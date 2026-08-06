@@ -8,14 +8,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Characters\Traits\Core\NpcTraitInitializer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="LM-Kit.NET" Version="2026.8.1" />
     <PackageReference Include="LM-Kit.NET.Backend.Cuda12.Windows" Version="2026.8.1" />
     <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="10.0.10" />
     <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="3.0.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\ProjectEve.Core\ProjectEve.Core\ProjectEve.Core.csproj" />
   </ItemGroup>
 
 </Project>
