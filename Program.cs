@@ -1,8 +1,10 @@
 ﻿using ProjectEve.AI.Brain;
 using ProjectEve.AI.Training;
 using ProjectEve.Characters.Base;
+using ProjectEve.Core.Chat;
 using System;
 using System.Diagnostics;
+using System.IO;
 
 class Program
 {
@@ -51,6 +53,20 @@ class Program
             Console.WriteLine("DB init warning: " + ex.Message);
         }
 
+        TtsBakeService? tts = null;
+        try
+        {
+            tts = new TtsBakeService();
+            tts.Start();
+            Console.WriteLine("TTS worker started.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("TTS worker failed to start: " + ex.Message);
+            Console.WriteLine("Chat will continue without voice bake.");
+            tts = null;
+        }
+
         var eve = CharacterRepository.LoadCharacter(1);
         if (eve == null)
         {
@@ -62,13 +78,20 @@ class Program
             eve.Brain = new Brain();
         eve.Brain.Owner = eve;
 
+        string voiceOutDir = Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
+            "kokoro312", "out");
+        Directory.CreateDirectory(voiceOutDir);
+
         Console.WriteLine($"Loaded: {eve.Name}, age {eve.Age}");
         Console.WriteLine($"Location: {eve.Location}");
         Console.WriteLine($"Occupation: {eve.Occupation}");
-        Console.WriteLine($"Traits: {eve.Traits?.GetAll().Count ?? 0}");
+        Console.WriteLine($"Traits: {eve.Traits?.GetAll()?.Count ?? 0}");
         Console.WriteLine();
         Console.WriteLine("Commands: sheet | exit");
         Console.WriteLine("Chat with Eve.\n");
+
+        int lineNum = 0;
 
         while (true)
         {
@@ -107,6 +130,18 @@ class Program
             Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.WriteLine($"   ({sw.Elapsed.TotalSeconds:0.00}s)\n");
             Console.ResetColor();
+
+            if (tts != null && !string.IsNullOrWhiteSpace(reply))
+            {
+                lineNum++;
+                string safeName = $"eve_line_{lineNum:000}.wav";
+                string outPath = Path.Combine(voiceOutDir, safeName);
+                tts.Enqueue(reply, "af_heart", outPath);
+
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine($"   (TTS queued → {safeName})\n");
+                Console.ResetColor();
+            }
         }
 
         try
