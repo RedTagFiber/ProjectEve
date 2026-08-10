@@ -1,0 +1,381 @@
+{
+  "id": "slow.movies.horror",
+  "layer": "slow",
+  "domain": "movies",
+  "label": "Horror",
+  "version": 1,
+  "description": "Prefers horror—scare style, subgenre loyalty, gore tolerance, and whether fear is fun or too much.",
+  "priorIntensity": 5,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [ "horror", "scary", "jump scare", "gore", "ghost", "slasher", "demon", "not sleep", "rewatch" ],
+  "rivalBias": true,
+  "catalog": "Movies/Titles/Horror",
+  "subTraits": [
+    {
+      "id": "slow.movies.horror.slasher",
+      "label": "Slasher",
+      "kind": "subgenre",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "knife", "final-girl" ]
+    },
+    {
+      "id": "slow.movies.horror.supernatural",
+      "label": "Supernatural / ghost",
+      "kind": "subgenre",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "haunt", "spirit" ]
+    },
+    {
+      "id": "slow.movies.horror.demonic",
+      "label": "Demonic / possession",
+      "kind": "subgenre",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "exorcist", "faith" ]
+    },
+    {
+      "id": "slow.movies.horror.folk",
+      "label": "Folk horror",
+      "kind": "subgenre",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "ritual", "rural" ]
+    },
+    {
+      "id": "slow.movies.horror.psychological",
+      "label": "Psychological horror",
+      "kind": "subgenre",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "mind", "dread" ]
+    },
+    {
+      "id": "slow.movies.horror.body",
+      "label": "Body horror",
+      "kind": "subgenre",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "flesh", "cronenberg" ]
+    },
+    {
+      "id": "slow.movies.horror.cosmic",
+      "label": "Cosmic / weird",
+      "kind": "subgenre",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "lovecraft", "scale" ]
+    },
+    {
+      "id": "slow.movies.horror.zombie",
+      "label": "Zombie / outbreak",
+      "kind": "subgenre",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "dead", "group" ]
+    },
+    {
+      "id": "slow.movies.horror.vampire",
+      "label": "Vampire",
+      "kind": "subgenre",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "blood", "seduce" ]
+    },
+    {
+      "id": "slow.movies.horror.werewolf",
+      "label": "Werewolf / creature",
+      "kind": "subgenre",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "transform", "moon" ]
+    },
+    {
+      "id": "slow.movies.horror.found_footage",
+      "label": "Found footage",
+      "kind": "style",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "cam", "raw" ]
+    },
+    {
+      "id": "slow.movies.horror.elevated",
+      "label": "Elevated / prestige horror",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "a24", "theme" ]
+    },
+    {
+      "id": "slow.movies.horror.campy",
+      "label": "Campy / fun scary",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "cheese", "party" ]
+    },
+    {
+      "id": "slow.movies.horror.extreme_gore",
+      "label": "Extreme gore OK",
+      "kind": "tolerance",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "blood", "hard" ]
+    },
+    {
+      "id": "slow.movies.horror.no_gore",
+      "label": "No gore / suggest only",
+      "kind": "tolerance",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "imply", "dread" ]
+    },
+    {
+      "id": "slow.movies.horror.jump_scare_love",
+      "label": "Jump scares work",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "pop", "fun" ]
+    },
+    {
+      "id": "slow.movies.horror.jump_scare_hate",
+      "label": "Hates cheap jump scares",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "lazy", "rival" ]
+    },
+    {
+      "id": "slow.movies.horror.dread_slow",
+      "label": "Slow dread preferred",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "atmosphere", "wait" ]
+    },
+    {
+      "id": "slow.movies.horror.classic_universal",
+      "label": "Classic monster era",
+      "kind": "era",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "old", "black-white" ]
+    },
+    {
+      "id": "slow.movies.horror.80s",
+      "label": "80s horror loyalty",
+      "kind": "era",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "vhs", "practical" ]
+    },
+    {
+      "id": "slow.movies.horror.90s_00s",
+      "label": "90s/00s horror",
+      "kind": "era",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "self-aware", "pg13-wave" ]
+    },
+    {
+      "id": "slow.movies.horror.modern",
+      "label": "Modern horror wave",
+      "kind": "era",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "hereditary", "new" ]
+    },
+    {
+      "id": "slow.movies.horror.practical_fx",
+      "label": "Practical effects love",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "latex", "craft" ]
+    },
+    {
+      "id": "slow.movies.horror.cgi_hate",
+      "label": "CGI creature skepticism",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "fake", "prefer-real" ]
+    },
+    {
+      "id": "slow.movies.horror.foreign_horror",
+      "label": "Foreign horror (Asia/Euro)",
+      "kind": "scope",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "subs", "rings" ]
+    },
+    {
+      "id": "slow.movies.horror.american_only",
+      "label": "American horror comfort",
+      "kind": "scope",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "known", "easy" ]
+    },
+    {
+      "id": "slow.movies.horror.franchise_slasher",
+      "label": "Slasher franchise loyal",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "halloween", "elm" ]
+    },
+    {
+      "id": "slow.movies.horror.originals_only",
+      "label": "Originals over sequels",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "fresh", "no-number" ]
+    },
+    {
+      "id": "slow.movies.horror.theater_scared",
+      "label": "Best scared in theater",
+      "kind": "viewing",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "crowd", "dark" ]
+    },
+    {
+      "id": "slow.movies.horror.home_lights",
+      "label": "Home with lights option",
+      "kind": "viewing",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "safe", "pause" ]
+    },
+    {
+      "id": "slow.movies.horror.daytime_only",
+      "label": "Daytime horror only",
+      "kind": "viewing",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "sleep", "anxiety" ]
+    },
+    {
+      "id": "slow.movies.horror.night_dedicated",
+      "label": "Dedicated night watches",
+      "kind": "viewing",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "dark", "commit" ]
+    },
+    {
+      "id": "slow.movies.horror.couple_scared",
+      "label": "Couple scare bonding",
+      "kind": "social",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "date", "hold" ]
+    },
+    {
+      "id": "slow.movies.horror.group_party",
+      "label": "Group scare party",
+      "kind": "social",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "friends", "yell" ]
+    },
+    {
+      "id": "slow.movies.horror.solo_brave",
+      "label": "Solo horror brave",
+      "kind": "social",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "alone", "pride" ]
+    },
+    {
+      "id": "slow.movies.horror.cannot_solo",
+      "label": "Cannot watch alone",
+      "kind": "social",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "need-people", "anxiety" ]
+    },
+    {
+      "id": "slow.movies.horror.no_sleep_after",
+      "label": "Sleeps bad after",
+      "kind": "effect",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "cost", "limit" ]
+    },
+    {
+      "id": "slow.movies.horror.no_effect",
+      "label": "Barely affected",
+      "kind": "effect",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "numb", "fun" ]
+    },
+    {
+      "id": "slow.movies.horror.cover_eyes",
+      "label": "Covers eyes but stays",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "peek", "commit" ]
+    },
+    {
+      "id": "slow.movies.horror.walk_out",
+      "label": "Will walk out if too much",
+      "kind": "habit",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "boundary", "done" ]
+    },
+    {
+      "id": "slow.movies.horror.october_ritual",
+      "label": "October horror ritual",
+      "kind": "season",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "halloween", "marathon" ]
+    },
+    {
+      "id": "slow.movies.horror.year_round",
+      "label": "Year-round horror",
+      "kind": "season",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "always", "identity" ]
+    },
+    {
+      "id": "slow.movies.horror.true_story_claim",
+      "label": "Based-on-true-claim pull",
+      "kind": "source",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "real", "uneasy" ]
+    },
+    {
+      "id": "slow.movies.horror.comedy_blend",
+      "label": "Horror-comedy blend",
+      "kind": "cross",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "laugh", "scare" ]
+    },
+    {
+      "id": "slow.movies.horror.no_comedy",
+      "label": "Horror must stay serious",
+      "kind": "cross",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "tone", "pure" ]
+    },
+    {
+      "id": "slow.movies.horror.religious_imagery",
+      "label": "Religious imagery hits hard",
+      "kind": "effect",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "faith", "unease" ]
+    },
+    {
+      "id": "slow.movies.horror.kids_danger_hard",
+      "label": "Kids-in-danger is hard limit",
+      "kind": "tolerance",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "boundary", "no" ]
+    },
+    {
+      "id": "slow.movies.horror.animal_harm_hard",
+      "label": "Animal harm hard limit",
+      "kind": "tolerance",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "boundary", "no" ]
+    },
+    {
+      "id": "slow.movies.horror.rewatch_favorites",
+      "label": "Rewatches favorites for craft",
+      "kind": "viewing",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "known", "lines" ]
+    },
+    {
+      "id": "slow.movies.horror.spoiler_ok_scare",
+      "label": "Spoilers OK if scare still works",
+      "kind": "attitude",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "craft", "repeat" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "avoids or tolerates; no horror identity",
+    "atOrAbove50": "attach 2-4; subgenre and tolerance define watch choices",
+    "atOrAbove70": "October and date scares are planned; hard limits must be respected",
+    "extreme95": "horror is a primary hobby; sleep cost accepted or managed"
+  },
+  "notes": "Hard limits (kids/animals) should gate recommendations. Faith NPCs may spike on demonic imagery."
+}

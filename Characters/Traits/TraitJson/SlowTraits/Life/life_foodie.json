@@ -1,0 +1,753 @@
+{
+  "id": "slow.life.foodie",
+  "layer": "slow",
+  "domain": "life",
+  "label": "Foodie",
+  "version": 1,
+  "description": "Life taste/identity: food as pleasure, skill, status, comfort, or adventure. Covers home cooks, restaurant chasers, diet tribes, and people who just care what is on the plate.",
+  "priorIntensity": 5,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [
+    "food",
+    "restaurant",
+    "cook",
+    "recipe",
+    "menu",
+    "spicy",
+    "sweet",
+    "grill",
+    "bbq",
+    "pizza",
+    "burger",
+    "coffee",
+    "brunch",
+    "chef",
+    "taste",
+    "hungry",
+    "leftovers",
+    "takeout",
+    "homemade",
+    "seasoning",
+    "craving"
+  ],
+  "rivalBias": true,
+  "catalog": "Life",
+  "subTraits": [
+    {
+      "id": "slow.life.foodie.home_cook_pride",
+      "label": "Home cook pride",
+      "kind": "identity",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "kitchen", "from-scratch", "feed" ]
+    },
+    {
+      "id": "slow.life.foodie.restaurant_chaser",
+      "label": "Restaurant chaser",
+      "kind": "identity",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "out", "reviews", "new-spot" ]
+    },
+    {
+      "id": "slow.life.foodie.takeout_loyal",
+      "label": "Takeout loyal",
+      "kind": "identity",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "delivery", "same-order", "easy" ]
+    },
+    {
+      "id": "slow.life.foodie.meal_prep",
+      "label": "Meal prep discipline",
+      "kind": "habit",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "containers", "sunday", "macros" ]
+    },
+    {
+      "id": "slow.life.foodie.leftover_artist",
+      "label": "Leftover artist",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "waste-not", "remix", "fridge" ]
+    },
+    {
+      "id": "slow.life.foodie.grill_identity",
+      "label": "Grill / smoker identity",
+      "kind": "style",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "charcoal", "pellet", "yard" ]
+    },
+    {
+      "id": "slow.life.foodie.bbq_regional",
+      "label": "BBQ regional opinions",
+      "kind": "style",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "sauce", "rib", "brisket", "rival" ]
+    },
+    {
+      "id": "slow.life.foodie.cast_iron",
+      "label": "Cast iron loyal",
+      "kind": "tool",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "skillet", "season", "heirloom" ]
+    },
+    {
+      "id": "slow.life.foodie.air_fryer",
+      "label": "Air fryer convert",
+      "kind": "tool",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "fast", "crisp", "modern" ]
+    },
+    {
+      "id": "slow.life.foodie.slow_cooker",
+      "label": "Slow cooker / crockpot",
+      "kind": "tool",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "set", "busy", "comfort" ]
+    },
+    {
+      "id": "slow.life.foodie.baking_sweet",
+      "label": "Sweet baking",
+      "kind": "style",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "cookies", "cake", "holiday" ]
+    },
+    {
+      "id": "slow.life.foodie.baking_bread",
+      "label": "Bread baking",
+      "kind": "style",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "sourdough", "yeast", "patience" ]
+    },
+    {
+      "id": "slow.life.foodie.pastry",
+      "label": "Pastry precision",
+      "kind": "style",
+      "defaultRange": [ 10, 85 ],
+      "tags": [ "laminate", "detail", "butter" ]
+    },
+    {
+      "id": "slow.life.foodie.italian_american",
+      "label": "Italian-American comfort",
+      "kind": "cuisine",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "pasta", "red-sauce", "family" ]
+    },
+    {
+      "id": "slow.life.foodie.mexican",
+      "label": "Mexican / Tex-Mex",
+      "kind": "cuisine",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "taco", "salsa", "spice" ]
+    },
+    {
+      "id": "slow.life.foodie.chinese_american",
+      "label": "Chinese-American",
+      "kind": "cuisine",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "takeout", "wok", "comfort" ]
+    },
+    {
+      "id": "slow.life.foodie.japanese",
+      "label": "Japanese",
+      "kind": "cuisine",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "sushi", "ramen", "clean" ]
+    },
+    {
+      "id": "slow.life.foodie.thai",
+      "label": "Thai",
+      "kind": "cuisine",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "spice", "curry", "balance" ]
+    },
+    {
+      "id": "slow.life.foodie.indian",
+      "label": "Indian",
+      "kind": "cuisine",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "curry", "spice", "veg-options" ]
+    },
+    {
+      "id": "slow.life.foodie.mediterranean",
+      "label": "Mediterranean",
+      "kind": "cuisine",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "olive", "fresh", "grill" ]
+    },
+    {
+      "id": "slow.life.foodie.soul_food",
+      "label": "Soul food",
+      "kind": "cuisine",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "comfort", "sunday", "history" ]
+    },
+    {
+      "id": "slow.life.foodie.midwest_comfort",
+      "label": "Midwest comfort food",
+      "kind": "cuisine",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "casserole", "ohio", "church-potluck" ]
+    },
+    {
+      "id": "slow.life.foodie.polish_eastern_euro",
+      "label": "Polish / Eastern Euro",
+      "kind": "cuisine",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "pierogi", "ohio-pockets", "hearty" ]
+    },
+    {
+      "id": "slow.life.foodie.german",
+      "label": "German / Oktoberfest food",
+      "kind": "cuisine",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "sausage", "pretzel", "ohio" ]
+    },
+    {
+      "id": "slow.life.foodie.seafood",
+      "label": "Seafood lover",
+      "kind": "cuisine",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "fish", "shrimp", "fresh" ]
+    },
+    {
+      "id": "slow.life.foodie.steak_serious",
+      "label": "Steak serious",
+      "kind": "cuisine",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "temp", "cut", "salt" ]
+    },
+    {
+      "id": "slow.life.foodie.burger_critic",
+      "label": "Burger critic",
+      "kind": "cuisine",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "smash", "diner", "opinions" ]
+    },
+    {
+      "id": "slow.life.foodie.pizza_opinions",
+      "label": "Pizza opinions (strong)",
+      "kind": "cuisine",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "style", "rival", "ohio" ]
+    },
+    {
+      "id": "slow.life.foodie.wings",
+      "label": "Wings culture",
+      "kind": "cuisine",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "heat", "game-day", "sauce" ]
+    },
+    {
+      "id": "slow.life.foodie.breakfast_all_day",
+      "label": "Breakfast all day",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "eggs", "diner", "morning" ]
+    },
+    {
+      "id": "slow.life.foodie.brunch",
+      "label": "Brunch person",
+      "kind": "style",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "weekend", "social", "mimosas" ]
+    },
+    {
+      "id": "slow.life.foodie.street_food",
+      "label": "Street food / food trucks",
+      "kind": "style",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "truck", "festival", "line" ]
+    },
+    {
+      "id": "slow.life.foodie.fine_dining",
+      "label": "Fine dining chase",
+      "kind": "style",
+      "defaultRange": [ 10, 85 ],
+      "tags": [ "tasting", "service", "money" ]
+    },
+    {
+      "id": "slow.life.foodie.hole_in_wall",
+      "label": "Hole-in-the-wall hunter",
+      "kind": "style",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "local", "secret", "cash-only" ]
+    },
+    {
+      "id": "slow.life.foodie.chain_loyal",
+      "label": "Chain loyal (no shame)",
+      "kind": "style",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "consistent", "known", "travel" ]
+    },
+    {
+      "id": "slow.life.foodie.anti_chain",
+      "label": "Anti-chain snob",
+      "kind": "attitude",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "local-only", "rival", "status" ]
+    },
+    {
+      "id": "slow.life.foodie.spicy_chaser",
+      "label": "Spice chaser",
+      "kind": "taste",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "heat", "dare", "sweat" ]
+    },
+    {
+      "id": "slow.life.foodie.mild_only",
+      "label": "Mild-only",
+      "kind": "taste",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "no-heat", "safe" ]
+    },
+    {
+      "id": "slow.life.foodie.sweet_tooth",
+      "label": "Sweet tooth",
+      "kind": "taste",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "dessert", "candy", "end" ]
+    },
+    {
+      "id": "slow.life.foodie.savory_first",
+      "label": "Savory-first",
+      "kind": "taste",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "salt", "umami", "no-dessert" ]
+    },
+    {
+      "id": "slow.life.foodie.sour_fermented",
+      "label": "Sour / fermented love",
+      "kind": "taste",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "pickle", "kimchi", "vinegar" ]
+    },
+    {
+      "id": "slow.life.foodie.texture_picky",
+      "label": "Texture picky",
+      "kind": "taste",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "mush", "crunch", "reject" ]
+    },
+    {
+      "id": "slow.life.foodie.picky_eater",
+      "label": "Picky eater identity",
+      "kind": "attitude",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "safe-foods", "kid-menu", "shame" ]
+    },
+    {
+      "id": "slow.life.foodie.adventurous_eater",
+      "label": "Adventurous eater",
+      "kind": "attitude",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "try-once", "weird", "travel" ]
+    },
+    {
+      "id": "slow.life.foodie.vegetarian",
+      "label": "Vegetarian",
+      "kind": "diet",
+      "defaultRange": [ 20, 95 ],
+      "tags": [ "no-meat", "identity" ]
+    },
+    {
+      "id": "slow.life.foodie.vegan",
+      "label": "Vegan",
+      "kind": "diet",
+      "defaultRange": [ 15, 95 ],
+      "tags": [ "plant", "ethics", "label" ]
+    },
+    {
+      "id": "slow.life.foodie.pescatarian",
+      "label": "Pescatarian",
+      "kind": "diet",
+      "defaultRange": [ 10, 85 ],
+      "tags": [ "fish", "flex" ]
+    },
+    {
+      "id": "slow.life.foodie.keto_lowcarb",
+      "label": "Keto / low-carb",
+      "kind": "diet",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "carb", "macros", "trend" ]
+    },
+    {
+      "id": "slow.life.foodie.high_protein",
+      "label": "High protein focus",
+      "kind": "diet",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "gym", "meat", "track" ]
+    },
+    {
+      "id": "slow.life.foodie.gluten_free",
+      "label": "Gluten free (need or choice)",
+      "kind": "diet",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "gf", "careful", "label" ]
+    },
+    {
+      "id": "slow.life.foodie.allergy_vigilant",
+      "label": "Allergy vigilant",
+      "kind": "diet",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "safety", "ask", "epipen" ]
+    },
+    {
+      "id": "slow.life.foodie.organic_only",
+      "label": "Organic / clean label",
+      "kind": "diet",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "organic", "money", "status" ]
+    },
+    {
+      "id": "slow.life.foodie.budget_cook",
+      "label": "Budget cook pride",
+      "kind": "identity",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "cheap", "stretch", "smart" ]
+    },
+    {
+      "id": "slow.life.foodie.splurge_nights",
+      "label": "Splurge-night foodie",
+      "kind": "identity",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "payday", "steak", "treat" ]
+    },
+    {
+      "id": "slow.life.foodie.coffee_serious",
+      "label": "Coffee serious",
+      "kind": "drink_food",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "brew", "beans", "ritual" ]
+    },
+    {
+      "id": "slow.life.foodie.tea_person",
+      "label": "Tea person",
+      "kind": "drink_food",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "tea", "calm", "hot" ]
+    },
+    {
+      "id": "slow.life.foodie.craft_soda_mocktail",
+      "label": "Craft soda / mocktail",
+      "kind": "drink_food",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "no-alcohol", "flavor" ]
+    },
+    {
+      "id": "slow.life.foodie.wine_with_food",
+      "label": "Wine-with-food pairing",
+      "kind": "drink_food",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "pair", "dinner", "status" ]
+    },
+    {
+      "id": "slow.life.foodie.beer_with_food",
+      "label": "Beer-with-food",
+      "kind": "drink_food",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "pair", "pub", "ohio" ]
+    },
+    {
+      "id": "slow.life.foodie.farmers_market",
+      "label": "Farmers market regular",
+      "kind": "habit",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "seasonal", "local", "saturday" ]
+    },
+    {
+      "id": "slow.life.foodie.garden_to_table",
+      "label": "Garden to table",
+      "kind": "habit",
+      "defaultRange": [ 20, 95 ],
+      "tags": [ "grow", "can", "summer" ]
+    },
+    {
+      "id": "slow.life.foodie.canning_preserve",
+      "label": "Canning / preserves",
+      "kind": "habit",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "jar", "winter", "grandma" ]
+    },
+    {
+      "id": "slow.life.foodie.hunter_game_meat",
+      "label": "Hunter / game meat",
+      "kind": "source",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "deer", "freezer", "ohio" ]
+    },
+    {
+      "id": "slow.life.foodie.fisherman_eat",
+      "label": "Catch and cook fish",
+      "kind": "source",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "lake", "fry", "clean" ]
+    },
+    {
+      "id": "slow.life.foodie.potluck_legend",
+      "label": "Potluck legend dish",
+      "kind": "social",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "church", "work", "known" ]
+    },
+    {
+      "id": "slow.life.foodie.holiday_table_host",
+      "label": "Holiday table host",
+      "kind": "social",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "thanksgiving", "host", "stress" ]
+    },
+    {
+      "id": "slow.life.foodie.food_as_love",
+      "label": "Food as love language",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "feed", "care", "plate" ]
+    },
+    {
+      "id": "slow.life.foodie.food_as_control",
+      "label": "Food as control / stress",
+      "kind": "attitude",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "anxiety", "restrict", "binge-risk" ]
+    },
+    {
+      "id": "slow.life.foodie.clean_plate",
+      "label": "Clean-plate upbringing",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "waste", "family", "finish" ]
+    },
+    {
+      "id": "slow.life.foodie.presentation_matters",
+      "label": "Presentation matters",
+      "kind": "attitude",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "plate", "photo", "status" ]
+    },
+    {
+      "id": "slow.life.foodie.flavor_over_looks",
+      "label": "Flavor over looks",
+      "kind": "attitude",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "ugly-delicious", "taste" ]
+    },
+    {
+      "id": "slow.life.foodie.recipe_exact",
+      "label": "Recipe exact",
+      "kind": "attitude",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "measure", "follow", "science" ]
+    },
+    {
+      "id": "slow.life.foodie.recipe_freestyle",
+      "label": "Recipe freestyle",
+      "kind": "attitude",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "pinch", "taste", "improv" ]
+    },
+    {
+      "id": "slow.life.foodie.family_recipe_keeper",
+      "label": "Family recipe keeper",
+      "kind": "history_hook",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "card", "grandma", "secret" ]
+    },
+    {
+      "id": "slow.life.foodie.restaurant_worker_past",
+      "label": "Worked in restaurants",
+      "kind": "history_hook",
+      "defaultRange": [ 20, 95 ],
+      "tags": [ "line", "serve", "knows" ]
+    },
+    {
+      "id": "slow.life.foodie.culinary_school",
+      "label": "Culinary training",
+      "kind": "history_hook",
+      "defaultRange": [ 10, 90 ],
+      "tags": [ "school", "pro", "knife" ]
+    },
+    {
+      "id": "slow.life.foodie.ohio_diner",
+      "label": "Ohio diner loyal",
+      "kind": "local",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "diner", "coffee", "local" ]
+    },
+    {
+      "id": "slow.life.foodie.fair_food",
+      "label": "Fair / festival food joy",
+      "kind": "local",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "fried", "county-fair", "summer" ]
+    },
+    {
+      "id": "slow.life.foodie.chili_cookoff",
+      "label": "Chili cook-off energy",
+      "kind": "local",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "chili", "compete", "church" ]
+    },
+    {
+      "id": "slow.life.foodie.tailgate_spread",
+      "label": "Tailgate spread pride",
+      "kind": "local",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "game-day", "grill", "osu" ]
+    },
+    {
+      "id": "slow.life.foodie.late_night_eater",
+      "label": "Late-night eater",
+      "kind": "habit",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "midnight", "fridge", "shift" ]
+    },
+    {
+      "id": "slow.life.foodie.big_breakfast",
+      "label": "Big breakfast person",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "morning", "fuel", "skip-lunch" ]
+    },
+    {
+      "id": "slow.life.foodie.skips_breakfast",
+      "label": "Skips breakfast",
+      "kind": "habit",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "coffee-only", "later" ]
+    },
+    {
+      "id": "slow.life.foodie.share_plates",
+      "label": "Share plates social",
+      "kind": "social",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "table", "taste", "date" ]
+    },
+    {
+      "id": "slow.life.foodie.wont_share",
+      "label": "Won't share food",
+      "kind": "social",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "mine", "order-own", "joke" ]
+    },
+    {
+      "id": "slow.life.foodie.food_photos",
+      "label": "Photos the plate",
+      "kind": "social",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "instagram", "before-eat" ]
+    },
+    {
+      "id": "slow.life.foodie.secret_menu",
+      "label": "Secret menu / regular status",
+      "kind": "social",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "known", "order", "local" ]
+    },
+    {
+      "id": "slow.life.foodie.cooking_for_one",
+      "label": "Cooking for one struggle",
+      "kind": "context",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "alone", "waste", "simple" ]
+    },
+    {
+      "id": "slow.life.foodie.cooking_for_crowd",
+      "label": "Cooking for a crowd gift",
+      "kind": "context",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "scale", "host", "calm" ]
+    },
+    {
+      "id": "slow.life.foodie.kids_picky_manager",
+      "label": "Manages picky kids",
+      "kind": "context",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "kids", "two-meals", "patience" ]
+    },
+    {
+      "id": "slow.life.foodie.date_night_food",
+      "label": "Date-night food planner",
+      "kind": "social",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "romance", "reservation", "try" ]
+    },
+    {
+      "id": "slow.life.foodie.apology_food",
+      "label": "Apology / peace food",
+      "kind": "social",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "sorry", "bring", "repair" ]
+    },
+    {
+      "id": "slow.life.foodie.stress_eat",
+      "label": "Stress eater",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "emotion", "snack", "fast" ]
+    },
+    {
+      "id": "slow.life.foodie.stress_no_appetite",
+      "label": "Stress kills appetite",
+      "kind": "attitude",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "emotion", "skip", "tea" ]
+    },
+    {
+      "id": "slow.life.foodie.umami_chaser",
+      "label": "Umami chaser",
+      "kind": "taste",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "deep", "mushroom", "soy", "cheese" ]
+    },
+    {
+      "id": "slow.life.foodie.cheese_serious",
+      "label": "Cheese serious",
+      "kind": "taste",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "board", "melt", "pair" ]
+    },
+    {
+      "id": "slow.life.foodie.chocolate_serious",
+      "label": "Chocolate serious",
+      "kind": "taste",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "dark", "dessert", "gift" ]
+    },
+    {
+      "id": "slow.life.foodie.hot_sauce_collection",
+      "label": "Hot sauce collection",
+      "kind": "habit",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "bottle", "heat", "shelf" ]
+    },
+    {
+      "id": "slow.life.foodie.seasonal_menu_only",
+      "label": "Seasonal menu only",
+      "kind": "attitude",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "season", "chef", "status" ]
+    },
+    {
+      "id": "slow.life.foodie.nostalgia_plates",
+      "label": "Nostalgia plates",
+      "kind": "attitude",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "kid-food", "memory", "comfort" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "eats; few opinions beyond like/dislike",
+    "atOrAbove50": "attach 2-4 subTraits (cuisine + habit/attitude); can recommend a place or dish",
+    "atOrAbove70": "food plans social life; strong opinions; potluck/host/date stories unlock",
+    "extreme95": "trips and relationships orbit food; bad meals are personal offenses; rivalBias fuels pizza/BBQ/chain wars"
+  },
+  "notes": "Big on purpose—foodies fragment hard. Factory still only attaches a few subs. Ohio anchors: diner, fair food, chili, tailgate, Midwest comfort, pierogi pockets, grill identity. Pair with slow.life.craft_pride when cooking is their craft."
+}

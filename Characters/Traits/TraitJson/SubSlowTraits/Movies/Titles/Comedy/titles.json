@@ -1,0 +1,23 @@
+{
+    "catalog":  "movie_titles_comedy",
+    "style":  "Comedy",
+    "version":  1,
+    "entries":  [
+                    {
+                        "id":  "superbad",
+                        "label":  "Superbad"
+                    },
+                    {
+                        "id":  "anchorman",
+                        "label":  "Anchorman"
+                    },
+                    {
+                        "id":  "bridesmaids",
+                        "label":  "Bridesmaids"
+                    },
+                    {
+                        "id":  "groundhog_day",
+                        "label":  "Groundhog Day"
+                    }
+                ]
+}

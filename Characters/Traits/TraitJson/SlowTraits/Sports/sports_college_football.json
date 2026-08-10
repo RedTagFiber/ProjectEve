@@ -1,0 +1,843 @@
+{
+  "id": "slow.sports.college_football",
+  "layer": "slow",
+  "domain": "sports",
+  "label": "College Football",
+  "version": 1,
+  "description": "College football—Big Ten core for Ohio, national powers, rivalries, Saturdays, and playoff talk. Can stack with NFL parent.",
+  "priorIntensity": 6,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [
+    "Saturday",
+    "Big Ten",
+    "OSU",
+    "rivalry",
+    "playoff",
+    "recruiting",
+    "conference",
+    "bowl",
+    "tailgate",
+    "The Game",
+    "coach",
+    "transfer portal"
+  ],
+  "rivalBias": true,
+  "catalog": "Sports/Football/Teams/College",
+  "subTraits": [
+    {
+      "id": "slow.sports.college_football.diehard",
+      "label": "Diehard",
+      "kind": "intensity",
+      "defaultRange": [ 70, 95 ],
+      "tags": [ "saturday-religion" ]
+    },
+    {
+      "id": "slow.sports.college_football.casual",
+      "label": "Casual Saturday fan",
+      "kind": "intensity",
+      "defaultRange": [ 30, 70 ],
+      "tags": [ "tv", "social" ]
+    },
+    {
+      "id": "slow.sports.college_football.recruiting_nerd",
+      "label": "Recruiting nerd",
+      "kind": "knowledge",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "247", "rivals" ]
+    },
+    {
+      "id": "slow.sports.college_football.scheme_nerd",
+      "label": "Scheme / film nerd",
+      "kind": "knowledge",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "x-and-o" ]
+    },
+    {
+      "id": "slow.sports.college_football.history_buff",
+      "label": "Program history buff",
+      "kind": "knowledge",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "tradition" ]
+    },
+    {
+      "id": "slow.sports.college_football.tailgate",
+      "label": "Tailgate culture",
+      "kind": "habit",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "ohio", "lot" ]
+    },
+    {
+      "id": "slow.sports.college_football.tv_all_day",
+      "label": "TV all day Saturday",
+      "kind": "habit",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "sofa", "redzone-adj" ]
+    },
+    {
+      "id": "slow.sports.college_football.home_games",
+      "label": "Goes to home games",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "tickets", "stadium" ]
+    },
+    {
+      "id": "slow.sports.college_football.road_trips",
+      "label": "Road / rivalry trips",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "travel" ]
+    },
+    {
+      "id": "slow.sports.college_football.portal_obsess",
+      "label": "Portal / coaching carousel obsessive",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "offseason" ]
+    },
+
+    {
+      "id": "slow.sports.college_football.team_osu",
+      "label": "Ohio State Buckeyes",
+      "kind": "team",
+      "defaultRange": [ 45, 95 ],
+      "tags": [ "ohio", "big-ten", "primary" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_michigan",
+      "label": "Michigan Wolverines",
+      "kind": "team",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "big-ten", "rival" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_penn_state",
+      "label": "Penn State Nittany Lions",
+      "kind": "team",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "big-ten" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_michigan_state",
+      "label": "Michigan State Spartans",
+      "kind": "team",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "big-ten" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_wisconsin",
+      "label": "Wisconsin Badgers",
+      "kind": "team",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "big-ten" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_iowa",
+      "label": "Iowa Hawkeyes",
+      "kind": "team",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "big-ten" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_minnesota",
+      "label": "Minnesota Golden Gophers",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "big-ten" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_nebraska",
+      "label": "Nebraska Cornhuskers",
+      "kind": "team",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "big-ten", "history" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_northwestern",
+      "label": "Northwestern Wildcats",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "big-ten" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_illinois",
+      "label": "Illinois Fighting Illini",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "big-ten" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_purdue",
+      "label": "Purdue Boilermakers",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "big-ten" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_indiana",
+      "label": "Indiana Hoosiers",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "big-ten" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_maryland",
+      "label": "Maryland Terrapins",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "big-ten" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_rutgers",
+      "label": "Rutgers Scarlet Knights",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "big-ten" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_oregon",
+      "label": "Oregon Ducks",
+      "kind": "team",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "big-ten", "new" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_washington",
+      "label": "Washington Huskies",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "big-ten", "new" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_usc",
+      "label": "USC Trojans",
+      "kind": "team",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "big-ten", "new" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_ucla",
+      "label": "UCLA Bruins",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "big-ten", "new" ]
+    },
+
+    {
+      "id": "slow.sports.college_football.team_alabama",
+      "label": "Alabama Crimson Tide",
+      "kind": "team",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "sec", "power" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_georgia",
+      "label": "Georgia Bulldogs",
+      "kind": "team",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "sec", "power" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_lsu",
+      "label": "LSU Tigers",
+      "kind": "team",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "sec" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_florida",
+      "label": "Florida Gators",
+      "kind": "team",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "sec" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_tennessee",
+      "label": "Tennessee Volunteers",
+      "kind": "team",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "sec" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_auburn",
+      "label": "Auburn Tigers",
+      "kind": "team",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "sec" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_texas_am",
+      "label": "Texas A&M Aggies",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "sec" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_ole_miss",
+      "label": "Ole Miss Rebels",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "sec" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_miss_state",
+      "label": "Mississippi State Bulldogs",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "sec" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_kentucky",
+      "label": "Kentucky Wildcats",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "sec", "ohio-adj" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_south_carolina",
+      "label": "South Carolina Gamecocks",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "sec" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_missouri",
+      "label": "Missouri Tigers",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "sec" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_vanderbilt",
+      "label": "Vanderbilt Commodores",
+      "kind": "team",
+      "defaultRange": [ 10, 75 ],
+      "tags": [ "sec" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_arkansas",
+      "label": "Arkansas Razorbacks",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "sec" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_oklahoma",
+      "label": "Oklahoma Sooners",
+      "kind": "team",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "sec", "power" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_texas",
+      "label": "Texas Longhorns",
+      "kind": "team",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "sec", "power" ]
+    },
+
+    {
+      "id": "slow.sports.college_football.team_notre_dame",
+      "label": "Notre Dame Fighting Irish",
+      "kind": "team",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "independent", "national", "ohio-tv" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_clemson",
+      "label": "Clemson Tigers",
+      "kind": "team",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "acc" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_florida_state",
+      "label": "Florida State Seminoles",
+      "kind": "team",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "acc" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_miami",
+      "label": "Miami Hurricanes",
+      "kind": "team",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "acc", "history" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_louisville",
+      "label": "Louisville Cardinals",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "acc", "ohio-adj" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_nc_state",
+      "label": "NC State Wolfpack",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "acc" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_north_carolina",
+      "label": "North Carolina Tar Heels",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "acc" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_virginia_tech",
+      "label": "Virginia Tech Hokies",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "acc" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_pitt",
+      "label": "Pittsburgh Panthers",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "acc", "ohio-adj" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_syracuse",
+      "label": "Syracuse Orange",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "acc" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_boston_college",
+      "label": "Boston College Eagles",
+      "kind": "team",
+      "defaultRange": [ 10, 75 ],
+      "tags": [ "acc" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_wake",
+      "label": "Wake Forest Demon Deacons",
+      "kind": "team",
+      "defaultRange": [ 10, 75 ],
+      "tags": [ "acc" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_duke_fb",
+      "label": "Duke Blue Devils (FB)",
+      "kind": "team",
+      "defaultRange": [ 10, 75 ],
+      "tags": [ "acc" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_virginia",
+      "label": "Virginia Cavaliers",
+      "kind": "team",
+      "defaultRange": [ 10, 75 ],
+      "tags": [ "acc" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_georgia_tech",
+      "label": "Georgia Tech Yellow Jackets",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "acc" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_cal",
+      "label": "California Golden Bears",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "acc", "new" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_stanford",
+      "label": "Stanford Cardinal",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "acc", "new" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_smc_adj",
+      "label": "SMU Mustangs",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "acc", "new" ]
+    },
+
+    {
+      "id": "slow.sports.college_football.team_oregon_state",
+      "label": "Oregon State Beavers",
+      "kind": "team",
+      "defaultRange": [ 10, 75 ],
+      "tags": [ "pac-remain" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_washington_state",
+      "label": "Washington State Cougars",
+      "kind": "team",
+      "defaultRange": [ 10, 75 ],
+      "tags": [ "pac-remain" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_colorado",
+      "label": "Colorado Buffaloes",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "big-12" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_utah",
+      "label": "Utah Utes",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "big-12" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_arizona",
+      "label": "Arizona Wildcats",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "big-12" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_arizona_state",
+      "label": "Arizona State Sun Devils",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "big-12" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_baylor",
+      "label": "Baylor Bears",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "big-12" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_tcu",
+      "label": "TCU Horned Frogs",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "big-12" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_texas_tech",
+      "label": "Texas Tech Red Raiders",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "big-12" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_kansas_state",
+      "label": "Kansas State Wildcats",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "big-12" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_kansas_fb",
+      "label": "Kansas Jayhawks (FB)",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "big-12" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_iowa_state",
+      "label": "Iowa State Cyclones",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "big-12" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_west_virginia",
+      "label": "West Virginia Mountaineers",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "big-12", "ohio-adj" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_cincinnati",
+      "label": "Cincinnati Bearcats",
+      "kind": "team",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "ohio", "big-12" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_ucf",
+      "label": "UCF Knights",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "big-12" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_houston",
+      "label": "Houston Cougars",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "big-12" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_byu",
+      "label": "BYU Cougars",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "big-12" ]
+    },
+
+    {
+      "id": "slow.sports.college_football.team_miami_oh",
+      "label": "Miami (OH) RedHawks",
+      "kind": "team",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "ohio", "mac" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_toledo",
+      "label": "Toledo Rockets",
+      "kind": "team",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "ohio", "mac" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_bowling_green",
+      "label": "Bowling Green Falcons",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "ohio", "mac" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_kent_state",
+      "label": "Kent State Golden Flashes",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "ohio", "mac" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_ohio_u",
+      "label": "Ohio Bobcats",
+      "kind": "team",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "ohio", "mac" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_akron",
+      "label": "Akron Zips",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "ohio", "mac" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_ball_state",
+      "label": "Ball State Cardinals",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "mac" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_northern_illinois",
+      "label": "Northern Illinois Huskies",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "mac" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_central_michigan",
+      "label": "Central Michigan Chippewas",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "mac" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_western_michigan",
+      "label": "Western Michigan Broncos",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "mac" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_eastern_michigan",
+      "label": "Eastern Michigan Eagles",
+      "kind": "team",
+      "defaultRange": [ 10, 75 ],
+      "tags": [ "mac" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_buffalo",
+      "label": "Buffalo Bulls",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "mac" ]
+    },
+
+    {
+      "id": "slow.sports.college_football.team_army",
+      "label": "Army Black Knights",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "independent" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_navy",
+      "label": "Navy Midshipmen",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "independent" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_air_force",
+      "label": "Air Force Falcons",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "mw" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_memphis",
+      "label": "Memphis Tigers",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "aac" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_tulane",
+      "label": "Tulane Green Wave",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "aac" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_app_state",
+      "label": "App State Mountaineers",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "sun-belt", "upset-fame" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_james_madison",
+      "label": "James Madison Dukes",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "sun-belt" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_boise",
+      "label": "Boise State Broncos",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "mw", "blue" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_fresno",
+      "label": "Fresno State Bulldogs",
+      "kind": "team",
+      "defaultRange": [ 10, 75 ],
+      "tags": [ "mw" ]
+    },
+    {
+      "id": "slow.sports.college_football.team_liberty",
+      "label": "Liberty Flames",
+      "kind": "team",
+      "defaultRange": [ 10, 75 ],
+      "tags": [ "cusa" ]
+    },
+
+    {
+      "id": "slow.sports.college_football.rival_the_game",
+      "label": "The Game (OSU ↔ Michigan)",
+      "kind": "rival",
+      "defaultRange": [ 50, 95 ],
+      "tags": [ "november", "holy" ]
+    },
+    {
+      "id": "slow.sports.college_football.rival_osu_penn_state",
+      "label": "OSU ↔ Penn State heat",
+      "kind": "rival",
+      "defaultRange": [ 30, 90 ],
+      "tags": [ "big-ten" ]
+    },
+    {
+      "id": "slow.sports.college_football.rival_osu_notre_dame",
+      "label": "OSU ↔ Notre Dame heat",
+      "kind": "rival",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "intermittent" ]
+    },
+    {
+      "id": "slow.sports.college_football.rival_michigan_msu",
+      "label": "Michigan ↔ Michigan State",
+      "kind": "rival",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "state" ]
+    },
+    {
+      "id": "slow.sports.college_football.rival_alabama_auburn",
+      "label": "Alabama ↔ Auburn (Iron Bowl)",
+      "kind": "rival",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "national-tv" ]
+    },
+    {
+      "id": "slow.sports.college_football.rival_hate_alabama",
+      "label": "Alabama dynasty fatigue / hate",
+      "kind": "rival",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "sec" ]
+    },
+    {
+      "id": "slow.sports.college_football.rival_cincy_uc",
+      "label": "Cincinnati local pride",
+      "kind": "rival",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "ohio" ]
+    },
+
+    {
+      "id": "slow.sports.college_football.playoff_or_bust",
+      "label": "Playoff-or-bust mindset",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "osu", "power" ]
+    },
+    {
+      "id": "slow.sports.college_football.enjoy_any_saturday",
+      "label": "Enjoys any good Saturday slate",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "neutral" ]
+    },
+    {
+      "id": "slow.sports.college_football.anti_sec_bias",
+      "label": "Anti-SEC media bias talk",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "big-ten", "argue" ]
+    },
+    {
+      "id": "slow.sports.college_football.coach_loyalty",
+      "label": "Coach loyalty / fire debate",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "hot-seat" ]
+    },
+    {
+      "id": "slow.sports.college_football.town_watched",
+      "label": "On TownWatchedTeams feed",
+      "kind": "system",
+      "defaultRange": [ 40, 95 ],
+      "tags": [ "local", "packet" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "knows OSU exists; no Saturday identity",
+    "atOrAbove50": "attach primary team + 1-2 rivals/habits",
+    "atOrAbove70": "Saturdays structured around games; The Game is sacred if OSU/Michigan",
+    "extreme95": "losses move Fast mood hard; recruiting and portal are year-round talk"
+  },
+  "notes": "Ohio seed weight: OSU primary, then Michigan as rival heat, Cincinnati + MAC schools for locals. Full list supports any transplanted NPC. Factory attaches 1 primary team + optional rival_heat, not every team."
+}

@@ -1,0 +1,69 @@
+{
+    "id":  "mid.self_assured",
+    "layer":  "mid",
+    "label":  "Self-assured",
+    "version":  1,
+    "cluster":  "self",
+    "description":  "Steady self-worth; less moved by one room\u0027s verdict.",
+    "priorIntensity":  6,
+    "moveSpeed":  "slow",
+    "bands":  {
+                  "off":  "0-29",
+                  "low":  "30-49",
+                  "mid":  "50-69",
+                  "high":  "70-84",
+                  "break":  "85-94",
+                  "extreme":  "95-100"
+              },
+    "styles":  [
+                   {
+                       "id":  "mid.self_assured.steady_worth",
+                       "label":  "Steady worth"
+                   },
+                   {
+                       "id":  "mid.self_assured.low_spiral",
+                       "label":  "Low spiral"
+                   },
+                   {
+                       "id":  "mid.self_assured.own_call",
+                       "label":  "Own call"
+                   }
+               ],
+    "links":  {
+                  "boostedBy":  [
+                                    "pride",
+                                    "hope",
+                                    "trust"
+                                ],
+                  "drainedBy":  [
+                                    "shame",
+                                    "hurt"
+                                ],
+                  "opposes":  [
+                                  "mid.self_critical"
+                              ]
+              },
+    "tagTriggers":  [
+                        {
+                            "tag":  "mid.self_assured.test",
+                            "meaning":  "Situation tests this character trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.self_assured.confirm",
+                            "meaning":  "Behavior confirms this trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.self_assured.violate",
+                            "meaning":  "Acts against this trait under pressure",
+                            "deltaHint":  -2
+                        }
+                    ],
+    "relationScoped":  true,
+    "historyHooks":  {
+                         "patternFile":  "self_assured_patterns.json",
+                         "fundingBudget":  2
+                     },
+    "notes":  "Can still feel Fast shame; recovers faster."
+}

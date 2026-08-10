@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using System.Linq;
 using ProjectEve.Narrative.Descriptions;
 
 namespace ProjectEve.Narrative.Scenes

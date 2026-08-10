@@ -1,33 +1,57 @@
-﻿namespace ProjectEve.Characters.Traits.Core;
-
-using ProjectEve.Characters.Base;
+﻿using ProjectEve.Characters.Base;
 using System;
 
-public static class BehaviorSystem
+namespace ProjectEve.Characters.Traits.Core
 {
-    public static float CalculateBehaviorScore(SimCharacter npc, string behaviorName)
+    public static class BehaviorSystem
     {
-        if (npc == null || string.IsNullOrWhiteSpace(behaviorName))
-            return 0f;
-
-        var behavior = BehaviorRegistry.GetBehavior(behaviorName);
-        if (behavior == null)
-            return 0f;
-
-        float score = 0f;
-
-        foreach (var pair in behavior.TraitWeights)
+        public static float CalculateBehaviorScore(SimCharacter npc, string behaviorName)
         {
-            string traitId = pair.Key;
-            float weight = pair.Value;
+            if (npc == null || string.IsNullOrWhiteSpace(behaviorName))
+                return 0f;
 
-            float traitValue = npc.GetTraitValue(traitId);
-            score += traitValue * weight;
+            var behavior = BehaviorRegistry.GetBehavior(behaviorName);
+            if (behavior == null)
+                return 0f;
+
+            float score = 0f;
+
+            foreach (var pair in behavior.TraitWeights)
+            {
+                float traitValue = npc.GetTraitValue(pair.Key);
+                score += traitValue * pair.Value;
+            }
+
+            // Soft money pressure on money / stress / risk / work-ish behaviors
+            try
+            {
+                if (npc.Money != null)
+                {
+                    int stressBias = npc.Money.StressBias();
+                    int fundBias = npc.Money.DesireFundingBias();
+
+                    switch (behaviorName)
+                    {
+                        case "MoneyManagement":
+                            score += stressBias * 0.4f;
+                            break;
+                        case "RiskTaking":
+                            score += fundBias * 0.35f;
+                            score -= Math.Max(0, stressBias) * 0.2f;
+                            break;
+                        case "WorkPerformance":
+                        case "MotivationDrive":
+                            score += Math.Max(0, stressBias) * 0.25f;
+                            break;
+                        case "RomanticBehavior":
+                            score += fundBias * 0.15f;
+                            break;
+                    }
+                }
+            }
+            catch { }
+
+            return Math.Clamp(score, 0f, 100f);
         }
-
-        // Keep in a usable range
-        score = Math.Clamp(score, 0f, 100f);
-
-        return score;
     }
 }

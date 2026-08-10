@@ -1,0 +1,181 @@
+﻿{
+  "id": "shame",
+  "layer": "fast",
+  "label": "Shame",
+  "version": 1,
+  "description": "Exposed, small, 'forget it' — I am wrong (not only I did wrong). Drives hide, deflect, collapse, or attack-other.",
+  "priorIntensity": {
+    "min": 2,
+    "max": 6,
+    "mean": 4
+  },
+  "spawn": {
+    "currentFromIntensity": true,
+    "noise": 3
+  },
+  "bands": {
+    "off": [ 0, 29 ],
+    "low": [ 30, 49 ],
+    "mid": [ 50, 69 ],
+    "high": [ 70, 84 ],
+    "break": [ 85, 94 ],
+    "extreme": [ 95, 100 ]
+  },
+  "styles": {
+    "hide": {
+      "means": "Wants out of sight; ends the topic; leaves.",
+      "speechHints": [ "forget_it", "nevermind" ],
+      "bodyHints": [ "shrink", "look_down", "exit" ],
+      "riskTags": [ "withdraw" ]
+    },
+    "joke_deflect": {
+      "means": "Covers with humor before it lands.",
+      "speechHints": [ "joke", "laugh_off" ],
+      "bodyHints": [ "forced_smile" ],
+      "riskTags": [ "never_serious" ]
+    },
+    "collapse": {
+      "means": "Folds; self-attack; feels worthless in the moment.",
+      "speechHints": [ "self_attack", "I_suck" ],
+      "bodyHints": [ "collapse" ],
+      "riskTags": [ "spiral" ]
+    },
+    "attack_other": {
+      "means": "Shame turns outward; blames the exposer.",
+      "speechHints": [ "accuse", "how_dare" ],
+      "bodyHints": [ "flare" ],
+      "riskTags": [ "shame_rage" ]
+    },
+    "over_explain": {
+      "means": "Talks too much to fix how they look.",
+      "speechHints": [ "justify", "long" ],
+      "bodyHints": [ "tense" ],
+      "riskTags": [ "ramble" ]
+    }
+  },
+  "defaultStyleWeights": {
+    "hide": 1.0,
+    "joke_deflect": 0.85,
+    "collapse": 0.7,
+    "attack_other": 0.5,
+    "over_explain": 0.8
+  },
+  "flavors": {
+    "body": "Looks, body, sexuality.",
+    "competence": "Failure, stupidity, skill.",
+    "moral": "Caught as bad/wrong person.",
+    "class": "Money, status, background.",
+    "belonging": "Not one of us."
+  },
+  "pull": {
+    "belowHomeDamageMult": 0.55,
+    "recoverMult": 1.2,
+    "aboveHomeSettleMult": 1.2
+  },
+  "funding": {
+    "required": true,
+    "budgetPerIntensityPoint": 1.0
+  },
+  "links": [
+    {
+      "trait": "guard",
+      "op": "+",
+      "weight": 0.5,
+      "when": "rise"
+    },
+    {
+      "trait": "openness",
+      "op": "-",
+      "weight": 0.55,
+      "when": "rise"
+    },
+    {
+      "trait": "pride",
+      "op": "-",
+      "weight": 0.4,
+      "when": "rise"
+    },
+    {
+      "trait": "anger",
+      "op": "+",
+      "weight": 0.3,
+      "when": "rise",
+      "styleGate": [ "attack_other" ]
+    },
+    {
+      "trait": "guilt",
+      "op": "+",
+      "weight": 0.25,
+      "when": "rise"
+    },
+    {
+      "trait": "hurt",
+      "op": "+",
+      "weight": 0.25,
+      "when": "rise"
+    }
+  ],
+  "opposePairs": [
+    {
+      "with": "pride",
+      "policyHints": [ "cover", "counterattack", "HeroSelf_lie" ]
+    },
+    {
+      "with": "desire",
+      "policyHints": [ "want_and_hide" ]
+    }
+  ],
+  "tagTriggers": [
+    {
+      "tag": "shame.expose",
+      "direction": "+",
+      "baseWeight": 1.0
+    },
+    {
+      "tag": "status.humiliate",
+      "direction": "+",
+      "baseWeight": 0.95
+    },
+    {
+      "tag": "status.belittle",
+      "direction": "+",
+      "baseWeight": 0.8
+    },
+    {
+      "tag": "conflict.laugh_at",
+      "direction": "+",
+      "baseWeight": 0.85
+    },
+    {
+      "tag": "bond.acceptance",
+      "direction": "-",
+      "baseWeight": 0.7
+    },
+    {
+      "tag": "bond.reassurance",
+      "direction": "-",
+      "baseWeight": 0.6
+    },
+    {
+      "tag": "bond.vulnerability_met_well",
+      "direction": "-",
+      "baseWeight": 0.75
+    }
+  ],
+  "relationScoped": true,
+  "historyHooks": {
+    "catalog": "Characters/Traits/TraitJson/TraitHistory/shame_patterns.json",
+    "filters": [ "style", "flavor", "sourceBucket" ],
+    "tellFraming": {
+      "prideHigh": "HeroSelf",
+      "prideLow": "VictimSelf",
+      "shameHigh": "VictimSelf",
+      "telephone": true
+    }
+  },
+  "debug": {
+    "showInDash": true,
+    "color": "#5c4a6a",
+    "sortPriority": 12
+  }
+}

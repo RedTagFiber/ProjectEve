@@ -1,0 +1,23 @@
+{
+    "catalog":  "tv_shows_scififantasy",
+    "style":  "SciFiFantasy",
+    "version":  1,
+    "entries":  [
+                    {
+                        "id":  "stranger_things",
+                        "label":  "Stranger Things"
+                    },
+                    {
+                        "id":  "the_mandalorian",
+                        "label":  "The Mandalorian"
+                    },
+                    {
+                        "id":  "game_of_thrones",
+                        "label":  "Game of Thrones"
+                    },
+                    {
+                        "id":  "the_expanse",
+                        "label":  "The Expanse"
+                    }
+                ]
+}

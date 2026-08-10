@@ -1,0 +1,137 @@
+{
+    "catalog":  "mlb_teams",
+    "version":  1,
+    "regionBias":  [
+                       "Ohio"
+                   ],
+    "entries":  [
+                    {
+                        "id":  "mlb.reds",
+                        "label":  "Cincinnati Reds",
+                        "league":  "MLB",
+                        "localWeight":  10,
+                        "rivals":  [
+                                       "mlb.cardinals",
+                                       "mlb.cubs"
+                                   ],
+                        "factsSeed":  [
+                                          "Great American Ball Park",
+                                          "oldest pro franchise"
+                                      ]
+                    },
+                    {
+                        "id":  "mlb.guardians",
+                        "label":  "Cleveland Guardians",
+                        "league":  "MLB",
+                        "localWeight":  9,
+                        "rivals":  [
+                                       "mlb.tigers",
+                                       "mlb.yankees"
+                                   ],
+                        "factsSeed":  [
+                                          "Progressive Field"
+                                      ]
+                    },
+                    {
+                        "id":  "mlb.yankees",
+                        "label":  "New York Yankees",
+                        "league":  "MLB",
+                        "localWeight":  4,
+                        "rivals":  [
+                                       "mlb.red_sox",
+                                       "mlb.guardians"
+                                   ],
+                        "factsSeed":  [
+                                          "Pinstripes"
+                                      ]
+                    },
+                    {
+                        "id":  "mlb.cubs",
+                        "label":  "Chicago Cubs",
+                        "league":  "MLB",
+                        "localWeight":  4,
+                        "rivals":  [
+                                       "mlb.white_sox",
+                                       "mlb.cardinals",
+                                       "mlb.reds"
+                                   ],
+                        "factsSeed":  [
+                                          "Wrigley"
+                                      ]
+                    },
+                    {
+                        "id":  "mlb.white_sox",
+                        "label":  "Chicago White Sox",
+                        "league":  "MLB",
+                        "localWeight":  3,
+                        "rivals":  [
+                                       "mlb.cubs"
+                                   ],
+                        "factsSeed":  [
+                                          "South Side"
+                                      ]
+                    },
+                    {
+                        "id":  "mlb.cardinals",
+                        "label":  "St. Louis Cardinals",
+                        "league":  "MLB",
+                        "localWeight":  4,
+                        "rivals":  [
+                                       "mlb.cubs",
+                                       "mlb.reds"
+                                   ],
+                        "factsSeed":  [
+                                          "Birds on the bat"
+                                      ]
+                    },
+                    {
+                        "id":  "mlb.tigers",
+                        "label":  "Detroit Tigers",
+                        "league":  "MLB",
+                        "localWeight":  4,
+                        "rivals":  [
+                                       "mlb.guardians"
+                                   ],
+                        "factsSeed":  [
+                                          "Comerica"
+                                      ]
+                    },
+                    {
+                        "id":  "mlb.pirates",
+                        "label":  "Pittsburgh Pirates",
+                        "league":  "MLB",
+                        "localWeight":  3,
+                        "rivals":  [
+                                       "mlb.reds",
+                                       "mlb.cardinals"
+                                   ],
+                        "factsSeed":  [
+                                          "Black and gold"
+                                      ]
+                    },
+                    {
+                        "id":  "mlb.red_sox",
+                        "label":  "Boston Red Sox",
+                        "league":  "MLB",
+                        "localWeight":  3,
+                        "rivals":  [
+                                       "mlb.yankees"
+                                   ],
+                        "factsSeed":  [
+                                          "Fenway"
+                                      ]
+                    },
+                    {
+                        "id":  "mlb.dodgers",
+                        "label":  "Los Angeles Dodgers",
+                        "league":  "MLB",
+                        "localWeight":  2,
+                        "rivals":  [
+                                       "mlb.giants"
+                                   ],
+                        "factsSeed":  [
+                                          "Blue"
+                                      ]
+                    }
+                ]
+}

@@ -1,0 +1,503 @@
+{
+  "id": "slow.music.blues",
+  "layer": "slow",
+  "domain": "music",
+  "label": "Blues",
+  "version": 1,
+  "description": "Interest in blues—Delta to Chicago to modern. Real artists, styles, and listening habits for talk, jukebox, and live shows.",
+  "priorIntensity": 5,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [
+    "blues",
+    "guitar",
+    "bar",
+    "harmonica",
+    "delta",
+    "chicago blues",
+    "12-bar",
+    "shuffle",
+    "slow blues",
+    "jam",
+    "open mic",
+    "BB",
+    "Clapton"
+  ],
+  "rivalBias": true,
+  "catalog": "Music/Blues",
+  "subTraits": [
+    {
+      "id": "slow.music.blues.delta",
+      "label": "Delta blues",
+      "kind": "style",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "acoustic", "mississippi", "raw" ]
+    },
+    {
+      "id": "slow.music.blues.chicago",
+      "label": "Chicago electric blues",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "amplified", "clubs", "urban" ]
+    },
+    {
+      "id": "slow.music.blues.texas",
+      "label": "Texas blues",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "shuffle", "guitar-hero" ]
+    },
+    {
+      "id": "slow.music.blues.memphis",
+      "label": "Memphis blues",
+      "kind": "style",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "beale", "soul-edge" ]
+    },
+    {
+      "id": "slow.music.blues.piedmont",
+      "label": "Piedmont / fingerstyle",
+      "kind": "style",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "ragtime", "acoustic" ]
+    },
+    {
+      "id": "slow.music.blues.british_blues",
+      "label": "British blues boom",
+      "kind": "style",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "60s", "rock-crossover" ]
+    },
+    {
+      "id": "slow.music.blues.blues_rock",
+      "label": "Blues rock",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "heavier", "jam" ]
+    },
+    {
+      "id": "slow.music.blues.jump_blues",
+      "label": "Jump blues",
+      "kind": "style",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "uptempo", "swing" ]
+    },
+    {
+      "id": "slow.music.blues.soul_blues",
+      "label": "Soul blues",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "horn", "church" ]
+    },
+    {
+      "id": "slow.music.blues.modern_blues",
+      "label": "Modern / contemporary blues",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "living", "festival" ]
+    },
+    {
+      "id": "slow.music.blues.acoustic_only",
+      "label": "Acoustic only preference",
+      "kind": "format",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "unplugged", "intimate" ]
+    },
+    {
+      "id": "slow.music.blues.electric_only",
+      "label": "Electric band preference",
+      "kind": "format",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "amp", "club" ]
+    },
+
+    {
+      "id": "slow.music.blues.robert_johnson",
+      "label": "Robert Johnson",
+      "kind": "artist",
+      "defaultRange": [ 20, 95 ],
+      "tags": [ "delta", "myth", "crossroads" ]
+    },
+    {
+      "id": "slow.music.blues.son_house",
+      "label": "Son House",
+      "kind": "artist",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "delta", "slide", "raw" ]
+    },
+    {
+      "id": "slow.music.blues.charley_patton",
+      "label": "Charley Patton",
+      "kind": "artist",
+      "defaultRange": [ 10, 85 ],
+      "tags": [ "delta", "foundational" ]
+    },
+    {
+      "id": "slow.music.blues.muddy_waters",
+      "label": "Muddy Waters",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "chicago", "electric", "king" ]
+    },
+    {
+      "id": "slow.music.blues.howlin_wolf",
+      "label": "Howlin' Wolf",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "chicago", "voice", "power" ]
+    },
+    {
+      "id": "slow.music.blues.little_walter",
+      "label": "Little Walter",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "harmonica", "chicago" ]
+    },
+    {
+      "id": "slow.music.blues.jimmy_reed",
+      "label": "Jimmy Reed",
+      "kind": "artist",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "shuffle", "laid-back" ]
+    },
+    {
+      "id": "slow.music.blues.bb_king",
+      "label": "B.B. King",
+      "kind": "artist",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "lucille", "vibrato", "ambassador" ]
+    },
+    {
+      "id": "slow.music.blues.albert_king",
+      "label": "Albert King",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "texas-edge", "bends", "influence" ]
+    },
+    {
+      "id": "slow.music.blues.freddie_king",
+      "label": "Freddie King",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "texas", "instrumental" ]
+    },
+    {
+      "id": "slow.music.blues.buddy_guy",
+      "label": "Buddy Guy",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "chicago", "wild", "living-legend" ]
+    },
+    {
+      "id": "slow.music.blues.otis_rush",
+      "label": "Otis Rush",
+      "kind": "artist",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "minor-key", "west-side" ]
+    },
+    {
+      "id": "slow.music.blues.magic_sam",
+      "label": "Magic Sam",
+      "kind": "artist",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "west-side", "groove" ]
+    },
+    {
+      "id": "slow.music.blues.john_lee_hooker",
+      "label": "John Lee Hooker",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "boogie", "hypnotic" ]
+    },
+    {
+      "id": "slow.music.blues.lightnin_hopkins",
+      "label": "Lightnin' Hopkins",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "texas", "solo" ]
+    },
+    {
+      "id": "slow.music.blues.t_bone_walker",
+      "label": "T-Bone Walker",
+      "kind": "artist",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "electric-pioneer", "showman" ]
+    },
+    {
+      "id": "slow.music.blues.elmore_james",
+      "label": "Elmore James",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "slide", "dust-my-broom" ]
+    },
+    {
+      "id": "slow.music.blues.etta_james",
+      "label": "Etta James",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "voice", "soul-blues", "at-last" ]
+    },
+    {
+      "id": "slow.music.blues.koko_taylor",
+      "label": "Koko Taylor",
+      "kind": "artist",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "chicago", "queen" ]
+    },
+    {
+      "id": "slow.music.blues.big_mama_thornton",
+      "label": "Big Mama Thornton",
+      "kind": "artist",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "hound-dog", "power" ]
+    },
+
+    {
+      "id": "slow.music.blues.clapton",
+      "label": "Eric Clapton (blues side)",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "british", "cream", "unplugged" ]
+    },
+    {
+      "id": "slow.music.blues.steve_ray_vaughan",
+      "label": "Stevie Ray Vaughan",
+      "kind": "artist",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "texas", "strat", "texas-flood" ]
+    },
+    {
+      "id": "slow.music.blues.jimi_hendrix_blues",
+      "label": "Hendrix blues side",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "red-house", "electric" ]
+    },
+    {
+      "id": "slow.music.blues.johnny_winter",
+      "label": "Johnny Winter",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "texas", "slide", "raw" ]
+    },
+    {
+      "id": "slow.music.blues.johnny_guitar_watson",
+      "label": "Johnny 'Guitar' Watson",
+      "kind": "artist",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "funk-blues", "style" ]
+    },
+    {
+      "id": "slow.music.blues.gary_moore",
+      "label": "Gary Moore",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "still-got-the-blues", "tone" ]
+    },
+    {
+      "id": "slow.music.blues.joe_bonamassa",
+      "label": "Joe Bonamassa",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "modern", "gear", "live" ]
+    },
+    {
+      "id": "slow.music.blues.derek_trucks",
+      "label": "Derek Trucks / Tedeschi Trucks",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "slide", "band", "modern" ]
+    },
+    {
+      "id": "slow.music.blues.susan_tedeschi",
+      "label": "Susan Tedeschi",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "voice", "guitar", "modern" ]
+    },
+    {
+      "id": "slow.music.blues.gary_clark_jr",
+      "label": "Gary Clark Jr.",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "modern", "rock-edge", "live" ]
+    },
+    {
+      "id": "slow.music.blues.christone_kingfish",
+      "label": "Christone 'Kingfish' Ingram",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "young", "mississippi", "future" ]
+    },
+    {
+      "id": "slow.music.blues.bobby_rush",
+      "label": "Bobby Rush",
+      "kind": "artist",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "soul-blues", "showman", "longevity" ]
+    },
+    {
+      "id": "slow.music.blues.shemekia_copeland",
+      "label": "Shemekia Copeland",
+      "kind": "artist",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "voice", "modern", "chicago-root" ]
+    },
+    {
+      "id": "slow.music.blues.robert_cray",
+      "label": "Robert Cray",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "soul-blues", "clean", "80s-on" ]
+    },
+    {
+      "id": "slow.music.blues.taj_mahal",
+      "label": "Taj Mahal",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "roots", "world", "joy" ]
+    },
+    {
+      "id": "slow.music.blues.ry_cooder",
+      "label": "Ry Cooder",
+      "kind": "artist",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "slide", "roots", "soundtracks" ]
+    },
+    {
+      "id": "slow.music.blues.john_mayer_blues",
+      "label": "John Mayer blues side",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "continuum", "dead-adj", "modern" ]
+    },
+    {
+      "id": "slow.music.blues.black_keys_blues",
+      "label": "Black Keys blues-rock root",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "ohio", "akron", "garage" ]
+    },
+
+    {
+      "id": "slow.music.blues.live_club",
+      "label": "Live club blues nights",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "bar", "close", "sweat" ]
+    },
+    {
+      "id": "slow.music.blues.festival",
+      "label": "Blues festival goer",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "outdoor", "daytime", "ohio-regional" ]
+    },
+    {
+      "id": "slow.music.blues.jukebox_picker",
+      "label": "Jukebox blues picker",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "bar", "quarters", "mood" ]
+    },
+    {
+      "id": "slow.music.blues.vinyl_collector",
+      "label": "Vinyl / reissue collector",
+      "kind": "habit",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "chess", "originals", "shelf" ]
+    },
+    {
+      "id": "slow.music.blues.guitar_player",
+      "label": "Plays blues guitar",
+      "kind": "practice",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "learn", "jam", "pride" ]
+    },
+    {
+      "id": "slow.music.blues.harmonica_player",
+      "label": "Plays harmonica",
+      "kind": "practice",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "pocket", "jam" ]
+    },
+    {
+      "id": "slow.music.blues.purist",
+      "label": "Blues purist",
+      "kind": "attitude",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "traditional", "gate" ]
+    },
+    {
+      "id": "slow.music.blues.big_tent",
+      "label": "Big-tent blues (rock OK)",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "open", "crossover" ]
+    },
+    {
+      "id": "slow.music.blues.slow_burn_mood",
+      "label": "Slow blues for mood",
+      "kind": "mood_role",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "late", "drink", "feel" ]
+    },
+    {
+      "id": "slow.music.blues.shuffle_drive",
+      "label": "Shuffle for drive / energy",
+      "kind": "mood_role",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "car", "up" ]
+    },
+    {
+      "id": "slow.music.blues.heartbreak_medicine",
+      "label": "Heartbreak medicine",
+      "kind": "mood_role",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "hurt", "alone" ]
+    },
+    {
+      "id": "slow.music.blues.church_to_club",
+      "label": "Church-to-club pipeline feel",
+      "kind": "attitude",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "gospel-root", "soul" ]
+    },
+    {
+      "id": "slow.music.blues.ohio_regional_scene",
+      "label": "Ohio / Midwest regional scene",
+      "kind": "local",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "cleveland", "columbus", "cincinnati", "bars" ]
+    },
+    {
+      "id": "slow.music.blues.chess_records",
+      "label": "Chess Records mythology",
+      "kind": "era_label",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "chicago", "history" ]
+    },
+    {
+      "id": "slow.music.blues.british_invasion_bridge",
+      "label": "British invasion as bridge in",
+      "kind": "history_hook",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "stones", "yardbirds", "doorway" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "knows B.B. King or Clapton name; no style identity",
+    "atOrAbove50": "attach 2-4 (style + 1-2 artists + habit); can name real records in talk",
+    "atOrAbove70": "jukebox and live-club habits show; purist vs big-tent arguments unlock",
+    "extreme95": "blues is core listening identity; festivals and vinyl matter"
+  },
+  "notes": "Real artists on purpose for your game. Black Keys included as Ohio bridge. Catalog path can later hold specific albums/tracks; these subs are preference + talk hooks. rivalBias true for purist vs blues-rock debates."
+}

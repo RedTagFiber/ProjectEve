@@ -1,0 +1,741 @@
+{
+  "id": "slow.music.country",
+  "layer": "slow",
+  "domain": "music",
+  "label": "Country",
+  "version": 1,
+  "description": "Interest in country—classic, outlaw, 90s, pop-country, and modern. Real artists for talk, radio, bars, and Ohio truck/backroad culture.",
+  "priorIntensity": 5,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [ "country", "nashville", "truck", "heartbreak song", "honky-tonk", "radio", "boots", "tailgate", "okie", "bro-country" ],
+  "rivalBias": true,
+  "catalog": "Music/Country",
+  "subTraits": [
+    {
+      "id": "slow.music.country.classic_country",
+      "label": "Classic country",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "old", "pure" ]
+    },
+    {
+      "id": "slow.music.country.honky_tonk",
+      "label": "Honky-tonk",
+      "kind": "style",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "bar", "dance" ]
+    },
+    {
+      "id": "slow.music.country.outlaw",
+      "label": "Outlaw country",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "rebellion", "70s" ]
+    },
+    {
+      "id": "slow.music.country.bakersfield",
+      "label": "Bakersfield sound",
+      "kind": "style",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "twang", "buck" ]
+    },
+    {
+      "id": "slow.music.country.countrypolitan",
+      "label": "Countrypolitan / Nashville smooth",
+      "kind": "style",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "strings", "polish" ]
+    },
+    {
+      "id": "slow.music.country.90s_country",
+      "label": "90s country",
+      "kind": "style",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "radio", "hats" ]
+    },
+    {
+      "id": "slow.music.country.pop_country",
+      "label": "Pop country",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "crossover", "charts" ]
+    },
+    {
+      "id": "slow.music.country.bro_country",
+      "label": "Bro-country",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "truck", "tailgate", "party" ]
+    },
+    {
+      "id": "slow.music.country.americana_edge",
+      "label": "Americana / alt-country edge",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "roots", "serious" ]
+    },
+    {
+      "id": "slow.music.country.texas_country",
+      "label": "Texas country / Red Dirt",
+      "kind": "style",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "independent", "dancehall" ]
+    },
+    {
+      "id": "slow.music.country.bluegrass_lean",
+      "label": "Bluegrass lean",
+      "kind": "style",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "banjo", "acoustic" ]
+    },
+    {
+      "id": "slow.music.country.gospel_country",
+      "label": "Country gospel",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "church", "faith" ]
+    },
+    {
+      "id": "slow.music.country.neotraditional",
+      "label": "Neotraditional",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "hats", "twang-return" ]
+    },
+    {
+      "id": "slow.music.country.modern_mainstream",
+      "label": "Modern mainstream country",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "radio", "now" ]
+    },
+
+    {
+      "id": "slow.music.country.hank_sr",
+      "label": "Hank Williams Sr.",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "foundation", "heartbreak" ]
+    },
+    {
+      "id": "slow.music.country.johnny_cash",
+      "label": "Johnny Cash",
+      "kind": "artist",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "man-in-black", "outlaw-adj" ]
+    },
+    {
+      "id": "slow.music.country.waylon",
+      "label": "Waylon Jennings",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "outlaw", "hard" ]
+    },
+    {
+      "id": "slow.music.country.willie",
+      "label": "Willie Nelson",
+      "kind": "artist",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "outlaw", "trigger", "long" ]
+    },
+    {
+      "id": "slow.music.country.merle",
+      "label": "Merle Haggard",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "bakersfield", "working" ]
+    },
+    {
+      "id": "slow.music.country.george_jones",
+      "label": "George Jones",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "voice", "heartbreak" ]
+    },
+    {
+      "id": "slow.music.country.tammy_wynette",
+      "label": "Tammy Wynette",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "stand-by", "classic" ]
+    },
+    {
+      "id": "slow.music.country.lovetta_lynn",
+      "label": "Loretta Lynn",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "coal", "woman" ]
+    },
+    {
+      "id": "slow.music.country.dolly",
+      "label": "Dolly Parton",
+      "kind": "artist",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "icon", "songwriting" ]
+    },
+    {
+      "id": "slow.music.country.patsy_cline",
+      "label": "Patsy Cline",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "voice", "classic" ]
+    },
+    {
+      "id": "slow.music.country.ray_price",
+      "label": "Ray Price",
+      "kind": "artist",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "shuffle", "smooth" ]
+    },
+    {
+      "id": "slow.music.country.buck_owens",
+      "label": "Buck Owens",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "bakersfield", "twang" ]
+    },
+    {
+      "id": "slow.music.country.conway",
+      "label": "Conway Twitty",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "love", "radio" ]
+    },
+    {
+      "id": "slow.music.country.charley_pride",
+      "label": "Charley Pride",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "voice", "trailblazer" ]
+    },
+    {
+      "id": "slow.music.country.kristofferson",
+      "label": "Kris Kristofferson",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "writer", "outlaw" ]
+    },
+    {
+      "id": "slow.music.country.emmylou",
+      "label": "Emmylou Harris",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "harmony", "americana" ]
+    },
+    {
+      "id": "slow.music.country.gram_parsons",
+      "label": "Gram Parsons",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "cosmic", "bridge" ]
+    },
+
+    {
+      "id": "slow.music.country.george_strait",
+      "label": "George Strait",
+      "kind": "artist",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "king", "neotrad", "dance" ]
+    },
+    {
+      "id": "slow.music.country.alan_jackson",
+      "label": "Alan Jackson",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "neotrad", "90s" ]
+    },
+    {
+      "id": "slow.music.country.garth",
+      "label": "Garth Brooks",
+      "kind": "artist",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "stadium", "90s", "show" ]
+    },
+    {
+      "id": "slow.music.country.tim_mcgraw",
+      "label": "Tim McGraw",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "90s-on", "radio" ]
+    },
+    {
+      "id": "slow.music.country.faith_hill",
+      "label": "Faith Hill",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "crossover", "voice" ]
+    },
+    {
+      "id": "slow.music.country.shania",
+      "label": "Shania Twain",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "pop-country", "90s" ]
+    },
+    {
+      "id": "slow.music.country.dixie_chicks",
+      "label": "Dixie Chicks / The Chicks",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "harmony", "fire" ]
+    },
+    {
+      "id": "slow.music.country.martina",
+      "label": "Martina McBride",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "voice", "power" ]
+    },
+    {
+      "id": "slow.music.country.reeba",
+      "label": "Reba McEntire",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "queen", "longevity" ]
+    },
+    {
+      "id": "slow.music.country.toby_keith",
+      "label": "Toby Keith",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "patriotic", "bar", "ohio-radio" ]
+    },
+    {
+      "id": "slow.music.country.kenny_chesney",
+      "label": "Kenny Chesney",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "island", "stadium", "summer" ]
+    },
+    {
+      "id": "slow.music.country.brad_paisley",
+      "label": "Brad Paisley",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "guitar", "clever" ]
+    },
+    {
+      "id": "slow.music.country.keith_urban",
+      "label": "Keith Urban",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "guitar", "pop-edge" ]
+    },
+    {
+      "id": "slow.music.country.blake_shelton",
+      "label": "Blake Shelton",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "radio", "tv-crossover" ]
+    },
+    {
+      "id": "slow.music.country.miranda_lambert",
+      "label": "Miranda Lambert",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "fire", "writing", "real" ]
+    },
+    {
+      "id": "slow.music.country.carrie_underwood",
+      "label": "Carrie Underwood",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "voice", "idol", "radio" ]
+    },
+    {
+      "id": "slow.music.country.taylor_country",
+      "label": "Taylor Swift (country era)",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "early", "crossover-door" ]
+    },
+    {
+      "id": "slow.music.country.lady_a",
+      "label": "Lady A",
+      "kind": "artist",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "harmony", "radio" ]
+    },
+    {
+      "id": "slow.music.country.zac_brown",
+      "label": "Zac Brown Band",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "jam", "southern", "live" ]
+    },
+    {
+      "id": "slow.music.country.eric_church",
+      "label": "Eric Church",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "outlaw-modern", "chief" ]
+    },
+    {
+      "id": "slow.music.country.chris_stapleton",
+      "label": "Chris Stapleton",
+      "kind": "artist",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "voice", "soul", "crossover-respect" ]
+    },
+    {
+      "id": "slow.music.country.jason_isbell",
+      "label": "Jason Isbell",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "americana", "writing" ]
+    },
+    {
+      "id": "slow.music.country.sturgill",
+      "label": "Sturgill Simpson",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "outlaw-modern", "weird" ]
+    },
+    {
+      "id": "slow.music.country.tyler_childers",
+      "label": "Tyler Childers",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "kentucky", "raw", "modern" ]
+    },
+    {
+      "id": "slow.music.country.zach_bryan",
+      "label": "Zach Bryan",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "modern", "heartland", "writing" ]
+    },
+    {
+      "id": "slow.music.country.morgan_wallen",
+      "label": "Morgan Wallen",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "modern", "radio", "controversy" ]
+    },
+    {
+      "id": "slow.music.country.luke_combs",
+      "label": "Luke Combs",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "modern", "voice", "stadium" ]
+    },
+    {
+      "id": "slow.music.country.kane_brown",
+      "label": "Kane Brown",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "modern", "crossover" ]
+    },
+    {
+      "id": "slow.music.country.thomas_rhett",
+      "label": "Thomas Rhett",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "pop-country", "feel-good" ]
+    },
+    {
+      "id": "slow.music.country.kacey_musgraves",
+      "label": "Kacey Musgraves",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "writing", "left-field", "polish" ]
+    },
+    {
+      "id": "slow.music.country.maren_morris",
+      "label": "Maren Morris",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "pop-edge", "voice" ]
+    },
+    {
+      "id": "slow.music.country.lainey_wilson",
+      "label": "Lainey Wilson",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "modern", "personality", "neotrad-edge" ]
+    },
+    {
+      "id": "slow.music.country.hardy",
+      "label": "HARDY",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "rock-edge", "writing" ]
+    },
+    {
+      "id": "slow.music.country.riley_green",
+      "label": "Riley Green",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "modern", "southern" ]
+    },
+    {
+      "id": "slow.music.country.jordan_davis",
+      "label": "Jordan Davis",
+      "kind": "artist",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "radio", "feel-good" ]
+    },
+    {
+      "id": "slow.music.country.old_dominion",
+      "label": "Old Dominion",
+      "kind": "artist",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "band", "radio" ]
+    },
+    {
+      "id": "slow.music.country.little_big_town",
+      "label": "Little Big Town",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "harmony", "radio" ]
+    },
+    {
+      "id": "slow.music.country.brooks_dunn",
+      "label": "Brooks & Dunn",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "90s", "neon", "dance" ]
+    },
+    {
+      "id": "slow.music.country.florida_georgia_line",
+      "label": "Florida Georgia Line",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "bro", "party", "crossover" ]
+    },
+    {
+      "id": "slow.music.country.jon_pardi",
+      "label": "Jon Pardi",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "neotrad", "dance" ]
+    },
+    {
+      "id": "slow.music.country.midland",
+      "label": "Midland",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "retro", "urban-cowboy" ]
+    },
+    {
+      "id": "slow.music.country.codys_jinks",
+      "label": "Cody Jinks",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "texas", "independent", "real" ]
+    },
+    {
+      "id": "slow.music.country.whiskey_myers",
+      "label": "Whiskey Myers",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "southern-rock", "texas" ]
+    },
+    {
+      "id": "slow.music.country.turnpike",
+      "label": "Turnpike Troubadours",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "red-dirt", "writing" ]
+    },
+    {
+      "id": "slow.music.country.randy_travis",
+      "label": "Randy Travis",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "neotrad", "voice" ]
+    },
+    {
+      "id": "slow.music.country.vince_gill",
+      "label": "Vince Gill",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "voice", "guitar", "respect" ]
+    },
+    {
+      "id": "slow.music.country.dwight_yoakam",
+      "label": "Dwight Yoakam",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "bakersfield", "twang", "cool" ]
+    },
+    {
+      "id": "slow.music.country.patty_loveless",
+      "label": "Patty Loveless",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "voice", "mountain" ]
+    },
+    {
+      "id": "slow.music.country.trisha_yearwood",
+      "label": "Trisha Yearwood",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "voice", "90s" ]
+    },
+    {
+      "id": "slow.music.country.alison_krauss",
+      "label": "Alison Krauss",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "bluegrass", "voice", "crossover" ]
+    },
+    {
+      "id": "slow.music.country.ricky_skaggs",
+      "label": "Ricky Skaggs",
+      "kind": "artist",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "bluegrass", "trad" ]
+    },
+    {
+      "id": "slow.music.country.johnny_paycheck",
+      "label": "Johnny Paycheck",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "take-this-job", "outlaw" ]
+    },
+    {
+      "id": "slow.music.country.david_allan_coe",
+      "label": "David Allan Coe",
+      "kind": "artist",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "outlaw", "edge" ]
+    },
+    {
+      "id": "slow.music.country.ernie_tubb",
+      "label": "Ernest Tubb",
+      "kind": "artist",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "honky-tonk", "classic" ]
+    },
+    {
+      "id": "slow.music.country.lefty",
+      "label": "Lefty Frizzell",
+      "kind": "artist",
+      "defaultRange": [ 10, 85 ],
+      "tags": [ "voice", "influence" ]
+    },
+    {
+      "id": "slow.music.country.gene_watson",
+      "label": "Gene Watson",
+      "kind": "artist",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "pure", "voice" ]
+    },
+    {
+      "id": "slow.music.country.john_prine",
+      "label": "John Prine",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "writing", "americana-bridge" ]
+    },
+    {
+      "id": "slow.music.country.guy_clark",
+      "label": "Guy Clark",
+      "kind": "artist",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "writer", "texas" ]
+    },
+    {
+      "id": "slow.music.country.townes",
+      "label": "Townes Van Zandt",
+      "kind": "artist",
+      "defaultRange": [ 20, 95 ],
+      "tags": [ "writer", "legend" ]
+    },
+
+    {
+      "id": "slow.music.country.radio_daily",
+      "label": "Country radio daily",
+      "kind": "habit",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "truck", "work", "ohio" ]
+    },
+    {
+      "id": "slow.music.country.playlist_heartbreak",
+      "label": "Heartbreak playlist",
+      "kind": "mood_role",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "hurt", "alone" ]
+    },
+    {
+      "id": "slow.music.country.tailgate_party",
+      "label": "Tailgate / party country",
+      "kind": "mood_role",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "osu", "summer", "beer" ]
+    },
+    {
+      "id": "slow.music.country.bar_jukebox",
+      "label": "Bar jukebox controller",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "quarters", "mood" ]
+    },
+    {
+      "id": "slow.music.country.live_fair",
+      "label": "County fair / outdoor shows",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "ohio", "summer" ]
+    },
+    {
+      "id": "slow.music.country.arena_shows",
+      "label": "Arena country shows",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "stadium", "night" ]
+    },
+    {
+      "id": "slow.music.country.dance_hall",
+      "label": "Two-step / dance hall",
+      "kind": "habit",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "boots", "floor" ]
+    },
+    {
+      "id": "slow.music.country.purist",
+      "label": "Country purist (hate pop)",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "gate", "real" ]
+    },
+    {
+      "id": "slow.music.country.big_tent",
+      "label": "Big-tent country",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "open", "radio" ]
+    },
+    {
+      "id": "slow.music.country.lyrics_first",
+      "label": "Lyrics / story first",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "writing", "truth" ]
+    },
+    {
+      "id": "slow.music.country.ohio_country_radio",
+      "label": "Ohio country radio identity",
+      "kind": "local",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "local", "truck", "work" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "knows a few radio names; no style identity",
+    "atOrAbove50": "attach 3-5 (style + 2-3 artists + habit); real names in talk",
+    "atOrAbove70": "radio/jukebox/live habits show; purist vs bro-country fights unlock",
+    "extreme95": "country is default soundtrack; fair and tailgate seasons matter"
+  },
+  "notes": "~100 subTraits. Factory still only attaches a handful. rivalBias true for real vs pop-country wars. Ohio: radio, fairs, tailgates, truck culture."
+}

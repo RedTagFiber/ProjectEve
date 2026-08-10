@@ -1,0 +1,78 @@
+{
+    "catalog":  "soccer_clubs",
+    "version":  1,
+    "regionBias":  [
+                       "Ohio",
+                       "MLS"
+                   ],
+    "entries":  [
+                    {
+                        "label":  "Columbus Crew",
+                        "factsSeed":  [
+                                          "Black and gold",
+                                          "MLS Cup"
+                                      ],
+                        "id":  "soccer.crew",
+                        "rivals":  [
+                                       "soccer.fccincinnati"
+                                   ],
+                        "localWeight":  10
+                    },
+                    {
+                        "label":  "FC Cincinnati",
+                        "factsSeed":  [
+                                          "Orange and blue"
+                                      ],
+                        "id":  "soccer.fccincinnati",
+                        "rivals":  [
+                                       "soccer.crew"
+                                   ],
+                        "localWeight":  9
+                    },
+                    {
+                        "label":  "Arsenal",
+                        "factsSeed":  [
+                                          "Gunners"
+                                      ],
+                        "id":  "soccer.arsenal",
+                        "rivals":  [
+                                       "soccer.tottenham"
+                                   ],
+                        "localWeight":  2
+                    },
+                    {
+                        "label":  "Manchester United",
+                        "factsSeed":  [
+                                          "Red Devils"
+                                      ],
+                        "id":  "soccer.manchester_united",
+                        "rivals":  [
+                                       "soccer.manchester_city",
+                                       "soccer.liverpool"
+                                   ],
+                        "localWeight":  2
+                    },
+                    {
+                        "label":  "Liverpool",
+                        "factsSeed":  [
+                                          "YNWA"
+                                      ],
+                        "id":  "soccer.liverpool",
+                        "rivals":  [
+                                       "soccer.manchester_united"
+                                   ],
+                        "localWeight":  2
+                    },
+                    {
+                        "label":  "Manchester City",
+                        "factsSeed":  [
+                                          "Sky blue"
+                                      ],
+                        "id":  "soccer.manchester_city",
+                        "rivals":  [
+                                       "soccer.manchester_united"
+                                   ],
+                        "localWeight":  2
+                    }
+                ]
+}

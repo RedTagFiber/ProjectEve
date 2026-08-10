@@ -1,0 +1,381 @@
+{
+  "id": "slow.movies.drama",
+  "layer": "slow",
+  "domain": "movies",
+  "label": "Drama",
+  "version": 1,
+  "description": "Prefers drama films—character, relationship, moral weight, and stories that sit with you after the credits.",
+  "priorIntensity": 5,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [ "drama", "heavy", "cry", "performance", "oscar", "character study", "gut punch", "rewatch" ],
+  "rivalBias": true,
+  "catalog": "Movies/Titles/Drama",
+  "subTraits": [
+    {
+      "id": "slow.movies.drama.family",
+      "label": "Family drama",
+      "kind": "subgenre",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "parents", "siblings", "home" ]
+    },
+    {
+      "id": "slow.movies.drama.romance_adjacent",
+      "label": "Romantic drama (not rom-com)",
+      "kind": "subgenre",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "love", "pain", "adult" ]
+    },
+    {
+      "id": "slow.movies.drama.crime_drama",
+      "label": "Crime / moral drama",
+      "kind": "subgenre",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "choices", "street" ]
+    },
+    {
+      "id": "slow.movies.drama.courtroom",
+      "label": "Courtroom / justice",
+      "kind": "subgenre",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "trial", "speech" ]
+    },
+    {
+      "id": "slow.movies.drama.period",
+      "label": "Period drama",
+      "kind": "subgenre",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "costume", "era" ]
+    },
+    {
+      "id": "slow.movies.drama.war_drama",
+      "label": "War drama",
+      "kind": "subgenre",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "cost", "service" ]
+    },
+    {
+      "id": "slow.movies.drama.sports_drama",
+      "label": "Sports drama",
+      "kind": "subgenre",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "underdog", "ohio" ]
+    },
+    {
+      "id": "slow.movies.drama.medical",
+      "label": "Medical / illness drama",
+      "kind": "subgenre",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "hospital", "grief" ]
+    },
+    {
+      "id": "slow.movies.drama.coming_of_age",
+      "label": "Coming of age",
+      "kind": "subgenre",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "youth", "become" ]
+    },
+    {
+      "id": "slow.movies.drama.workplace",
+      "label": "Workplace / ambition drama",
+      "kind": "subgenre",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "career", "cost" ]
+    },
+    {
+      "id": "slow.movies.drama.faith_drama",
+      "label": "Faith / spiritual drama",
+      "kind": "subgenre",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "church", "doubt" ]
+    },
+    {
+      "id": "slow.movies.drama.social_issue",
+      "label": "Social issue drama",
+      "kind": "subgenre",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "message", "talk" ]
+    },
+    {
+      "id": "slow.movies.drama.character_study",
+      "label": "Character study first",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "interior", "actor" ]
+    },
+    {
+      "id": "slow.movies.drama.plot_engine",
+      "label": "Plot-driven drama",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "events", "pace" ]
+    },
+    {
+      "id": "slow.movies.drama.quiet",
+      "label": "Quiet / restrained",
+      "kind": "style",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "silence", "looks" ]
+    },
+    {
+      "id": "slow.movies.drama.melodrama",
+      "label": "Melodrama OK",
+      "kind": "style",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "big", "feelings" ]
+    },
+    {
+      "id": "slow.movies.drama.kitchen_sink",
+      "label": "Kitchen-sink realism",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "ordinary", "hard" ]
+    },
+    {
+      "id": "slow.movies.drama.prestige",
+      "label": "Prestige / awards bait",
+      "kind": "attitude",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "oscar", "season" ]
+    },
+    {
+      "id": "slow.movies.drama.anti_prestige",
+      "label": "Anti-awards snobbery",
+      "kind": "attitude",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "story", "not-statue" ]
+    },
+    {
+      "id": "slow.movies.drama.performance_first",
+      "label": "Chases great performances",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "acting", "scene" ]
+    },
+    {
+      "id": "slow.movies.drama.director_auteur",
+      "label": "Drama auteur loyal",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "filmography" ]
+    },
+    {
+      "id": "slow.movies.drama.ensemble",
+      "label": "Ensemble casts",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "many", "weave" ]
+    },
+    {
+      "id": "slow.movies.drama.two_hander",
+      "label": "Two-hander intimacy",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "pair", "dialogue" ]
+    },
+    {
+      "id": "slow.movies.drama.slow_burn",
+      "label": "Slow burn",
+      "kind": "structure",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "patience", "payoff" ]
+    },
+    {
+      "id": "slow.movies.drama.tight_runtime",
+      "label": "Tight runtime preferred",
+      "kind": "structure",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "no-bloat" ]
+    },
+    {
+      "id": "slow.movies.drama.epic_length",
+      "label": "Epic length OK",
+      "kind": "structure",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "saga", "years" ]
+    },
+    {
+      "id": "slow.movies.drama.tearjerker",
+      "label": "Wants the cry",
+      "kind": "tone",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "catharsis", "tissue" ]
+    },
+    {
+      "id": "slow.movies.drama.no_manipulation",
+      "label": "Hates cheap tear tricks",
+      "kind": "tone",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "earned", "rival" ]
+    },
+    {
+      "id": "slow.movies.drama.hopeful_end",
+      "label": "Needs hopeful end",
+      "kind": "tone",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "light", "repair" ]
+    },
+    {
+      "id": "slow.movies.drama.bleak_ok",
+      "label": "Bleak endings OK",
+      "kind": "tone",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "honest", "dark" ]
+    },
+    {
+      "id": "slow.movies.drama.based_true",
+      "label": "Based-on-true pull",
+      "kind": "source",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "real", "research" ]
+    },
+    {
+      "id": "slow.movies.drama.pure_fiction",
+      "label": "Pure fiction preferred",
+      "kind": "source",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "invented", "free" ]
+    },
+    {
+      "id": "slow.movies.drama.literary_adapt",
+      "label": "Book adaptations",
+      "kind": "source",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "novel", "compare" ]
+    },
+    {
+      "id": "slow.movies.drama.stage_adapt",
+      "label": "Stage-to-screen",
+      "kind": "source",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "play", "talky" ]
+    },
+    {
+      "id": "slow.movies.drama.70s_80s",
+      "label": "70s/80s serious drama",
+      "kind": "era",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "grit", "classic" ]
+    },
+    {
+      "id": "slow.movies.drama.modern_indie_drama",
+      "label": "Modern indie drama",
+      "kind": "era",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "small", "real" ]
+    },
+    {
+      "id": "slow.movies.drama.foreign_drama",
+      "label": "Foreign language drama",
+      "kind": "scope",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "subs", "world" ]
+    },
+    {
+      "id": "slow.movies.drama.american_realism",
+      "label": "American realism",
+      "kind": "scope",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "midwest", "work" ]
+    },
+    {
+      "id": "slow.movies.drama.theater_serious",
+      "label": "Theater for serious drama",
+      "kind": "viewing",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "focus", "event" ]
+    },
+    {
+      "id": "slow.movies.drama.home_heavy",
+      "label": "Heavy drama at home only",
+      "kind": "viewing",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "safe", "pause" ]
+    },
+    {
+      "id": "slow.movies.drama.date_deep",
+      "label": "Deep date-night drama",
+      "kind": "social",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "talk", "bond" ]
+    },
+    {
+      "id": "slow.movies.drama.not_on_date",
+      "label": "Too heavy for dates",
+      "kind": "social",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "solo", "mood" ]
+    },
+    {
+      "id": "slow.movies.drama.discussion_need",
+      "label": "Needs post-film talk",
+      "kind": "social",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "process", "meaning" ]
+    },
+    {
+      "id": "slow.movies.drama.rewatch_rare",
+      "label": "Rarely rewatches (too heavy)",
+      "kind": "viewing",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "once", "enough" ]
+    },
+    {
+      "id": "slow.movies.drama.comfort_drama",
+      "label": "Has comfort dramas",
+      "kind": "viewing",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "known", "feel" ]
+    },
+    {
+      "id": "slow.movies.drama.score_sensitive",
+      "label": "Score can make or break",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "music", "swell" ]
+    },
+    {
+      "id": "slow.movies.drama.silence_brave",
+      "label": "Brave with silence",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "space", "actor" ]
+    },
+    {
+      "id": "slow.movies.drama.monologue_love",
+      "label": "Great monologue hunter",
+      "kind": "style",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "speech", "scene" ]
+    },
+    {
+      "id": "slow.movies.drama.moral_ambiguity",
+      "label": "Moral ambiguity preferred",
+      "kind": "tone",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "grey", "human" ]
+    },
+    {
+      "id": "slow.movies.drama.clear_moral",
+      "label": "Clear moral preferred",
+      "kind": "tone",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "lesson", "side" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "will sit through a drama; no preference identity",
+    "atOrAbove50": "attach 2-4; tone and subgenre opinions show",
+    "atOrAbove70": "drama nights are intentional; performance talk natural",
+    "extreme95": "uses drama as emotional workout; ending debates matter"
+  },
+  "notes": "Family and sports drama weight well for Ohio. Pair heavy endings with Fast mood after viewing."
+}

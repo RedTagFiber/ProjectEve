@@ -1,0 +1,23 @@
+{
+    "catalog":  "movie_titles_thriller",
+    "style":  "Thriller",
+    "version":  1,
+    "entries":  [
+                    {
+                        "id":  "gone_girl",
+                        "label":  "Gone Girl"
+                    },
+                    {
+                        "id":  "se7en",
+                        "label":  "Se7en"
+                    },
+                    {
+                        "id":  "zodiac",
+                        "label":  "Zodiac"
+                    },
+                    {
+                        "id":  "the_silence_of_the_lambs",
+                        "label":  "The Silence of the Lambs"
+                    }
+                ]
+}

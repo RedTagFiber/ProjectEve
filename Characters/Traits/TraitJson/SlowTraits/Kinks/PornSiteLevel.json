@@ -1,0 +1,1031 @@
+{
+  "notes": {
+    "pack": "porn_site_scenarios",
+    "purpose": "Sharing, watching, group, voyeur/exhibit, finish/body-focus, breeding-talk, role-scenario kinks common on adult sites. Complements protocol/impact packs—not a replacement.",
+    "contentRating": "+18",
+    "bounds": "Consensual adults only. No minors. No real non-consent. No real incapacitation. Cheating/CNC-flavored entries are fantasy or pre-negotiated frames only.",
+    "factory": "Still 0–3 kinks per +18 NPC total across ALL packs. These compete with Level1–4 catalogs—don’t stack five sharing traits on one person."
+  },
+  "kinks": [
+    {
+      "id": "kink.hotwife_watch",
+      "name": "Hotwife Watch",
+      "level": 3,
+      "description": "Partner with another while you watch; arousal without required humiliation.",
+      "defaultValueRange": [ 30, 85 ],
+      "revealTrust": 88,
+      "limitDefault": "hard",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 14,
+        "maxDays": 240
+      },
+      "tags": [ "hotwife", "watch", "share" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "jealousy+", "tension+", "pride+" ],
+        "ifRejected": [ "hurt+", "jealousy+", "resentment+", "trust-" ]
+      },
+      "midBias": [ "adventurous", "possessive", "secure-or-testing" ]
+    },
+    {
+      "id": "kink.cuckold_humiliation",
+      "name": "Cuckold Humiliation",
+      "level": 4,
+      "description": "Partner with another; your charge includes humiliation and status loss play.",
+      "defaultValueRange": [ 35, 90 ],
+      "revealTrust": 94,
+      "limitDefault": "hard",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 21,
+        "maxDays": 365
+      },
+      "tags": [ "cuckold", "humiliation", "watch" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "shame+", "jealousy+", "hurt?" ],
+        "ifRejected": [ "shame+", "anger+", "hurt+", "trust-" ]
+      },
+      "midBias": [ "submissive", "shame-prone", "intense" ]
+    },
+    {
+      "id": "kink.hotwife_report",
+      "name": "Hotwife Report",
+      "level": 3,
+      "description": "Partner plays elsewhere and tells you after in detail.",
+      "defaultValueRange": [ 30, 85 ],
+      "revealTrust": 86,
+      "limitDefault": "hard",
+      "styleOptions": [ "tease", "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 10,
+        "maxDays": 220
+      },
+      "tags": [ "hotwife", "report", "verbal" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "jealousy+", "tension+", "shame+" ],
+        "ifRejected": [ "hurt+", "jealousy+", "guard+" ]
+      },
+      "midBias": [ "verbal", "jealous", "adventurous" ]
+    },
+    {
+      "id": "kink.stag_encourage",
+      "name": "Stag Encourage",
+      "level": 3,
+      "description": "You encourage partner with others; pride and setup, low humiliation.",
+      "defaultValueRange": [ 30, 85 ],
+      "revealTrust": 85,
+      "limitDefault": "hard",
+      "styleOptions": [ "direct", "tease", "only-private" ],
+      "cooldown": {
+        "minDays": 10,
+        "maxDays": 210
+      },
+      "tags": [ "stag", "encourage", "share" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "pride+", "jealousy+", "tension+" ],
+        "ifRejected": [ "disappointment", "resentment+", "pride+" ]
+      },
+      "midBias": [ "secure", "controlling", "adventurous" ]
+    },
+    {
+      "id": "kink.cuckquean_watch",
+      "name": "Cuckquean Watch",
+      "level": 3,
+      "description": "You watch partner with another woman/man; jealousy/arousal mix.",
+      "defaultValueRange": [ 30, 85 ],
+      "revealTrust": 88,
+      "limitDefault": "hard",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 14,
+        "maxDays": 240
+      },
+      "tags": [ "cuckquean", "watch", "share" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "jealousy+", "shame+", "tension+" ],
+        "ifRejected": [ "hurt+", "jealousy+", "anger+", "trust-" ]
+      },
+      "midBias": [ "jealous", "intense", "adventurous" ]
+    },
+    {
+      "id": "kink.share_soft",
+      "name": "Soft Share",
+      "level": 2,
+      "description": "Same-room touching/kissing with another; stop before full swap.",
+      "defaultValueRange": [ 25, 75 ],
+      "revealTrust": 78,
+      "limitDefault": "soft",
+      "styleOptions": [ "tease", "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 7,
+        "maxDays": 140
+      },
+      "tags": [ "share", "soft", "group-light" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "jealousy+", "anxiety+", "tension+" ],
+        "ifRejected": [ "guard+", "jealousy+", "hurt+" ]
+      },
+      "midBias": [ "adventurous", "cautious", "jealous" ]
+    },
+    {
+      "id": "kink.share_full",
+      "name": "Full Share",
+      "level": 3,
+      "description": "Full partner share / soft swing with agreed rules.",
+      "defaultValueRange": [ 30, 85 ],
+      "revealTrust": 88,
+      "limitDefault": "hard",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 14,
+        "maxDays": 240
+      },
+      "tags": [ "share", "swing", "full" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "jealousy+", "tension+", "pride+" ],
+        "ifRejected": [ "hurt+", "anger+", "trust-", "jealousy+" ]
+      },
+      "midBias": [ "adventurous", "secure-or-volatile" ]
+    },
+    {
+      "id": "kink.same_room_separate",
+      "name": "Same Room Separate",
+      "level": 2,
+      "description": "Two couples or pairs in same room, not crossing partners.",
+      "defaultValueRange": [ 20, 70 ],
+      "revealTrust": 75,
+      "limitDefault": "soft",
+      "styleOptions": [ "tease", "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 7,
+        "maxDays": 130
+      },
+      "tags": [ "same-room", "voyeur-adjacent" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "anxiety+", "tension+", "shame+" ],
+        "ifRejected": [ "guard+", "shame+" ]
+      },
+      "midBias": [ "voyeuristic", "anxious", "adventurous" ]
+    },
+    {
+      "id": "kink.threesome_mfm",
+      "name": "Threesome MFM",
+      "level": 2,
+      "description": "Two men / one woman as preferred group shape.",
+      "defaultValueRange": [ 25, 80 ],
+      "revealTrust": 80,
+      "limitDefault": "soft",
+      "styleOptions": [ "direct", "tease", "only-private" ],
+      "cooldown": {
+        "minDays": 10,
+        "maxDays": 160
+      },
+      "tags": [ "threesome", "mfm", "group" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "jealousy+", "tension+", "anxiety+" ],
+        "ifRejected": [ "hurt+", "jealousy+", "guard+" ]
+      },
+      "midBias": [ "adventurous", "bisexual-flexible", "jealous" ]
+    },
+    {
+      "id": "kink.threesome_fmf",
+      "name": "Threesome FMF",
+      "level": 2,
+      "description": "Two women / one man as preferred group shape.",
+      "defaultValueRange": [ 25, 80 ],
+      "revealTrust": 80,
+      "limitDefault": "soft",
+      "styleOptions": [ "direct", "tease", "only-private" ],
+      "cooldown": {
+        "minDays": 10,
+        "maxDays": 160
+      },
+      "tags": [ "threesome", "fmf", "group" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "jealousy+", "tension+", "pride+" ],
+        "ifRejected": [ "hurt+", "jealousy+", "guard+" ]
+      },
+      "midBias": [ "adventurous", "jealous", "secure" ]
+    },
+    {
+      "id": "kink.group_sex",
+      "name": "Group Sex",
+      "level": 3,
+      "description": "More than three; party/group energy as preference.",
+      "defaultValueRange": [ 25, 75 ],
+      "revealTrust": 88,
+      "limitDefault": "hard",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 14,
+        "maxDays": 220
+      },
+      "tags": [ "group", "party" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "anxiety+", "jealousy+", "shame+" ],
+        "ifRejected": [ "guard+", "jealousy+", "hurt+" ]
+      },
+      "midBias": [ "adventurous", "exhibition-lean", "overwhelm-risk" ]
+    },
+    {
+      "id": "kink.bisexual_with_partner",
+      "name": "Bi With Partner Present",
+      "level": 2,
+      "description": "Same-sex contact preferred when primary partner is present/involved.",
+      "defaultValueRange": [ 25, 80 ],
+      "revealTrust": 78,
+      "limitDefault": "soft",
+      "styleOptions": [ "shy", "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 7,
+        "maxDays": 140
+      },
+      "tags": [ "bisexual", "partner-present" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "openness+", "anxiety+", "shame+" ],
+        "ifRejected": [ "shame+", "hurt+", "guard+" ]
+      },
+      "midBias": [ "fluid", "loyal", "exploratory" ]
+    },
+    {
+      "id": "kink.voyeur_consensual",
+      "name": "Consensual Voyeur",
+      "level": 2,
+      "description": "Watching consenting others; live or arranged.",
+      "defaultValueRange": [ 25, 75 ],
+      "revealTrust": 72,
+      "limitDefault": "soft",
+      "styleOptions": [ "shy", "tease", "only-private" ],
+      "cooldown": {
+        "minDays": 5,
+        "maxDays": 120
+      },
+      "tags": [ "voyeur", "watch" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "tension+", "shame+", "anxiety+" ],
+        "ifRejected": [ "shame+", "guard+" ]
+      },
+      "midBias": [ "voyeuristic", "secretive" ]
+    },
+    {
+      "id": "kink.exhibition_private_audience",
+      "name": "Private Audience Exhibition",
+      "level": 2,
+      "description": "Being watched by invited audience; not random public.",
+      "defaultValueRange": [ 25, 80 ],
+      "revealTrust": 80,
+      "limitDefault": "soft",
+      "styleOptions": [ "tease", "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 7,
+        "maxDays": 140
+      },
+      "tags": [ "exhibition", "audience" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "shame+", "pride+", "anxiety+" ],
+        "ifRejected": [ "shame+", "hurt+", "guard+" ]
+      },
+      "midBias": [ "exhibitionist", "proud", "anxious" ]
+    },
+    {
+      "id": "kink.exhibition_risk",
+      "name": "Risk Exhibition",
+      "level": 3,
+      "description": "Risk of being seen as the charge; still avoids forcing bystanders.",
+      "defaultValueRange": [ 20, 70 ],
+      "revealTrust": 86,
+      "limitDefault": "hard",
+      "styleOptions": [ "tease", "only-private", "direct" ],
+      "cooldown": {
+        "minDays": 10,
+        "maxDays": 200
+      },
+      "tags": [ "exhibition", "risk", "public-edge" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "anxiety+", "fear+", "tension+" ],
+        "ifRejected": [ "fear+", "guard+", "anger+" ]
+      },
+      "midBias": [ "edge-seeking", "adventurous", "secretive" ]
+    },
+    {
+      "id": "kink.recording_perform",
+      "name": "Perform for Camera",
+      "level": 2,
+      "description": "Partner directs; you perform for private recording.",
+      "defaultValueRange": [ 20, 70 ],
+      "revealTrust": 82,
+      "limitDefault": "hard",
+      "styleOptions": [ "shy", "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 7,
+        "maxDays": 150
+      },
+      "tags": [ "recording", "perform", "director" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "shame+", "anxiety+", "pride+" ],
+        "ifRejected": [ "shame+", "guard+", "trust-" ]
+      },
+      "midBias": [ "exhibitionist", "anxious", "compliant" ]
+    },
+    {
+      "id": "kink.onlyfans_fantasy",
+      "name": "Creator Fantasy",
+      "level": 2,
+      "description": "Fantasy of paid/public creator dynamic with partner as manager/fan.",
+      "defaultValueRange": [ 15, 65 ],
+      "revealTrust": 80,
+      "limitDefault": "soft",
+      "styleOptions": [ "tease", "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 7,
+        "maxDays": 150
+      },
+      "tags": [ "creator", "fantasy", "perform" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "pride+", "shame+", "anxiety+" ],
+        "ifRejected": [ "pride+", "hurt+", "guard+" ]
+      },
+      "midBias": [ "ambitious", "exhibitionist", "status" ]
+    },
+    {
+      "id": "kink.breeding_talk",
+      "name": "Breeding Talk",
+      "level": 2,
+      "description": "Impregnation/breeding language as arousal; may be fantasy-only.",
+      "defaultValueRange": [ 25, 80 ],
+      "revealTrust": 70,
+      "limitDefault": "soft",
+      "styleOptions": [ "direct", "tease", "only-private" ],
+      "cooldown": {
+        "minDays": 3,
+        "maxDays": 100
+      },
+      "tags": [ "breeding", "verbal", "risk-talk" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "tension+", "fear?", "pride+" ],
+        "ifRejected": [ "hurt+", "shame+", "guard+" ]
+      },
+      "midBias": [ "passionate", "risk-tolerant", "nurture-or-edge" ]
+    },
+    {
+      "id": "kink.creampie_focus",
+      "name": "Creampie Focus",
+      "level": 2,
+      "description": "Internal finish as preferred end; strong visual/claim charge.",
+      "defaultValueRange": [ 30, 85 ],
+      "revealTrust": 68,
+      "limitDefault": "none",
+      "styleOptions": [ "direct", "tease", "only-private" ],
+      "cooldown": {
+        "minDays": 2,
+        "maxDays": 90
+      },
+      "tags": [ "creampie", "finish", "claim" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "pride+", "tension+" ],
+        "ifRejected": [ "disappointment", "resentment+" ]
+      },
+      "midBias": [ "possessive", "sensual", "direct" ]
+    },
+    {
+      "id": "kink.creampie_cleanup",
+      "name": "Cleanup Focus",
+      "level": 3,
+      "description": "Cleanup after creampie as central act (self or partner).",
+      "defaultValueRange": [ 25, 80 ],
+      "revealTrust": 84,
+      "limitDefault": "soft",
+      "styleOptions": [ "shy", "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 5,
+        "maxDays": 160
+      },
+      "tags": [ "cleanup", "creampie", "service" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "shame+", "devotion+", "tension+" ],
+        "ifRejected": [ "shame+", "hurt+", "guard+" ]
+      },
+      "midBias": [ "submissive", "devoted", "shame-tolerant" ]
+    },
+    {
+      "id": "kink.cum_marking",
+      "name": "Cum Marking",
+      "level": 2,
+      "description": "Being marked with finish on body as claim/arousal.",
+      "defaultValueRange": [ 25, 80 ],
+      "revealTrust": 72,
+      "limitDefault": "soft",
+      "styleOptions": [ "direct", "tease", "only-private" ],
+      "cooldown": {
+        "minDays": 3,
+        "maxDays": 110
+      },
+      "tags": [ "marking", "finish", "claim" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "shame+", "pride+", "tension+" ],
+        "ifRejected": [ "shame+", "hurt+" ]
+      },
+      "midBias": [ "possessive", "exhibition-lite", "sensual" ]
+    },
+    {
+      "id": "kink.facial_focus",
+      "name": "Facial Focus",
+      "level": 2,
+      "description": "Finish on face as preferred climax path.",
+      "defaultValueRange": [ 20, 75 ],
+      "revealTrust": 75,
+      "limitDefault": "soft",
+      "styleOptions": [ "direct", "shy", "only-private" ],
+      "cooldown": {
+        "minDays": 4,
+        "maxDays": 120
+      },
+      "tags": [ "facial", "finish", "visual" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "shame+", "pride+", "tension+" ],
+        "ifRejected": [ "shame+", "hurt+", "guard+" ]
+      },
+      "midBias": [ "submission-lean", "exhibition-lite", "direct" ]
+    },
+    {
+      "id": "kink.oral_focus_give",
+      "name": "Oral Focus Give",
+      "level": 1,
+      "description": "Giving oral as primary preferred act, not warm-up.",
+      "defaultValueRange": [ 30, 85 ],
+      "revealTrust": 45,
+      "limitDefault": "none",
+      "styleOptions": [ "shy", "direct", "tease" ],
+      "cooldown": {
+        "minDays": 1,
+        "maxDays": 40
+      },
+      "tags": [ "oral", "give", "service" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "affection+", "pride+" ],
+        "ifRejected": [ "hurt+", "shame+" ]
+      },
+      "midBias": [ "devoted", "sensual", "service" ]
+    },
+    {
+      "id": "kink.oral_focus_receive",
+      "name": "Oral Focus Receive",
+      "level": 1,
+      "description": "Receiving oral as primary preferred act.",
+      "defaultValueRange": [ 30, 85 ],
+      "revealTrust": 45,
+      "limitDefault": "none",
+      "styleOptions": [ "direct", "tease", "shy" ],
+      "cooldown": {
+        "minDays": 1,
+        "maxDays": 40
+      },
+      "tags": [ "oral", "receive" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "pride+", "tension+" ],
+        "ifRejected": [ "disappointment", "resentment+" ]
+      },
+      "midBias": [ "sensual", "entitled-or-appreciative" ]
+    },
+    {
+      "id": "kink.anal_focus",
+      "name": "Anal Focus",
+      "level": 2,
+      "description": "Anal as main preferred path, not rare exception.",
+      "defaultValueRange": [ 25, 80 ],
+      "revealTrust": 70,
+      "limitDefault": "soft",
+      "styleOptions": [ "direct", "shy", "only-private" ],
+      "cooldown": {
+        "minDays": 3,
+        "maxDays": 110
+      },
+      "tags": [ "anal", "focus" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "tension+", "anxiety+", "shame+" ],
+        "ifRejected": [ "hurt+", "guard+", "shame+" ]
+      },
+      "midBias": [ "adventurous", "sensual", "careful" ]
+    },
+    {
+      "id": "kink.pegging",
+      "name": "Pegging",
+      "level": 2,
+      "description": "Strap/pegging as preferred dynamic direction.",
+      "defaultValueRange": [ 25, 80 ],
+      "revealTrust": 78,
+      "limitDefault": "soft",
+      "styleOptions": [ "direct", "shy", "only-private" ],
+      "cooldown": {
+        "minDays": 5,
+        "maxDays": 130
+      },
+      "tags": [ "pegging", "strap", "role-reverse" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "shame+", "pride+", "tension+" ],
+        "ifRejected": [ "shame+", "hurt+", "pride+" ]
+      },
+      "midBias": [ "fluid", "dominant", "submissive" ]
+    },
+    {
+      "id": "kink.toy_machine_focus",
+      "name": "Toy Machine Focus",
+      "level": 2,
+      "description": "Machines/heavy toy setups as preferred intensity path.",
+      "defaultValueRange": [ 20, 70 ],
+      "revealTrust": 72,
+      "limitDefault": "soft",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 5,
+        "maxDays": 130
+      },
+      "tags": [ "toy", "machine", "intensity" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "overwhelm", "tension+", "anxiety+" ],
+        "ifRejected": [ "disappointment", "guard+" ]
+      },
+      "midBias": [ "edge-seeking", "technical", "enduring" ]
+    },
+    {
+      "id": "kink.size_queen",
+      "name": "Size Focus Receive",
+      "level": 2,
+      "description": "Strong preference for size as arousal focus (receive).",
+      "defaultValueRange": [ 25, 80 ],
+      "revealTrust": 65,
+      "limitDefault": "none",
+      "styleOptions": [ "direct", "tease", "only-private" ],
+      "cooldown": {
+        "minDays": 3,
+        "maxDays": 100
+      },
+      "tags": [ "size", "receive" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "tension+", "anxiety+" ],
+        "ifRejected": [ "disappointment", "resentment+" ]
+      },
+      "midBias": [ "sensual", "particular", "direct" ]
+    },
+    {
+      "id": "kink.sph_verbal",
+      "name": "SPH Verbal",
+      "level": 2,
+      "description": "Small-penetration humiliation as verbal play.",
+      "defaultValueRange": [ 15, 65 ],
+      "revealTrust": 80,
+      "limitDefault": "soft",
+      "styleOptions": [ "tease", "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 5,
+        "maxDays": 140
+      },
+      "tags": [ "sph", "humiliation", "verbal" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "shame+", "hurt?", "tension+" ],
+        "ifRejected": [ "shame+", "anger+", "hurt+", "pride+" ]
+      },
+      "midBias": [ "shame-prone", "verbal", "intense" ]
+    },
+    {
+      "id": "kink.joi_direction",
+      "name": "JOI Direction",
+      "level": 2,
+      "description": "Giving or receiving detailed solo instructions as main event.",
+      "defaultValueRange": [ 20, 70 ],
+      "revealTrust": 60,
+      "limitDefault": "none",
+      "styleOptions": [ "direct", "tease", "only-private" ],
+      "cooldown": {
+        "minDays": 2,
+        "maxDays": 90
+      },
+      "tags": [ "joi", "instruction", "distance-ok" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "tension+", "focus" ],
+        "ifRejected": [ "disappointment" ]
+      },
+      "midBias": [ "controlling", "verbal", "playful" ]
+    },
+    {
+      "id": "kink.feet_worship",
+      "name": "Feet Worship",
+      "level": 2,
+      "description": "Feet as primary worship/arousal focus.",
+      "defaultValueRange": [ 20, 75 ],
+      "revealTrust": 70,
+      "limitDefault": "soft",
+      "styleOptions": [ "shy", "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 4,
+        "maxDays": 120
+      },
+      "tags": [ "feet", "worship", "body-part" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "shame+", "devotion+" ],
+        "ifRejected": [ "shame+", "hurt+", "guard+" ]
+      },
+      "midBias": [ "devoted", "secretive", "particular" ]
+    },
+    {
+      "id": "kink.body_part_worship",
+      "name": "Body Part Worship",
+      "level": 2,
+      "description": "Specific body part (not feet) as worship center—chest, hands, etc.",
+      "defaultValueRange": [ 20, 75 ],
+      "revealTrust": 55,
+      "limitDefault": "none",
+      "styleOptions": [ "shy", "direct", "tease" ],
+      "cooldown": {
+        "minDays": 2,
+        "maxDays": 90
+      },
+      "tags": [ "worship", "body-part" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "affection+", "pride+" ],
+        "ifRejected": [ "hurt+", "shame+" ]
+      },
+      "midBias": [ "devoted", "sensual" ]
+    },
+    {
+      "id": "kink.uniform_role_cop",
+      "name": "Uniform Role Cop",
+      "level": 2,
+      "description": "Adult cop/authority uniform role between consenting adults.",
+      "defaultValueRange": [ 20, 70 ],
+      "revealTrust": 65,
+      "limitDefault": "soft",
+      "styleOptions": [ "tease", "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 5,
+        "maxDays": 120
+      },
+      "tags": [ "uniform", "role", "authority" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "tension+", "playfulness+", "fear?" ],
+        "ifRejected": [ "disappointment", "guard+" ]
+      },
+      "midBias": [ "playful", "authority-responsive" ]
+    },
+    {
+      "id": "kink.uniform_role_nurse",
+      "name": "Uniform Role Nurse",
+      "level": 2,
+      "description": "Adult medical/nurse role play between adults.",
+      "defaultValueRange": [ 15, 65 ],
+      "revealTrust": 68,
+      "limitDefault": "soft",
+      "styleOptions": [ "tease", "shy", "only-private" ],
+      "cooldown": {
+        "minDays": 5,
+        "maxDays": 120
+      },
+      "tags": [ "uniform", "role", "care" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "anxiety+", "playfulness+" ],
+        "ifRejected": [ "shame+", "guard+" ]
+      },
+      "midBias": [ "playful", "care-oriented" ]
+    },
+    {
+      "id": "kink.teacher_student_adult_role",
+      "name": "Adult Teacher Student Role",
+      "level": 3,
+      "description": "Teacher/student fantasy with both adults; compartmentalized role only.",
+      "defaultValueRange": [ 20, 70 ],
+      "revealTrust": 88,
+      "limitDefault": "hard",
+      "styleOptions": [ "only-private", "shy", "direct" ],
+      "cooldown": {
+        "minDays": 10,
+        "maxDays": 220
+      },
+      "tags": [ "role", "taboo-flavor", "adult-only" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "shame+", "tension+", "guard+" ],
+        "ifRejected": [ "shame+", "guard+", "hurt+" ]
+      },
+      "midBias": [ "secretive", "compartmentalizing", "power-responsive" ]
+    },
+    {
+      "id": "kink.boss_employee_role",
+      "name": "Boss Employee Role",
+      "level": 2,
+      "description": "Workplace power role fantasy between adults (not real coercion).",
+      "defaultValueRange": [ 20, 70 ],
+      "revealTrust": 72,
+      "limitDefault": "soft",
+      "styleOptions": [ "tease", "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 5,
+        "maxDays": 130
+      },
+      "tags": [ "role", "power", "workplace-fantasy" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "tension+", "shame+", "pride+" ],
+        "ifRejected": [ "shame+", "guard+" ]
+      },
+      "midBias": [ "status", "power-responsive", "playful" ]
+    },
+    {
+      "id": "kink.cheating_role_fantasy",
+      "name": "Cheating Role Fantasy",
+      "level": 3,
+      "description": "Affair/cheating scenario as role only—partner knows; not secret betrayal.",
+      "defaultValueRange": [ 20, 70 ],
+      "revealTrust": 90,
+      "limitDefault": "hard",
+      "styleOptions": [ "only-private", "tease", "direct" ],
+      "cooldown": {
+        "minDays": 14,
+        "maxDays": 240
+      },
+      "tags": [ "cheating-role", "fantasy", "negotiated" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "jealousy+", "shame+", "tension+" ],
+        "ifRejected": [ "hurt+", "jealousy+", "anger+", "trust-" ]
+      },
+      "midBias": [ "dramatic", "secretive", "edge" ]
+    },
+    {
+      "id": "kink.ntr_fantasy",
+      "name": "NTR Flavor Fantasy",
+      "level": 4,
+      "description": "Taken-from / netorare emotional flavor as fantasy; high jealousy load.",
+      "defaultValueRange": [ 25, 75 ],
+      "revealTrust": 95,
+      "limitDefault": "hard",
+      "styleOptions": [ "only-private", "direct" ],
+      "cooldown": {
+        "minDays": 21,
+        "maxDays": 365
+      },
+      "tags": [ "ntr", "jealousy", "fantasy" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "jealousy+", "hurt+", "shame+", "tension+" ],
+        "ifRejected": [ "hurt+", "anger+", "trust-", "resentment+" ]
+      },
+      "midBias": [ "jealous", "intense", "shame-prone" ]
+    },
+    {
+      "id": "kink.netori_fantasy",
+      "name": "Netori Fantasy",
+      "level": 3,
+      "description": "Being the one who takes someone else’s partner—fantasy frame.",
+      "defaultValueRange": [ 25, 75 ],
+      "revealTrust": 90,
+      "limitDefault": "hard",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 14,
+        "maxDays": 240
+      },
+      "tags": [ "netori", "conquest", "fantasy" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "pride+", "tension+", "guilt?" ],
+        "ifRejected": [ "pride+", "disappointment", "guard+" ]
+      },
+      "midBias": [ "competitive", "dominant", "guilt-capable" ]
+    },
+    {
+      "id": "kink.free_use_fantasy",
+      "name": "Free Use Fantasy",
+      "level": 4,
+      "description": "Pre-negotiated at-home free-use frame; explicit consent architecture required.",
+      "defaultValueRange": [ 35, 85 ],
+      "revealTrust": 96,
+      "limitDefault": "hard",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 14,
+        "maxDays": 365
+      },
+      "tags": [ "free-use", "protocol", "negotiated" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "tension+", "anxiety+", "trust+" ],
+        "ifRejected": [ "hurt+", "anger+", "trust-", "guard+" ]
+      },
+      "midBias": [ "submissive", "protocol", "edge" ]
+    },
+    {
+      "id": "kink.somno_negotiated",
+      "name": "Negotiated Sleep Play",
+      "level": 4,
+      "description": "Sleep-play only with prior standing consent; never surprise-incapacitation.",
+      "defaultValueRange": [ 25, 75 ],
+      "revealTrust": 97,
+      "limitDefault": "hard",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 14,
+        "maxDays": 365
+      },
+      "tags": [ "somno", "negotiated", "trust-heavy" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "trust+", "anxiety+", "fear?" ],
+        "ifRejected": [ "fear+", "anger+", "trust-", "guard+" ]
+      },
+      "midBias": [ "trusting", "edge", "careful-partner-need" ]
+    },
+    {
+      "id": "kink.drunk_role_fantasy",
+      "name": "Drunk Role Fantasy",
+      "level": 3,
+      "description": "Drunk/impaired role as acting only—not real intoxication play.",
+      "defaultValueRange": [ 15, 60 ],
+      "revealTrust": 88,
+      "limitDefault": "hard",
+      "styleOptions": [ "only-private", "tease" ],
+      "cooldown": {
+        "minDays": 14,
+        "maxDays": 240
+      },
+      "tags": [ "drunk-role", "fantasy-only" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "playfulness+", "shame+", "anxiety+" ],
+        "ifRejected": [ "shame+", "guard+", "anger+" ]
+      },
+      "midBias": [ "playful", "compartmentalizing" ]
+    },
+    {
+      "id": "kink.public_sex_real",
+      "name": "Real Public Sex",
+      "level": 4,
+      "description": "Actually doing it in public-risk space; extreme discretion and legal risk awareness.",
+      "defaultValueRange": [ 20, 65 ],
+      "revealTrust": 94,
+      "limitDefault": "hard",
+      "styleOptions": [ "only-private", "direct" ],
+      "cooldown": {
+        "minDays": 21,
+        "maxDays": 365
+      },
+      "tags": [ "public-sex", "risk", "legal-flag" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "fear+", "anxiety+", "tension+" ],
+        "ifRejected": [ "fear+", "anger+", "guard+" ]
+      },
+      "midBias": [ "edge-seeking", "adventurous", "secretive" ]
+    },
+    {
+      "id": "kink.car_sex_focus",
+      "name": "Car Sex Focus",
+      "level": 2,
+      "description": "Vehicle sex as preferred setting, not accident.",
+      "defaultValueRange": [ 25, 75 ],
+      "revealTrust": 60,
+      "limitDefault": "soft",
+      "styleOptions": [ "tease", "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 4,
+        "maxDays": 110
+      },
+      "tags": [ "car", "setting", "risk-light" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "tension+", "anxiety+" ],
+        "ifRejected": [ "disappointment" ]
+      },
+      "midBias": [ "adventurous", "impulsive" ]
+    },
+    {
+      "id": "kink.outdoor_sex_focus",
+      "name": "Outdoor Sex Focus",
+      "level": 2,
+      "description": "Outdoors as preferred setting when secluded enough.",
+      "defaultValueRange": [ 25, 75 ],
+      "revealTrust": 65,
+      "limitDefault": "soft",
+      "styleOptions": [ "tease", "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 5,
+        "maxDays": 120
+      },
+      "tags": [ "outdoor", "setting" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "anxiety+", "tension+" ],
+        "ifRejected": [ "guard+", "disappointment" ]
+      },
+      "midBias": [ "adventurous", "nature-linked" ]
+    },
+    {
+      "id": "kink.shower_sex_focus",
+      "name": "Shower Sex Focus",
+      "level": 1,
+      "description": "Shower/bath sex as high preference setting.",
+      "defaultValueRange": [ 25, 75 ],
+      "revealTrust": 40,
+      "limitDefault": "none",
+      "styleOptions": [ "tease", "direct", "shy" ],
+      "cooldown": {
+        "minDays": 2,
+        "maxDays": 50
+      },
+      "tags": [ "shower", "setting" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "playfulness+", "affection+" ],
+        "ifRejected": []
+      },
+      "midBias": [ "sensual", "playful" ]
+    },
+    {
+      "id": "kink.kitchen_counter_focus",
+      "name": "Kitchen Counter Focus",
+      "level": 2,
+      "description": "Domestic urgent settings (counter, couch, wall) as preferred heat.",
+      "defaultValueRange": [ 25, 75 ],
+      "revealTrust": 50,
+      "limitDefault": "none",
+      "styleOptions": [ "tease", "direct" ],
+      "cooldown": {
+        "minDays": 2,
+        "maxDays": 80
+      },
+      "tags": [ "domestic", "urgent", "setting" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "tension+", "playfulness+" ],
+        "ifRejected": []
+      },
+      "midBias": [ "passionate", "impulsive" ]
+    },
+    {
+      "id": "kink.gloryhole_fantasy",
+      "name": "Gloryhole Fantasy",
+      "level": 3,
+      "description": "Anonymous partition fantasy; often stays fantasy or staged with partner.",
+      "defaultValueRange": [ 20, 70 ],
+      "revealTrust": 90,
+      "limitDefault": "hard",
+      "styleOptions": [ "only-private", "shy" ],
+      "cooldown": {
+        "minDays": 14,
+        "maxDays": 240
+      },
+      "tags": [ "anonymous", "fantasy", "partition" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "shame+", "anxiety+", "tension+" ],
+        "ifRejected": [ "shame+", "guard+", "hurt+" ]
+      },
+      "midBias": [ "anonymous-lean", "secretive", "compartmentalizing" ]
+    },
+    {
+      "id": "kink.massage_parlor_role",
+      "name": "Massage Parlor Role",
+      "level": 2,
+      "description": "Massage-to-more role scenario between partners.",
+      "defaultValueRange": [ 20, 70 ],
+      "revealTrust": 65,
+      "limitDefault": "soft",
+      "styleOptions": [ "tease", "shy", "only-private" ],
+      "cooldown": {
+        "minDays": 5,
+        "maxDays": 120
+      },
+      "tags": [ "role", "massage", "slow-burn" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "tension+", "playfulness+" ],
+        "ifRejected": [ "disappointment" ]
+      },
+      "midBias": [ "playful", "sensual" ]
+    },
+    {
+      "id": "kink.stranger_role_partner",
+      "name": "Stranger Role With Partner",
+      "level": 2,
+      "description": "Meet-as-strangers role in bar/hotel; partner is the stranger.",
+      "defaultValueRange": [ 25, 75 ],
+      "revealTrust": 60,
+      "limitDefault": "none",
+      "styleOptions": [ "tease", "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 4,
+        "maxDays": 110
+      },
+      "tags": [ "role", "stranger", "hotel" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "tension+", "playfulness+", "anxiety+" ],
+        "ifRejected": [ "disappointment" ]
+      },
+      "midBias": [ "playful", "adventurous" ]
+    },
+    {
+      "id": "kink.hotel_weekend_focus",
+      "name": "Hotel Weekend Focus",
+      "level": 2,
+      "description": "Hotel as preferred container for intensity—anonymity + time.",
+      "defaultValueRange": [ 25, 75 ],
+      "revealTrust": 55,
+      "limitDefault": "none",
+      "styleOptions": [ "tease", "direct" ],
+      "cooldown": {
+        "minDays": 7,
+        "maxDays": 140
+      },
+      "tags": [ "hotel", "setting", "weekend" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "openness+", "tension+" ],
+        "ifRejected": [ "disappointment" ]
+      },
+      "midBias": [ "romantic", "adventurous", "escape-oriented" ]
+    }
+  ]
+}

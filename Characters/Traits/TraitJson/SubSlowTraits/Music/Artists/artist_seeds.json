@@ -1,0 +1,93 @@
+{
+    "catalog":  "artist_seeds",
+    "version":  1,
+    "byGenre":  {
+                    "country":  [
+                                    "Johnny Cash",
+                                    "Chris Stapleton",
+                                    "Carrie Underwood",
+                                    "Morgan Wallen",
+                                    "Luke Combs",
+                                    "Shania Twain"
+                                ],
+                    "rock":  [
+                                 "Foo Fighters",
+                                 "AC/DC",
+                                 "Nirvana",
+                                 "Pearl Jam",
+                                 "The Rolling Stones",
+                                 "Queen"
+                             ],
+                    "hip_hop":  [
+                                    "Eminem",
+                                    "Kendrick Lamar",
+                                    "Drake",
+                                    "J. Cole",
+                                    "Outkast",
+                                    "Missy Elliott"
+                                ],
+                    "metal":  [
+                                  "Metallica",
+                                  "Iron Maiden",
+                                  "Tool",
+                                  "Slipknot",
+                                  "Black Sabbath"
+                              ],
+                    "pop":  [
+                                "Taylor Swift",
+                                "Michael Jackson",
+                                "Madonna",
+                                "Bruno Mars",
+                                "Billie Eilish"
+                            ],
+                    "edm_dance":  [
+                                      "Daft Punk",
+                                      "Calvin Harris",
+                                      "Deadmau5",
+                                      "Skrillex"
+                                  ],
+                    "rnb_soul":  [
+                                     "Alicia Keys",
+                                     "Usher",
+                                     "Aretha Franklin",
+                                     "The Weeknd"
+                                 ],
+                    "reggae":  [
+                                   "Bob Marley",
+                                   "Damian Marley",
+                                   "UB40"
+                               ],
+                    "punk":  [
+                                 "Green Day",
+                                 "The Clash",
+                                 "Ramones",
+                                 "NOFX"
+                             ],
+                    "indie":  [
+                                  "The National",
+                                  "Arcade Fire",
+                                  "Phoebe Bridgers"
+                              ],
+                    "blues":  [
+                                  "B.B. King",
+                                  "Stevie Ray Vaughan",
+                                  "Buddy Guy"
+                              ],
+                    "folk_americana":  [
+                                           "Bob Dylan",
+                                           "Mumford \u0026 Sons",
+                                           "The Avett Brothers"
+                                       ],
+                    "classical_jazz":  [
+                                           "Miles Davis",
+                                           "John Coltrane",
+                                           "Beethoven",
+                                           "Debussy"
+                                       ],
+                    "christian_gospel":  [
+                                             "Elevation Worship",
+                                             "Mahalia Jackson",
+                                             "Lauren Daigle"
+                                         ]
+                }
+}

@@ -1,0 +1,605 @@
+{
+  "parent": "slow.life.work_ambition",
+  "version": 1,
+  "fillThreshold": 50,
+  "notes": "Attaches when work_ambition >= 50. Factory picks a cluster, not every flag. Pairs with JobProfile (title, pay, schedule) on SimCharacter.",
+  "subs": [
+    {
+      "id": "sub.work.climb_drive",
+      "label": "Climb drive",
+      "type": "enum",
+      "values": [ "none", "low", "mid", "high", "ruthless" ],
+      "default": "mid",
+      "tags": [ "ambition" ]
+    },
+    {
+      "id": "sub.work.identity_fuse",
+      "label": "Job is identity",
+      "type": "bool",
+      "default": false,
+      "tags": [ "self" ]
+    },
+    {
+      "id": "sub.work.job_is_just_job",
+      "label": "Job is just a job",
+      "type": "bool",
+      "default": true,
+      "tags": [ "self" ]
+    },
+    {
+      "id": "sub.work.talk_about_work",
+      "label": "Talks work",
+      "type": "enum",
+      "values": [ "never", "if_asked", "sometimes", "often", "cannot_stop" ],
+      "default": "sometimes",
+      "tags": [ "dialogue" ]
+    },
+    {
+      "id": "sub.work.vents_about_work",
+      "label": "Vents about work",
+      "type": "enum",
+      "values": [ "never", "rare", "weekly", "daily" ],
+      "default": "weekly",
+      "tags": [ "dialogue", "stress" ]
+    },
+    {
+      "id": "sub.work.pride_in_craft",
+      "label": "Pride in craft / quality",
+      "type": "bool",
+      "default": true,
+      "tags": [ "attitude" ]
+    },
+    {
+      "id": "sub.work.paycheck_only",
+      "label": "Paycheck-only motivation",
+      "type": "bool",
+      "default": false,
+      "tags": [ "attitude" ]
+    },
+    {
+      "id": "sub.work.status_sensitive",
+      "label": "Title / status sensitive",
+      "type": "bool",
+      "default": false,
+      "tags": [ "ambition" ]
+    },
+    {
+      "id": "sub.work.money_primary",
+      "label": "Money is the main scoreboard",
+      "type": "bool",
+      "default": false,
+      "tags": [ "money" ]
+    },
+    {
+      "id": "sub.work.security_primary",
+      "label": "Stability / benefits primary",
+      "type": "bool",
+      "default": true,
+      "tags": [ "money", "fear" ]
+    },
+    {
+      "id": "sub.work.meaning_primary",
+      "label": "Meaning / impact primary",
+      "type": "bool",
+      "default": false,
+      "tags": [ "values" ]
+    },
+    {
+      "id": "sub.work.hours_attitude",
+      "label": "Hours attitude",
+      "type": "enum",
+      "values": [ "protects_clock", "flexible", "stays_late", "always_on" ],
+      "default": "flexible",
+      "tags": [ "boundary" ]
+    },
+    {
+      "id": "sub.work.overtime_willing",
+      "label": "Willing overtime",
+      "type": "bool",
+      "default": true,
+      "tags": [ "boundary" ]
+    },
+    {
+      "id": "sub.work.overtime_resent",
+      "label": "Resents unpaid / creeping overtime",
+      "type": "bool",
+      "default": false,
+      "tags": [ "boundary" ]
+    },
+    {
+      "id": "sub.work.weekend_email",
+      "label": "Checks work on weekends",
+      "type": "bool",
+      "default": false,
+      "tags": [ "boundary" ]
+    },
+    {
+      "id": "sub.work.phone_off_after",
+      "label": "Phone off after shift",
+      "type": "bool",
+      "default": false,
+      "tags": [ "boundary" ]
+    },
+    {
+      "id": "sub.work.shift_type",
+      "label": "Shift type comfort",
+      "type": "enum",
+      "values": [ "days", "nights", "swing", "rotating", "salary_unbounded" ],
+      "default": "days",
+      "tags": [ "schedule" ]
+    },
+    {
+      "id": "sub.work.commute_tolerance",
+      "label": "Commute tolerance",
+      "type": "enum",
+      "values": [ "hates_long", "tolerates", "uses_for_podcasts", "remote_preferred" ],
+      "default": "tolerates",
+      "tags": [ "schedule" ]
+    },
+    {
+      "id": "sub.work.remote_hybrid",
+      "label": "Remote / hybrid preference",
+      "type": "enum",
+      "values": [ "must_office", "hybrid_ok", "remote_hungry", "already_remote" ],
+      "default": "hybrid_ok",
+      "tags": [ "schedule" ]
+    },
+    {
+      "id": "sub.work.management_desire",
+      "label": "Wants to manage people",
+      "type": "bool",
+      "default": false,
+      "tags": [ "ambition" ]
+    },
+    {
+      "id": "sub.work.ic_forever",
+      "label": "Individual contributor forever",
+      "type": "bool",
+      "default": false,
+      "tags": [ "ambition" ]
+    },
+    {
+      "id": "sub.work.leadership_style",
+      "label": "If leads, style",
+      "type": "enum",
+      "values": [ "none", "coach", "driver", "hands_off", "micromanage_risk" ],
+      "default": "none",
+      "tags": [ "social" ]
+    },
+    {
+      "id": "sub.work.politics_skill",
+      "label": "Office politics skill",
+      "type": "enum",
+      "values": [ "oblivious", "avoids", "competent", "player" ],
+      "default": "avoids",
+      "tags": [ "social" ]
+    },
+    {
+      "id": "sub.work.conflict_at_work",
+      "label": "Workplace conflict style",
+      "type": "enum",
+      "values": [ "avoids", "diplomatic", "direct", "explosive_risk" ],
+      "default": "diplomatic",
+      "tags": [ "social" ]
+    },
+    {
+      "id": "sub.work.mentor",
+      "label": "Mentors others",
+      "type": "bool",
+      "default": false,
+      "tags": [ "social" ]
+    },
+    {
+      "id": "sub.work.has_mentor",
+      "label": "Has or seeks a mentor",
+      "type": "bool",
+      "default": false,
+      "tags": [ "social" ]
+    },
+    {
+      "id": "sub.work.networker",
+      "label": "Networks intentionally",
+      "type": "bool",
+      "default": false,
+      "tags": [ "ambition" ]
+    },
+    {
+      "id": "sub.work.job_hopper",
+      "label": "Job-hopper pattern",
+      "type": "bool",
+      "default": false,
+      "tags": [ "history" ]
+    },
+    {
+      "id": "sub.work.loyal_tenure",
+      "label": "Long-tenure loyalist",
+      "type": "bool",
+      "default": false,
+      "tags": [ "history" ]
+    },
+    {
+      "id": "sub.work.laid_off_history",
+      "label": "Has been laid off / restructured",
+      "type": "bool",
+      "default": false,
+      "tags": [ "history", "fear" ]
+    },
+    {
+      "id": "sub.work.fired_history",
+      "label": "Has been fired",
+      "type": "bool",
+      "default": false,
+      "tags": [ "history", "shame" ]
+    },
+    {
+      "id": "sub.work.side_hustle",
+      "label": "Has side hustle",
+      "type": "bool",
+      "default": false,
+      "tags": [ "money" ]
+    },
+    {
+      "id": "sub.work.side_hustle_dream",
+      "label": "Dreams of side hustle / exit",
+      "type": "bool",
+      "default": false,
+      "tags": [ "ambition" ]
+    },
+    {
+      "id": "sub.work.entrepreneur_itch",
+      "label": "Wants to own something",
+      "type": "bool",
+      "default": false,
+      "tags": [ "ambition" ]
+    },
+    {
+      "id": "sub.work.union_lean",
+      "label": "Union / labor lean",
+      "type": "enum",
+      "values": [ "anti", "neutral", "supportive", "active" ],
+      "default": "neutral",
+      "tags": [ "values" ]
+    },
+    {
+      "id": "sub.work.education_path",
+      "label": "Education path pride",
+      "type": "enum",
+      "values": [ "no_degree_chip", "degree_proud", "trade_proud", "mixed", "irrelevant" ],
+      "default": "irrelevant",
+      "tags": [ "history" ]
+    },
+    {
+      "id": "sub.work.student_debt_weight",
+      "label": "Student debt weighs on choices",
+      "type": "bool",
+      "default": false,
+      "tags": [ "money", "fear" ]
+    },
+    {
+      "id": "sub.work.benefits_focus",
+      "label": "Healthcare / benefits focus",
+      "type": "bool",
+      "default": true,
+      "tags": [ "money", "ohio" ]
+    },
+    {
+      "id": "sub.work.retirement_aware",
+      "label": "Thinks about 401k / retirement",
+      "type": "bool",
+      "default": false,
+      "tags": [ "money" ]
+    },
+    {
+      "id": "sub.work.paycheck_to_paycheck",
+      "label": "Feels paycheck-to-paycheck",
+      "type": "bool",
+      "default": false,
+      "tags": [ "money", "stress" ]
+    },
+    {
+      "id": "sub.work.comfortable",
+      "label": "Feels financially comfortable from work",
+      "type": "bool",
+      "default": false,
+      "tags": [ "money" ]
+    },
+    {
+      "id": "sub.work.imposter",
+      "label": "Imposter feelings at work",
+      "type": "bool",
+      "default": false,
+      "tags": [ "emotion" ]
+    },
+    {
+      "id": "sub.work.confidence_high",
+      "label": "High work confidence",
+      "type": "bool",
+      "default": false,
+      "tags": [ "emotion" ]
+    },
+    {
+      "id": "sub.work.burnout_history",
+      "label": "Has burned out before",
+      "type": "bool",
+      "default": false,
+      "tags": [ "history", "body" ]
+    },
+    {
+      "id": "sub.work.burnout_risk_now",
+      "label": "Currently near burnout",
+      "type": "bool",
+      "default": false,
+      "tags": [ "stress" ]
+    },
+    {
+      "id": "sub.work.loves_busy",
+      "label": "Likes being busy / needed",
+      "type": "bool",
+      "default": false,
+      "tags": [ "emotion" ]
+    },
+    {
+      "id": "sub.work.bored_easy",
+      "label": "Gets bored easily in role",
+      "type": "bool",
+      "default": false,
+      "tags": [ "emotion" ]
+    },
+    {
+      "id": "sub.work.customer_facing",
+      "label": "Customer / public facing comfort",
+      "type": "enum",
+      "values": [ "hates", "tolerates", "good_at", "energized_by" ],
+      "default": "tolerates",
+      "tags": [ "social" ]
+    },
+    {
+      "id": "sub.work.physical_job",
+      "label": "Physical labor component",
+      "type": "bool",
+      "default": false,
+      "tags": [ "body" ]
+    },
+    {
+      "id": "sub.work.desk_job",
+      "label": "Desk / screen heavy",
+      "type": "bool",
+      "default": false,
+      "tags": [ "body" ]
+    },
+    {
+      "id": "sub.work.uniform_pride",
+      "label": "Uniform / role gear pride",
+      "type": "bool",
+      "default": false,
+      "tags": [ "identity" ]
+    },
+    {
+      "id": "sub.work.trades_path",
+      "label": "Skilled trades identity",
+      "type": "bool",
+      "default": false,
+      "tags": [ "ohio", "identity" ]
+    },
+    {
+      "id": "sub.work.healthcare_path",
+      "label": "Healthcare / care work identity",
+      "type": "bool",
+      "default": false,
+      "tags": [ "identity" ]
+    },
+    {
+      "id": "sub.work.education_path_job",
+      "label": "Education / teaching identity",
+      "type": "bool",
+      "default": false,
+      "tags": [ "identity" ]
+    },
+    {
+      "id": "sub.work.service_path",
+      "label": "Service / hospitality identity",
+      "type": "bool",
+      "default": false,
+      "tags": [ "identity" ]
+    },
+    {
+      "id": "sub.work.office_path",
+      "label": "Office / admin / corp identity",
+      "type": "bool",
+      "default": false,
+      "tags": [ "identity" ]
+    },
+    {
+      "id": "sub.work.public_sector",
+      "label": "Public sector / government / municipal",
+      "type": "bool",
+      "default": false,
+      "tags": [ "ohio" ]
+    },
+    {
+      "id": "sub.work.factory_warehouse",
+      "label": "Factory / warehouse / logistics",
+      "type": "bool",
+      "default": false,
+      "tags": [ "ohio" ]
+    },
+    {
+      "id": "sub.work.retail",
+      "label": "Retail path",
+      "type": "bool",
+      "default": false,
+      "tags": [ "identity" ]
+    },
+    {
+      "id": "sub.work.gig_economy",
+      "label": "Gig / app work component",
+      "type": "bool",
+      "default": false,
+      "tags": [ "money" ]
+    },
+    {
+      "id": "sub.work.second_job",
+      "label": "Works a second job",
+      "type": "bool",
+      "default": false,
+      "tags": [ "money", "stress" ]
+    },
+    {
+      "id": "sub.work.promotion_hungry",
+      "label": "Actively angling for promotion",
+      "type": "bool",
+      "default": false,
+      "tags": [ "ambition" ]
+    },
+    {
+      "id": "sub.work.coast_mode",
+      "label": "Coasting / doing enough",
+      "type": "bool",
+      "default": false,
+      "tags": [ "attitude" ]
+    },
+    {
+      "id": "sub.work.quiet_quit_adj",
+      "label": "Quiet-quit adjacent boundaries",
+      "type": "bool",
+      "default": false,
+      "tags": [ "boundary" ]
+    },
+    {
+      "id": "sub.work.company_loyalty",
+      "label": "Loyalty to current employer",
+      "type": "enum",
+      "values": [ "none", "low", "medium", "high" ],
+      "default": "medium",
+      "tags": [ "attitude" ]
+    },
+    {
+      "id": "sub.work.boss_relationship",
+      "label": "Boss relationship",
+      "type": "enum",
+      "values": [ "toxic", "tense", "neutral", "good", "mentor_boss" ],
+      "default": "neutral",
+      "tags": [ "social" ]
+    },
+    {
+      "id": "sub.work.team_relationship",
+      "label": "Team relationship",
+      "type": "enum",
+      "values": [ "isolated", "cordial", "friends", "clique_drama" ],
+      "default": "cordial",
+      "tags": [ "social" ]
+    },
+    {
+      "id": "sub.work.brings_stress_home",
+      "label": "Brings stress home",
+      "type": "bool",
+      "default": true,
+      "tags": [ "relationship", "stress" ]
+    },
+    {
+      "id": "sub.work.leaves_at_work",
+      "label": "Leaves work at work",
+      "type": "bool",
+      "default": false,
+      "tags": [ "boundary" ]
+    },
+    {
+      "id": "sub.work.partner_understands",
+      "label": "Partner understands the job demands",
+      "type": "bool",
+      "default": true,
+      "tags": [ "relationship" ]
+    },
+    {
+      "id": "sub.work.schedule_kills_social",
+      "label": "Schedule kills social / dating life",
+      "type": "bool",
+      "default": false,
+      "tags": [ "relationship" ]
+    },
+    {
+      "id": "sub.work.dream_job_current",
+      "label": "Current job is the dream",
+      "type": "bool",
+      "default": false,
+      "tags": [ "emotion" ]
+    },
+    {
+      "id": "sub.work.dream_job_other",
+      "label": "Has a different dream job",
+      "type": "bool",
+      "default": false,
+      "tags": [ "ambition" ]
+    },
+    {
+      "id": "sub.work.fear_unemployment",
+      "label": "Strong fear of unemployment",
+      "type": "bool",
+      "default": false,
+      "tags": [ "fear" ]
+    },
+    {
+      "id": "sub.work.emergency_fund_focus",
+      "label": "Building emergency fund from work",
+      "type": "bool",
+      "default": false,
+      "tags": [ "money" ]
+    },
+    {
+      "id": "sub.work.ohio_local_employer",
+      "label": "Tied to local Ohio employer / plant / system",
+      "type": "bool",
+      "default": false,
+      "tags": [ "ohio" ]
+    },
+    {
+      "id": "sub.work.commute_columbus_cincy_cle",
+      "label": "Metro commute pattern (Columbus/Cincy/Cleveland)",
+      "type": "bool",
+      "default": false,
+      "tags": [ "ohio" ]
+    },
+    {
+      "id": "sub.work.small_town_job",
+      "label": "Small-town / limited local options feel",
+      "type": "bool",
+      "default": false,
+      "tags": [ "ohio" ]
+    },
+    {
+      "id": "sub.work.stories_ready",
+      "label": "Has ready work stories",
+      "type": "bool",
+      "default": true,
+      "tags": [ "dialogue" ]
+    },
+    {
+      "id": "sub.work.cannot_talk_ndas",
+      "label": "Cannot talk details (policy/NDA/privacy)",
+      "type": "bool",
+      "default": false,
+      "tags": [ "dialogue" ]
+    },
+    {
+      "id": "sub.work.gossip_risk",
+      "label": "Participates in work gossip",
+      "type": "bool",
+      "default": false,
+      "tags": [ "social" ]
+    },
+    {
+      "id": "sub.work.ethical_line",
+      "label": "Strong ethical lines at work",
+      "type": "bool",
+      "default": true,
+      "tags": [ "values" ]
+    },
+    {
+      "id": "sub.work.bent_rules",
+      "label": "Has bent rules to get by",
+      "type": "bool",
+      "default": false,
+      "tags": [ "history" ]
+    }
+  ]
+}

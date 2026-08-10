@@ -1,0 +1,504 @@
+{
+  "id": "slow.life.faith",
+  "layer": "slow",
+  "domain": "life",
+  "label": "Faith practice",
+  "version": 1,
+  "description": "Life taste/identity: religion, practice, doubt, and community. Ohio-weighted toward common Christian denominations, with room for other faiths and none so a few NPCs feel like outliers.",
+  "priorIntensity": 5,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [
+    "church",
+    "faith",
+    "pray",
+    "god",
+    "jesus",
+    "bible",
+    "sermon",
+    "pastor",
+    "mass",
+    "service",
+    "sunday",
+    "blessing",
+    "amen",
+    "scripture",
+    "worship",
+    "heaven",
+    "hell",
+    "sin",
+    "grace",
+    "baptism",
+    "communion"
+  ],
+  "rivalBias": true,
+  "catalog": "Life",
+  "factoryWeights": {
+    "note": "When attaching denomination subTraits, roll weighted: ~95% Christian-main cluster, ~5% other faith / none / odd path. Within Christian-main, use localOhioBias.",
+    "christianMainCluster": 0.95,
+    "otherOrNoneCluster": 0.05,
+    "localOhioBias": {
+      "nondenominational": 0.18,
+      "baptist": 0.14,
+      "catholic": 0.14,
+      "methodist": 0.10,
+      "pentecostal_charismatic": 0.09,
+      "church_of_christ": 0.07,
+      "lutheran": 0.06,
+      "presbyterian": 0.05,
+      "assembly_of_god": 0.04,
+      "evangelical_generic": 0.05,
+      "other_christian": 0.08
+    }
+  },
+  "subTraits": [
+    {
+      "id": "slow.life.faith.nondenominational",
+      "label": "Nondenominational Christian",
+      "kind": "denomination",
+      "cluster": "christian_main",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "bible", "modern", "ohio-common" ]
+    },
+    {
+      "id": "slow.life.faith.baptist",
+      "label": "Baptist",
+      "kind": "denomination",
+      "cluster": "christian_main",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "baptist", "salvation", "ohio-common" ]
+    },
+    {
+      "id": "slow.life.faith.southern_baptist",
+      "label": "Southern Baptist",
+      "kind": "denomination",
+      "cluster": "christian_main",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "baptist", "conservative" ]
+    },
+    {
+      "id": "slow.life.faith.catholic",
+      "label": "Catholic",
+      "kind": "denomination",
+      "cluster": "christian_main",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "mass", "sacraments", "ohio-common" ]
+    },
+    {
+      "id": "slow.life.faith.methodist",
+      "label": "Methodist / UMC",
+      "kind": "denomination",
+      "cluster": "christian_main",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "methodist", "mainline" ]
+    },
+    {
+      "id": "slow.life.faith.wesleyan",
+      "label": "Wesleyan / holiness",
+      "kind": "denomination",
+      "cluster": "christian_main",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "holiness", "methodist-family" ]
+    },
+    {
+      "id": "slow.life.faith.lutheran",
+      "label": "Lutheran",
+      "kind": "denomination",
+      "cluster": "christian_main",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "lutheran", "liturgy" ]
+    },
+    {
+      "id": "slow.life.faith.presbyterian",
+      "label": "Presbyterian",
+      "kind": "denomination",
+      "cluster": "christian_main",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "presbyterian", "reformed" ]
+    },
+    {
+      "id": "slow.life.faith.pentecostal",
+      "label": "Pentecostal",
+      "kind": "denomination",
+      "cluster": "christian_main",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "spirit", "tongues", "ohio-common" ]
+    },
+    {
+      "id": "slow.life.faith.assembly_of_god",
+      "label": "Assemblies of God",
+      "kind": "denomination",
+      "cluster": "christian_main",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "ag", "pentecostal" ]
+    },
+    {
+      "id": "slow.life.faith.charismatic",
+      "label": "Charismatic",
+      "kind": "denomination",
+      "cluster": "christian_main",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "spirit", "gifts", "worship" ]
+    },
+    {
+      "id": "slow.life.faith.church_of_christ",
+      "label": "Church of Christ",
+      "kind": "denomination",
+      "cluster": "christian_main",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "restoration", "a-cappella", "ohio" ]
+    },
+    {
+      "id": "slow.life.faith.disciples_of_christ",
+      "label": "Disciples of Christ",
+      "kind": "denomination",
+      "cluster": "christian_main",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "restoration", "mainline" ]
+    },
+    {
+      "id": "slow.life.faith.evangelical_generic",
+      "label": "Evangelical (generic)",
+      "kind": "denomination",
+      "cluster": "christian_main",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "evangelical", "bible", "ohio-common" ]
+    },
+    {
+      "id": "slow.life.faith.episcopal",
+      "label": "Episcopal / Anglican",
+      "kind": "denomination",
+      "cluster": "christian_main",
+      "defaultRange": [ 10, 75 ],
+      "tags": [ "liturgy", "mainline" ]
+    },
+    {
+      "id": "slow.life.faith.adventist",
+      "label": "Seventh-day Adventist",
+      "kind": "denomination",
+      "cluster": "christian_main",
+      "defaultRange": [ 5, 80 ],
+      "tags": [ "sabbath", "health" ]
+    },
+    {
+      "id": "slow.life.faith.nazarene",
+      "label": "Nazarene",
+      "kind": "denomination",
+      "cluster": "christian_main",
+      "defaultRange": [ 10, 85 ],
+      "tags": [ "holiness", "wesleyan" ]
+    },
+    {
+      "id": "slow.life.faith.churches_of_god",
+      "label": "Church of God",
+      "kind": "denomination",
+      "cluster": "christian_main",
+      "defaultRange": [ 10, 85 ],
+      "tags": [ "holiness", "pentecostal-lean" ]
+    },
+    {
+      "id": "slow.life.faith.mennonite",
+      "label": "Mennonite",
+      "kind": "denomination",
+      "cluster": "christian_main",
+      "defaultRange": [ 5, 85 ],
+      "tags": [ "peace", "plain", "ohio-pockets" ]
+    },
+    {
+      "id": "slow.life.faith.amish_adjacent",
+      "label": "Amish / plain adjacent",
+      "kind": "denomination",
+      "cluster": "christian_main",
+      "defaultRange": [ 5, 90 ],
+      "tags": [ "plain", "ohio", "separate" ]
+    },
+    {
+      "id": "slow.life.faith.orthodox_christian",
+      "label": "Eastern Orthodox",
+      "kind": "denomination",
+      "cluster": "christian_main",
+      "defaultRange": [ 5, 80 ],
+      "tags": [ "orthodox", "liturgy", "rare-ohio" ]
+    },
+    {
+      "id": "slow.life.faith.mormon_lds",
+      "label": "LDS / Mormon",
+      "kind": "denomination",
+      "cluster": "christian_edge",
+      "defaultRange": [ 5, 85 ],
+      "tags": [ "lds", "mission", "rare-local" ]
+    },
+    {
+      "id": "slow.life.faith.jehovah_witness",
+      "label": "Jehovah's Witness",
+      "kind": "denomination",
+      "cluster": "christian_edge",
+      "defaultRange": [ 5, 85 ],
+      "tags": [ "witness", "door", "separate" ]
+    },
+
+    {
+      "id": "slow.life.faith.jewish",
+      "label": "Jewish",
+      "kind": "faith",
+      "cluster": "other",
+      "defaultRange": [ 10, 90 ],
+      "tags": [ "jewish", "torah", "rare-ohio" ]
+    },
+    {
+      "id": "slow.life.faith.muslim",
+      "label": "Muslim",
+      "kind": "faith",
+      "cluster": "other",
+      "defaultRange": [ 10, 90 ],
+      "tags": [ "islam", "prayer", "rare-ohio" ]
+    },
+    {
+      "id": "slow.life.faith.hindu",
+      "label": "Hindu",
+      "kind": "faith",
+      "cluster": "other",
+      "defaultRange": [ 5, 85 ],
+      "tags": [ "hindu", "rare-ohio" ]
+    },
+    {
+      "id": "slow.life.faith.buddhist",
+      "label": "Buddhist",
+      "kind": "faith",
+      "cluster": "other",
+      "defaultRange": [ 5, 85 ],
+      "tags": [ "buddhist", "practice" ]
+    },
+    {
+      "id": "slow.life.faith.spiritual_not_religious",
+      "label": "Spiritual not religious",
+      "kind": "path",
+      "cluster": "other",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "spiritual", "no-label" ]
+    },
+    {
+      "id": "slow.life.faith.agnostic",
+      "label": "Agnostic",
+      "kind": "path",
+      "cluster": "other",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "doubt", "unknown" ]
+    },
+    {
+      "id": "slow.life.faith.atheist",
+      "label": "Atheist",
+      "kind": "path",
+      "cluster": "other",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "no-god", "secular" ]
+    },
+    {
+      "id": "slow.life.faith.pagan_open",
+      "label": "Pagan / earth path",
+      "kind": "faith",
+      "cluster": "other",
+      "defaultRange": [ 5, 80 ],
+      "tags": [ "pagan", "rare", "private" ]
+    },
+
+    {
+      "id": "slow.life.faith.weekly_service",
+      "label": "Weekly service goer",
+      "kind": "practice",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "sunday", "habit", "community" ]
+    },
+    {
+      "id": "slow.life.faith.holiday_only",
+      "label": "Holiday-only attender",
+      "kind": "practice",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "christmas", "easter", "cultural" ]
+    },
+    {
+      "id": "slow.life.faith.daily_prayer",
+      "label": "Daily prayer",
+      "kind": "practice",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "pray", "private", "habit" ]
+    },
+    {
+      "id": "slow.life.faith.bible_study",
+      "label": "Bible study regular",
+      "kind": "practice",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "study", "group", "scripture" ]
+    },
+    {
+      "id": "slow.life.faith.worship_music",
+      "label": "Worship music heavy",
+      "kind": "practice",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "music", "band", "emotion" ]
+    },
+    {
+      "id": "slow.life.faith.traditional_liturgy",
+      "label": "Traditional liturgy love",
+      "kind": "practice",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "liturgy", "old", "quiet" ]
+    },
+    {
+      "id": "slow.life.faith.altar_call_style",
+      "label": "Altar-call / decision culture",
+      "kind": "practice",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "evangelical", "public" ]
+    },
+    {
+      "id": "slow.life.faith.service_volunteer",
+      "label": "Church volunteer / servant",
+      "kind": "practice",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "serve", "kitchen", "kids" ]
+    },
+    {
+      "id": "slow.life.faith.missions_minded",
+      "label": "Missions minded",
+      "kind": "practice",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "mission", "travel", "give" ]
+    },
+    {
+      "id": "slow.life.faith.tithing_serious",
+      "label": "Tithing / giving serious",
+      "kind": "practice",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "money", "tithe", "discipline" ]
+    },
+    {
+      "id": "slow.life.faith.grace_focused",
+      "label": "Grace-focused theology",
+      "kind": "attitude",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "grace", "mercy", "soft" ]
+    },
+    {
+      "id": "slow.life.faith.rules_focused",
+      "label": "Rules / holiness focused",
+      "kind": "attitude",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "rules", "holiness", "strict" ]
+    },
+    {
+      "id": "slow.life.faith.private_faith",
+      "label": "Private faith (won't push)",
+      "kind": "attitude",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "quiet", "personal", "no-preach" ]
+    },
+    {
+      "id": "slow.life.faith.witness_talkative",
+      "label": "Talks faith openly",
+      "kind": "attitude",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "witness", "share", "bold" ]
+    },
+    {
+      "id": "slow.life.faith.doubt_honest",
+      "label": "Honest doubter",
+      "kind": "attitude",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "doubt", "questions", "struggle" ]
+    },
+    {
+      "id": "slow.life.faith.cultural_christian",
+      "label": "Cultural Christian",
+      "kind": "attitude",
+      "defaultRange": [ 25, 85 ],
+      "tags": [ "identity", "low-practice" ]
+    },
+    {
+      "id": "slow.life.faith.exvangelical",
+      "label": "Dechurched / exvangelical",
+      "kind": "path",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "left", "hurt", "rebuild" ]
+    },
+    {
+      "id": "slow.life.faith.family_pressure",
+      "label": "Family faith pressure",
+      "kind": "history_hook",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "family", "expect", "tension" ]
+    },
+    {
+      "id": "slow.life.faith.conversion_story",
+      "label": "Strong conversion story",
+      "kind": "history_hook",
+      "defaultRange": [ 20, 95 ],
+      "tags": [ "before-after", "testimony" ]
+    },
+    {
+      "id": "slow.life.faith.church_hurt",
+      "label": "Church hurt / trust wound",
+      "kind": "history_hook",
+      "defaultRange": [ 20, 95 ],
+      "tags": [ "hurt", "leave", "guard" ]
+    },
+    {
+      "id": "slow.life.faith.interfaith_marriage",
+      "label": "Interfaith household",
+      "kind": "context",
+      "defaultRange": [ 10, 85 ],
+      "tags": [ "spouse", "negotiate", "kids" ]
+    },
+    {
+      "id": "slow.life.faith.kids_ministry",
+      "label": "Kids / youth ministry",
+      "kind": "practice",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "kids", "youth", "serve" ]
+    },
+    {
+      "id": "slow.life.faith.politics_pulpit_sensitive",
+      "label": "Politics-from-pulpit sensitive",
+      "kind": "attitude",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "politics", "split", "tension" ]
+    },
+    {
+      "id": "slow.life.faith.end_times_focus",
+      "label": "End-times focus",
+      "kind": "attitude",
+      "defaultRange": [ 10, 85 ],
+      "tags": [ "prophecy", "urgency" ]
+    },
+    {
+      "id": "slow.life.faith.prosperity_lean",
+      "label": "Prosperity lean",
+      "kind": "attitude",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "blessing", "money", "debate" ]
+    },
+    {
+      "id": "slow.life.faith.social_gospel_lean",
+      "label": "Social gospel / justice lean",
+      "kind": "attitude",
+      "defaultRange": [ 10, 85 ],
+      "tags": [ "justice", "serve", "mainline" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "may know holidays and polite respect; no deep practice or denomination identity",
+    "atOrAbove50": "attach 1 denomination/path (weighted 95% christian_main) + 1-2 practice/attitude subs; can name church style in talk",
+    "atOrAbove70": "faith shapes week and conflict; history hooks (conversion, church hurt, family pressure) unlock under trust",
+    "extreme95": "faith is primary identity lens; most decisions filtered through it; rivalBias can heat denomination arguments",
+    "oddRoll": "5% other/none cluster keeps the town from feeling cloned—Muslim, Jewish, atheist, pagan, etc. stay rare but real"
+  },
+  "notes": "Do not preach at the player from every NPC. Private faith is common. rivalBias true for denomination and politics-from-pulpit friction. Amish/Mennonite pockets matter for Ohio flavor but stay uncommon in the 200 actives unless location calls for it."
+}

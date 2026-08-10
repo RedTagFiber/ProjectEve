@@ -1,0 +1,41 @@
+{
+    "parent":  "slow.sports.soccer",
+    "version":  1,
+    "fillThreshold":  50,
+    "subs":  [
+                 {
+                     "id":  "sub.soccer.club_primary",
+                     "label":  "Primary club",
+                     "required":  true,
+                     "type":  "catalog_ref",
+                     "catalogs":  [
+                                      "soccer_clubs"
+                                  ],
+                     "pickCount":  1
+                 },
+                 {
+                     "label":  "Knowledge",
+                     "values":  [
+                                    "casual",
+                                    "fan",
+                                    "diehard"
+                                ],
+                     "default":  "casual",
+                     "id":  "sub.soccer.knowledge",
+                     "type":  "enum"
+                 },
+                 {
+                     "label":  "League focus",
+                     "values":  [
+                                    "mls",
+                                    "premier",
+                                    "liga",
+                                    "serie_a",
+                                    "world_cup_only"
+                                ],
+                     "default":  "mls",
+                     "id":  "sub.soccer.league_focus",
+                     "type":  "enum"
+                 }
+             ]
+}

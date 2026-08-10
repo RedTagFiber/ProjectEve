@@ -1,0 +1,433 @@
+{
+  "id": "slow.music.classical_jazz",
+  "layer": "slow",
+  "domain": "music",
+  "label": "Classical / Jazz",
+  "version": 1,
+  "description": "Interest in classical and jazz—concert hall to club, composers to improvisers.",
+  "priorIntensity": 5,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [ "jazz", "classical", "piano", "orchestra", "sax", "symphony", "improv", "vinyl", "standards" ],
+  "rivalBias": true,
+  "catalog": "Music/ClassicalJazz",
+  "subTraits": [
+    {
+      "id": "slow.music.classical_jazz.baroque",
+      "label": "Baroque",
+      "kind": "classical_era",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "bach", "order" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.classical_era",
+      "label": "Classical era (Mozart/Haydn)",
+      "kind": "classical_era",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "form", "clear" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.romantic",
+      "label": "Romantic classical",
+      "kind": "classical_era",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "emotion", "big" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.modern_classical",
+      "label": "20th-c / modern classical",
+      "kind": "classical_era",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "strange", "new" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.film_scores",
+      "label": "Film scores as classical gateway",
+      "kind": "classical_era",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "williams", "zimmer", "door" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.bach",
+      "label": "Bach",
+      "kind": "composer",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "structure", "god" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.mozart",
+      "label": "Mozart",
+      "kind": "composer",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "melody", "clear" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.beethoven",
+      "label": "Beethoven",
+      "kind": "composer",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "storm", "will" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.chopin",
+      "label": "Chopin",
+      "kind": "composer",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "piano", "night" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.tchaikovsky",
+      "label": "Tchaikovsky",
+      "kind": "composer",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "melody", "drama" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.debussy",
+      "label": "Debussy",
+      "kind": "composer",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "color", "impression" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.stravinsky",
+      "label": "Stravinsky",
+      "kind": "composer",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "rhythm", "shock" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.philip_glass",
+      "label": "Philip Glass / minimalism",
+      "kind": "composer",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "repeat", "modern" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.john_williams",
+      "label": "John Williams",
+      "kind": "composer",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "film", "theme" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.hans_zimmer",
+      "label": "Hans Zimmer",
+      "kind": "composer",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "film", "pulse" ]
+    },
+
+    {
+      "id": "slow.music.classical_jazz.trad_jazz",
+      "label": "Traditional / Dixieland",
+      "kind": "jazz_style",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "old", "parade" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.swing",
+      "label": "Swing",
+      "kind": "jazz_style",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "dance", "big-band" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.bebop",
+      "label": "Bebop",
+      "kind": "jazz_style",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "fast", "virtuoso" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.cool_jazz",
+      "label": "Cool jazz",
+      "kind": "jazz_style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "west-coast", "calm" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.hard_bop",
+      "label": "Hard bop",
+      "kind": "jazz_style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "soul", "groove" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.modal",
+      "label": "Modal jazz",
+      "kind": "jazz_style",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "kind-of-blue", "space" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.free_jazz",
+      "label": "Free jazz",
+      "kind": "jazz_style",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "out", "challenge" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.fusion",
+      "label": "Jazz fusion",
+      "kind": "jazz_style",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "electric", "rock-edge" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.smooth",
+      "label": "Smooth jazz",
+      "kind": "jazz_style",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "radio", "easy" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.vocal_jazz",
+      "label": "Vocal jazz / standards",
+      "kind": "jazz_style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "songbook", "voice" ]
+    },
+
+    {
+      "id": "slow.music.classical_jazz.louis_armstrong",
+      "label": "Louis Armstrong",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "foundation", "joy" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.duke_ellington",
+      "label": "Duke Ellington",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "orchestra", "elegance" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.count_basie",
+      "label": "Count Basie",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "swing", "pulse" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.charlie_parker",
+      "label": "Charlie Parker",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "bebop", "sax" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.dizzy",
+      "label": "Dizzy Gillespie",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "bebop", "trumpet" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.miles",
+      "label": "Miles Davis",
+      "kind": "artist",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "change", "cool", "icon" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.coltrane",
+      "label": "John Coltrane",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "spirit", "sheets" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.monk",
+      "label": "Thelonious Monk",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "angular", "space" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.bill_evans",
+      "label": "Bill Evans",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "piano", "lyric" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.charles_mingus",
+      "label": "Charles Mingus",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "bass", "fire" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.ella",
+      "label": "Ella Fitzgerald",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "voice", "scat", "songbook" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.billie",
+      "label": "Billie Holiday",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "voice", "pain", "truth" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.sarah_vaughan",
+      "label": "Sarah Vaughan",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "voice", "range" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.nina_simone",
+      "label": "Nina Simone",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "voice", "piano", "power" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.dave_brubeck",
+      "label": "Dave Brubeck",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "time", "take-five" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.herbie",
+      "label": "Herbie Hancock",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "fusion", "funk", "piano" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.weather_report",
+      "label": "Weather Report",
+      "kind": "artist",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "fusion", "heavy" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.pat_metheny",
+      "label": "Pat Metheny",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "guitar", "lyrical" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.wynton",
+      "label": "Wynton Marsalis",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "trad", "education" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.kamasi",
+      "label": "Kamasi Washington",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "modern", "epic" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.esperanza",
+      "label": "Esperanza Spalding",
+      "kind": "artist",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "modern", "bass", "voice" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.robert_glasper",
+      "label": "Robert Glasper",
+      "kind": "artist",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "hip-hop-jazz", "modern" ]
+    },
+
+    {
+      "id": "slow.music.classical_jazz.concert_hall",
+      "label": "Concert hall goer",
+      "kind": "habit",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "symphony", "dress" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.jazz_club",
+      "label": "Jazz club nights",
+      "kind": "habit",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "live", "close" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.vinyl_ritual",
+      "label": "Vinyl ritual listening",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "album", "side" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.background_dinner",
+      "label": "Dinner / background jazz",
+      "kind": "mood_role",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "social", "soft" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.focus_classical",
+      "label": "Classical for focus",
+      "kind": "mood_role",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "work", "study" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.night_drive_jazz",
+      "label": "Night drive jazz",
+      "kind": "mood_role",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "car", "cool" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.purist_jazz",
+      "label": "Jazz purist (anti-smooth)",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "gate", "real" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.gateway_film",
+      "label": "Film scores as gateway",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "entry", "open" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.plays_instrument",
+      "label": "Plays classical or jazz instrument",
+      "kind": "practice",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "piano", "horn", "pride" ]
+    },
+    {
+      "id": "slow.music.classical_jazz.ohio_scene",
+      "label": "Ohio orchestra / club awareness",
+      "kind": "local",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "cleveland", "columbus", "cincinnati" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "recognizes a famous name; no deep lane",
+    "atOrAbove50": "attach 2-4; classical vs jazz lean + a few names",
+    "atOrAbove70": "concert/club or vinyl habits; can talk eras",
+    "extreme95": "identity listening; purist debates possible"
+  },
+  "notes": "One parent covers both lanes—subs split classical vs jazz so NPCs aren't forced into both."
+}

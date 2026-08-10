@@ -1,0 +1,8 @@
+﻿{
+  "pairs": [
+    { "a": "trait.guard", "b": "trait.openness", "requiresMin": 55, "like": 3, "cap": 4 },
+    { "a": "trait.openness", "b": "trait.guard", "requiresMin": 55, "like": 3, "cap": 4 },
+    { "a": "trait.playfulness", "b": "trait.guard", "requiresMin": 50, "like": 2, "cap": 3 },
+    { "a": "trait.desire", "b": "trait.guard", "requiresMin": 55, "like": 2, "attraction": 2, "cap": 4 }
+  ]
+}

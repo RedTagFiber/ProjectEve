@@ -1,0 +1,171 @@
+﻿{
+  "id": "loneliness",
+  "layer": "fast",
+  "label": "Loneliness",
+  "version": 1,
+  "description": "Need for contact / left out. Can be alone in a crowd. Drives reach, cling, or numb scroll.",
+  "priorIntensity": {
+    "min": 2,
+    "max": 7,
+    "mean": 4
+  },
+  "spawn": {
+    "currentFromIntensity": true,
+    "noise": 3
+  },
+  "bands": {
+    "off": [ 0, 29 ],
+    "low": [ 30, 49 ],
+    "mid": [ 50, 69 ],
+    "high": [ 70, 84 ],
+    "break": [ 85, 94 ],
+    "extreme": [ 95, 100 ]
+  },
+  "styles": {
+    "reach": {
+      "means": "Texts, calls, shows up; asks to hang.",
+      "speechHints": [ "you_free", "miss_you", "come_over" ],
+      "bodyHints": [ "approach" ],
+      "riskTags": [ "needy_read" ]
+    },
+    "numb": {
+      "means": "Flat alone; shuts the need down.",
+      "speechHints": [ "flat", "fine" ],
+      "bodyHints": [ "still", "screen" ],
+      "riskTags": [ "isolate" ]
+    },
+    "scroll": {
+      "means": "Fills the hole with phone, noise, background people.",
+      "speechHints": [ "distracted" ],
+      "bodyHints": [ "phone", "half_present" ],
+      "riskTags": [ "absent" ]
+    },
+    "cling": {
+      "means": "When someone is there, holds tight; fears the end of the visit.",
+      "speechHints": [ "stay", "one_more" ],
+      "bodyHints": [ "hold", "delay_exit" ],
+      "riskTags": [ "cling" ]
+    },
+    "ache": {
+      "means": "Open painful awareness of missing someone / people.",
+      "speechHints": [ "honest_sad", "empty" ],
+      "bodyHints": [ "sink", "quiet" ],
+      "riskTags": [ "vulnerable" ]
+    }
+  },
+  "defaultStyleWeights": {
+    "reach": 0.9,
+    "numb": 0.8,
+    "scroll": 1.0,
+    "cling": 0.7,
+    "ache": 0.75
+  },
+  "flavors": {
+    "romantic": "Missing a specific person.",
+    "social": "No group / no invite.",
+    "family": "Distance from home/people.",
+    "new_town": "Not known yet.",
+    "after_fight": "Alone because of the rupture."
+  },
+  "pull": {
+    "belowHomeDamageMult": 0.6,
+    "recoverMult": 1.3,
+    "aboveHomeSettleMult": 1.15
+  },
+  "funding": {
+    "required": true,
+    "budgetPerIntensityPoint": 1.0
+  },
+  "links": [
+    {
+      "trait": "affection",
+      "op": "+",
+      "weight": 0.2,
+      "when": "rise",
+      "note": "Want for warmth."
+    },
+    {
+      "trait": "hurt",
+      "op": "+",
+      "weight": 0.25,
+      "when": "rise"
+    },
+    {
+      "trait": "hope",
+      "op": "-",
+      "weight": 0.2,
+      "when": "rise"
+    },
+    {
+      "trait": "anxiety",
+      "op": "+",
+      "weight": 0.25,
+      "when": "rise"
+    },
+    {
+      "trait": "guard",
+      "op": "+",
+      "weight": 0.15,
+      "when": "rise",
+      "styleGate": [ "numb" ]
+    }
+  ],
+  "opposePairs": [
+    {
+      "with": "guard",
+      "policyHints": [ "want_contact_but_walled" ]
+    },
+    {
+      "with": "pride",
+      "policyHints": [ "won't_admit_lonely" ]
+    }
+  ],
+  "tagTriggers": [
+    {
+      "tag": "bond.left_out",
+      "direction": "+",
+      "baseWeight": 0.9
+    },
+    {
+      "tag": "bond.silence_long",
+      "direction": "+",
+      "baseWeight": 0.75
+    },
+    {
+      "tag": "bond.rejection",
+      "direction": "+",
+      "baseWeight": 0.8
+    },
+    {
+      "tag": "bond.presence",
+      "direction": "-",
+      "baseWeight": 0.85
+    },
+    {
+      "tag": "bond.invite",
+      "direction": "-",
+      "baseWeight": 0.8
+    },
+    {
+      "tag": "bond.soft_return",
+      "direction": "-",
+      "baseWeight": 0.7
+    }
+  ],
+  "relationScoped": true,
+  "historyHooks": {
+    "catalog": "Characters/Traits/TraitJson/TraitHistory/loneliness_patterns.json",
+    "filters": [ "style", "flavor", "sourceBucket" ],
+    "tellFraming": {
+      "prideHigh": "HeroSelf",
+      "prideLow": "VictimSelf",
+      "shameHigh": "VictimSelf",
+      "telephone": true
+    }
+  },
+  "debug": {
+    "showInDash": true,
+    "color": "#4a5a6a",
+    "sortPriority": 19
+  }
+}

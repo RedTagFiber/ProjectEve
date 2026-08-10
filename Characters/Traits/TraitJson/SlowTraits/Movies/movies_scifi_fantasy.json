@@ -1,0 +1,381 @@
+{
+  "id": "slow.movies.scifi_fantasy",
+  "layer": "slow",
+  "domain": "movies",
+  "label": "Sci-Fi / Fantasy",
+  "version": 1,
+  "description": "Prefers sci-fi and fantasy—worlds, rules, spectacle, and idea-driven storytelling.",
+  "priorIntensity": 5,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [ "sci-fi", "fantasy", "space", "magic", "dragon", "future", "world building", "franchise", "lore" ],
+  "rivalBias": true,
+  "catalog": "Movies/Titles/SciFiFantasy",
+  "subTraits": [
+    {
+      "id": "slow.movies.scifi_fantasy.hard_scifi",
+      "label": "Hard sci-fi",
+      "kind": "subgenre",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "science", "plausible" ]
+    },
+    {
+      "id": "slow.movies.scifi_fantasy.soft_scifi",
+      "label": "Soft / adventure sci-fi",
+      "kind": "subgenre",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "fun", "space-opera" ]
+    },
+    {
+      "id": "slow.movies.scifi_fantasy.space_opera",
+      "label": "Space opera",
+      "kind": "subgenre",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "wars", "empire" ]
+    },
+    {
+      "id": "slow.movies.scifi_fantasy.cyberpunk",
+      "label": "Cyberpunk",
+      "kind": "subgenre",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "neon", "corp" ]
+    },
+    {
+      "id": "slow.movies.scifi_fantasy.dystopia",
+      "label": "Dystopia",
+      "kind": "subgenre",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "control", "resist" ]
+    },
+    {
+      "id": "slow.movies.scifi_fantasy.time_travel",
+      "label": "Time travel",
+      "kind": "subgenre",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "paradox", "loop" ]
+    },
+    {
+      "id": "slow.movies.scifi_fantasy.alien",
+      "label": "First contact / aliens",
+      "kind": "subgenre",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "other", "fear-wonder" ]
+    },
+    {
+      "id": "slow.movies.scifi_fantasy.mecha_tech",
+      "label": "Mechs / big tech toys",
+      "kind": "subgenre",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "robot", "suit" ]
+    },
+    {
+      "id": "slow.movies.scifi_fantasy.high_fantasy",
+      "label": "High fantasy",
+      "kind": "subgenre",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "quest", "map" ]
+    },
+    {
+      "id": "slow.movies.scifi_fantasy.dark_fantasy",
+      "label": "Dark fantasy",
+      "kind": "subgenre",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "grim", "cost" ]
+    },
+    {
+      "id": "slow.movies.scifi_fantasy.urban_fantasy",
+      "label": "Urban fantasy",
+      "kind": "subgenre",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "city", "hidden" ]
+    },
+    {
+      "id": "slow.movies.scifi_fantasy.fairy_myth",
+      "label": "Fairy tale / mythic",
+      "kind": "subgenre",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "old", "lesson" ]
+    },
+    {
+      "id": "slow.movies.scifi_fantasy.superhero_as_fantasy",
+      "label": "Superhero as fantasy",
+      "kind": "cross",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "power", "cape" ]
+    },
+    {
+      "id": "slow.movies.scifi_fantasy.anti_superhero",
+      "label": "Superhero fatigue",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "enough", "rival" ]
+    },
+    {
+      "id": "slow.movies.scifi_fantasy.star_wars",
+      "label": "Star Wars loyal",
+      "kind": "franchise",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "saga", "debate" ]
+    },
+    {
+      "id": "slow.movies.scifi_fantasy.star_trek",
+      "label": "Star Trek loyal",
+      "kind": "franchise",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "hope", "crew" ]
+    },
+    {
+      "id": "slow.movies.scifi_fantasy.lotr",
+      "label": "Lord of the Rings loyal",
+      "kind": "franchise",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "tolkien", "long" ]
+    },
+    {
+      "id": "slow.movies.scifi_fantasy.harry_potter",
+      "label": "Wizarding world",
+      "kind": "franchise",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "magic", "school" ]
+    },
+    {
+      "id": "slow.movies.scifi_fantasy.marvel",
+      "label": "MCU interest",
+      "kind": "franchise",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "phase", "event" ]
+    },
+    {
+      "id": "slow.movies.scifi_fantasy.dc",
+      "label": "DC interest",
+      "kind": "franchise",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "darker", "hero" ]
+    },
+    {
+      "id": "slow.movies.scifi_fantasy.matrix_adj",
+      "label": "Matrix-adjacent reality bend",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "sim", "mind" ]
+    },
+    {
+      "id": "slow.movies.scifi_fantasy.blade_runner_mood",
+      "label": "Blade Runner mood",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "noir", "rain" ]
+    },
+    {
+      "id": "slow.movies.scifi_fantasy.world_rules_nerd",
+      "label": "World rules nerd",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "magic-system", "tech" ]
+    },
+    {
+      "id": "slow.movies.scifi_fantasy.lore_deep",
+      "label": "Lore deep-diver",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "wiki", "appendix" ]
+    },
+    {
+      "id": "slow.movies.scifi_fantasy.spectacle_first",
+      "label": "Spectacle first",
+      "kind": "priority",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "imax", "wow" ]
+    },
+    {
+      "id": "slow.movies.scifi_fantasy.ideas_first",
+      "label": "Ideas first",
+      "kind": "priority",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "theme", "talk" ]
+    },
+    {
+      "id": "slow.movies.scifi_fantasy.character_first",
+      "label": "Character in big worlds",
+      "kind": "priority",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "heart", "crew" ]
+    },
+    {
+      "id": "slow.movies.scifi_fantasy.practical_creature",
+      "label": "Practical creatures preferred",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "puppet", "suit" ]
+    },
+    {
+      "id": "slow.movies.scifi_fantasy.cgi_ok",
+      "label": "CGI worlds OK",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "modern", "scale" ]
+    },
+    {
+      "id": "slow.movies.scifi_fantasy.theater_must",
+      "label": "Must see big",
+      "kind": "viewing",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "imax", "opening" ]
+    },
+    {
+      "id": "slow.movies.scifi_fantasy.rewatch_worlds",
+      "label": "Rewatches to live in world",
+      "kind": "viewing",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "comfort", "detail" ]
+    },
+    {
+      "id": "slow.movies.scifi_fantasy.marathon",
+      "label": "Franchise marathon nights",
+      "kind": "viewing",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "order", "hours" ]
+    },
+    {
+      "id": "slow.movies.scifi_fantasy.canon_warrior",
+      "label": "Canon warrior",
+      "kind": "attitude",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "debate", "pure" ]
+    },
+    {
+      "id": "slow.movies.scifi_fantasy.canon_relaxed",
+      "label": "Relaxed about canon",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "fun", "multiverse" ]
+    },
+    {
+      "id": "slow.movies.scifi_fantasy.book_first",
+      "label": "Book was better stance",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "adapt", "rival" ]
+    },
+    {
+      "id": "slow.movies.scifi_fantasy.film_own",
+      "label": "Film as its own thing",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "adapt", "free" ]
+    },
+    {
+      "id": "slow.movies.scifi_fantasy.hopeful_sf",
+      "label": "Hopeful sci-fi",
+      "kind": "tone",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "trek", "future" ]
+    },
+    {
+      "id": "slow.movies.scifi_fantasy.bleak_sf",
+      "label": "Bleak sci-fi",
+      "kind": "tone",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "warn", "cold" ]
+    },
+    {
+      "id": "slow.movies.scifi_fantasy.humor_blend",
+      "label": "Humor in genre OK",
+      "kind": "tone",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "guardians", "fun" ]
+    },
+    {
+      "id": "slow.movies.scifi_fantasy.serious_tone",
+      "label": "Serious tone only",
+      "kind": "tone",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "no-joke", "weight" ]
+    },
+    {
+      "id": "slow.movies.scifi_fantasy.date_spectacle",
+      "label": "Spectacle date night",
+      "kind": "social",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "big", "share" ]
+    },
+    {
+      "id": "slow.movies.scifi_fantasy.solo_lore",
+      "label": "Solo lore nights",
+      "kind": "social",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "alone", "deep" ]
+    },
+    {
+      "id": "slow.movies.scifi_fantasy.group_debate",
+      "label": "Group theory debate",
+      "kind": "social",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "friends", "wiki" ]
+    },
+    {
+      "id": "slow.movies.scifi_fantasy.originals_over_sequel",
+      "label": "Originals over endless sequel",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "fresh", "fatigue" ]
+    },
+    {
+      "id": "slow.movies.scifi_fantasy.sequel_hype",
+      "label": "Sequel / phase hype",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "night-one", "event" ]
+    },
+    {
+      "id": "slow.movies.scifi_fantasy.score_iconic",
+      "label": "Iconic scores matter",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "williams", "zimmer" ]
+    },
+    {
+      "id": "slow.movies.scifi_fantasy.map_lover",
+      "label": "Map / opening-text lover",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "world", "scroll" ]
+    },
+    {
+      "id": "slow.movies.scifi_fantasy.chosen_one_fatigue",
+      "label": "Chosen-one fatigue",
+      "kind": "trope",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "enough", "subvert" ]
+    },
+    {
+      "id": "slow.movies.scifi_fantasy.found_family",
+      "label": "Found-family crews",
+      "kind": "trope",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "crew", "bond" ]
+    },
+    {
+      "id": "slow.movies.scifi_fantasy.magic_vs_tech",
+      "label": "Cares magic vs tech feel",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "split", "talk" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "watched a franchise film; no world identity",
+    "atOrAbove50": "attach 2-4; franchise or hard/soft lean appears",
+    "atOrAbove70": "lore and opening-night habits show; debates get heated",
+    "extreme95": "identity fused to a saga; canon fights are personal"
+  },
+  "notes": "Franchise subs are preference flags—not full title catalogs. rivalBias for Wars vs Trek, MCU fatigue, book-vs-film."
+}

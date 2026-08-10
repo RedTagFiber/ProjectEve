@@ -1,0 +1,150 @@
+{
+  "id": "slow.tv.true_crime",
+  "layer": "slow",
+  "domain": "tv",
+  "label": "True Crime",
+  "version": 1,
+  "description": "True crime series, documentaries, and docuseries—cases, trials, and amateur-sleuth culture.",
+  "priorIntensity": 5,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [ "true crime", "documentary", "case", "trial", "that doc", "podcast-adj" ],
+  "rivalBias": false,
+  "catalog": "TV/Shows/TrueCrime",
+  "subTraits": [
+    {
+      "id": "slow.tv.true_crime.docs",
+      "label": "Docuseries focus",
+      "kind": "style",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "netflix" ]
+    },
+    {
+      "id": "slow.tv.true_crime.nightly",
+      "label": "Nightly / background true crime",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "comfort-dark" ]
+    },
+    {
+      "id": "slow.tv.true_crime.trial_watcher",
+      "label": "Live trial watcher",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "court-tv" ]
+    },
+    {
+      "id": "slow.tv.true_crime.making_murderer",
+      "label": "Making a Murderer era",
+      "kind": "show",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "gateway" ]
+    },
+    {
+      "id": "slow.tv.true_crime.tiger_king_adj",
+      "label": "Tiger King / chaos docs",
+      "kind": "show",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "spectacle" ]
+    },
+    {
+      "id": "slow.tv.true_crime.the_jinx",
+      "label": "The Jinx",
+      "kind": "show",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "prestige" ]
+    },
+    {
+      "id": "slow.tv.true_crime.oh_innocent",
+      "label": "The Staircase / longform",
+      "kind": "show",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "prestige" ]
+    },
+    {
+      "id": "slow.tv.true_crime.dahmer",
+      "label": "Dahmer / Ryan Murphy crime",
+      "kind": "show",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "debate" ]
+    },
+    {
+      "id": "slow.tv.true_crime.night_stalker",
+      "label": "Night Stalker / 80s cases",
+      "kind": "show",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "case" ]
+    },
+    {
+      "id": "slow.tv.true_crime.forensic_files",
+      "label": "Forensic Files comfort",
+      "kind": "show",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "syndication" ]
+    },
+    {
+      "id": "slow.tv.true_crime.dateline",
+      "label": "Dateline",
+      "kind": "show",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "network" ]
+    },
+    {
+      "id": "slow.tv.true_crime.twenty_twenty",
+      "label": "20/20",
+      "kind": "show",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "network" ]
+    },
+    {
+      "id": "slow.tv.true_crime.snapped",
+      "label": "Snapped",
+      "kind": "show",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "cable" ]
+    },
+    {
+      "id": "slow.tv.true_crime.unsolved_mysteries",
+      "label": "Unsolved Mysteries",
+      "kind": "show",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "classic" ]
+    },
+    {
+      "id": "slow.tv.true_crime.ethics_aware",
+      "label": "Worries about victim ethics",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "thoughtful" ]
+    },
+    {
+      "id": "slow.tv.true_crime.armchair",
+      "label": "Armchair detective",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "theories" ]
+    },
+    {
+      "id": "slow.tv.true_crime.scare_sleep",
+      "label": "Shouldn't watch before bed (does anyway)",
+      "kind": "habit",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "irony" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "saw one Netflix doc; no lane",
+    "atOrAbove50": "attach 2-3 titles + nightly or ethics lean",
+    "atOrAbove70": "true crime is default wind-down",
+    "extreme95": "cases and trials are ongoing hobby"
+  },
+  "notes": "Pairs often with procedural background TV; still separate taste identity."
+}

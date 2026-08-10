@@ -1,0 +1,68 @@
+{
+    "id":  "mid.protective",
+    "layer":  "mid",
+    "label":  "Protective",
+    "version":  1,
+    "cluster":  "moral",
+    "description":  "Shields people or group; threat to them is personal.",
+    "priorIntensity":  6,
+    "moveSpeed":  "slow",
+    "bands":  {
+                  "off":  "0-29",
+                  "low":  "30-49",
+                  "mid":  "50-69",
+                  "high":  "70-84",
+                  "break":  "85-94",
+                  "extreme":  "95-100"
+              },
+    "styles":  [
+                   {
+                       "id":  "mid.protective.shield",
+                       "label":  "Shield"
+                   },
+                   {
+                       "id":  "mid.protective.intercept",
+                       "label":  "Intercept"
+                   },
+                   {
+                       "id":  "mid.protective.warn_off",
+                       "label":  "Warn off"
+                   }
+               ],
+    "links":  {
+                  "boostedBy":  [
+                                    "affection",
+                                    "fear",
+                                    "anger"
+                                ],
+                  "drainedBy":  [
+                                    "resentment"
+                                ],
+                  "opposes":  [
+                                  "mid.opportunistic"
+                              ]
+              },
+    "tagTriggers":  [
+                        {
+                            "tag":  "mid.protective.test",
+                            "meaning":  "Situation tests this character trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.protective.confirm",
+                            "meaning":  "Behavior confirms this trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.protective.violate",
+                            "meaning":  "Acts against this trait under pressure",
+                            "deltaHint":  -2
+                        }
+                    ],
+    "relationScoped":  true,
+    "historyHooks":  {
+                         "patternFile":  "protective_patterns.json",
+                         "fundingBudget":  2
+                     },
+    "notes":  "Strong with family/friend tiers."
+}

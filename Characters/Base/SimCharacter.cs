@@ -1,19 +1,19 @@
-﻿using ProjectEve.Characters.Emotion;
-using ProjectEve.History;
+﻿using ProjectEve.AI.Brain;
+using ProjectEve.Characters.Emotion;
 using ProjectEve.Characters.NPCs;
+using ProjectEve.History;
 using ProjectEve.Memory;
 using ProjectEve.Money;
 using ProjectEve.Relationships;
 using ProjectEve.Traits;
-using ProjectEve.AI.Brain;
 using System;
 using System.Collections.Generic;
 
 namespace ProjectEve.Characters.Base
 {
     /// <summary>
-    /// Base class for all NPCs in Project Eve.
-    /// Holds identity, traits, emotions, relationships, memory, and history.
+    /// Base for every NPC / player character.
+    /// Traits live in NpcTraits (Fast / Mid / Slow). No InitializeFromRegistry.
     /// </summary>
     public class SimCharacter
     {
@@ -21,20 +21,50 @@ namespace ProjectEve.Characters.Base
         // BASIC IDENTITY
         // ============================================================
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string Name { get; set; } = "";
         public int Age { get; set; }
-        public NPCAppearance Appearance { get; set; }
         public string Gender { get; set; } = "Unknown";
+        public string Occupation { get; set; } = "";
+        public string Location { get; set; } = "Unknown";
 
-        public Brain Brain { get; set; } = new Brain();
+        /// <summary>1 = close, 5 = lore/family graph only.</summary>
+        public int Tier { get; set; } = 2;
+
+        public string Hometown { get; set; } = "";
+        /// <summary>Street / area. Not named Address (avoids type name clash).</summary>
+        public string HomeAddress { get; set; } = "";
+
+        public DateTime? BirthDate { get; set; }
+        public string Zodiac { get; set; } = "";
+
+        public string PersonalityContext { get; set; } = "";
+        public List<string> PersonalityTags { get; set; } = new();
 
         // ============================================================
-        // MONEY PROFILE
+        // APPEARANCE (prompt + sheet)
         // ============================================================
-        public MoneyProfile Money { get; set; } = new MoneyProfile();
-        public JobProfile Job { get; set; } = new JobProfile();
+        public NPCAppearance Appearance { get; set; } = new();
+
+        public int? HeightCm { get; set; }
+        public int? WeightKg { get; set; }
+        public string BodyShape { get; set; } = "";
+        public string HairColor { get; set; } = "";
+        public string HairStyle { get; set; } = "";
+        public string EyeColor { get; set; } = "";
+        public string EyeStyle { get; set; } = "";
+        public string SkinTone { get; set; } = "";
+        public string Glasses { get; set; } = "";   // none | reading | always | style
+        public string ScarNotes { get; set; } = "";
+
         // ============================================================
-        // CORE MOTIVATIONS
+        // BRAIN / MONEY / JOB
+        // ============================================================
+        public Brain Brain { get; set; } = new();
+        public MoneyProfile Money { get; set; } = new();
+        public JobProfile Job { get; set; } = new();
+
+        // ============================================================
+        // DRIVES
         // ============================================================
         public string Goal { get; set; } = "";
         public string Need { get; set; } = "";
@@ -42,124 +72,83 @@ namespace ProjectEve.Characters.Base
         public string Want { get; set; } = "";
 
         // ============================================================
-        // LOCATION
+        // TRAITS (Fast / Mid / Slow bag)
         // ============================================================
-        public string Location { get; set; } = "Unknown";
-        public string Occupation { get; set; } = string.Empty;
-        public List<string> PersonalityTags { get; set; } = new();
+        public NpcTraits Traits { get; set; } = new();
 
-        // ============================================================
-        // TRAITS (NEW 0–100 SYSTEM)
-        // ============================================================
-        public NpcTraits Traits { get; set; } = new NpcTraits();
+        public float GetTraitValue(string traitId) => Traits.Get(traitId);
+        public float GetTraitIntensity(string traitId) => Traits.Get(traitId);
 
-        /// <summary>
-        /// Returns the current value of a trait (0–100).
-        /// </summary>
-        public float GetTraitValue(string traitId)
-        {
-            return Traits.Get(traitId);
-        }
-
-        /// <summary>
-        /// Alias for older code that called GetTraitIntensity.
-        /// </summary>
-        public float GetTraitIntensity(string traitId)
-        {
-            return GetTraitValue(traitId);
-        }
-
-        /// <summary>
-        /// Returns true if the trait value meets or exceeds the threshold.
-        /// </summary>
         public bool HasTrait(string traitId, float threshold = 60f)
-        {
-            return GetTraitValue(traitId) >= threshold;
-        }
+            => Traits.Get(traitId) >= threshold;
 
-        /// <summary>
-        /// Directly set a trait value (0–100).
-        /// </summary>
         public void SetTrait(string traitId, float value)
-        {
-            Traits.Set(traitId, value);
-        }
+            => Traits.Set(traitId, value);
 
-        /// <summary>
-        /// Adjust a trait by a positive or negative amount.
-        /// </summary>
         public void AdjustTrait(string traitId, float amount)
-        {
-            Traits.Adjust(traitId, amount);
-        }
+            => Traits.Adjust(traitId, amount);
 
-        /// <summary>
-        /// Debug helper (keeps old name working).
-        /// </summary>
         public void DebugSetTrait(string traitId, int value)
-        {
-            Traits.Set(traitId, value);
-        }
-
-        public void UpdateTraits()
-        {
-            // Optional: call your TraitEngine here later
-            // TraitEngine.UpdateTraits(this);
-        }
+            => Traits.Set(traitId, value);
 
         // ============================================================
-        // EMOTIONAL STATE
+        // EMOTION (legacy mirror — prefer Traits Fast)
         // ============================================================
-        public EmotionalProfile Emotion { get; set; } = new EmotionalProfile();
+        public EmotionalProfile Emotion { get; set; } = new();
 
         // ============================================================
-        // RELATIONSHIPS
+        // RELATIONSHIPS / MEMORY / HISTORY
         // ============================================================
         public List<Relationship> Relationships { get; set; } = new();
 
-        // ============================================================
-        // MEMORY SYSTEM
-        // ============================================================
-        public MemoryDatabase MemoryDB { get; set; } = new MemoryDatabase();
+        public MemoryDatabase MemoryDB { get; set; } = new();
 
-        /// <summary>
-        /// Adds a memory to the character's memory database.
-        /// </summary>
         public void Remember(string summary, string category, int importance = 1)
         {
             MemoryDB.AddMemory(new MemoryRecord
             {
+                NpcId = Id,
                 CharacterName = Name,
                 Summary = summary,
                 Category = category,
-                Importance = importance,
-                Timestamp = DateTime.Now
+                Importance = Math.Clamp(importance, 1, 100),
+                Strength = Math.Clamp(40f + importance * 0.5f, 20f, 100f),
+                IsLockedPeak = importance >= 85,
+                Timestamp = DateTime.UtcNow
             });
         }
 
-        // ============================================================
-        // HISTORY SYSTEM
-        // ============================================================
         public List<HistoryRecord> History { get; set; } = new();
-        public List<string> Schedule { get; internal set; } = new();
-        public List<string> ConversationTopics { get; internal set; } = new();
-        public object? TravelPlan { get; internal set; }
-        public string PersonalityContext { get; set; } = "";
+
+        public List<string> Schedule { get; set; } = new();
+        public List<string> ConversationTopics { get; set; } = new();
+        public object? TravelPlan { get; set; }
 
         // ============================================================
         // CONSTRUCTOR
         // ============================================================
         public SimCharacter(string name, int age)
         {
-            Name = name;
+            Name = name ?? "";
             Age = age;
             Appearance = new NPCAppearance();
-            Schedule = new List<string>();
-            ConversationTopics = new List<string>();
+            Schedule = new();
+            ConversationTopics = new();
             TravelPlan = null;
+            // Traits stay empty until CharacterFactory / TraitJsonLoader.ApplyRolledLayers
+        }
 
-            // Load every trait at its default value
-            Traits.InitializeFromRegistry();
+        public SimCharacter() : this("Unknown", 25) { }
+
+        /// <summary>Age from BirthDate when set; else stored Age.</summary>
+        public int DerivedAge(DateTime? asOf = null)
+        {
+            if (BirthDate == null) return Age;
+            var now = asOf ?? DateTime.Now;
+            int years = now.Year - BirthDate.Value.Year;
+            if (now.Date < BirthDate.Value.Date.AddYears(years))
+                years--;
+            return Math.Max(0, years);
         }
     }
 }

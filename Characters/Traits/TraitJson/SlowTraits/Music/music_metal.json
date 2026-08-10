@@ -1,0 +1,418 @@
+{
+  "id": "slow.music.metal",
+  "layer": "slow",
+  "domain": "music",
+  "label": "Metal",
+  "version": 1,
+  "description": "Interest in metal—from traditional and thrash to extreme, prog, and modern. Real bands for live, gym, and identity.",
+  "priorIntensity": 5,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [ "metal", "riff", "mosh", "band", "headbang", "blast", "breakdown", "festival", "double bass" ],
+  "rivalBias": true,
+  "catalog": "Music/Metal",
+  "subTraits": [
+    {
+      "id": "slow.music.metal.traditional",
+      "label": "Traditional / classic metal",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "nwobhm", "80s" ]
+    },
+    {
+      "id": "slow.music.metal.thrash",
+      "label": "Thrash",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "fast", "aggression" ]
+    },
+    {
+      "id": "slow.music.metal.death",
+      "label": "Death metal",
+      "kind": "style",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "guttural", "extreme" ]
+    },
+    {
+      "id": "slow.music.metal.black",
+      "label": "Black metal",
+      "kind": "style",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "atmosphere", "raw" ]
+    },
+    {
+      "id": "slow.music.metal.doom",
+      "label": "Doom / sludge",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "slow", "heavy" ]
+    },
+    {
+      "id": "slow.music.metal.power",
+      "label": "Power metal",
+      "kind": "style",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "melody", "fantasy" ]
+    },
+    {
+      "id": "slow.music.metal.prog_metal",
+      "label": "Progressive metal",
+      "kind": "style",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "complex", "long" ]
+    },
+    {
+      "id": "slow.music.metal.nu_metal",
+      "label": "Nu-metal",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "90s", "crossover" ]
+    },
+    {
+      "id": "slow.music.metal.metalcore",
+      "label": "Metalcore",
+      "kind": "style",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "breakdown", "modern" ]
+    },
+    {
+      "id": "slow.music.metal.deathcore",
+      "label": "Deathcore",
+      "kind": "style",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "extreme", "breakdown" ]
+    },
+    {
+      "id": "slow.music.metal.djent",
+      "label": "Djent / modern prog",
+      "kind": "style",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "rhythm", "tech" ]
+    },
+    {
+      "id": "slow.music.metal.industrial",
+      "label": "Industrial metal",
+      "kind": "style",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "machine", "ohio-adj" ]
+    },
+    {
+      "id": "slow.music.metal.glam_hair",
+      "label": "Glam / hair metal",
+      "kind": "style",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "80s", "hooks" ]
+    },
+    {
+      "id": "slow.music.metal.groove",
+      "label": "Groove metal",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "pantera-adj", "swing" ]
+    },
+
+    {
+      "id": "slow.music.metal.black_sabbath",
+      "label": "Black Sabbath",
+      "kind": "artist",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "foundation", "doom" ]
+    },
+    {
+      "id": "slow.music.metal.judas_priest",
+      "label": "Judas Priest",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "metal-gods", "leather" ]
+    },
+    {
+      "id": "slow.music.metal.iron_maiden",
+      "label": "Iron Maiden",
+      "kind": "artist",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "eddie", "gallop", "live" ]
+    },
+    {
+      "id": "slow.music.metal.metallica",
+      "label": "Metallica",
+      "kind": "artist",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "mainstream", "thrash-root" ]
+    },
+    {
+      "id": "slow.music.metal.megadeth",
+      "label": "Megadeth",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "thrash", "technical" ]
+    },
+    {
+      "id": "slow.music.metal.slayer",
+      "label": "Slayer",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "thrash", "speed" ]
+    },
+    {
+      "id": "slow.music.metal.anthrax",
+      "label": "Anthrax",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "thrash", "fun" ]
+    },
+    {
+      "id": "slow.music.metal.pantera",
+      "label": "Pantera",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "groove", "attitude" ]
+    },
+    {
+      "id": "slow.music.metal.motorhead",
+      "label": "Motörhead",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "speed", "rock-n-roll" ]
+    },
+    {
+      "id": "slow.music.metal.dio",
+      "label": "Dio / Rainbow",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "voice", "fantasy" ]
+    },
+    {
+      "id": "slow.music.metal.ozzy",
+      "label": "Ozzy Osbourne",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "solo", "icon" ]
+    },
+    {
+      "id": "slow.music.metal.tool_metal",
+      "label": "Tool",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "prog", "patient" ]
+    },
+    {
+      "id": "slow.music.metal.dream_theater",
+      "label": "Dream Theater",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "prog", "virtuoso" ]
+    },
+    {
+      "id": "slow.music.metal.opeth",
+      "label": "Opeth",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "prog", "death-to-prog" ]
+    },
+    {
+      "id": "slow.music.metal.mastodon",
+      "label": "Mastodon",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "sludge-prog", "concept" ]
+    },
+    {
+      "id": "slow.music.metal.gojira",
+      "label": "Gojira",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "modern", "environment" ]
+    },
+    {
+      "id": "slow.music.metal.slipknot",
+      "label": "Slipknot",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "nu", "masks", "live" ]
+    },
+    {
+      "id": "slow.music.metal.korn",
+      "label": "Korn",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "nu", "bass" ]
+    },
+    {
+      "id": "slow.music.metal.system_of_a_down",
+      "label": "System of a Down",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "weird", "political" ]
+    },
+    {
+      "id": "slow.music.metal.lamb_of_god",
+      "label": "Lamb of God",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "groove", "modern" ]
+    },
+    {
+      "id": "slow.music.metal.killswitch",
+      "label": "Killswitch Engage",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "metalcore", "melody" ]
+    },
+    {
+      "id": "slow.music.metal.as_i_lay_dying",
+      "label": "As I Lay Dying",
+      "kind": "artist",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "metalcore", "debate" ]
+    },
+    {
+      "id": "slow.music.metal.architects",
+      "label": "Architects",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "modern", "message" ]
+    },
+    {
+      "id": "slow.music.metal.spiritbox",
+      "label": "Spiritbox",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "modern", "voice" ]
+    },
+    {
+      "id": "slow.music.metal.sleep_token",
+      "label": "Sleep Token",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "modern", "ritual", "crossover" ]
+    },
+    {
+      "id": "slow.music.metal.ghost",
+      "label": "Ghost",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "theatrical", "hooks" ]
+    },
+    {
+      "id": "slow.music.metal.devo_nin_bridge",
+      "label": "NIN industrial bridge",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "ohio", "industrial" ]
+    },
+    {
+      "id": "slow.music.metal.cannibal",
+      "label": "Cannibal Corpse",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "death", "extreme" ]
+    },
+    {
+      "id": "slow.music.metal.death_band",
+      "label": "Death",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "death", "prog-death" ]
+    },
+    {
+      "id": "slow.music.metal.mayhem_burzum_adj",
+      "label": "Second-wave black metal awareness",
+      "kind": "style",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "norway", "raw" ]
+    },
+    {
+      "id": "slow.music.metal.avenged",
+      "label": "Avenged Sevenfold",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "modern", "arena" ]
+    },
+    {
+      "id": "slow.music.metal.five_finger",
+      "label": "Five Finger Death Punch",
+      "kind": "artist",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "radio-metal", "debate" ]
+    },
+
+    {
+      "id": "slow.music.metal.live_pit",
+      "label": "Pit / live show regular",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "mosh", "tour" ]
+    },
+    {
+      "id": "slow.music.metal.festival_metal",
+      "label": "Metal festival goer",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "outdoor", "day" ]
+    },
+    {
+      "id": "slow.music.metal.gym_metal",
+      "label": "Gym metal only",
+      "kind": "mood_role",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "lift", "aggression" ]
+    },
+    {
+      "id": "slow.music.metal.drive_loud",
+      "label": "Drive it loud",
+      "kind": "mood_role",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "car", "release" ]
+    },
+    {
+      "id": "slow.music.metal.purist_true",
+      "label": "True metal purist",
+      "kind": "attitude",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "gate", "poseur" ]
+    },
+    {
+      "id": "slow.music.metal.open_core",
+      "label": "Open to core / modern",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "flexible", "now" ]
+    },
+    {
+      "id": "slow.music.metal.anti_nu",
+      "label": "Anti nu-metal",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "gate", "90s" ]
+    },
+    {
+      "id": "slow.music.metal.vinyl_patches",
+      "label": "Patches / vest / vinyl culture",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "identity", "scene" ]
+    },
+    {
+      "id": "slow.music.metal.ohio_shows",
+      "label": "Ohio venue circuit",
+      "kind": "local",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "cleveland", "columbus", "cincy" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "knows Metallica radio cuts; no substyle identity",
+    "atOrAbove50": "attach 2-4; style + bands + gym/live habit",
+    "atOrAbove70": "shows and purity debates; extreme vs mainstream split",
+    "extreme95": "metal is identity; vest, pit, and gatekeeping real"
+  },
+  "notes": "NIN as Ohio industrial bridge. rivalBias for true-vs-core and anti-nu fights."
+}

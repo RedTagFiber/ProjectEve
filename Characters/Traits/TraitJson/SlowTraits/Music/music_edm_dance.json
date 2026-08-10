@@ -1,0 +1,489 @@
+{
+  "id": "slow.music.edm_dance",
+  "layer": "slow",
+  "domain": "music",
+  "label": "EDM / Dance",
+  "version": 1,
+  "description": "Interest in electronic dance music—club, festival, car, and workout. Substyles and real DJs/producers for talk and scene identity.",
+  "priorIntensity": 5,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [ "edm", "dance", "club", "drop", "dj", "festival", "rave", "house", "techno", "bass", "set" ],
+  "rivalBias": true,
+  "catalog": "Music/EDMDance",
+  "subTraits": [
+    {
+      "id": "slow.music.edm_dance.house",
+      "label": "House",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "four-on-floor", "groove" ]
+    },
+    {
+      "id": "slow.music.edm_dance.deep_house",
+      "label": "Deep house",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "warm", "late" ]
+    },
+    {
+      "id": "slow.music.edm_dance.tech_house",
+      "label": "Tech house",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "club", "punch" ]
+    },
+    {
+      "id": "slow.music.edm_dance.techno",
+      "label": "Techno",
+      "kind": "style",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "detroit", "warehouse" ]
+    },
+    {
+      "id": "slow.music.edm_dance.trance",
+      "label": "Trance",
+      "kind": "style",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "uplift", "melody" ]
+    },
+    {
+      "id": "slow.music.edm_dance.progressive",
+      "label": "Progressive house / prog",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "build", "long" ]
+    },
+    {
+      "id": "slow.music.edm_dance.dubstep",
+      "label": "Dubstep / bass",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "wobble", "drop" ]
+    },
+    {
+      "id": "slow.music.edm_dance.drum_bass",
+      "label": "Drum & bass",
+      "kind": "style",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "fast", "break" ]
+    },
+    {
+      "id": "slow.music.edm_dance.garage_uk",
+      "label": "UK garage / 2-step",
+      "kind": "style",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "shuffle", "uk" ]
+    },
+    {
+      "id": "slow.music.edm_dance.trap_edm",
+      "label": "Trap (EDM lane)",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "hats", "festival" ]
+    },
+    {
+      "id": "slow.music.edm_dance.future_bass",
+      "label": "Future bass",
+      "kind": "style",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "chords", "emotional" ]
+    },
+    {
+      "id": "slow.music.edm_dance.hardstyle",
+      "label": "Hardstyle / hard dance",
+      "kind": "style",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "kick", "intense" ]
+    },
+    {
+      "id": "slow.music.edm_dance.disco_edit",
+      "label": "Disco / nu-disco / edits",
+      "kind": "style",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "fun", "retro" ]
+    },
+    {
+      "id": "slow.music.edm_dance.ambient_chill",
+      "label": "Ambient / chill / downtempo",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "calm", "after" ]
+    },
+    {
+      "id": "slow.music.edm_dance.mainstage_bigroom",
+      "label": "Big-room / mainstage",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "festival", "anthem" ]
+    },
+
+    {
+      "id": "slow.music.edm_dance.daft_punk",
+      "label": "Daft Punk",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "robots", "house", "icon" ]
+    },
+    {
+      "id": "slow.music.edm_dance.deadmau5",
+      "label": "deadmau5",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "progressive", "geek" ]
+    },
+    {
+      "id": "slow.music.edm_dance.skrillex",
+      "label": "Skrillex",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "bass", "drop", "2010s" ]
+    },
+    {
+      "id": "slow.music.edm_dance.calvin_harris",
+      "label": "Calvin Harris",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "radio", "pop-dance" ]
+    },
+    {
+      "id": "slow.music.edm_dance.tiesto",
+      "label": "Tiësto",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "trance-to-big", "longevity" ]
+    },
+    {
+      "id": "slow.music.edm_dance.armin",
+      "label": "Armin van Buuren",
+      "label": "Armin van Buuren",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "trance", "asot" ]
+    },
+    {
+      "id": "slow.music.edm_dance.above_beyond",
+      "label": "Above & Beyond",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "trance", "emotional" ]
+    },
+    {
+      "id": "slow.music.edm_dance.avicii",
+      "label": "Avicii",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "melody", "festival", "legacy" ]
+    },
+    {
+      "id": "slow.music.edm_dance.swedish_house",
+      "label": "Swedish House Mafia",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "anthem", "reunion" ]
+    },
+    {
+      "id": "slow.music.edm_dance.david_guetta",
+      "label": "David Guetta",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "radio", "pop-dance" ]
+    },
+    {
+      "id": "slow.music.edm_dance.disclosure",
+      "label": "Disclosure",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "uk-house", "vocal" ]
+    },
+    {
+      "id": "slow.music.edm_dance.flume",
+      "label": "Flume",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "future-bass", "texture" ]
+    },
+    {
+      "id": "slow.music.edm_dance.odesza",
+      "label": "ODESZA",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "emotional", "live" ]
+    },
+    {
+      "id": "slow.music.edm_dance.illenium",
+      "label": "Illenium",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "melodic-bass", "feel" ]
+    },
+    {
+      "id": "slow.music.edm_dance.seven_lions",
+      "label": "Seven Lions",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "melodic", "bass" ]
+    },
+    {
+      "id": "slow.music.edm_dance.porter",
+      "label": "Porter Robinson",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "emotional", "art" ]
+    },
+    {
+      "id": "slow.music.edm_dance.madeon",
+      "label": "Madeon",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "color", "craft" ]
+    },
+    {
+      "id": "slow.music.edm_dance.justice",
+      "label": "Justice",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "french", "rock-edge" ]
+    },
+    {
+      "id": "slow.music.edm_dance.chemical_brothers",
+      "label": "Chemical Brothers",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "big-beat", "live" ]
+    },
+    {
+      "id": "slow.music.edm_dance.fatboy_slim",
+      "label": "Fatboy Slim",
+      "kind": "artist",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "big-beat", "fun" ]
+    },
+    {
+      "id": "slow.music.edm_dance.carl_cox",
+      "label": "Carl Cox",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "techno", "legend" ]
+    },
+    {
+      "id": "slow.music.edm_dance.charlotte_de_witte",
+      "label": "Charlotte de Witte",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "techno", "dark" ]
+    },
+    {
+      "id": "slow.music.edm_dance.amelie_lens",
+      "label": "Amelie Lens",
+      "kind": "artist",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "techno", "peak" ]
+    },
+    {
+      "id": "slow.music.edm_dance.fisher",
+      "label": "Fisher",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "tech-house", "party" ]
+    },
+    {
+      "id": "slow.music.edm_dance.john_summit",
+      "label": "John Summit",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "tech-house", "modern" ]
+    },
+    {
+      "id": "slow.music.edm_dance.fred_again",
+      "label": "Fred again..",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "emotional", "samples", "live" ]
+    },
+    {
+      "id": "slow.music.edm_dance.four_tet",
+      "label": "Four Tet",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "leftfield", "texture" ]
+    },
+    {
+      "id": "slow.music.edm_dance.floating_points",
+      "label": "Floating Points",
+      "kind": "artist",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "jazz-edge", "long" ]
+    },
+    {
+      "id": "slow.music.edm_dance.kaytranada",
+      "label": "KAYTRANADA",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "house", "hip-hop-edge" ]
+    },
+    {
+      "id": "slow.music.edm_dance.diplo",
+      "label": "Diplo / Major Lazer lane",
+      "kind": "artist",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "bass", "global" ]
+    },
+    {
+      "id": "slow.music.edm_dance.marshmello",
+      "label": "Marshmello",
+      "kind": "artist",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "festival", "mask" ]
+    },
+    {
+      "id": "slow.music.edm_dance.zedd",
+      "label": "Zedd",
+      "kind": "artist",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "pop-edm", "clean" ]
+    },
+    {
+      "id": "slow.music.edm_dance.martin_garrix",
+      "label": "Martin Garrix",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "mainstage", "young" ]
+    },
+    {
+      "id": "slow.music.edm_dance.alesso",
+      "label": "Alesso",
+      "kind": "artist",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "progressive", "pop" ]
+    },
+    {
+      "id": "slow.music.edm_dance.nervo",
+      "label": "NERVO",
+      "kind": "artist",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "festival", "duo" ]
+    },
+    {
+      "id": "slow.music.edm_dance.rex_orange",
+      "label": "Not pure EDM—skip",
+      "kind": "note",
+      "defaultRange": [ 0, 0 ],
+      "tags": []
+    },
+
+    {
+      "id": "slow.music.edm_dance.festival_goer",
+      "label": "Festival goer",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "edm", "camping", "day" ]
+    },
+    {
+      "id": "slow.music.edm_dance.club_regular",
+      "label": "Club regular",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "night", "dancefloor" ]
+    },
+    {
+      "id": "slow.music.edm_dance.car_bass",
+      "label": "Car system / bass head",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "sub", "ohio", "ride" ]
+    },
+    {
+      "id": "slow.music.edm_dance.gym_edm",
+      "label": "Gym / workout EDM",
+      "kind": "mood_role",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "lift", "energy" ]
+    },
+    {
+      "id": "slow.music.edm_dance.game_focus",
+      "label": "Gaming / focus electronic",
+      "kind": "mood_role",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "flow", "hours" ]
+    },
+    {
+      "id": "slow.music.edm_dance.afters_chill",
+      "label": "Afters / chill sets",
+      "kind": "mood_role",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "come-down", "sunrise" ]
+    },
+    {
+      "id": "slow.music.edm_dance.producer_hobby",
+      "label": "Produces / messes in DAW",
+      "kind": "practice",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "ableton", "hobby" ]
+    },
+    {
+      "id": "slow.music.edm_dance.vinyl_dj",
+      "label": "Vinyl / controller DJ hobby",
+      "kind": "practice",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "mix", "party" ]
+    },
+    {
+      "id": "slow.music.edm_dance.mainstage_only",
+      "label": "Mainstage only",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "big", "anthem" ]
+    },
+    {
+      "id": "slow.music.edm_dance.underground_only",
+      "label": "Underground only",
+      "kind": "attitude",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "warehouse", "gate" ]
+    },
+    {
+      "id": "slow.music.edm_dance.radio_dance",
+      "label": "Radio dance / Top 40 OK",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "open", "fun" ]
+    },
+    {
+      "id": "slow.music.edm_dance.anti_bro_festival",
+      "label": "Anti bro-festival culture",
+      "kind": "attitude",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "scene", "rival" ]
+    },
+    {
+      "id": "slow.music.edm_dance.ohio_shows",
+      "label": "Columbus / Cleveland / Cincy shows",
+      "kind": "local",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "ohio", "venue" ]
+    },
+    {
+      "id": "slow.music.edm_dance.lost_lands_adj",
+      "label": "Lost Lands / Ohio festival awareness",
+      "kind": "local",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "ohio", "bass", "legend-valley" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "danced at a wedding; no style identity",
+    "atOrAbove50": "attach 2-4 (style + artists + habit); can name DJs/sets",
+    "atOrAbove70": "festival/club/car habits show; underground vs mainstage split matters",
+    "extreme95": "scene identity; calendar bends around shows and drops"
+  },
+  "notes": "Lost Lands is real Ohio bass culture. rivalBias for underground vs big-room."
+}

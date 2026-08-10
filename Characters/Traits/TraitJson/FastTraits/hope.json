@@ -1,0 +1,179 @@
+﻿{
+  "id": "hope",
+  "layer": "fast",
+  "label": "Hope",
+  "version": 1,
+  "description": "Belief this can get better — the bond, the night, the future. Fragile when Fear/Anxiety high; fuels repair and staying.",
+  "priorIntensity": {
+    "min": 3,
+    "max": 7,
+    "mean": 5
+  },
+  "spawn": {
+    "currentFromIntensity": true,
+    "noise": 3
+  },
+  "bands": {
+    "off": [ 0, 29 ],
+    "low": [ 30, 49 ],
+    "mid": [ 50, 69 ],
+    "high": [ 70, 84 ],
+    "break": [ 85, 94 ],
+    "extreme": [ 95, 100 ]
+  },
+  "styles": {
+    "bright": {
+      "means": "Open optimism; says the good future out loud.",
+      "speechHints": [ "we_can", "itll_work", "forward" ],
+      "bodyHints": [ "open", "light" ],
+      "riskTags": [ "naive_read" ]
+    },
+    "fragile": {
+      "means": "Hopes but is ready to crack; small voice.",
+      "speechHints": [ "maybe", "I_want_to_believe" ],
+      "bodyHints": [ "tentative" ],
+      "riskTags": [ "easily_crushed" ]
+    },
+    "stubborn": {
+      "means": "Won't quit the belief even when evidence is thin.",
+      "speechHints": [ "still", "not_giving_up" ],
+      "bodyHints": [ "set_jaw_soft" ],
+      "riskTags": [ "denial_edge" ]
+    },
+    "quiet": {
+      "means": "Holds hope privately; doesn't perform it.",
+      "speechHints": [ "understated", "small_plan" ],
+      "bodyHints": [ "steady" ],
+      "riskTags": []
+    },
+    "naive": {
+      "means": "Skips the hard parts; rose-colored.",
+      "speechHints": [ "easy_fix", "itll_be_fine" ],
+      "bodyHints": [ "bounce" ],
+      "riskTags": [ "blindsided" ]
+    }
+  },
+  "defaultStyleWeights": {
+    "bright": 0.85,
+    "fragile": 1.0,
+    "stubborn": 0.8,
+    "quiet": 0.9,
+    "naive": 0.45
+  },
+  "flavors": {
+    "relational": "Us — we can make it.",
+    "personal": "I can change / get out.",
+    "practical": "This problem has a fix.",
+    "spiritual": "Meaning / larger arc (light touch).",
+    "last_chance": "One more try energy."
+  },
+  "pull": {
+    "belowHomeDamageMult": 0.55,
+    "recoverMult": 1.25,
+    "aboveHomeSettleMult": 1.15
+  },
+  "funding": {
+    "required": true,
+    "budgetPerIntensityPoint": 1.0
+  },
+  "links": [
+    {
+      "trait": "fear",
+      "op": "-",
+      "weight": 0.3,
+      "when": "rise"
+    },
+    {
+      "trait": "anxiety",
+      "op": "-",
+      "weight": 0.25,
+      "when": "rise"
+    },
+    {
+      "trait": "hurt",
+      "op": "-",
+      "weight": 0.2,
+      "when": "rise"
+    },
+    {
+      "trait": "trust",
+      "op": "+",
+      "weight": 0.2,
+      "when": "rise"
+    },
+    {
+      "trait": "patience",
+      "op": "+",
+      "weight": 0.2,
+      "when": "rise"
+    }
+  ],
+  "opposePairs": [
+    {
+      "with": "fear",
+      "policyHints": [ "hope_vs_dread", "one_more_try" ]
+    },
+    {
+      "with": "resentment",
+      "policyHints": [ "bitter_hope", "hope_dies_last" ]
+    }
+  ],
+  "tagTriggers": [
+    {
+      "tag": "bond.reassurance",
+      "direction": "+",
+      "baseWeight": 0.7
+    },
+    {
+      "tag": "bond.plan_together",
+      "direction": "+",
+      "baseWeight": 0.8
+    },
+    {
+      "tag": "repair.amends_done",
+      "direction": "+",
+      "baseWeight": 0.75
+    },
+    {
+      "tag": "bond.soft_return",
+      "direction": "+",
+      "baseWeight": 0.65
+    },
+    {
+      "tag": "threat.loss",
+      "direction": "-",
+      "baseWeight": 0.8
+    },
+    {
+      "tag": "bond.rejection",
+      "direction": "-",
+      "baseWeight": 0.85
+    },
+    {
+      "tag": "conflict.betrayal",
+      "direction": "-",
+      "baseWeight": 0.9
+    },
+    {
+      "tag": "hope.crush",
+      "direction": "-",
+      "baseWeight": 1.0
+    }
+  ],
+  "relationScoped": true,
+  "historyHooks": {
+    "catalog": "Characters/Traits/TraitJson/TraitHistory/hope_patterns.json",
+    "filters": [ "style", "flavor", "sourceBucket" ],
+    "tellFraming": {
+      "prideHigh": "HeroSelf",
+      "prideLow": "VictimSelf",
+      "shameHigh": "VictimSelf",
+      "telephone": true
+    }
+  },
+  "debug": {
+    "showInDash": true,
+    "color": "#7ec8e3",
+    "sortPriority": 25
+  }
+}

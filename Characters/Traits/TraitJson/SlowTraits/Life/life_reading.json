@@ -1,0 +1,381 @@
+{
+  "id": "slow.life.reading",
+  "layer": "slow",
+  "domain": "life",
+  "label": "Reading",
+  "version": 1,
+  "description": "Life taste/identity: books, genres, formats, and the habit of reading—not the same as news scrolling.",
+  "priorIntensity": 5,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [ "book", "read", "novel", "author", "chapter", "library", "kindle", "audiobook", "series", "spoiler" ],
+  "rivalBias": true,
+  "catalog": "Life",
+  "subTraits": [
+    {
+      "id": "slow.life.reading.fiction_general",
+      "label": "General fiction",
+      "kind": "genre",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "story", "lit" ]
+    },
+    {
+      "id": "slow.life.reading.literary",
+      "label": "Literary fiction",
+      "kind": "genre",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "prose", "prize" ]
+    },
+    {
+      "id": "slow.life.reading.romance",
+      "label": "Romance",
+      "kind": "genre",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "heat", "hea", "series" ]
+    },
+    {
+      "id": "slow.life.reading.romance_spicy",
+      "label": "Spicy romance",
+      "kind": "genre",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "heat", "+18", "private" ]
+    },
+    {
+      "id": "slow.life.reading.mystery_thriller",
+      "label": "Mystery / thriller",
+      "kind": "genre",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "twist", "pace" ]
+    },
+    {
+      "id": "slow.life.reading.horror_books",
+      "label": "Horror books",
+      "kind": "genre",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "scare", "night" ]
+    },
+    {
+      "id": "slow.life.reading.fantasy",
+      "label": "Fantasy",
+      "kind": "genre",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "world", "quest", "doorstopper" ]
+    },
+    {
+      "id": "slow.life.reading.sci_fi",
+      "label": "Science fiction",
+      "kind": "genre",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "future", "idea" ]
+    },
+    {
+      "id": "slow.life.reading.historical",
+      "label": "Historical fiction",
+      "kind": "genre",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "past", "research" ]
+    },
+    {
+      "id": "slow.life.reading.nonfiction_history",
+      "label": "History nonfiction",
+      "kind": "genre",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "true", "war", "era" ]
+    },
+    {
+      "id": "slow.life.reading.nonfiction_self",
+      "label": "Self-help / growth",
+      "kind": "genre",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "improve", "habit" ]
+    },
+    {
+      "id": "slow.life.reading.biography",
+      "label": "Biography / memoir",
+      "kind": "genre",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "life", "person" ]
+    },
+    {
+      "id": "slow.life.reading.true_crime",
+      "label": "True crime",
+      "kind": "genre",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "case", "podcast-crossover" ]
+    },
+    {
+      "id": "slow.life.reading.business",
+      "label": "Business / money books",
+      "kind": "genre",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "career", "invest" ]
+    },
+    {
+      "id": "slow.life.reading.faith_books",
+      "label": "Faith / devotionals",
+      "kind": "genre",
+      "defaultRange": [ 20, 95 ],
+      "tags": [ "church", "daily" ]
+    },
+    {
+      "id": "slow.life.reading.poetry",
+      "label": "Poetry",
+      "kind": "genre",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "verse", "short" ]
+    },
+    {
+      "id": "slow.life.reading.graphic_novels",
+      "label": "Graphic novels / comics",
+      "kind": "format",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "art", "panel" ]
+    },
+    {
+      "id": "slow.life.reading.manga",
+      "label": "Manga",
+      "kind": "format",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "series", "volume" ]
+    },
+    {
+      "id": "slow.life.reading.print_paper",
+      "label": "Print paper preference",
+      "kind": "format",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "smell", "shelf" ]
+    },
+    {
+      "id": "slow.life.reading.ebook",
+      "label": "E-book / Kindle",
+      "kind": "format",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "travel", "library" ]
+    },
+    {
+      "id": "slow.life.reading.audiobook",
+      "label": "Audiobooks",
+      "kind": "format",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "commute", "chores", "narrator" ]
+    },
+    {
+      "id": "slow.life.reading.library_user",
+      "label": "Library regular",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "card", "holds", "free" ]
+    },
+    {
+      "id": "slow.life.reading.bookstore_browser",
+      "label": "Bookstore browser",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "indie", "coffee" ]
+    },
+    {
+      "id": "slow.life.reading.tbr_pile",
+      "label": "Huge TBR pile",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "guilt", "stack" ]
+    },
+    {
+      "id": "slow.life.reading.dnfs_freely",
+      "label": "DNFs freely",
+      "kind": "attitude",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "quit", "time" ]
+    },
+    {
+      "id": "slow.life.reading.finishes_always",
+      "label": "Always finishes",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "stubborn", "complete" ]
+    },
+    {
+      "id": "slow.life.reading.series_binger",
+      "label": "Series binger",
+      "kind": "habit",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "next", "sleep" ]
+    },
+    {
+      "id": "slow.life.reading.slow_reader",
+      "label": "Slow careful reader",
+      "kind": "habit",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "savor", "notes" ]
+    },
+    {
+      "id": "slow.life.reading.fast_reader",
+      "label": "Fast high-volume",
+      "kind": "habit",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "count", "year-goal" ]
+    },
+    {
+      "id": "slow.life.reading.annotator",
+      "label": "Annotates / highlights",
+      "kind": "habit",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "pen", "kindle" ]
+    },
+    {
+      "id": "slow.life.reading.re_reader",
+      "label": "Re-reads favorites",
+      "kind": "habit",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "comfort", "again" ]
+    },
+    {
+      "id": "slow.life.reading.spoiler_phobic",
+      "label": "Spoiler phobic",
+      "kind": "attitude",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "avoid", "talk-careful" ]
+    },
+    {
+      "id": "slow.life.reading.spoiler_ok",
+      "label": "Spoilers OK",
+      "kind": "attitude",
+      "defaultRange": [ 15, 80 ],
+      "tags": [ "discuss", "open" ]
+    },
+    {
+      "id": "slow.life.reading.book_club",
+      "label": "Book club member",
+      "kind": "social",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "monthly", "talk" ]
+    },
+    {
+      "id": "slow.life.reading.recommends_hard",
+      "label": "Aggressive recommender",
+      "kind": "social",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "push", "share" ]
+    },
+    {
+      "id": "slow.life.reading.private_taste",
+      "label": "Private about taste",
+      "kind": "social",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "shame", "romance-hide" ]
+    },
+    {
+      "id": "slow.life.reading.bedtime_only",
+      "label": "Bedtime reading ritual",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "sleep", "pages" ]
+    },
+    {
+      "id": "slow.life.reading.commute_read",
+      "label": "Commute reader",
+      "kind": "habit",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "bus", "audio" ]
+    },
+    {
+      "id": "slow.life.reading.multiple_at_once",
+      "label": "Multiple books at once",
+      "kind": "habit",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "mood", "rotate" ]
+    },
+    {
+      "id": "slow.life.reading.one_at_a_time",
+      "label": "One book at a time",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "focus", "pure" ]
+    },
+    {
+      "id": "slow.life.reading.collects_editions",
+      "label": "Collects nice editions",
+      "kind": "habit",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "shelf", "pretty" ]
+    },
+    {
+      "id": "slow.life.reading.paperback_beater",
+      "label": "Beats up paperbacks",
+      "kind": "habit",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "use", "not-precious" ]
+    },
+    {
+      "id": "slow.life.reading.kids_read_aloud",
+      "label": "Reads aloud to kids",
+      "kind": "social",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "parent", "night" ]
+    },
+    {
+      "id": "slow.life.reading.banned_book_aware",
+      "label": "Banned-book aware",
+      "kind": "attitude",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "politics", "library" ]
+    },
+    {
+      "id": "slow.life.reading.classic_canon",
+      "label": "Classics / canon chase",
+      "kind": "genre",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "old", "school" ]
+    },
+    {
+      "id": "slow.life.reading.genre_snob",
+      "label": "Genre snob",
+      "kind": "attitude",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "literary-only", "rival" ]
+    },
+    {
+      "id": "slow.life.reading.anti_snob",
+      "label": "Anti-snob (all reading counts)",
+      "kind": "attitude",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "romance-valid", "fun" ]
+    },
+    {
+      "id": "slow.life.reading.year_goal",
+      "label": "Yearly book count goal",
+      "kind": "habit",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "goodreads", "number" ]
+    },
+    {
+      "id": "slow.life.reading.author_follow",
+      "label": "Follows favorite authors",
+      "kind": "habit",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "release", "preorder" ]
+    },
+    {
+      "id": "slow.life.reading.local_author",
+      "label": "Supports local authors",
+      "kind": "social",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "ohio", "signing" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "reads menus and captions; no book identity",
+    "atOrAbove50": "attach 2-4 (genre + format + habit); can recommend titles",
+    "atOrAbove70": "reading time is protected; TBR and series talk natural",
+    "extreme95": "mood and self-image tied to reading life; snob/anti-snob fights possible"
+  },
+  "notes": "Private spicy romance is common—don't force reveal. Library weight high for Ohio realism."
+}

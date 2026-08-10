@@ -1,0 +1,57 @@
+{
+    "parent":  "slow.sports.baseball",
+    "version":  1,
+    "fillThreshold":  50,
+    "subs":  [
+                 {
+                     "id":  "sub.baseball.team_primary",
+                     "label":  "Primary team",
+                     "required":  true,
+                     "type":  "catalog_ref",
+                     "catalogs":  [
+                                      "mlb_teams"
+                                  ],
+                     "pickCount":  1
+                 },
+                 {
+                     "label":  "Knowledge",
+                     "values":  [
+                                    "casual",
+                                    "fan",
+                                    "diehard"
+                                ],
+                     "default":  "fan",
+                     "id":  "sub.baseball.knowledge",
+                     "type":  "enum"
+                 },
+                 {
+                     "label":  "Rival heat",
+                     "values":  [
+                                    "low",
+                                    "mid",
+                                    "high"
+                                ],
+                     "default":  "mid",
+                     "id":  "sub.baseball.rival_heat",
+                     "type":  "enum"
+                 },
+                 {
+                     "label":  "Watch mode",
+                     "values":  [
+                                    "home",
+                                    "ballpark",
+                                    "radio",
+                                    "highlights"
+                                ],
+                     "default":  "home",
+                     "id":  "sub.baseball.watch_mode",
+                     "type":  "enum"
+                 },
+                 {
+                     "label":  "Stat interest",
+                     "default":  false,
+                     "id":  "sub.baseball.stat_nerd",
+                     "type":  "bool"
+                 }
+             ]
+}

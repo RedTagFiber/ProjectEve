@@ -1,0 +1,334 @@
+{
+  "id": "slow.music.punk",
+  "layer": "slow",
+  "domain": "music",
+  "label": "Punk",
+  "version": 1,
+  "description": "Interest in punk—from 77 and hardcore to pop-punk and post-punk. Attitude, speed, and scene habits.",
+  "priorIntensity": 5,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [ "punk", "garage", "riot", "hardcore", "pit", "diy", "anarchy", "three chords" ],
+  "rivalBias": true,
+  "catalog": "Music/Punk",
+  "subTraits": [
+    {
+      "id": "slow.music.punk.classic_77",
+      "label": "77 / classic punk",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "ramones", "simple" ]
+    },
+    {
+      "id": "slow.music.punk.hardcore",
+      "label": "Hardcore",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "fast", "pit" ]
+    },
+    {
+      "id": "slow.music.punk.post_punk",
+      "label": "Post-punk",
+      "kind": "style",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "art", "angular" ]
+    },
+    {
+      "id": "slow.music.punk.pop_punk",
+      "label": "Pop-punk",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "hooks", "suburban" ]
+    },
+    {
+      "id": "slow.music.punk.ska_punk",
+      "label": "Ska-punk",
+      "kind": "style",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "horns", "up" ]
+    },
+    {
+      "id": "slow.music.punk.emo_edge",
+      "label": "Emo / punk-edge",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "feel", "2000s" ]
+    },
+    {
+      "id": "slow.music.punk.street_punk",
+      "label": "Street punk / oi",
+      "kind": "style",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "boots", "gang" ]
+    },
+    {
+      "id": "slow.music.punk.crust",
+      "label": "Crust / anarcho",
+      "kind": "style",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "political", "raw" ]
+    },
+    {
+      "id": "slow.music.punk.garage_punk",
+      "label": "Garage punk",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "dirty", "ohio" ]
+    },
+
+    {
+      "id": "slow.music.punk.ramones",
+      "label": "Ramones",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "foundation", "simple" ]
+    },
+    {
+      "id": "slow.music.punk.sex_pistols",
+      "label": "Sex Pistols",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "77", "shock" ]
+    },
+    {
+      "id": "slow.music.punk.clash",
+      "label": "The Clash",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "political", "range" ]
+    },
+    {
+      "id": "slow.music.punk.dead_kennedys",
+      "label": "Dead Kennedys",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "satire", "hardcore" ]
+    },
+    {
+      "id": "slow.music.punk.black_flag",
+      "label": "Black Flag",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "hardcore", "diy" ]
+    },
+    {
+      "id": "slow.music.punk.bad_brains",
+      "label": "Bad Brains",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "hardcore", "reggae-edge" ]
+    },
+    {
+      "id": "slow.music.punk.minor_threat",
+      "label": "Minor Threat",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "straight-edge", "dc" ]
+    },
+    {
+      "id": "slow.music.punk.fugazi",
+      "label": "Fugazi",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "diy", "ethics" ]
+    },
+    {
+      "id": "slow.music.punk.misfits",
+      "label": "Misfits",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "horror", "hooks" ]
+    },
+    {
+      "id": "slow.music.punk.social_distortion",
+      "label": "Social Distortion",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "americana-punk" ]
+    },
+    {
+      "id": "slow.music.punk.bad_religion",
+      "label": "Bad Religion",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "smart", "melody" ]
+    },
+    {
+      "id": "slow.music.punk.Offspring",
+      "label": "The Offspring",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "90s", "radio" ]
+    },
+    {
+      "id": "slow.music.punk.green_day",
+      "label": "Green Day",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "pop-punk", "stadium" ]
+    },
+    {
+      "id": "slow.music.punk.blink",
+      "label": "blink-182",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "pop-punk", "fun" ]
+    },
+    {
+      "id": "slow.music.punk.paramore",
+      "label": "Paramore",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "emo-edge", "growth" ]
+    },
+    {
+      "id": "slow.music.punk.my_chem",
+      "label": "My Chemical Romance",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "emo", "theatrical" ]
+    },
+    {
+      "id": "slow.music.punk.rancid",
+      "label": "Rancid",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "ska-edge", "street" ]
+    },
+    {
+      "id": "slow.music.punk.noop",
+      "label": "NOFX",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "skate", "sarcasm" ]
+    },
+    {
+      "id": "slow.music.punk.descendents",
+      "label": "Descendents",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "melody", "influence" ]
+    },
+    {
+      "id": "slow.music.punk.jawbreaker",
+      "label": "Jawbreaker",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "emo-root", "writing" ]
+    },
+    {
+      "id": "slow.music.punk.titty",
+      "label": "Title Fight / modern HC edge",
+      "kind": "artist",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "modern", "emo-hc" ]
+    },
+    {
+      "id": "slow.music.punk.idio_teens",
+      "label": "IDLES / modern post-punk",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "modern", "political" ]
+    },
+    {
+      "id": "slow.music.punk.fontaines",
+      "label": "Fontaines D.C.",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "post-punk", "now" ]
+    },
+    {
+      "id": "slow.music.punk.amyl",
+      "label": "Amyl and the Sniffers",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "garage", "energy" ]
+    },
+
+    {
+      "id": "slow.music.punk.diy_shows",
+      "label": "DIY / basement shows",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "small", "scene" ]
+    },
+    {
+      "id": "slow.music.punk.pit_regular",
+      "label": "Pit regular",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "live", "body" ]
+    },
+    {
+      "id": "slow.music.punk.zine_vest",
+      "label": "Zines / patches / vest",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "identity", "diy" ]
+    },
+    {
+      "id": "slow.music.punk.political",
+      "label": "Political punk listener",
+      "kind": "attitude",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "message", "action" ]
+    },
+    {
+      "id": "slow.music.punk.apolitical_fun",
+      "label": "Apolitical fun punk",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "party", "hooks" ]
+    },
+    {
+      "id": "slow.music.punk.purist_77",
+      "label": "77 purist",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "gate", "old" ]
+    },
+    {
+      "id": "slow.music.punk.anti_pop_punk",
+      "label": "Anti pop-punk",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "gate", "sellout" ]
+    },
+    {
+      "id": "slow.music.punk.drive_fast",
+      "label": "Fast driving soundtrack",
+      "kind": "mood_role",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "car", "anger" ]
+    },
+    {
+      "id": "slow.music.punk.workout",
+      "label": "Workout / release punk",
+      "kind": "mood_role",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "energy", "rage" ]
+    },
+    {
+      "id": "slow.music.punk.ohio_diy",
+      "label": "Ohio DIY / midwest scene",
+      "kind": "local",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "columbus", "cleveland", "basement" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "knows Green Day radio; no scene identity",
+    "atOrAbove50": "attach 2-4; style + bands + diy/live habit",
+    "atOrAbove70": "shows and ethics talk; pop-punk vs hardcore fights",
+    "extreme95": "punk is ethics + soundtrack; DIY calendar real"
+  },
+  "notes": "Strong overlap with rock garage and metalcore—factory should not max all without intent."
+}

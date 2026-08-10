@@ -1,0 +1,16 @@
+﻿{
+  "threshold": 55,
+  "cooldownHours": 20,
+  "votes": {
+    "likeScore": 0.35,
+    "gapDays": 0.25,
+    "loneliness": 0.2,
+    "affection": 0.15,
+    "desire": 0.1,
+    "hope": 0.08,
+    "anxiety": -0.12,
+    "guard": -0.15,
+    "anger": -0.2,
+    "outgoingMid": 0.1
+  }
+}

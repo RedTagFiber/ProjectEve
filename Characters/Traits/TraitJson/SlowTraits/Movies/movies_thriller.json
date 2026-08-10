@@ -1,0 +1,395 @@
+{
+  "id": "slow.movies.thriller",
+  "layer": "slow",
+  "domain": "movies",
+  "label": "Thriller",
+  "version": 1,
+  "description": "Prefers thrillers—tension, twists, cat-and-mouse, and controlled dread without full horror commitment.",
+  "priorIntensity": 5,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [ "thriller", "twist", "suspense", "tension", "who did it", "cat and mouse", "edge of seat" ],
+  "rivalBias": true,
+  "catalog": "Movies/Titles/Thriller",
+  "subTraits": [
+    {
+      "id": "slow.movies.thriller.psychological",
+      "label": "Psychological thriller",
+      "kind": "subgenre",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "mind", "unreliable" ]
+    },
+    {
+      "id": "slow.movies.thriller.crime",
+      "label": "Crime thriller",
+      "kind": "subgenre",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "heist", "chase" ]
+    },
+    {
+      "id": "slow.movies.thriller.legal",
+      "label": "Legal / courtroom thriller",
+      "kind": "subgenre",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "case", "truth" ]
+    },
+    {
+      "id": "slow.movies.thriller.political",
+      "label": "Political thriller",
+      "kind": "subgenre",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "power", "conspiracy" ]
+    },
+    {
+      "id": "slow.movies.thriller.spy",
+      "label": "Spy thriller",
+      "kind": "subgenre",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "tradecraft", "trust" ]
+    },
+    {
+      "id": "slow.movies.thriller.tech",
+      "label": "Tech / cyber thriller",
+      "kind": "subgenre",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "hack", "surveil" ]
+    },
+    {
+      "id": "slow.movies.thriller.domestic",
+      "label": "Domestic thriller",
+      "kind": "subgenre",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "home", "marriage" ]
+    },
+    {
+      "id": "slow.movies.thriller.survival",
+      "label": "Survival thriller",
+      "kind": "subgenre",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "escape", "alone" ]
+    },
+    {
+      "id": "slow.movies.thriller.noir",
+      "label": "Noir / neo-noir",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "night", "moral" ]
+    },
+    {
+      "id": "slow.movies.thriller.conspiracy",
+      "label": "Conspiracy web",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "board", "pins" ]
+    },
+    {
+      "id": "slow.movies.thriller.cat_mouse",
+      "label": "Cat-and-mouse",
+      "kind": "structure",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "hunter", "hunted" ]
+    },
+    {
+      "id": "slow.movies.thriller.whodunit",
+      "label": "Whodunit engine",
+      "kind": "structure",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "suspects", "reveal" ]
+    },
+    {
+      "id": "slow.movies.thriller.twist_ending",
+      "label": "Twist ending hunger",
+      "kind": "structure",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "shyamalan-adj", "shock" ]
+    },
+    {
+      "id": "slow.movies.thriller.twist_fatigue",
+      "label": "Twist fatigue",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "enough", "honest" ]
+    },
+    {
+      "id": "slow.movies.thriller.slow_burn",
+      "label": "Slow-burn tension",
+      "kind": "pace",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "dread", "wait" ]
+    },
+    {
+      "id": "slow.movies.thriller.propulsive",
+      "label": "Propulsive / nonstop",
+      "kind": "pace",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "run", "clock" ]
+    },
+    {
+      "id": "slow.movies.thriller.contained",
+      "label": "Contained location",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "one-place", "pressure" ]
+    },
+    {
+      "id": "slow.movies.thriller.sprawling",
+      "label": "Sprawling multi-thread",
+      "kind": "style",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "city", "web" ]
+    },
+    {
+      "id": "slow.movies.thriller.70s_paranoia",
+      "label": "70s paranoia era",
+      "kind": "era",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "classic", "trust-no" ]
+    },
+    {
+      "id": "slow.movies.thriller.90s",
+      "label": "90s thriller era",
+      "kind": "era",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "vhs", "erotic-adj" ]
+    },
+    {
+      "id": "slow.movies.thriller.modern",
+      "label": "Modern thriller",
+      "kind": "era",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "phone", "now" ]
+    },
+    {
+      "id": "slow.movies.thriller.erotic_thriller",
+      "label": "Erotic thriller",
+      "kind": "subgenre",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "heat", "danger", "+18" ]
+    },
+    {
+      "id": "slow.movies.thriller.no_erotic",
+      "label": "No erotic thriller",
+      "kind": "tolerance",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "skip", "boundary" ]
+    },
+    {
+      "id": "slow.movies.thriller.violence_implied",
+      "label": "Implied violence preferred",
+      "kind": "tolerance",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "suggest", "tension" ]
+    },
+    {
+      "id": "slow.movies.thriller.violence_graphic",
+      "label": "Graphic OK if earned",
+      "kind": "tolerance",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "cost", "real" ]
+    },
+    {
+      "id": "slow.movies.thriller.spoiler_phobic",
+      "label": "Spoiler phobic",
+      "kind": "habit",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "silence", "first-watch" ]
+    },
+    {
+      "id": "slow.movies.thriller.rewatch_craft",
+      "label": "Rewatch for craft / tells",
+      "kind": "viewing",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "clues", "second" ]
+    },
+    {
+      "id": "slow.movies.thriller.no_rewatch",
+      "label": "One-and-done (twist spent)",
+      "kind": "viewing",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "once", "done" ]
+    },
+    {
+      "id": "slow.movies.thriller.theater_tension",
+      "label": "Theater for tension",
+      "kind": "viewing",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "phones-down", "dark" ]
+    },
+    {
+      "id": "slow.movies.thriller.home_pause",
+      "label": "Home so can pause / process",
+      "kind": "viewing",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "control", "talk" ]
+    },
+    {
+      "id": "slow.movies.thriller.date_tension",
+      "label": "Date-night tension pick",
+      "kind": "social",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "edge", "talk-after" ]
+    },
+    {
+      "id": "slow.movies.thriller.solo_puzzle",
+      "label": "Solo puzzle nights",
+      "kind": "social",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "alone", "think" ]
+    },
+    {
+      "id": "slow.movies.thriller.group_guess",
+      "label": "Group guess-along",
+      "kind": "social",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "pause", "theory" ]
+    },
+    {
+      "id": "slow.movies.thriller.unreliable_narrator",
+      "label": "Unreliable narrator love",
+      "kind": "trope",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "mind", "doubt" ]
+    },
+    {
+      "id": "slow.movies.thriller.innocent_accused",
+      "label": "Innocent accused",
+      "kind": "trope",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "race", "clear-name" ]
+    },
+    {
+      "id": "slow.movies.thriller.clock",
+      "label": "Race-against-clock",
+      "kind": "trope",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "timer", "urgency" ]
+    },
+    {
+      "id": "slow.movies.thriller.identity",
+      "label": "Identity / amnesia thrillers",
+      "kind": "trope",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "who", "memory" ]
+    },
+    {
+      "id": "slow.movies.thriller.based_true",
+      "label": "Based-on-true pull",
+      "kind": "source",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "real", "unease" ]
+    },
+    {
+      "id": "slow.movies.thriller.pure_fiction",
+      "label": "Pure fiction preferred",
+      "kind": "source",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "invented" ]
+    },
+    {
+      "id": "slow.movies.thriller.director_hitchcock_adj",
+      "label": "Hitchcock-adjacent taste",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "suspense", "classic" ]
+    },
+    {
+      "id": "slow.movies.thriller.fincher_adj",
+      "label": "Fincher-adjacent precision",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "cold", "craft" ]
+    },
+    {
+      "id": "slow.movies.thriller.score_tension",
+      "label": "Score builds tension",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "music", "pulse" ]
+    },
+    {
+      "id": "slow.movies.thriller.silence_weapon",
+      "label": "Silence as weapon",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "quiet", "dread" ]
+    },
+    {
+      "id": "slow.movies.thriller.ending_ambiguous",
+      "label": "Ambiguous endings OK",
+      "kind": "ending",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "talk", "open" ]
+    },
+    {
+      "id": "slow.movies.thriller.ending_closed",
+      "label": "Needs closed ending",
+      "kind": "ending",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "answers", "safe" ]
+    },
+    {
+      "id": "slow.movies.thriller.smart_assume",
+      "label": "Assumes audience is smart",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "no-handhold" ]
+    },
+    {
+      "id": "slow.movies.thriller.hate_dumb",
+      "label": "Hates dumb protagonist choices",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "logic", "yell" ]
+    },
+    {
+      "id": "slow.movies.thriller.foreign",
+      "label": "Foreign thrillers",
+      "kind": "scope",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "subs", "new" ]
+    },
+    {
+      "id": "slow.movies.thriller.short_tight",
+      "label": "Tight under 2 hours",
+      "kind": "structure",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "pace", "no-bloat" ]
+    },
+    {
+      "id": "slow.movies.thriller.long_ok",
+      "label": "Long if tension holds",
+      "kind": "structure",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "epic", "grip" ]
+    },
+    {
+      "id": "slow.movies.thriller.horror_line",
+      "label": "OK near horror line",
+      "kind": "cross",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "dread", "scare" ]
+    },
+    {
+      "id": "slow.movies.thriller.not_horror",
+      "label": "Must not become horror",
+      "kind": "cross",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "boundary", "tone" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "enjoys tension if others pick; no thriller identity",
+    "atOrAbove50": "attach 2-4; twist vs slow-burn preference shows",
+    "atOrAbove70": "spoiler discipline real; rewatch for craft common",
+    "extreme95": "lives for the puzzle; dumb-character choices ruin nights"
+  },
+  "notes": "Spoiler-phobic should affect how NPCs talk after a shared watch. Domestic thriller pairs with relationship drama."
+}

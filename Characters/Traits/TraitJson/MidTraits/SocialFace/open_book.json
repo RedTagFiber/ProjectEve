@@ -1,0 +1,70 @@
+{
+    "id":  "mid.open_book",
+    "layer":  "mid",
+    "label":  "Open book",
+    "version":  1,
+    "cluster":  "socialface",
+    "description":  "Low filter; shares early; little performance of mystery.",
+    "priorIntensity":  5,
+    "moveSpeed":  "slow",
+    "bands":  {
+                  "off":  "0-29",
+                  "low":  "30-49",
+                  "mid":  "50-69",
+                  "high":  "70-84",
+                  "break":  "85-94",
+                  "extreme":  "95-100"
+              },
+    "styles":  [
+                   {
+                       "id":  "mid.open_book.early_share",
+                       "label":  "Early share"
+                   },
+                   {
+                       "id":  "mid.open_book.low_edit",
+                       "label":  "Low edit"
+                   },
+                   {
+                       "id":  "mid.open_book.invite_in",
+                       "label":  "Invite in"
+                   }
+               ],
+    "links":  {
+                  "boostedBy":  [
+                                    "openness",
+                                    "trust",
+                                    "playfulness"
+                                ],
+                  "drainedBy":  [
+                                    "shame",
+                                    "guard",
+                                    "hurt"
+                                ],
+                  "opposes":  [
+                                  "mid.guarded"
+                              ]
+              },
+    "tagTriggers":  [
+                        {
+                            "tag":  "mid.open_book.test",
+                            "meaning":  "Situation tests this character trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.open_book.confirm",
+                            "meaning":  "Behavior confirms this trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.open_book.violate",
+                            "meaning":  "Acts against this trait under pressure",
+                            "deltaHint":  -2
+                        }
+                    ],
+    "relationScoped":  true,
+    "historyHooks":  {
+                         "patternFile":  "open_book_patterns.json",
+                         "fundingBudget":  2
+                     },
+    "notes":  "Can overshare under Fast openness high."
+}

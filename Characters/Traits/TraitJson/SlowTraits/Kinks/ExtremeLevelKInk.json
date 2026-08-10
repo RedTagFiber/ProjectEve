@@ -1,0 +1,1014 @@
+{
+  "notes": {
+    "level": 4,
+    "levelName": "extreme",
+    "meaning": "Edge of their map. Very rare. Identity-adjacent. Dialogue almost never dumps cold. Thought may know; reveal needs peak trust + private scene + consent gate.",
+    "revealTrust": "typically 90–98",
+    "cooldownBand": "minDays ~7–21, maxDays ~300–365; value 99 still returns sooner than value 40",
+    "population": "aim ~1–2% of +18 actives with any level-4 max",
+    "contentRating": "+18",
+    "bounds": "Consensual adults only. No minors. No real non-consent-as-preference. No illegal acts. Hard limits respected; botch = major trust/hurt/anger damage."
+  },
+  "kinks": [
+    {
+      "id": "kink.full_power_exchange",
+      "name": "Full Power Exchange",
+      "level": 4,
+      "description": "Lead/follow frames more than single scenes; trust is load-bearing.",
+      "defaultValueRange": [ 50, 95 ],
+      "revealTrust": 92,
+      "limitDefault": "hard",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 7,
+        "maxDays": 365
+      },
+      "tags": [ "power-exchange", "identity-adjacent" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "trust+", "fear+", "tension+" ],
+        "ifRejected": [ "hurt+", "anger+", "trust-", "guard+" ]
+      },
+      "midBias": [ "dominant", "submissive", "identity-orbit" ]
+    },
+    {
+      "id": "kink.fear_play_consensual",
+      "name": "Consensual Fear Play",
+      "level": 4,
+      "description": "Fear/intensity theater with consent and safety—never real harm.",
+      "defaultValueRange": [ 40, 90 ],
+      "revealTrust": 94,
+      "limitDefault": "hard",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 10,
+        "maxDays": 365
+      },
+      "tags": [ "fear-play", "intensity", "trust-heavy" ],
+      "fastEffects": {
+        "onTheme": [ "fear+", "desire+", "anxiety+", "trust+" ],
+        "ifRejected": [ "fear+", "anger+", "trust-", "guard+" ]
+      },
+      "midBias": [ "brave", "intense", "trustworthy-partner-need" ]
+    },
+    {
+      "id": "kink.pain_center",
+      "name": "Pain Center",
+      "level": 4,
+      "description": "Pain as a primary arousal path; strict bounds and aftercare.",
+      "defaultValueRange": [ 45, 95 ],
+      "revealTrust": 93,
+      "limitDefault": "hard",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 7,
+        "maxDays": 330
+      },
+      "tags": [ "pain", "center-path" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "tension+", "anxiety+" ],
+        "ifRejected": [ "hurt+", "trust-", "resentment+" ]
+      },
+      "midBias": [ "enduring", "intense", "low-mismatch-tolerance" ]
+    },
+    {
+      "id": "kink.taboo_role_adult",
+      "name": "Adult Taboo Role",
+      "level": 4,
+      "description": "Strong taboo role fantasy between consenting adults; compartmentalized.",
+      "defaultValueRange": [ 35, 85 ],
+      "revealTrust": 95,
+      "limitDefault": "hard",
+      "styleOptions": [ "only-private", "shy" ],
+      "cooldown": {
+        "minDays": 14,
+        "maxDays": 365
+      },
+      "tags": [ "role", "taboo-fantasy", "compartmentalized" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "shame+", "guard+", "tension+" ],
+        "ifRejected": [ "shame+", "guard+", "hurt+", "trust-" ]
+      },
+      "midBias": [ "secretive", "compartmentalizing", "intense" ]
+    },
+    {
+      "id": "kink.total_protocol",
+      "name": "Total Protocol",
+      "level": 4,
+      "description": "Near-constant private-life protocol; rare and heavy.",
+      "defaultValueRange": [ 50, 95 ],
+      "revealTrust": 96,
+      "limitDefault": "hard",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 10,
+        "maxDays": 365
+      },
+      "tags": [ "protocol", "total", "structure" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "pride+", "shame+", "guard+", "trust+" ],
+        "ifRejected": [ "anger+", "hurt+", "trust-", "resentment+" ]
+      },
+      "midBias": [ "ritualistic", "regimental", "identity-orbit" ]
+    },
+    {
+      "id": "kink.ownership_identity",
+      "name": "Ownership Identity",
+      "level": 4,
+      "description": "Ownership frame as core intimate identity—not a one-scene bit.",
+      "defaultValueRange": [ 50, 95 ],
+      "revealTrust": 95,
+      "limitDefault": "hard",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 7,
+        "maxDays": 350
+      },
+      "tags": [ "ownership", "identity", "claim" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "affection+", "jealousy+", "guard+", "trust+" ],
+        "ifRejected": [ "hurt+", "anger+", "trust-", "shame+" ]
+      },
+      "midBias": [ "loyal", "possessive", "devoted", "identity-orbit" ]
+    },
+    {
+      "id": "kink.24_7_flavor",
+      "name": "24/7 Flavor Dynamic",
+      "level": 4,
+      "description": "Dynamic runs under daily life, not only bedroom scenes.",
+      "defaultValueRange": [ 50, 95 ],
+      "revealTrust": 96,
+      "limitDefault": "hard",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 10,
+        "maxDays": 365
+      },
+      "tags": [ "24-7", "lifestyle-adjacent", "protocol" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "trust+", "tension+", "guard+" ],
+        "ifRejected": [ "hurt+", "anger+", "trust-", "resentment+" ]
+      },
+      "midBias": [ "regimental", "devoted", "identity-orbit" ]
+    },
+    {
+      "id": "kink.consensual_nonconsent_scene",
+      "name": "CNC Scene Frame",
+      "level": 4,
+      "description": "Pre-negotiated resistance play between adults; safeties required; not real assault preference.",
+      "defaultValueRange": [ 35, 85 ],
+      "revealTrust": 97,
+      "limitDefault": "hard",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 14,
+        "maxDays": 365
+      },
+      "tags": [ "cnc", "negotiated", "trust-heavy" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "fear+", "tension+", "trust+" ],
+        "ifRejected": [ "fear+", "hurt+", "trust-", "anger+", "guard+" ]
+      },
+      "midBias": [ "intense", "edge-seeking", "trustworthy-partner-need" ]
+    },
+    {
+      "id": "kink.heavy_bondage",
+      "name": "Heavy Bondage",
+      "level": 4,
+      "description": "Extensive restraint as center of scene; mobility highly limited by agreement.",
+      "defaultValueRange": [ 40, 90 ],
+      "revealTrust": 92,
+      "limitDefault": "hard",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 7,
+        "maxDays": 320
+      },
+      "tags": [ "bondage", "restraint-heavy" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "anxiety+", "tension+", "trust+" ],
+        "ifRejected": [ "fear+", "guard+", "trust-" ]
+      },
+      "midBias": [ "submissive", "enduring", "trusting" ]
+    },
+    {
+      "id": "kink.mummification_play",
+      "name": "Full Wrap Play",
+      "level": 4,
+      "description": "Full-body wrap/restriction play with breathing and safety discipline.",
+      "defaultValueRange": [ 30, 80 ],
+      "revealTrust": 95,
+      "limitDefault": "hard",
+      "styleOptions": [ "only-private", "direct" ],
+      "cooldown": {
+        "minDays": 14,
+        "maxDays": 365
+      },
+      "tags": [ "restriction", "sensory", "trust-heavy" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "anxiety+", "fear+", "trust+" ],
+        "ifRejected": [ "fear+", "trust-", "guard+" ]
+      },
+      "midBias": [ "enduring", "edge-seeking", "careful-partner-need" ]
+    },
+    {
+      "id": "kink.sensory_deprivation_full",
+      "name": "Full Sensory Deprivation",
+      "level": 4,
+      "description": "Sight/sound/touch cut to extremes inside timed safe scenes.",
+      "defaultValueRange": [ 35, 85 ],
+      "revealTrust": 94,
+      "limitDefault": "hard",
+      "styleOptions": [ "only-private", "direct" ],
+      "cooldown": {
+        "minDays": 10,
+        "maxDays": 340
+      },
+      "tags": [ "sensory-deprivation", "intensity" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "anxiety+", "fear+", "trust+" ],
+        "ifRejected": [ "fear+", "guard+", "trust-" ]
+      },
+      "midBias": [ "trusting", "intense", "anxious" ]
+    },
+    {
+      "id": "kink.impact_heavy",
+      "name": "Heavy Impact",
+      "level": 4,
+      "description": "High-intensity impact as primary path; marks and recovery planned.",
+      "defaultValueRange": [ 45, 95 ],
+      "revealTrust": 93,
+      "limitDefault": "hard",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 7,
+        "maxDays": 330
+      },
+      "tags": [ "impact", "heavy", "pain" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "tension+", "anxiety+", "pride+" ],
+        "ifRejected": [ "hurt+", "trust-", "resentment+" ]
+      },
+      "midBias": [ "enduring", "intense", "attuned-partner-need" ]
+    },
+    {
+      "id": "kink.whip_focus",
+      "name": "Whip Focus",
+      "level": 4,
+      "description": "Whip/single-tail style impact as preferred heavy tool path.",
+      "defaultValueRange": [ 35, 85 ],
+      "revealTrust": 94,
+      "limitDefault": "hard",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 10,
+        "maxDays": 350
+      },
+      "tags": [ "whip", "impact", "skill-partner" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "fear+", "tension+", "trust+" ],
+        "ifRejected": [ "fear+", "hurt+", "trust-" ]
+      },
+      "midBias": [ "enduring", "edge-seeking", "skill-respect" ]
+    },
+    {
+      "id": "kink.cane_focus",
+      "name": "Cane Focus",
+      "level": 4,
+      "description": "Caning as formal heavy discipline/impact preference.",
+      "defaultValueRange": [ 35, 85 ],
+      "revealTrust": 93,
+      "limitDefault": "hard",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 10,
+        "maxDays": 340
+      },
+      "tags": [ "cane", "discipline", "impact" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "tension+", "anxiety+", "shame+" ],
+        "ifRejected": [ "hurt+", "anger+", "trust-" ]
+      },
+      "midBias": [ "regimental", "enduring", "disciplined" ]
+    },
+    {
+      "id": "kink.breath_edge_play",
+      "name": "Breath Edge Play",
+      "level": 4,
+      "description": "Breath-control edge play only with high skill, consent, and hard stops—high risk catalog flag.",
+      "defaultValueRange": [ 25, 70 ],
+      "revealTrust": 98,
+      "limitDefault": "hard",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 21,
+        "maxDays": 365
+      },
+      "tags": [ "breath", "edge", "extreme-risk" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "fear+", "anxiety+", "trust+" ],
+        "ifRejected": [ "fear+", "anger+", "trust-", "guard+" ]
+      },
+      "midBias": [ "edge-seeking", "trustworthy-partner-need", "careful" ]
+    },
+    {
+      "id": "kink.chastity_long",
+      "name": "Long Chastity",
+      "level": 4,
+      "description": "Extended chastity as identity-level control, not a weekend bit.",
+      "defaultValueRange": [ 40, 90 ],
+      "revealTrust": 94,
+      "limitDefault": "hard",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 7,
+        "maxDays": 330
+      },
+      "tags": [ "chastity", "long", "control" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "tension+", "frustration", "trust+" ],
+        "ifRejected": [ "anger+", "hurt+", "trust-", "resentment+" ]
+      },
+      "midBias": [ "disciplined", "enduring", "controlling" ]
+    },
+    {
+      "id": "kink.keyholder_identity",
+      "name": "Keyholder Identity",
+      "level": 4,
+      "description": "Keyholder role as core identity for one or both partners.",
+      "defaultValueRange": [ 45, 95 ],
+      "revealTrust": 93,
+      "limitDefault": "hard",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 7,
+        "maxDays": 320
+      },
+      "tags": [ "keyholder", "chastity", "identity" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "pride+", "control", "trust+" ],
+        "ifRejected": [ "anger+", "pride+", "hurt+", "trust-" ]
+      },
+      "midBias": [ "controlling", "responsible", "identity-orbit" ]
+    },
+    {
+      "id": "kink.slave_identity_consensual",
+      "name": "Consensual Slave Identity",
+      "level": 4,
+      "description": "Slave/owner identity language and structure between adults by consent.",
+      "defaultValueRange": [ 45, 95 ],
+      "revealTrust": 96,
+      "limitDefault": "hard",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 10,
+        "maxDays": 365
+      },
+      "tags": [ "slave-identity", "ownership", "protocol" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "shame+", "pride+", "trust+", "guard+" ],
+        "ifRejected": [ "hurt+", "shame+", "anger+", "trust-" ]
+      },
+      "midBias": [ "devoted", "submissive", "identity-orbit" ]
+    },
+    {
+      "id": "kink.master_identity_consensual",
+      "name": "Consensual Master Identity",
+      "level": 4,
+      "description": "Master/lead identity as core intimate self, not a costume.",
+      "defaultValueRange": [ 45, 95 ],
+      "revealTrust": 95,
+      "limitDefault": "hard",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 10,
+        "maxDays": 365
+      },
+      "tags": [ "master-identity", "dominance", "protocol" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "pride+", "control", "trust+" ],
+        "ifRejected": [ "anger+", "pride+", "hurt+", "resentment+" ]
+      },
+      "midBias": [ "dominant", "responsible", "identity-orbit" ]
+    },
+    {
+      "id": "kink.objectification_full",
+      "name": "Full Objectification Headspace",
+      "level": 4,
+      "description": "Extended object/furniture headspace with aftercare and consent.",
+      "defaultValueRange": [ 35, 85 ],
+      "revealTrust": 96,
+      "limitDefault": "hard",
+      "styleOptions": [ "only-private", "direct" ],
+      "cooldown": {
+        "minDays": 14,
+        "maxDays": 365
+      },
+      "tags": [ "objectification", "headspace" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "shame+", "dissociation?", "trust+" ],
+        "ifRejected": [ "hurt+", "shame+", "trust-", "guard+" ]
+      },
+      "midBias": [ "submissive", "compartmentalizing", "enduring" ]
+    },
+    {
+      "id": "kink.pet_identity",
+      "name": "Pet Identity",
+      "level": 4,
+      "description": "Pet headspace as recurring identity mode, not one gag scene.",
+      "defaultValueRange": [ 35, 85 ],
+      "revealTrust": 94,
+      "limitDefault": "hard",
+      "styleOptions": [ "shy", "only-private", "direct" ],
+      "cooldown": {
+        "minDays": 10,
+        "maxDays": 340
+      },
+      "tags": [ "pet-play", "identity", "headspace" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "shame+", "playfulness+", "guard+" ],
+        "ifRejected": [ "shame+", "hurt+", "guard+" ]
+      },
+      "midBias": [ "imaginative", "secretive", "devoted", "identity-orbit" ]
+    },
+    {
+      "id": "kink.pony_play",
+      "name": "Pony Play",
+      "level": 4,
+      "description": "Pony-role gear/headspace as serious preference path.",
+      "defaultValueRange": [ 30, 80 ],
+      "revealTrust": 95,
+      "limitDefault": "hard",
+      "styleOptions": [ "only-private", "direct" ],
+      "cooldown": {
+        "minDays": 14,
+        "maxDays": 365
+      },
+      "tags": [ "pony-play", "role", "gear" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "shame+", "pride+", "tension+" ],
+        "ifRejected": [ "shame+", "guard+", "hurt+" ]
+      },
+      "midBias": [ "secretive", "disciplined", "identity-orbit" ]
+    },
+    {
+      "id": "kink.service_total",
+      "name": "Total Service Orientation",
+      "level": 4,
+      "description": "Life-shaped service orientation toward partner in private dynamic.",
+      "defaultValueRange": [ 50, 95 ],
+      "revealTrust": 93,
+      "limitDefault": "hard",
+      "styleOptions": [ "direct", "shy", "only-private" ],
+      "cooldown": {
+        "minDays": 5,
+        "maxDays": 300
+      },
+      "tags": [ "service", "total", "devotion" ],
+      "fastEffects": {
+        "onTheme": [ "affection+", "desire+", "pride+", "shame+" ],
+        "ifRejected": [ "hurt+", "shame+", "resentment+", "trust-" ]
+      },
+      "midBias": [ "self-sacrificing", "devoted", "conscientious", "identity-orbit" ]
+    },
+    {
+      "id": "kink.financial_protocol_erotic",
+      "name": "Erotic Money Protocol",
+      "level": 4,
+      "description": "Money rules as erotic power structure between adults—not fraud/coercion crime.",
+      "defaultValueRange": [ 30, 80 ],
+      "revealTrust": 97,
+      "limitDefault": "hard",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 14,
+        "maxDays": 365
+      },
+      "tags": [ "financial", "protocol", "power" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "anxiety+", "pride+", "resentment?" ],
+        "ifRejected": [ "anger+", "hurt+", "trust-", "pride+" ]
+      },
+      "midBias": [ "controlling", "anxious", "status-sensitive" ]
+    },
+    {
+      "id": "kink.protocol_social_stealth",
+      "name": "Stealth Social Protocol",
+      "level": 4,
+      "description": "Hidden protocols running under normal social life.",
+      "defaultValueRange": [ 40, 90 ],
+      "revealTrust": 95,
+      "limitDefault": "hard",
+      "styleOptions": [ "only-private", "direct" ],
+      "cooldown": {
+        "minDays": 7,
+        "maxDays": 330
+      },
+      "tags": [ "protocol", "social-stealth", "secrecy" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "anxiety+", "pride+", "guard+" ],
+        "ifRejected": [ "shame+", "anger+", "guard+", "trust-" ]
+      },
+      "midBias": [ "secretive", "controlled", "regimental" ]
+    },
+    {
+      "id": "kink.humiliation_deep",
+      "name": "Deep Humiliation Play",
+      "level": 4,
+      "description": "Deep humiliation as charge with strict aftercare and consent.",
+      "defaultValueRange": [ 30, 80 ],
+      "revealTrust": 96,
+      "limitDefault": "hard",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 14,
+        "maxDays": 365
+      },
+      "tags": [ "humiliation", "psychological", "edge" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "shame+", "hurt?", "tension+" ],
+        "ifRejected": [ "hurt+", "shame+", "anger+", "trust-" ]
+      },
+      "midBias": [ "intense", "resilient", "sexual-shame-risk" ]
+    },
+    {
+      "id": "kink.exposure_private_extreme",
+      "name": "Extreme Private Exposure",
+      "level": 4,
+      "description": "Extreme exposure tasks inside private controlled space—not non-consent public assault.",
+      "defaultValueRange": [ 30, 80 ],
+      "revealTrust": 95,
+      "limitDefault": "hard",
+      "styleOptions": [ "only-private", "direct" ],
+      "cooldown": {
+        "minDays": 10,
+        "maxDays": 350
+      },
+      "tags": [ "exposure", "private", "edge" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "shame+", "anxiety+", "tension+" ],
+        "ifRejected": [ "shame+", "guard+", "trust-" ]
+      },
+      "midBias": [ "edge-seeking", "secretive", "anxious" ]
+    },
+    {
+      "id": "kink.interrogation_play",
+      "name": "Interrogation Play",
+      "level": 4,
+      "description": "Interrogation theater with pressure and confession structure.",
+      "defaultValueRange": [ 30, 80 ],
+      "revealTrust": 94,
+      "limitDefault": "hard",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 10,
+        "maxDays": 340
+      },
+      "tags": [ "interrogation", "psychological", "role" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "fear+", "shame+", "tension+" ],
+        "ifRejected": [ "fear+", "anger+", "trust-" ]
+      },
+      "midBias": [ "intense", "imaginative", "edge-seeking" ]
+    },
+    {
+      "id": "kink.predator_prey_consensual",
+      "name": "Consensual Predator Prey",
+      "level": 4,
+      "description": "Hunt/prey theater between adults; negotiated, bounded, safe.",
+      "defaultValueRange": [ 35, 85 ],
+      "revealTrust": 95,
+      "limitDefault": "hard",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 14,
+        "maxDays": 365
+      },
+      "tags": [ "predator-prey", "theater", "fear-adjacent" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "fear+", "tension+", "trust+" ],
+        "ifRejected": [ "fear+", "hurt+", "trust-", "guard+" ]
+      },
+      "midBias": [ "adventurous", "intense", "brave" ]
+    },
+    {
+      "id": "kink.knife_play_edge",
+      "name": "Edge Knife Play",
+      "level": 4,
+      "description": "Blade-edge sensation play with extreme caution flags; fantasy-capable without real cut.",
+      "defaultValueRange": [ 25, 70 ],
+      "revealTrust": 98,
+      "limitDefault": "hard",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 21,
+        "maxDays": 365
+      },
+      "tags": [ "knife-play", "edge", "extreme-risk" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "fear+", "anxiety+", "trust+" ],
+        "ifRejected": [ "fear+", "anger+", "trust-", "guard+" ]
+      },
+      "midBias": [ "edge-seeking", "careful-partner-need", "intense" ]
+    },
+    {
+      "id": "kink.blood_play_consent",
+      "name": "Consensual Blood Play",
+      "level": 4,
+      "description": "Blood-aware play only with explicit consent, health awareness, hard limits.",
+      "defaultValueRange": [ 20, 65 ],
+      "revealTrust": 98,
+      "limitDefault": "hard",
+      "styleOptions": [ "only-private", "direct" ],
+      "cooldown": {
+        "minDays": 21,
+        "maxDays": 365
+      },
+      "tags": [ "blood-play", "extreme-risk", "health-flag" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "fear+", "anxiety+", "shame+" ],
+        "ifRejected": [ "fear+", "disgust?", "trust-", "guard+" ]
+      },
+      "midBias": [ "edge-seeking", "secretive", "careful-partner-need" ]
+    },
+    {
+      "id": "kink.scarification_fantasy",
+      "name": "Scarification Fantasy",
+      "level": 4,
+      "description": "Fantasy of intentional lasting marks as claim; may remain fantasy only.",
+      "defaultValueRange": [ 25, 70 ],
+      "revealTrust": 97,
+      "limitDefault": "hard",
+      "styleOptions": [ "shy", "only-private" ],
+      "cooldown": {
+        "minDays": 30,
+        "maxDays": 365
+      },
+      "tags": [ "scar", "claim", "fantasy-heavy" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "pride+", "anxiety+", "jealousy+" ],
+        "ifRejected": [ "hurt+", "shame+", "guard+" ]
+      },
+      "midBias": [ "possessive", "intense", "compartmentalizing" ]
+    },
+    {
+      "id": "kink.branding_fantasy",
+      "name": "Branding Fantasy",
+      "level": 4,
+      "description": "Brand/claim fantasy; often stays fantasy; extreme identity charge.",
+      "defaultValueRange": [ 25, 70 ],
+      "revealTrust": 97,
+      "limitDefault": "hard",
+      "styleOptions": [ "shy", "only-private" ],
+      "cooldown": {
+        "minDays": 30,
+        "maxDays": 365
+      },
+      "tags": [ "brand", "ownership", "fantasy-heavy" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "pride+", "fear+", "shame+" ],
+        "ifRejected": [ "hurt+", "shame+", "trust-" ]
+      },
+      "midBias": [ "possessive", "identity-orbit", "secretive" ]
+    },
+    {
+      "id": "kink.collar_permanent_meaning",
+      "name": "Permanent Collar Meaning",
+      "level": 4,
+      "description": "Collar treated as permanent commitment symbol inside the dynamic.",
+      "defaultValueRange": [ 50, 95 ],
+      "revealTrust": 94,
+      "limitDefault": "hard",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 14,
+        "maxDays": 365
+      },
+      "tags": [ "collar", "permanent-meaning", "commitment" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "affection+", "pride+", "guard+", "trust+" ],
+        "ifRejected": [ "hurt+", "shame+", "trust-", "anger+" ]
+      },
+      "midBias": [ "loyal", "devoted", "ritualistic", "identity-orbit" ]
+    },
+    {
+      "id": "kink.wedding_protocol_overlap",
+      "name": "Wedding Protocol Overlap",
+      "level": 4,
+      "description": "Marriage and power protocol overlap as one structure.",
+      "defaultValueRange": [ 40, 90 ],
+      "revealTrust": 95,
+      "limitDefault": "hard",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 14,
+        "maxDays": 365
+      },
+      "tags": [ "marriage", "protocol", "ownership" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "affection+", "pride+", "anxiety+" ],
+        "ifRejected": [ "hurt+", "resentment+", "trust-" ]
+      },
+      "midBias": [ "loyal", "regimental", "identity-orbit" ]
+    },
+    {
+      "id": "kink.multi_day_scene",
+      "name": "Multi-Day Scene",
+      "level": 4,
+      "description": "Scenes that span days with ongoing roles and check-ins.",
+      "defaultValueRange": [ 40, 90 ],
+      "revealTrust": 93,
+      "limitDefault": "hard",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 14,
+        "maxDays": 350
+      },
+      "tags": [ "multi-day", "immersion", "protocol" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "tension+", "fatigue?", "trust+" ],
+        "ifRejected": [ "hurt+", "resentment+", "trust-" ]
+      },
+      "midBias": [ "enduring", "immersive", "disciplined" ]
+    },
+    {
+      "id": "kink.house_rules_total",
+      "name": "Total House Rules",
+      "level": 4,
+      "description": "House runs on explicit total ruleset in private life.",
+      "defaultValueRange": [ 45, 95 ],
+      "revealTrust": 94,
+      "limitDefault": "hard",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 7,
+        "maxDays": 330
+      },
+      "tags": [ "house-rules", "protocol", "structure" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "pride+", "resentment?", "trust+" ],
+        "ifRejected": [ "anger+", "hurt+", "pride+", "trust-" ]
+      },
+      "midBias": [ "regimental", "controlling", "identity-orbit" ]
+    },
+    {
+      "id": "kink.speech_ban_extended",
+      "name": "Extended Speech Ban",
+      "level": 4,
+      "description": "Long silent periods as structure, not a five-minute gag bit.",
+      "defaultValueRange": [ 30, 80 ],
+      "revealTrust": 95,
+      "limitDefault": "hard",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 10,
+        "maxDays": 340
+      },
+      "tags": [ "speech-ban", "protocol", "control" ],
+      "fastEffects": {
+        "onTheme": [ "tension+", "shame+", "frustration", "desire+" ],
+        "ifRejected": [ "anger+", "pride+", "hurt+" ]
+      },
+      "midBias": [ "disciplined", "controlling", "enduring" ]
+    },
+    {
+      "id": "kink.position_life_rules",
+      "name": "Life Position Rules",
+      "level": 4,
+      "description": "Standing/kneeling/sitting rules that follow them through private life.",
+      "defaultValueRange": [ 40, 90 ],
+      "revealTrust": 94,
+      "limitDefault": "hard",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 7,
+        "maxDays": 320
+      },
+      "tags": [ "position", "life-rules", "protocol" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "shame+", "pride+", "tension+" ],
+        "ifRejected": [ "anger+", "hurt+", "resentment+" ]
+      },
+      "midBias": [ "ritualistic", "regimental", "submissive" ]
+    },
+    {
+      "id": "kink.permission_existence",
+      "name": "Permission for Basics",
+      "level": 4,
+      "description": "Basic comforts in private require permission—intense control frame.",
+      "defaultValueRange": [ 35, 85 ],
+      "revealTrust": 96,
+      "limitDefault": "hard",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 10,
+        "maxDays": 350
+      },
+      "tags": [ "permission", "total-control", "protocol" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "shame+", "anxiety+", "trust+" ],
+        "ifRejected": [ "anger+", "hurt+", "pride+", "trust-" ]
+      },
+      "midBias": [ "controlling", "compliance", "identity-orbit" ]
+    },
+    {
+      "id": "kink.training_program_long",
+      "name": "Long Training Program",
+      "level": 4,
+      "description": "Months-long training arc of habits, posture, service, endurance.",
+      "defaultValueRange": [ 40, 90 ],
+      "revealTrust": 93,
+      "limitDefault": "hard",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 14,
+        "maxDays": 365
+      },
+      "tags": [ "training", "long-arc", "protocol" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "pride+", "shame+", "hope+" ],
+        "ifRejected": [ "hurt+", "resentment+", "pride+" ]
+      },
+      "midBias": [ "disciplined", "ambitious", "devoted" ]
+    },
+    {
+      "id": "kink.ordeal_ritual",
+      "name": "Ordeal Ritual",
+      "level": 4,
+      "description": "Named ordeal scenes that mark status or commitment.",
+      "defaultValueRange": [ 35, 85 ],
+      "revealTrust": 95,
+      "limitDefault": "hard",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 21,
+        "maxDays": 365
+      },
+      "tags": [ "ordeal", "ritual", "status" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "fear+", "pride+", "trust+" ],
+        "ifRejected": [ "hurt+", "shame+", "trust-" ]
+      },
+      "midBias": [ "ritualistic", "enduring", "proud" ]
+    },
+    {
+      "id": "kink.drop_management_extreme",
+      "name": "Extreme Drop Management",
+      "level": 4,
+      "description": "Plans for severe subspace/dom drop; care is part of the kink structure.",
+      "defaultValueRange": [ 45, 95 ],
+      "revealTrust": 90,
+      "limitDefault": "hard",
+      "styleOptions": [ "direct", "shy" ],
+      "cooldown": {
+        "minDays": 5,
+        "maxDays": 280
+      },
+      "tags": [ "drop", "aftercare", "safety" ],
+      "fastEffects": {
+        "onTheme": [ "trust+", "affection+", "anxiety+", "calm" ],
+        "ifRejected": [ "hurt+", "loneliness+", "resentment+", "trust-" ]
+      },
+      "midBias": [ "caring", "responsible", "sensitive" ]
+    },
+    {
+      "id": "kink.veto_power_asymmetric",
+      "name": "Asymmetric Veto Power",
+      "level": 4,
+      "description": "One partner holds final veto inside agreed domain; high trust required.",
+      "defaultValueRange": [ 40, 90 ],
+      "revealTrust": 94,
+      "limitDefault": "hard",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 7,
+        "maxDays": 320
+      },
+      "tags": [ "veto", "power", "structure" ],
+      "fastEffects": {
+        "onTheme": [ "trust+", "desire+", "anxiety+", "pride+" ],
+        "ifRejected": [ "anger+", "hurt+", "pride+", "trust-" ]
+      },
+      "midBias": [ "controlling", "principled", "status-sensitive" ]
+    },
+    {
+      "id": "kink.ritual_ownership_anniversary",
+      "name": "Ownership Anniversary Ritual",
+      "level": 4,
+      "description": "Yearly ritual renewing ownership/protocol commitment.",
+      "defaultValueRange": [ 45, 95 ],
+      "revealTrust": 92,
+      "limitDefault": "soft",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 30,
+        "maxDays": 365
+      },
+      "tags": [ "ritual", "anniversary", "ownership" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "affection+", "pride+", "trust+" ],
+        "ifRejected": [ "hurt+", "shame+", "resentment+" ]
+      },
+      "midBias": [ "loyal", "ritualistic", "devoted" ]
+    },
+    {
+      "id": "kink.group_protocol_consensual",
+      "name": "Consensual Group Protocol",
+      "level": 4,
+      "description": "Protocol involving more than two consenting adults; rare and gated.",
+      "defaultValueRange": [ 25, 70 ],
+      "revealTrust": 97,
+      "limitDefault": "hard",
+      "styleOptions": [ "only-private", "direct" ],
+      "cooldown": {
+        "minDays": 21,
+        "maxDays": 365
+      },
+      "tags": [ "group", "protocol", "rare" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "jealousy+", "anxiety+", "shame+", "tension+" ],
+        "ifRejected": [ "jealousy+", "hurt+", "anger+", "trust-" ]
+      },
+      "midBias": [ "adventurous", "jealousy-prone", "compartmentalizing" ]
+    },
+    {
+      "id": "kink.public_risk_engineered",
+      "name": "Engineered Public Risk",
+      "level": 4,
+      "description": "Carefully engineered almost-public risk with exits—never forcing bystanders.",
+      "defaultValueRange": [ 30, 75 ],
+      "revealTrust": 96,
+      "limitDefault": "hard",
+      "styleOptions": [ "only-private", "direct" ],
+      "cooldown": {
+        "minDays": 14,
+        "maxDays": 365
+      },
+      "tags": [ "public-risk", "engineered", "edge" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "anxiety+", "fear+", "tension+" ],
+        "ifRejected": [ "fear+", "guard+", "anger+" ]
+      },
+      "midBias": [ "adventurous", "edge-seeking", "secretive" ]
+    },
+    {
+      "id": "kink.mindfuck_consensual",
+      "name": "Consensual Mindfuck",
+      "level": 4,
+      "description": "Psychological confusion/intensity games inside explicit consent and debrief.",
+      "defaultValueRange": [ 30, 80 ],
+      "revealTrust": 97,
+      "limitDefault": "hard",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 14,
+        "maxDays": 365
+      },
+      "tags": [ "psychological", "mindfuck", "debrief-required" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "anxiety+", "confusion", "trust+" ],
+        "ifRejected": [ "hurt+", "anger+", "trust-", "guard+" ]
+      },
+      "midBias": [ "intense", "psychological", "edge-seeking" ]
+    },
+    {
+      "id": "kink.ownership_language_absolute",
+      "name": "Absolute Ownership Language",
+      "level": 4,
+      "description": "Absolute claim language as daily intimate speech in private.",
+      "defaultValueRange": [ 50, 95 ],
+      "revealTrust": 95,
+      "limitDefault": "hard",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 5,
+        "maxDays": 300
+      },
+      "tags": [ "ownership", "language", "absolute" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "affection+", "jealousy+", "pride+", "guard+" ],
+        "ifRejected": [ "hurt+", "anger+", "shame+", "trust-" ]
+      },
+      "midBias": [ "possessive", "loyal", "identity-orbit" ]
+    },
+    {
+      "id": "kink.contract_life_binding",
+      "name": "Life-Binding Contract Fantasy",
+      "level": 4,
+      "description": "Erotic life-binding contract as structure; symbolic or practical by agreement.",
+      "defaultValueRange": [ 40, 90 ],
+      "revealTrust": 96,
+      "limitDefault": "hard",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 30,
+        "maxDays": 365
+      },
+      "tags": [ "contract", "life-binding", "structure" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "anxiety+", "pride+", "trust+" ],
+        "ifRejected": [ "hurt+", "pride+", "resentment+", "trust-" ]
+      },
+      "midBias": [ "serious", "regimental", "loyal", "identity-orbit" ]
+    }
+  ]
+}

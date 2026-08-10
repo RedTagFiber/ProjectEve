@@ -1,0 +1,60 @@
+{
+    "appliesToParents":  [
+                             "slow.movies.drama",
+                             "slow.movies.comedy",
+                             "slow.movies.horror",
+                             "slow.movies.romance",
+                             "slow.movies.action",
+                             "slow.movies.scifi_fantasy",
+                             "slow.movies.thriller",
+                             "slow.movies.documentary",
+                             "slow.movies.animated",
+                             "slow.movies.cult_indie"
+                         ],
+    "version":  1,
+    "fillThreshold":  50,
+    "subs":  [
+                 {
+                     "label":  "Comfort rewatch",
+                     "default":  true,
+                     "id":  "sub.movies.comfort_rewatch",
+                     "type":  "bool"
+                 },
+                 {
+                     "label":  "Theater vs stream",
+                     "values":  [
+                                    "theater",
+                                    "stream",
+                                    "both"
+                                ],
+                     "default":  "stream",
+                     "id":  "sub.movies.theater_vs_stream",
+                     "type":  "enum"
+                 },
+                 {
+                     "label":  "Date movie bias",
+                     "default":  false,
+                     "id":  "sub.movies.date_bias",
+                     "type":  "bool"
+                 },
+                 {
+                     "label":  "Title seeds",
+                     "source":  "Movies/Titles",
+                     "id":  "sub.movies.title_seeds",
+                     "type":  "string_list",
+                     "maxItems":  10
+                 },
+                 {
+                     "label":  "Talk style",
+                     "values":  [
+                                    "spoilers_ok",
+                                    "no_spoilers",
+                                    "plot_only",
+                                    "vibes_only"
+                                ],
+                     "default":  "no_spoilers",
+                     "id":  "sub.movies.talk_style",
+                     "type":  "enum"
+                 }
+             ]
+}

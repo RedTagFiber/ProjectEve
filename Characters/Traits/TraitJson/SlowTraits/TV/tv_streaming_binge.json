@@ -1,0 +1,136 @@
+{
+  "id": "slow.tv.streaming_binge",
+  "layer": "slow",
+  "domain": "tv",
+  "label": "Streaming binge",
+  "version": 1,
+  "description": "How they watch: full-season drops, marathon sessions, completionism. Genre-agnostic meta trait.",
+  "priorIntensity": 6,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 40,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [ "binge", "finished the season", "one more episode", "stayed up", "dropped" ],
+  "rivalBias": false,
+  "catalog": "TV/Habits",
+  "subTraits": [
+    {
+      "id": "slow.tv.streaming_binge.all_nighter",
+      "label": "All-night season burns",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "sleep-tax" ]
+    },
+    {
+      "id": "slow.tv.streaming_binge.weekend_marathon",
+      "label": "Weekend marathon",
+      "kind": "habit",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "block" ]
+    },
+    {
+      "id": "slow.tv.streaming_binge.completionist",
+      "label": "Must finish once started",
+      "kind": "attitude",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "no-drop" ]
+    },
+    {
+      "id": "slow.tv.streaming_binge.drops_easy",
+      "label": "Drops shows easily",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "impatient" ]
+    },
+    {
+      "id": "slow.tv.streaming_binge.weekly_prefers",
+      "label": "Actually prefers weekly releases",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "anticipation" ]
+    },
+    {
+      "id": "slow.tv.streaming_binge.multi_show",
+      "label": "Juggles multiple shows",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "chaos" ]
+    },
+    {
+      "id": "slow.tv.streaming_binge.one_at_a_time",
+      "label": "One show at a time",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "focus" ]
+    },
+    {
+      "id": "slow.tv.streaming_binge.autoplay_trap",
+      "label": "Autoplay trap victim",
+      "kind": "habit",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "one-more" ]
+    },
+    {
+      "id": "slow.tv.streaming_binge.spoiler_avoid",
+      "label": "Hard spoiler avoider while bingeing",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "isolation" ]
+    },
+    {
+      "id": "slow.tv.streaming_binge.platform_hopper",
+      "label": "Hops Netflix/Hulu/Max/Disney+",
+      "kind": "habit",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "subs" ]
+    },
+    {
+      "id": "slow.tv.streaming_binge.netflix_home",
+      "label": "Netflix is home base",
+      "kind": "platform",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "netflix" ]
+    },
+    {
+      "id": "slow.tv.streaming_binge.max_home",
+      "label": "Max / prestige home",
+      "kind": "platform",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "max" ]
+    },
+    {
+      "id": "slow.tv.streaming_binge.hulu_home",
+      "label": "Hulu / network+current",
+      "kind": "platform",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "hulu" ]
+    },
+    {
+      "id": "slow.tv.streaming_binge.disney_home",
+      "label": "Disney+ franchise home",
+      "kind": "platform",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "disney" ]
+    },
+    {
+      "id": "slow.tv.streaming_binge.share_account",
+      "label": "Household / shared accounts",
+      "kind": "habit",
+      "defaultRange": [ 40, 95 ],
+      "tags": [ "real-life" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "watches an episode sometimes",
+    "atOrAbove40": "attach 2-3 habits/platforms",
+    "atOrAbove70": "binge structure is default weekend mode",
+    "extreme95": "sleep and plans yield to seasons"
+  },
+  "notes": "Meta trait—pairs with any genre pack."
+}

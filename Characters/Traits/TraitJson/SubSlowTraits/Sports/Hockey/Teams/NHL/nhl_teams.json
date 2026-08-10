@@ -1,0 +1,89 @@
+{
+    "catalog":  "nhl_teams",
+    "version":  1,
+    "regionBias":  [
+                       "Ohio"
+                   ],
+    "entries":  [
+                    {
+                        "label":  "Columbus Blue Jackets",
+                        "factsSeed":  [
+                                          "CBJ",
+                                          "Cannon"
+                                      ],
+                        "id":  "nhl.bluejackets",
+                        "rivals":  [
+                                       "nhl.penguins",
+                                       "nhl.redwings"
+                                   ],
+                        "localWeight":  10
+                    },
+                    {
+                        "label":  "Pittsburgh Penguins",
+                        "factsSeed":  [
+                                          "Black and gold"
+                                      ],
+                        "id":  "nhl.penguins",
+                        "rivals":  [
+                                       "nhl.bluejackets",
+                                       "nhl.capitals"
+                                   ],
+                        "localWeight":  5
+                    },
+                    {
+                        "label":  "Detroit Red Wings",
+                        "factsSeed":  [
+                                          "Hockeytown"
+                                      ],
+                        "id":  "nhl.redwings",
+                        "rivals":  [
+                                       "nhl.bluejackets"
+                                   ],
+                        "localWeight":  4
+                    },
+                    {
+                        "label":  "Washington Capitals",
+                        "factsSeed":  [
+                                          "Ovi"
+                                      ],
+                        "id":  "nhl.capitals",
+                        "rivals":  [
+                                       "nhl.penguins"
+                                   ],
+                        "localWeight":  3
+                    },
+                    {
+                        "label":  "Chicago Blackhawks",
+                        "factsSeed":  [
+                                          "Indian head logo era"
+                                      ],
+                        "id":  "nhl.blackhawks",
+                        "rivals":  [
+
+                                   ],
+                        "localWeight":  3
+                    },
+                    {
+                        "label":  "Toronto Maple Leafs",
+                        "factsSeed":  [
+                                          "Leafs"
+                                      ],
+                        "id":  "nhl.mapleleafs",
+                        "rivals":  [
+                                       "nhl.canadiens"
+                                   ],
+                        "localWeight":  2
+                    },
+                    {
+                        "label":  "Montreal Canadiens",
+                        "factsSeed":  [
+                                          "Habs"
+                                      ],
+                        "id":  "nhl.canadiens",
+                        "rivals":  [
+                                       "nhl.mapleleafs"
+                                   ],
+                        "localWeight":  2
+                    }
+                ]
+}

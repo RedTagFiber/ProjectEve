@@ -1,0 +1,53 @@
+{
+    "parent":  "slow.sports.college_football",
+    "version":  1,
+    "fillThreshold":  50,
+    "subs":  [
+                 {
+                     "id":  "sub.cfb.team_primary",
+                     "label":  "Primary school",
+                     "required":  true,
+                     "type":  "catalog_ref",
+                     "catalogs":  [
+                                      "big_ten_football",
+                                      "top25_football"
+                                  ],
+                     "pickCount":  1
+                 },
+                 {
+                     "label":  "Rival heat",
+                     "values":  [
+                                    "low",
+                                    "mid",
+                                    "high"
+                                ],
+                     "default":  "high",
+                     "id":  "sub.cfb.rival_heat",
+                     "type":  "enum"
+                 },
+                 {
+                     "label":  "Knowledge",
+                     "values":  [
+                                    "casual",
+                                    "fan",
+                                    "diehard"
+                                ],
+                     "default":  "fan",
+                     "id":  "sub.cfb.knowledge",
+                     "type":  "enum"
+                 },
+                 {
+                     "label":  "Saturday ritual",
+                     "values":  [
+                                    "tv",
+                                    "bar",
+                                    "stadium",
+                                    "radio",
+                                    "none"
+                                ],
+                     "default":  "tv",
+                     "id":  "sub.cfb.saturday_ritual",
+                     "type":  "enum"
+                 }
+             ]
+}

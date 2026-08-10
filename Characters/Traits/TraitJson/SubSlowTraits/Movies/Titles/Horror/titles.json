@@ -1,0 +1,23 @@
+{
+    "catalog":  "movie_titles_horror",
+    "style":  "Horror",
+    "version":  1,
+    "entries":  [
+                    {
+                        "id":  "the_conjuring",
+                        "label":  "The Conjuring"
+                    },
+                    {
+                        "id":  "get_out",
+                        "label":  "Get Out"
+                    },
+                    {
+                        "id":  "hereditary",
+                        "label":  "Hereditary"
+                    },
+                    {
+                        "id":  "scream",
+                        "label":  "Scream"
+                    }
+                ]
+}

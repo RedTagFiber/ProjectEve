@@ -1,0 +1,70 @@
+{
+    "id":  "mid.passive_aggressive",
+    "layer":  "mid",
+    "label":  "Passive-aggressive",
+    "version":  1,
+    "cluster":  "conflict",
+    "description":  "Side channels, delay, digs; anger without clean claim.",
+    "priorIntensity":  5,
+    "moveSpeed":  "slow",
+    "bands":  {
+                  "off":  "0-29",
+                  "low":  "30-49",
+                  "mid":  "50-69",
+                  "high":  "70-84",
+                  "break":  "85-94",
+                  "extreme":  "95-100"
+              },
+    "styles":  [
+                   {
+                       "id":  "mid.passive_aggressive.dig",
+                       "label":  "Dig"
+                   },
+                   {
+                       "id":  "mid.passive_aggressive.delay",
+                       "label":  "Delay"
+                   },
+                   {
+                       "id":  "mid.passive_aggressive.smile_cut",
+                       "label":  "Smile cut"
+                   }
+               ],
+    "links":  {
+                  "boostedBy":  [
+                                    "resentment",
+                                    "anger",
+                                    "guard"
+                                ],
+                  "drainedBy":  [
+                                    "openness",
+                                    "trust"
+                                ],
+                  "opposes":  [
+                                  "mid.blunt",
+                                  "mid.confrontational"
+                              ]
+              },
+    "tagTriggers":  [
+                        {
+                            "tag":  "mid.passive_aggressive.test",
+                            "meaning":  "Situation tests this character trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.passive_aggressive.confirm",
+                            "meaning":  "Behavior confirms this trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.passive_aggressive.violate",
+                            "meaning":  "Acts against this trait under pressure",
+                            "deltaHint":  -2
+                        }
+                    ],
+    "relationScoped":  true,
+    "historyHooks":  {
+                         "patternFile":  "passive_aggressive_patterns.json",
+                         "fundingBudget":  2
+                     },
+    "notes":  "Often when direct anger was punished in history."
+}

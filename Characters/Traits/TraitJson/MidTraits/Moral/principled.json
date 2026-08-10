@@ -1,0 +1,69 @@
+{
+    "id":  "mid.principled",
+    "layer":  "mid",
+    "label":  "Principled",
+    "version":  1,
+    "cluster":  "moral",
+    "description":  "Line that does not move easy; cost accepted to hold it.",
+    "priorIntensity":  6,
+    "moveSpeed":  "slow",
+    "bands":  {
+                  "off":  "0-29",
+                  "low":  "30-49",
+                  "mid":  "50-69",
+                  "high":  "70-84",
+                  "break":  "85-94",
+                  "extreme":  "95-100"
+              },
+    "styles":  [
+                   {
+                       "id":  "mid.principled.hold_line",
+                       "label":  "Hold line"
+                   },
+                   {
+                       "id":  "mid.principled.cost_ok",
+                       "label":  "Cost ok"
+                   },
+                   {
+                       "id":  "mid.principled.no_bargain",
+                       "label":  "No bargain"
+                   }
+               ],
+    "links":  {
+                  "boostedBy":  [
+                                    "pride",
+                                    "guilt",
+                                    "anger"
+                                ],
+                  "drainedBy":  [
+                                    "fear"
+                                ],
+                  "opposes":  [
+                                  "mid.flexible_ethics",
+                                  "mid.opportunistic"
+                              ]
+              },
+    "tagTriggers":  [
+                        {
+                            "tag":  "mid.principled.test",
+                            "meaning":  "Situation tests this character trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.principled.confirm",
+                            "meaning":  "Behavior confirms this trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.principled.violate",
+                            "meaning":  "Acts against this trait under pressure",
+                            "deltaHint":  -2
+                        }
+                    ],
+    "relationScoped":  true,
+    "historyHooks":  {
+                         "patternFile":  "principled_patterns.json",
+                         "fundingBudget":  2
+                     },
+    "notes":  "Can look stubborn from outside."
+}

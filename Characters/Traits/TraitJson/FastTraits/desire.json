@@ -1,0 +1,187 @@
+﻿{
+  "id": "desire",
+  "layer": "fast",
+  "label": "Desire",
+  "version": 1,
+  "description": "Wanting them — body and/or heart drive to act. Stronger and more intentional than Attraction alone. Gated by context, trust, and content rating.",
+  "priorIntensity": {
+    "min": 2,
+    "max": 6,
+    "mean": 3
+  },
+  "spawn": {
+    "currentFromIntensity": true,
+    "noise": 3
+  },
+  "bands": {
+    "off": [ 0, 29 ],
+    "low": [ 30, 49 ],
+    "mid": [ 50, 69 ],
+    "high": [ 70, 84 ],
+    "break": [ 85, 94 ],
+    "extreme": [ 95, 100 ]
+  },
+  "styles": {
+    "soft": {
+      "means": "Gentle want; tenderness first; no rush.",
+      "speechHints": [ "quiet", "warm", "careful" ],
+      "bodyHints": [ "soft_touch", "close" ],
+      "riskTags": [ "vulnerable" ]
+    },
+    "direct": {
+      "means": "Clear ask or clear signal; names the want.",
+      "speechHints": [ "blunt", "honest", "forward" ],
+      "bodyHints": [ "steady_eye", "advance" ],
+      "riskTags": [ "rejection_risk" ]
+    },
+    "playful": {
+      "means": "Tease and charge; want wrapped in fun.",
+      "speechHints": [ "tease", "dare", "laugh" ],
+      "bodyHints": [ "grin", "brush_contact" ],
+      "riskTags": [ "misread" ]
+    },
+    "hungry": {
+      "means": "Strong physical drive; urgency; less filter.",
+      "speechHints": [ "low", "short", "raw" ],
+      "bodyHints": [ "intensity", "proximity" ],
+      "riskTags": [ "push_pace" ]
+    },
+    "restrained": {
+      "means": "Feels it hard but holds the line; controlled.",
+      "speechHints": [ "measured", "half_held" ],
+      "bodyHints": [ "tense_still", "step_back" ],
+      "riskTags": [ "frustration" ]
+    }
+  },
+  "defaultStyleWeights": {
+    "soft": 1.0,
+    "direct": 0.7,
+    "playful": 0.85,
+    "hungry": 0.45,
+    "restrained": 0.9
+  },
+  "flavors": {
+    "sexual": "Physical/sexual want.",
+    "romantic": "Heart + closeness want.",
+    "reunion": "After absence; need to close distance.",
+    "jealous_spark": "Want sharpened by rival attention.",
+    "comfort": "Want as soothing / safety-seeking."
+  },
+  "pull": {
+    "belowHomeDamageMult": 0.65,
+    "recoverMult": 1.2,
+    "aboveHomeSettleMult": 1.2
+  },
+  "funding": {
+    "required": true,
+    "budgetPerIntensityPoint": 1.0
+  },
+  "links": [
+    {
+      "trait": "attraction",
+      "op": "+",
+      "weight": 0.35,
+      "when": "rise"
+    },
+    {
+      "trait": "tension",
+      "op": "+",
+      "weight": 0.5,
+      "when": "rise"
+    },
+    {
+      "trait": "affection",
+      "op": "+",
+      "weight": 0.2,
+      "when": "rise"
+    },
+    {
+      "trait": "guard",
+      "op": "-",
+      "weight": 0.2,
+      "when": "rise",
+      "styleGate": [ "soft", "direct", "playful" ]
+    },
+    {
+      "trait": "guard",
+      "op": "+",
+      "weight": 0.25,
+      "when": "rise",
+      "styleGate": [ "restrained" ]
+    },
+    {
+      "trait": "shame",
+      "op": "+",
+      "weight": 0.2,
+      "when": "rise",
+      "note": "If culture/history punishes desire."
+    }
+  ],
+  "opposePairs": [
+    {
+      "with": "guard",
+      "policyHints": [ "advance_retreat", "mixed_signals" ]
+    },
+    {
+      "with": "shame",
+      "policyHints": [ "hide_want", "afterglow_guilt" ]
+    },
+    {
+      "with": "anxiety",
+      "policyHints": [ "want_but_worry", "reassure_first" ]
+    }
+  ],
+  "tagTriggers": [
+    {
+      "tag": "desire.express",
+      "direction": "+",
+      "baseWeight": 0.9
+    },
+    {
+      "tag": "desire.flirt_heavy",
+      "direction": "+",
+      "baseWeight": 0.8
+    },
+    {
+      "tag": "bond.proximity_intimate",
+      "direction": "+",
+      "baseWeight": 0.7
+    },
+    {
+      "tag": "bond.compliment_body",
+      "direction": "+",
+      "baseWeight": 0.65
+    },
+    {
+      "tag": "bond.rejection",
+      "direction": "-",
+      "baseWeight": 0.75
+    },
+    {
+      "tag": "conflict.insult",
+      "direction": "-",
+      "baseWeight": 0.55
+    },
+    {
+      "tag": "shame.expose",
+      "direction": "-",
+      "baseWeight": 0.5
+    }
+  ],
+  "relationScoped": true,
+  "historyHooks": {
+    "catalog": "Characters/Traits/TraitJson/TraitHistory/desire_patterns.json",
+    "filters": [ "style", "flavor", "sourceBucket" ],
+    "tellFraming": {
+      "prideHigh": "HeroSelf",
+      "prideLow": "VictimSelf",
+      "shameHigh": "VictimSelf",
+      "telephone": true
+    }
+  },
+  "debug": {
+    "showInDash": true,
+    "color": "#b33b6b",
+    "sortPriority": 21
+  }
+}

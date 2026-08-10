@@ -1,0 +1,482 @@
+{
+  "id": "slow.life.gaming",
+  "layer": "slow",
+  "domain": "life",
+  "label": "Gaming",
+  "version": 1,
+  "description": "Life taste/identity: video games, platforms, genres, habits, and social play. Separate from sports—this is interactive media time and identity.",
+  "priorIntensity": 5,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [
+    "game",
+    "console",
+    "steam",
+    "raid",
+    "xbox",
+    "playstation",
+    "nintendo",
+    "pc",
+    "fps",
+    "rpg",
+    "co-op",
+    "ranked",
+    "save",
+    "boss",
+    "dlc",
+    "controller",
+    "keyboard",
+    "stream",
+    "discord"
+  ],
+  "rivalBias": true,
+  "catalog": "Life",
+  "subTraits": [
+    {
+      "id": "slow.life.gaming.pc_main",
+      "label": "PC main",
+      "kind": "platform",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "steam", "mods", "hardware" ]
+    },
+    {
+      "id": "slow.life.gaming.playstation",
+      "label": "PlayStation",
+      "kind": "platform",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "ps5", "exclusive", "sony" ]
+    },
+    {
+      "id": "slow.life.gaming.xbox",
+      "label": "Xbox",
+      "kind": "platform",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "gamepass", "microsoft", "ohio-common" ]
+    },
+    {
+      "id": "slow.life.gaming.nintendo",
+      "label": "Nintendo",
+      "kind": "platform",
+      "defaultRange": [ 20, 95 ],
+      "tags": [ "switch", "family", "portable" ]
+    },
+    {
+      "id": "slow.life.gaming.mobile_gamer",
+      "label": "Mobile gamer",
+      "kind": "platform",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "phone", "idle", "commute" ]
+    },
+    {
+      "id": "slow.life.gaming.retro",
+      "label": "Retro / classic",
+      "kind": "platform",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "old", "emulation", "nostalgia" ]
+    },
+    {
+      "id": "slow.life.gaming.multi_platform",
+      "label": "Multi-platform",
+      "kind": "platform",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "wherever", "friends" ]
+    },
+
+    {
+      "id": "slow.life.gaming.fps",
+      "label": "FPS / shooters",
+      "kind": "genre",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "aim", "ranked", "comp" ]
+    },
+    {
+      "id": "slow.life.gaming.battle_royale",
+      "label": "Battle royale",
+      "kind": "genre",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "drop", "squad", "circle" ]
+    },
+    {
+      "id": "slow.life.gaming.mmo_rpg",
+      "label": "MMO / live service RPG",
+      "kind": "genre",
+      "defaultRange": [ 20, 95 ],
+      "tags": [ "raid", "guild", "grind" ]
+    },
+    {
+      "id": "slow.life.gaming.single_rpg",
+      "label": "Single-player RPG",
+      "kind": "genre",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "story", "build", "hours" ]
+    },
+    {
+      "id": "slow.life.gaming.jrpg",
+      "label": "JRPG",
+      "kind": "genre",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "turn", "story", "anime-adjacent" ]
+    },
+    {
+      "id": "slow.life.gaming.strategy",
+      "label": "Strategy / 4X / grand strat",
+      "kind": "genre",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "think", "turns", "map" ]
+    },
+    {
+      "id": "slow.life.gaming.moba",
+      "label": "MOBA",
+      "kind": "genre",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "lane", "tilt", "team" ]
+    },
+    {
+      "id": "slow.life.gaming.fighting",
+      "label": "Fighting games",
+      "kind": "genre",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "combo", "lab", "local" ]
+    },
+    {
+      "id": "slow.life.gaming.sports_game",
+      "label": "Sports titles (Madden/NBA/FIFA)",
+      "kind": "genre",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "season", "ultimate", "ohio" ]
+    },
+    {
+      "id": "slow.life.gaming.racing",
+      "label": "Racing / sim driving",
+      "kind": "genre",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "wheel", "track", "tune" ]
+    },
+    {
+      "id": "slow.life.gaming.horror",
+      "label": "Horror games",
+      "kind": "genre",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "scare", "co-op-scream", "night" ]
+    },
+    {
+      "id": "slow.life.gaming.survival_craft",
+      "label": "Survival / crafting",
+      "kind": "genre",
+      "defaultRange": [ 20, 95 ],
+      "tags": [ "base", "farm", "friends" ]
+    },
+    {
+      "id": "slow.life.gaming.sandbox_creative",
+      "label": "Sandbox / creative",
+      "kind": "genre",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "build", "minecraft-class", "no-goal" ]
+    },
+    {
+      "id": "slow.life.gaming.souls_like",
+      "label": "Souls-like / hardcore",
+      "kind": "genre",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "die", "learn", "pride" ]
+    },
+    {
+      "id": "slow.life.gaming.indie",
+      "label": "Indie focus",
+      "kind": "genre",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "small", "art", "steam-sale" ]
+    },
+    {
+      "id": "slow.life.gaming.cozy",
+      "label": "Cozy games",
+      "kind": "genre",
+      "defaultRange": [ 20, 95 ],
+      "tags": [ "chill", "farm", "low-stress" ]
+    },
+    {
+      "id": "slow.life.gaming.story_adventure",
+      "label": "Story adventure",
+      "kind": "genre",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "narrative", "choices", "cry" ]
+    },
+    {
+      "id": "slow.life.gaming.roguelike",
+      "label": "Roguelike / roguelite",
+      "kind": "genre",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "run", "die", "again" ]
+    },
+    {
+      "id": "slow.life.gaming.sim",
+      "label": "Sims / management sim",
+      "kind": "genre",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "manage", "life-sim", "build" ]
+    },
+    {
+      "id": "slow.life.gaming.card_ccg",
+      "label": "Card / CCG / deckbuilder",
+      "kind": "genre",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "deck", "meta", "collect" ]
+    },
+
+    {
+      "id": "slow.life.gaming.competitive_ranked",
+      "label": "Competitive ranked",
+      "kind": "habit",
+      "defaultRange": [ 20, 95 ],
+      "tags": [ "rank", "tilt", "grind" ]
+    },
+    {
+      "id": "slow.life.gaming.casual_only",
+      "label": "Casual only",
+      "kind": "habit",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "fun", "no-rank", "chill" ]
+    },
+    {
+      "id": "slow.life.gaming.completionist",
+      "label": "Completionist",
+      "kind": "habit",
+      "defaultRange": [ 20, 95 ],
+      "tags": [ "100%", "collect", "hours" ]
+    },
+    {
+      "id": "slow.life.gaming.story_skipper",
+      "label": "Story skipper",
+      "kind": "habit",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "gameplay", "cutscene-skip" ]
+    },
+    {
+      "id": "slow.life.gaming.lore_reader",
+      "label": "Lore reader",
+      "kind": "habit",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "item-text", "wiki", "theory" ]
+    },
+    {
+      "id": "slow.life.gaming.co_op_first",
+      "label": "Co-op first",
+      "kind": "social",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "friends", "couch", "online" ]
+    },
+    {
+      "id": "slow.life.gaming.solo_only",
+      "label": "Solo only",
+      "kind": "social",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "alone", "pace", "no-mic" ]
+    },
+    {
+      "id": "slow.life.gaming.mic_talker",
+      "label": "Mic talker",
+      "kind": "social",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "discord", "party", "callouts" ]
+    },
+    {
+      "id": "slow.life.gaming.mic_shy",
+      "label": "Mic shy / text only",
+      "kind": "social",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "chat", "quiet", "anxiety" ]
+    },
+    {
+      "id": "slow.life.gaming.clan_guild",
+      "label": "Clan / guild member",
+      "kind": "social",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "schedule", "raid-night", "duty" ]
+    },
+    {
+      "id": "slow.life.gaming.streamer_watcher",
+      "label": "Watches streamers",
+      "kind": "social",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "twitch", "youtube", "parasocial" ]
+    },
+    {
+      "id": "slow.life.gaming.streams_self",
+      "label": "Streams / content creates",
+      "kind": "social",
+      "defaultRange": [ 10, 85 ],
+      "tags": [ "create", "audience", "side" ]
+    },
+    {
+      "id": "slow.life.gaming.local_couch",
+      "label": "Local couch multiplayer",
+      "kind": "social",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "party", "friends-over", "fight" ]
+    },
+
+    {
+      "id": "slow.life.gaming.night_owl_sessions",
+      "label": "Night-owl sessions",
+      "kind": "habit",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "late", "one-more", "sleep" ]
+    },
+    {
+      "id": "slow.life.gaming.weekend_warrior",
+      "label": "Weekend warrior only",
+      "kind": "habit",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "saturday", "limited" ]
+    },
+    {
+      "id": "slow.life.gaming.daily_login",
+      "label": "Daily login habit",
+      "kind": "habit",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "streak", "live-service" ]
+    },
+    {
+      "id": "slow.life.gaming.backlog_guilt",
+      "label": "Backlog guilt",
+      "kind": "attitude",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "unplayed", "sale", "shame" ]
+    },
+    {
+      "id": "slow.life.gaming.sale_buyer",
+      "label": "Sale buyer / library hoarder",
+      "kind": "habit",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "steam-sale", "bundle" ]
+    },
+    {
+      "id": "slow.life.gaming.full_price_day_one",
+      "label": "Day-one full price",
+      "kind": "habit",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "hype", "money", "spoiler-free" ]
+    },
+    {
+      "id": "slow.life.gaming.modder",
+      "label": "Modder",
+      "kind": "habit",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "nexus", "load-order", "pc" ]
+    },
+    {
+      "id": "slow.life.gaming.achievement_hunter",
+      "label": "Achievement hunter",
+      "kind": "habit",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "trophy", "rare", "list" ]
+    },
+    {
+      "id": "slow.life.gaming.speedrunner_interest",
+      "label": "Speedrun interest",
+      "kind": "habit",
+      "defaultRange": [ 10, 85 ],
+      "tags": [ "time", "route", "watch-or-run" ]
+    },
+
+    {
+      "id": "slow.life.gaming.console_war",
+      "label": "Console war participant",
+      "kind": "attitude",
+      "defaultRange": [ 20, 95 ],
+      "tags": [ "rival", "brand", "argue" ]
+    },
+    {
+      "id": "slow.life.gaming.anti_live_service",
+      "label": "Anti live-service",
+      "kind": "attitude",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "single", "own", "fatigue" ]
+    },
+    {
+      "id": "slow.life.gaming.nostalgia_gate",
+      "label": "Nostalgia gatekeeper",
+      "kind": "attitude",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "old-good", "new-bad" ]
+    },
+    {
+      "id": "slow.life.gaming.open_new",
+      "label": "Open to new genres",
+      "kind": "attitude",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "try", "flexible" ]
+    },
+    {
+      "id": "slow.life.gaming.toxic_avoider",
+      "label": "Avoids toxic lobbies",
+      "kind": "attitude",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "mute", "quit", "peace" ]
+    },
+    {
+      "id": "slow.life.gaming.tilt_prone",
+      "label": "Tilt prone",
+      "kind": "attitude",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "rage", "break", "fast-anger" ]
+    },
+    {
+      "id": "slow.life.gaming.teacher_patient",
+      "label": "Patient teacher in-game",
+      "kind": "attitude",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "help", "newbie", "kind" ]
+    },
+    {
+      "id": "slow.life.gaming.family_share",
+      "label": "Plays with family / kids",
+      "kind": "social",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "kids", "switch", "couch" ]
+    },
+    {
+      "id": "slow.life.gaming.partner_co_op",
+      "label": "Partner co-op seeker",
+      "kind": "social",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "date", "split-screen", "bond" ]
+    },
+    {
+      "id": "slow.life.gaming.vr_curious",
+      "label": "VR curious / owner",
+      "kind": "platform",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "headset", "immersive", "space" ]
+    },
+    {
+      "id": "slow.life.gaming.board_crossover",
+      "label": "Board game crossover",
+      "kind": "adjacent",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "tabletop", "friends", "night" ]
+    },
+    {
+      "id": "slow.life.gaming.fighting_local_scene",
+      "label": "Local fight-night scene",
+      "kind": "social",
+      "defaultRange": [ 10, 85 ],
+      "tags": [ "arcade", "bracket", "ohio" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "has played something; no platform/genre identity",
+    "atOrAbove50": "attach 2-4 subTraits (platform + genre + habit/social); can name real titles in talk",
+    "atOrAbove70": "gaming time is protected; schedule and mood shift around sessions; history hooks to guild, tilt fights, partner co-op",
+    "extreme95": "primary leisure identity; sleep and social plans bend around games; console-war and tilt show in Fast traits"
+  },
+  "notes": "rivalBias true for console wars, ranked tilt, and live-service debates. Pair with slow music/TV when streams are on in the background. Xbox + sports titles weight up slightly for Ohio factory defaults."
+}

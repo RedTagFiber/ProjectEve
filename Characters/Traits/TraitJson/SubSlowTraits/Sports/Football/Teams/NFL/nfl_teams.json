@@ -1,0 +1,27 @@
+{
+    "catalog":  "nfl_teams",
+    "version":  1,
+    "regionBias":  [
+                       "Ohio",
+                       "AFC_North"
+                   ],
+    "entries":  [
+                    {
+                        "id":  "nfl.bengals",
+                        "label":  "Cincinnati Bengals",
+                        "league":  "NFL",
+                        "division":  "AFC North",
+                        "localWeight":  10,
+                        "rivals":  [
+                                       "nfl.browns",
+                                       "nfl.steelers",
+                                       "nfl.ravens"
+                                   ],
+                        "factsSeed":  [
+                                          "Who Dey",
+                                          "Paycor Stadium",
+                                          "orange and black"
+                                      ]
+                    }
+                ]
+}

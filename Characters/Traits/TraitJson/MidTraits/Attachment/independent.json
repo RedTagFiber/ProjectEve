@@ -1,0 +1,69 @@
+{
+    "id":  "mid.independent",
+    "layer":  "mid",
+    "label":  "Independent",
+    "version":  1,
+    "cluster":  "attachment",
+    "description":  "Self-reliant; low need to merge; solves alone before asking.",
+    "priorIntensity":  6,
+    "moveSpeed":  "slow",
+    "bands":  {
+                  "off":  "0-29",
+                  "low":  "30-49",
+                  "mid":  "50-69",
+                  "high":  "70-84",
+                  "break":  "85-94",
+                  "extreme":  "95-100"
+              },
+    "styles":  [
+                   {
+                       "id":  "mid.independent.solo_solve",
+                       "label":  "Solo solve"
+                   },
+                   {
+                       "id":  "mid.independent.low_ask",
+                       "label":  "Low ask"
+                   },
+                   {
+                       "id":  "mid.independent.quiet_competence",
+                       "label":  "Quiet competence"
+                   }
+               ],
+    "links":  {
+                  "boostedBy":  [
+                                    "pride",
+                                    "guard"
+                                ],
+                  "drainedBy":  [
+                                    "loneliness",
+                                    "hurt"
+                                ],
+                  "opposes":  [
+                                  "mid.dependent",
+                                  "mid.anxious_attach"
+                              ]
+              },
+    "tagTriggers":  [
+                        {
+                            "tag":  "mid.independent.test",
+                            "meaning":  "Situation tests this character trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.independent.confirm",
+                            "meaning":  "Behavior confirms this trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.independent.violate",
+                            "meaning":  "Acts against this trait under pressure",
+                            "deltaHint":  -2
+                        }
+                    ],
+    "relationScoped":  true,
+    "historyHooks":  {
+                         "patternFile":  "independent_patterns.json",
+                         "fundingBudget":  2
+                     },
+    "notes":  "Can look avoidant but is competence-based not fear-based."
+}

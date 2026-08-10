@@ -1,0 +1,76 @@
+{
+    "catalog":  "music_genres",
+    "version":  1,
+    "entries":  [
+                    {
+                        "id":  "genre.rock",
+                        "label":  "rock",
+                        "parentTrait":  "slow.music.rock"
+                    },
+                    {
+                        "id":  "genre.country",
+                        "label":  "country",
+                        "parentTrait":  "slow.music.country"
+                    },
+                    {
+                        "id":  "genre.hip_hop",
+                        "label":  "hip_hop",
+                        "parentTrait":  "slow.music.hip_hop"
+                    },
+                    {
+                        "id":  "genre.metal",
+                        "label":  "metal",
+                        "parentTrait":  "slow.music.metal"
+                    },
+                    {
+                        "id":  "genre.pop",
+                        "label":  "pop",
+                        "parentTrait":  "slow.music.pop"
+                    },
+                    {
+                        "id":  "genre.edm_dance",
+                        "label":  "edm_dance",
+                        "parentTrait":  "slow.music.edm_dance"
+                    },
+                    {
+                        "id":  "genre.rnb_soul",
+                        "label":  "rnb_soul",
+                        "parentTrait":  "slow.music.rnb_soul"
+                    },
+                    {
+                        "id":  "genre.reggae",
+                        "label":  "reggae",
+                        "parentTrait":  "slow.music.reggae"
+                    },
+                    {
+                        "id":  "genre.folk_americana",
+                        "label":  "folk_americana",
+                        "parentTrait":  "slow.music.folk_americana"
+                    },
+                    {
+                        "id":  "genre.classical_jazz",
+                        "label":  "classical_jazz",
+                        "parentTrait":  "slow.music.classical_jazz"
+                    },
+                    {
+                        "id":  "genre.punk",
+                        "label":  "punk",
+                        "parentTrait":  "slow.music.punk"
+                    },
+                    {
+                        "id":  "genre.indie",
+                        "label":  "indie",
+                        "parentTrait":  "slow.music.indie"
+                    },
+                    {
+                        "id":  "genre.blues",
+                        "label":  "blues",
+                        "parentTrait":  "slow.music.blues"
+                    },
+                    {
+                        "id":  "genre.christian_gospel",
+                        "label":  "christian_gospel",
+                        "parentTrait":  "slow.music.christian_gospel"
+                    }
+                ]
+}

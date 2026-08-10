@@ -1,0 +1,29 @@
+{
+    "parent":  "slow.sports.boxing",
+    "version":  1,
+    "fillThreshold":  50,
+    "subs":  [
+                 {
+                     "label":  "Knowledge",
+                     "values":  [
+                                    "casual",
+                                    "fan",
+                                    "diehard"
+                                ],
+                     "default":  "casual",
+                     "id":  "sub.boxing.knowledge",
+                     "type":  "enum"
+                 },
+                 {
+                     "label":  "Era bias",
+                     "values":  [
+                                    "classic",
+                                    "modern",
+                                    "both"
+                                ],
+                     "default":  "modern",
+                     "id":  "sub.boxing.era_bias",
+                     "type":  "enum"
+                 }
+             ]
+}

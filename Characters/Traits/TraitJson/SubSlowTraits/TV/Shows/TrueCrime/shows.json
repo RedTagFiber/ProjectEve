@@ -1,0 +1,19 @@
+{
+    "catalog":  "tv_shows_truecrime",
+    "style":  "TrueCrime",
+    "version":  1,
+    "entries":  [
+                    {
+                        "id":  "making_a_murderer",
+                        "label":  "Making a Murderer"
+                    },
+                    {
+                        "id":  "dateline",
+                        "label":  "Dateline"
+                    },
+                    {
+                        "id":  "conversations_with_a_killer",
+                        "label":  "Conversations with a Killer"
+                    }
+                ]
+}

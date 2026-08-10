@@ -1,15 +1,14 @@
-﻿namespace Project_Eve.Characters.Personality
+﻿namespace ProjectEve.Characters.Personality
 {
     /// <summary>
-    /// PersonalityProfile defines the character's stable social behavior.
-    /// Unlike EmotionalProfile, these values rarely change.
+    /// Stable social read for prompts/UI.
+    /// Prefer DeriveFromTraits — values mirror Mid/Fast, not a parallel RNG.
     /// </summary>
     public class PersonalityProfile
     {
-        // Broad personality category
         public PersonalityType Type { get; set; } = PersonalityType.Neutral;
 
-        // Social traits (0–100)
+        // Social surface (0–100), filled from traits
         public int Warmth { get; set; } = 50;
         public int Assertiveness { get; set; } = 50;
         public int Humor { get; set; } = 50;
@@ -17,10 +16,8 @@
         public int Shyness { get; set; } = 50;
         public int Boldness { get; set; } = 50;
 
-        // Future expansion:
-        // - Openness
-        // - Agreeableness
-        // - Conscientiousness
-        // - Creativity
+        public string SummaryLine()
+            => $"{Type}: warmth {Warmth}, assert {Assertiveness}, humor {Humor}, " +
+               $"sarcasm {Sarcasm}, shy {Shyness}, bold {Boldness}";
     }
 }

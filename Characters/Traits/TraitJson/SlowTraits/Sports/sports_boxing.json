@@ -1,0 +1,425 @@
+{
+  "id": "slow.sports.boxing",
+  "layer": "slow",
+  "domain": "sports",
+  "label": "Boxing",
+  "version": 1,
+  "description": "Boxing interest—eras, weight classes, big names, PPV habits, and gym culture. Lower population trait; high scores are distinctive.",
+  "priorIntensity": 3,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [
+    "fight",
+    "bout",
+    "title",
+    "knockout",
+    "round",
+    "card",
+    "PPV",
+    "heavyweight",
+    "gym",
+    "spar",
+    "decision",
+    "champ"
+  ],
+  "rivalBias": true,
+  "catalog": "Sports/Boxing",
+  "subTraits": [
+    {
+      "id": "slow.sports.boxing.casual",
+      "label": "Casual big-fight fan",
+      "kind": "intensity",
+      "defaultRange": [ 30, 70 ],
+      "tags": [ "ppv", "highlights" ]
+    },
+    {
+      "id": "slow.sports.boxing.diehard",
+      "label": "Diehard",
+      "kind": "intensity",
+      "defaultRange": [ 70, 95 ],
+      "tags": [ "cards", "under" ]
+    },
+    {
+      "id": "slow.sports.boxing.history_buff",
+      "label": "History buff",
+      "kind": "knowledge",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "legends", "lineage" ]
+    },
+    {
+      "id": "slow.sports.boxing.modern_only",
+      "label": "Modern era only",
+      "kind": "knowledge",
+      "defaultRange": [ 25, 85 ],
+      "tags": [ "now" ]
+    },
+    {
+      "id": "slow.sports.boxing.technique_nerd",
+      "label": "Technique / film nerd",
+      "kind": "knowledge",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "footwork", "guard" ]
+    },
+    {
+      "id": "slow.sports.boxing.stats_judge",
+      "label": "Judges every decision",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "robbery", "scorecards" ]
+    },
+    {
+      "id": "slow.sports.boxing.ppv_buyer",
+      "label": "Buys PPVs",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "money", "night" ]
+    },
+    {
+      "id": "slow.sports.boxing.bar_watch",
+      "label": "Bar / watch-party fights",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "social" ]
+    },
+    {
+      "id": "slow.sports.boxing.gym_member",
+      "label": "Trains / hits bags",
+      "kind": "practice",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "local", "sweat" ]
+    },
+    {
+      "id": "slow.sports.boxing.amateur_past",
+      "label": "Amateur / golden gloves past",
+      "kind": "practice",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "history", "pride" ]
+    },
+    {
+      "id": "slow.sports.boxing.coach_corner",
+      "label": "Coaches or corners amateurs",
+      "kind": "practice",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "give-back" ]
+    },
+
+    {
+      "id": "slow.sports.boxing.heavyweight",
+      "label": "Heavyweight focus",
+      "kind": "division",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "glamour" ]
+    },
+    {
+      "id": "slow.sports.boxing.cruiser",
+      "label": "Cruiserweight",
+      "kind": "division",
+      "defaultRange": [ 15, 85 ],
+      "tags": []
+    },
+    {
+      "id": "slow.sports.boxing.light_heavy",
+      "label": "Light heavyweight",
+      "kind": "division",
+      "defaultRange": [ 20, 90 ],
+      "tags": []
+    },
+    {
+      "id": "slow.sports.boxing.super_middle",
+      "label": "Super middleweight",
+      "kind": "division",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "stacked" ]
+    },
+    {
+      "id": "slow.sports.boxing.middle",
+      "label": "Middleweight",
+      "kind": "division",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "classic" ]
+    },
+    {
+      "id": "slow.sports.boxing.welter",
+      "label": "Welterweight",
+      "kind": "division",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "depth" ]
+    },
+    {
+      "id": "slow.sports.boxing.lightweight",
+      "label": "Lightweight",
+      "kind": "division",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "skill" ]
+    },
+    {
+      "id": "slow.sports.boxing.feather_light",
+      "label": "Feather / junior light",
+      "kind": "division",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "speed" ]
+    },
+
+    {
+      "id": "slow.sports.boxing.ali",
+      "label": "Muhammad Ali",
+      "kind": "legend",
+      "defaultRange": [ 40, 95 ],
+      "tags": [ "goat-talk", "culture" ]
+    },
+    {
+      "id": "slow.sports.boxing.frazier",
+      "label": "Joe Frazier",
+      "kind": "legend",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "rival-ali" ]
+    },
+    {
+      "id": "slow.sports.boxing.foreman",
+      "label": "George Foreman",
+      "kind": "legend",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "power", "comeback" ]
+    },
+    {
+      "id": "slow.sports.boxing.sugar_ray_robinson",
+      "label": "Sugar Ray Robinson",
+      "kind": "legend",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "pound-for-pound" ]
+    },
+    {
+      "id": "slow.sports.boxing.sugar_ray_leonard",
+      "label": "Sugar Ray Leonard",
+      "kind": "legend",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "80s" ]
+    },
+    {
+      "id": "slow.sports.boxing.hagler",
+      "label": "Marvin Hagler",
+      "kind": "legend",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "80s", "tough" ]
+    },
+    {
+      "id": "slow.sports.boxing.hearns",
+      "label": "Thomas Hearns",
+      "kind": "legend",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "80s", "power" ]
+    },
+    {
+      "id": "slow.sports.boxing.duran",
+      "label": "Roberto Durán",
+      "kind": "legend",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "hands-of-stone" ]
+    },
+    {
+      "id": "slow.sports.boxing.tyson",
+      "label": "Mike Tyson",
+      "kind": "legend",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "80s-90s", "fear" ]
+    },
+    {
+      "id": "slow.sports.boxing.holyfield",
+      "label": "Evander Holyfield",
+      "kind": "legend",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "90s" ]
+    },
+    {
+      "id": "slow.sports.boxing.lewis",
+      "label": "Lennox Lewis",
+      "kind": "legend",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "90s-00s" ]
+    },
+    {
+      "id": "slow.sports.boxing.roy_jones",
+      "label": "Roy Jones Jr.",
+      "kind": "legend",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "prime", "speed" ]
+    },
+    {
+      "id": "slow.sports.boxing.pacquiao",
+      "label": "Manny Pacquiao",
+      "kind": "legend",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "00s-10s" ]
+    },
+    {
+      "id": "slow.sports.boxing.mayweather",
+      "label": "Floyd Mayweather Jr.",
+      "kind": "legend",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "defense", "debate" ]
+    },
+    {
+      "id": "slow.sports.boxing.canelo",
+      "label": "Canelo Álvarez",
+      "kind": "modern",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "ppv", "king" ]
+    },
+    {
+      "id": "slow.sports.boxing.usyk",
+      "label": "Oleksandr Usyk",
+      "kind": "modern",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "heavy", "skill" ]
+    },
+    {
+      "id": "slow.sports.boxing.tyson_fury",
+      "label": "Tyson Fury",
+      "kind": "modern",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "heavy", "showman" ]
+    },
+    {
+      "id": "slow.sports.boxing.aj",
+      "label": "Anthony Joshua",
+      "kind": "modern",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "heavy", "uk" ]
+    },
+    {
+      "id": "slow.sports.boxing.wilder",
+      "label": "Deontay Wilder",
+      "kind": "modern",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "power" ]
+    },
+    {
+      "id": "slow.sports.boxing.crawford",
+      "label": "Terence Crawford",
+      "kind": "modern",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "p4p" ]
+    },
+    {
+      "id": "slow.sports.boxing.spence",
+      "label": "Errol Spence Jr.",
+      "kind": "modern",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "welter" ]
+    },
+    {
+      "id": "slow.sports.boxing.haney",
+      "label": "Devin Haney",
+      "kind": "modern",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "light" ]
+    },
+    {
+      "id": "slow.sports.boxing.loma",
+      "label": "Vasiliy Lomachenko",
+      "kind": "modern",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "skill", "angles" ]
+    },
+    {
+      "id": "slow.sports.boxing.tank",
+      "label": "Gervonta Davis",
+      "kind": "modern",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "power", "ppv" ]
+    },
+    {
+      "id": "slow.sports.boxing.ryan_garcia",
+      "label": "Ryan Garcia",
+      "kind": "modern",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "hype", "debate" ]
+    },
+    {
+      "id": "slow.sports.boxing.benavidez",
+      "label": "David Benavidez",
+      "kind": "modern",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "pressure" ]
+    },
+    {
+      "id": "slow.sports.boxing.inoue",
+      "label": "Naoya Inoue",
+      "kind": "modern",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "monster", "lower-weight" ]
+    },
+    {
+      "id": "slow.sports.boxing.bivol",
+      "label": "Dmitry Bivol",
+      "kind": "modern",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "light-heavy" ]
+    },
+    {
+      "id": "slow.sports.boxing.beterbiev",
+      "label": "Artur Beterbiev",
+      "kind": "modern",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "light-heavy", "ko" ]
+    },
+
+    {
+      "id": "slow.sports.boxing.mayweather_pac_memory",
+      "label": "Mayweather–Pac memory debates",
+      "kind": "rival",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "what-if" ]
+    },
+    {
+      "id": "slow.sports.boxing.ali_frazier_respect",
+      "label": "Ali–Frazier sacred history",
+      "kind": "rival",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "trilogy" ]
+    },
+    {
+      "id": "slow.sports.boxing.anti_exhibition",
+      "label": "Anti celebrity exhibition",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "purist" ]
+    },
+    {
+      "id": "slow.sports.boxing.ok_crossover",
+      "label": "OK with crossover cards",
+      "kind": "attitude",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "fun" ]
+    },
+    {
+      "id": "slow.sports.boxing.belt_mess",
+      "label": "Complains about alphabet belts",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "wba-wbc-ibf-wbo" ]
+    },
+    {
+      "id": "slow.sports.boxing.ohio_gym",
+      "label": "Ohio gym / local scene awareness",
+      "kind": "local",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "cleveland", "columbus", "cincy" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "heard of Tyson or Ali; no fight calendar",
+    "atOrAbove50": "attach 2-4; division + 1-2 names + watch habit",
+    "atOrAbove70": "PPV and scorecard talk; gym possible",
+    "extreme95": "cards structure weekends; purist debates real"
+  },
+  "notes": "Keep population lower than football/baseball. High boxing + gym_member is a strong NPC flavor. Exhibition hate is common among diehards."
+}

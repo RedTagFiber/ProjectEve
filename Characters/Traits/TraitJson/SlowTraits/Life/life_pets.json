@@ -1,0 +1,381 @@
+{
+  "id": "slow.life.pets",
+  "layer": "slow",
+  "domain": "life",
+  "label": "Pet person",
+  "version": 1,
+  "description": "Life taste/identity: animals in the house or life—dogs, cats, and beyond. Care, talk, spoiling, and boundaries.",
+  "priorIntensity": 5,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [ "dog", "cat", "pet", "pup", "kitten", "vet", "walk", "litter", "bark", "rescue" ],
+  "rivalBias": true,
+  "catalog": "Life",
+  "subTraits": [
+    {
+      "id": "slow.life.pets.dog_person",
+      "label": "Dog person",
+      "kind": "species",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "walk", "loyal" ]
+    },
+    {
+      "id": "slow.life.pets.cat_person",
+      "label": "Cat person",
+      "kind": "species",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "lap", "independent" ]
+    },
+    {
+      "id": "slow.life.pets.both_dog_cat",
+      "label": "Dog and cat household",
+      "kind": "species",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "chaos", "love" ]
+    },
+    {
+      "id": "slow.life.pets.only_dogs",
+      "label": "Dogs only (no cats)",
+      "kind": "species",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "boundary" ]
+    },
+    {
+      "id": "slow.life.pets.only_cats",
+      "label": "Cats only (no dogs)",
+      "kind": "species",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "boundary" ]
+    },
+    {
+      "id": "slow.life.pets.rescue_first",
+      "label": "Rescue / adopt first",
+      "kind": "source",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "shelter", "ethics" ]
+    },
+    {
+      "id": "slow.life.pets.breeder_specific",
+      "label": "Breed-specific seeker",
+      "kind": "source",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "breed", "waitlist" ]
+    },
+    {
+      "id": "slow.life.pets.working_breed",
+      "label": "Working / sport breed",
+      "kind": "dog",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "drive", "job" ]
+    },
+    {
+      "id": "slow.life.pets.lap_dog",
+      "label": "Lap / companion dog",
+      "kind": "dog",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "small", "couch" ]
+    },
+    {
+      "id": "slow.life.pets.big_dog",
+      "label": "Big dog preference",
+      "kind": "dog",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "space", "yard" ]
+    },
+    {
+      "id": "slow.life.pets.mutt_pride",
+      "label": "Mutt pride",
+      "kind": "dog",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "mix", "character" ]
+    },
+    {
+      "id": "slow.life.pets.training_serious",
+      "label": "Training serious",
+      "kind": "care",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "obey", "class" ]
+    },
+    {
+      "id": "slow.life.pets.training_loose",
+      "label": "Loose / chill training",
+      "kind": "care",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "vibe", "not-strict" ]
+    },
+    {
+      "id": "slow.life.pets.walk_daily",
+      "label": "Daily walk non-negotiable",
+      "kind": "care",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "routine", "weather" ]
+    },
+    {
+      "id": "slow.life.pets.offleash_trust",
+      "label": "Off-leash trust goals",
+      "kind": "care",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "recall", "field" ]
+    },
+    {
+      "id": "slow.life.pets.vet_anxious",
+      "label": "Vet-anxious (for pet)",
+      "kind": "care",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "money", "worry" ]
+    },
+    {
+      "id": "slow.life.pets.vet_proactive",
+      "label": "Proactive vet care",
+      "kind": "care",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "prevent", "money" ]
+    },
+    {
+      "id": "slow.life.pets.spoil_food",
+      "label": "Spoils with food",
+      "kind": "care",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "treats", "table" ]
+    },
+    {
+      "id": "slow.life.pets.raw_or_fancy_diet",
+      "label": "Fancy / raw diet",
+      "kind": "care",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "food", "money" ]
+    },
+    {
+      "id": "slow.life.pets.bed_share",
+      "label": "Pet in the bed",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "sleep", "partner-friction" ]
+    },
+    {
+      "id": "slow.life.pets.no_bed",
+      "label": "No pets on furniture",
+      "kind": "habit",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "rules", "clean" ]
+    },
+    {
+      "id": "slow.life.pets.talks_to_pet",
+      "label": "Talks to pet constantly",
+      "kind": "habit",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "voice", "bond" ]
+    },
+    {
+      "id": "slow.life.pets.photo_pet",
+      "label": "Phone full of pet photos",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "camera", "share" ]
+    },
+    {
+      "id": "slow.life.pets.social_media_pet",
+      "label": "Pet has a social presence",
+      "kind": "habit",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "post", "joke" ]
+    },
+    {
+      "id": "slow.life.pets.multi_pet",
+      "label": "Multi-pet household",
+      "kind": "context",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "pack", "cost" ]
+    },
+    {
+      "id": "slow.life.pets.one_pet_only",
+      "label": "One pet only capacity",
+      "kind": "context",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "limit", "focus" ]
+    },
+    {
+      "id": "slow.life.pets.foster",
+      "label": "Fosters animals",
+      "kind": "care",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "temp", "heartbreak" ]
+    },
+    {
+      "id": "slow.life.pets.fish_tanks",
+      "label": "Fish / aquariums",
+      "kind": "species",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "tank", "calm" ]
+    },
+    {
+      "id": "slow.life.pets.birds",
+      "label": "Birds",
+      "kind": "species",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "cage", "noise" ]
+    },
+    {
+      "id": "slow.life.pets.reptiles",
+      "label": "Reptiles",
+      "kind": "species",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "heat", "niche" ]
+    },
+    {
+      "id": "slow.life.pets.small_mammals",
+      "label": "Rabbits / guinea / hamster",
+      "kind": "species",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "small", "kids" ]
+    },
+    {
+      "id": "slow.life.pets.horses",
+      "label": "Horses / barn life",
+      "kind": "species",
+      "defaultRange": [ 15, 95 ],
+      "tags": [ "barn", "money", "rural" ]
+    },
+    {
+      "id": "slow.life.pets.farm_animals",
+      "label": "Farm pets / livestock bond",
+      "kind": "species",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "chicken", "goat", "ohio" ]
+    },
+    {
+      "id": "slow.life.pets.allergy_struggle",
+      "label": "Loves pets despite allergy",
+      "kind": "context",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "meds", "tradeoff" ]
+    },
+    {
+      "id": "slow.life.pets.no_pets_partner_conflict",
+      "label": "Partner conflict over pets",
+      "kind": "social",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "dealbreaker", "negotiate" ]
+    },
+    {
+      "id": "slow.life.pets.kids_and_pets",
+      "label": "Kids + pets package",
+      "kind": "social",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "family", "teach" ]
+    },
+    {
+      "id": "slow.life.pets.grief_past",
+      "label": "Deep grief for past pet",
+      "kind": "history_hook",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "loss", "memory" ]
+    },
+    {
+      "id": "slow.life.pets.named_family",
+      "label": "Pet is family member",
+      "kind": "attitude",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "equal", "holiday" ]
+    },
+    {
+      "id": "slow.life.pets.working_animal",
+      "label": "Animal has a job",
+      "kind": "attitude",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "herd", "hunt", "service" ]
+    },
+    {
+      "id": "slow.life.pets.service_support",
+      "label": "Service / ESA awareness",
+      "kind": "care",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "support", "public" ]
+    },
+    {
+      "id": "slow.life.pets.dog_park",
+      "label": "Dog park regular",
+      "kind": "social",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "social", "play" ]
+    },
+    {
+      "id": "slow.life.pets.reactive_manage",
+      "label": "Manages reactive dog",
+      "kind": "care",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "training", "stress" ]
+    },
+    {
+      "id": "slow.life.pets.senior_pet_care",
+      "label": "Senior pet devoted care",
+      "kind": "care",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "old", "meds", "soft" ]
+    },
+    {
+      "id": "slow.life.pets.holiday_pet_stress",
+      "label": "Holiday pet logistics stress",
+      "kind": "context",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "travel", "sitter" ]
+    },
+    {
+      "id": "slow.life.pets.sitter_network",
+      "label": "Has pet-sitter network",
+      "kind": "social",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "trust", "friends" ]
+    },
+    {
+      "id": "slow.life.pets.anti_breed_ban",
+      "label": "Anti breed bans",
+      "kind": "attitude",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "politics", "dog" ]
+    },
+    {
+      "id": "slow.life.pets.cat_outdoor",
+      "label": "Outdoor cat OK",
+      "kind": "care",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "barn", "debate" ]
+    },
+    {
+      "id": "slow.life.pets.cat_indoor_only",
+      "label": "Indoor-only cats",
+      "kind": "care",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "safe", "litter" ]
+    },
+    {
+      "id": "slow.life.pets.litter_standards",
+      "label": "Litter / house standards high",
+      "kind": "care",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "clean", "smell" ]
+    },
+    {
+      "id": "slow.life.pets.animal_voice",
+      "label": "Advocates for animals in talk",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "ethics", "argue" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "likes animals; no daily care identity",
+    "atOrAbove50": "attach 2-3; pet is conversation default and schedule factor",
+    "atOrAbove70": "pet logistics shape dating, travel, money; grief hooks available",
+    "extreme95": "pet is central family; partners who dislike pets are near-dealbreakers"
+  },
+  "notes": "Bed-share and partner-conflict subs create natural relationship drama. Ohio farm/horse rare but real."
+}

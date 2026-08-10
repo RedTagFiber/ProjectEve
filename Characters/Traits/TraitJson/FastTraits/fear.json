@@ -1,0 +1,186 @@
+﻿{
+  "id": "fear",
+  "layer": "fast",
+  "label": "Fear",
+  "version": 1,
+  "description": "Response to threat, loss, or danger — more immediate than Anxiety. Can be physical danger, social ruin, or losing someone.",
+  "priorIntensity": {
+    "min": 2,
+    "max": 6,
+    "mean": 3
+  },
+  "spawn": {
+    "currentFromIntensity": true,
+    "noise": 3
+  },
+  "bands": {
+    "off": [ 0, 29 ],
+    "low": [ 30, 49 ],
+    "mid": [ 50, 69 ],
+    "high": [ 70, 84 ],
+    "break": [ 85, 94 ],
+    "extreme": [ 95, 100 ]
+  },
+  "styles": {
+    "flee": {
+      "means": "Gets out — leaves room, ends call, changes subject hard.",
+      "speechHints": [ "cutoff", "gotta_go" ],
+      "bodyHints": [ "exit", "turn_away" ],
+      "riskTags": [ "abandon_scene" ]
+    },
+    "freeze": {
+      "means": "Cannot move or decide; locked.",
+      "speechHints": [ "stuck", "quiet" ],
+      "bodyHints": [ "still", "wide_eye" ],
+      "riskTags": [ "non_responsive" ]
+    },
+    "fight": {
+      "means": "Fear turns into push-back; defensive aggression.",
+      "speechHints": [ "sharp", "defensive" ],
+      "bodyHints": [ "brace", "raise_voice" ],
+      "riskTags": [ "fear_anger_blend" ]
+    },
+    "cling": {
+      "means": "Grabs safety in a person; stays close; needs them near.",
+      "speechHints": [ "don't_leave", "stay" ],
+      "bodyHints": [ "hold", "follow" ],
+      "riskTags": [ "cling" ]
+    },
+    "numb": {
+      "means": "Shuts feeling down; flat; delayed reaction.",
+      "speechHints": [ "flat", "distant" ],
+      "bodyHints": [ "slack", "empty_face" ],
+      "riskTags": [ "dissociate_light" ]
+    }
+  },
+  "defaultStyleWeights": {
+    "flee": 0.9,
+    "freeze": 0.7,
+    "fight": 0.6,
+    "cling": 0.8,
+    "numb": 0.5
+  },
+  "flavors": {
+    "physical": "Body harm, violence, accident.",
+    "social": "Humiliation, exile, being hated.",
+    "loss": "Someone leaving, dying, choosing another.",
+    "authority": "Police, boss, parent power.",
+    "unknown": "Cannot name the threat; dread."
+  },
+  "pull": {
+    "belowHomeDamageMult": 0.5,
+    "recoverMult": 1.35,
+    "aboveHomeSettleMult": 1.25
+  },
+  "funding": {
+    "required": true,
+    "budgetPerIntensityPoint": 1.0
+  },
+  "links": [
+    {
+      "trait": "anxiety",
+      "op": "+",
+      "weight": 0.4,
+      "when": "rise"
+    },
+    {
+      "trait": "guard",
+      "op": "+",
+      "weight": 0.55,
+      "when": "rise"
+    },
+    {
+      "trait": "openness",
+      "op": "-",
+      "weight": 0.45,
+      "when": "rise"
+    },
+    {
+      "trait": "trust",
+      "op": "-",
+      "weight": 0.3,
+      "when": "rise"
+    },
+    {
+      "trait": "hope",
+      "op": "-",
+      "weight": 0.35,
+      "when": "rise"
+    },
+    {
+      "trait": "anger",
+      "op": "+",
+      "weight": 0.3,
+      "when": "rise",
+      "styleGate": [ "fight" ]
+    }
+  ],
+  "opposePairs": [
+    {
+      "with": "pride",
+      "policyHints": [ "hide_fear", "bravado" ]
+    },
+    {
+      "with": "affection",
+      "policyHints": [ "cling_to_them", "fear_for_them" ]
+    }
+  ],
+  "tagTriggers": [
+    {
+      "tag": "threat.physical",
+      "direction": "+",
+      "baseWeight": 1.0
+    },
+    {
+      "tag": "threat.social",
+      "direction": "+",
+      "baseWeight": 0.85
+    },
+    {
+      "tag": "threat.loss",
+      "direction": "+",
+      "baseWeight": 0.9
+    },
+    {
+      "tag": "conflict.threaten",
+      "direction": "+",
+      "baseWeight": 0.95
+    },
+    {
+      "tag": "bond.abandon_signal",
+      "direction": "+",
+      "baseWeight": 0.85
+    },
+    {
+      "tag": "bond.reassurance",
+      "direction": "-",
+      "baseWeight": 0.7
+    },
+    {
+      "tag": "bond.safe_presence",
+      "direction": "-",
+      "baseWeight": 0.75
+    },
+    {
+      "tag": "repair.apology",
+      "direction": "-",
+      "baseWeight": 0.3
+    }
+  ],
+  "relationScoped": true,
+  "historyHooks": {
+    "catalog": "Characters/Traits/TraitJson/TraitHistory/fear_patterns.json",
+    "filters": [ "style", "flavor", "sourceBucket" ],
+    "tellFraming": {
+      "prideHigh": "HeroSelf",
+      "prideLow": "VictimSelf",
+      "shameHigh": "VictimSelf",
+      "telephone": true
+    }
+  },
+  "debug": {
+    "showInDash": true,
+    "color": "#6b7b8a",
+    "sortPriority": 11
+  }
+}

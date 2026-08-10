@@ -1,0 +1,374 @@
+{
+  "id": "slow.movies.animated",
+  "layer": "slow",
+  "domain": "movies",
+  "label": "Animated",
+  "version": 1,
+  "description": "Prefers animated films—family, adult animation, anime features, stop-motion, and style-forward storytelling.",
+  "priorIntensity": 5,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [ "movie", "animated", "pixar", "disney", "anime", "cartoon", "ghibli", "kids movie", "rewatch" ],
+  "rivalBias": true,
+  "catalog": "Movies/Titles/Animated",
+  "subTraits": [
+    {
+      "id": "slow.movies.animated.pixar",
+      "label": "Pixar emotional craft",
+      "kind": "studio",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "up", "inside-out" ]
+    },
+    {
+      "id": "slow.movies.animated.disney_classic",
+      "label": "Disney classics",
+      "kind": "studio",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "princess", "musical" ]
+    },
+    {
+      "id": "slow.movies.animated.disney_modern",
+      "label": "Modern Disney / W-ERA",
+      "kind": "studio",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "frozen", "moana" ]
+    },
+    {
+      "id": "slow.movies.animated.dreamworks",
+      "label": "DreamWorks energy",
+      "kind": "studio",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "shrek", "humor" ]
+    },
+    {
+      "id": "slow.movies.animated.illumination",
+      "label": "Illumination / kid chaos",
+      "kind": "studio",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "minions", "broad" ]
+    },
+    {
+      "id": "slow.movies.animated.ghibli",
+      "label": "Ghibli / Miyazaki",
+      "kind": "studio",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "spirit", "hand-drawn" ]
+    },
+    {
+      "id": "slow.movies.animated.anime_feature",
+      "label": "Anime features",
+      "kind": "style",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "japan", "your-name" ]
+    },
+    {
+      "id": "slow.movies.animated.stop_motion",
+      "label": "Stop-motion",
+      "kind": "style",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "coral", "laika" ]
+    },
+    {
+      "id": "slow.movies.animated.hand_drawn",
+      "label": "Hand-drawn preference",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "2d", "craft" ]
+    },
+    {
+      "id": "slow.movies.animated.cgi_3d",
+      "label": "CGI 3D preference",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "modern", "render" ]
+    },
+    {
+      "id": "slow.movies.animated.adult_animation",
+      "label": "Adult animation features",
+      "kind": "rating",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "spider-verse-edge", "satire" ]
+    },
+    {
+      "id": "slow.movies.animated.family_first",
+      "label": "Family / all-ages first",
+      "kind": "rating",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "kids", "safe" ]
+    },
+    {
+      "id": "slow.movies.animated.kids_only_gate",
+      "label": "Still sees as 'kids movies'",
+      "kind": "attitude",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "gate", "grow-up" ]
+    },
+    {
+      "id": "slow.movies.animated.animation_is_cinema",
+      "label": "Animation is cinema",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "art", "serious" ]
+    },
+    {
+      "id": "slow.movies.animated.musical_toons",
+      "label": "Animated musicals",
+      "kind": "style",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "songs", "broadway" ]
+    },
+    {
+      "id": "slow.movies.animated.no_musical",
+      "label": "No singing please",
+      "kind": "style",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "skip-songs" ]
+    },
+    {
+      "id": "slow.movies.animated.emotional_gut",
+      "label": "Emotional gut-punch toons",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "cry", "up" ]
+    },
+    {
+      "id": "slow.movies.animated.joke_machine",
+      "label": "Joke-dense animated",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "gags", "shrek" ]
+    },
+    {
+      "id": "slow.movies.animated.visual_innovation",
+      "label": "Visual innovation chase",
+      "kind": "style",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "spider-verse", "style" ]
+    },
+    {
+      "id": "slow.movies.animated.comfort_rewatch",
+      "label": "Endless comfort rewatch",
+      "kind": "viewing",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "kids", "sick-day" ]
+    },
+    {
+      "id": "slow.movies.animated.with_kids",
+      "label": "Watches with kids identity",
+      "kind": "social",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "parent", "bond" ]
+    },
+    {
+      "id": "slow.movies.animated.without_kids",
+      "label": "Watches without kids proudly",
+      "kind": "social",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "adult", "no-shame" ]
+    },
+    {
+      "id": "slow.movies.animated.date_animated",
+      "label": "Date-night animated OK",
+      "kind": "social",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "soft", "fun" ]
+    },
+    {
+      "id": "slow.movies.animated.theater_event",
+      "label": "Theater event for big toons",
+      "kind": "viewing",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "opening", "family" ]
+    },
+    {
+      "id": "slow.movies.animated.short_films",
+      "label": "Loves animated shorts",
+      "kind": "format",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "pixar-short", "before" ]
+    },
+    {
+      "id": "slow.movies.animated.sequel_fatigue",
+      "label": "Sequel fatigue",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "originals", "cash-grab" ]
+    },
+    {
+      "id": "slow.movies.animated.franchise_kids",
+      "label": "Kids franchise loyal",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "toy", "brand" ]
+    },
+    {
+      "id": "slow.movies.animated.foreign_toons",
+      "label": "Foreign / subtitled animation",
+      "kind": "scope",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "sub", "ghibli" ]
+    },
+    {
+      "id": "slow.movies.animated.dub_only",
+      "label": "Dub only",
+      "kind": "viewing",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "english", "easy" ]
+    },
+    {
+      "id": "slow.movies.animated.sub_prefer",
+      "label": "Subs preferred",
+      "kind": "viewing",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "original", "voice" ]
+    },
+    {
+      "id": "slow.movies.animated.holiday_specials",
+      "label": "Holiday animated specials",
+      "kind": "season",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "christmas", "tradition" ]
+    },
+    {
+      "id": "slow.movies.animated.nostalgia_90s",
+      "label": "90s/00s toon nostalgia",
+      "kind": "era",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "vhs", "childhood" ]
+    },
+    {
+      "id": "slow.movies.animated.art_house_toon",
+      "label": "Art-house animation",
+      "kind": "style",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "festival", "weird" ]
+    },
+    {
+      "id": "slow.movies.animated.animal_leads",
+      "label": "Animal-lead stories",
+      "kind": "trope",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "zootopia", "pets" ]
+    },
+    {
+      "id": "slow.movies.animated.human_leads",
+      "label": "Human-lead animated",
+      "kind": "trope",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "family", "city" ]
+    },
+    {
+      "id": "slow.movies.animated.fantasy_worlds",
+      "label": "Fantasy world building",
+      "kind": "trope",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "magic", "quest" ]
+    },
+    {
+      "id": "slow.movies.animated.coming_of_age",
+      "label": "Coming-of-age toons",
+      "kind": "trope",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "grow", "feel" ]
+    },
+    {
+      "id": "slow.movies.animated.villain_songs",
+      "label": "Villain songs / big numbers",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "musical", "iconic" ]
+    },
+    {
+      "id": "slow.movies.animated.world_detail",
+      "label": "Background world detail nerd",
+      "kind": "habit",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "pause", "easter-egg" ]
+    },
+    {
+      "id": "slow.movies.animated.score_sensitive",
+      "label": "Score / songs sensitive",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "music", "theme" ]
+    },
+    {
+      "id": "slow.movies.animated.merch_resistant",
+      "label": "Story over merch",
+      "kind": "attitude",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "anti-product" ]
+    },
+    {
+      "id": "slow.movies.animated.collects_art",
+      "label": "Collects art books / stills",
+      "kind": "habit",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "craft", "shelf" ]
+    },
+    {
+      "id": "slow.movies.animated.rewatch_with_new_eyes",
+      "label": "Adult rewatch hits different",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "parent", "cry" ]
+    },
+    {
+      "id": "slow.movies.animated.spiderverse_style",
+      "label": "Spider-Verse style revolution",
+      "kind": "style",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "frames", "comic" ]
+    },
+    {
+      "id": "slow.movies.animated.indie_anim",
+      "label": "Indie animation features",
+      "kind": "scope",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "small", "festival" ]
+    },
+    {
+      "id": "slow.movies.animated.tv_movie_crossover",
+      "label": "Loves animated TV movies too",
+      "kind": "format",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "special", "series" ]
+    },
+    {
+      "id": "slow.movies.animated.no_live_action_remake",
+      "label": "Hates live-action remakes",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "rival", "protect" ]
+    },
+    {
+      "id": "slow.movies.animated.ok_remakes",
+      "label": "OK with some remakes",
+      "kind": "attitude",
+      "defaultRange": [ 15, 80 ],
+      "tags": [ "curious", "cast" ]
+    },
+    {
+      "id": "slow.movies.animated.teach_taste_kids",
+      "label": "Uses toons to teach taste",
+      "kind": "social",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "parent", "curate" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "watched kids films; no animation identity",
+    "atOrAbove50": "attach 2-4; studio and style opinions appear",
+    "atOrAbove70": "animation is legitimate favorite lane; rewatch culture strong",
+    "extreme95": "defends animation as art; remake discourse is personal"
+  },
+  "notes": "Ghibli/anime vs pure Disney split is free personality. Parent vs adult-only watching matters for talk."
+}

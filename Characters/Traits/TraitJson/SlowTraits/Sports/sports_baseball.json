@@ -1,0 +1,424 @@
+{
+  "id": "slow.sports.baseball",
+  "layer": "slow",
+  "domain": "sports",
+  "label": "Baseball",
+  "version": 1,
+  "description": "MLB interest—teams, rivalries, watch habits, and talk. Ohio leans Reds and Guardians; rivals and national clubs still available.",
+  "priorIntensity": 5,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [
+    "game",
+    "team",
+    "pitching",
+    "homer",
+    "season",
+    "playoffs",
+    "box score",
+    "bullpen",
+    "trade deadline",
+    "opening day",
+    "World Series"
+  ],
+  "rivalBias": true,
+  "catalog": "Sports/Baseball",
+  "subTraits": [
+    {
+      "id": "slow.sports.baseball.casual_fan",
+      "label": "Casual fan",
+      "kind": "intensity",
+      "defaultRange": [ 30, 70 ],
+      "tags": [ "radio", "highlights" ]
+    },
+    {
+      "id": "slow.sports.baseball.diehard",
+      "label": "Diehard",
+      "kind": "intensity",
+      "defaultRange": [ 70, 95 ],
+      "tags": [ "every-day", "stats" ]
+    },
+    {
+      "id": "slow.sports.baseball.bandwagon",
+      "label": "Bandwagon when hot",
+      "kind": "intensity",
+      "defaultRange": [ 20, 70 ],
+      "tags": [ "october", "only" ]
+    },
+    {
+      "id": "slow.sports.baseball.analytics",
+      "label": "Analytics / sabermetrics",
+      "kind": "knowledge",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "ops", "war", "nerd" ]
+    },
+    {
+      "id": "slow.sports.baseball.old_school",
+      "label": "Old-school eye test",
+      "kind": "knowledge",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "scout", "grit" ]
+    },
+    {
+      "id": "slow.sports.baseball.history_buff",
+      "label": "History / dead-ball nerd",
+      "kind": "knowledge",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "records", "era" ]
+    },
+    {
+      "id": "slow.sports.baseball.fantasy",
+      "label": "Fantasy baseball",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "roster", "wire" ]
+    },
+    {
+      "id": "slow.sports.baseball.radio_listen",
+      "label": "Radio / scoreboard listen",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "drive", "ohio" ]
+    },
+    {
+      "id": "slow.sports.baseball.tv_every_night",
+      "label": "TV almost every night",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "package", "couch" ]
+    },
+    {
+      "id": "slow.sports.baseball.ballpark",
+      "label": "Goes to the park",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "tickets", "summer" ]
+    },
+    {
+      "id": "slow.sports.baseball.out_of_market",
+      "label": "Out-of-market streamer",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "package", "vpn-adj" ]
+    },
+
+    {
+      "id": "slow.sports.baseball.team_reds",
+      "label": "Cincinnati Reds",
+      "kind": "team",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "ohio", "nl-central", "primary" ]
+    },
+    {
+      "id": "slow.sports.baseball.team_guardians",
+      "label": "Cleveland Guardians",
+      "kind": "team",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "ohio", "al-central", "primary" ]
+    },
+    {
+      "id": "slow.sports.baseball.team_yankees",
+      "label": "New York Yankees",
+      "kind": "team",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "al-east", "hate-or-love" ]
+    },
+    {
+      "id": "slow.sports.baseball.team_cubs",
+      "label": "Chicago Cubs",
+      "kind": "team",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "nl-central", "rival-adj" ]
+    },
+    {
+      "id": "slow.sports.baseball.team_cardinals",
+      "label": "St. Louis Cardinals",
+      "kind": "team",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "nl-central", "reds-rival" ]
+    },
+    {
+      "id": "slow.sports.baseball.team_brewers",
+      "label": "Milwaukee Brewers",
+      "kind": "team",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "nl-central" ]
+    },
+    {
+      "id": "slow.sports.baseball.team_pirates",
+      "label": "Pittsburgh Pirates",
+      "kind": "team",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "nl-central", "ohio-adj" ]
+    },
+    {
+      "id": "slow.sports.baseball.team_astros",
+      "label": "Houston Astros",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "al-west", "controversy" ]
+    },
+    {
+      "id": "slow.sports.baseball.team_dodgers",
+      "label": "Los Angeles Dodgers",
+      "kind": "team",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "nl-west", "spend" ]
+    },
+    {
+      "id": "slow.sports.baseball.team_braves",
+      "label": "Atlanta Braves",
+      "kind": "team",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "nl-east" ]
+    },
+    {
+      "id": "slow.sports.baseball.team_mets",
+      "label": "New York Mets",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "nl-east" ]
+    },
+    {
+      "id": "slow.sports.baseball.team_phillies",
+      "label": "Philadelphia Phillies",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "nl-east" ]
+    },
+    {
+      "id": "slow.sports.baseball.team_red_sox",
+      "label": "Boston Red Sox",
+      "kind": "team",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "al-east", "yankees-rival" ]
+    },
+    {
+      "id": "slow.sports.baseball.team_orioles",
+      "label": "Baltimore Orioles",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "al-east" ]
+    },
+    {
+      "id": "slow.sports.baseball.team_rays",
+      "label": "Tampa Bay Rays",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "al-east", "smart" ]
+    },
+    {
+      "id": "slow.sports.baseball.team_blue_jays",
+      "label": "Toronto Blue Jays",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "al-east" ]
+    },
+    {
+      "id": "slow.sports.baseball.team_tigers",
+      "label": "Detroit Tigers",
+      "kind": "team",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "al-central", "ohio-adj" ]
+    },
+    {
+      "id": "slow.sports.baseball.team_twins",
+      "label": "Minnesota Twins",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "al-central" ]
+    },
+    {
+      "id": "slow.sports.baseball.team_white_sox",
+      "label": "Chicago White Sox",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "al-central" ]
+    },
+    {
+      "id": "slow.sports.baseball.team_royals",
+      "label": "Kansas City Royals",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "al-central" ]
+    },
+    {
+      "id": "slow.sports.baseball.team_mariners",
+      "label": "Seattle Mariners",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "al-west" ]
+    },
+    {
+      "id": "slow.sports.baseball.team_rangers",
+      "label": "Texas Rangers",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "al-west" ]
+    },
+    {
+      "id": "slow.sports.baseball.team_angels",
+      "label": "Los Angeles Angels",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "al-west" ]
+    },
+    {
+      "id": "slow.sports.baseball.team_athletics",
+      "label": "Athletics",
+      "kind": "team",
+      "defaultRange": [ 10, 75 ],
+      "tags": [ "al-west" ]
+    },
+    {
+      "id": "slow.sports.baseball.team_padres",
+      "label": "San Diego Padres",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "nl-west" ]
+    },
+    {
+      "id": "slow.sports.baseball.team_giants",
+      "label": "San Francisco Giants",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "nl-west" ]
+    },
+    {
+      "id": "slow.sports.baseball.team_rockies",
+      "label": "Colorado Rockies",
+      "kind": "team",
+      "defaultRange": [ 10, 75 ],
+      "tags": [ "nl-west" ]
+    },
+    {
+      "id": "slow.sports.baseball.team_diamondbacks",
+      "label": "Arizona Diamondbacks",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "nl-west" ]
+    },
+    {
+      "id": "slow.sports.baseball.team_nationals",
+      "label": "Washington Nationals",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "nl-east" ]
+    },
+    {
+      "id": "slow.sports.baseball.team_marlins",
+      "label": "Miami Marlins",
+      "kind": "team",
+      "defaultRange": [ 10, 75 ],
+      "tags": [ "nl-east" ]
+    },
+
+    {
+      "id": "slow.sports.baseball.rival_reds_cards",
+      "label": "Reds ↔ Cardinals heat",
+      "kind": "rival",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "nl-central" ]
+    },
+    {
+      "id": "slow.sports.baseball.rival_reds_cubs",
+      "label": "Reds ↔ Cubs heat",
+      "kind": "rival",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "nl-central" ]
+    },
+    {
+      "id": "slow.sports.baseball.rival_guardians_tigers",
+      "label": "Guardians ↔ Tigers heat",
+      "kind": "rival",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "al-central" ]
+    },
+    {
+      "id": "slow.sports.baseball.rival_yankees_hate",
+      "label": "Yankees hate (or love)",
+      "kind": "rival",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "national" ]
+    },
+    {
+      "id": "slow.sports.baseball.rival_astros_hate",
+      "label": "Astros scandal hangover",
+      "kind": "rival",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "cheat" ]
+    },
+
+    {
+      "id": "slow.sports.baseball.watch_pitching_duel",
+      "label": "Loves pitching duels",
+      "kind": "taste",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "low-scoring" ]
+    },
+    {
+      "id": "slow.sports.baseball.watch_offense",
+      "label": "Wants offense / homers",
+      "kind": "taste",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "slug" ]
+    },
+    {
+      "id": "slow.sports.baseball.watch_bullpen_stress",
+      "label": "Bullpen innings stress",
+      "kind": "taste",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "late" ]
+    },
+    {
+      "id": "slow.sports.baseball.spring_training_care",
+      "label": "Cares about spring training",
+      "kind": "habit",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "february" ]
+    },
+    {
+      "id": "slow.sports.baseball.trade_deadline_obsess",
+      "label": "Trade deadline obsessive",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "july" ]
+    },
+    {
+      "id": "slow.sports.baseball.prospect_nerd",
+      "label": "Prospect / farm system nerd",
+      "kind": "knowledge",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "pipeline" ]
+    },
+    {
+      "id": "slow.sports.baseball.ohio_split",
+      "label": "Ohio split household (Reds vs Guardians)",
+      "kind": "local",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "family", "argue" ]
+    },
+    {
+      "id": "slow.sports.baseball.town_watched",
+      "label": "On TownWatchedTeams feed",
+      "kind": "system",
+      "defaultRange": [ 40, 95 ],
+      "tags": [ "local", "packet" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "knows World Series exists; no team identity",
+    "atOrAbove50": "attach primary team + 1-2 rivals/habits; real names in talk",
+    "atOrAbove70": "nightly or radio habit; deadline and farm talk unlock",
+    "extreme95": "season structures free time; losses affect Fast mood"
+  },
+  "notes": "Factory: one primary team for most NPCs. Ohio seed weight toward Reds + Guardians. TownWatchedTeams only for locals actually followed."
+}

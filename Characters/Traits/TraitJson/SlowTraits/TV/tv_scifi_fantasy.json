@@ -1,0 +1,199 @@
+{
+  "id": "slow.tv.scifi_fantasy",
+  "layer": "slow",
+  "domain": "tv",
+  "label": "TV Sci-Fi / Fantasy",
+  "version": 1,
+  "description": "Sci-fi, fantasy, superhero, and speculative TV series.",
+  "priorIntensity": 5,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [ "sci-fi", "fantasy", "episode", "season", "lore", "finale", "marvel", "star wars" ],
+  "rivalBias": true,
+  "catalog": "TV/Shows/SciFiFantasy",
+  "subTraits": [
+    {
+      "id": "slow.tv.scifi_fantasy.hard_scifi",
+      "label": "Harder sci-fi",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "ideas" ]
+    },
+    {
+      "id": "slow.tv.scifi_fantasy.space_opera",
+      "label": "Space opera",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "ships" ]
+    },
+    {
+      "id": "slow.tv.scifi_fantasy.fantasy_epic",
+      "label": "Epic fantasy",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "worlds" ]
+    },
+    {
+      "id": "slow.tv.scifi_fantasy.superhero",
+      "label": "Superhero TV",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "cape" ]
+    },
+    {
+      "id": "slow.tv.scifi_fantasy.stranger_things",
+      "label": "Stranger Things",
+      "kind": "show",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "netflix", "80s" ]
+    },
+    {
+      "id": "slow.tv.scifi_fantasy.got",
+      "label": "Game of Thrones / House of the Dragon",
+      "kind": "show",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "fantasy" ]
+    },
+    {
+      "id": "slow.tv.scifi_fantasy.witcher",
+      "label": "The Witcher",
+      "kind": "show",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "fantasy" ]
+    },
+    {
+      "id": "slow.tv.scifi_fantasy.lotr_rings",
+      "label": "Rings of Power / Tolkien TV",
+      "kind": "show",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "debate" ]
+    },
+    {
+      "id": "slow.tv.scifi_fantasy.mandalorian",
+      "label": "The Mandalorian / Star Wars TV",
+      "kind": "show",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "star-wars" ]
+    },
+    {
+      "id": "slow.tv.scifi_fantasy.andor",
+      "label": "Andor",
+      "kind": "show",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "prestige-sw" ]
+    },
+    {
+      "id": "slow.tv.scifi_fantasy.last_of_us",
+      "label": "The Last of Us",
+      "kind": "show",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "adaptation" ]
+    },
+    {
+      "id": "slow.tv.scifi_fantasy.fallout",
+      "label": "Fallout",
+      "kind": "show",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "adaptation" ]
+    },
+    {
+      "id": "slow.tv.scifi_fantasy.foundation",
+      "label": "Foundation",
+      "kind": "show",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "hard-adj" ]
+    },
+    {
+      "id": "slow.tv.scifi_fantasy.severance",
+      "label": "Severance",
+      "kind": "show",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "prestige", "weird" ]
+    },
+    {
+      "id": "slow.tv.scifi_fantasy.westworld",
+      "label": "Westworld",
+      "kind": "show",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "debate" ]
+    },
+    {
+      "id": "slow.tv.scifi_fantasy.black_mirror",
+      "label": "Black Mirror",
+      "kind": "show",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "anthology" ]
+    },
+    {
+      "id": "slow.tv.scifi_fantasy.doctor_who",
+      "label": "Doctor Who",
+      "kind": "show",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "long-run" ]
+    },
+    {
+      "id": "slow.tv.scifi_fantasy.trek",
+      "label": "Star Trek (any era)",
+      "kind": "show",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "franchise" ]
+    },
+    {
+      "id": "slow.tv.scifi_fantasy.xfiles",
+      "label": "The X-Files",
+      "kind": "show",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "90s" ]
+    },
+    {
+      "id": "slow.tv.scifi_fantasy.buffy",
+      "label": "Buffy / Whedon-era fantasy",
+      "kind": "show",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "90s-00s" ]
+    },
+    {
+      "id": "slow.tv.scifi_fantasy.marvel_tv",
+      "label": "MCU Disney+ shows",
+      "kind": "show",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "volume" ]
+    },
+    {
+      "id": "slow.tv.scifi_fantasy.the_boys",
+      "label": "The Boys",
+      "kind": "show",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "dark", "super" ]
+    },
+    {
+      "id": "slow.tv.scifi_fantasy.lore_debate",
+      "label": "Lore argument enjoyer",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "online" ]
+    },
+    {
+      "id": "slow.tv.scifi_fantasy.franchise_loyal",
+      "label": "Franchise-loyal (SW/Trek/Marvel)",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "tribal" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "saw Stranger Things once; no lane",
+    "atOrAbove50": "attach style + 2-3 shows",
+    "atOrAbove70": "lore and franchise talk is normal",
+    "extreme95": "release weeks structure free time"
+  },
+  "notes": "Anime is separate pack—don't dump anime-only titles here."
+}

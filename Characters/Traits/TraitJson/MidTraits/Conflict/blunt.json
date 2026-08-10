@@ -1,0 +1,70 @@
+{
+    "id":  "mid.blunt",
+    "layer":  "mid",
+    "label":  "Blunt",
+    "version":  1,
+    "cluster":  "conflict",
+    "description":  "Says the sharp true thing with little polish.",
+    "priorIntensity":  5,
+    "moveSpeed":  "slow",
+    "bands":  {
+                  "off":  "0-29",
+                  "low":  "30-49",
+                  "mid":  "50-69",
+                  "high":  "70-84",
+                  "break":  "85-94",
+                  "extreme":  "95-100"
+              },
+    "styles":  [
+                   {
+                       "id":  "mid.blunt.plain_cut",
+                       "label":  "Plain cut"
+                   },
+                   {
+                       "id":  "mid.blunt.no_softener",
+                       "label":  "No softener"
+                   },
+                   {
+                       "id":  "mid.blunt.fact_first",
+                       "label":  "Fact first"
+                   }
+               ],
+    "links":  {
+                  "boostedBy":  [
+                                    "pride",
+                                    "anger",
+                                    "openness"
+                                ],
+                  "drainedBy":  [
+                                    "shame",
+                                    "anxiety"
+                                ],
+                  "opposes":  [
+                                  "mid.people_pleasing",
+                                  "mid.peacemaker"
+                              ]
+              },
+    "tagTriggers":  [
+                        {
+                            "tag":  "mid.blunt.test",
+                            "meaning":  "Situation tests this character trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.blunt.confirm",
+                            "meaning":  "Behavior confirms this trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.blunt.violate",
+                            "meaning":  "Acts against this trait under pressure",
+                            "deltaHint":  -2
+                        }
+                    ],
+    "relationScoped":  true,
+    "historyHooks":  {
+                         "patternFile":  "blunt_patterns.json",
+                         "fundingBudget":  2
+                     },
+    "notes":  "Not always cruel; low social buffering."
+}

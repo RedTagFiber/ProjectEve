@@ -1,0 +1,381 @@
+{
+  "id": "slow.life.homebody",
+  "layer": "slow",
+  "domain": "life",
+  "label": "Homebody",
+  "version": 1,
+  "description": "Life taste/identity: prefers home as the main stage—comfort, control, low travel friction, nested routines.",
+  "priorIntensity": 5,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [ "home", "couch", "stay in", "pajamas", "nest", "quiet night", "cancel plans", "delivery", "blanket" ],
+  "rivalBias": true,
+  "catalog": "Life",
+  "subTraits": [
+    {
+      "id": "slow.life.homebody.couch_throne",
+      "label": "Couch throne",
+      "kind": "space",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "tv", "sink-in" ]
+    },
+    {
+      "id": "slow.life.homebody.bedroom_nest",
+      "label": "Bedroom nest",
+      "kind": "space",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "bed", "alone", "recharge" ]
+    },
+    {
+      "id": "slow.life.homebody.kitchen_hub",
+      "label": "Kitchen as hub",
+      "kind": "space",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "cook", "gather" ]
+    },
+    {
+      "id": "slow.life.homebody.garage_cave",
+      "label": "Garage cave",
+      "kind": "space",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "tools", "alone", "radio" ]
+    },
+    {
+      "id": "slow.life.homebody.porch_sitting",
+      "label": "Porch / stoop sitting",
+      "kind": "space",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "ohio", "evening", "watch" ]
+    },
+    {
+      "id": "slow.life.homebody.yard_puttering",
+      "label": "Yard puttering",
+      "kind": "habit",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "grass", "tinker" ]
+    },
+    {
+      "id": "slow.life.homebody.pajamas_early",
+      "label": "Pajamas by 7",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "comfort", "done" ]
+    },
+    {
+      "id": "slow.life.homebody.cancel_plans_relief",
+      "label": "Cancel plans = relief",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "social-battery", "guilt-mix" ]
+    },
+    {
+      "id": "slow.life.homebody.hate_surprise_guests",
+      "label": "Hates surprise guests",
+      "kind": "attitude",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "control", "anxiety" ]
+    },
+    {
+      "id": "slow.life.homebody.loves_host_small",
+      "label": "Hosts small on own terms",
+      "kind": "social",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "invite", "control", "cook" ]
+    },
+    {
+      "id": "slow.life.homebody.delivery_loyal",
+      "label": "Delivery / no-leave dinner",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "door", "easy" ]
+    },
+    {
+      "id": "slow.life.homebody.movie_blanket",
+      "label": "Movie + blanket nights",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "film", "repeat" ]
+    },
+    {
+      "id": "slow.life.homebody.rewatch_comfort",
+      "label": "Rewatch comfort shows",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "same", "safe" ]
+    },
+    {
+      "id": "slow.life.homebody.rainy_day_joy",
+      "label": "Rainy day joy",
+      "kind": "attitude",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "weather", "excuse" ]
+    },
+    {
+      "id": "slow.life.homebody.winter_hibernation",
+      "label": "Winter hibernation",
+      "kind": "season",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "ohio", "cold", "nest" ]
+    },
+    {
+      "id": "slow.life.homebody.sunday_scaries_home",
+      "label": "Sunday home reset",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "laundry", "prep", "quiet" ]
+    },
+    {
+      "id": "slow.life.homebody.clean_nest",
+      "label": "Needs clean nest",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "order", "calm" ]
+    },
+    {
+      "id": "slow.life.homebody.messy_nest_ok",
+      "label": "Messy nest OK",
+      "kind": "attitude",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "lived-in", "priority-elsewhere" ]
+    },
+    {
+      "id": "slow.life.homebody.lighting_ritual",
+      "label": "Lighting / lamp ritual",
+      "kind": "habit",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "mood", "evening" ]
+    },
+    {
+      "id": "slow.life.homebody.scent_candles",
+      "label": "Candles / scent at home",
+      "kind": "habit",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "smell", "nest" ]
+    },
+    {
+      "id": "slow.life.homebody.noise_control",
+      "label": "Controls noise (quiet house)",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "sound", "peace" ]
+    },
+    {
+      "id": "slow.life.homebody.tv_background",
+      "label": "TV as background always",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "noise", "company" ]
+    },
+    {
+      "id": "slow.life.homebody.phone_on_couch",
+      "label": "Phone-on-couch lifestyle",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "scroll", "isolated-connect" ]
+    },
+    {
+      "id": "slow.life.homebody.gaming_home",
+      "label": "Games only at home",
+      "kind": "habit",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "setup", "nest" ]
+    },
+    {
+      "id": "slow.life.homebody.reading_nook",
+      "label": "Reading nook identity",
+      "kind": "space",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "book", "chair" ]
+    },
+    {
+      "id": "slow.life.homebody.bath_long",
+      "label": "Long bath / shower reset",
+      "kind": "habit",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "water", "alone" ]
+    },
+    {
+      "id": "slow.life.homebody.cooking_in",
+      "label": "Cooking in > going out",
+      "kind": "habit",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "kitchen", "save", "control" ]
+    },
+    {
+      "id": "slow.life.homebody.pet_on_lap",
+      "label": "Pet-on-lap required",
+      "kind": "social",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "animal", "bond" ]
+    },
+    {
+      "id": "slow.life.homebody.partner_home_dates",
+      "label": "Partner home dates preferred",
+      "kind": "social",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "date", "cheap", "intimate" ]
+    },
+    {
+      "id": "slow.life.homebody.hate_bars",
+      "label": "Avoids bars / loud nights",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "noise", "crowd" ]
+    },
+    {
+      "id": "slow.life.homebody.early_leave_party",
+      "label": "Early leave from parties",
+      "kind": "social",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "battery", "drive-home" ]
+    },
+    {
+      "id": "slow.life.homebody.introvert_recharge",
+      "label": "Introvert recharge home",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "alone", "recover" ]
+    },
+    {
+      "id": "slow.life.homebody.extrovert_home_base",
+      "label": "Extrovert but home-based",
+      "kind": "attitude",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "invite-over", "host" ]
+    },
+    {
+      "id": "slow.life.homebody.wfh_identity",
+      "label": "Work-from-home identity",
+      "kind": "context",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "remote", "commute-zero" ]
+    },
+    {
+      "id": "slow.life.homebody.commute_dread",
+      "label": "Commute dread",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "drive", "time" ]
+    },
+    {
+      "id": "slow.life.homebody.grocery_quick",
+      "label": "In-and-out errands only",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "list", "no-browse" ]
+    },
+    {
+      "id": "slow.life.homebody.online_everything",
+      "label": "Orders everything online",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "amazon", "avoid-store" ]
+    },
+    {
+      "id": "slow.life.homebody.neighbors_distance",
+      "label": "Polite distance from neighbors",
+      "kind": "social",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "wave", "no-enter" ]
+    },
+    {
+      "id": "slow.life.homebody.neighbors_porch",
+      "label": "Porch-neighbor social",
+      "kind": "social",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "chat", "yard" ]
+    },
+    {
+      "id": "slow.life.homebody.security_nest",
+      "label": "Home security conscious",
+      "kind": "attitude",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "locks", "cameras", "safe" ]
+    },
+    {
+      "id": "slow.life.homebody.storm_prep",
+      "label": "Storm / power-out prep",
+      "kind": "habit",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "ohio", "supplies" ]
+    },
+    {
+      "id": "slow.life.homebody.holiday_home_only",
+      "label": "Holidays at home only",
+      "kind": "season",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "travel-refuse", "host-or-quiet" ]
+    },
+    {
+      "id": "slow.life.homebody.guest_room_pride",
+      "label": "Guest room pride",
+      "kind": "space",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "ready", "host" ]
+    },
+    {
+      "id": "slow.life.homebody.no_guest_room",
+      "label": "No guests overnight",
+      "kind": "attitude",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "boundary", "space" ]
+    },
+    {
+      "id": "slow.life.homebody.plants_indoor",
+      "label": "Indoor plants care",
+      "kind": "habit",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "green", "water" ]
+    },
+    {
+      "id": "slow.life.homebody.hobby_table",
+      "label": "Hobby table always up",
+      "kind": "space",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "craft", "spread" ]
+    },
+    {
+      "id": "slow.life.homebody.sleep_schedule_sacred",
+      "label": "Sleep schedule sacred",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "bedtime", "guard" ]
+    },
+    {
+      "id": "slow.life.homebody.one_more_episode",
+      "label": "One-more-episode trap",
+      "kind": "habit",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "binge", "late" ]
+    },
+    {
+      "id": "slow.life.homebody.social_battery_meter",
+      "label": "Tracks social battery aloud",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "talk", "limit" ]
+    },
+    {
+      "id": "slow.life.homebody.home_is_identity",
+      "label": "Home is identity",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "nest", "pride", "self" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "likes nights in sometimes; no strong refusal of plans",
+    "atOrAbove50": "attach 2-3 subs; will prefer home dates and cancel soft plans",
+    "atOrAbove70": "home is recovery system; travel and parties cost Fast energy/anxiety",
+    "extreme95": "leaving home needs a real reason; forced outings spike guard/stress"
+  },
+  "notes": "Natural tension with outdoors/travel high. rivalBias vs 'always out' people."
+}

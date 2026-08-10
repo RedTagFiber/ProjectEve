@@ -1,0 +1,29 @@
+{
+    "parent":  "slow.sports.golf",
+    "version":  1,
+    "fillThreshold":  50,
+    "subs":  [
+                 {
+                     "label":  "Watch or play",
+                     "values":  [
+                                    "watch",
+                                    "play",
+                                    "both"
+                                ],
+                     "default":  "watch",
+                     "id":  "sub.golf.watch_or_play",
+                     "type":  "enum"
+                 },
+                 {
+                     "label":  "Knowledge",
+                     "values":  [
+                                    "casual",
+                                    "fan",
+                                    "diehard"
+                                ],
+                     "default":  "casual",
+                     "id":  "sub.golf.knowledge",
+                     "type":  "enum"
+                 }
+             ]
+}

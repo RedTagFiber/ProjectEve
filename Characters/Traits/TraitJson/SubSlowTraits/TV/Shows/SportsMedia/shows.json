@@ -1,0 +1,19 @@
+{
+    "catalog":  "tv_shows_sportsmedia",
+    "style":  "SportsMedia",
+    "version":  1,
+    "entries":  [
+                    {
+                        "id":  "hard_knocks",
+                        "label":  "Hard Knocks"
+                    },
+                    {
+                        "id":  "the_last_dance",
+                        "label":  "The Last Dance"
+                    },
+                    {
+                        "id":  "formula_1_drive_to_survive",
+                        "label":  "Formula 1 Drive to Survive"
+                    }
+                ]
+}

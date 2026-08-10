@@ -1,0 +1,129 @@
+{
+  "id": "slow.tv.netflix_and_chill",
+  "layer": "slow",
+  "domain": "tv",
+  "label": "Netflix and chill",
+  "version": 1,
+  "description": "Co-watch as social/romantic ritual—background, half-attention, closeness, and the joke that is sometimes real.",
+  "priorIntensity": 5,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 40,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [ "netflix and chill", "come over", "watch something", "background", "movie night", "on the couch" ],
+  "rivalBias": false,
+  "catalog": "TV/Habits",
+  "subTraits": [
+    {
+      "id": "slow.tv.netflix_and_chill.literal_hookup",
+      "label": "Uses it as hookup frame",
+      "kind": "social",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "adult" ]
+    },
+    {
+      "id": "slow.tv.netflix_and_chill.wholesome_couch",
+      "label": "Wholesome couch nights",
+      "kind": "social",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "couple" ]
+    },
+    {
+      "id": "slow.tv.netflix_and_chill.background_talk",
+      "label": "Show is background for talk",
+      "kind": "habit",
+      "defaultRange": [ 40, 95 ],
+      "tags": [ "half-attention" ]
+    },
+    {
+      "id": "slow.tv.netflix_and_chill.must_finish",
+      "label": "Actually wants to finish the episode",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "focus" ]
+    },
+    {
+      "id": "slow.tv.netflix_and_chill.picks_easy",
+      "label": "Picks easy / non-intense titles",
+      "kind": "habit",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "comfort" ]
+    },
+    {
+      "id": "slow.tv.netflix_and_chill.picks_prestige",
+      "label": "Tries to impress with picks",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "status" ]
+    },
+    {
+      "id": "slow.tv.netflix_and_chill.scroll_twenty",
+      "label": "Scrolls 20 minutes deciding",
+      "kind": "habit",
+      "defaultRange": [ 40, 95 ],
+      "tags": [ "universal" ]
+    },
+    {
+      "id": "slow.tv.netflix_and_chill.lets_them_pick",
+      "label": "Lets the other person pick",
+      "kind": "social",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "soft" ]
+    },
+    {
+      "id": "slow.tv.netflix_and_chill.controls_remote",
+      "label": "Controls the remote",
+      "kind": "social",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "dominant" ]
+    },
+    {
+      "id": "slow.tv.netflix_and_chill.comfort_rewatch",
+      "label": "Default to known comfort title",
+      "kind": "habit",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "safe" ]
+    },
+    {
+      "id": "slow.tv.netflix_and_chill.something_new",
+      "label": "Always wants something new",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "novelty" ]
+    },
+    {
+      "id": "slow.tv.netflix_and_chill.phone_second_screen",
+      "label": "Second-screen phone habit",
+      "kind": "habit",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "modern" ]
+    },
+    {
+      "id": "slow.tv.netflix_and_chill.blanket_fort",
+      "label": "Blanket / dim-light ritual",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "mood" ]
+    },
+    {
+      "id": "slow.tv.netflix_and_chill.friends_group",
+      "label": "Also does friend-group watch",
+      "kind": "social",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "platonic" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "knows the phrase; no ritual",
+    "atOrAbove40": "attach 2-3 social/habit subs",
+    "atOrAbove70": "couch watch is a main bonding mode",
+    "extreme95": "invitation language is coded and frequent"
+  },
+  "notes": "Adult-content adjacent via literal_hookup; still works for PG couple nights. Ties to Phone/In-Person invites."
+}

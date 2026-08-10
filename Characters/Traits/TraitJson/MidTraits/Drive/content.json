@@ -1,0 +1,69 @@
+{
+    "id":  "mid.content",
+    "layer":  "mid",
+    "label":  "Content",
+    "version":  1,
+    "cluster":  "drive",
+    "description":  "Enough is enough; low hunger for next rung.",
+    "priorIntensity":  5,
+    "moveSpeed":  "slow",
+    "bands":  {
+                  "off":  "0-29",
+                  "low":  "30-49",
+                  "mid":  "50-69",
+                  "high":  "70-84",
+                  "break":  "85-94",
+                  "extreme":  "95-100"
+              },
+    "styles":  [
+                   {
+                       "id":  "mid.content.enough",
+                       "label":  "Enough"
+                   },
+                   {
+                       "id":  "mid.content.hold_steady",
+                       "label":  "Hold steady"
+                   },
+                   {
+                       "id":  "mid.content.decline_climb",
+                       "label":  "Decline climb"
+                   }
+               ],
+    "links":  {
+                  "boostedBy":  [
+                                    "hope",
+                                    "affection"
+                                ],
+                  "drainedBy":  [
+                                    "envy_tags",
+                                    "pride"
+                                ],
+                  "opposes":  [
+                                  "mid.ambitious",
+                                  "mid.restless"
+                              ]
+              },
+    "tagTriggers":  [
+                        {
+                            "tag":  "mid.content.test",
+                            "meaning":  "Situation tests this character trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.content.confirm",
+                            "meaning":  "Behavior confirms this trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.content.violate",
+                            "meaning":  "Acts against this trait under pressure",
+                            "deltaHint":  -2
+                        }
+                    ],
+    "relationScoped":  true,
+    "historyHooks":  {
+                         "patternFile":  "content_patterns.json",
+                         "fundingBudget":  2
+                     },
+    "notes":  "Not lazy; satisfaction baseline."
+}

@@ -1,0 +1,250 @@
+{
+    "catalog":  "big_ten_football",
+    "version":  1,
+    "regionBias":  [
+                       "Ohio",
+                       "Michigan"
+                   ],
+    "entries":  [
+                    {
+                        "id":  "cfb.ohio_state",
+                        "label":  "Ohio State Buckeyes",
+                        "league":  "NCAA",
+                        "conference":  "Big Ten",
+                        "localWeight":  10,
+                        "rivals":  [
+                                       "cfb.michigan",
+                                       "cfb.penn_state"
+                                   ],
+                        "factsSeed":  [
+                                          "OSU",
+                                          "Scarlet and gray",
+                                          "The Game"
+                                      ]
+                    },
+                    {
+                        "id":  "cfb.michigan",
+                        "label":  "Michigan Wolverines",
+                        "league":  "NCAA",
+                        "conference":  "Big Ten",
+                        "localWeight":  8,
+                        "rivals":  [
+                                       "cfb.ohio_state",
+                                       "cfb.msu"
+                                   ],
+                        "factsSeed":  [
+                                          "Maize and blue",
+                                          "The Game"
+                                      ]
+                    },
+                    {
+                        "id":  "cfb.penn_state",
+                        "label":  "Penn State Nittany Lions",
+                        "league":  "NCAA",
+                        "conference":  "Big Ten",
+                        "localWeight":  5,
+                        "rivals":  [
+                                       "cfb.ohio_state"
+                                   ],
+                        "factsSeed":  [
+                                          "White out"
+                                      ]
+                    },
+                    {
+                        "id":  "cfb.michigan_state",
+                        "label":  "Michigan State Spartans",
+                        "league":  "NCAA",
+                        "conference":  "Big Ten",
+                        "localWeight":  4,
+                        "rivals":  [
+                                       "cfb.michigan"
+                                   ],
+                        "factsSeed":  [
+                                          "Sparty"
+                                      ]
+                    },
+                    {
+                        "id":  "cfb.indiana",
+                        "label":  "Indiana Hoosiers",
+                        "league":  "NCAA",
+                        "conference":  "Big Ten",
+                        "localWeight":  3,
+                        "rivals":  [
+                                       "cfb.purdue"
+                                   ],
+                        "factsSeed":  [
+                                          "IU"
+                                      ]
+                    },
+                    {
+                        "id":  "cfb.purdue",
+                        "label":  "Purdue Boilermakers",
+                        "league":  "NCAA",
+                        "conference":  "Big Ten",
+                        "localWeight":  3,
+                        "rivals":  [
+                                       "cfb.indiana"
+                                   ],
+                        "factsSeed":  [
+                                          "Boiler Up"
+                                      ]
+                    },
+                    {
+                        "id":  "cfb.wisconsin",
+                        "label":  "Wisconsin Badgers",
+                        "league":  "NCAA",
+                        "conference":  "Big Ten",
+                        "localWeight":  3,
+                        "rivals":  [
+                                       "cfb.minnesota"
+                                   ],
+                        "factsSeed":  [
+                                          "Jump Around"
+                                      ]
+                    },
+                    {
+                        "id":  "cfb.iowa",
+                        "label":  "Iowa Hawkeyes",
+                        "league":  "NCAA",
+                        "conference":  "Big Ten",
+                        "localWeight":  3,
+                        "rivals":  [
+                                       "cfb.minnesota"
+                                   ],
+                        "factsSeed":  [
+                                          "Hawk fever"
+                                      ]
+                    },
+                    {
+                        "id":  "cfb.minnesota",
+                        "label":  "Minnesota Golden Gophers",
+                        "league":  "NCAA",
+                        "conference":  "Big Ten",
+                        "localWeight":  2,
+                        "rivals":  [
+                                       "cfb.wisconsin",
+                                       "cfb.iowa"
+                                   ],
+                        "factsSeed":  [
+                                          "Ski-U-Mah"
+                                      ]
+                    },
+                    {
+                        "id":  "cfb.illinois",
+                        "label":  "Illinois Fighting Illini",
+                        "league":  "NCAA",
+                        "conference":  "Big Ten",
+                        "localWeight":  2,
+                        "rivals":  [
+                                       "cfb.northwestern"
+                                   ],
+                        "factsSeed":  [
+                                          "Illini"
+                                      ]
+                    },
+                    {
+                        "id":  "cfb.northwestern",
+                        "label":  "Northwestern Wildcats",
+                        "league":  "NCAA",
+                        "conference":  "Big Ten",
+                        "localWeight":  2,
+                        "rivals":  [
+                                       "cfb.illinois"
+                                   ],
+                        "factsSeed":  [
+                                          "Evanston"
+                                      ]
+                    },
+                    {
+                        "id":  "cfb.maryland",
+                        "label":  "Maryland Terrapins",
+                        "league":  "NCAA",
+                        "conference":  "Big Ten",
+                        "localWeight":  2,
+                        "rivals":  [
+
+                                   ],
+                        "factsSeed":  [
+                                          "Terps"
+                                      ]
+                    },
+                    {
+                        "id":  "cfb.rutgers",
+                        "label":  "Rutgers Scarlet Knights",
+                        "league":  "NCAA",
+                        "conference":  "Big Ten",
+                        "localWeight":  1,
+                        "rivals":  [
+
+                                   ],
+                        "factsSeed":  [
+                                          "RU"
+                                      ]
+                    },
+                    {
+                        "id":  "cfb.nebraska",
+                        "label":  "Nebraska Cornhuskers",
+                        "league":  "NCAA",
+                        "conference":  "Big Ten",
+                        "localWeight":  3,
+                        "rivals":  [
+
+                                   ],
+                        "factsSeed":  [
+                                          "Big Red"
+                                      ]
+                    },
+                    {
+                        "id":  "cfb.oregon",
+                        "label":  "Oregon Ducks",
+                        "league":  "NCAA",
+                        "conference":  "Big Ten",
+                        "localWeight":  2,
+                        "rivals":  [
+                                       "cfb.washington"
+                                   ],
+                        "factsSeed":  [
+                                          "Uniforms"
+                                      ]
+                    },
+                    {
+                        "id":  "cfb.washington",
+                        "label":  "Washington Huskies",
+                        "league":  "NCAA",
+                        "conference":  "Big Ten",
+                        "localWeight":  2,
+                        "rivals":  [
+                                       "cfb.oregon"
+                                   ],
+                        "factsSeed":  [
+                                          "Purple"
+                                      ]
+                    },
+                    {
+                        "id":  "cfb.usc",
+                        "label":  "USC Trojans",
+                        "league":  "NCAA",
+                        "conference":  "Big Ten",
+                        "localWeight":  2,
+                        "rivals":  [
+                                       "cfb.ucla"
+                                   ],
+                        "factsSeed":  [
+                                          "Fight On"
+                                      ]
+                    },
+                    {
+                        "id":  "cfb.ucla",
+                        "label":  "UCLA Bruins",
+                        "league":  "NCAA",
+                        "conference":  "Big Ten",
+                        "localWeight":  1,
+                        "rivals":  [
+                                       "cfb.usc"
+                                   ],
+                        "factsSeed":  [
+                                          "Bruins"
+                                      ]
+                    }
+                ]
+}

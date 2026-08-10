@@ -1,0 +1,390 @@
+{
+  "id": "slow.music.rnb_soul",
+  "layer": "slow",
+  "domain": "music",
+  "label": "R&B / Soul",
+  "version": 1,
+  "description": "Interest in soul, Motown, quiet storm, and modern R&B—voice, groove, and slow-jam culture.",
+  "priorIntensity": 5,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [ "rnb", "soul", "slow jam", "motown", "groove", "quiet storm", "neo-soul", "falsetto" ],
+  "rivalBias": true,
+  "catalog": "Music/RnBSoul",
+  "subTraits": [
+    {
+      "id": "slow.music.rnb_soul.motown",
+      "label": "Motown",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "detroit", "classic" ]
+    },
+    {
+      "id": "slow.music.rnb_soul.stax",
+      "label": "Stax / southern soul",
+      "kind": "style",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "memphis", "raw" ]
+    },
+    {
+      "id": "slow.music.rnb_soul.philly",
+      "label": "Philly soul",
+      "kind": "style",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "lush", "strings" ]
+    },
+    {
+      "id": "slow.music.rnb_soul.funk_soul",
+      "label": "Funk-leaning soul",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "groove", "bass" ]
+    },
+    {
+      "id": "slow.music.rnb_soul.quiet_storm",
+      "label": "Quiet storm",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "late", "smooth" ]
+    },
+    {
+      "id": "slow.music.rnb_soul.neo_soul",
+      "label": "Neo-soul",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "90s", "organic" ]
+    },
+    {
+      "id": "slow.music.rnb_soul.modern_rnb",
+      "label": "Modern R&B",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "now", "alt-rnb" ]
+    },
+    {
+      "id": "slow.music.rnb_soul.alt_rnb",
+      "label": "Alt-R&B",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "dark", "space" ]
+    },
+    {
+      "id": "slow.music.rnb_soul.gospel_edge",
+      "label": "Gospel-rooted R&B",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "church", "voice" ]
+    },
+
+    {
+      "id": "slow.music.rnb_soul.aretha",
+      "label": "Aretha Franklin",
+      "kind": "artist",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "queen", "voice" ]
+    },
+    {
+      "id": "slow.music.rnb_soul.marvin",
+      "label": "Marvin Gaye",
+      "kind": "artist",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "sensual", "conscious" ]
+    },
+    {
+      "id": "slow.music.rnb_soul.stevie",
+      "label": "Stevie Wonder",
+      "kind": "artist",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "genius", "joy" ]
+    },
+    {
+      "id": "slow.music.rnb_soul.al_green",
+      "label": "Al Green",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "voice", "love" ]
+    },
+    {
+      "id": "slow.music.rnb_soul.otis",
+      "label": "Otis Redding",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "stax", "raw" ]
+    },
+    {
+      "id": "slow.music.rnb_soul.sam_cooke",
+      "label": "Sam Cooke",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "voice", "bridge" ]
+    },
+    {
+      "id": "slow.music.rnb_soul.curtis",
+      "label": "Curtis Mayfield",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "message", "falsetto" ]
+    },
+    {
+      "id": "slow.music.rnb_soul.prince_soul",
+      "label": "Prince (soul/funk)",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "minneapolis", "range" ]
+    },
+    {
+      "id": "slow.music.rnb_soul.michael_soul",
+      "label": "Michael Jackson (soul root)",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "jacksons", "dance" ]
+    },
+    {
+      "id": "slow.music.rnb_soul.luther",
+      "label": "Luther Vandross",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "quiet-storm", "voice" ]
+    },
+    {
+      "id": "slow.music.rnb_soul.anita",
+      "label": "Anita Baker",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "quiet-storm", "alto" ]
+    },
+    {
+      "id": "slow.music.rnb_soul.whitney_rnb",
+      "label": "Whitney Houston",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "voice", "crossover" ]
+    },
+    {
+      "id": "slow.music.rnb_soul.mariah_rnb",
+      "label": "Mariah Carey",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "range", "90s" ]
+    },
+    {
+      "id": "slow.music.rnb_soul.rkelly_skip",
+      "label": "Avoid problematic catalog",
+      "kind": "note",
+      "defaultRange": [ 0, 0 ],
+      "tags": [ "boundary" ]
+    },
+    {
+      "id": "slow.music.rnb_soul.aaliyah",
+      "label": "Aaliyah",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "90s", "cool" ]
+    },
+    {
+      "id": "slow.music.rnb_soul.tlc",
+      "label": "TLC",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "90s", "group" ]
+    },
+    {
+      "id": "slow.music.rnb_soul.boyz",
+      "label": "Boyz II Men",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "harmony", "ballad" ]
+    },
+    {
+      "id": "slow.music.rnb_soul.erykah",
+      "label": "Erykah Badu",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "neo", "poet" ]
+    },
+    {
+      "id": "slow.music.rnb_soul.dangelo",
+      "label": "D'Angelo",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "neo", "groove" ]
+    },
+    {
+      "id": "slow.music.rnb_soul.lauryn",
+      "label": "Lauryn Hill",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "miseducation", "bridge" ]
+    },
+    {
+      "id": "slow.music.rnb_soul.jill_scott",
+      "label": "Jill Scott",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "neo", "live" ]
+    },
+    {
+      "id": "slow.music.rnb_soul.maxwell",
+      "label": "Maxwell",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "neo", "sensual" ]
+    },
+    {
+      "id": "slow.music.rnb_soul.usher",
+      "label": "Usher",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "2000s", "dance" ]
+    },
+    {
+      "id": "slow.music.rnb_soul.beyonce_rnb",
+      "label": "Beyoncé (R&B root)",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "performance", "catalog" ]
+    },
+    {
+      "id": "slow.music.rnb_soul.akira",
+      "label": "Alicia Keys",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "piano", "voice" ]
+    },
+    {
+      "id": "slow.music.rnb_soul.john_legend",
+      "label": "John Legend",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "piano", "wedding" ]
+    },
+    {
+      "id": "slow.music.rnb_soul.frank_ocean",
+      "label": "Frank Ocean",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "alt", "writing" ]
+    },
+    {
+      "id": "slow.music.rnb_soul.sza",
+      "label": "SZA",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "modern", "writing" ]
+    },
+    {
+      "id": "slow.music.rnb_soul.summer_walker",
+      "label": "Summer Walker",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "modern", "mood" ]
+    },
+    {
+      "id": "slow.music.rnb_soul.giveon",
+      "label": "Giveon",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "baritone", "modern" ]
+    },
+    {
+      "id": "slow.music.rnb_soul.her",
+      "label": "H.E.R.",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "guitar", "modern" ]
+    },
+    {
+      "id": "slow.music.rnb_soul.daniel_caesar",
+      "label": "Daniel Caesar",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "neo", "soft" ]
+    },
+    {
+      "id": "slow.music.rnb_soul.solange",
+      "label": "Solange",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "art", "alt" ]
+    },
+    {
+      "id": "slow.music.rnb_soul.the_weeknd_rnb",
+      "label": "The Weeknd (R&B lane)",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "dark", "crossover" ]
+    },
+
+    {
+      "id": "slow.music.rnb_soul.slow_jam_night",
+      "label": "Slow-jam night authority",
+      "kind": "mood_role",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "intimate", "late" ]
+    },
+    {
+      "id": "slow.music.rnb_soul.sunday_clean",
+      "label": "Sunday / clean-house soul",
+      "kind": "mood_role",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "morning", "home" ]
+    },
+    {
+      "id": "slow.music.rnb_soul.drive_night",
+      "label": "Night drive R&B",
+      "kind": "mood_role",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "car", "city" ]
+    },
+    {
+      "id": "slow.music.rnb_soul.date_playlist",
+      "label": "Date playlist curator",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "romance", "control" ]
+    },
+    {
+      "id": "slow.music.rnb_soul.karaoke_ballad",
+      "label": "Karaoke ballad specialist",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "voice", "show" ]
+    },
+    {
+      "id": "slow.music.rnb_soul.vinyl_soul",
+      "label": "Soul vinyl collector",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "crate", "originals" ]
+    },
+    {
+      "id": "slow.music.rnb_soul.purist_classic",
+      "label": "Classic-only purist",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "motown", "gate" ]
+    },
+    {
+      "id": "slow.music.rnb_soul.open_modern",
+      "label": "Open to alt/modern R&B",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "now", "flexible" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "knows a few wedding songs; no lane identity",
+    "atOrAbove50": "attach 2-4; era + artists + slow-jam role",
+    "atOrAbove70": "playlist and night-drive habits; Motown vs modern talk",
+    "extreme95": "R&B/soul is intimacy and home soundtrack; curator identity"
+  },
+  "notes": "Skip problematic artists in recommendations even if historically known. Strong tie to romance scenes and musicTag slow-jam beds."
+}

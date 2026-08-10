@@ -1,0 +1,66 @@
+{
+    "appliesToParents":  [
+                             "slow.tv.drama",
+                             "slow.tv.comedy",
+                             "slow.tv.reality",
+                             "slow.tv.true_crime",
+                             "slow.tv.scifi_fantasy",
+                             "slow.tv.sports_media",
+                             "slow.tv.procedural",
+                             "slow.tv.anime",
+                             "slow.tv.documentary_tv",
+                             "slow.tv.streaming_binge",
+                             "slow.tv.netflix_and_chill"
+                         ],
+    "version":  1,
+    "fillThreshold":  50,
+    "subs":  [
+                 {
+                     "label":  "Weekly ritual",
+                     "default":  false,
+                     "id":  "sub.tv.weekly_ritual",
+                     "type":  "bool"
+                 },
+                 {
+                     "label":  "Binge vs weekly",
+                     "values":  [
+                                    "binge",
+                                    "weekly",
+                                    "mixed"
+                                ],
+                     "default":  "mixed",
+                     "id":  "sub.tv.binge_vs_weekly",
+                     "type":  "enum"
+                 },
+                 {
+                     "label":  "Co-watch habit",
+                     "values":  [
+                                    "alone",
+                                    "partner",
+                                    "friends",
+                                    "either"
+                                ],
+                     "default":  "either",
+                     "id":  "sub.tv.cowatch",
+                     "type":  "enum"
+                 },
+                 {
+                     "label":  "Show seeds",
+                     "source":  "TV/Shows",
+                     "id":  "sub.tv.show_seeds",
+                     "type":  "string_list",
+                     "maxItems":  10
+                 },
+                 {
+                     "label":  "Spoilers",
+                     "values":  [
+                                    "ok",
+                                    "hate",
+                                    "delay"
+                                ],
+                     "default":  "hate",
+                     "id":  "sub.tv.spoilers",
+                     "type":  "enum"
+                 }
+             ]
+}

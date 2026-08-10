@@ -1,0 +1,374 @@
+{
+  "id": "slow.movies.comedy",
+  "layer": "slow",
+  "domain": "movies",
+  "label": "Comedy",
+  "version": 1,
+  "description": "Prefers comedy films—from broad laughs to dry wit, rom-coms adjacent, and rewatchable quotables.",
+  "priorIntensity": 5,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [ "movie", "comedy", "funny", "laugh", "quote", "parody", "standup-adjacent", "rewatch" ],
+  "rivalBias": true,
+  "catalog": "Movies/Titles/Comedy",
+  "subTraits": [
+    {
+      "id": "slow.movies.comedy.slapstick",
+      "label": "Slapstick / physical",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "fall", "broad" ]
+    },
+    {
+      "id": "slow.movies.comedy.wordplay",
+      "label": "Wordplay / dialogue wit",
+      "kind": "style",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "script", "smart" ]
+    },
+    {
+      "id": "slow.movies.comedy.dry_deadpan",
+      "label": "Dry / deadpan",
+      "kind": "style",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "flat", "british-lean" ]
+    },
+    {
+      "id": "slow.movies.comedy.cringe",
+      "label": "Cringe comedy",
+      "kind": "style",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "awkward", "office-film" ]
+    },
+    {
+      "id": "slow.movies.comedy.dark_comedy",
+      "label": "Dark comedy",
+      "kind": "style",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "morbid", "edge" ]
+    },
+    {
+      "id": "slow.movies.comedy.parody_spoof",
+      "label": "Parody / spoof",
+      "kind": "style",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "airplane", "scary-movie" ]
+    },
+    {
+      "id": "slow.movies.comedy.romcom_lean",
+      "label": "Rom-com lean",
+      "kind": "subgenre",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "love", "meet-cute" ]
+    },
+    {
+      "id": "slow.movies.comedy.action_comedy",
+      "label": "Action-comedy",
+      "kind": "subgenre",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "rush", "banter" ]
+    },
+    {
+      "id": "slow.movies.comedy.horror_comedy",
+      "label": "Horror-comedy",
+      "kind": "subgenre",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "shaun", "scare-laugh" ]
+    },
+    {
+      "id": "slow.movies.comedy.sports_comedy",
+      "label": "Sports comedy",
+      "kind": "subgenre",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "underdog", "team" ]
+    },
+    {
+      "id": "slow.movies.comedy.workplace",
+      "label": "Workplace comedy",
+      "kind": "subgenre",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "office", "boss" ]
+    },
+    {
+      "id": "slow.movies.comedy.family_chaos",
+      "label": "Family chaos comedy",
+      "kind": "subgenre",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "holiday", "relatives" ]
+    },
+    {
+      "id": "slow.movies.comedy.stoner",
+      "label": "Stoner comedy",
+      "kind": "subgenre",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "weed", "dumb-fun" ]
+    },
+    {
+      "id": "slow.movies.comedy.gross_out",
+      "label": "Gross-out",
+      "kind": "style",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "raunch", "body" ]
+    },
+    {
+      "id": "slow.movies.comedy.raunch_ok",
+      "label": "Raunch OK",
+      "kind": "rating",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "r", "sex-jokes" ]
+    },
+    {
+      "id": "slow.movies.comedy.clean_only",
+      "label": "Clean / PG comedy only",
+      "kind": "rating",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "family", "no-raunch" ]
+    },
+    {
+      "id": "slow.movies.comedy.80s_90s",
+      "label": "80s/90s comedy era",
+      "kind": "era",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "vhs", "quotable" ]
+    },
+    {
+      "id": "slow.movies.comedy.2000s_apathy",
+      "label": "2000s irony comedy",
+      "kind": "era",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "apathy", "napoletano" ]
+    },
+    {
+      "id": "slow.movies.comedy.modern_prestige",
+      "label": "Modern prestige comedy",
+      "kind": "era",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "festival", "bittersweet" ]
+    },
+    {
+      "id": "slow.movies.comedy.quotable",
+      "label": "Needs quotable lines",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "repeat", "friends" ]
+    },
+    {
+      "id": "slow.movies.comedy.rewatch_endless",
+      "label": "Endless rewatch comedies",
+      "kind": "viewing",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "comfort", "background" ]
+    },
+    {
+      "id": "slow.movies.comedy.background_tv",
+      "label": "Comedy as background TV",
+      "kind": "viewing",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "half-watch", "home" ]
+    },
+    {
+      "id": "slow.movies.comedy.theater_laughs",
+      "label": "Loves laughing in a crowd",
+      "kind": "viewing",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "theater", "group" ]
+    },
+    {
+      "id": "slow.movies.comedy.date_easy",
+      "label": "Easy date comedy pick",
+      "kind": "social",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "safe", "light" ]
+    },
+    {
+      "id": "slow.movies.comedy.group_night",
+      "label": "Group-night comedy",
+      "kind": "social",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "party", "quote" ]
+    },
+    {
+      "id": "slow.movies.comedy.solo_comfort",
+      "label": "Solo comfort comedy",
+      "kind": "social",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "alone", "safe" ]
+    },
+    {
+      "id": "slow.movies.comedy.improv_feel",
+      "label": "Improv / loose feel",
+      "kind": "style",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "riff", "apato" ]
+    },
+    {
+      "id": "slow.movies.comedy.tight_script",
+      "label": "Tight scripted jokes",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "written", "craft" ]
+    },
+    {
+      "id": "slow.movies.comedy.ensemble_casts",
+      "label": "Ensemble casts",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "many", "bits" ]
+    },
+    {
+      "id": "slow.movies.comedy.star_vehicle",
+      "label": "Star vehicle comedies",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "sandbox", "comic" ]
+    },
+    {
+      "id": "slow.movies.comedy.mockumentary",
+      "label": "Mockumentary style",
+      "kind": "style",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "talking-head", "awkward" ]
+    },
+    {
+      "id": "slow.movies.comedy.satire",
+      "label": "Satire / social comedy",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "point", "politics-light" ]
+    },
+    {
+      "id": "slow.movies.comedy.feel_good",
+      "label": "Feel-good only",
+      "kind": "tone",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "warm", "safe" ]
+    },
+    {
+      "id": "slow.movies.comedy.mean_comedy",
+      "label": "Mean / savage comedy",
+      "kind": "tone",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "roast", "edge" ]
+    },
+    {
+      "id": "slow.movies.comedy.british",
+      "label": "British comedy taste",
+      "kind": "scope",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "humour", "dry" ]
+    },
+    {
+      "id": "slow.movies.comedy.standup_adjacent",
+      "label": "Stand-up adjacent films",
+      "kind": "source",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "comic", "special-crossover" ]
+    },
+    {
+      "id": "slow.movies.comedy.spoof_fatigue",
+      "label": "Spoof fatigue",
+      "kind": "attitude",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "enough", "lazy" ]
+    },
+    {
+      "id": "slow.movies.comedy.franchise_sequels",
+      "label": "Comedy franchise sequels OK",
+      "kind": "habit",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "hangover", "again" ]
+    },
+    {
+      "id": "slow.movies.comedy.originals_only",
+      "label": "Original comedies only",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "fresh", "no-number" ]
+    },
+    {
+      "id": "slow.movies.comedy.quote_battle",
+      "label": "Will quote-battle friends",
+      "kind": "social",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "memory", "fun" ]
+    },
+    {
+      "id": "slow.movies.comedy.hate_laugh_track_feel",
+      "label": "Hates sitcom-flat film comedy",
+      "kind": "attitude",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "cinematic", "not-tv" ]
+    },
+    {
+      "id": "slow.movies.comedy.bittersweet",
+      "label": "Bittersweet comedy",
+      "kind": "tone",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "sad-funny", "human" ]
+    },
+    {
+      "id": "slow.movies.comedy.dumb_fun_pride",
+      "label": "Dumb fun without shame",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "brain-off", "joy" ]
+    },
+    {
+      "id": "slow.movies.comedy.smart_only",
+      "label": "Must feel smart",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "wit", "status" ]
+    },
+    {
+      "id": "slow.movies.comedy.holiday_comedies",
+      "label": "Holiday comedy tradition",
+      "kind": "season",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "christmas", "annual" ]
+    },
+    {
+      "id": "slow.movies.comedy.sports_game_day",
+      "label": "Game-day comedy background",
+      "kind": "viewing",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "party", "ohio" ]
+    },
+    {
+      "id": "slow.movies.comedy.actor_loyalty",
+      "label": "Follows comedy actors",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "ferrell", "hart", "wee" ]
+    },
+    {
+      "id": "slow.movies.comedy.director_loyalty",
+      "label": "Follows comedy directors",
+      "kind": "habit",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "wright", "mcKay" ]
+    },
+    {
+      "id": "slow.movies.comedy.short_runtime",
+      "label": "Prefers tight comedy runtime",
+      "kind": "structure",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "90min", "no-drag" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "laughs if it's on; no comedy identity",
+    "atOrAbove50": "attach 2-4; quote culture and tone preferences show",
+    "atOrAbove70": "comedy is medicine; rewatch library is real",
+    "extreme95": "taste wars over 'dumb vs smart' comedy; holiday lineup sacred"
+  },
+  "notes": "Ohio hangout culture: background comedy, holiday rewatches, quote battles."
+}

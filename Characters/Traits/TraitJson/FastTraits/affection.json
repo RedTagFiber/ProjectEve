@@ -1,0 +1,200 @@
+﻿{
+  {
+    "id": "affection",
+    "layer": "fast",
+    "label": "Affection",
+    "version": 1,
+    "description": "Warmth and fondness toward someone in the moment. Not the same as Desire (want) or Trust (safety). Can coexist with Anger.",
+    "priorIntensity": {
+      "min": 3,
+      "max": 7,
+      "mean": 5
+    },
+    "spawn": {
+      "currentFromIntensity": true,
+      "noise": 3
+    },
+    "bands": {
+      "off": [ 0, 29 ],
+      "low": [ 30, 49 ],
+      "mid": [ 50, 69 ],
+      "high": [ 70, 84 ],
+      "break": [ 85, 94 ],
+      "extreme": [ 95, 100 ]
+    },
+    "styles": {
+      "words": {
+        "means": "Shows care through language: soft labels, check-ins, praise, I-miss-you.",
+        "speechHints": [ "warm", "soft", "encouraging" ],
+        "bodyHints": [ "eye_contact", "lean_in_soft" ],
+        "riskTags": [ "vulnerability" ]
+      },
+      "touch": {
+        "means": "Physical warmth: hand, hug, shoulder, proximity.",
+        "speechHints": [ "few_words", "present" ],
+        "bodyHints": [ "touch", "close_distance" ],
+        "riskTags": [ "boundary_sensitive" ]
+      },
+      "acts": {
+        "means": "Care through doing: help, bring food, fix, show up.",
+        "speechHints": [ "practical", "understated" ],
+        "bodyHints": [ "busy_hands", "service" ],
+        "riskTags": []
+      },
+      "tease": {
+        "means": "Affection as play; light ribbing that means belonging.",
+        "speechHints": [ "tease_warm", "nickname" ],
+        "bodyHints": [ "grin", "bump" ],
+        "riskTags": [ "misread_as_mean" ]
+      },
+      "quiet": {
+        "means": "Presence without performance; sits with you, steady.",
+        "speechHints": [ "minimal", "calm" ],
+        "bodyHints": [ "still_near", "shared_silence" ],
+        "riskTags": []
+      },
+      "guarded_warm": {
+        "means": "Feels it but meters it; warmth in small doses.",
+        "speechHints": [ "careful", "half_said" ],
+        "bodyHints": [ "hesitant_reach" ],
+        "riskTags": [ "mixed_signal" ]
+      }
+    },
+    "defaultStyleWeights": {
+      "words": 1.0,
+      "touch": 0.7,
+      "acts": 1.0,
+      "tease": 0.8,
+      "quiet": 0.9,
+      "guarded_warm": 0.85
+    },
+    "flavors": {
+      "romantic": "Partner / crush-colored warmth.",
+      "platonic": "Friend / family care without romance.",
+      "caretaker": "Looks after, manages, protects.",
+      "reunion": "After distance or fight; soft return.",
+      "protective": "Warmth mixed with keep-you-safe energy."
+    },
+    "pull": {
+      "belowHomeDamageMult": 0.65,
+      "recoverMult": 1.35,
+      "aboveHomeSettleMult": 1.0
+    },
+    "funding": {
+      "required": true,
+      "budgetPerIntensityPoint": 1.0
+    },
+    "links": [
+      {
+        "trait": "trust",
+        "op": "+",
+        "weight": 0.35,
+        "when": "rise"
+      },
+      {
+        "trait": "guard",
+        "op": "-",
+        "weight": 0.3,
+        "when": "rise"
+      },
+      {
+        "trait": "loneliness",
+        "op": "-",
+        "weight": 0.45,
+        "when": "rise"
+      },
+      {
+        "trait": "hurt",
+        "op": "=",
+        "weight": 0.0,
+        "note": "High affection makes hurt land harder via policy, not auto-wipe."
+      },
+      {
+        "trait": "anger",
+        "op": "=",
+        "weight": 0.0,
+        "note": "Can coexist; opposePairs policy."
+      },
+      {
+        "trait": "desire",
+        "op": "+",
+        "weight": 0.2,
+        "when": "rise",
+        "note": "Small bleed; not the same trait."
+      }
+    ],
+    "opposePairs": [
+      {
+        "with": "anger",
+        "policyHints": [ "stay_sharp", "blow_then_guilt", "exit_to_protect_bond", "cold_care" ]
+      },
+      {
+        "with": "guard",
+        "policyHints": [ "reach_then_pullback", "small_doses" ]
+      }
+    ],
+    "tagTriggers": [
+      {
+        "tag": "bond.love.declaration",
+        "direction": "+",
+        "baseWeight": 0.9
+      },
+      {
+        "tag": "bond.care.check",
+        "direction": "+",
+        "baseWeight": 0.7
+      },
+      {
+        "tag": "bond.miss.you",
+        "direction": "+",
+        "baseWeight": 0.75
+      },
+      {
+        "tag": "bond.soft_return",
+        "direction": "+",
+        "baseWeight": 0.8
+      },
+      {
+        "tag": "repair.apology",
+        "direction": "+",
+        "baseWeight": 0.4
+      },
+      {
+        "tag": "conflict.insult",
+        "direction": "-",
+        "baseWeight": 0.6
+      },
+      {
+        "tag": "conflict.dismiss",
+        "direction": "-",
+        "baseWeight": 0.55
+      },
+      {
+        "tag": "conflict.stonewall",
+        "direction": "-",
+        "baseWeight": 0.5
+      },
+      {
+        "tag": "bond.rejection",
+        "direction": "-",
+        "baseWeight": 0.85
+      }
+    ],
+    "relationScoped": true,
+    "historyHooks": {
+      "catalog": "Characters/Traits/TraitJson/TraitHistory/affection_patterns.json",
+      "filters": [ "style", "flavor", "sourceBucket" ],
+      "tellFraming": {
+        "prideHigh": "HeroSelf",
+        "prideLow": "VictimSelf",
+        "shameHigh": "VictimSelf",
+        "telephone": true
+      }
+    },
+    "debug": {
+      "showInDash": true,
+      "color": "#e8a0b0",
+      "sortPriority": 20
+    }
+  }
+}

@@ -1,0 +1,68 @@
+{
+    "id":  "mid.ambitious",
+    "layer":  "mid",
+    "label":  "Ambitious",
+    "version":  1,
+    "cluster":  "drive",
+    "description":  "Climb, prove, expand; status and progress as fuel.",
+    "priorIntensity":  6,
+    "moveSpeed":  "slow",
+    "bands":  {
+                  "off":  "0-29",
+                  "low":  "30-49",
+                  "mid":  "50-69",
+                  "high":  "70-84",
+                  "break":  "85-94",
+                  "extreme":  "95-100"
+              },
+    "styles":  [
+                   {
+                       "id":  "mid.ambitious.climb",
+                       "label":  "Climb"
+                   },
+                   {
+                       "id":  "mid.ambitious.prove",
+                       "label":  "Prove"
+                   },
+                   {
+                       "id":  "mid.ambitious.expand_lane",
+                       "label":  "Expand lane"
+                   }
+               ],
+    "links":  {
+                  "boostedBy":  [
+                                    "pride",
+                                    "hope"
+                                ],
+                  "drainedBy":  [
+                                    "shame",
+                                    "hurt"
+                                ],
+                  "opposes":  [
+                                  "mid.content"
+                              ]
+              },
+    "tagTriggers":  [
+                        {
+                            "tag":  "mid.ambitious.test",
+                            "meaning":  "Situation tests this character trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.ambitious.confirm",
+                            "meaning":  "Behavior confirms this trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.ambitious.violate",
+                            "meaning":  "Acts against this trait under pressure",
+                            "deltaHint":  -2
+                        }
+                    ],
+    "relationScoped":  true,
+    "historyHooks":  {
+                         "patternFile":  "ambitious_patterns.json",
+                         "fundingBudget":  2
+                     },
+    "notes":  "Wakes Slow work_ambition often."
+}

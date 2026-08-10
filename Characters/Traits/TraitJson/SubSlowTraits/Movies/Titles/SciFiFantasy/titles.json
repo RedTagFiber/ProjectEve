@@ -1,0 +1,23 @@
+{
+    "catalog":  "movie_titles_scififantasy",
+    "style":  "SciFiFantasy",
+    "version":  1,
+    "entries":  [
+                    {
+                        "id":  "inception",
+                        "label":  "Inception"
+                    },
+                    {
+                        "id":  "the_matrix",
+                        "label":  "The Matrix"
+                    },
+                    {
+                        "id":  "star_wars",
+                        "label":  "Star Wars"
+                    },
+                    {
+                        "id":  "lord_of_the_rings",
+                        "label":  "Lord of the Rings"
+                    }
+                ]
+}

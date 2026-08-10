@@ -1,0 +1,70 @@
+{
+    "id":  "mid.anxious_attach",
+    "layer":  "mid",
+    "label":  "Anxious attach",
+    "version":  1,
+    "cluster":  "attachment",
+    "description":  "Scans for distance; needs reassurance; protest when bond feels thin.",
+    "priorIntensity":  5,
+    "moveSpeed":  "slow",
+    "bands":  {
+                  "off":  "0-29",
+                  "low":  "30-49",
+                  "mid":  "50-69",
+                  "high":  "70-84",
+                  "break":  "85-94",
+                  "extreme":  "95-100"
+              },
+    "styles":  [
+                   {
+                       "id":  "mid.anxious_attach.reassure_seek",
+                       "label":  "Reassure seek"
+                   },
+                   {
+                       "id":  "mid.anxious_attach.protest",
+                       "label":  "Protest"
+                   },
+                   {
+                       "id":  "mid.anxious_attach.cling_then_snap",
+                       "label":  "Cling then snap"
+                   }
+               ],
+    "links":  {
+                  "boostedBy":  [
+                                    "anxiety",
+                                    "loneliness",
+                                    "jealousy"
+                                ],
+                  "drainedBy":  [
+                                    "trust",
+                                    "affection"
+                                ],
+                  "opposes":  [
+                                  "mid.avoidant",
+                                  "mid.independent"
+                              ]
+              },
+    "tagTriggers":  [
+                        {
+                            "tag":  "mid.anxious_attach.test",
+                            "meaning":  "Situation tests this character trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.anxious_attach.confirm",
+                            "meaning":  "Behavior confirms this trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.anxious_attach.violate",
+                            "meaning":  "Acts against this trait under pressure",
+                            "deltaHint":  -2
+                        }
+                    ],
+    "relationScoped":  true,
+    "historyHooks":  {
+                         "patternFile":  "anxious_attach_patterns.json",
+                         "fundingBudget":  2
+                     },
+    "notes":  "Pairs with Fast anxiety/jealousy spikes."
+}

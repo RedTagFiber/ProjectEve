@@ -1,0 +1,471 @@
+{
+  "id": "slow.sports.football",
+  "layer": "slow",
+  "domain": "sports",
+  "label": "Football",
+  "version": 1,
+  "description": "American football—primarily NFL. AFC North is Ohio gravity (Browns, Bengals, Steelers, Ravens). Stacks with college_football parent.",
+  "priorIntensity": 6,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [
+    "game",
+    "team",
+    "score",
+    "injury",
+    "rival",
+    "Sunday",
+    "Monday night",
+    "playoffs",
+    "draft",
+    "trade",
+    "quarterback",
+    "fantasy",
+    "RedZone"
+  ],
+  "rivalBias": true,
+  "catalog": "Sports/Football",
+  "subTraits": [
+    {
+      "id": "slow.sports.football.diehard",
+      "label": "Diehard",
+      "kind": "intensity",
+      "defaultRange": [ 70, 95 ],
+      "tags": [ "sunday-religion" ]
+    },
+    {
+      "id": "slow.sports.football.casual",
+      "label": "Casual fan",
+      "kind": "intensity",
+      "defaultRange": [ 30, 70 ],
+      "tags": [ "social", "highlights" ]
+    },
+    {
+      "id": "slow.sports.football.bandwagon",
+      "label": "Bandwagon when hot",
+      "kind": "intensity",
+      "defaultRange": [ 20, 70 ],
+      "tags": [ "january" ]
+    },
+    {
+      "id": "slow.sports.football.fantasy",
+      "label": "Fantasy football serious",
+      "kind": "habit",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "league", "waiver" ]
+    },
+    {
+      "id": "slow.sports.football.gambling_adj",
+      "label": "Bets / spreads interest",
+      "kind": "habit",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "lines", "risk" ]
+    },
+    {
+      "id": "slow.sports.football.redzone",
+      "label": "RedZone / all-day Sunday",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "couch" ]
+    },
+    {
+      "id": "slow.sports.football.primetime",
+      "label": "Primetime only",
+      "kind": "habit",
+      "defaultRange": [ 25, 85 ],
+      "tags": [ "snf", "mnf" ]
+    },
+    {
+      "id": "slow.sports.football.stadium",
+      "label": "Goes to stadium",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "tickets", "tailgate" ]
+    },
+    {
+      "id": "slow.sports.football.out_of_market",
+      "label": "Out-of-market package",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "sunday-ticket" ]
+    },
+    {
+      "id": "slow.sports.football.film_nerd",
+      "label": "Film / scheme nerd",
+      "kind": "knowledge",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "all-22" ]
+    },
+    {
+      "id": "slow.sports.football.draft_nerd",
+      "label": "Draft nerd",
+      "kind": "knowledge",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "april" ]
+    },
+    {
+      "id": "slow.sports.football.history_buff",
+      "label": "Franchise history buff",
+      "kind": "knowledge",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "legacy" ]
+    },
+    {
+      "id": "slow.sports.football.stacks_college",
+      "label": "Also heavy college",
+      "kind": "lane",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "stack", "year-round" ]
+    },
+
+    {
+      "id": "slow.sports.football.team_browns",
+      "label": "Cleveland Browns",
+      "kind": "team",
+      "defaultRange": [ 40, 95 ],
+      "tags": [ "ohio", "afc-north", "primary" ]
+    },
+    {
+      "id": "slow.sports.football.team_bengals",
+      "label": "Cincinnati Bengals",
+      "kind": "team",
+      "defaultRange": [ 40, 95 ],
+      "tags": [ "ohio", "afc-north", "primary" ]
+    },
+    {
+      "id": "slow.sports.football.team_steelers",
+      "label": "Pittsburgh Steelers",
+      "kind": "team",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "afc-north", "rival", "ohio-tv" ]
+    },
+    {
+      "id": "slow.sports.football.team_ravens",
+      "label": "Baltimore Ravens",
+      "kind": "team",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "afc-north", "rival" ]
+    },
+
+    {
+      "id": "slow.sports.football.team_chiefs",
+      "label": "Kansas City Chiefs",
+      "kind": "team",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "afc-west", "dynasty" ]
+    },
+    {
+      "id": "slow.sports.football.team_bills",
+      "label": "Buffalo Bills",
+      "kind": "team",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "afc-east" ]
+    },
+    {
+      "id": "slow.sports.football.team_dolphins",
+      "label": "Miami Dolphins",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "afc-east" ]
+    },
+    {
+      "id": "slow.sports.football.team_jets",
+      "label": "New York Jets",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "afc-east" ]
+    },
+    {
+      "id": "slow.sports.football.team_patriots",
+      "label": "New England Patriots",
+      "kind": "team",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "afc-east", "dynasty-memory" ]
+    },
+    {
+      "id": "slow.sports.football.team_texans",
+      "label": "Houston Texans",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "afc-south" ]
+    },
+    {
+      "id": "slow.sports.football.team_jaguars",
+      "label": "Jacksonville Jaguars",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "afc-south" ]
+    },
+    {
+      "id": "slow.sports.football.team_colts",
+      "label": "Indianapolis Colts",
+      "kind": "team",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "afc-south", "ohio-adj" ]
+    },
+    {
+      "id": "slow.sports.football.team_titans",
+      "label": "Tennessee Titans",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "afc-south" ]
+    },
+    {
+      "id": "slow.sports.football.team_chargers",
+      "label": "Los Angeles Chargers",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "afc-west" ]
+    },
+    {
+      "id": "slow.sports.football.team_broncos",
+      "label": "Denver Broncos",
+      "kind": "team",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "afc-west" ]
+    },
+    {
+      "id": "slow.sports.football.team_raiders",
+      "label": "Las Vegas Raiders",
+      "kind": "team",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "afc-west" ]
+    },
+
+    {
+      "id": "slow.sports.football.team_chiefs_hate",
+      "label": "Chiefs dynasty fatigue",
+      "kind": "rival",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "afc" ]
+    },
+
+    {
+      "id": "slow.sports.football.team_eagles",
+      "label": "Philadelphia Eagles",
+      "kind": "team",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "nfc-east" ]
+    },
+    {
+      "id": "slow.sports.football.team_cowboys",
+      "label": "Dallas Cowboys",
+      "kind": "team",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "nfc-east", "national" ]
+    },
+    {
+      "id": "slow.sports.football.team_giants",
+      "label": "New York Giants",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "nfc-east" ]
+    },
+    {
+      "id": "slow.sports.football.team_commanders",
+      "label": "Washington Commanders",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "nfc-east" ]
+    },
+    {
+      "id": "slow.sports.football.team_packers",
+      "label": "Green Bay Packers",
+      "kind": "team",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "nfc-north" ]
+    },
+    {
+      "id": "slow.sports.football.team_vikings",
+      "label": "Minnesota Vikings",
+      "kind": "team",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "nfc-north" ]
+    },
+    {
+      "id": "slow.sports.football.team_lions",
+      "label": "Detroit Lions",
+      "kind": "team",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "nfc-north", "ohio-adj", "rise" ]
+    },
+    {
+      "id": "slow.sports.football.team_bears",
+      "label": "Chicago Bears",
+      "kind": "team",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "nfc-north" ]
+    },
+    {
+      "id": "slow.sports.football.team_49ers",
+      "label": "San Francisco 49ers",
+      "kind": "team",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "nfc-west" ]
+    },
+    {
+      "id": "slow.sports.football.team_seahawks",
+      "label": "Seattle Seahawks",
+      "kind": "team",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "nfc-west" ]
+    },
+    {
+      "id": "slow.sports.football.team_rams",
+      "label": "Los Angeles Rams",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "nfc-west" ]
+    },
+    {
+      "id": "slow.sports.football.team_cardinals",
+      "label": "Arizona Cardinals",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "nfc-west" ]
+    },
+    {
+      "id": "slow.sports.football.team_saints",
+      "label": "New Orleans Saints",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "nfc-south" ]
+    },
+    {
+      "id": "slow.sports.football.team_buccaneers",
+      "label": "Tampa Bay Buccaneers",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "nfc-south" ]
+    },
+    {
+      "id": "slow.sports.football.team_falcons",
+      "label": "Atlanta Falcons",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "nfc-south" ]
+    },
+    {
+      "id": "slow.sports.football.team_panthers",
+      "label": "Carolina Panthers",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "nfc-south" ]
+    },
+
+    {
+      "id": "slow.sports.football.rival_browns_steelers",
+      "label": "Browns ↔ Steelers heat",
+      "kind": "rival",
+      "defaultRange": [ 40, 95 ],
+      "tags": [ "afc-north" ]
+    },
+    {
+      "id": "slow.sports.football.rival_bengals_steelers",
+      "label": "Bengals ↔ Steelers heat",
+      "kind": "rival",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "afc-north" ]
+    },
+    {
+      "id": "slow.sports.football.rival_browns_ravens",
+      "label": "Browns ↔ Ravens heat",
+      "kind": "rival",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "afc-north" ]
+    },
+    {
+      "id": "slow.sports.football.rival_bengals_ravens",
+      "label": "Bengals ↔ Ravens heat",
+      "kind": "rival",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "afc-north" ]
+    },
+    {
+      "id": "slow.sports.football.rival_browns_bengals",
+      "label": "Browns ↔ Bengals (Ohio split)",
+      "kind": "rival",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "ohio", "family" ]
+    },
+    {
+      "id": "slow.sports.football.rival_cowboys_hate",
+      "label": "Cowboys national hate/love",
+      "kind": "rival",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "media" ]
+    },
+    {
+      "id": "slow.sports.football.rival_patriots_memory",
+      "label": "Patriots dynasty memory",
+      "kind": "rival",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "history" ]
+    },
+
+    {
+      "id": "slow.sports.football.ohio_split_household",
+      "label": "Ohio split (Browns vs Bengals)",
+      "kind": "local",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "family", "argue" ]
+    },
+    {
+      "id": "slow.sports.football.steelers_creep",
+      "label": "Steelers fans in Ohio (border/TV)",
+      "kind": "local",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "northeast-ohio" ]
+    },
+    {
+      "id": "slow.sports.football.qb_controversy",
+      "label": "Lives for QB controversy",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "talk-radio" ]
+    },
+    {
+      "id": "slow.sports.football.coach_hot_seat",
+      "label": "Coach hot-seat talker",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "fire" ]
+    },
+    {
+      "id": "slow.sports.football.defense_first",
+      "label": "Defense-first taste",
+      "kind": "taste",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "hits" ]
+    },
+    {
+      "id": "slow.sports.football.offense_first",
+      "label": "Offense / skill-player taste",
+      "kind": "taste",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "yards" ]
+    },
+    {
+      "id": "slow.sports.football.town_watched",
+      "label": "On TownWatchedTeams feed",
+      "kind": "system",
+      "defaultRange": [ 40, 95 ],
+      "tags": [ "local", "packet" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "knows Super Bowl exists; no team identity",
+    "atOrAbove50": "attach 1 primary team + optional rival/habit",
+    "atOrAbove70": "Sundays structured; fantasy and injury reports matter",
+    "extreme95": "losses move Fast mood; AFC North weeks are personal"
+  },
+  "notes": "Ohio seed: Browns or Bengals primary (not both high). Steelers secondary common near PA border. College stacks via stacks_college + slow.sports.college_football."
+}

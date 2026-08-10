@@ -18,12 +18,14 @@ namespace ProjectEve.Characters.Traits.Core
                 BehaviorName = "DecisionMaking",
                 TraitWeights =
                 {
-                    { "Anxiety Level", -0.4f },
-                    { "Curiosity", 0.3f },
-                    { "Stress Vulnerability", -0.2f },
-                    { "Goal Persistence", 0.5f },
-                    { "Optimism", 0.2f },
-                    { "Pessimism", -0.2f }
+                    { "trait.anxiety", -0.4f },
+                    { "trait.hope", 0.25f },
+                    { "trait.fear", -0.2f },
+                    { "trait.pride", 0.15f },
+                    { "mid.ambitious", 0.35f },
+                    { "mid.dutiful", 0.25f },
+                    { "mid.perfectionist", 0.15f },
+                    { "mid.resilient", 0.2f }
                 }
             });
 
@@ -35,11 +37,15 @@ namespace ProjectEve.Characters.Traits.Core
                 BehaviorName = "SocialInteraction",
                 TraitWeights =
                 {
-                    { "Expressiveness", 0.5f },
-                    { "Silence", -0.4f },
-                    { "Humor", 0.3f },
-                    { "Social Anxiety", -0.6f },
-                    { "Empathic Accuracy", 0.4f }
+                    { "trait.openness", 0.45f },
+                    { "trait.guard", -0.4f },
+                    { "trait.playfulness", 0.3f },
+                    { "trait.anxiety", -0.35f },
+                    { "trait.loneliness", 0.15f },
+                    { "mid.people_pleasing", 0.25f },
+                    { "mid.open_book", 0.3f },
+                    { "mid.guarded", -0.35f },
+                    { "mid.blunt", 0.1f }
                 }
             });
 
@@ -51,11 +57,14 @@ namespace ProjectEve.Characters.Traits.Core
                 BehaviorName = "WorkPerformance",
                 TraitWeights =
                 {
-                    { "Work Ethic", 0.6f },
-                    { "Consistency", 0.5f },
-                    { "Sloppiness", -0.5f },
-                    { "Stress Vulnerability", -0.3f },
-                    { "Perfectionism", 0.3f }
+                    { "mid.dutiful", 0.5f },
+                    { "mid.ambitious", 0.4f },
+                    { "mid.perfectionist", 0.25f },
+                    { "mid.resilient", 0.25f },
+                    { "trait.anxiety", -0.2f },
+                    { "trait.patience", 0.2f },
+                    { "trait.pride", 0.15f },
+                    { "slow.life.work_ambition", 0.3f }
                 }
             });
 
@@ -67,10 +76,13 @@ namespace ProjectEve.Characters.Traits.Core
                 BehaviorName = "StressResponse",
                 TraitWeights =
                 {
-                    { "Stress Vulnerability", -0.6f },
-                    { "Resilience", 0.5f },
-                    { "Anxiety Level", -0.4f },
-                    { "Emotional Stability", 0.4f }
+                    { "trait.anxiety", -0.5f },
+                    { "trait.fear", -0.25f },
+                    { "trait.patience", 0.3f },
+                    { "trait.hope", 0.2f },
+                    { "mid.resilient", 0.45f },
+                    { "mid.self_critical", -0.2f },
+                    { "mid.self_assured", 0.25f }
                 }
             });
 
@@ -82,11 +94,15 @@ namespace ProjectEve.Characters.Traits.Core
                 BehaviorName = "ConflictHandling",
                 TraitWeights =
                 {
-                    { "Confrontation Tendency", 0.6f },
-                    { "Diplomacy", 0.5f },
-                    { "Sarcasm", -0.2f },
-                    { "Trauma Sensitivity", -0.3f },
-                    { "Resilience", 0.4f }
+                    { "trait.anger", 0.45f },
+                    { "trait.patience", -0.25f },
+                    { "trait.pride", 0.2f },
+                    { "trait.tension", 0.2f },
+                    { "mid.confrontational", 0.5f },
+                    { "mid.peacemaker", 0.35f },
+                    { "mid.conflict_avoidant", -0.4f },
+                    { "mid.passive_aggressive", 0.15f },
+                    { "mid.blunt", 0.25f }
                 }
             });
 
@@ -98,11 +114,16 @@ namespace ProjectEve.Characters.Traits.Core
                 BehaviorName = "RomanticBehavior",
                 TraitWeights =
                 {
-                    { "Player Attraction", 0.7f },
-                    { "Player Trust", 0.5f },
-                    { "Romantic Jealousy", 0.4f },
-                    { "Anxiety Level", -0.3f },
-                    { "Attachment Avoidance", -0.5f }
+                    { "trait.affection", 0.5f },
+                    { "trait.desire", 0.45f },
+                    { "trait.attraction", 0.4f },
+                    { "trait.trust", 0.35f },
+                    { "trait.jealousy", 0.2f },
+                    { "trait.anxiety", -0.25f },
+                    { "trait.guard", -0.2f },
+                    { "mid.anxious_attach", 0.15f },
+                    { "mid.avoidant", -0.35f },
+                    { "mid.loyal", 0.25f }
                 }
             });
 
@@ -114,11 +135,12 @@ namespace ProjectEve.Characters.Traits.Core
                 BehaviorName = "DailyRoutineStability",
                 TraitWeights =
                 {
-                    { "Routine Stability", 0.6f },
-                    { "Flexibility", 0.2f },
-                    { "Forgetfulness", -0.5f },
-                    { "Sleep Quality", 0.3f },
-                    { "Stress Impact on Body", -0.4f }
+                    { "mid.dutiful", 0.4f },
+                    { "mid.content", 0.25f },
+                    { "mid.restless", -0.35f },
+                    { "trait.anxiety", -0.2f },
+                    { "trait.patience", 0.25f },
+                    { "trait.hope", 0.15f }
                 }
             });
 
@@ -130,10 +152,14 @@ namespace ProjectEve.Characters.Traits.Core
                 BehaviorName = "RiskTaking",
                 TraitWeights =
                 {
-                    { "Risk Appetite", 0.7f },
-                    { "Anxiety Level", -0.4f },
-                    { "Confidence", 0.5f },
-                    { "Impulsiveness", 0.3f }
+                    { "trait.fear", -0.4f },
+                    { "trait.anxiety", -0.3f },
+                    { "trait.desire", 0.25f },
+                    { "trait.hope", 0.15f },
+                    { "trait.pride", 0.15f },
+                    { "mid.ambitious", 0.3f },
+                    { "mid.restless", 0.25f },
+                    { "mid.principled", -0.1f }
                 }
             });
 
@@ -145,10 +171,13 @@ namespace ProjectEve.Characters.Traits.Core
                 BehaviorName = "MoneyManagement",
                 TraitWeights =
                 {
-                    { "Financial Discipline", 0.7f },
-                    { "Impulsiveness", -0.4f },
-                    { "Long-Term Planning", 0.5f },
-                    { "Stress Vulnerability", -0.2f }
+                    { "mid.dutiful", 0.35f },
+                    { "mid.ambitious", 0.2f },
+                    { "mid.perfectionist", 0.15f },
+                    { "trait.anxiety", 0.1f },
+                    { "trait.desire", -0.25f },
+                    { "trait.patience", 0.2f },
+                    { "mid.opportunistic", -0.2f }
                 }
             });
 
@@ -160,10 +189,12 @@ namespace ProjectEve.Characters.Traits.Core
                 BehaviorName = "HealthMaintenance",
                 TraitWeights =
                 {
-                    { "Health Awareness", 0.6f },
-                    { "Routine Stability", 0.4f },
-                    { "Stress Impact on Body", -0.5f },
-                    { "Energy Level", 0.3f }
+                    { "mid.dutiful", 0.3f },
+                    { "mid.resilient", 0.25f },
+                    { "trait.anxiety", -0.15f },
+                    { "trait.hope", 0.15f },
+                    { "trait.patience", 0.2f },
+                    { "slow.life.fitness", 0.35f }
                 }
             });
 
@@ -175,10 +206,14 @@ namespace ProjectEve.Characters.Traits.Core
                 BehaviorName = "MotivationDrive",
                 TraitWeights =
                 {
-                    { "Motivation Level", 0.7f },
-                    { "Goal Persistence", 0.6f },
-                    { "Energy Level", 0.4f },
-                    { "Stress Vulnerability", -0.3f }
+                    { "trait.hope", 0.4f },
+                    { "trait.pride", 0.25f },
+                    { "trait.desire", 0.2f },
+                    { "trait.anxiety", -0.2f },
+                    { "mid.ambitious", 0.5f },
+                    { "mid.dutiful", 0.3f },
+                    { "mid.content", -0.25f },
+                    { "mid.restless", 0.2f }
                 }
             });
 
@@ -190,10 +225,16 @@ namespace ProjectEve.Characters.Traits.Core
                 BehaviorName = "PlayerInteraction",
                 TraitWeights =
                 {
-                    { "Player Trust", 0.7f },
-                    { "Affection", 0.5f },
-                    { "Comfort", 0.4f },
-                    { "Anxiety Level", -0.3f }
+                    { "trait.trust", 0.55f },
+                    { "trait.affection", 0.45f },
+                    { "trait.openness", 0.3f },
+                    { "trait.guard", -0.3f },
+                    { "trait.anxiety", -0.25f },
+                    { "trait.hurt", -0.15f },
+                    { "trait.playfulness", 0.2f },
+                    { "mid.loyal", 0.25f },
+                    { "mid.avoidant", -0.3f },
+                    { "mid.people_pleasing", 0.15f }
                 }
             });
         }

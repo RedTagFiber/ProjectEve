@@ -1,0 +1,199 @@
+{
+  "id": "slow.tv.drama",
+  "layer": "slow",
+  "domain": "tv",
+  "label": "TV Drama",
+  "version": 1,
+  "description": "Scripted drama series—prestige, soaps, family, crime-adjacent story, character arcs.",
+  "priorIntensity": 5,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [ "show", "season", "episode", "finale", "binge", "that ending", "rewatch" ],
+  "rivalBias": false,
+  "catalog": "TV/Shows/Drama",
+  "subTraits": [
+    {
+      "id": "slow.tv.drama.prestige",
+      "label": "Prestige / HBO-style",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "slow-burn" ]
+    },
+    {
+      "id": "slow.tv.drama.network",
+      "label": "Network drama comfort",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "weekly" ]
+    },
+    {
+      "id": "slow.tv.drama.family",
+      "label": "Family / relationship drama",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "feelings" ]
+    },
+    {
+      "id": "slow.tv.drama.period",
+      "label": "Period / historical drama",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "costumes" ]
+    },
+    {
+      "id": "slow.tv.drama.medical",
+      "label": "Medical drama",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "hospital" ]
+    },
+    {
+      "id": "slow.tv.drama.legal",
+      "label": "Legal drama",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "court" ]
+    },
+    {
+      "id": "slow.tv.drama.crime_story",
+      "label": "Crime drama (story, not pure procedural)",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "antihero" ]
+    },
+    {
+      "id": "slow.tv.drama.sopranos",
+      "label": "The Sopranos",
+      "kind": "show",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "goat-talk" ]
+    },
+    {
+      "id": "slow.tv.drama.wire",
+      "label": "The Wire",
+      "kind": "show",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "goat-talk" ]
+    },
+    {
+      "id": "slow.tv.drama.breaking_bad",
+      "label": "Breaking Bad / Better Call Saul",
+      "kind": "show",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "modern-classic" ]
+    },
+    {
+      "id": "slow.tv.drama.mad_men",
+      "label": "Mad Men",
+      "kind": "show",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "prestige" ]
+    },
+    {
+      "id": "slow.tv.drama.succession",
+      "label": "Succession",
+      "kind": "show",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "prestige" ]
+    },
+    {
+      "id": "slow.tv.drama.game_of_thrones",
+      "label": "Game of Thrones",
+      "kind": "show",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "debate", "ending" ]
+    },
+    {
+      "id": "slow.tv.drama.this_is_us",
+      "label": "This Is Us",
+      "kind": "show",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "cry" ]
+    },
+    {
+      "id": "slow.tv.drama.grey_anatomy",
+      "label": "Grey's Anatomy",
+      "kind": "show",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "long-run" ]
+    },
+    {
+      "id": "slow.tv.drama.ozark",
+      "label": "Ozark",
+      "kind": "show",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "netflix" ]
+    },
+    {
+      "id": "slow.tv.drama.the_crown",
+      "label": "The Crown",
+      "kind": "show",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "period" ]
+    },
+    {
+      "id": "slow.tv.drama.shogun",
+      "label": "Shōgun",
+      "kind": "show",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "prestige" ]
+    },
+    {
+      "id": "slow.tv.drama.yellowstone",
+      "label": "Yellowstone",
+      "kind": "show",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "popular" ]
+    },
+    {
+      "id": "slow.tv.drama.euphoria",
+      "label": "Euphoria",
+      "kind": "show",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "young", "style" ]
+    },
+    {
+      "id": "slow.tv.drama.the_bear",
+      "label": "The Bear",
+      "kind": "show",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "anxiety", "kitchen" ]
+    },
+    {
+      "id": "slow.tv.drama.cowatch",
+      "label": "Co-watch drama nights",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "couple" ]
+    },
+    {
+      "id": "slow.tv.drama.finale_party",
+      "label": "Finale event watcher",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "social" ]
+    },
+    {
+      "id": "slow.tv.drama.rewatch",
+      "label": "Comfort rewatch dramas",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "safe" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "knows a few big titles; no drama identity",
+    "atOrAbove50": "attach 2-4 shows/styles + one habit",
+    "atOrAbove70": "season talk is normal social fuel",
+    "extreme95": "prestige opinions and finale debates are identity"
+  },
+  "notes": "Overlaps procedural/true_crime at edges—factory picks primary lane."
+}

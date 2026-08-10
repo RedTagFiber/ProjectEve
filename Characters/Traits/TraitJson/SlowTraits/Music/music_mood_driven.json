@@ -1,0 +1,302 @@
+{
+  "id": "slow.music.mood_driven",
+  "layer": "slow",
+  "domain": "music",
+  "label": "Mood-driven",
+  "version": 1,
+  "description": "Listens by mood more than genre loyalty. High score = playlist and situation first; genres are tools. Pairs with Thought musicTag beds.",
+  "priorIntensity": 6,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 40,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [
+    "depends on mood",
+    "playlist",
+    "whatever fits",
+    "for the drive",
+    "for the gym",
+    "when I'm mad",
+    "when I'm sad",
+    "background"
+  ],
+  "rivalBias": false,
+  "catalog": "Music/Mood",
+  "subTraits": [
+    {
+      "id": "slow.music.mood_driven.drive",
+      "label": "Drive / car mood first",
+      "kind": "context",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "road", "ohio" ]
+    },
+    {
+      "id": "slow.music.mood_driven.gym",
+      "label": "Gym / lift mood",
+      "kind": "context",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "energy", "focus" ]
+    },
+    {
+      "id": "slow.music.mood_driven.work_focus",
+      "label": "Work / focus bed",
+      "kind": "context",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "instrumental", "flow" ]
+    },
+    {
+      "id": "slow.music.mood_driven.clean_house",
+      "label": "Clean / chores energy",
+      "kind": "context",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "up", "home" ]
+    },
+    {
+      "id": "slow.music.mood_driven.cook",
+      "label": "Cook / kitchen mood",
+      "kind": "context",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "home", "groove" ]
+    },
+    {
+      "id": "slow.music.mood_driven.morning",
+      "label": "Morning start playlist",
+      "kind": "context",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "wake", "soft-or-up" ]
+    },
+    {
+      "id": "slow.music.mood_driven.night_wind_down",
+      "label": "Night wind-down",
+      "kind": "context",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "late", "lower" ]
+    },
+    {
+      "id": "slow.music.mood_driven.sleep_edge",
+      "label": "Sleep-edge / ambient",
+      "kind": "context",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "quiet", "fade" ]
+    },
+
+    {
+      "id": "slow.music.mood_driven.anger_release",
+      "label": "Anger / stress release",
+      "kind": "emotion",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "loud", "fast", "metal-punk-rap" ]
+    },
+    {
+      "id": "slow.music.mood_driven.sad_sit",
+      "label": "Sad sit-with-it",
+      "kind": "emotion",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "slow", "lyrics", "indie-soul" ]
+    },
+    {
+      "id": "slow.music.mood_driven.sad_lift",
+      "label": "Sad then lift out",
+      "kind": "emotion",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "arc", "hope" ]
+    },
+    {
+      "id": "slow.music.mood_driven.romance",
+      "label": "Romance / desire bed",
+      "kind": "emotion",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "rnb", "slow-jam", "soft" ]
+    },
+    {
+      "id": "slow.music.mood_driven.lonely",
+      "label": "Lonely companion playlist",
+      "kind": "emotion",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "alone", "company" ]
+    },
+    {
+      "id": "slow.music.mood_driven.joy_up",
+      "label": "Joy / celebration",
+      "kind": "emotion",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "up", "dance", "pop" ]
+    },
+    {
+      "id": "slow.music.mood_driven.anxiety_calm",
+      "label": "Anxiety calm-down",
+      "kind": "emotion",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "soft", "predictable" ]
+    },
+    {
+      "id": "slow.music.mood_driven.anxiety_distract",
+      "label": "Anxiety distract (busy music)",
+      "kind": "emotion",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "dense", "focus-away" ]
+    },
+    {
+      "id": "slow.music.mood_driven.nostalgia",
+      "label": "Nostalgia hit (90s etc.)",
+      "kind": "emotion",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "era", "memory" ]
+    },
+    {
+      "id": "slow.music.mood_driven.confidence",
+      "label": "Confidence / armor playlist",
+      "kind": "emotion",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "walk", "ready" ]
+    },
+
+    {
+      "id": "slow.music.mood_driven.background_always",
+      "label": "Needs background always",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "silence-hard" ]
+    },
+    {
+      "id": "slow.music.mood_driven.silence_ok",
+      "label": "Silence is fine",
+      "kind": "habit",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "quiet-home" ]
+    },
+    {
+      "id": "slow.music.mood_driven.album_mode",
+      "label": "Full album when mood is deep",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "patient", "art" ]
+    },
+    {
+      "id": "slow.music.mood_driven.shuffle_mode",
+      "label": "Shuffle / short hits when restless",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "impatient", "variety" ]
+    },
+    {
+      "id": "slow.music.mood_driven.shared_aux",
+      "label": "Aux cord / shared ride curator",
+      "kind": "social",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "control", "car" ]
+    },
+    {
+      "id": "slow.music.mood_driven.reads_room",
+      "label": "Reads the room before picking",
+      "kind": "social",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "group", "tact" ]
+    },
+    {
+      "id": "slow.music.mood_driven.forces_taste",
+      "label": "Forces their taste on the room",
+      "kind": "social",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "dominant", "aux" ]
+    },
+    {
+      "id": "slow.music.mood_driven.party_dj",
+      "label": "Party mood DJ",
+      "kind": "social",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "up", "crowd" ]
+    },
+
+    {
+      "id": "slow.music.mood_driven.tag_fight",
+      "label": "musicTag: fight / tension bed",
+      "kind": "system",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "thought", "scene" ]
+    },
+    {
+      "id": "slow.music.mood_driven.tag_romantic",
+      "label": "musicTag: romantic bed",
+      "kind": "system",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "thought", "scene" ]
+    },
+    {
+      "id": "slow.music.mood_driven.tag_comfort",
+      "label": "musicTag: comfort / lonely bed",
+      "kind": "system",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "thought", "scene" ]
+    },
+    {
+      "id": "slow.music.mood_driven.tag_desire",
+      "label": "musicTag: desire bed",
+      "kind": "system",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "thought", "scene" ]
+    },
+    {
+      "id": "slow.music.mood_driven.tag_drive",
+      "label": "musicTag: drive bed",
+      "kind": "system",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "thought", "scene" ]
+    },
+    {
+      "id": "slow.music.mood_driven.tag_club",
+      "label": "musicTag: dance club bed",
+      "kind": "system",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "thought", "scene" ]
+    },
+    {
+      "id": "slow.music.mood_driven.tag_reggae",
+      "label": "musicTag: reggae chill bed",
+      "kind": "system",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "thought", "scene" ]
+    },
+    {
+      "id": "slow.music.mood_driven.genre_flexible",
+      "label": "Will cross any genre for the mood",
+      "kind": "attitude",
+      "defaultRange": [ 40, 95 ],
+      "tags": [ "open", "tool" ]
+    },
+    {
+      "id": "slow.music.mood_driven.genre_loyal_anyway",
+      "label": "Mood first but still has home genres",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "anchor", "90s-indie" ]
+    },
+    {
+      "id": "slow.music.mood_driven.discovers_by_mood",
+      "label": "Discovers new music via mood playlists",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "algorithm", "open" ]
+    },
+    {
+      "id": "slow.music.mood_driven.same_songs_safe",
+      "label": "Same safe songs when stressed",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "predictable", "anxiety" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "picks whatever is on; no mood system",
+    "atOrAbove40": "attach 2-4 context/emotion roles; Thought can set musicTag",
+    "atOrAbove70": "explicit playlist identity; aux and scene beds matter",
+    "extreme95": "almost never genre-loyal; every hour has a soundtrack job"
+  },
+  "notes": "This is the bridge to Thought musicTag (fight, romantic, comfort, desire, drive, club, reggae). High mood_driven + high indie/90s = your personal pattern: mood first, 90s alt as home base."
+}

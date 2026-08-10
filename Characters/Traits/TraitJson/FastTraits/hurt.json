@@ -1,0 +1,187 @@
+﻿{
+  "id": "hurt",
+  "layer": "fast",
+  "label": "Hurt",
+  "version": 1,
+  "description": "Wounded by someone who matters. Softer than Anger; deeper when Affection/Trust were high. Can turn into Anger, Guard, or inward Shame.",
+  "priorIntensity": {
+    "min": 2,
+    "max": 6,
+    "mean": 4
+  },
+  "spawn": {
+    "currentFromIntensity": true,
+    "noise": 3
+  },
+  "bands": {
+    "off": [ 0, 29 ],
+    "low": [ 30, 49 ],
+    "mid": [ 50, 69 ],
+    "high": [ 70, 84 ],
+    "break": [ 85, 94 ],
+    "extreme": [ 95, 100 ]
+  },
+  "styles": {
+    "soft_cry": {
+      "means": "Tears, cracked voice, visible wound.",
+      "speechHints": [ "broken", "quiet", "why" ],
+      "bodyHints": [ "tears", "fold_in" ],
+      "riskTags": [ "vulnerable" ]
+    },
+    "shut_down": {
+      "means": "Goes quiet and flat; emotional lights off.",
+      "speechHints": [ "minimal", "empty" ],
+      "bodyHints": [ "still", "look_down" ],
+      "riskTags": [ "stonewall" ]
+    },
+    "lash": {
+      "means": "Hurt comes out as sharp words; wound → spike.",
+      "speechHints": [ "sharp", "accuse" ],
+      "bodyHints": [ "tense", "glare" ],
+      "riskTags": [ "hurt_anger_blend" ]
+    },
+    "cling": {
+      "means": "Needs contact even while wounded; don't leave.",
+      "speechHints": [ "stay", "hold" ],
+      "bodyHints": [ "reach", "hold" ],
+      "riskTags": [ "cling" ]
+    },
+    "silent": {
+      "means": "No show; carries it; may tell later or never.",
+      "speechHints": [ "fine", "nothing" ],
+      "bodyHints": [ "composed_mask" ],
+      "riskTags": [ "delayed_blow" ]
+    }
+  },
+  "defaultStyleWeights": {
+    "soft_cry": 0.8,
+    "shut_down": 0.9,
+    "lash": 0.7,
+    "cling": 0.75,
+    "silent": 0.85
+  },
+  "flavors": {
+    "rejection": "Not chosen / pushed away.",
+    "betrayal": "Trust broken by someone inside the circle.",
+    "dismissed": "Feelings treated as nothing.",
+    "compare": "Put against someone else and lost.",
+    "neglect": "Absence where presence was owed."
+  },
+  "pull": {
+    "belowHomeDamageMult": 0.55,
+    "recoverMult": 1.2,
+    "aboveHomeSettleMult": 1.15
+  },
+  "funding": {
+    "required": true,
+    "budgetPerIntensityPoint": 1.0
+  },
+  "links": [
+    {
+      "trait": "anger",
+      "op": "+",
+      "weight": 0.35,
+      "when": "rise",
+      "styleGate": [ "lash" ]
+    },
+    {
+      "trait": "guard",
+      "op": "+",
+      "weight": 0.45,
+      "when": "rise"
+    },
+    {
+      "trait": "trust",
+      "op": "-",
+      "weight": 0.5,
+      "when": "rise"
+    },
+    {
+      "trait": "affection",
+      "op": "-",
+      "weight": 0.25,
+      "when": "rise",
+      "note": "Can stay high — wound from someone they still love."
+    },
+    {
+      "trait": "shame",
+      "op": "+",
+      "weight": 0.25,
+      "when": "rise"
+    },
+    {
+      "trait": "loneliness",
+      "op": "+",
+      "weight": 0.3,
+      "when": "rise"
+    }
+  ],
+  "opposePairs": [
+    {
+      "with": "affection",
+      "policyHints": [ "love_and_wound", "stay_or_go" ]
+    },
+    {
+      "with": "pride",
+      "policyHints": [ "hide_the_hurt", "anger_cover" ]
+    }
+  ],
+  "tagTriggers": [
+    {
+      "tag": "bond.rejection",
+      "direction": "+",
+      "baseWeight": 0.95
+    },
+    {
+      "tag": "conflict.betrayal",
+      "direction": "+",
+      "baseWeight": 1.0
+    },
+    {
+      "tag": "conflict.dismiss",
+      "direction": "+",
+      "baseWeight": 0.8
+    },
+    {
+      "tag": "status.belittle",
+      "direction": "+",
+      "baseWeight": 0.75
+    },
+    {
+      "tag": "conflict.insult",
+      "direction": "+",
+      "baseWeight": 0.7
+    },
+    {
+      "tag": "repair.apology",
+      "direction": "-",
+      "baseWeight": 0.55
+    },
+    {
+      "tag": "bond.soft_return",
+      "direction": "-",
+      "baseWeight": 0.6
+    },
+    {
+      "tag": "bond.reassurance",
+      "direction": "-",
+      "baseWeight": 0.5
+    }
+  ],
+  "relationScoped": true,
+  "historyHooks": {
+    "catalog": "Characters/Traits/TraitJson/TraitHistory/hurt_patterns.json",
+    "filters": [ "style", "flavor", "sourceBucket" ],
+    "tellFraming": {
+      "prideHigh": "HeroSelf",
+      "prideLow": "VictimSelf",
+      "shameHigh": "VictimSelf",
+      "telephone": true
+    }
+  },
+  "debug": {
+    "showInDash": true,
+    "color": "#9a6b7a",
+    "sortPriority": 15
+  }
+}

@@ -1,0 +1,68 @@
+{
+    "id":  "mid.image_conscious",
+    "layer":  "mid",
+    "label":  "Image-conscious",
+    "version":  1,
+    "cluster":  "socialface",
+    "description":  "Manages how they are seen; audience-aware even in small rooms.",
+    "priorIntensity":  5,
+    "moveSpeed":  "slow",
+    "bands":  {
+                  "off":  "0-29",
+                  "low":  "30-49",
+                  "mid":  "50-69",
+                  "high":  "70-84",
+                  "break":  "85-94",
+                  "extreme":  "95-100"
+              },
+    "styles":  [
+                   {
+                       "id":  "mid.image_conscious.audience_scan",
+                       "label":  "Audience scan"
+                   },
+                   {
+                       "id":  "mid.image_conscious.curate_story",
+                       "label":  "Curate story"
+                   },
+                   {
+                       "id":  "mid.image_conscious.public_polish",
+                       "label":  "Public polish"
+                   }
+               ],
+    "links":  {
+                  "boostedBy":  [
+                                    "pride",
+                                    "shame",
+                                    "anxiety"
+                                ],
+                  "drainedBy":  [
+                                    "openness"
+                                ],
+                  "opposes":  [
+                                  "mid.open_book"
+                              ]
+              },
+    "tagTriggers":  [
+                        {
+                            "tag":  "mid.image_conscious.test",
+                            "meaning":  "Situation tests this character trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.image_conscious.confirm",
+                            "meaning":  "Behavior confirms this trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.image_conscious.violate",
+                            "meaning":  "Acts against this trait under pressure",
+                            "deltaHint":  -2
+                        }
+                    ],
+    "relationScoped":  true,
+    "historyHooks":  {
+                         "patternFile":  "image_conscious_patterns.json",
+                         "fundingBudget":  2
+                     },
+    "notes":  "Not always shallow; can be survival-learned."
+}

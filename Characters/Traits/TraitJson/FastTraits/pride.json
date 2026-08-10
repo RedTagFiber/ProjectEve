@@ -1,0 +1,44 @@
+﻿{
+  "id": "pride",
+  "layer": "fast",
+  "label": "Pride",
+  "version": 1,
+  "description": "TODO: define pride",
+  "priorIntensity": { "min": 2, "max": 6, "mean": 4 },
+  "spawn": { "currentFromIntensity": true, "noise": 3 },
+  "bands": {
+    "off": [0, 29],
+    "low": [30, 49],
+    "mid": [50, 69],
+    "high": [70, 84],
+    "break": [85, 94],
+    "extreme": [95, 100]
+  },
+  "styles": {
+    "default": {
+      "means": "TODO: primary expression styles for pride",
+      "speechHints": [],
+      "bodyHints": [],
+      "riskTags": []
+    }
+  },
+  "defaultStyleWeights": { "default": 1.0 },
+  "flavors": {},
+  "pull": { "belowHomeDamageMult": 0.6, "recoverMult": 1.4, "aboveHomeSettleMult": 1.0 },
+  "funding": { "required": true, "budgetPerIntensityPoint": 1.0 },
+  "links": [],
+  "opposePairs": [],
+  "tagTriggers": [],
+  "relationScoped": true,
+  "historyHooks": {
+    "catalog": "History/Catalogs/pride_patterns.json",
+    "filters": ["style", "flavor", "sourceBucket"],
+    "tellFraming": {
+      "prideHigh": "HeroSelf",
+      "prideLow": "VictimSelf",
+      "shameHigh": "VictimSelf",
+      "telephone": true
+    }
+  },
+  "debug": { "showInDash": true, "sortPriority": 50 }
+}

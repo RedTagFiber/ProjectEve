@@ -1,206 +1,156 @@
 ﻿using ProjectEve.Characters.Base;
-using ProjectEve.Characters.Emotion;
+using ProjectEve.Traits;
 using System;
 
 namespace ProjectEve.Characters.Emotion
 {
     /// <summary>
-    /// Traits push emotional meters for any NPC.
-    /// Uses TraitRegistry ids only.
+    /// Context → Fast trait movement.
+    /// Does NOT write EmotionalProfile (emotions are Fast traits now).
+    /// Prefer Thought tags via TraitEngine.ApplyTags when available;
+    /// this is the fallback / assist path.
     /// </summary>
     public static class TraitEmotionReactor
     {
-        public static void ApplyTraitDrivenEmotion(SimCharacter character, string context)
+        /// <summary>
+        /// Call after a chat line (user or combined context).
+        /// intensityHint 1–10 scales deltas (default 5).
+        /// </summary>
+        public static void ApplyTraitDrivenEmotion(
+            SimCharacter character,
+            string context,
+            int intensityHint = 5)
         {
-            if (character?.Emotion == null)
+            if (character?.Traits == null)
                 return;
 
-            var emotion = character.Emotion;
-            context = (context ?? "").ToLowerInvariant();
+            if (string.IsNullOrWhiteSpace(context))
+                return;
 
-            float anxiety = Get(character, "trait.anxiety");
-            float fear = Get(character, "trait.fearfulness");
-            float angerTrait = Get(character, "trait.anger");
-            float impulsiveness = Get(character, "trait.impulsiveness");
-            float optimism = Get(character, "trait.optimism");
-            float pessimism = Get(character, "trait.pessimism");
-            float confidence = Get(character, "trait.confidence");
-            float insecurity = Get(character, "trait.insecurity");
-            float empathy = Get(character, "trait.empathy");
-            float sensitivity = Get(character, "trait.sensitivity");
-            float stoicism = Get(character, "trait.stoicism");
-            float moodStability = Get(character, "trait.moodStability");
+            string c = context.ToLowerInvariant();
+            int intensity = Math.Clamp(intensityHint, 1, 10);
 
-            float sexualConfidence = Get(character, "trait.sexualConfidence");
-            float sexualCuriosity = Get(character, "trait.sexualCuriosity");
-            float sexualShame = Get(character, "trait.sexualShame");
-            float secrecyKink = Get(character, "trait.secrecyKink");
-            float doubleLife = Get(character, "trait.doubleLifeComfort");
-            float degradation = Get(character, "trait.degradationDesire");
-            float roughness = Get(character, "trait.roughnessPreference");
-            float aftercare = Get(character, "trait.aftercareNeed");
-            float dominance = Get(character, "trait.dominance");
-            float submission = Get(character, "trait.submission");
-            float jealousyRelated = Get(character, "trait.possessiveDesire");
-            float nonMono = Get(character, "trait.nonMonogamyComfort");
-            float compersion = Get(character, "trait.compersion");
-
-            // =====================================================
-            // BASE TRAIT PRESSURE (always mild)
-            // =====================================================
-            if (anxiety > 60) emotion.AddStress(Scale(anxiety, 60, 2));
-            if (fear > 60) emotion.AddStress(Scale(fear, 60, 1));
-            if (angerTrait > 60) emotion.AddAnger(Scale(angerTrait, 60, 2));
-            if (optimism > 65) emotion.AddHappiness(Scale(optimism, 65, 1));
-            if (pessimism > 65) emotion.AddSadness(Scale(pessimism, 65, 1));
-            if (insecurity > 65) emotion.AddStress(Scale(insecurity, 65, 1));
-            if (confidence > 70) emotion.AdjustComfort(1);
-            if (stoicism > 70) emotion.AddStress(-1);
-            if (moodStability > 70) emotion.AddStress(-1);
-            if (moodStability < 35) emotion.AddStress(1);
-
-            // =====================================================
-            // CONTEXT REACTIONS
-            // =====================================================
-
-            // Social / connection
-            if (ContainsAny(context, "miss", "hold", "stay", "with you", "love"))
+            // ---------- Conflict / anger ----------
+            if (ContainsAny(c, "hate you", "fuck you", "idiot", "shut up", "disrespect", "yell", "mad at"))
             {
-                emotion.AddAffection(2);
-                if (empathy > 50) emotion.AddHappiness(1);
-                if (aftercare > 60) emotion.AdjustComfort(2);
+                Push(character, "trait.anger", +4f, intensity);
+                Push(character, "trait.hurt", +2f, intensity);
+                Push(character, "trait.trust", -2f, intensity);
+                Push(character, "trait.patience", -2f, intensity);
+                Push(character, "trait.tension", +2f, intensity);
             }
 
-            if (ContainsAny(context, "alone", "ignored", "left me", "didn't text"))
+            // ---------- Soft / repair / love ----------
+            if (ContainsAny(c, "sorry", "i love you", "miss you", "forgive", "come here", "hold me", "stay with me"))
             {
-                emotion.AddSadness(2);
-                emotion.AddRestlessness(2);
-                if (insecurity > 55) emotion.AddStress(2);
+                Push(character, "trait.affection", +3f, intensity);
+                Push(character, "trait.hope", +2f, intensity);
+                Push(character, "trait.hurt", -2f, intensity);
+                Push(character, "trait.anger", -2f, intensity);
+                Push(character, "trait.loneliness", -2f, intensity);
             }
 
-            // Conflict
-            if (ContainsAny(context, "fight", "argue", "mad", "yell", "disrespect"))
+            // ---------- Fear / threat ----------
+            if (ContainsAny(c, "afraid", "scared", "danger", "don't leave", "please don't go"))
             {
-                emotion.AddAnger(Scale(Math.Max(angerTrait, 40), 40, 3));
-                emotion.AddStress(2);
-                if (impulsiveness > 60) emotion.AddAnger(2);
-                if (stoicism > 70) emotion.AddAnger(-1);
+                Push(character, "trait.fear", +3f, intensity);
+                Push(character, "trait.anxiety", +2f, intensity);
+                Push(character, "trait.guard", +1f, intensity);
             }
 
-            // Jealousy / possession
-            if (ContainsAny(context, "other guy", "other girl", "with someone else", "jealous"))
+            // ---------- Jealousy / rival ----------
+            if (ContainsAny(c, "other guy", "other girl", "with someone else", "who is she", "who is he", "jealous"))
             {
-                emotion.AddResentment(Scale(Math.Max(jealousyRelated, 40), 40, 3));
-                emotion.AddStress(1);
-                if (nonMono > 70 && compersion > 60)
-                {
-                    // can flip toward desire instead of only resentment
-                    emotion.AddDesire(2);
-                    emotion.AddResentment(-1);
-                }
+                Push(character, "trait.jealousy", +4f, intensity);
+                Push(character, "trait.trust", -2f, intensity);
+                Push(character, "trait.resentment", +1f, intensity);
+                Push(character, "trait.tension", +2f, intensity);
             }
 
-            // Sexual pressure
-            if (ContainsAny(context, "horny", "fuck", "wet", "cock", "pussy", "kiss me", "come over", "bed"))
+            // ---------- Desire / heat ----------
+            if (ContainsAny(c, "want you", "need you", "kiss me", "come over", "in bed", "horny", "fuck me", "touch me"))
             {
-                emotion.AddDesire(Scale(Math.Max(sexualConfidence, sexualCuriosity), 40, 3));
-                if (roughness > 60 || degradation > 55)
-                    emotion.AddDesire(1);
-                if (sexualShame > 55)
-                    emotion.AddShame(2);
+                Push(character, "trait.desire", +3f, intensity);
+                Push(character, "trait.attraction", +2f, intensity);
+                Push(character, "trait.tension", +2f, intensity);
             }
 
-            // Secrecy / double life thrill
-            if (ContainsAny(context, "secret", "hide", "don't tell", "behind", "if he knew", "sneak"))
+            // ---------- Lonely / abandoned ----------
+            if (ContainsAny(c, "alone", "ignored", "left me", "didn't text", "where are you", "nobody"))
             {
-                if (secrecyKink > 55 || doubleLife > 55)
-                {
-                    emotion.AddDesire(2);
-                    emotion.AddHappiness(1); // thrill
-                }
-                else
-                {
-                    emotion.AddStress(2);
-                    emotion.AddShame(1);
-                }
+                Push(character, "trait.loneliness", +3f, intensity);
+                Push(character, "trait.hurt", +2f, intensity);
+                Push(character, "trait.hope", -1f, intensity);
             }
 
-            // Power tones
-            if (ContainsAny(context, "on your knees", "do what i say", "use me", "obey"))
+            // ---------- Shame / exposed ----------
+            if (ContainsAny(c, "embarrassed", "ashamed", "caught", "shouldn't have", "humiliated"))
             {
-                if (submission > 55) emotion.AddDesire(2);
-                if (dominance > 55) emotion.AddDesire(2);
+                Push(character, "trait.shame", +3f, intensity);
+                Push(character, "trait.guard", +2f, intensity);
+                Push(character, "trait.openness", -2f, intensity);
             }
 
-            // Aftercare / soft come-down
-            if (ContainsAny(context, "after", "hold me", "stay close", "you okay"))
+            // ---------- Guilt ----------
+            if (ContainsAny(c, "my fault", "i messed up", "i shouldn't", "forgive me", "i was wrong"))
             {
-                if (aftercare > 50)
-                {
-                    emotion.AdjustComfort(3);
-                    emotion.AddStress(-2);
-                    emotion.AddShame(-1);
-                }
+                Push(character, "trait.guilt", +3f, intensity);
+                Push(character, "trait.pride", -1f, intensity);
             }
 
-            // Embarrassment / shame spikes
-            if (ContainsAny(context, "embarrassed", "caught", "ashamed", "shouldn't"))
+            // ---------- Play / joke ----------
+            if (ContainsAny(c, "haha", "lol", "kidding", "teasing", "joke", "just playing"))
             {
-                emotion.AddShame(Scale(Math.Max(sexualShame, sensitivity), 40, 3));
-                emotion.AddStress(1);
+                Push(character, "trait.playfulness", +2f, intensity);
+                Push(character, "trait.tension", -1f, intensity);
+                Push(character, "trait.anger", -1f, intensity);
             }
 
-            // Boredom / empty time
-            if (ContainsAny(context, "bored", "nothing to do", "same day", "scrolling"))
+            // ---------- Trust open ----------
+            if (ContainsAny(c, "trust you", "tell you something", "between us", "i need to say"))
             {
-                emotion.AddRestlessness(3);
-                if (impulsiveness > 60) emotion.AddDesire(1);
+                Push(character, "trait.trust", +2f, intensity);
+                Push(character, "trait.openness", +2f, intensity);
+                Push(character, "trait.guard", -1f, intensity);
             }
 
-            // Work pressure
-            if (ContainsAny(context, "work", "shift", "customer", "rush", "manager"))
+            // ---------- Guard / shut down ----------
+            if (ContainsAny(c, "leave me alone", "i don't want to talk", "drop it", "whatever"))
             {
-                emotion.AddStress(1);
-                emotion.AddEnergy(-1);
-                if (anxiety > 60) emotion.AddStress(1);
+                Push(character, "trait.guard", +3f, intensity);
+                Push(character, "trait.openness", -2f, intensity);
+                Push(character, "trait.patience", -1f, intensity);
             }
 
-            // Final resolve
-            emotion.Recalculate();
+            // ---------- Pride / status ----------
+            if (ContainsAny(c, "i was right", "told you", "embarrass me", "make me look bad"))
+            {
+                Push(character, "trait.pride", +2f, intensity);
+                if (ContainsAny(c, "embarrass", "look bad"))
+                    Push(character, "trait.shame", +2f, intensity);
+            }
+
+            // ---------- Work pressure (light) ----------
+            if (ContainsAny(c, "work", "shift", "boss", "manager", "customer", "rush"))
+            {
+                Push(character, "trait.anxiety", +1f, Math.Min(intensity, 4));
+                Push(character, "trait.patience", -1f, Math.Min(intensity, 4));
+            }
         }
 
-        // -------------------------------------------------
-        private static float Get(SimCharacter character, string traitId)
+        // ------------------------------------------------------------------
+        private static void Push(SimCharacter character, string traitId, float baseDelta, int intensity)
         {
-            try
-            {
-                if (character.Brain != null)
-                    return character.Brain.GetTrait(traitId);
-            }
-            catch { }
-
-            try
-            {
-                if (character.Traits != null)
-                    return character.Traits.Get(traitId);
-            }
-            catch { }
-
-            return 50f;
-        }
-
-        private static int Scale(float traitValue, float threshold, int maxAdd)
-        {
-            if (traitValue <= threshold) return 1;
-            float t = (traitValue - threshold) / (100f - threshold);
-            return Math.Clamp((int)Math.Round(1 + t * (maxAdd - 1)), 1, maxAdd);
+            TraitEngine.ApplyTag(character, traitId, baseDelta, intensity);
         }
 
         private static bool ContainsAny(string text, params string[] words)
         {
             foreach (var w in words)
-                if (text.Contains(w))
+            {
+                if (text.Contains(w, StringComparison.OrdinalIgnoreCase))
                     return true;
+            }
             return false;
         }
     }

@@ -1,0 +1,69 @@
+{
+    "id":  "mid.forgiving",
+    "layer":  "mid",
+    "label":  "Forgiving",
+    "version":  1,
+    "cluster":  "moral",
+    "description":  "Drops debt faster than average; repair window stays open longer.",
+    "priorIntensity":  5,
+    "moveSpeed":  "slow",
+    "bands":  {
+                  "off":  "0-29",
+                  "low":  "30-49",
+                  "mid":  "50-69",
+                  "high":  "70-84",
+                  "break":  "85-94",
+                  "extreme":  "95-100"
+              },
+    "styles":  [
+                   {
+                       "id":  "mid.forgiving.drop_debt",
+                       "label":  "Drop debt"
+                   },
+                   {
+                       "id":  "mid.forgiving.second_chance",
+                       "label":  "Second chance"
+                   },
+                   {
+                       "id":  "mid.forgiving.soft_memory",
+                       "label":  "Soft memory"
+                   }
+               ],
+    "links":  {
+                  "boostedBy":  [
+                                    "hope",
+                                    "affection",
+                                    "guilt"
+                                ],
+                  "drainedBy":  [
+                                    "resentment",
+                                    "hurt"
+                                ],
+                  "opposes":  [
+                                  "mid.grudge_holding"
+                              ]
+              },
+    "tagTriggers":  [
+                        {
+                            "tag":  "mid.forgiving.test",
+                            "meaning":  "Situation tests this character trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.forgiving.confirm",
+                            "meaning":  "Behavior confirms this trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.forgiving.violate",
+                            "meaning":  "Acts against this trait under pressure",
+                            "deltaHint":  -2
+                        }
+                    ],
+    "relationScoped":  true,
+    "historyHooks":  {
+                         "patternFile":  "forgiving_patterns.json",
+                         "fundingBudget":  2
+                     },
+    "notes":  "Can be exploited; still a character strength."
+}

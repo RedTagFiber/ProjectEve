@@ -1,0 +1,176 @@
+﻿{
+  "id": "attraction",
+  "layer": "fast",
+  "label": "Attraction",
+  "version": 1,
+  "description": "Pull / chemistry spike toward a person. Can be visual, social, or intellectual. Not the same as Desire (want to act) or Affection (warmth).",
+  "priorIntensity": {
+    "min": 2,
+    "max": 6,
+    "mean": 4
+  },
+  "spawn": {
+    "currentFromIntensity": true,
+    "noise": 3
+  },
+  "bands": {
+    "off": [ 0, 29 ],
+    "low": [ 30, 49 ],
+    "mid": [ 50, 69 ],
+    "high": [ 70, 84 ],
+    "break": [ 85, 94 ],
+    "extreme": [ 95, 100 ]
+  },
+  "styles": {
+    "glance": {
+      "means": "Eyes keep returning; notices details; quiet pull.",
+      "speechHints": [ "distracted", "soft" ],
+      "bodyHints": [ "look_back", "orient_toward" ],
+      "riskTags": [ "noticed_staring" ]
+    },
+    "flirt": {
+      "means": "Playful charge in talk; smiles; tests interest.",
+      "speechHints": [ "tease", "double_meaning", "bright" ],
+      "bodyHints": [ "smile", "closer" ],
+      "riskTags": [ "misread" ]
+    },
+    "charge": {
+      "means": "Strong body-level pull; heat in the room.",
+      "speechHints": [ "lower_voice", "fewer_words" ],
+      "bodyHints": [ "tension_posture", "proximity" ],
+      "riskTags": [ "obvious" ]
+    },
+    "deny": {
+      "means": "Feels it but pushes it down or jokes it away.",
+      "speechHints": [ "deflect", "too_casual" ],
+      "bodyHints": [ "look_away", "arms_busy" ],
+      "riskTags": [ "mixed_signal" ]
+    },
+    "magnetic": {
+      "means": "Drawn in hard; hard to focus elsewhere.",
+      "speechHints": [ "engaged", "curious" ],
+      "bodyHints": [ "track_them", "lean" ],
+      "riskTags": [ "possessive_edge" ]
+    }
+  },
+  "defaultStyleWeights": {
+    "glance": 1.0,
+    "flirt": 0.9,
+    "charge": 0.6,
+    "deny": 0.75,
+    "magnetic": 0.5
+  },
+  "flavors": {
+    "visual": "Looks, style, body.",
+    "social": "Humor, status, how they move in a room.",
+    "mind": "Smart, competent, interesting.",
+    "forbidden": "Shouldn't — makes the pull louder.",
+    "nostalgia": "Reminds them of someone / a time."
+  },
+  "pull": {
+    "belowHomeDamageMult": 0.7,
+    "recoverMult": 1.3,
+    "aboveHomeSettleMult": 1.15
+  },
+  "funding": {
+    "required": true,
+    "budgetPerIntensityPoint": 1.0
+  },
+  "links": [
+    {
+      "trait": "desire",
+      "op": "+",
+      "weight": 0.45,
+      "when": "rise"
+    },
+    {
+      "trait": "tension",
+      "op": "+",
+      "weight": 0.4,
+      "when": "rise"
+    },
+    {
+      "trait": "playfulness",
+      "op": "+",
+      "weight": 0.2,
+      "when": "rise"
+    },
+    {
+      "trait": "guard",
+      "op": "+",
+      "weight": 0.15,
+      "when": "rise",
+      "styleGate": [ "deny" ]
+    },
+    {
+      "trait": "affection",
+      "op": "+",
+      "weight": 0.15,
+      "when": "rise",
+      "note": "Small; not automatic love."
+    }
+  ],
+  "opposePairs": [
+    {
+      "with": "guard",
+      "policyHints": [ "pull_and_retreat", "deny_out_loud" ]
+    },
+    {
+      "with": "shame",
+      "policyHints": [ "hide_interest", "self_check" ]
+    }
+  ],
+  "tagTriggers": [
+    {
+      "tag": "bond.flirt",
+      "direction": "+",
+      "baseWeight": 0.8
+    },
+    {
+      "tag": "bond.compliment_appearance",
+      "direction": "+",
+      "baseWeight": 0.7
+    },
+    {
+      "tag": "bond.proximity_close",
+      "direction": "+",
+      "baseWeight": 0.55
+    },
+    {
+      "tag": "desire.notice",
+      "direction": "+",
+      "baseWeight": 0.75
+    },
+    {
+      "tag": "conflict.insult",
+      "direction": "-",
+      "baseWeight": 0.5
+    },
+    {
+      "tag": "bond.rejection",
+      "direction": "-",
+      "baseWeight": 0.7
+    },
+    {
+      "tag": "status.humiliate",
+      "direction": "-",
+      "baseWeight": 0.6
+    }
+  ],
+  "relationScoped": true,
+  "historyHooks": {
+    "catalog": "Characters/Traits/TraitJson/TraitHistory/attraction_patterns.json",
+    "filters": [ "style", "flavor", "sourceBucket" ],
+    "tellFraming": {
+      "prideHigh": "HeroSelf",
+      "prideLow": "VictimSelf",
+      "shameHigh": "VictimSelf",
+      "telephone": true
+    }
+  },
+  "debug": {
+    "showInDash": true,
+    "color": "#d67ba8",
+    "sortPriority": 22
+  }
+}

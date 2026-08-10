@@ -1,0 +1,1012 @@
+{
+  "notes": {
+    "level": 2,
+    "levelName": "risky",
+    "meaning": "Clearly not vanilla. Private. Some partners will refuse. revealTrust typically 55–78.",
+    "cooldownBand": "minDays ~2–10, maxDays ~80–140; high value slides toward minDays",
+    "contentRating": "+18",
+    "bounds": "Consensual adults only."
+  },
+  "kinks": [
+    {
+      "id": "kink.light_restraint",
+      "name": "Light Restraint",
+      "level": 2,
+      "description": "Wrists held, soft ties, stay-still control.",
+      "defaultValueRange": [ 25, 75 ],
+      "revealTrust": 60,
+      "limitDefault": "soft",
+      "styleOptions": [ "direct", "shy", "only-private" ],
+      "cooldown": {
+        "minDays": 2,
+        "maxDays": 90
+      },
+      "tags": [ "restraint", "control" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "tension+", "guard+", "trust+" ],
+        "ifRejected": [ "hurt+", "guard+", "shame+" ]
+      },
+      "midBias": [ "submissive", "dominant", "control-need" ]
+    },
+    {
+      "id": "kink.power_tease",
+      "name": "Power Tease",
+      "level": 2,
+      "description": "Orders, permission, ask-first without heavy protocol.",
+      "defaultValueRange": [ 25, 80 ],
+      "revealTrust": 58,
+      "limitDefault": "none",
+      "styleOptions": [ "direct", "tease", "only-private" ],
+      "cooldown": {
+        "minDays": 2,
+        "maxDays": 85
+      },
+      "tags": [ "power", "permission" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "pride+", "tension+" ],
+        "ifRejected": [ "anger+", "pride+", "hurt+" ]
+      },
+      "midBias": [ "dominant", "deferential", "proud" ]
+    },
+    {
+      "id": "kink.marking_claim",
+      "name": "Claim Marking",
+      "level": 2,
+      "description": "Marks meant to be noticed; possessive edge.",
+      "defaultValueRange": [ 20, 70 ],
+      "revealTrust": 62,
+      "limitDefault": "soft",
+      "styleOptions": [ "direct", "tease", "only-private" ],
+      "cooldown": {
+        "minDays": 4,
+        "maxDays": 100
+      },
+      "tags": [ "marking", "possessive" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "jealousy+", "pride+" ],
+        "ifRejected": [ "hurt+", "resentment+" ]
+      },
+      "midBias": [ "loyal", "possessive" ]
+    },
+    {
+      "id": "kink.degrade_play_light",
+      "name": "Light Degradation Play",
+      "level": 2,
+      "description": "Mild dirty labels as play; aftercare expected.",
+      "defaultValueRange": [ 15, 65 ],
+      "revealTrust": 68,
+      "limitDefault": "soft",
+      "styleOptions": [ "direct", "only-private", "tease" ],
+      "cooldown": {
+        "minDays": 5,
+        "maxDays": 110
+      },
+      "tags": [ "degradation-light", "verbal" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "shame+", "tension+" ],
+        "ifRejected": [ "hurt+", "shame+", "trust-" ]
+      },
+      "midBias": [ "sexual-confidence", "sexual-shame" ]
+    },
+    {
+      "id": "kink.praise_degrade_mix",
+      "name": "Praise Degrade Mix",
+      "level": 2,
+      "description": "Good labels and filthy labels in the same scene.",
+      "defaultValueRange": [ 20, 70 ],
+      "revealTrust": 70,
+      "limitDefault": "soft",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 4,
+        "maxDays": 100
+      },
+      "tags": [ "praise", "degradation-light" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "shame+", "pride+", "tension+" ],
+        "ifRejected": [ "hurt+", "guard+" ]
+      },
+      "midBias": [ "intense", "sensitive" ]
+    },
+    {
+      "id": "kink.orgasm_control_light",
+      "name": "Light Orgasm Control",
+      "level": 2,
+      "description": "Partner times or delays climax short-term.",
+      "defaultValueRange": [ 25, 75 ],
+      "revealTrust": 65,
+      "limitDefault": "soft",
+      "styleOptions": [ "direct", "tease", "only-private" ],
+      "cooldown": {
+        "minDays": 3,
+        "maxDays": 95
+      },
+      "tags": [ "control", "denial-light" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "tension+", "patience-" ],
+        "ifRejected": [ "anger+", "resentment+" ]
+      },
+      "midBias": [ "controlling", "patient", "submissive" ]
+    },
+    {
+      "id": "kink.collar_symbolic",
+      "name": "Symbolic Collar",
+      "level": 2,
+      "description": "Necklace/collar with meaning between them—not full lifestyle protocol.",
+      "defaultValueRange": [ 20, 70 ],
+      "revealTrust": 72,
+      "limitDefault": "soft",
+      "styleOptions": [ "shy", "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 7,
+        "maxDays": 120
+      },
+      "tags": [ "collar", "symbol" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "affection+", "pride+", "guard+" ],
+        "ifRejected": [ "hurt+", "shame+", "trust-" ]
+      },
+      "midBias": [ "devoted", "loyal", "possessive" ]
+    },
+    {
+      "id": "kink.service_small",
+      "name": "Small Service",
+      "level": 2,
+      "description": "Small service acts as intimacy (fetch, kneel briefly, prepare).",
+      "defaultValueRange": [ 25, 75 ],
+      "revealTrust": 60,
+      "limitDefault": "none",
+      "styleOptions": [ "shy", "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 2,
+        "maxDays": 80
+      },
+      "tags": [ "service", "protocol-light" ],
+      "fastEffects": {
+        "onTheme": [ "affection+", "desire+", "pride+", "shame+" ],
+        "ifRejected": [ "hurt+", "shame+" ]
+      },
+      "midBias": [ "devoted", "conscientious" ]
+    },
+    {
+      "id": "kink.impact_light",
+      "name": "Light Impact",
+      "level": 2,
+      "description": "Spanking or light impact as a preference, not identity core.",
+      "defaultValueRange": [ 20, 70 ],
+      "revealTrust": 68,
+      "limitDefault": "soft",
+      "styleOptions": [ "direct", "shy", "only-private" ],
+      "cooldown": {
+        "minDays": 4,
+        "maxDays": 100
+      },
+      "tags": [ "impact", "spanking" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "tension+", "anxiety+" ],
+        "ifRejected": [ "hurt+", "guard+", "trust-" ]
+      },
+      "midBias": [ "enduring", "passionate" ]
+    },
+    {
+      "id": "kink.jealousy_play",
+      "name": "Jealousy Play",
+      "level": 2,
+      "description": "Using jealousy as charge—unsafe if trust is weak.",
+      "defaultValueRange": [ 10, 55 ],
+      "revealTrust": 75,
+      "limitDefault": "soft",
+      "styleOptions": [ "tease", "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 7,
+        "maxDays": 130
+      },
+      "tags": [ "jealousy", "risk-emotional" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "jealousy+", "tension+", "anger+" ],
+        "ifRejected": [ "hurt+", "resentment+", "anger+" ]
+      },
+      "midBias": [ "possessive", "insecure", "dramatic" ]
+    },
+    {
+      "id": "kink.recording_fantasy",
+      "name": "Recording Fantasy",
+      "level": 2,
+      "description": "Private recording/photo fantasy between partners; consent-heavy.",
+      "defaultValueRange": [ 10, 50 ],
+      "revealTrust": 78,
+      "limitDefault": "hard",
+      "styleOptions": [ "shy", "only-private" ],
+      "cooldown": {
+        "minDays": 10,
+        "maxDays": 140
+      },
+      "tags": [ "private-media", "trust-heavy" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "anxiety+", "shame+", "trust+" ],
+        "ifRejected": [ "shame+", "guard+", "trust-" ]
+      },
+      "midBias": [ "secretive", "anxious" ]
+    },
+    {
+      "id": "kink.role_light",
+      "name": "Light Role",
+      "level": 2,
+      "description": "Light adult role flavor without a full scripted scene.",
+      "defaultValueRange": [ 15, 60 ],
+      "revealTrust": 62,
+      "limitDefault": "soft",
+      "styleOptions": [ "tease", "shy", "only-private" ],
+      "cooldown": {
+        "minDays": 5,
+        "maxDays": 100
+      },
+      "tags": [ "role", "fantasy-light" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "playfulness+", "shame+" ],
+        "ifRejected": [ "shame+", "guard+" ]
+      },
+      "midBias": [ "playful", "imaginative" ]
+    },
+    {
+      "id": "kink.gag_soft",
+      "name": "Soft Gag",
+      "level": 2,
+      "description": "Hand, cloth, or soft gag for quiet or control flavor.",
+      "defaultValueRange": [ 15, 60 ],
+      "revealTrust": 70,
+      "limitDefault": "soft",
+      "styleOptions": [ "direct", "shy", "only-private" ],
+      "cooldown": {
+        "minDays": 5,
+        "maxDays": 110
+      },
+      "tags": [ "gag", "control", "sensory" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "tension+", "anxiety+", "trust+" ],
+        "ifRejected": [ "guard+", "fear+", "trust-" ]
+      },
+      "midBias": [ "submissive", "trusting", "anxious" ]
+    },
+    {
+      "id": "kink.blindfold_restraint_mix",
+      "name": "Blindfold Plus Hold",
+      "level": 2,
+      "description": "Blindfold combined with being held or lightly bound.",
+      "defaultValueRange": [ 20, 70 ],
+      "revealTrust": 66,
+      "limitDefault": "soft",
+      "styleOptions": [ "shy", "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 4,
+        "maxDays": 105
+      },
+      "tags": [ "blindfold", "restraint", "sensory" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "tension+", "anxiety+", "trust+" ],
+        "ifRejected": [ "guard+", "shame+" ]
+      },
+      "midBias": [ "trusting", "submissive" ]
+    },
+    {
+      "id": "kink.hair_pull_hard",
+      "name": "Harder Hair Pull",
+      "level": 2,
+      "description": "Stronger guiding hair pull; edge of pain-pleasure.",
+      "defaultValueRange": [ 25, 75 ],
+      "revealTrust": 58,
+      "limitDefault": "soft",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 2,
+        "maxDays": 85
+      },
+      "tags": [ "hair", "control", "impact-light" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "tension+" ],
+        "ifRejected": [ "hurt+", "anger+" ]
+      },
+      "midBias": [ "passionate", "dominant", "direct" ]
+    },
+    {
+      "id": "kink.biting",
+      "name": "Biting",
+      "level": 2,
+      "description": "Biting as arousal—shoulders, neck, lips—marks possible.",
+      "defaultValueRange": [ 20, 70 ],
+      "revealTrust": 55,
+      "limitDefault": "soft",
+      "styleOptions": [ "direct", "tease", "only-private" ],
+      "cooldown": {
+        "minDays": 3,
+        "maxDays": 90
+      },
+      "tags": [ "biting", "marking", "physical" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "tension+", "pride+" ],
+        "ifRejected": [ "hurt+", "guard+" ]
+      },
+      "midBias": [ "passionate", "intense" ]
+    },
+    {
+      "id": "kink.scratching",
+      "name": "Scratching",
+      "level": 2,
+      "description": "Nails and red lines as heat, not injury play.",
+      "defaultValueRange": [ 15, 65 ],
+      "revealTrust": 58,
+      "limitDefault": "soft",
+      "styleOptions": [ "direct", "tease", "only-private" ],
+      "cooldown": {
+        "minDays": 3,
+        "maxDays": 95
+      },
+      "tags": [ "scratching", "marking" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "tension+" ],
+        "ifRejected": [ "hurt+", "guard+" ]
+      },
+      "midBias": [ "passionate", "intense" ]
+    },
+    {
+      "id": "kink.wall_pin",
+      "name": "Wall Pin",
+      "level": 2,
+      "description": "Pinned to wall or door; size/power body language.",
+      "defaultValueRange": [ 25, 75 ],
+      "revealTrust": 60,
+      "limitDefault": "soft",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 2,
+        "maxDays": 85
+      },
+      "tags": [ "pinning", "power", "physical" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "tension+", "guard+" ],
+        "ifRejected": [ "fear+", "anger+", "guard+" ]
+      },
+      "midBias": [ "dominant", "submissive", "physical" ]
+    },
+    {
+      "id": "kink.throat_focus",
+      "name": "Throat Focus",
+      "level": 2,
+      "description": "Hand near throat / guided pressure with trust; not harm.",
+      "defaultValueRange": [ 15, 60 ],
+      "revealTrust": 76,
+      "limitDefault": "hard",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 7,
+        "maxDays": 130
+      },
+      "tags": [ "throat", "control", "trust-heavy" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "fear+", "tension+", "trust+" ],
+        "ifRejected": [ "fear+", "anger+", "trust-", "guard+" ]
+      },
+      "midBias": [ "intense", "trusting", "edge-aware" ]
+    },
+    {
+      "id": "kink.face_focus",
+      "name": "Face Focus",
+      "level": 2,
+      "description": "Hands on jaw/face, guided eye contact, chin control.",
+      "defaultValueRange": [ 20, 70 ],
+      "revealTrust": 60,
+      "limitDefault": "soft",
+      "styleOptions": [ "direct", "tease", "only-private" ],
+      "cooldown": {
+        "minDays": 2,
+        "maxDays": 80
+      },
+      "tags": [ "face", "control-light", "eye-contact" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "tension+", "openness+", "shame+" ],
+        "ifRejected": [ "guard+", "hurt+" ]
+      },
+      "midBias": [ "dominant", "intense" ]
+    },
+    {
+      "id": "kink.kneeling",
+      "name": "Kneeling",
+      "level": 2,
+      "description": "Kneeling as signal—apology, ask, offer, worship-lite.",
+      "defaultValueRange": [ 25, 80 ],
+      "revealTrust": 64,
+      "limitDefault": "none",
+      "styleOptions": [ "shy", "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 2,
+        "maxDays": 90
+      },
+      "tags": [ "kneeling", "service", "power" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "shame+", "pride+", "affection+" ],
+        "ifRejected": [ "shame+", "hurt+" ]
+      },
+      "midBias": [ "submissive", "devoted", "proud" ]
+    },
+    {
+      "id": "kink.begging",
+      "name": "Begging",
+      "level": 2,
+      "description": "Being made to ask or beg for touch/release/permission.",
+      "defaultValueRange": [ 20, 75 ],
+      "revealTrust": 66,
+      "limitDefault": "soft",
+      "styleOptions": [ "shy", "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 3,
+        "maxDays": 95
+      },
+      "tags": [ "begging", "permission", "verbal" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "shame+", "tension+", "pride-" ],
+        "ifRejected": [ "hurt+", "shame+", "resentment+" ]
+      },
+      "midBias": [ "submissive", "proud", "sensitive" ]
+    },
+    {
+      "id": "kink.permission_sex",
+      "name": "Permission Sex",
+      "level": 2,
+      "description": "Nothing proceeds without a clear yes each step.",
+      "defaultValueRange": [ 30, 85 ],
+      "revealTrust": 55,
+      "limitDefault": "none",
+      "styleOptions": [ "direct", "shy" ],
+      "cooldown": {
+        "minDays": 2,
+        "maxDays": 75
+      },
+      "tags": [ "permission", "consent-ritual" ],
+      "fastEffects": {
+        "onTheme": [ "trust+", "desire+", "patience+", "tension+" ],
+        "ifRejected": [ "hurt+", "guard+" ]
+      },
+      "midBias": [ "careful", "conscientious", "dominant" ]
+    },
+    {
+      "id": "kink.denial_evening",
+      "name": "Evening Denial",
+      "level": 2,
+      "description": "One partner stays wound up through an evening on purpose.",
+      "defaultValueRange": [ 25, 70 ],
+      "revealTrust": 65,
+      "limitDefault": "soft",
+      "styleOptions": [ "tease", "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 4,
+        "maxDays": 100
+      },
+      "tags": [ "denial", "tease", "control" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "tension+", "patience-", "irritation" ],
+        "ifRejected": [ "anger+", "resentment+" ]
+      },
+      "midBias": [ "controlling", "playful", "patient" ]
+    },
+    {
+      "id": "kink.clothing_control_day",
+      "name": "Day Clothing Control",
+      "level": 2,
+      "description": "Partner chooses underwear/outfit rules for the day.",
+      "defaultValueRange": [ 20, 70 ],
+      "revealTrust": 68,
+      "limitDefault": "soft",
+      "styleOptions": [ "direct", "tease", "only-private" ],
+      "cooldown": {
+        "minDays": 3,
+        "maxDays": 100
+      },
+      "tags": [ "clothing", "control", "day-rule" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "tension+", "pride+", "shame+" ],
+        "ifRejected": [ "resentment+", "anger+" ]
+      },
+      "midBias": [ "compliance", "controlling", "secretive" ]
+    },
+    {
+      "id": "kink.no_underwear_rule",
+      "name": "No Underwear Rule",
+      "level": 2,
+      "description": "Private rule for a night out or day at home.",
+      "defaultValueRange": [ 15, 65 ],
+      "revealTrust": 70,
+      "limitDefault": "soft",
+      "styleOptions": [ "tease", "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 5,
+        "maxDays": 110
+      },
+      "tags": [ "clothing", "rule", "secrecy" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "anxiety+", "tension+", "playfulness+" ],
+        "ifRejected": [ "guard+", "resentment+" ]
+      },
+      "midBias": [ "adventurous", "compliance", "secretive" ]
+    },
+    {
+      "id": "kink.public_hand",
+      "name": "Public Hand",
+      "level": 2,
+      "description": "Hidden hand / close contact in public risk zone—not full exposure.",
+      "defaultValueRange": [ 15, 60 ],
+      "revealTrust": 72,
+      "limitDefault": "soft",
+      "styleOptions": [ "tease", "only-private", "direct" ],
+      "cooldown": {
+        "minDays": 5,
+        "maxDays": 120
+      },
+      "tags": [ "public-edge", "secrecy", "risk" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "anxiety+", "tension+" ],
+        "ifRejected": [ "guard+", "shame+" ]
+      },
+      "midBias": [ "adventurous", "secretive" ]
+    },
+    {
+      "id": "kink.car_sex",
+      "name": "Car Sex",
+      "level": 2,
+      "description": "Vehicle as the scene—tight space, risk, urgency.",
+      "defaultValueRange": [ 20, 70 ],
+      "revealTrust": 58,
+      "limitDefault": "soft",
+      "styleOptions": [ "direct", "tease", "only-private" ],
+      "cooldown": {
+        "minDays": 4,
+        "maxDays": 100
+      },
+      "tags": [ "car", "risk-light", "urgency" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "tension+", "anxiety+" ],
+        "ifRejected": [ "disappointment", "guard+" ]
+      },
+      "midBias": [ "adventurous", "impulsive" ]
+    },
+    {
+      "id": "kink.outdoor_hidden",
+      "name": "Hidden Outdoor",
+      "level": 2,
+      "description": "Secluded outdoor intimacy; risk of discovery without seeking audience.",
+      "defaultValueRange": [ 15, 60 ],
+      "revealTrust": 70,
+      "limitDefault": "soft",
+      "styleOptions": [ "tease", "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 7,
+        "maxDays": 125
+      },
+      "tags": [ "outdoor", "risk-light", "secrecy" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "anxiety+", "tension+" ],
+        "ifRejected": [ "guard+", "fear+" ]
+      },
+      "midBias": [ "adventurous", "cautious" ]
+    },
+    {
+      "id": "kink.mirror_command",
+      "name": "Mirror Command",
+      "level": 2,
+      "description": "Ordered to watch themselves; verbal control + mirror.",
+      "defaultValueRange": [ 20, 65 ],
+      "revealTrust": 68,
+      "limitDefault": "soft",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 4,
+        "maxDays": 105
+      },
+      "tags": [ "mirror", "command", "visual" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "shame+", "pride+", "tension+" ],
+        "ifRejected": [ "shame+", "guard+" ]
+      },
+      "midBias": [ "dominant", "insecure", "intense" ]
+    },
+    {
+      "id": "kink.name_control",
+      "name": "Name Control",
+      "level": 2,
+      "description": "Forced nickname, title, or banned real name in scene.",
+      "defaultValueRange": [ 20, 70 ],
+      "revealTrust": 64,
+      "limitDefault": "soft",
+      "styleOptions": [ "direct", "tease", "only-private" ],
+      "cooldown": {
+        "minDays": 3,
+        "maxDays": 95
+      },
+      "tags": [ "verbal", "name", "power" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "shame+", "pride+", "guard+" ],
+        "ifRejected": [ "anger+", "hurt+", "pride+" ]
+      },
+      "midBias": [ "dominant", "proud", "submissive" ]
+    },
+    {
+      "id": "kink.silence_order",
+      "name": "Silence Order",
+      "level": 2,
+      "description": "Ordered quiet; sound becomes disobedience.",
+      "defaultValueRange": [ 15, 65 ],
+      "revealTrust": 66,
+      "limitDefault": "soft",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 3,
+        "maxDays": 100
+      },
+      "tags": [ "silence", "control", "discipline-light" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "tension+", "anxiety+", "shame+" ],
+        "ifRejected": [ "anger+", "resentment+" ]
+      },
+      "midBias": [ "controlling", "submissive", "disciplined" ]
+    },
+    {
+      "id": "kink.count_aloud",
+      "name": "Count Aloud",
+      "level": 2,
+      "description": "Must count impacts, kisses, or breaths on command.",
+      "defaultValueRange": [ 20, 70 ],
+      "revealTrust": 62,
+      "limitDefault": "soft",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 3,
+        "maxDays": 95
+      },
+      "tags": [ "count", "protocol-light", "impact-adjacent" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "focus", "shame+", "tension+" ],
+        "ifRejected": [ "resentment+", "guard+" ]
+      },
+      "midBias": [ "ritualistic", "submissive", "controlling" ]
+    },
+    {
+      "id": "kink.position_lock",
+      "name": "Position Lock",
+      "level": 2,
+      "description": "Hold a position until released; strain as part of the charge.",
+      "defaultValueRange": [ 25, 75 ],
+      "revealTrust": 63,
+      "limitDefault": "soft",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 3,
+        "maxDays": 95
+      },
+      "tags": [ "position", "endurance", "control" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "tension+", "patience-", "pride+" ],
+        "ifRejected": [ "anger+", "hurt+" ]
+      },
+      "midBias": [ "enduring", "dominant", "disciplined" ]
+    },
+    {
+      "id": "kink.worship_lite",
+      "name": "Body Worship Lite",
+      "level": 2,
+      "description": "Focused worship of body/partner without full protocol life.",
+      "defaultValueRange": [ 25, 80 ],
+      "revealTrust": 58,
+      "limitDefault": "none",
+      "styleOptions": [ "shy", "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 2,
+        "maxDays": 85
+      },
+      "tags": [ "worship", "devotion", "service" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "affection+", "pride+", "shame+" ],
+        "ifRejected": [ "hurt+", "shame+" ]
+      },
+      "midBias": [ "devoted", "affectionate", "submissive" ]
+    },
+    {
+      "id": "kink.boot_focus",
+      "name": "Boots / Shoes Focus",
+      "level": 2,
+      "description": "Footwear as arousal object—attention, service, aesthetic.",
+      "defaultValueRange": [ 10, 55 ],
+      "revealTrust": 70,
+      "limitDefault": "soft",
+      "styleOptions": [ "shy", "only-private", "direct" ],
+      "cooldown": {
+        "minDays": 7,
+        "maxDays": 130
+      },
+      "tags": [ "footwear", "object-focus", "service" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "shame+", "focus" ],
+        "ifRejected": [ "shame+", "guard+" ]
+      },
+      "midBias": [ "secretive", "devoted", "aesthetic" ]
+    },
+    {
+      "id": "kink.glove_focus",
+      "name": "Glove Focus",
+      "level": 2,
+      "description": "Gloves on during touch; texture and distance.",
+      "defaultValueRange": [ 10, 50 ],
+      "revealTrust": 65,
+      "limitDefault": "none",
+      "styleOptions": [ "tease", "shy", "only-private" ],
+      "cooldown": {
+        "minDays": 5,
+        "maxDays": 115
+      },
+      "tags": [ "gloves", "texture", "control-light" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "tension+", "playfulness+" ],
+        "ifRejected": []
+      },
+      "midBias": [ "sensual", "particular" ]
+    },
+    {
+      "id": "kink.ice_impact_mix",
+      "name": "Ice and Impact Mix",
+      "level": 2,
+      "description": "Cold sensory plus light spanking in one scene.",
+      "defaultValueRange": [ 15, 60 ],
+      "revealTrust": 68,
+      "limitDefault": "soft",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 5,
+        "maxDays": 110
+      },
+      "tags": [ "temperature", "impact", "sensory" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "tension+", "anxiety+" ],
+        "ifRejected": [ "guard+", "hurt+" ]
+      },
+      "midBias": [ "adventurous", "intense" ]
+    },
+    {
+      "id": "kink.overstim_light",
+      "name": "Light Overstimulation",
+      "level": 2,
+      "description": "Push past comfort briefly with consent; edge of too much.",
+      "defaultValueRange": [ 20, 70 ],
+      "revealTrust": 74,
+      "limitDefault": "soft",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 6,
+        "maxDays": 120
+      },
+      "tags": [ "overstim", "edge", "control" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "tension+", "anxiety+", "overwhelm" ],
+        "ifRejected": [ "hurt+", "trust-", "guard+" ]
+      },
+      "midBias": [ "intense", "enduring", "edge-seeking" ]
+    },
+    {
+      "id": "kink.edging_session",
+      "name": "Edging Session",
+      "level": 2,
+      "description": "Repeated approach without release as the point of the night.",
+      "defaultValueRange": [ 30, 80 ],
+      "revealTrust": 65,
+      "limitDefault": "soft",
+      "styleOptions": [ "tease", "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 4,
+        "maxDays": 100
+      },
+      "tags": [ "edging", "denial", "control" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "tension+", "patience-", "frustration" ],
+        "ifRejected": [ "anger+", "resentment+" ]
+      },
+      "midBias": [ "controlling", "patient", "intense" ]
+    },
+    {
+      "id": "kink.partner_choose_toys",
+      "name": "Partner Chooses Toys",
+      "level": 2,
+      "description": "One partner picks tools/toys; the other accepts the menu.",
+      "defaultValueRange": [ 25, 75 ],
+      "revealTrust": 62,
+      "limitDefault": "soft",
+      "styleOptions": [ "direct", "shy", "only-private" ],
+      "cooldown": {
+        "minDays": 3,
+        "maxDays": 95
+      },
+      "tags": [ "toys", "control", "menu" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "anxiety+", "tension+", "openness+" ],
+        "ifRejected": [ "hurt+", "guard+" ]
+      },
+      "midBias": [ "dominant", "submissive", "adventurous" ]
+    },
+    {
+      "id": "kink.blind_taste",
+      "name": "Blind Taste",
+      "level": 2,
+      "description": "Blindfold plus feeding or taste games as intimacy.",
+      "defaultValueRange": [ 15, 55 ],
+      "revealTrust": 60,
+      "limitDefault": "none",
+      "styleOptions": [ "tease", "shy", "only-private" ],
+      "cooldown": {
+        "minDays": 4,
+        "maxDays": 100
+      },
+      "tags": [ "blindfold", "taste", "sensory" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "playfulness+", "trust+", "anxiety+" ],
+        "ifRejected": [ "guard+" ]
+      },
+      "midBias": [ "playful", "trusting" ]
+    },
+    {
+      "id": "kink.sleep_permission",
+      "name": "Sleep Permission",
+      "level": 2,
+      "description": "Asked or told when they may sleep after a scene or night.",
+      "defaultValueRange": [ 15, 60 ],
+      "revealTrust": 72,
+      "limitDefault": "soft",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 5,
+        "maxDays": 120
+      },
+      "tags": [ "permission", "protocol-light", "care-control" ],
+      "fastEffects": {
+        "onTheme": [ "trust+", "desire+", "pride+", "resentment?" ],
+        "ifRejected": [ "anger+", "hurt+" ]
+      },
+      "midBias": [ "controlling", "devoted", "regimental" ]
+    },
+    {
+      "id": "kink.text_orders",
+      "name": "Text Orders",
+      "level": 2,
+      "description": "Commands by phone during the day; private compliance.",
+      "defaultValueRange": [ 20, 70 ],
+      "revealTrust": 68,
+      "limitDefault": "soft",
+      "styleOptions": [ "direct", "tease", "only-private" ],
+      "cooldown": {
+        "minDays": 3,
+        "maxDays": 100
+      },
+      "tags": [ "text", "orders", "distance-control" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "tension+", "anxiety+", "pride+" ],
+        "ifRejected": [ "resentment+", "anger+" ]
+      },
+      "midBias": [ "controlling", "compliance", "secretive" ]
+    },
+    {
+      "id": "kink.photo_orders_private",
+      "name": "Private Photo Orders",
+      "level": 2,
+      "description": "Requested private photos on command between partners.",
+      "defaultValueRange": [ 15, 65 ],
+      "revealTrust": 76,
+      "limitDefault": "hard",
+      "styleOptions": [ "shy", "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 5,
+        "maxDays": 125
+      },
+      "tags": [ "photo", "orders", "trust-heavy" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "shame+", "anxiety+", "trust+" ],
+        "ifRejected": [ "shame+", "guard+", "trust-" ]
+      },
+      "midBias": [ "secretive", "compliance", "anxious" ]
+    },
+    {
+      "id": "kink.ritual_undress",
+      "name": "Ritual Undress",
+      "level": 2,
+      "description": "Undressing follows a set order or request pattern every time.",
+      "defaultValueRange": [ 20, 70 ],
+      "revealTrust": 60,
+      "limitDefault": "none",
+      "styleOptions": [ "direct", "shy", "only-private" ],
+      "cooldown": {
+        "minDays": 2,
+        "maxDays": 85
+      },
+      "tags": [ "ritual", "clothing", "protocol-light" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "tension+", "focus" ],
+        "ifRejected": [ "irritation", "resentment+" ]
+      },
+      "midBias": [ "ritualistic", "controlling", "sensual" ]
+    },
+    {
+      "id": "kink.apology_body",
+      "name": "Body Apology",
+      "level": 2,
+      "description": "Apology expressed through service or body language, not only words.",
+      "defaultValueRange": [ 20, 70 ],
+      "revealTrust": 70,
+      "limitDefault": "soft",
+      "styleOptions": [ "shy", "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 5,
+        "maxDays": 115
+      },
+      "tags": [ "apology", "service", "power" ],
+      "fastEffects": {
+        "onTheme": [ "shame+", "affection+", "desire+", "hurt-" ],
+        "ifRejected": [ "hurt+", "resentment+", "shame+" ]
+      },
+      "midBias": [ "devoted", "proud", "conflict-avoidant" ]
+    },
+    {
+      "id": "kink.reward_token",
+      "name": "Reward Token",
+      "level": 2,
+      "description": "Small tokens/points that unlock affection or scenes.",
+      "defaultValueRange": [ 15, 65 ],
+      "revealTrust": 64,
+      "limitDefault": "none",
+      "styleOptions": [ "tease", "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 3,
+        "maxDays": 100
+      },
+      "tags": [ "reward", "game", "protocol-light" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "playfulness+", "pride+", "hope+" ],
+        "ifRejected": [ "disappointment", "resentment+" ]
+      },
+      "midBias": [ "playful", "regimental", "motivated" ]
+    },
+    {
+      "id": "kink.corner_time",
+      "name": "Corner Time",
+      "level": 2,
+      "description": "Quiet corner time as reset, punishment-lite, or focus.",
+      "defaultValueRange": [ 15, 60 ],
+      "revealTrust": 72,
+      "limitDefault": "soft",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 5,
+        "maxDays": 120
+      },
+      "tags": [ "discipline-light", "quiet", "protocol-light" ],
+      "fastEffects": {
+        "onTheme": [ "shame+", "calm?", "resentment?", "tension+" ],
+        "ifRejected": [ "anger+", "hurt+", "pride+" ]
+      },
+      "midBias": [ "regimental", "proud", "submissive" ]
+    },
+    {
+      "id": "kink.partner_hygiene_rule",
+      "name": "Hygiene Rule",
+      "level": 2,
+      "description": "Shower/shave/prep rules before intimacy allowed.",
+      "defaultValueRange": [ 15, 60 ],
+      "revealTrust": 58,
+      "limitDefault": "soft",
+      "styleOptions": [ "direct", "only-private" ],
+      "cooldown": {
+        "minDays": 2,
+        "maxDays": 80
+      },
+      "tags": [ "rule", "prep", "control-light" ],
+      "fastEffects": {
+        "onTheme": [ "desire+", "pride+", "resentment?" ],
+        "ifRejected": [ "anger+", "resentment+", "hurt+" ]
+      },
+      "midBias": [ "particular", "controlling", "conscientious" ]
+    }
+  ]
+}

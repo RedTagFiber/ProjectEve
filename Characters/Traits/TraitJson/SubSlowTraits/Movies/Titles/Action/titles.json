@@ -1,0 +1,23 @@
+{
+    "catalog":  "movie_titles_action",
+    "style":  "Action",
+    "version":  1,
+    "entries":  [
+                    {
+                        "id":  "john_wick",
+                        "label":  "John Wick"
+                    },
+                    {
+                        "id":  "die_hard",
+                        "label":  "Die Hard"
+                    },
+                    {
+                        "id":  "mad_max_fury_road",
+                        "label":  "Mad Max Fury Road"
+                    },
+                    {
+                        "id":  "mission_impossible",
+                        "label":  "Mission Impossible"
+                    }
+                ]
+}

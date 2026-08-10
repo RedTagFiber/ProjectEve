@@ -1,0 +1,182 @@
+﻿{
+  "rows": [
+    {
+      "id": "mid.loyal",
+      "layer": "mid",
+      "weight": 0.65,
+      "targetHigh": {
+        "like": 5,
+        "trust": 4
+      },
+      "targetLow": {
+        "like": -3,
+        "trust": -2
+      },
+      "sharedHigh": {
+        "like": 4,
+        "growthMult": 1.25
+      }
+    },
+    {
+      "id": "mid.guarded",
+      "layer": "mid",
+      "weight": 0.55,
+      "targetHigh": {
+        "like": -3,
+        "trust": -2
+      },
+      "targetLow": { "like": 2 },
+      "sharedHigh": { "like": 1 }
+    },
+    {
+      "id": "mid.outgoing",
+      "layer": "mid",
+      "weight": 0.6,
+      "targetHigh": { "like": 4 },
+      "targetLow": { "like": -2 },
+      "sharedHigh": {
+        "like": 3,
+        "growthMult": 1.2
+      },
+      "strangerBase": 8
+    },
+    {
+      "id": "mid.avoidant",
+      "layer": "mid",
+      "weight": 0.55,
+      "targetHigh": {
+        "like": -3,
+        "trust": -2
+      },
+      "targetLow": { "like": 1 },
+      "strangerBase": -6
+    },
+    {
+      "id": "mid.honest",
+      "layer": "mid",
+      "weight": 0.6,
+      "targetHigh": {
+        "like": 4,
+        "trust": 5
+      },
+      "targetLow": {
+        "like": -4,
+        "trust": -5
+      },
+      "sharedHigh": {
+        "like": 3,
+        "growthMult": 1.15
+      }
+    },
+    {
+      "id": "mid.people_pleasing",
+      "layer": "mid",
+      "weight": 0.45,
+      "targetHigh": { "like": 2 },
+      "targetLow": { "like": -1 }
+    },
+    {
+      "id": "mid.vindictive",
+      "layer": "mid",
+      "weight": 0.7,
+      "targetHigh": {
+        "like": -6,
+        "trust": -5,
+        "tension": 4
+      },
+      "targetLow": { "like": 1 }
+    },
+    {
+      "id": "mid.ambitious",
+      "layer": "mid",
+      "weight": 0.4,
+      "targetHigh": { "like": 2 },
+      "targetLow": {},
+      "sharedHigh": {
+        "like": 3,
+        "growthMult": 1.1
+      }
+    },
+    {
+      "id": "mid.compassionate",
+      "layer": "mid",
+      "weight": 0.55,
+      "targetHigh": {
+        "like": 4,
+        "trust": 2
+      },
+      "targetLow": { "like": -2 },
+      "sharedHigh": {
+        "like": 4,
+        "growthMult": 1.2
+      }
+    },
+    {
+      "id": "mid.jealous",
+      "layer": "mid",
+      "weight": 0.55,
+      "targetHigh": {
+        "like": -4,
+        "trust": -3,
+        "tension": 4
+      },
+      "targetLow": { "like": 1 }
+    },
+    {
+      "id": "mid.proud",
+      "layer": "mid",
+      "weight": 0.4,
+      "targetHigh": { "like": -2 },
+      "targetLow": { "like": 1 },
+      "sharedHigh": { "like": -2 }
+    },
+    {
+      "id": "mid.open",
+      "layer": "mid",
+      "weight": 0.5,
+      "targetHigh": {
+        "like": 3,
+        "trust": 2
+      },
+      "targetLow": { "like": -2 },
+      "sharedHigh": {
+        "like": 3,
+        "growthMult": 1.15
+      },
+      "strangerBase": 5
+    },
+    {
+      "id": "mid.anxious",
+      "layer": "mid",
+      "weight": 0.45,
+      "targetHigh": { "like": -1 },
+      "targetLow": {},
+      "strangerBase": -4
+    },
+    {
+      "id": "mid.playful",
+      "layer": "mid",
+      "weight": 0.45,
+      "targetHigh": { "like": 3 },
+      "targetLow": { "like": -1 },
+      "sharedHigh": {
+        "like": 3,
+        "growthMult": 1.15
+      }
+    },
+    {
+      "id": "mid.loyal_to_a_fault",
+      "layer": "mid",
+      "weight": 0.5,
+      "targetHigh": {
+        "like": 3,
+        "trust": 3
+      },
+      "targetLow": {},
+      "sharedHigh": {
+        "like": 2,
+        "growthMult": 1.2
+      }
+    }
+  ]
+}

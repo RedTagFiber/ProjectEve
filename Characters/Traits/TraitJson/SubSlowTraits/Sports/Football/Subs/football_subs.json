@@ -1,0 +1,83 @@
+{
+    "parent":  "slow.sports.football",
+    "version":  1,
+    "fillThreshold":  50,
+    "description":  "Filled only when slow.sports.football \u003e= 50",
+    "subs":  [
+                 {
+                     "id":  "sub.football.team_primary",
+                     "label":  "Primary team",
+                     "required":  true,
+                     "type":  "catalog_ref",
+                     "catalogs":  [
+                                      "nfl_teams",
+                                      "big_ten_football"
+                                  ],
+                     "pickCount":  1
+                 },
+                 {
+                     "id":  "sub.football.team_secondary",
+                     "label":  "Secondary team",
+                     "required":  false,
+                     "type":  "catalog_ref",
+                     "catalogs":  [
+                                      "nfl_teams",
+                                      "big_ten_football"
+                                  ],
+                     "pickCount":  1
+                 },
+                 {
+                     "label":  "Knowledge depth",
+                     "values":  [
+                                    "casual",
+                                    "fan",
+                                    "diehard"
+                                ],
+                     "default":  "fan",
+                     "id":  "sub.football.knowledge",
+                     "type":  "enum"
+                 },
+                 {
+                     "label":  "Rival heat",
+                     "values":  [
+                                    "low",
+                                    "mid",
+                                    "high"
+                                ],
+                     "default":  "mid",
+                     "id":  "sub.football.rival_heat",
+                     "type":  "enum"
+                 },
+                 {
+                     "label":  "Watch mode",
+                     "values":  [
+                                    "bar",
+                                    "home",
+                                    "alone",
+                                    "never_miss",
+                                    "highlights_only"
+                                ],
+                     "default":  "home",
+                     "id":  "sub.football.watch_mode",
+                     "type":  "enum"
+                 },
+                 {
+                     "label":  "Talk style",
+                     "values":  [
+                                    "stats",
+                                    "stories",
+                                    "trash_talk",
+                                    "quiet_watcher"
+                                ],
+                     "default":  "stories",
+                     "id":  "sub.football.talk_style",
+                     "type":  "enum"
+                 },
+                 {
+                     "label":  "Tailgate / social",
+                     "default":  false,
+                     "id":  "sub.football.tailgate",
+                     "type":  "bool"
+                 }
+             ]
+}

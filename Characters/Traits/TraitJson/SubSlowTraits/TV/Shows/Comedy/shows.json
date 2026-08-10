@@ -1,0 +1,23 @@
+{
+    "catalog":  "tv_shows_comedy",
+    "style":  "Comedy",
+    "version":  1,
+    "entries":  [
+                    {
+                        "id":  "the_office",
+                        "label":  "The Office"
+                    },
+                    {
+                        "id":  "parks_and_recreation",
+                        "label":  "Parks and Recreation"
+                    },
+                    {
+                        "id":  "it_s_always_sunny",
+                        "label":  "It\u0027s Always Sunny"
+                    },
+                    {
+                        "id":  "abbott_elementary",
+                        "label":  "Abbott Elementary"
+                    }
+                ]
+}

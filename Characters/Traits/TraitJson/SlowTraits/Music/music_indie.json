@@ -1,0 +1,507 @@
+{
+  "id": "slow.music.indie",
+  "layer": "slow",
+  "domain": "music",
+  "label": "Indie",
+  "version": 1,
+  "description": "Interest in indie and alternative—especially 90s college/alt radio through modern indie. Playlists, small rooms, and guitar culture.",
+  "priorIntensity": 5,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [
+    "indie",
+    "alt",
+    "playlist",
+    "college radio",
+    "90s",
+    "alternative",
+    "shoegaze",
+    "britpop",
+    "emo",
+    "lo-fi",
+    "guitar"
+  ],
+  "rivalBias": true,
+  "catalog": "Music/Indie",
+  "subTraits": [
+    {
+      "id": "slow.music.indie.90s_alt",
+      "label": "90s alternative",
+      "kind": "era",
+      "defaultRange": [ 40, 95 ],
+      "tags": [ "radio", "your-core" ]
+    },
+    {
+      "id": "slow.music.indie.90s_college",
+      "label": "90s college rock",
+      "kind": "era",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "left-of-dial" ]
+    },
+    {
+      "id": "slow.music.indie.britpop",
+      "label": "Britpop",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "uk", "attitude" ]
+    },
+    {
+      "id": "slow.music.indie.shoegaze",
+      "label": "Shoegaze",
+      "kind": "style",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "wall", "dream" ]
+    },
+    {
+      "id": "slow.music.indie.grunge_adj",
+      "label": "Grunge-adjacent",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "90s", "raw" ]
+    },
+    {
+      "id": "slow.music.indie.post_punk_revival",
+      "label": "2000s post-punk revival",
+      "kind": "era",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "strokes-era" ]
+    },
+    {
+      "id": "slow.music.indie.indie_folk_edge",
+      "label": "Indie folk edge",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "acoustic", "soft" ]
+    },
+    {
+      "id": "slow.music.indie.lofi",
+      "label": "Lo-fi / bedroom",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "diy", "tape" ]
+    },
+    {
+      "id": "slow.music.indie.emo_90s_00s",
+      "label": "90s/00s emo",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "feel", "midwest" ]
+    },
+    {
+      "id": "slow.music.indie.math_post",
+      "label": "Math rock / post-rock edge",
+      "kind": "style",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "odd", "build" ]
+    },
+    {
+      "id": "slow.music.indie.modern_indie",
+      "label": "Modern indie",
+      "kind": "era",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "now", "playlist" ]
+    },
+    {
+      "id": "slow.music.indie.noise_pop",
+      "label": "Noise-pop",
+      "kind": "style",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "fuzz", "sweet" ]
+    },
+
+    {
+      "id": "slow.music.indie.nirvana_adj",
+      "label": "Nirvana (alt gateway)",
+      "kind": "artist",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "90s", "shift" ]
+    },
+    {
+      "id": "slow.music.indie.pearl_jam_adj",
+      "label": "Pearl Jam",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "90s", "live" ]
+    },
+    {
+      "id": "slow.music.indie.soundgarden_adj",
+      "label": "Soundgarden",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "90s", "heavy" ]
+    },
+    {
+      "id": "slow.music.indie.alice_adj",
+      "label": "Alice in Chains",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "90s", "dark" ]
+    },
+    {
+      "id": "slow.music.indie.smashing",
+      "label": "Smashing Pumpkins",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "90s", "album" ]
+    },
+    {
+      "id": "slow.music.indie.radiohead_indie",
+      "label": "Radiohead",
+      "kind": "artist",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "change", "art" ]
+    },
+    {
+      "id": "slow.music.indie.pixies",
+      "label": "Pixies",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "loud-quiet", "influence" ]
+    },
+    {
+      "id": "slow.music.indie.sonic_youth",
+      "label": "Sonic Youth",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "noise", "cool" ]
+    },
+    {
+      "id": "slow.music.indie.my_bloody",
+      "label": "My Bloody Valentine",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "shoegaze", "loveless" ]
+    },
+    {
+      "id": "slow.music.indie.slowdive",
+      "label": "Slowdive",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "shoegaze", "soft" ]
+    },
+    {
+      "id": "slow.music.indie.ride",
+      "label": "Ride",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "shoegaze", "90s" ]
+    },
+    {
+      "id": "slow.music.indie.pavement",
+      "label": "Pavement",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "slacker", "90s" ]
+    },
+    {
+      "id": "slow.music.indie.guided_by_voices",
+      "label": "Guided by Voices",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "ohio", "dayton", "lofi" ]
+    },
+    {
+      "id": "slow.music.indie.sebadoh",
+      "label": "Sebadoh",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "lofi", "90s" ]
+    },
+    {
+      "id": "slow.music.indie.dinosaur_jr",
+      "label": "Dinosaur Jr.",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "guitar", "fuzz" ]
+    },
+    {
+      "id": "slow.music.indie.builtin_to_spill",
+      "label": "Built to Spill",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "guitar", "indie" ]
+    },
+    {
+      "id": "slow.music.indie.modest_mouse",
+      "label": "Modest Mouse",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "weird", "road" ]
+    },
+    {
+      "id": "slow.music.indie.death_cab",
+      "label": "Death Cab for Cutie",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "emo-edge", "00s" ]
+    },
+    {
+      "id": "slow.music.indie.the_shins",
+      "label": "The Shins",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "melody", "garden-state" ]
+    },
+    {
+      "id": "slow.music.indie.interpol",
+      "label": "Interpol",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "post-punk", "00s" ]
+    },
+    {
+      "id": "slow.music.indie.the_strokes",
+      "label": "The Strokes",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "revival", "cool" ]
+    },
+    {
+      "id": "slow.music.indie.yeah_yeahs",
+      "label": "Yeah Yeah Yeahs",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "art", "energy" ]
+    },
+    {
+      "id": "slow.music.indie.arcade_fire",
+      "label": "Arcade Fire",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "big", "indie" ]
+    },
+    {
+      "id": "slow.music.indie.national",
+      "label": "The National",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "ohio", "cincy", "mood" ]
+    },
+    {
+      "id": "slow.music.indie.black_keys",
+      "label": "The Black Keys",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "ohio", "akron", "garage" ]
+    },
+    {
+      "id": "slow.music.indie.weezer",
+      "label": "Weezer",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "90s", "nerd" ]
+    },
+    {
+      "id": "slow.music.indie.foo_adj",
+      "label": "Foo Fighters (post-90s bridge)",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "workhorse" ]
+    },
+    {
+      "id": "slow.music.indie.beckhead",
+      "label": "Radiohead deep cuts",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "b-sides", "patient" ]
+    },
+    {
+      "id": "slow.music.indie.oasis",
+      "label": "Oasis",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "britpop", "attitude" ]
+    },
+    {
+      "id": "slow.music.indie.blur",
+      "label": "Blur",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "britpop", "art" ]
+    },
+    {
+      "id": "slow.music.indie.pulp",
+      "label": "Pulp",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "britpop", "story" ]
+    },
+    {
+      "id": "slow.music.indie.stone_roses",
+      "label": "The Stone Roses",
+      "kind": "artist",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "madchester" ]
+    },
+    {
+      "id": "slow.music.indie.jeff_buckley",
+      "label": "Jeff Buckley",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "voice", "grace" ]
+    },
+    {
+      "id": "slow.music.indie.elliott",
+      "label": "Elliott Smith",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "quiet", "pain" ]
+    },
+    {
+      "id": "slow.music.indie.cat_power",
+      "label": "Cat Power",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "voice", "raw" ]
+    },
+    {
+      "id": "slow.music.indie.pj_harvey",
+      "label": "PJ Harvey",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "90s", "power" ]
+    },
+    {
+      "id": "slow.music.indie.hole",
+      "label": "Hole",
+      "kind": "artist",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "90s", "riot" ]
+    },
+    {
+      "id": "slow.music.indie.garbage",
+      "label": "Garbage",
+      "kind": "artist",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "90s", "electronic-edge" ]
+    },
+    {
+      "id": "slow.music.indie.bush_filter",
+      "label": "Bush / Filter / radio-alt",
+      "kind": "artist",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "90s-radio" ]
+    },
+    {
+      "id": "slow.music.indie.live_band",
+      "label": "Live / Counting Crows radio-alt",
+      "kind": "artist",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "90s-radio" ]
+    },
+    {
+      "id": "slow.music.indie.sublime_adj",
+      "label": "Sublime (ska-alt edge)",
+      "kind": "artist",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "90s" ]
+    },
+    {
+      "id": "slow.music.indie.beck_fight",
+      "label": "Title Fight / modern emo-hc",
+      "kind": "artist",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "later" ]
+    },
+    {
+      "id": "slow.music.indie.japanese_breakfast",
+      "label": "Japanese Breakfast",
+      "kind": "artist",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "modern" ]
+    },
+    {
+      "id": "slow.music.indie.big_thief",
+      "label": "Big Thief",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "modern", "raw" ]
+    },
+    {
+      "id": "slow.music.indie.phoebo",
+      "label": "Phoebe Bridgers",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "modern", "sad" ]
+    },
+
+    {
+      "id": "slow.music.indie.college_radio_habit",
+      "label": "College / left-of-dial habit",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "discover", "90s" ]
+    },
+    {
+      "id": "slow.music.indie.playlist_curator",
+      "label": "Playlist curator",
+      "kind": "habit",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "order", "mood" ]
+    },
+    {
+      "id": "slow.music.indie.small_room_shows",
+      "label": "Small room / club shows",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "live", "close" ]
+    },
+    {
+      "id": "slow.music.indie.vinyl_90s",
+      "label": "90s vinyl / reissue nerd",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "crate", "album" ]
+    },
+    {
+      "id": "slow.music.indie.drive_night_90s",
+      "label": "Night drive 90s alt",
+      "kind": "mood_role",
+      "defaultRange": [ 40, 95 ],
+      "tags": [ "car", "your-core" ]
+    },
+    {
+      "id": "slow.music.indie.headphones_deep",
+      "label": "Headphones deep-listen",
+      "kind": "mood_role",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "alone", "album" ]
+    },
+    {
+      "id": "slow.music.indie.anti_mainstream",
+      "label": "Anti pure Top-40",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "gate", "cool" ]
+    },
+    {
+      "id": "slow.music.indie.ok_with_radio_alt",
+      "label": "OK with 90s radio alt",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "bush", "live", "no-shame" ]
+    },
+    {
+      "id": "slow.music.indie.ohio_scene",
+      "label": "Ohio indie pride",
+      "kind": "local",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "gbv", "national", "keys" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "liked a few 90s hits; no indie identity",
+    "atOrAbove50": "attach 3-5; 90s core + a few bands + drive/playlist habit",
+    "atOrAbove70": "curator and small-room habits; 90s is default language",
+    "extreme95": "90s alt/indie is identity; gatekeeping and deep cuts real"
+  },
+  "notes": "Biased toward 90s for your taste. Overlaps rock.alternative_90s and rock.indie_rock—factory can treat high indie as covering that lane."
+}

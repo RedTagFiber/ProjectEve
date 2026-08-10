@@ -1,9 +1,10 @@
-﻿namespace ProjectEve.Characters.Traits.Core;
+﻿using System.Collections.Generic;
 
-using System.Collections.Generic;
-
-public class BehaviorInfluence
+namespace ProjectEve.Characters.Traits.Core
 {
-    public string BehaviorName { get; set; } = "";
-    public Dictionary<string, float> TraitWeights { get; set; } = new();
+    public class BehaviorInfluence
+    {
+        public string BehaviorName { get; set; } = "";
+        public Dictionary<string, float> TraitWeights { get; set; } = new();
+    }
 }

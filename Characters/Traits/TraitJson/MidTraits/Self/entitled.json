@@ -1,0 +1,69 @@
+{
+    "id":  "mid.entitled",
+    "layer":  "mid",
+    "label":  "Entitled",
+    "version":  1,
+    "cluster":  "self",
+    "description":  "Expects special treatment; rules feel optional for self.",
+    "priorIntensity":  4,
+    "moveSpeed":  "slow",
+    "bands":  {
+                  "off":  "0-29",
+                  "low":  "30-49",
+                  "mid":  "50-69",
+                  "high":  "70-84",
+                  "break":  "85-94",
+                  "extreme":  "95-100"
+              },
+    "styles":  [
+                   {
+                       "id":  "mid.entitled.special_case",
+                       "label":  "Special case"
+                   },
+                   {
+                       "id":  "mid.entitled.rule_bend",
+                       "label":  "Rule bend"
+                   },
+                   {
+                       "id":  "mid.entitled.owed",
+                       "label":  "Owed"
+                   }
+               ],
+    "links":  {
+                  "boostedBy":  [
+                                    "pride",
+                                    "anger"
+                                ],
+                  "drainedBy":  [
+                                    "shame",
+                                    "guilt"
+                                ],
+                  "opposes":  [
+                                  "mid.self_sacrificing",
+                                  "mid.dutiful"
+                              ]
+              },
+    "tagTriggers":  [
+                        {
+                            "tag":  "mid.entitled.test",
+                            "meaning":  "Situation tests this character trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.entitled.confirm",
+                            "meaning":  "Behavior confirms this trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.entitled.violate",
+                            "meaning":  "Acts against this trait under pressure",
+                            "deltaHint":  -2
+                        }
+                    ],
+    "relationScoped":  true,
+    "historyHooks":  {
+                         "patternFile":  "entitled_patterns.json",
+                         "fundingBudget":  2
+                     },
+    "notes":  "Population quota: keep rare in town."
+}

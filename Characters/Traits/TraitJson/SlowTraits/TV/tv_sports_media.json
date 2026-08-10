@@ -1,0 +1,143 @@
+{
+  "id": "slow.tv.sports_media",
+  "layer": "slow",
+  "domain": "tv",
+  "label": "Sports Media",
+  "version": 1,
+  "description": "Sports TV as content—studio shows, documentaries, highlight culture, not just live games (live games live on sports traits).",
+  "priorIntensity": 5,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [ "First Take", "Pat McAfee", "highlights", "documentary", "studio show", "debate" ],
+  "rivalBias": true,
+  "catalog": "TV/Shows/SportsMedia",
+  "subTraits": [
+    {
+      "id": "slow.tv.sports_media.debate_shows",
+      "label": "Debate / hot-take shows",
+      "kind": "style",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "noise" ]
+    },
+    {
+      "id": "slow.tv.sports_media.highlights",
+      "label": "Highlights / cold pizza morning",
+      "kind": "style",
+      "defaultRange": [ 40, 95 ],
+      "tags": [ "short" ]
+    },
+    {
+      "id": "slow.tv.sports_media.longform_doc",
+      "label": "Longform sports docs",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "30-for-30" ]
+    },
+    {
+      "id": "slow.tv.sports_media.first_take",
+      "label": "First Take",
+      "kind": "show",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "espn" ]
+    },
+    {
+      "id": "slow.tv.sports_media.ptii",
+      "label": "PTI",
+      "kind": "show",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "espn" ]
+    },
+    {
+      "id": "slow.tv.sports_media.mcafee",
+      "label": "Pat McAfee Show",
+      "kind": "show",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "internet-tv" ]
+    },
+    {
+      "id": "slow.tv.sports_media.cowherd",
+      "label": "Cowherd / FS1 lane",
+      "kind": "show",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "fs1" ]
+    },
+    {
+      "id": "slow.tv.sports_media.nfl_network",
+      "label": "NFL Network culture",
+      "kind": "show",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "football" ]
+    },
+    {
+      "id": "slow.tv.sports_media.college_gameday",
+      "label": "College GameDay",
+      "kind": "show",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "saturday", "ohio" ]
+    },
+    {
+      "id": "slow.tv.sports_media.hard_knocks",
+      "label": "Hard Knocks",
+      "kind": "show",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "nfl" ]
+    },
+    {
+      "id": "slow.tv.sports_media.last_dance",
+      "label": "The Last Dance",
+      "kind": "show",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "doc" ]
+    },
+    {
+      "id": "slow.tv.sports_media.drive_to_survive",
+      "label": "Drive to Survive",
+      "kind": "show",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "f1" ]
+    },
+    {
+      "id": "slow.tv.sports_media.quarterback_doc",
+      "label": "Quarterback / Netflix sports series",
+      "kind": "show",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "netflix" ]
+    },
+    {
+      "id": "slow.tv.sports_media.hot_take_addict",
+      "label": "Hot-take addict",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "argue" ]
+    },
+    {
+      "id": "slow.tv.sports_media.hate_debate",
+      "label": "Hates debate shows",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "purist" ]
+    },
+    {
+      "id": "slow.tv.sports_media.morning_ritual",
+      "label": "Morning sports-TV ritual",
+      "kind": "habit",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "coffee" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "sees highlights on phone only",
+    "atOrAbove50": "attach style + 1-2 shows",
+    "atOrAbove70": "studio/doc content is daily diet with live sports",
+    "extreme95": "opinions shaped by media as much as games"
+  },
+  "notes": "Stacks with football/college_football; not a replacement for team traits."
+}

@@ -1,0 +1,374 @@
+{
+  "id": "slow.movies.documentary",
+  "layer": "slow",
+  "domain": "movies",
+  "label": "Documentary",
+  "version": 1,
+  "description": "Prefers documentaries—true stories, issues, nature, sports, music, and investigative film.",
+  "priorIntensity": 5,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [ "documentary", "doc", "true story", "netflix doc", "nature film", "investigation", "interview" ],
+  "rivalBias": true,
+  "catalog": "Movies/Titles/Documentary",
+  "subTraits": [
+    {
+      "id": "slow.movies.documentary.true_crime",
+      "label": "True crime docs",
+      "kind": "topic",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "case", "binge" ]
+    },
+    {
+      "id": "slow.movies.documentary.nature",
+      "label": "Nature / planet",
+      "kind": "topic",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "attenborough", "wild" ]
+    },
+    {
+      "id": "slow.movies.documentary.sports_doc",
+      "label": "Sports documentaries",
+      "kind": "topic",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "athlete", "ohio" ]
+    },
+    {
+      "id": "slow.movies.documentary.music_doc",
+      "label": "Music docs",
+      "kind": "topic",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "band", "tour" ]
+    },
+    {
+      "id": "slow.movies.documentary.political",
+      "label": "Political / civic docs",
+      "kind": "topic",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "power", "argue" ]
+    },
+    {
+      "id": "slow.movies.documentary.history",
+      "label": "History docs",
+      "kind": "topic",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "war", "era" ]
+    },
+    {
+      "id": "slow.movies.documentary.science",
+      "label": "Science / space",
+      "kind": "topic",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "explain", "wonder" ]
+    },
+    {
+      "id": "slow.movies.documentary.food_doc",
+      "label": "Food documentaries",
+      "kind": "topic",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "chef", "system" ]
+    },
+    {
+      "id": "slow.movies.documentary.business",
+      "label": "Business / money docs",
+      "kind": "topic",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "corp", "scam" ]
+    },
+    {
+      "id": "slow.movies.documentary.art_doc",
+      "label": "Art / artist docs",
+      "kind": "topic",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "maker", "process" ]
+    },
+    {
+      "id": "slow.movies.documentary.sports_30for30",
+      "label": "30 for 30 style",
+      "kind": "format",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "espn", "story" ]
+    },
+    {
+      "id": "slow.movies.documentary.true_crime_series",
+      "label": "True crime series binge",
+      "kind": "format",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "episodes", "hook" ]
+    },
+    {
+      "id": "slow.movies.documentary.cinema_verite",
+      "label": "Cinema vérité / observational",
+      "kind": "style",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "fly", "raw" ]
+    },
+    {
+      "id": "slow.movies.documentary.talking_heads",
+      "label": "Talking-heads heavy",
+      "kind": "style",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "interview", "archive" ]
+    },
+    {
+      "id": "slow.movies.documentary.essay_film",
+      "label": "Essay film",
+      "kind": "style",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "voice", "idea" ]
+    },
+    {
+      "id": "slow.movies.documentary.activist",
+      "label": "Activist / cause docs",
+      "kind": "purpose",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "change", "anger" ]
+    },
+    {
+      "id": "slow.movies.documentary.entertainment_first",
+      "label": "Entertainment-first docs",
+      "kind": "purpose",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "story", "fun" ]
+    },
+    {
+      "id": "slow.movies.documentary.skeptic",
+      "label": "Skeptical of framing",
+      "kind": "attitude",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "bias", "question" ]
+    },
+    {
+      "id": "slow.movies.documentary.trust_filmmaker",
+      "label": "Trusts filmmaker voice",
+      "kind": "attitude",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "author", "follow" ]
+    },
+    {
+      "id": "slow.movies.documentary.conspiracy_curious",
+      "label": "Conspiracy-curious docs",
+      "kind": "topic",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "edge", "doubt" ]
+    },
+    {
+      "id": "slow.movies.documentary.anti_conspiracy",
+      "label": "Anti-conspiracy doc taste",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "debunk", "rival" ]
+    },
+    {
+      "id": "slow.movies.documentary.nature_calm",
+      "label": "Nature as calm TV",
+      "kind": "viewing",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "background", "sleep" ]
+    },
+    {
+      "id": "slow.movies.documentary.intense_focus",
+      "label": "Needs full attention",
+      "kind": "viewing",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "pause", "detail" ]
+    },
+    {
+      "id": "slow.movies.documentary.theater_rare",
+      "label": "Sees docs in theater when big",
+      "kind": "viewing",
+      "defaultRange": [ 15, 80 ],
+      "tags": [ "event", "imax-nature" ]
+    },
+    {
+      "id": "slow.movies.documentary.streaming_default",
+      "label": "Streaming is default home",
+      "kind": "viewing",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "netflix", "queue" ]
+    },
+    {
+      "id": "slow.movies.documentary.date_risky",
+      "label": "Risky date doc pick",
+      "kind": "social",
+      "defaultRange": [ 15, 80 ],
+      "tags": [ "heavy", "talk" ]
+    },
+    {
+      "id": "slow.movies.documentary.discussion_after",
+      "label": "Needs discussion after",
+      "kind": "social",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "talk", "process" ]
+    },
+    {
+      "id": "slow.movies.documentary.solo_deep",
+      "label": "Solo deep-dive nights",
+      "kind": "social",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "alone", "rabbit-hole" ]
+    },
+    {
+      "id": "slow.movies.documentary.short_form",
+      "label": "Short-form / YouTube docs",
+      "kind": "format",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "online", "explain" ]
+    },
+    {
+      "id": "slow.movies.documentary.feature_only",
+      "label": "Feature-length only",
+      "kind": "format",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "cinema", "craft" ]
+    },
+    {
+      "id": "slow.movies.documentary.sports_local",
+      "label": "Local / Ohio sports stories",
+      "kind": "topic",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "osu", "hometown" ]
+    },
+    {
+      "id": "slow.movies.documentary.war_vet",
+      "label": "War / veteran stories",
+      "kind": "topic",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "service", "cost" ]
+    },
+    {
+      "id": "slow.movies.documentary.religion_faith",
+      "label": "Faith / religion docs",
+      "kind": "topic",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "church", "question" ]
+    },
+    {
+      "id": "slow.movies.documentary.true_crime_ethics",
+      "label": "True crime ethics aware",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "victims", "care" ]
+    },
+    {
+      "id": "slow.movies.documentary.binge_limited",
+      "label": "Limited series binge",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "weekend", "hook" ]
+    },
+    {
+      "id": "slow.movies.documentary.one_at_a_time",
+      "label": "One heavy doc at a time",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "process", "space" ]
+    },
+    {
+      "id": "slow.movies.documentary.reenactment_hate",
+      "label": "Hates cheesy reenactments",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "style", "cheap" ]
+    },
+    {
+      "id": "slow.movies.documentary.archive_love",
+      "label": "Archive footage love",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "old", "real" ]
+    },
+    {
+      "id": "slow.movies.documentary.personal_essay",
+      "label": "Personal essay docs",
+      "kind": "style",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "i", "memoir" ]
+    },
+    {
+      "id": "slow.movies.documentary.travel_doc",
+      "label": "Travel / culture docs",
+      "kind": "topic",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "place", "food" ]
+    },
+    {
+      "id": "slow.movies.documentary.animal_focus",
+      "label": "Animal-focused docs",
+      "kind": "topic",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "pets", "wild" ]
+    },
+    {
+      "id": "slow.movies.documentary.medical",
+      "label": "Medical / body docs",
+      "kind": "topic",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "health", "edge" ]
+    },
+    {
+      "id": "slow.movies.documentary.influencer_skeptic",
+      "label": "Skeptical of influencer docs",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "fame", "shallow" ]
+    },
+    {
+      "id": "slow.movies.documentary.oscar_shortlist",
+      "label": "Follows Oscar doc shortlist",
+      "kind": "habit",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "awards", "year" ]
+    },
+    {
+      "id": "slow.movies.documentary.classroom",
+      "label": "Remembers school docs",
+      "kind": "history_hook",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "class", "first" ]
+    },
+    {
+      "id": "slow.movies.documentary.changes_behavior",
+      "label": "Docs that change behavior",
+      "kind": "purpose",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "diet", "action" ]
+    },
+    {
+      "id": "slow.movies.documentary.comfort_nature",
+      "label": "Nature as comfort genre",
+      "kind": "viewing",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "calm", "home" ]
+    },
+    {
+      "id": "slow.movies.documentary.rage_fuel",
+      "label": "Docs as rage fuel",
+      "kind": "purpose",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "anger", "share" ]
+    },
+    {
+      "id": "slow.movies.documentary.podcast_crossover",
+      "label": "Podcast-to-doc crossover",
+      "kind": "source",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "audio", "expand" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "has seen a doc; no topic identity",
+    "atOrAbove50": "attach 2-4 topic/style; recommends with agenda or calm",
+    "atOrAbove70": "docs shape opinions and weekends; true crime or nature becomes default",
+    "extreme95": "frames conversations through recent docs; bias arguments common"
+  },
+  "notes": "True crime vs nature split is huge for personality. Wire discussion-after to relationship talk."
+}

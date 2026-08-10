@@ -1,0 +1,70 @@
+{
+    "id":  "mid.opportunistic",
+    "layer":  "mid",
+    "label":  "Opportunistic",
+    "version":  1,
+    "cluster":  "moral",
+    "description":  "Takes advantage when available; loyalty secondary to gain.",
+    "priorIntensity":  4,
+    "moveSpeed":  "slow",
+    "bands":  {
+                  "off":  "0-29",
+                  "low":  "30-49",
+                  "mid":  "50-69",
+                  "high":  "70-84",
+                  "break":  "85-94",
+                  "extreme":  "95-100"
+              },
+    "styles":  [
+                   {
+                       "id":  "mid.opportunistic.opening_take",
+                       "label":  "Opening take"
+                   },
+                   {
+                       "id":  "mid.opportunistic.soft_betrayal",
+                       "label":  "Soft betrayal"
+                   },
+                   {
+                       "id":  "mid.opportunistic.gain_first",
+                       "label":  "Gain first"
+                   }
+               ],
+    "links":  {
+                  "boostedBy":  [
+                                    "pride",
+                                    "desire"
+                                ],
+                  "drainedBy":  [
+                                    "guilt",
+                                    "trust"
+                                ],
+                  "opposes":  [
+                                  "mid.loyal",
+                                  "mid.principled",
+                                  "mid.dutiful"
+                              ]
+              },
+    "tagTriggers":  [
+                        {
+                            "tag":  "mid.opportunistic.test",
+                            "meaning":  "Situation tests this character trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.opportunistic.confirm",
+                            "meaning":  "Behavior confirms this trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.opportunistic.violate",
+                            "meaning":  "Acts against this trait under pressure",
+                            "deltaHint":  -2
+                        }
+                    ],
+    "relationScoped":  true,
+    "historyHooks":  {
+                         "patternFile":  "opportunistic_patterns.json",
+                         "fundingBudget":  2
+                     },
+    "notes":  "Quota: uncommon; fuels drama when present."
+}

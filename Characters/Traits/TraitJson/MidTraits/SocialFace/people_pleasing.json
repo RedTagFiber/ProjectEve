@@ -1,0 +1,71 @@
+{
+    "id":  "mid.people_pleasing",
+    "layer":  "mid",
+    "label":  "People-pleasing",
+    "version":  1,
+    "cluster":  "socialface",
+    "description":  "Harmony over self; agrees early; hard to hold a no.",
+    "priorIntensity":  5,
+    "moveSpeed":  "slow",
+    "bands":  {
+                  "off":  "0-29",
+                  "low":  "30-49",
+                  "mid":  "50-69",
+                  "high":  "70-84",
+                  "break":  "85-94",
+                  "extreme":  "95-100"
+              },
+    "styles":  [
+                   {
+                       "id":  "mid.people_pleasing.agree_first",
+                       "label":  "Agree first"
+                   },
+                   {
+                       "id":  "mid.people_pleasing.soft_no",
+                       "label":  "Soft no"
+                   },
+                   {
+                       "id":  "mid.people_pleasing.over-give",
+                       "label":  "Over-give"
+                   }
+               ],
+    "links":  {
+                  "boostedBy":  [
+                                    "anxiety",
+                                    "shame",
+                                    "guilt"
+                                ],
+                  "drainedBy":  [
+                                    "anger",
+                                    "pride",
+                                    "resentment"
+                                ],
+                  "opposes":  [
+                                  "mid.blunt",
+                                  "mid.confrontational"
+                              ]
+              },
+    "tagTriggers":  [
+                        {
+                            "tag":  "mid.people_pleasing.test",
+                            "meaning":  "Situation tests this character trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.people_pleasing.confirm",
+                            "meaning":  "Behavior confirms this trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.people_pleasing.violate",
+                            "meaning":  "Acts against this trait under pressure",
+                            "deltaHint":  -2
+                        }
+                    ],
+    "relationScoped":  true,
+    "historyHooks":  {
+                         "patternFile":  "people_pleasing_patterns.json",
+                         "fundingBudget":  2
+                     },
+    "notes":  "Often pairs with Fast shame/anxiety."
+}

@@ -1,7 +1,9 @@
 ﻿using ProjectEve.Characters.Base;
 using ProjectEve.Characters.Emotion;
+using ProjectEve.Characters.Traits.Core;
 using ProjectEve.Narrative.Texting;
 using ProjectEve.Traits;
+using ProjectEve.Traits.Matrix;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,15 +13,16 @@ namespace ProjectEve.AI.Brain
 {
     /// <summary>
     /// Shared brain for every NPC.
+    /// Flow: Think (Thought + TAGS → TraitEngine once) → Reply (spoken words only).
     /// </summary>
     public class Brain
     {
         public SimCharacter? Owner { get; set; }
 
+        // Soft meters 0–1 mirrored from Fast (not a second emotion system)
         public float Mood { get; set; } = 0.5f;
         public float Stress { get; set; } = 0.2f;
         public float Energy { get; set; } = 0.7f;
-
         public float Affection { get; set; } = 0.5f;
         public float Attraction { get; set; } = 0.5f;
         public float Trust { get; set; } = 0.5f;
@@ -27,72 +30,60 @@ namespace ProjectEve.AI.Brain
 
         public string? LastThought { get; private set; }
         public string LastPsyAction { get; private set; } = "";
-        public int LastPsyScore { get; private set; } = 0;
-
+        public int LastPsyScore { get; private set; }
         public string LastOocOrder { get; private set; } = "";
         public string LastSceneLock { get; private set; } = "";
         public string LastToneLock { get; private set; } = "";
         public string LastRelLock { get; private set; } = "";
 
+        // =====================================================
+        // THINK — Thought first, then ONE trait pass from TAGS
+        // =====================================================
         public NPCGoal Think(string situation)
         {
-            // =====================================================
-            // PSY → THOUGHT bias
-            // =====================================================
-            string psyHint = "";
-            try
-            {
-                if (Owner != null)
-                {
-                    var psy = new PsyHierarchy(Owner);
-                    var ranked = BuildActionCandidates(situation)
-                        .Select(a => (Action: a, Score: psy.GetPriority(a)))
-                        .OrderByDescending(x => x.Score)
-                        .ToList();
+            situation ??= "";
 
-                    if (ranked.Count > 0)
-                    {
-                        var best = ranked[0];
-                        LastPsyAction = best.Action;
-                        LastPsyScore = best.Score;
+            string psyHint = BuildPsyHint(situation);
+            string aboutBlock = BuildRelationshipBlock(Owner);
 
-                        psyHint =
-                            $"Behavioral pull: '{best.Action}' (score {best.Score}). " +
-                            "Let this bias the private thought, but do not announce the score.";
-                    }
-                }
-            }
-            catch
-            {
-                // Psy is optional; thought must still run
-            }
-
-            string thoughtInput = string.IsNullOrWhiteSpace(psyHint)
-                ? situation
-                : situation + "\n" + psyHint;
+            string thoughtInput = situation;
+            if (!string.IsNullOrWhiteSpace(psyHint))
+                thoughtInput += "\n" + psyHint;
+            if (!string.IsNullOrWhiteSpace(aboutBlock))
+                thoughtInput += "\n" + aboutBlock;
 
             LastThought = ThoughtEngine.GenerateThought(thoughtInput, Owner);
 
-            // thought can move traits + emotion
-            AITraitEngine.UpdateTraits(this, LastThought);
             if (Owner != null)
-                TraitEmotionReactor.ApplyTraitDrivenEmotion(Owner, situation + " " + LastThought);
+            {
+                try
+                {
+                    // Prefer TAGS in LastThought; keyword fallback inside TraitEngine
+                    TraitEngine.UpdateTraitsAfterChat(Owner, situation, LastThought);
+                }
+                catch
+                {
+                    try { TraitEngine.UpdateTraitsAfterChat(Owner, situation); }
+                    catch { }
+                }
 
-            SyncFromEmotion();
+                // Do not call AITraitEngine here — avoids double movement
+                SyncMetersFromFast();
+            }
+
             return GoalEngine.SelectGoal(this, LastThought);
         }
 
+        // =====================================================
+        // REPLY — spoken words only (traits already moved in Think)
+        // =====================================================
         public string Reply(string playerMessage)
         {
             if (Owner == null)
                 return "...";
 
             playerMessage = playerMessage?.Trim() ?? "";
-            string controlBlock = "";
 
-            // =====================================================
-            // HELP
-            // =====================================================
             if (playerMessage.Equals("Peanut Butter", StringComparison.OrdinalIgnoreCase)
                 || playerMessage.Equals("/help", StringComparison.OrdinalIgnoreCase))
             {
@@ -103,26 +94,21 @@ namespace ProjectEve.AI.Brain
                     "TONE: <tone>\n" +
                     "FACT: <canon fact>\n" +
                     "REL: <relationship rule>\n" +
-                    "TRAIT: Name +10 | Name -5 | Name = 85\n" +
+                    "TRAIT: trait.anger +10 | trait.trust -5 | trait.desire = 85\n" +
                     "Peanut Butter";
             }
 
-            // =====================================================
-            // TRAIT COMMAND
-            // =====================================================
             if (StartsWithCommand(playerMessage, "TRAIT:", out var traitCmd))
             {
                 if (TryApplyTraitCommand(Owner, traitCmd, out var report))
                 {
                     RememberControl("trait", traitCmd, 6);
+                    SyncMetersFromFast();
                     return "[Trait updated] " + report;
                 }
-                return "[Trait command failed] Use: TRAIT: Name +10 | Name -5 | Name = 85";
+                return "[Trait command failed] Use: TRAIT: trait.anger +10 | trait.trust -5 | trait.desire = 85";
             }
 
-            // =====================================================
-            // DIRECTOR COMMANDS
-            // =====================================================
             if (StartsWithCommand(playerMessage, "OOC:", out var ooc)
                 || StartsWithCommand(playerMessage, "/ooc", out ooc)
                 || IsDoubleParen(playerMessage, out ooc))
@@ -170,12 +156,15 @@ namespace ProjectEve.AI.Brain
                     "Keep this relationship framing.\n" +
                     "Reply in character as " + Owner.Name + ".";
             }
-            else
+            else if (string.IsNullOrWhiteSpace(LastThought))
             {
-                TraitEmotionReactor.ApplyTraitDrivenEmotion(Owner, playerMessage);
-                SyncFromEmotion();
+                // Reply without Think (shouldn't happen) — apply once
+                try { TraitEngine.UpdateTraitsAfterChat(Owner, playerMessage); }
+                catch { }
+                SyncMetersFromFast();
             }
 
+            string controlBlock = "";
             if (!string.IsNullOrWhiteSpace(LastOocOrder))
                 controlBlock += "STICKY OOC: " + LastOocOrder + "\n";
             if (!string.IsNullOrWhiteSpace(LastSceneLock))
@@ -185,21 +174,23 @@ namespace ProjectEve.AI.Brain
             if (!string.IsNullOrWhiteSpace(LastRelLock))
                 controlBlock += "STICKY REL: " + LastRelLock + "\n";
 
-            string traitSummary = Owner.Traits?.BuildLlmSummary(8) ?? "No strong traits.";
+            string traitSummary = Owner.Traits?.BuildLlmSummary(10) ?? "No strong traits.";
             string name = Owner.Name;
-            string emotionBlock = BuildEmotionBlock(Owner);
+            string emotionBlock = BuildFastEmotionBlock(Owner);
             string psyBlock = string.IsNullOrWhiteSpace(LastPsyAction)
                 ? "None"
                 : $"{LastPsyAction} (score {LastPsyScore})";
+            string aboutBlock = BuildRelationshipBlock(Owner);
+
+            // Strip TAGS from thought before showing Dialogue (speech only)
+            string thoughtForDialogue = StripTagsLine(LastThought);
 
             string prompt = $@"
 SYSTEM:
 You are {name}, age {Owner.Age}, living in {Owner.Location}.
 Occupation: {Owner.Occupation}
 Gender: {Owner.Gender}
-
-You are a real person.
-You are NOT an AI, not a model, not a system, not a character sheet.
+You are a real person — not an AI, model, or system.
 
 CORE DRIVES:
 - Goal: {Owner.Goal}
@@ -207,168 +198,254 @@ CORE DRIVES:
 - Fear: {Owner.Fear}
 - Want: {Owner.Want}
 
-PERSONALITY / TRAITS:
+PERSONALITY / TRAITS (0-100):
 {traitSummary}
 
 PERSONALITY CONTEXT:
 {Owner.PersonalityContext}
 
-CURRENT EMOTION:
+CURRENT EMOTIONAL READ (Fast traits):
 {emotionBlock}
 
-RECENT INTERNAL THOUGHT:
-{LastThought}
+RELATIONSHIP:
+{aboutBlock}
+
+RECENT INTERNAL THOUGHT (private — do not quote as speech):
+{thoughtForDialogue}
 
 BEHAVIORAL PULL:
 {psyBlock}
 
-BRAIN METERS (0 to 1):
-Mood: {Mood}
-Stress: {Stress}
-Energy: {Energy}
-Affection: {Affection}
-Attraction: {Attraction}
-Trust: {Trust}
-Tension: {Tension}
+BRAIN METERS (0-1, from Fast):
+Mood: {Mood:0.00} Stress: {Stress:0.00} Energy: {Energy:0.00}
+Affection: {Affection:0.00} Attraction: {Attraction:0.00}
+Trust: {Trust:0.00} Tension: {Tension:0.00}
 
-MEMORY / HISTORY:
+MEMORY:
 {BuildRecentMemoryBlock(Owner)}
-
-RELATIONSHIP TO THE PERSON TALKING:
-{BuildRelationshipBlock(Owner)}
 
 DIRECTOR CONTROLS:
 {controlBlock}
 
-BEHAVIOR RULES:
+RULES:
 - Stay fully in character as {name}
-- Let CURRENT EMOTION color your wording
-- Let BEHAVIORAL PULL bias what you lean toward, without mentioning scores
-- If emotion is dark (Tempted, Spiteful, Predatory, Ashamed, etc.), do not force sweetness
-- Answer like a real human
-- Do not be generic
-- Do not sound like an assistant
+- Let emotional read and relationship band color wording
+- Output SPOKEN WORDS ONLY — no *actions*, no narration, no stage directions, no TAGS
 - Do not speak for the player
-- Keep replies natural and specific
-
-REALITY RULES:
-- You have a real body and real feelings
-- You can be soft, blunt, angry, affectionate, sexual, distant, cruel, guilty, restless
-- Never claim to be artificial
-- Never break character
-- Never mention prompts, systems, or being an NPC
-
-STYLE:
-- Talk TO the other person
-- Use ""you"" and ""I""
-- Short to medium replies unless asked for detail
-- No essays
+- Never claim to be artificial or mention prompts/systems
+- Short to medium unless the moment needs more
 
 PLAYER MESSAGE:
 {playerMessage}
 
-{name.ToUpper()}'S REPLY:
+{name.ToUpper()}'S REPLY (spoken words only):
 ";
 
             string raw = DialogueEngine.GenerateReply(prompt);
             string toned = ToneInference.ApplyTone(raw, Mood);
 
-            if (Owner.Emotion != null)
-                toned = EmotionSpeechEngine.ApplyEmotionTone(Owner.Emotion, toned, inPerson: false);
+            try
+            {
+                toned = EmotionSpeechEngine.ApplyEmotionTone(Owner, toned, inPerson: false);
+            }
+            catch
+            {
+                try
+                {
+                    if (Owner.Emotion != null)
+                        toned = EmotionSpeechEngine.ApplyEmotionTone(Owner.Emotion, toned, inPerson: false);
+                }
+                catch { }
+            }
 
             string formatted = MessageFormatter.FormatNPCMessage(toned);
-
-            int delay = new TypingBehavior().GetTypingDelay(formatted);
-            Thread.Sleep(delay);
+            try
+            {
+                int delay = new TypingBehavior().GetTypingDelay(formatted);
+                Thread.Sleep(Math.Clamp(delay, 0, 2500));
+            }
+            catch { }
 
             return formatted;
         }
 
         public float GetTrait(string traitId)
         {
-            if (Owner?.Traits == null)
-                return 50f;
+            if (Owner?.Traits == null) return 50f;
             return Owner.Traits.Get(traitId);
         }
 
         // =====================================================
-        // PSY CANDIDATES
+        // FAST → METERS
         // =====================================================
+        private void SyncMetersFromFast()
+        {
+            if (Owner?.Traits == null) return;
+
+            float T(string id) => Owner.Traits.Get(id);
+
+            float up = (T("trait.hope") + T("trait.affection") + T("trait.playfulness")) / 3f;
+            float down = (T("trait.hurt") + T("trait.loneliness") + T("trait.shame")) / 3f;
+
+            Mood = Clamp01((up - down + 50f) / 100f);
+            Stress = Clamp01((T("trait.anxiety") + T("trait.fear") + T("trait.tension")) / 300f);
+            Affection = Clamp01(T("trait.affection") / 100f);
+            Attraction = Clamp01(T("trait.attraction") / 100f);
+            Trust = Clamp01(T("trait.trust") / 100f);
+            Tension = Clamp01((T("trait.anger") + T("trait.tension") + T("trait.resentment")) / 300f);
+        }
+
+        private static string BuildFastEmotionBlock(SimCharacter owner)
+        {
+            if (owner.Traits == null) return "No trait bag.";
+
+            float T(string id) => owner.Traits.Get(id);
+
+            var pairs = new (string Label, float V)[]
+            {
+                ("Anger", T("trait.anger")),
+                ("Anxiety", T("trait.anxiety")),
+                ("Fear", T("trait.fear")),
+                ("Shame", T("trait.shame")),
+                ("Guilt", T("trait.guilt")),
+                ("Hurt", T("trait.hurt")),
+                ("Jealousy", T("trait.jealousy")),
+                ("Resentment", T("trait.resentment")),
+                ("Desire", T("trait.desire")),
+                ("Affection", T("trait.affection")),
+                ("Guard", T("trait.guard")),
+                ("Loneliness", T("trait.loneliness")),
+                ("Hope", T("trait.hope")),
+                ("Playfulness", T("trait.playfulness")),
+                ("Tension", T("trait.tension")),
+            };
+
+            var top = pairs.OrderByDescending(p => p.V).First();
+            string band = top.V >= 85 ? "extreme" :
+                          top.V >= 70 ? "high" :
+                          top.V >= 50 ? "mid" :
+                          top.V >= 30 ? "low" : "off";
+
+            return
+                $"Dominant: {top.Label} ({top.V:0}, {band})\n" +
+                $"Anger {T("trait.anger"):0} | Anxiety {T("trait.anxiety"):0} | Trust {T("trait.trust"):0} | " +
+                $"Affection {T("trait.affection"):0} | Desire {T("trait.desire"):0} | Guard {T("trait.guard"):0}";
+        }
+
+        // =====================================================
+        // RELATIONSHIP / ABOUT (interim until edge DB)
+        // =====================================================
+        private static string BuildRelationshipBlock(SimCharacter? owner)
+        {
+            if (owner?.Traits == null)
+                return "ABOUT the person talking: unknown.";
+
+            try
+            {
+                float trust = owner.Traits.Get("trait.trust");
+                float aff = owner.Traits.Get("trait.affection");
+                float des = owner.Traits.Get("trait.desire");
+                float ang = owner.Traits.Get("trait.anger");
+                float like = Math.Clamp(0.45f * trust + 0.45f * aff + 0.1f * des - 0.15f * ang, 0f, 100f);
+
+                string bandName = "neutral";
+                if (RelationshipMatrixLoader.Loaded)
+                    bandName = RelationshipMatrixLoader.GetBand(like).Name;
+                else if (like <= 20) bandName = "hostile";
+                else if (like <= 40) bandName = "cold";
+                else if (like <= 60) bandName = "neutral";
+                else if (like <= 80) bandName = "friend";
+                else bandName = "close";
+
+                return
+                    $"ABOUT the person talking (Ryan):\n" +
+                    $"- LikeScore ~{like:0} ({bandName}) [interim from Fast until relationship edge DB]\n" +
+                    $"- Trust {trust:0} Affection {aff:0} Desire {des:0} Anger {ang:0}\n" +
+                    $"- Even hello / small talk should respect this band.";
+            }
+            catch
+            {
+                return "ABOUT the person talking: use trust/affection from traits.";
+            }
+        }
+
+        // =====================================================
+        // PSY
+        // =====================================================
+        private string BuildPsyHint(string situation)
+        {
+            try
+            {
+                if (Owner == null) return "";
+
+                var psy = new PsyHierarchy(Owner);
+                var ranked = BuildActionCandidates(situation)
+                    .Select(a => (Action: a, Score: psy.GetPriority(a)))
+                    .OrderByDescending(x => x.Score)
+                    .ToList();
+
+                if (ranked.Count == 0) return "";
+
+                var best = ranked[0];
+                LastPsyAction = best.Action;
+                LastPsyScore = best.Score;
+                return
+                    $"Behavioral pull: '{best.Action}' (score {best.Score}). " +
+                    "Bias private thought; do not announce the score.";
+            }
+            catch
+            {
+                return "";
+            }
+        }
+
         private static List<string> BuildActionCandidates(string situation)
         {
             var s = (situation ?? "").ToLowerInvariant();
-            var list = new List<string>
-            {
-                "talk",
-                "text",
-                "spend time",
-                "avoid",
-                "work"
-            };
+            var list = new List<string> { "talk", "text", "spend time", "avoid", "work" };
 
-            if (s.Contains("sex") || s.Contains("fuck") || s.Contains("kiss") || s.Contains("come over"))
+            if (ContainsAny(s, "sex", "fuck", "kiss", "come over"))
             {
                 list.Add("sex");
                 list.Add("kiss");
                 list.Add("come over");
             }
-
-            if (s.Contains("secret") || s.Contains("sneak") || s.Contains("cheat"))
+            if (ContainsAny(s, "secret", "sneak", "cheat"))
             {
                 list.Add("secret");
                 list.Add("sneak");
             }
-
-            if (s.Contains("mad") || s.Contains("fight") || s.Contains("argue"))
+            if (ContainsAny(s, "mad", "fight", "argue", "hate"))
             {
                 list.Add("confront");
                 list.Add("argue");
             }
-
-            if (s.Contains("work") || s.Contains("shift") || s.Contains("shop"))
+            if (ContainsAny(s, "work", "shift", "shop"))
                 list.Add("work");
-
-            if (s.Contains("tired") || s.Contains("sleep") || s.Contains("bed"))
+            if (ContainsAny(s, "tired", "sleep", "bed"))
                 list.Add("rest");
+            if (ContainsAny(s, "sorry", "forgive"))
+                list.Add("apologize");
 
             return list.Distinct().ToList();
         }
 
         // =====================================================
-        // EMOTION SYNC
-        // =====================================================
-        private void SyncFromEmotion()
-        {
-            if (Owner?.Emotion == null)
-                return;
-
-            Mood = Clamp01((Owner.Emotion.Happiness - Owner.Emotion.Sadness + 50) / 100f);
-            Stress = Clamp01(Owner.Emotion.Stress / 100f);
-            Energy = Clamp01(Owner.Emotion.Energy / 100f);
-            Affection = Clamp01(Owner.Emotion.Affection / 100f);
-            Tension = Clamp01((Owner.Emotion.Anger + Owner.Emotion.Resentment) / 200f);
-        }
-
-        private static string BuildEmotionBlock(SimCharacter owner)
-        {
-            if (owner.Emotion == null)
-                return "State: Neutral\nIntensity: 0.3";
-
-            var e = owner.Emotion;
-            return
-                $"State: {e.State}\n" +
-                $"Mood label: {e.Mood}\n" +
-                $"Intensity: {e.Intensity:0.00}\n" +
-                $"Desire: {e.Desire}, Resentment: {e.Resentment}, Shame: {e.Shame}, Restlessness: {e.Restlessness}";
-        }
-
-        // =====================================================
-        // CONTROL HELPERS
+        // HELPERS
         // =====================================================
         private void RememberControl(string category, string value, int importance)
         {
             try { Owner?.Remember($"{category.ToUpper()}: {value}", category, importance); }
             catch { }
+        }
+
+        private static string StripTagsLine(string? thought)
+        {
+            if (string.IsNullOrWhiteSpace(thought)) return "(none)";
+            var lines = thought.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            var kept = lines.Where(l => !l.TrimStart().StartsWith("TAGS:", StringComparison.OrdinalIgnoreCase));
+            string s = string.Join(" ", kept).Trim();
+            return string.IsNullOrWhiteSpace(s) ? "(none)" : s;
         }
 
         private static bool StartsWithCommand(string text, string prefix, out string value)
@@ -377,7 +454,7 @@ PLAYER MESSAGE:
             value = "";
             if (!text.StartsWith(prefix, StringComparison.OrdinalIgnoreCase))
                 return false;
-            value = text.Substring(prefix.Length).Trim();
+            value = text[prefix.Length..].Trim();
             return value.Length > 0;
         }
 
@@ -387,7 +464,7 @@ PLAYER MESSAGE:
             value = "";
             if (text.StartsWith("((") && text.EndsWith("))") && text.Length > 4)
             {
-                value = text.Substring(2, text.Length - 4).Trim();
+                value = text[2..^2].Trim();
                 return value.Length > 0;
             }
             return false;
@@ -396,22 +473,19 @@ PLAYER MESSAGE:
         private static bool TryApplyTraitCommand(SimCharacter owner, string cmd, out string report)
         {
             report = "";
-            if (owner?.Traits == null)
-                return false;
+            if (owner?.Traits == null) return false;
 
             var parts = cmd.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-            if (parts.Length < 2)
-                return false;
+            if (parts.Length < 2) return false;
 
-            string traitName = parts[0];
+            string traitId = parts[0];
             string op = parts[1];
-
-            float current = owner.Traits.Get(traitName);
+            float current = owner.Traits.Get(traitId);
             float next = current;
 
-            if (op.StartsWith("+") && float.TryParse(op.Substring(1), out var up))
+            if (op.StartsWith("+") && float.TryParse(op[1..], out var up))
                 next = current + up;
-            else if (op.StartsWith("-") && float.TryParse(op.Substring(1), out var down))
+            else if (op.StartsWith("-") && float.TryParse(op[1..], out var down))
                 next = current - down;
             else if (op == "=" && parts.Length >= 3 && float.TryParse(parts[2], out var set))
                 next = set;
@@ -421,8 +495,8 @@ PLAYER MESSAGE:
                 return false;
 
             next = Math.Clamp(next, 0f, 100f);
-            owner.Traits.Set(traitName, next);
-            report = $"{traitName}: {current:0} -> {next:0}";
+            owner.Traits.Set(traitId, next);
+            report = $"{traitId}: {current:0} -> {next:0}";
             return true;
         }
 
@@ -433,11 +507,12 @@ PLAYER MESSAGE:
             return "Recent personal memories influence tone and priorities.";
         }
 
-        private static string BuildRelationshipBlock(SimCharacter? owner)
+        private static bool ContainsAny(string text, params string[] words)
         {
-            if (owner == null)
-                return "No relationship data.";
-            return "Use current affection, trust, tension, and shared history with this person.";
+            foreach (var w in words)
+                if (text.Contains(w, StringComparison.OrdinalIgnoreCase))
+                    return true;
+            return false;
         }
 
         private static float Clamp01(float v) => Math.Clamp(v, 0f, 1f);

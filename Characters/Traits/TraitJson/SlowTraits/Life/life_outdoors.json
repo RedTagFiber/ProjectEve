@@ -1,0 +1,381 @@
+{
+  "id": "slow.life.outdoors",
+  "layer": "slow",
+  "domain": "life",
+  "label": "Outdoors",
+  "version": 1,
+  "description": "Life taste/identity: woods, water, fields, weather, and time outside—hunt, fish, camp, hike, yard, and land.",
+  "priorIntensity": 5,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [ "hunt", "fish", "camp", "hike", "woods", "lake", "trail", "deer", "bait", "tent", "fire", "sunrise" ],
+  "rivalBias": true,
+  "catalog": "Life",
+  "subTraits": [
+    {
+      "id": "slow.life.outdoors.deer_hunt",
+      "label": "Deer hunting",
+      "kind": "hunt",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "ohio", "season", "freezer" ]
+    },
+    {
+      "id": "slow.life.outdoors.turkey_hunt",
+      "label": "Turkey hunting",
+      "kind": "hunt",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "spring", "call" ]
+    },
+    {
+      "id": "slow.life.outdoors.waterfowl",
+      "label": "Duck / goose",
+      "kind": "hunt",
+      "defaultRange": [ 10, 85 ],
+      "tags": [ "blind", "cold" ]
+    },
+    {
+      "id": "slow.life.outdoors.small_game",
+      "label": "Small game",
+      "kind": "hunt",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "rabbit", "squirrel" ]
+    },
+    {
+      "id": "slow.life.outdoors.bow_hunt",
+      "label": "Bow hunting",
+      "kind": "hunt",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "archery", "close" ]
+    },
+    {
+      "id": "slow.life.outdoors.firearm_hunt",
+      "label": "Firearm hunting",
+      "kind": "hunt",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "rifle", "shotgun" ]
+    },
+    {
+      "id": "slow.life.outdoors.ethics_fair_chase",
+      "label": "Fair chase ethics",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "respect", "rules" ]
+    },
+    {
+      "id": "slow.life.outdoors.lake_fish",
+      "label": "Lake fishing",
+      "kind": "fish",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "ohio", "boat", "shore" ]
+    },
+    {
+      "id": "slow.life.outdoors.river_fish",
+      "label": "River / stream fishing",
+      "kind": "fish",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "current", "wade" ]
+    },
+    {
+      "id": "slow.life.outdoors.ice_fish",
+      "label": "Ice fishing",
+      "kind": "fish",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "winter", "shanty" ]
+    },
+    {
+      "id": "slow.life.outdoors.bass_focus",
+      "label": "Bass focus",
+      "kind": "fish",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "lure", "tournament-lite" ]
+    },
+    {
+      "id": "slow.life.outdoors.catfish_carp",
+      "label": "Catfish / rough fish",
+      "kind": "fish",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "night", "simple" ]
+    },
+    {
+      "id": "slow.life.outdoors.fly_fish",
+      "label": "Fly fishing",
+      "kind": "fish",
+      "defaultRange": [ 10, 85 ],
+      "tags": [ "cast", "craft" ]
+    },
+    {
+      "id": "slow.life.outdoors.camp_tent",
+      "label": "Tent camping",
+      "kind": "camp",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "ground", "fire" ]
+    },
+    {
+      "id": "slow.life.outdoors.camp_rv",
+      "label": "RV / camper",
+      "kind": "camp",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "hookup", "comfort" ]
+    },
+    {
+      "id": "slow.life.outdoors.backcountry",
+      "label": "Backcountry / backpack",
+      "kind": "camp",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "pack", "miles" ]
+    },
+    {
+      "id": "slow.life.outdoors.campfire_cook",
+      "label": "Campfire cooking",
+      "kind": "camp",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "cast-iron", "smoke" ]
+    },
+    {
+      "id": "slow.life.outdoors.hike_day",
+      "label": "Day hiking",
+      "kind": "hike",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "parks", "ohio" ]
+    },
+    {
+      "id": "slow.life.outdoors.hike_long",
+      "label": "Long / multi-day hikes",
+      "kind": "hike",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "trail", "miles" ]
+    },
+    {
+      "id": "slow.life.outdoors.bird_watch",
+      "label": "Bird watching",
+      "kind": "watch",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "binoculars", "quiet" ]
+    },
+    {
+      "id": "slow.life.outdoors.forage",
+      "label": "Foraging",
+      "kind": "land",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "mushroom", "morel", "ohio" ]
+    },
+    {
+      "id": "slow.life.outdoors.morel_season",
+      "label": "Morel season serious",
+      "kind": "land",
+      "defaultRange": [ 20, 95 ],
+      "tags": [ "spring", "secret-spots" ]
+    },
+    {
+      "id": "slow.life.outdoors.gardening_plot",
+      "label": "Garden / plot outdoors",
+      "kind": "land",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "grow", "dirt" ]
+    },
+    {
+      "id": "slow.life.outdoors.tractor_land",
+      "label": "Land / tractor time",
+      "kind": "land",
+      "defaultRange": [ 20, 95 ],
+      "tags": [ "acre", "rural" ]
+    },
+    {
+      "id": "slow.life.outdoors.atv_utv",
+      "label": "ATV / UTV",
+      "kind": "ride",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "trail", "farm" ]
+    },
+    {
+      "id": "slow.life.outdoors.snowmobile",
+      "label": "Snowmobile",
+      "kind": "ride",
+      "defaultRange": [ 10, 85 ],
+      "tags": [ "winter", "north" ]
+    },
+    {
+      "id": "slow.life.outdoors.kayak_canoe",
+      "label": "Kayak / canoe",
+      "kind": "water",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "paddle", "river" ]
+    },
+    {
+      "id": "slow.life.outdoors.boat_power",
+      "label": "Power boat",
+      "kind": "water",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "lake", "tow" ]
+    },
+    {
+      "id": "slow.life.outdoors.swim_lake",
+      "label": "Lake swimming",
+      "kind": "water",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "summer", "dock" ]
+    },
+    {
+      "id": "slow.life.outdoors.sunrise_person",
+      "label": "Sunrise outdoors person",
+      "kind": "habit",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "early", "quiet" ]
+    },
+    {
+      "id": "slow.life.outdoors.weather_tough",
+      "label": "Weather-tough",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "rain", "cold", "go" ]
+    },
+    {
+      "id": "slow.life.outdoors.fair_weather_only",
+      "label": "Fair weather only",
+      "kind": "attitude",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "sun", "cancel" ]
+    },
+    {
+      "id": "slow.life.outdoors.gear_minimal",
+      "label": "Minimal gear pride",
+      "kind": "attitude",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "simple", "old-school" ]
+    },
+    {
+      "id": "slow.life.outdoors.gear_max",
+      "label": "Gear collector",
+      "kind": "attitude",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "kit", "money", "new" ]
+    },
+    {
+      "id": "slow.life.outdoors.dogs_in_field",
+      "label": "Dogs in the field",
+      "kind": "partner",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "retriever", "bond" ]
+    },
+    {
+      "id": "slow.life.outdoors.solo_woods",
+      "label": "Solo woods time",
+      "kind": "social",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "alone", "head-clear" ]
+    },
+    {
+      "id": "slow.life.outdoors.group_camp",
+      "label": "Group camp / buddies",
+      "kind": "social",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "friends", "cooler" ]
+    },
+    {
+      "id": "slow.life.outdoors.family_outdoors",
+      "label": "Family outdoors tradition",
+      "kind": "social",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "kids", "passed-down" ]
+    },
+    {
+      "id": "slow.life.outdoors.teach_kids",
+      "label": "Teaches kids outdoors",
+      "kind": "social",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "mentor", "safety" ]
+    },
+    {
+      "id": "slow.life.outdoors.conservation",
+      "label": "Conservation minded",
+      "kind": "attitude",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "land", "future" ]
+    },
+    {
+      "id": "slow.life.outdoors.anti_trespass",
+      "label": "Anti-trespass strict",
+      "kind": "attitude",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "property", "permission" ]
+    },
+    {
+      "id": "slow.life.outdoors.public_land",
+      "label": "Public land user",
+      "kind": "context",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "state", "wildlife-area" ]
+    },
+    {
+      "id": "slow.life.outdoors.private_land",
+      "label": "Private land access",
+      "kind": "context",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "permission", "farm" ]
+    },
+    {
+      "id": "slow.life.outdoors.season_clock",
+      "label": "Lives by outdoor seasons",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "calendar", "openers" ]
+    },
+    {
+      "id": "slow.life.outdoors.photo_wildlife",
+      "label": "Wildlife photography",
+      "kind": "watch",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "camera", "patience" ]
+    },
+    {
+      "id": "slow.life.outdoors.stargaze",
+      "label": "Stargazing",
+      "kind": "watch",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "night", "dark" ]
+    },
+    {
+      "id": "slow.life.outdoors.bonfire_social",
+      "label": "Bonfire social default",
+      "kind": "social",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "fire", "friends", "ohio" ]
+    },
+    {
+      "id": "slow.life.outdoors.mud_proud",
+      "label": "Mud / dirty proud",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "mess", "work" ]
+    },
+    {
+      "id": "slow.life.outdoors.leave_no_trace",
+      "label": "Leave no trace",
+      "kind": "attitude",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "pack-out", "respect" ]
+    },
+    {
+      "id": "slow.life.outdoors.ohio_parks",
+      "label": "Ohio parks / metro parks",
+      "kind": "local",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "local", "weekend" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "likes nice weather outside; no season identity",
+    "atOrAbove50": "attach 2-4 subs; weekends fill with outdoor plans",
+    "atOrAbove70": "seasons and openers shape calendar; indoor-only partners create friction",
+    "extreme95": "identity is land/water; bad indoor weeks tank mood"
+  },
+  "notes": "Ohio anchors: deer, morels, metro parks, lake fish, bonfire. Tension with pure homebody."
+}

@@ -1,0 +1,69 @@
+{
+    "id":  "mid.conflict_avoidant",
+    "layer":  "mid",
+    "label":  "Conflict-avoidant",
+    "version":  1,
+    "cluster":  "conflict",
+    "description":  "Leaves the room or topic; peace by absence.",
+    "priorIntensity":  5,
+    "moveSpeed":  "slow",
+    "bands":  {
+                  "off":  "0-29",
+                  "low":  "30-49",
+                  "mid":  "50-69",
+                  "high":  "70-84",
+                  "break":  "85-94",
+                  "extreme":  "95-100"
+              },
+    "styles":  [
+                   {
+                       "id":  "mid.conflict_avoidant.topic_change",
+                       "label":  "Topic change"
+                   },
+                   {
+                       "id":  "mid.conflict_avoidant.exit",
+                       "label":  "Exit"
+                   },
+                   {
+                       "id":  "mid.conflict_avoidant.freeze_polite",
+                       "label":  "Freeze polite"
+                   }
+               ],
+    "links":  {
+                  "boostedBy":  [
+                                    "fear",
+                                    "anxiety",
+                                    "guard"
+                                ],
+                  "drainedBy":  [
+                                    "anger",
+                                    "pride"
+                                ],
+                  "opposes":  [
+                                  "mid.confrontational"
+                              ]
+              },
+    "tagTriggers":  [
+                        {
+                            "tag":  "mid.conflict_avoidant.test",
+                            "meaning":  "Situation tests this character trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.conflict_avoidant.confirm",
+                            "meaning":  "Behavior confirms this trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.conflict_avoidant.violate",
+                            "meaning":  "Acts against this trait under pressure",
+                            "deltaHint":  -2
+                        }
+                    ],
+    "relationScoped":  true,
+    "historyHooks":  {
+                         "patternFile":  "conflict_avoidant_patterns.json",
+                         "fundingBudget":  2
+                     },
+    "notes":  "Different from peacemaker; avoids not brokers."
+}

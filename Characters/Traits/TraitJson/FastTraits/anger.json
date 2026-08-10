@@ -1,0 +1,227 @@
+﻿{
+  "id": "anger",
+  "layer": "fast",
+  "label": "Anger",
+  "version": 2,
+  "description": "Heat when blocked, insulted, disrespected, treated unfairly, or overwhelmed. Level = how much; style = how it comes out; flavor = why/moral color.",
+  "priorIntensity": {
+    "min": 2,
+    "max": 6,
+    "mean": 3
+  },
+  "spawn": {
+    "currentFromIntensity": true,
+    "noise": 3
+  },
+  "bands": {
+    "off": [ 0, 29 ],
+    "low": [ 30, 49 ],
+    "mid": [ 50, 69 ],
+    "high": [ 70, 84 ],
+    "break": [ 85, 94 ],
+    "extreme": [ 95, 100 ]
+  },
+  "styles": {
+    "verbal": {
+      "means": "Harsh words, insults, criticism, shouting.",
+      "speechHints": [ "sharp", "loud", "accusatory" ],
+      "bodyHints": [ "lean_in", "pointing" ],
+      "riskTags": [ "insult", "escalate_words" ]
+    },
+    "behavioral": {
+      "means": "Slam, throw, pace, aggressive movement.",
+      "speechHints": [ "few_words", "growled" ],
+      "bodyHints": [ "slam", "throw", "pace" ],
+      "riskTags": [ "property_damage" ]
+    },
+    "hostile": {
+      "means": "Intimidate, dominate, control.",
+      "speechHints": [ "threat", "command" ],
+      "bodyHints": [ "loom", "hard_stare" ],
+      "riskTags": [ "intimidate", "violence_risk" ]
+    },
+    "volatile": {
+      "means": "Sudden explosive bursts.",
+      "speechHints": [ "outburst", "unfiltered" ],
+      "bodyHints": [ "sudden_move" ],
+      "riskTags": [ "rupture" ]
+    },
+    "suppressive": {
+      "means": "Hidden or pushed down; silence and tightness.",
+      "speechHints": [ "minimal", "flat" ],
+      "bodyHints": [ "jaw_set", "arms_tight" ],
+      "riskTags": [ "stonewall", "delayed_blow" ]
+    },
+    "inward": {
+      "means": "Anger turned on self; self-attack, shame spiral.",
+      "speechHints": [ "self_blame" ],
+      "bodyHints": [ "collapse_posture" ],
+      "riskTags": [ "shame_spike", "guilt_spike" ],
+      "crossLinksForced": [ "shame", "guilt" ]
+    },
+    "cold": {
+      "means": "Controlled ice; belittle, moral superiority, cut-off.",
+      "speechHints": [ "precise", "belittling" ],
+      "bodyHints": [ "still", "hard_eye" ],
+      "riskTags": [ "humiliate", "cut_off" ]
+    },
+    "overwhelmed": {
+      "means": "Heat from overload; snap or shut down.",
+      "speechHints": [ "too_much", "scattered" ],
+      "bodyHints": [ "hands_in_hair", "freeze_or_pace" ],
+      "riskTags": [ "shutdown", "snap" ]
+    }
+  },
+  "defaultStyleWeights": {
+    "verbal": 1.0,
+    "behavioral": 0.45,
+    "hostile": 0.3,
+    "volatile": 0.4,
+    "suppressive": 1.0,
+    "inward": 0.7,
+    "cold": 0.75,
+    "overwhelmed": 0.6
+  },
+  "flavors": {
+    "impatient": "Delays, inefficiency, slowness.",
+    "frustration": "Blocked goals, obstacles, repeated failure.",
+    "defensive": "Feels attacked or criticized.",
+    "righteous": "Moral/ethical injustice framing.",
+    "retaliatory": "Payback for a perceived wrong.",
+    "resentful": "Old wound; long memory of being wronged."
+  },
+  "pull": {
+    "belowHomeDamageMult": 0.6,
+    "recoverMult": 1.4,
+    "aboveHomeSettleMult": 1.0
+  },
+  "funding": {
+    "required": true,
+    "budgetPerIntensityPoint": 1.0
+  },
+  "links": [
+    {
+      "trait": "patience",
+      "op": "-",
+      "weight": 0.85,
+      "when": "rise"
+    },
+    {
+      "trait": "guard",
+      "op": "+",
+      "weight": 0.45,
+      "when": "rise"
+    },
+    {
+      "trait": "tension",
+      "op": "+",
+      "weight": 0.4,
+      "when": "rise"
+    },
+    {
+      "trait": "playfulness",
+      "op": "-",
+      "weight": 0.35,
+      "when": "rise"
+    },
+    {
+      "trait": "openness",
+      "op": "-",
+      "weight": 0.25,
+      "when": "rise"
+    },
+    {
+      "trait": "affection",
+      "op": "=",
+      "weight": 0.0,
+      "note": "Can coexist; policy handles conflict."
+    },
+    {
+      "trait": "trust",
+      "op": "=",
+      "weight": 0.0,
+      "note": "From actions/tags, not raw anger."
+    },
+    {
+      "trait": "shame",
+      "op": "+",
+      "weight": 0.4,
+      "when": "rise",
+      "styleGate": [ "inward" ]
+    },
+    {
+      "trait": "guilt",
+      "op": "+",
+      "weight": 0.35,
+      "when": "fall"
+    }
+  ],
+  "opposePairs": [
+    {
+      "with": "affection",
+      "policyHints": [ "stay_sharp", "blow_then_guilt", "exit_to_protect_bond" ]
+    },
+    {
+      "with": "pride",
+      "policyHints": [ "face_saving", "must_win_point" ]
+    }
+  ],
+  "tagTriggers": [
+    {
+      "tag": "conflict.insult",
+      "direction": "+",
+      "baseWeight": 0.9
+    },
+    {
+      "tag": "conflict.dismiss",
+      "direction": "+",
+      "baseWeight": 0.7
+    },
+    {
+      "tag": "conflict.threaten",
+      "direction": "+",
+      "baseWeight": 1.0
+    },
+    {
+      "tag": "conflict.block_goal",
+      "direction": "+",
+      "baseWeight": 0.6
+    },
+    {
+      "tag": "status.belittle",
+      "direction": "+",
+      "baseWeight": 0.85
+    },
+    {
+      "tag": "repair.apology",
+      "direction": "-",
+      "baseWeight": 0.5
+    },
+    {
+      "tag": "repair.own_it",
+      "direction": "-",
+      "baseWeight": 0.55
+    },
+    {
+      "tag": "bond.soft_return",
+      "direction": "-",
+      "baseWeight": 0.35
+    }
+  ],
+  "relationScoped": true,
+  "historyHooks": {
+    "catalog": "Characters/Traits/TraitJson/TraitHistory/anger_patterns.json",
+    "filters": [ "style", "flavor", "sourceBucket" ],
+    "tellFraming": {
+      "prideHigh": "HeroSelf",
+      "prideLow": "VictimSelf",
+      "shameHigh": "VictimSelf",
+      "telephone": true
+    }
+  },
+  "debug": {
+    "showInDash": true,
+    "color": "#c44",
+    "sortPriority": 10
+  }
+}

@@ -1,0 +1,474 @@
+{
+  "id": "slow.music.folk_americana",
+  "layer": "slow",
+  "domain": "music",
+  "label": "Folk / Americana",
+  "version": 1,
+  "description": "Interest in folk, Americana, and roots songwriting—acoustic, story, and modern roots scenes.",
+  "priorIntensity": 5,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [ "folk", "americana", "acoustic", "songwriter", "banjo", "harmony", "roots", "campfire", "coffeehouse" ],
+  "rivalBias": true,
+  "catalog": "Music/FolkAmericana",
+  "subTraits": [
+    {
+      "id": "slow.music.folk_americana.traditional_folk",
+      "label": "Traditional folk",
+      "kind": "style",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "old", "ballad" ]
+    },
+    {
+      "id": "slow.music.folk_americana.protest_folk",
+      "label": "Protest / political folk",
+      "kind": "style",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "message", "60s" ]
+    },
+    {
+      "id": "slow.music.folk_americana.singer_songwriter",
+      "label": "Singer-songwriter",
+      "kind": "style",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "story", "alone" ]
+    },
+    {
+      "id": "slow.music.folk_americana.americana",
+      "label": "Americana",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "roots", "band" ]
+    },
+    {
+      "id": "slow.music.folk_americana.alt_country_edge",
+      "label": "Alt-country edge",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "twang", "indie" ]
+    },
+    {
+      "id": "slow.music.folk_americana.indie_folk",
+      "label": "Indie folk",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "modern", "gentle" ]
+    },
+    {
+      "id": "slow.music.folk_americana.bluegrass_adj",
+      "label": "Bluegrass-adjacent",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "acoustic", "fast" ]
+    },
+    {
+      "id": "slow.music.folk_americana.old_time",
+      "label": "Old-time",
+      "kind": "style",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "fiddle", "tradition" ]
+    },
+    {
+      "id": "slow.music.folk_americana.celtic_lean",
+      "label": "Celtic / British Isles lean",
+      "kind": "style",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "ballad", "session" ]
+    },
+    {
+      "id": "slow.music.folk_americana.folk_rock",
+      "label": "Folk rock",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "electric", "60s-70s" ]
+    },
+
+    {
+      "id": "slow.music.folk_americana.woody_guthrie",
+      "label": "Woody Guthrie",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "foundation", "road" ]
+    },
+    {
+      "id": "slow.music.folk_americana.pete_seeger",
+      "label": "Pete Seeger",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "banjo", "protest" ]
+    },
+    {
+      "id": "slow.music.folk_americana.bob_dylan",
+      "label": "Bob Dylan",
+      "kind": "artist",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "writer", "change", "icon" ]
+    },
+    {
+      "id": "slow.music.folk_americana.joan_baez",
+      "label": "Joan Baez",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "voice", "protest" ]
+    },
+    {
+      "id": "slow.music.folk_americana.joni_mitchell",
+      "label": "Joni Mitchell",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "writing", "guitar", "art" ]
+    },
+    {
+      "id": "slow.music.folk_americana.leonard_cohen",
+      "label": "Leonard Cohen",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "poetry", "deep" ]
+    },
+    {
+      "id": "slow.music.folk_americana.simon_garfunkel",
+      "label": "Simon & Garfunkel",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "harmony", "60s" ]
+    },
+    {
+      "id": "slow.music.folk_americana.crosby_stills",
+      "label": "Crosby, Stills & Nash",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "harmony", "70s" ]
+    },
+    {
+      "id": "slow.music.folk_americana.neil_young",
+      "label": "Neil Young",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "raw", "long", "bridge" ]
+    },
+    {
+      "id": "slow.music.folk_americana.john_prine",
+      "label": "John Prine",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "writing", "human", "midwest" ]
+    },
+    {
+      "id": "slow.music.folk_americana.townes",
+      "label": "Townes Van Zandt",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "writer", "legend" ]
+    },
+    {
+      "id": "slow.music.folk_americana.guy_clark",
+      "label": "Guy Clark",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "writer", "texas" ]
+    },
+    {
+      "id": "slow.music.folk_americana.emmylou",
+      "label": "Emmylou Harris",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "harmony", "americana" ]
+    },
+    {
+      "id": "slow.music.folk_americana.lucinda",
+      "label": "Lucinda Williams",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "writing", "raw" ]
+    },
+    {
+      "id": "slow.music.folk_americana.steve_earle",
+      "label": "Steve Earle",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "outlaw-edge", "writer" ]
+    },
+    {
+      "id": "slow.music.folk_americana.gillian_welch",
+      "label": "Gillian Welch",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "old-time", "duo" ]
+    },
+    {
+      "id": "slow.music.folk_americana.dave_rawlings",
+      "label": "David Rawlings",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "guitar", "harmony" ]
+    },
+    {
+      "id": "slow.music.folk_americana.alison_krauss",
+      "label": "Alison Krauss",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "bluegrass", "voice" ]
+    },
+    {
+      "id": "slow.music.folk_americana.nickel_creek",
+      "label": "Nickel Creek",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "progressive-acoustic" ]
+    },
+    {
+      "id": "slow.music.folk_americana.punch_brothers",
+      "label": "Punch Brothers",
+      "kind": "artist",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "progressive", "virtuoso" ]
+    },
+    {
+      "id": "slow.music.folk_americana.mumford",
+      "label": "Mumford & Sons",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "stomp", "2010s" ]
+    },
+    {
+      "id": "slow.music.folk_americana.avett",
+      "label": "The Avett Brothers",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "heart", "live" ]
+    },
+    {
+      "id": "slow.music.folk_americana.lumineers",
+      "label": "The Lumineers",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "stomps", "radio" ]
+    },
+    {
+      "id": "slow.music.folk_americana.fleet_foxes",
+      "label": "Fleet Foxes",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "harmony", "indie" ]
+    },
+    {
+      "id": "slow.music.folk_americana.bon_iver",
+      "label": "Bon Iver",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "cabin", "modern", "feel" ]
+    },
+    {
+      "id": "slow.music.folk_americana.sufjan",
+      "label": "Sufjan Stevens",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "writing", "michigan", "art" ]
+    },
+    {
+      "id": "slow.music.folk_americana.iron_wine",
+      "label": "Iron & Wine",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "soft", "story" ]
+    },
+    {
+      "id": "slow.music.folk_americana.the_national_adj",
+      "label": "The National (mood adjacent)",
+      "kind": "artist",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "baritone", "night" ]
+    },
+    {
+      "id": "slow.music.folk_americana.jason_isbell",
+      "label": "Jason Isbell",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "writing", "americana", "truth" ]
+    },
+    {
+      "id": "slow.music.folk_americana.sturgill",
+      "label": "Sturgill Simpson",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "weird", "bridge" ]
+    },
+    {
+      "id": "slow.music.folk_americana.tyler_childers",
+      "label": "Tyler Childers",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "kentucky", "raw" ]
+    },
+    {
+      "id": "slow.music.folk_americana.brandi",
+      "label": "Brandi Carlile",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "voice", "writing", "power" ]
+    },
+    {
+      "id": "slow.music.folk_americana.katie_prine_adj",
+      "label": "John Prine lineage fans",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "midwest", "human" ]
+    },
+    {
+      "id": "slow.music.folk_americana.phoebo_bridgers",
+      "label": "Phoebe Bridgers",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "indie", "sad", "modern" ]
+    },
+    {
+      "id": "slow.music.folk_americana.boygenius",
+      "label": "boygenius",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "harmony", "modern" ]
+    },
+    {
+      "id": "slow.music.folk_americana.big_thief",
+      "label": "Big Thief",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "indie", "raw" ]
+    },
+    {
+      "id": "slow.music.folk_americana.caamp",
+      "label": "Caamp",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "ohio", "columbus", "folk" ]
+    },
+    {
+      "id": "slow.music.folk_americana.the_front_bottoms_adj",
+      "label": "Midwest emo-folk edge",
+      "kind": "style",
+      "defaultRange": [ 15, 80 ],
+      "tags": [ "midwest", "talky" ]
+    },
+    {
+      "id": "slow.music.folk_americana.trampled_by_turtles",
+      "label": "Trampled by Turtles",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "bluegrass-speed", "midwest" ]
+    },
+    {
+      "id": "slow.music.folk_americana.goat_rodeo",
+      "label": "Goat Rodeo / classical-folk meet",
+      "kind": "artist",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "crossover", "virtuoso" ]
+    },
+    {
+      "id": "slow.music.folk_americana.rhiannon",
+      "label": "Rhiannon Giddens",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "banjo", "history", "voice" ]
+    },
+    {
+      "id": "slow.music.folk_americana.oirish_sessions",
+      "label": "Pub / session culture",
+      "kind": "habit",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "live", "join" ]
+    },
+
+    {
+      "id": "slow.music.folk_americana.coffeehouse",
+      "label": "Coffeehouse / small room shows",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "intimate", "listen" ]
+    },
+    {
+      "id": "slow.music.folk_americana.campfire",
+      "label": "Campfire / porch playing",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "friends", "acoustic" ]
+    },
+    {
+      "id": "slow.music.folk_americana.vinyl_lyrics",
+      "label": "Reads lyrics / liner notes",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "words", "respect" ]
+    },
+    {
+      "id": "slow.music.folk_americana.plays_guitar",
+      "label": "Plays acoustic guitar",
+      "kind": "practice",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "learn", "cover" ]
+    },
+    {
+      "id": "slow.music.folk_americana.writes_songs",
+      "label": "Writes songs",
+      "kind": "practice",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "notebook", "private" ]
+    },
+    {
+      "id": "slow.music.folk_americana.drive_story",
+      "label": "Long-drive story songs",
+      "kind": "mood_role",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "car", "ohio" ]
+    },
+    {
+      "id": "slow.music.folk_americana.heartbreak_quiet",
+      "label": "Quiet heartbreak folk",
+      "kind": "mood_role",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "hurt", "alone" ]
+    },
+    {
+      "id": "slow.music.folk_americana.purist_acoustic",
+      "label": "Acoustic purist",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "unplugged", "gate" ]
+    },
+    {
+      "id": "slow.music.folk_americana.band_ok",
+      "label": "Full band Americana OK",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "electric", "open" ]
+    },
+    {
+      "id": "slow.music.folk_americana.lyrics_first",
+      "label": "Lyrics above all",
+      "kind": "attitude",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "writing", "truth" ]
+    },
+    {
+      "id": "slow.music.folk_americana.ohio_scene",
+      "label": "Ohio / Midwest folk awareness",
+      "kind": "local",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "caamp", "columbus", "cleveland" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "likes an acoustic song; no roots identity",
+    "atOrAbove50": "attach 2-4; writer names and coffeehouse habits show",
+    "atOrAbove70": "lyrics and live small rooms matter; can argue Dylan eras",
+    "extreme95": "songwriting is almost sacred; campfire and porch are social default"
+  },
+  "notes": "Caamp is a real Ohio hook. Overlaps with country americana-edge and blues storytelling—factory should not stack all three at max on one NPC without intent."
+}

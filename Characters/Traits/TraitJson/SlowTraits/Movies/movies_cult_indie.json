@@ -1,0 +1,374 @@
+{
+  "id": "slow.movies.cult_indie",
+  "layer": "slow",
+  "domain": "movies",
+  "label": "Cult / Indie",
+  "version": 1,
+  "description": "Prefers cult classics, indie, midnight movies, and off-mainstream film culture.",
+  "priorIntensity": 5,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [ "indie", "cult", "midnight", "festival", "arthouse", "obscure", "criterion", "rewatch" ],
+  "rivalBias": true,
+  "catalog": "Movies/Titles/CultIndie",
+  "subTraits": [
+    {
+      "id": "slow.movies.cult_indie.midnight",
+      "label": "Midnight movie culture",
+      "kind": "scene",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "rocky", "crowd" ]
+    },
+    {
+      "id": "slow.movies.cult_indie.criterion",
+      "label": "Criterion / boutique labels",
+      "kind": "source",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "shelf", "essay" ]
+    },
+    {
+      "id": "slow.movies.cult_indie.festival",
+      "label": "Festival circuit taste",
+      "kind": "source",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "sundance", "tiff" ]
+    },
+    {
+      "id": "slow.movies.cult_indie.mumblecore",
+      "label": "Mumblecore / lo-fi talk",
+      "kind": "style",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "natural", "small" ]
+    },
+    {
+      "id": "slow.movies.cult_indie.a24_era",
+      "label": "A24-era indie",
+      "kind": "era",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "brand", "vibe" ]
+    },
+    {
+      "id": "slow.movies.cult_indie.90s_indie",
+      "label": "90s indie wave",
+      "kind": "era",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "tarantino-adj", "linklater" ]
+    },
+    {
+      "id": "slow.movies.cult_indie.cult_horror",
+      "label": "Cult horror adjacent",
+      "kind": "cross",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "weird", "blood" ]
+    },
+    {
+      "id": "slow.movies.cult_indie.camp",
+      "label": "Camp / so-bad-good",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "irony", "love" ]
+    },
+    {
+      "id": "slow.movies.cult_indie.sincere_weird",
+      "label": "Sincere weird",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "heart", "odd" ]
+    },
+    {
+      "id": "slow.movies.cult_indie.noir_neo",
+      "label": "Neo-noir indie",
+      "kind": "style",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "night", "moral" ]
+    },
+    {
+      "id": "slow.movies.cult_indie.black_comedy_cult",
+      "label": "Black comedy cult",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "dark", "laugh" ]
+    },
+    {
+      "id": "slow.movies.cult_indie.surreal",
+      "label": "Surreal / dream logic",
+      "kind": "style",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "lynch-adj", "odd" ]
+    },
+    {
+      "id": "slow.movies.cult_indie.found_footage_cult",
+      "label": "Found-footage cult",
+      "kind": "style",
+      "defaultRange": [ 15, 80 ],
+      "tags": [ "raw", "scare" ]
+    },
+    {
+      "id": "slow.movies.cult_indie.foreign_arthouse",
+      "label": "Foreign arthouse",
+      "kind": "scope",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "subs", "world" ]
+    },
+    {
+      "id": "slow.movies.cult_indie.subs_pride",
+      "label": "Subtitles pride",
+      "kind": "viewing",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "original", "status" ]
+    },
+    {
+      "id": "slow.movies.cult_indie.dub_reject",
+      "label": "Rejects dubs",
+      "kind": "viewing",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "purist" ]
+    },
+    {
+      "id": "slow.movies.cult_indie.physical_media",
+      "label": "Physical media collector",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "bluray", "shelf" ]
+    },
+    {
+      "id": "slow.movies.cult_indie.streaming_only",
+      "label": "Streaming discovery only",
+      "kind": "habit",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "algorithm", "chance" ]
+    },
+    {
+      "id": "slow.movies.cult_indie.obscure_flex",
+      "label": "Obscure flex",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "status", "gate" ]
+    },
+    {
+      "id": "slow.movies.cult_indie.anti_gatekeep",
+      "label": "Anti-gatekeep",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "welcome", "share" ]
+    },
+    {
+      "id": "slow.movies.cult_indie.mainstream_ok",
+      "label": "Still likes some mainstream",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "balance", "fun" ]
+    },
+    {
+      "id": "slow.movies.cult_indie.hate_marvel_discourse",
+      "label": "Anti-franchise discourse",
+      "kind": "attitude",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "rival", "cinema" ]
+    },
+    {
+      "id": "slow.movies.cult_indie.director_auteur",
+      "label": "Auteur director loyal",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "filmography", "follow" ]
+    },
+    {
+      "id": "slow.movies.cult_indie.one_and_done",
+      "label": "One perfect cult film forever",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "identity", "quote" ]
+    },
+    {
+      "id": "slow.movies.cult_indie.rewatch_study",
+      "label": "Rewatch to study craft",
+      "kind": "viewing",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "pause", "frame" ]
+    },
+    {
+      "id": "slow.movies.cult_indie.theater_revival",
+      "label": "Revival / repertory theater",
+      "kind": "viewing",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "35mm", "event" ]
+    },
+    {
+      "id": "slow.movies.cult_indie.date_risky",
+      "label": "Risky date pick (tests taste)",
+      "kind": "social",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "filter", "talk" ]
+    },
+    {
+      "id": "slow.movies.cult_indie.group_alienates",
+      "label": "Knows it alienates groups",
+      "kind": "social",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "solo", "niche" ]
+    },
+    {
+      "id": "slow.movies.cult_indie.zine_essay",
+      "label": "Reads criticism / essays",
+      "kind": "habit",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "letterboxd", "longform" ]
+    },
+    {
+      "id": "slow.movies.cult_indie.letterboxd",
+      "label": "Letterboxd identity",
+      "kind": "habit",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "log", "list" ]
+    },
+    {
+      "id": "slow.movies.cult_indie.vhs_aesthetic",
+      "label": "VHS / retro aesthetic",
+      "kind": "style",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "grain", "nostalgia" ]
+    },
+    {
+      "id": "slow.movies.cult_indie.slow_cinema",
+      "label": "Slow cinema tolerance",
+      "kind": "style",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "long", "patient" ]
+    },
+    {
+      "id": "slow.movies.cult_indie.fast_cult",
+      "label": "Fast / punk cult energy",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "short", "loud" ]
+    },
+    {
+      "id": "slow.movies.cult_indie.queer_cinema",
+      "label": "Queer indie cinema",
+      "kind": "scope",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "rep", "fest" ]
+    },
+    {
+      "id": "slow.movies.cult_indie.regional_ohio",
+      "label": "Regional / Midwest oddities",
+      "kind": "scope",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "local", "strange" ]
+    },
+    {
+      "id": "slow.movies.cult_indie.doc_hybrid",
+      "label": "Doc-fiction hybrids",
+      "kind": "cross",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "blur", "real" ]
+    },
+    {
+      "id": "slow.movies.cult_indie.music_film",
+      "label": "Music-driven indie",
+      "kind": "style",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "soundtrack", "band" ]
+    },
+    {
+      "id": "slow.movies.cult_indie.no_three_act",
+      "label": "OK without three-act neatness",
+      "kind": "structure",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "loose", "art" ]
+    },
+    {
+      "id": "slow.movies.cult_indie.twist_cult",
+      "label": "Cult of the twist ending",
+      "kind": "structure",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "shock", "talk" ]
+    },
+    {
+      "id": "slow.movies.cult_indie.practical_fx_cult",
+      "label": "Practical FX cult love",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "latex", "craft" ]
+    },
+    {
+      "id": "slow.movies.cult_indie.banned_controversial",
+      "label": "Controversial / banned curious",
+      "kind": "attitude",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "edge", "history" ]
+    },
+    {
+      "id": "slow.movies.cult_indie.comfort_cult",
+      "label": "Comfort-cult rewatch",
+      "kind": "viewing",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "known-weird", "home" ]
+    },
+    {
+      "id": "slow.movies.cult_indie.introduce_others",
+      "label": "Loves introducing people",
+      "kind": "social",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "mission", "convert" ]
+    },
+    {
+      "id": "slow.movies.cult_indie.gate_shame",
+      "label": "Ashamed of mainstream loves",
+      "kind": "attitude",
+      "defaultRange": [ 15, 80 ],
+      "tags": [ "status", "hide" ]
+    },
+    {
+      "id": "slow.movies.cult_indie.double_feature",
+      "label": "Builds double features",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "pair", "night" ]
+    },
+    {
+      "id": "slow.movies.cult_indie.runtime_long",
+      "label": "Long runtime tolerance",
+      "kind": "structure",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "epic", "patient" ]
+    },
+    {
+      "id": "slow.movies.cult_indie.short_films",
+      "label": "Short film appreciation",
+      "kind": "format",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "fest", "dense" ]
+    },
+    {
+      "id": "slow.movies.cult_indie.director_commentary",
+      "label": "Commentary / extras nerd",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "disc", "learn" ]
+    },
+    {
+      "id": "slow.movies.cult_indie.poster_art",
+      "label": "Poster / key art collector",
+      "kind": "habit",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "wall", "design" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "has seen a weird movie; no cult identity",
+    "atOrAbove50": "attach 2-4; discovery and status talk appear",
+    "atOrAbove70": "taste is identity; physical media or Letterboxd habits show",
+    "extreme95": "gatekeeping risk; mission to convert friends"
+  },
+  "notes": "rivalBias vs pure franchise/MCU talk. Pair with music taste for soundtrack-driven indies."
+}

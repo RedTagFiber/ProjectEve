@@ -1,20 +1,19 @@
-﻿namespace Project_Eve.Characters.Personality
+﻿namespace ProjectEve.Characters.Personality
 {
     /// <summary>
-    /// Broad personality categories.
-    /// These help shape tone, behavior, and emotional reactions.
+    /// Broad social label derived from Mid/Fast — not a separate engine.
     /// </summary>
     public enum PersonalityType
     {
         Neutral,
-        Introvert,
-        Extrovert,
         Warm,
-        Cold,
-        Sarcastic,
-        Serious,
+        Guarded,
         Playful,
-        Shy,
-        Bold
+        Serious,
+        Soft,
+        Sharp,      // sarcasm / bite
+        Bold,
+        Anxious,
+        Steady
     }
 }

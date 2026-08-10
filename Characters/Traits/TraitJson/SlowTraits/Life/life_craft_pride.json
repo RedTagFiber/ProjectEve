@@ -1,0 +1,402 @@
+{
+  "id": "slow.life.craft_pride",
+  "layer": "slow",
+  "domain": "life",
+  "label": "Craft pride",
+  "version": 1,
+  "description": "Life taste/identity: making, fixing, building, and trade skill. Pride in work done by hand or by trade—not just owning things.",
+  "priorIntensity": 5,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [
+    "built",
+    "fixed",
+    "made",
+    "trade",
+    "tools",
+    "shop",
+    "weld",
+    "wood",
+    "measure",
+    "level",
+    "saw",
+    "drill",
+    "project",
+    "diy",
+    "contractor",
+    "plumber",
+    "electrician",
+    "finish",
+    "square",
+    "plumb"
+  ],
+  "rivalBias": true,
+  "catalog": "Life",
+  "subTraits": [
+    {
+      "id": "slow.life.craft_pride.carpentry",
+      "label": "Carpentry / wood",
+      "kind": "trade",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "wood", "framing", "finish" ]
+    },
+    {
+      "id": "slow.life.craft_pride.electrical",
+      "label": "Electrical",
+      "kind": "trade",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "wire", "code", "panel" ]
+    },
+    {
+      "id": "slow.life.craft_pride.plumbing",
+      "label": "Plumbing",
+      "kind": "trade",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "pipe", "water", "fix" ]
+    },
+    {
+      "id": "slow.life.craft_pride.hvac",
+      "label": "HVAC",
+      "kind": "trade",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "heat", "ac", "duct" ]
+    },
+    {
+      "id": "slow.life.craft_pride.welding",
+      "label": "Welding / fab",
+      "kind": "trade",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "mig", "tig", "metal" ]
+    },
+    {
+      "id": "slow.life.craft_pride.auto_tech",
+      "label": "Auto technician",
+      "kind": "trade",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "engine", "diagnosis", "garage" ]
+    },
+    {
+      "id": "slow.life.craft_pride.diesel_tech",
+      "label": "Diesel tech",
+      "kind": "trade",
+      "defaultRange": [ 10, 85 ],
+      "tags": [ "diesel", "truck", "heavy" ]
+    },
+    {
+      "id": "slow.life.craft_pride.machining",
+      "label": "Machining / CNC",
+      "kind": "trade",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "lathe", "mill", "tolerance" ]
+    },
+    {
+      "id": "slow.life.craft_pride.masonry",
+      "label": "Masonry / concrete",
+      "kind": "trade",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "block", "pour", "foundation" ]
+    },
+    {
+      "id": "slow.life.craft_pride.roofing",
+      "label": "Roofing",
+      "kind": "trade",
+      "defaultRange": [ 10, 75 ],
+      "tags": [ "shingle", "height", "weather" ]
+    },
+    {
+      "id": "slow.life.craft_pride.painting_finish",
+      "label": "Paint / finish work",
+      "kind": "trade",
+      "defaultRange": [ 15, 80 ],
+      "tags": [ "clean-lines", "prep" ]
+    },
+    {
+      "id": "slow.life.craft_pride.landscaping",
+      "label": "Landscaping / outdoor",
+      "kind": "trade",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "dirt", "plants", "hardscape" ]
+    },
+    {
+      "id": "slow.life.craft_pride.farm_mechanic",
+      "label": "Farm / equipment fix",
+      "kind": "trade",
+      "defaultRange": [ 10, 85 ],
+      "tags": [ "tractor", "rural", "jury-rig" ]
+    },
+    {
+      "id": "slow.life.craft_pride.cdl_operator",
+      "label": "Heavy equipment / CDL ops",
+      "kind": "trade",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "operator", "site", "truck" ]
+    },
+    {
+      "id": "slow.life.craft_pride.cooking_craft",
+      "label": "Cooking as craft",
+      "kind": "craft",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "knife", "heat", "timing" ]
+    },
+    {
+      "id": "slow.life.craft_pride.baking",
+      "label": "Baking precision",
+      "kind": "craft",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "measure", "patience", "oven" ]
+    },
+    {
+      "id": "slow.life.craft_pride.sewing_textile",
+      "label": "Sewing / textile",
+      "kind": "craft",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "fabric", "fit", "repair" ]
+    },
+    {
+      "id": "slow.life.craft_pride.knitting_fiber",
+      "label": "Knitting / fiber arts",
+      "kind": "craft",
+      "defaultRange": [ 10, 75 ],
+      "tags": [ "yarn", "handmade" ]
+    },
+    {
+      "id": "slow.life.craft_pride.leatherwork",
+      "label": "Leatherwork",
+      "kind": "craft",
+      "defaultRange": [ 10, 75 ],
+      "tags": [ "hide", "stitch", "tool" ]
+    },
+    {
+      "id": "slow.life.craft_pride.woodturning",
+      "label": "Woodturning / fine wood",
+      "kind": "craft",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "lathe", "grain", "finish" ]
+    },
+    {
+      "id": "slow.life.craft_pride.metal_art",
+      "label": "Metal art / sculpture",
+      "kind": "craft",
+      "defaultRange": [ 10, 70 ],
+      "tags": [ "art", "torch", "form" ]
+    },
+    {
+      "id": "slow.life.craft_pride.pottery",
+      "label": "Pottery / ceramics",
+      "kind": "craft",
+      "defaultRange": [ 10, 75 ],
+      "tags": [ "wheel", "kiln", "clay" ]
+    },
+    {
+      "id": "slow.life.craft_pride.home_repair",
+      "label": "General home repair",
+      "kind": "diy",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "fixer", "house", "save-money" ]
+    },
+    {
+      "id": "slow.life.craft_pride.furniture_build",
+      "label": "Furniture building",
+      "kind": "diy",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "table", "cabinet", "custom" ]
+    },
+    {
+      "id": "slow.life.craft_pride.deck_fence",
+      "label": "Deck / fence builds",
+      "kind": "diy",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "outdoor", "lumber", "weekend" ]
+    },
+    {
+      "id": "slow.life.craft_pride.engine_rebuild",
+      "label": "Engine rebuild pride",
+      "kind": "diy",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "motor", "garage", "patience" ]
+    },
+    {
+      "id": "slow.life.craft_pride.restoration",
+      "label": "Restoration projects",
+      "kind": "diy",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "old", "bring-back", "years" ]
+    },
+    {
+      "id": "slow.life.craft_pride.tool_collect",
+      "label": "Tool collection pride",
+      "kind": "attitude",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "snap-on", "harbor-freight", "organize" ]
+    },
+    {
+      "id": "slow.life.craft_pride.measure_twice",
+      "label": "Measure twice mindset",
+      "kind": "attitude",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "precision", "patience", "no-waste" ]
+    },
+    {
+      "id": "slow.life.craft_pride.good_enough",
+      "label": "Good-enough finisher",
+      "kind": "attitude",
+      "defaultRange": [ 15, 80 ],
+      "tags": [ "speed", "practical", "ship-it" ]
+    },
+    {
+      "id": "slow.life.craft_pride.perfectionist_finish",
+      "label": "Perfectionist finish",
+      "kind": "attitude",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "detail", "slow", "pride" ]
+    },
+    {
+      "id": "slow.life.craft_pride.hate_halfass",
+      "label": "Hates half-assed work",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "standards", "judgment", "rival" ]
+    },
+    {
+      "id": "slow.life.craft_pride.teach_trade",
+      "label": "Teaches the trade",
+      "kind": "attitude",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "mentor", "apprentice", "show" ]
+    },
+    {
+      "id": "slow.life.craft_pride.learned_from_parent",
+      "label": "Learned from parent/kin",
+      "kind": "history_hook",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "family", "passed-down" ]
+    },
+    {
+      "id": "slow.life.craft_pride.self_taught",
+      "label": "Self-taught pride",
+      "kind": "attitude",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "youtube", "trial", "no-school" ]
+    },
+    {
+      "id": "slow.life.craft_pride.union_trade",
+      "label": "Union / apprenticed trade",
+      "kind": "path",
+      "defaultRange": [ 10, 85 ],
+      "tags": [ "union", "card", "hours" ]
+    },
+    {
+      "id": "slow.life.craft_pride.side_hustle_build",
+      "label": "Side-hustle builds",
+      "kind": "lifestyle",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "cash", "nights", "weekend" ]
+    },
+    {
+      "id": "slow.life.craft_pride.sell_handmade",
+      "label": "Sells handmade",
+      "kind": "lifestyle",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "market", "etsy", "fair" ]
+    },
+    {
+      "id": "slow.life.craft_pride.gift_handmade",
+      "label": "Gifts what they make",
+      "kind": "attitude",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "love-language", "time" ]
+    },
+    {
+      "id": "slow.life.craft_pride.shop_sanctuary",
+      "label": "Shop as sanctuary",
+      "kind": "lifestyle",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "alone", "radio", "peace" ]
+    },
+    {
+      "id": "slow.life.craft_pride.clean_shop",
+      "label": "Clean shop standard",
+      "kind": "attitude",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "organize", "sweep", "put-away" ]
+    },
+    {
+      "id": "slow.life.craft_pride.messy_genius",
+      "label": "Messy but productive",
+      "kind": "attitude",
+      "defaultRange": [ 15, 80 ],
+      "tags": [ "chaos", "finds-things" ]
+    },
+    {
+      "id": "slow.life.craft_pride.safety_first",
+      "label": "Safety-first",
+      "kind": "attitude",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "ppe", "guards", "no-shortcuts" ]
+    },
+    {
+      "id": "slow.life.craft_pride.risk_shortcuts",
+      "label": "Risk / shortcut taker",
+      "kind": "attitude",
+      "defaultRange": [ 10, 75 ],
+      "tags": [ "fast", "danger", "old-school" ]
+    },
+    {
+      "id": "slow.life.craft_pride.estimate_honest",
+      "label": "Honest estimating",
+      "kind": "attitude",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "quote", "trust", "no-upsell" ]
+    },
+    {
+      "id": "slow.life.craft_pride.hate_cheap_customer",
+      "label": "Resents cheap customers",
+      "kind": "attitude",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "money", "respect", "trade" ]
+    },
+    {
+      "id": "slow.life.craft_pride.coding_craft",
+      "label": "Code as craft",
+      "kind": "craft",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "software", "clean-code", "build" ]
+    },
+    {
+      "id": "slow.life.craft_pride.music_instrument_build",
+      "label": "Instrument / amp craft",
+      "kind": "craft",
+      "defaultRange": [ 5, 70 ],
+      "tags": [ "guitar", "solder", "tone" ]
+    },
+    {
+      "id": "slow.life.craft_pride.gunsmith_hobby",
+      "label": "Gunsmith / build hobby",
+      "kind": "craft",
+      "defaultRange": [ 5, 75 ],
+      "tags": [ "firearm", "precision", "legal" ]
+    },
+    {
+      "id": "slow.life.craft_pride.garden_grow",
+      "label": "Grow / garden craft",
+      "kind": "craft",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "soil", "season", "food" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "vague knowledge only; respects people who can fix things but no deep identity",
+    "atOrAbove50": "attach 1-3 subTraits as signature crafts; can tell one real project story",
+    "atOrAbove70": "craft is identity; judges bad work; shop/time stories unlock; history hooks to mentor or first build",
+    "extreme95": "self-worth tied to what they can make or fix; idle hands feel wrong"
+  },
+  "notes": "Slow wakes on build/fix/trade talk. rivalBias true → quality standards and 'who did that job' talk. Pair with MoneyProfile when side-hustle or trade income matters."
+}

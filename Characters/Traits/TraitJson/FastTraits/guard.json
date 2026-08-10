@@ -1,0 +1,183 @@
+﻿{
+  "id": "guard",
+  "layer": "fast",
+  "label": "Guard",
+  "version": 1,
+  "description": "Close the gates now. Protects self from exposure, hurt, or control. High Guard blocks Openness and slows Trust gains.",
+  "priorIntensity": {
+    "min": 3,
+    "max": 7,
+    "mean": 5
+  },
+  "spawn": {
+    "currentFromIntensity": true,
+    "noise": 3
+  },
+  "bands": {
+    "off": [ 0, 29 ],
+    "low": [ 30, 49 ],
+    "mid": [ 50, 69 ],
+    "high": [ 70, 84 ],
+    "break": [ 85, 94 ],
+    "extreme": [ 95, 100 ]
+  },
+  "styles": {
+    "walls": {
+      "means": "Hard boundary; closed topics; emotional wall.",
+      "speechHints": [ "short", "closed", "none_of_your_business" ],
+      "bodyHints": [ "arms_cross", "angle_away" ],
+      "riskTags": [ "stonewall" ]
+    },
+    "humor_mask": {
+      "means": "Jokes instead of answers; keeps it light on purpose.",
+      "speechHints": [ "joke", "deflect", "sarcasm_light" ],
+      "bodyHints": [ "smile_armor" ],
+      "riskTags": [ "never_serious" ]
+    },
+    "topic_change": {
+      "means": "Steers away from soft or dangerous subjects.",
+      "speechHints": [ "anyway", "subject_change" ],
+      "bodyHints": [ "busy", "look_elsewhere" ],
+      "riskTags": [ "avoidant" ]
+    },
+    "exit": {
+      "means": "Leaves the moment — room, thread, relationship beat.",
+      "speechHints": [ "gotta_go", "done" ],
+      "bodyHints": [ "exit" ],
+      "riskTags": [ "abandon_scene" ]
+    },
+    "minimal": {
+      "means": "Answers with least possible; no extra free info.",
+      "speechHints": [ "one_word", "fine", "sure" ],
+      "bodyHints": [ "still", "flat" ],
+      "riskTags": [ "read_as_cold" ]
+    }
+  },
+  "defaultStyleWeights": {
+    "walls": 1.0,
+    "humor_mask": 0.85,
+    "topic_change": 0.9,
+    "exit": 0.55,
+    "minimal": 1.0
+  },
+  "flavors": {
+    "after_hurt": "Just got burned; gates slam.",
+    "stranger": "Doesn't know you yet.",
+    "pride": "Won't be seen weak.",
+    "control": "Won't be managed or pinned down.",
+    "secret": "Protecting something specific."
+  },
+  "pull": {
+    "belowHomeDamageMult": 0.55,
+    "recoverMult": 1.15,
+    "aboveHomeSettleMult": 1.0
+  },
+  "funding": {
+    "required": true,
+    "budgetPerIntensityPoint": 1.0
+  },
+  "links": [
+    {
+      "trait": "openness",
+      "op": "-",
+      "weight": 0.7,
+      "when": "rise"
+    },
+    {
+      "trait": "trust",
+      "op": "-",
+      "weight": 0.35,
+      "when": "rise"
+    },
+    {
+      "trait": "affection",
+      "op": "-",
+      "weight": 0.2,
+      "when": "rise"
+    },
+    {
+      "trait": "anxiety",
+      "op": "+",
+      "weight": 0.25,
+      "when": "rise"
+    },
+    {
+      "trait": "fear",
+      "op": "+",
+      "weight": 0.2,
+      "when": "rise"
+    }
+  ],
+  "opposePairs": [
+    {
+      "with": "openness",
+      "policyHints": [ "crack_in_wall", "one_true_thing" ]
+    },
+    {
+      "with": "desire",
+      "policyHints": [ "want_but_walled", "mixed_signal" ]
+    },
+    {
+      "with": "affection",
+      "policyHints": [ "care_at_a_distance" ]
+    }
+  ],
+  "tagTriggers": [
+    {
+      "tag": "conflict.insult",
+      "direction": "+",
+      "baseWeight": 0.7
+    },
+    {
+      "tag": "conflict.probe_deep",
+      "direction": "+",
+      "baseWeight": 0.8
+    },
+    {
+      "tag": "bond.rejection",
+      "direction": "+",
+      "baseWeight": 0.75
+    },
+    {
+      "tag": "shame.expose",
+      "direction": "+",
+      "baseWeight": 0.85
+    },
+    {
+      "tag": "bond.reassurance",
+      "direction": "-",
+      "baseWeight": 0.45
+    },
+    {
+      "tag": "bond.safe_presence",
+      "direction": "-",
+      "baseWeight": 0.5
+    },
+    {
+      "tag": "repair.own_it",
+      "direction": "-",
+      "baseWeight": 0.35
+    },
+    {
+      "tag": "bond.vulnerability_met_well",
+      "direction": "-",
+      "baseWeight": 0.6
+    }
+  ],
+  "relationScoped": true,
+  "historyHooks": {
+    "catalog": "Characters/Traits/TraitJson/TraitHistory/guard_patterns.json",
+    "filters": [ "style", "flavor", "sourceBucket" ],
+    "tellFraming": {
+      "prideHigh": "HeroSelf",
+      "prideLow": "VictimSelf",
+      "shameHigh": "VictimSelf",
+      "telephone": true
+    }
+  },
+  "debug": {
+    "showInDash": true,
+    "color": "#5a6a7a",
+    "sortPriority": 14
+  }
+}

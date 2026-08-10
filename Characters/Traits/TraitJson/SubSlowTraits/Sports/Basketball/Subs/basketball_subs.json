@@ -1,0 +1,52 @@
+{
+    "parent":  "slow.sports.basketball",
+    "version":  1,
+    "fillThreshold":  50,
+    "subs":  [
+                 {
+                     "id":  "sub.basketball.team_primary",
+                     "label":  "Primary team",
+                     "required":  true,
+                     "type":  "catalog_ref",
+                     "catalogs":  [
+                                      "nba_teams",
+                                      "cbb_teams"
+                                  ],
+                     "pickCount":  1
+                 },
+                 {
+                     "label":  "Knowledge",
+                     "values":  [
+                                    "casual",
+                                    "fan",
+                                    "diehard"
+                                ],
+                     "default":  "fan",
+                     "id":  "sub.basketball.knowledge",
+                     "type":  "enum"
+                 },
+                 {
+                     "label":  "Rival heat",
+                     "values":  [
+                                    "low",
+                                    "mid",
+                                    "high"
+                                ],
+                     "default":  "mid",
+                     "id":  "sub.basketball.rival_heat",
+                     "type":  "enum"
+                 },
+                 {
+                     "label":  "Watch mode",
+                     "values":  [
+                                    "home",
+                                    "bar",
+                                    "arena",
+                                    "highlights"
+                                ],
+                     "default":  "home",
+                     "id":  "sub.basketball.watch_mode",
+                     "type":  "enum"
+                 }
+             ]
+}

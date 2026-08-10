@@ -1,0 +1,381 @@
+{
+  "id": "slow.life.work_ambition",
+  "layer": "slow",
+  "domain": "life",
+  "label": "Work ambition",
+  "version": 1,
+  "description": "Life taste/identity: how they relate to work—climb, coast, craft, hustle, burnout, and meaning.",
+  "priorIntensity": 5,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [ "job", "career", "promotion", "shift", "boss", "paycheck", "overtime", "resume", "quit", "hire" ],
+  "rivalBias": true,
+  "catalog": "Life",
+  "subTraits": [
+    {
+      "id": "slow.life.work_ambition.climb_ladder",
+      "label": "Climb the ladder",
+      "kind": "path",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "promo", "title" ]
+    },
+    {
+      "id": "slow.life.work_ambition.master_craft",
+      "label": "Master the craft",
+      "kind": "path",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "skill", "pride", "trade" ]
+    },
+    {
+      "id": "slow.life.work_ambition.steady_paycheck",
+      "label": "Steady paycheck priority",
+      "kind": "path",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "stable", "benefits" ]
+    },
+    {
+      "id": "slow.life.work_ambition.coast_protect",
+      "label": "Coast and protect energy",
+      "kind": "path",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "minimum", "life-first" ]
+    },
+    {
+      "id": "slow.life.work_ambition.entrepreneur",
+      "label": "Entrepreneur / own thing",
+      "kind": "path",
+      "defaultRange": [ 20, 95 ],
+      "tags": [ "risk", "boss-self" ]
+    },
+    {
+      "id": "slow.life.work_ambition.side_hustle",
+      "label": "Side hustle always",
+      "kind": "path",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "extra", "nights" ]
+    },
+    {
+      "id": "slow.life.work_ambition.union_path",
+      "label": "Union / trade path pride",
+      "kind": "path",
+      "defaultRange": [ 20, 95 ],
+      "tags": [ "card", "ohio", "scale" ]
+    },
+    {
+      "id": "slow.life.work_ambition.public_service",
+      "label": "Public service / helping role",
+      "kind": "path",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "nurse", "teacher", "cop", "serve" ]
+    },
+    {
+      "id": "slow.life.work_ambition.creative_career",
+      "label": "Creative career push",
+      "kind": "path",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "art", "unstable" ]
+    },
+    {
+      "id": "slow.life.work_ambition.management_aim",
+      "label": "Wants management",
+      "kind": "path",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "lead", "people" ]
+    },
+    {
+      "id": "slow.life.work_ambition.avoid_management",
+      "label": "Avoids managing people",
+      "kind": "path",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "ic", "skill-only" ]
+    },
+    {
+      "id": "slow.life.work_ambition.shift_work_identity",
+      "label": "Shift work identity",
+      "kind": "context",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "nights", "factory", "hospital" ]
+    },
+    {
+      "id": "slow.life.work_ambition.salary_salaried",
+      "label": "Salaried mindset",
+      "kind": "context",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "exempt", "email" ]
+    },
+    {
+      "id": "slow.life.work_ambition.hourly_ot",
+      "label": "Hourly + overtime hunter",
+      "kind": "context",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "ot", "money" ]
+    },
+    {
+      "id": "slow.life.work_ambition.gig_flexible",
+      "label": "Gig / flexible work",
+      "kind": "context",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "uber", "variable" ]
+    },
+    {
+      "id": "slow.life.work_ambition.remote_aim",
+      "label": "Remote work aim",
+      "kind": "context",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "home", "zoom" ]
+    },
+    {
+      "id": "slow.life.work_ambition.on_site_pride",
+      "label": "On-site / in-person pride",
+      "kind": "context",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "show-up", "hands" ]
+    },
+    {
+      "id": "slow.life.work_ambition.education_climb",
+      "label": "Education as climb tool",
+      "kind": "path",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "degree", "cert", "night-class" ]
+    },
+    {
+      "id": "slow.life.work_ambition.anti_degree",
+      "label": "Anti-degree / experience first",
+      "kind": "attitude",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "practical", "debt-fear" ]
+    },
+    {
+      "id": "slow.life.work_ambition.title_sensitive",
+      "label": "Title sensitive",
+      "kind": "attitude",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "status", "card" ]
+    },
+    {
+      "id": "slow.life.work_ambition.money_over_title",
+      "label": "Money over title",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "pay", "practical" ]
+    },
+    {
+      "id": "slow.life.work_ambition.meaning_over_money",
+      "label": "Meaning over money",
+      "kind": "attitude",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "purpose", "serve" ]
+    },
+    {
+      "id": "slow.life.work_ambition.money_over_meaning",
+      "label": "Money over meaning",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "bills", "real" ]
+    },
+    {
+      "id": "slow.life.work_ambition.workaholic",
+      "label": "Workaholic pull",
+      "kind": "habit",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "hours", "identity" ]
+    },
+    {
+      "id": "slow.life.work_ambition.boundaries_hard",
+      "label": "Hard work boundaries",
+      "kind": "habit",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "clock-out", "phone-off" ]
+    },
+    {
+      "id": "slow.life.work_ambition.always_on_email",
+      "label": "Always-on email",
+      "kind": "habit",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "night", "anxiety" ]
+    },
+    {
+      "id": "slow.life.work_ambition.burnout_history",
+      "label": "Burnout history",
+      "kind": "history_hook",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "crash", "recover" ]
+    },
+    {
+      "id": "slow.life.work_ambition.laid_off_scar",
+      "label": "Laid-off scar",
+      "kind": "history_hook",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "trust", "money-fear" ]
+    },
+    {
+      "id": "slow.life.work_ambition.first_gen_pro",
+      "label": "First-gen professional",
+      "kind": "history_hook",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "family", "pressure" ]
+    },
+    {
+      "id": "slow.life.work_ambition.family_business",
+      "label": "Family business path",
+      "kind": "path",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "inherit", "duty" ]
+    },
+    {
+      "id": "slow.life.work_ambition.military_to_civ",
+      "label": "Military to civilian work",
+      "kind": "history_hook",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "transition", "structure" ]
+    },
+    {
+      "id": "slow.life.work_ambition.boss_relationship",
+      "label": "Defines self vs boss",
+      "kind": "social",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "authority", "friction" ]
+    },
+    {
+      "id": "slow.life.work_ambition.team_loyal",
+      "label": "Loyal to work team",
+      "kind": "social",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "crew", "cover" ]
+    },
+    {
+      "id": "slow.life.work_ambition.office_politics_hate",
+      "label": "Hates office politics",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "drama", "avoid" ]
+    },
+    {
+      "id": "slow.life.work_ambition.politics_player",
+      "label": "Plays politics well",
+      "kind": "attitude",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "advance", "smooth" ]
+    },
+    {
+      "id": "slow.life.work_ambition.mentor_others",
+      "label": "Mentors at work",
+      "kind": "social",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "teach", "pride" ]
+    },
+    {
+      "id": "slow.life.work_ambition.imposter",
+      "label": "Imposter feelings",
+      "kind": "attitude",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "doubt", "anxiety" ]
+    },
+    {
+      "id": "slow.life.work_ambition.confidence_earned",
+      "label": "Confidence from results",
+      "kind": "attitude",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "proof", "pride" ]
+    },
+    {
+      "id": "slow.life.work_ambition.quit_fantasy",
+      "label": "Quit fantasy frequent",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "daydream", "stuck" ]
+    },
+    {
+      "id": "slow.life.work_ambition.loyalty_long",
+      "label": "Long employer loyalty",
+      "kind": "attitude",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "years", "stable" ]
+    },
+    {
+      "id": "slow.life.work_ambition.job_hopper",
+      "label": "Job hopper for gain",
+      "kind": "attitude",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "raise", "move" ]
+    },
+    {
+      "id": "slow.life.work_ambition.retirement_clock",
+      "label": "Counts to retirement",
+      "kind": "habit",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "pension", "years-left" ]
+    },
+    {
+      "id": "slow.life.work_ambition.early_retire_aim",
+      "label": "Early retire / FIRE lean",
+      "kind": "path",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "save", "exit" ]
+    },
+    {
+      "id": "slow.life.work_ambition.second_career",
+      "label": "Second career brewing",
+      "kind": "path",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "pivot", "later" ]
+    },
+    {
+      "id": "slow.life.work_ambition.identity_is_job",
+      "label": "Job is identity",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "who-i-am", "introduce" ]
+    },
+    {
+      "id": "slow.life.work_ambition.job_is_not_self",
+      "label": "Job is not self",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "boundary", "life" ]
+    },
+    {
+      "id": "slow.life.work_ambition.sunday_scaries",
+      "label": "Sunday scaries strong",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "anxiety", "week" ]
+    },
+    {
+      "id": "slow.life.work_ambition.loves_monday",
+      "label": "Actually likes the work week",
+      "kind": "attitude",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "energy", "purpose" ]
+    },
+    {
+      "id": "slow.life.work_ambition.paycheck_to_paycheck_fear",
+      "label": "Paycheck-to-paycheck fear",
+      "kind": "attitude",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "money", "stress" ]
+    },
+    {
+      "id": "slow.life.work_ambition.provider_identity",
+      "label": "Provider identity",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "family", "duty", "pride" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "has a job or not; no career story identity",
+    "atOrAbove50": "attach 2-3; work talk has angle (climb, coast, craft, hustle)",
+    "atOrAbove70": "schedule and self-worth lean on work path; burnout and boss hooks unlock",
+    "extreme95": "life orbits work path; partners and hobbies compete with ambition or recovery from it"
+  },
+  "notes": "Wire to MoneyProfile and JobProfile. Ohio weight: shift work, union/trade, provider identity, steady paycheck."
+}

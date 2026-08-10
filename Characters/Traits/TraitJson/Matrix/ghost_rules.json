@@ -1,0 +1,15 @@
+﻿{
+  "graceDaysWeak": 5,
+  "graceDaysClose": 3,
+  "closeLikeThreshold": 65,
+  "ghostPenalty": {
+    "like": -12,
+    "trust": -10,
+    "affection": -8,
+    "hurt": 6,
+    "anger": 4,
+    "tension": 5
+  },
+  "decayPerDayAfterGrace": 0.6,
+  "decayFloor": 30
+}

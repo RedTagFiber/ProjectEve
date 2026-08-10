@@ -1,74 +1,40 @@
-﻿namespace Project_Eve.Characters.Traits.Special
+﻿using System;
+
+namespace ProjectEve.Characters.Traits.Special
 {
     /// <summary>
-    /// SpecialTrait represents a deeper personality trait.
-    /// 
-    /// IMPORTANT:
-    /// - These traits come from JSON or your character factory.
-    /// - They describe WHO the character is at a deeper level.
-    /// - They do NOT change during gameplay (static definition).
-    /// 
-    /// Example special traits:
-    /// - "Empath"
-    /// - "Workaholic"
-    /// - "Deep Thinker"
-    /// - "Social Echo"
-    /// 
-    /// Their *effects* on emotions and relationships can be modified
-    /// by TraitState (Intensity + Control), but the trait itself stays the same.
+    /// Mid-layer identity trait definition (WHO they are).
+    /// Live value is NpcTraits["mid.…"] — this class is catalog + flavor, not a second number bag.
     /// </summary>
     public class SpecialTrait
     {
-        /// <summary>
-        /// The name of the trait.
-        /// Example: "Empath", "JealousMind", "CalmFocus"
-        /// </summary>
-        public string Name { get; set; }
+        /// <summary>Canonical id: mid.loyal, mid.guarded, mid.workaholic</summary>
+        public string Id { get; set; } = "";
 
-        /// <summary>
-        /// Category of the trait.
-        /// Default is "Identity", but you can use:
-        /// - Emotional
-        /// - Social
-        /// - Cognitive
-        /// - Behavioral
-        /// - Trauma
-        /// </summary>
+        /// <summary>Display name: Loyal, Guarded, Workaholic</summary>
+        public string Name { get; set; } = "";
+
+        /// <summary>Identity | Emotional | Social | Cognitive | Behavioral | Trauma</summary>
         public string Category { get; set; } = "Identity";
 
-        /// <summary>
-        /// A short description explaining what the trait means.
-        /// This helps you understand how the trait should behave.
-        /// </summary>
         public string Description { get; set; } = "";
 
-        // ============================================================
-        // OPTIONAL EMOTIONAL / RELATIONSHIP MODIFIERS
-        // ============================================================
-        // These bonuses are applied when the character has this trait.
-        // They give small boosts to emotional or relationship stats.
-        //
-        // Example:
-        // - An "Empath" might get +5 ComfortBonus
-        // - A "Romantic" might get +10 AttractionBonus
-        // - A "Loyal" person might get +8 TrustBonus
-        //
-        // These are static modifiers — they do NOT change during gameplay.
-        // TraitState (Intensity + Control) will later modify how strong
-        // these bonuses actually feel.
-        // ============================================================
+        /// <summary>Suggested prior intensity 0–100 when rolled onto an NPC.</summary>
+        public int DefaultIntensity { get; set; } = 55;
 
+        /// <summary>
+        /// Soft relationship / comfort modifiers when intensity is high.
+        /// Applied as: bonus * (midValue / 100).
+        /// </summary>
         public int ComfortBonus { get; set; } = 0;
         public int TrustBonus { get; set; } = 0;
         public int AffectionBonus { get; set; } = 0;
         public int AttractionBonus { get; set; } = 0;
 
-        /// <summary>
-        /// Constructor for creating a SpecialTrait.
-        /// Lets you set all values at once.
-        /// </summary>
+        public SpecialTrait() { }
+
         public SpecialTrait(
-            string name,
+            string idOrName,
             string category = "Identity",
             string description = "",
             int comfortBonus = 0,
@@ -76,13 +42,50 @@
             int affectionBonus = 0,
             int attractionBonus = 0)
         {
-            Name = name;
+            // Accept "Loyal" or "mid.loyal"
+            if (idOrName.StartsWith("mid.", StringComparison.OrdinalIgnoreCase))
+            {
+                Id = idOrName.ToLowerInvariant();
+                Name = Humanize(Id);
+            }
+            else
+            {
+                Name = idOrName;
+                Id = "mid." + Sanitize(idOrName);
+            }
+
             Category = category;
             Description = description;
             ComfortBonus = comfortBonus;
             TrustBonus = trustBonus;
             AffectionBonus = affectionBonus;
             AttractionBonus = attractionBonus;
+        }
+
+        /// <summary>Scaled bonus at current Mid intensity (0–100).</summary>
+        public int ScaledBonus(int baseBonus, float midValue0to100)
+            => (int)Math.Round(baseBonus * (Math.Clamp(midValue0to100, 0f, 100f) / 100f));
+
+        private static string Sanitize(string name)
+        {
+            var s = name.Trim().ToLowerInvariant().Replace(' ', '_');
+            foreach (var ch in s.ToCharArray())
+            {
+                if (!(char.IsLetterOrDigit(ch) || ch == '_'))
+                    s = s.Replace(ch.ToString(), "");
+            }
+            return s;
+        }
+
+        private static string Humanize(string id)
+        {
+            // mid.people_pleasing → People Pleasing
+            var raw = id.StartsWith("mid.", StringComparison.OrdinalIgnoreCase)
+                ? id.Substring(4)
+                : id;
+            raw = raw.Replace('_', ' ');
+            if (raw.Length == 0) return id;
+            return char.ToUpperInvariant(raw[0]) + raw.Substring(1);
         }
     }
 }

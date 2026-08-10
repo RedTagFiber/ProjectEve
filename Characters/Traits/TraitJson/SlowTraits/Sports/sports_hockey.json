@@ -1,0 +1,448 @@
+{
+  "id": "slow.sports.hockey",
+  "layer": "slow",
+  "domain": "sports",
+  "label": "Hockey",
+  "version": 1,
+  "description": "NHL interest—teams, rivalries, watch habits. Ohio gravity is Columbus Blue Jackets; Detroit and Pittsburgh still common on local TVs.",
+  "priorIntensity": 4,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [
+    "game",
+    "team",
+    "Stanley",
+    "rink",
+    "fight",
+    "goal",
+    "period",
+    "power play",
+    "hat trick",
+    "playoffs",
+    "goalie",
+    "line"
+  ],
+  "rivalBias": true,
+  "catalog": "Sports/Hockey",
+  "subTraits": [
+    {
+      "id": "slow.sports.hockey.casual",
+      "label": "Casual fan",
+      "kind": "intensity",
+      "defaultRange": [ 30, 70 ],
+      "tags": [ "highlights" ]
+    },
+    {
+      "id": "slow.sports.hockey.diehard",
+      "label": "Diehard",
+      "kind": "intensity",
+      "defaultRange": [ 70, 95 ],
+      "tags": [ "every-night" ]
+    },
+    {
+      "id": "slow.sports.hockey.bandwagon",
+      "label": "Playoff bandwagon",
+      "kind": "intensity",
+      "defaultRange": [ 20, 70 ],
+      "tags": [ "spring" ]
+    },
+    {
+      "id": "slow.sports.hockey.analytics",
+      "label": "Analytics / advanced stats",
+      "kind": "knowledge",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "corsi", "xG" ]
+    },
+    {
+      "id": "slow.sports.hockey.old_school",
+      "label": "Old-school / toughness",
+      "kind": "knowledge",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "hits", "fights" ]
+    },
+    {
+      "id": "slow.sports.hockey.history_buff",
+      "label": "History / Original Six nerd",
+      "kind": "knowledge",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "legacy" ]
+    },
+    {
+      "id": "slow.sports.hockey.fantasy",
+      "label": "Fantasy hockey",
+      "kind": "habit",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "roster" ]
+    },
+    {
+      "id": "slow.sports.hockey.tv_package",
+      "label": "ESPN+/package grinder",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "out-of-market" ]
+    },
+    {
+      "id": "slow.sports.hockey.arena",
+      "label": "Goes to arena",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "nationwide", "tickets" ]
+    },
+    {
+      "id": "slow.sports.hockey.playoffs_only",
+      "label": "Playoffs-only watcher",
+      "kind": "habit",
+      "defaultRange": [ 25, 85 ],
+      "tags": [ "spring" ]
+    },
+    {
+      "id": "slow.sports.hockey.played",
+      "label": "Played growing up / beer league",
+      "kind": "practice",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "skates", "local" ]
+    },
+    {
+      "id": "slow.sports.hockey.goalie_bias",
+      "label": "Goalie-watcher bias",
+      "kind": "taste",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "saves" ]
+    },
+    {
+      "id": "slow.sports.hockey.skill_bias",
+      "label": "Skill / speed bias",
+      "kind": "taste",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "highlights" ]
+    },
+    {
+      "id": "slow.sports.hockey.physical_bias",
+      "label": "Physical / edge bias",
+      "kind": "taste",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "hits" ]
+    },
+
+    {
+      "id": "slow.sports.hockey.team_blue_jackets",
+      "label": "Columbus Blue Jackets",
+      "kind": "team",
+      "defaultRange": [ 45, 95 ],
+      "tags": [ "ohio", "metro", "primary" ]
+    },
+    {
+      "id": "slow.sports.hockey.team_red_wings",
+      "label": "Detroit Red Wings",
+      "kind": "team",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "atlantic", "ohio-tv", "history" ]
+    },
+    {
+      "id": "slow.sports.hockey.team_penguins",
+      "label": "Pittsburgh Penguins",
+      "kind": "team",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "metro", "ohio-adj" ]
+    },
+    {
+      "id": "slow.sports.hockey.team_capitals",
+      "label": "Washington Capitals",
+      "kind": "team",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "metro" ]
+    },
+    {
+      "id": "slow.sports.hockey.team_rangers",
+      "label": "New York Rangers",
+      "kind": "team",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "metro" ]
+    },
+    {
+      "id": "slow.sports.hockey.team_islanders",
+      "label": "New York Islanders",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "metro" ]
+    },
+    {
+      "id": "slow.sports.hockey.team_devils",
+      "label": "New Jersey Devils",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "metro" ]
+    },
+    {
+      "id": "slow.sports.hockey.team_flyers",
+      "label": "Philadelphia Flyers",
+      "kind": "team",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "metro" ]
+    },
+    {
+      "id": "slow.sports.hockey.team_hurricanes",
+      "label": "Carolina Hurricanes",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "metro" ]
+    },
+    {
+      "id": "slow.sports.hockey.team_penguins_era",
+      "label": "Crosby/Malkin era memory",
+      "kind": "era",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "2000s-10s" ]
+    },
+
+    {
+      "id": "slow.sports.hockey.team_bruins",
+      "label": "Boston Bruins",
+      "kind": "team",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "atlantic" ]
+    },
+    {
+      "id": "slow.sports.hockey.team_maple_leafs",
+      "label": "Toronto Maple Leafs",
+      "kind": "team",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "atlantic", "national" ]
+    },
+    {
+      "id": "slow.sports.hockey.team_canadiens",
+      "label": "Montreal Canadiens",
+      "kind": "team",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "atlantic", "history" ]
+    },
+    {
+      "id": "slow.sports.hockey.team_senators",
+      "label": "Ottawa Senators",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "atlantic" ]
+    },
+    {
+      "id": "slow.sports.hockey.team_sabres",
+      "label": "Buffalo Sabres",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "atlantic" ]
+    },
+    {
+      "id": "slow.sports.hockey.team_lightning",
+      "label": "Tampa Bay Lightning",
+      "kind": "team",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "atlantic" ]
+    },
+    {
+      "id": "slow.sports.hockey.team_panthers",
+      "label": "Florida Panthers",
+      "kind": "team",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "atlantic" ]
+    },
+
+    {
+      "id": "slow.sports.hockey.team_avalanche",
+      "label": "Colorado Avalanche",
+      "kind": "team",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "central" ]
+    },
+    {
+      "id": "slow.sports.hockey.team_stars",
+      "label": "Dallas Stars",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "central" ]
+    },
+    {
+      "id": "slow.sports.hockey.team_wild",
+      "label": "Minnesota Wild",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "central" ]
+    },
+    {
+      "id": "slow.sports.hockey.team_predators",
+      "label": "Nashville Predators",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "central" ]
+    },
+    {
+      "id": "slow.sports.hockey.team_blues",
+      "label": "St. Louis Blues",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "central" ]
+    },
+    {
+      "id": "slow.sports.hockey.team_jets",
+      "label": "Winnipeg Jets",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "central" ]
+    },
+    {
+      "id": "slow.sports.hockey.team_blackhawks",
+      "label": "Chicago Blackhawks",
+      "kind": "team",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "central", "midwest" ]
+    },
+    {
+      "id": "slow.sports.hockey.team_utah",
+      "label": "Utah Hockey Club",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "central", "new" ]
+    },
+
+    {
+      "id": "slow.sports.hockey.team_oilers",
+      "label": "Edmonton Oilers",
+      "kind": "team",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "pacific", "mcdavid" ]
+    },
+    {
+      "id": "slow.sports.hockey.team_flames",
+      "label": "Calgary Flames",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "pacific" ]
+    },
+    {
+      "id": "slow.sports.hockey.team_canucks",
+      "label": "Vancouver Canucks",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "pacific" ]
+    },
+    {
+      "id": "slow.sports.hockey.team_kraken",
+      "label": "Seattle Kraken",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "pacific" ]
+    },
+    {
+      "id": "slow.sports.hockey.team_sharks",
+      "label": "San Jose Sharks",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "pacific" ]
+    },
+    {
+      "id": "slow.sports.hockey.team_kings",
+      "label": "Los Angeles Kings",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "pacific" ]
+    },
+    {
+      "id": "slow.sports.hockey.team_ducks",
+      "label": "Anaheim Ducks",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "pacific" ]
+    },
+    {
+      "id": "slow.sports.hockey.team_golden_knights",
+      "label": "Vegas Golden Knights",
+      "kind": "team",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "pacific" ]
+    },
+
+    {
+      "id": "slow.sports.hockey.rival_cbj_pens",
+      "label": "CBJ ↔ Penguins heat",
+      "kind": "rival",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "metro" ]
+    },
+    {
+      "id": "slow.sports.hockey.rival_cbj_caps",
+      "label": "CBJ ↔ Capitals heat",
+      "kind": "rival",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "metro" ]
+    },
+    {
+      "id": "slow.sports.hockey.rival_wings_memory",
+      "label": "Red Wings regional rivalry memory",
+      "kind": "rival",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "ohio-michigan" ]
+    },
+    {
+      "id": "slow.sports.hockey.rival_leafs_hate",
+      "label": "Leafs national noise hate",
+      "kind": "rival",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "media" ]
+    },
+    {
+      "id": "slow.sports.hockey.original_six_bias",
+      "label": "Original Six bias",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "history" ]
+    },
+    {
+      "id": "slow.sports.hockey.expansion_ok",
+      "label": "Likes new / expansion clubs",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "vegas", "seattle" ]
+    },
+    {
+      "id": "slow.sports.hockey.fight_era_nostalgia",
+      "label": "Fight-era nostalgia",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "old-nhl" ]
+    },
+    {
+      "id": "slow.sports.hockey.anti_fight",
+      "label": "Anti fighting / skill first",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "modern" ]
+    },
+    {
+      "id": "slow.sports.hockey.ohio_cbj_pride",
+      "label": "Ohio CBJ pride (underdog)",
+      "kind": "local",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "columbus" ]
+    },
+    {
+      "id": "slow.sports.hockey.town_watched",
+      "label": "On TownWatchedTeams feed",
+      "kind": "system",
+      "defaultRange": [ 40, 95 ],
+      "tags": [ "local", "packet" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "knows Stanley Cup; no team identity",
+    "atOrAbove50": "attach primary team + 1-2 habits/rivals",
+    "atOrAbove70": "arena or package habit; division weeks matter",
+    "extreme95": "season structures nights; losses can move Fast mood"
+  },
+  "notes": "Ohio seed: Blue Jackets primary. Wings/Pens secondary common. Full NHL list for transplants. Keep rarer than football in population quotas."
+}

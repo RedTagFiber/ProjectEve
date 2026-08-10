@@ -1,0 +1,34 @@
+{
+    "catalog":  "streaming_habits",
+    "version":  1,
+    "entries":  [
+                    {
+                        "id":  "stream.netflix",
+                        "label":  "Netflix"
+                    },
+                    {
+                        "id":  "stream.hulu",
+                        "label":  "Hulu"
+                    },
+                    {
+                        "id":  "stream.disney",
+                        "label":  "Disney+"
+                    },
+                    {
+                        "id":  "stream.prime",
+                        "label":  "Prime Video"
+                    },
+                    {
+                        "id":  "stream.max",
+                        "label":  "Max"
+                    },
+                    {
+                        "id":  "stream.youtube",
+                        "label":  "YouTube"
+                    },
+                    {
+                        "id":  "stream.live_cable",
+                        "label":  "Live / cable"
+                    }
+                ]
+}

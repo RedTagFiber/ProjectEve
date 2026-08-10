@@ -1,0 +1,474 @@
+{
+  "id": "slow.music.hiphop",
+  "layer": "slow",
+  "domain": "music",
+  "label": "Hip-Hop / Rap",
+  "version": 1,
+  "description": "Interest in hip-hop and rap—eras, regions, lyricism, and production. Real artists for car, gym, and talk.",
+  "priorIntensity": 5,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [ "rap", "hip-hop", "bars", "beat", "verse", "mixtape", "cypher", "producer", "old school" ],
+  "rivalBias": true,
+  "catalog": "Music/HipHop",
+  "subTraits": [
+    {
+      "id": "slow.music.hiphop.old_school",
+      "label": "Old school",
+      "kind": "era",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "80s", "foundation" ]
+    },
+    {
+      "id": "slow.music.hiphop.golden_age",
+      "label": "Golden age (late 80s–90s)",
+      "kind": "era",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "lyric", "boom-bap" ]
+    },
+    {
+      "id": "slow.music.hiphop.2000s",
+      "label": "2000s mainstream",
+      "kind": "era",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "radio", "club" ]
+    },
+    {
+      "id": "slow.music.hiphop.blog_era",
+      "label": "Blog era / 2010s",
+      "kind": "era",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "internet", "mixtape" ]
+    },
+    {
+      "id": "slow.music.hiphop.modern",
+      "label": "Modern / streaming era",
+      "kind": "era",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "now", "playlist" ]
+    },
+    {
+      "id": "slow.music.hiphop.east_coast",
+      "label": "East Coast",
+      "kind": "region",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "ny", "lyric" ]
+    },
+    {
+      "id": "slow.music.hiphop.west_coast",
+      "label": "West Coast",
+      "kind": "region",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "funk", "g-funk" ]
+    },
+    {
+      "id": "slow.music.hiphop.south",
+      "label": "Southern hip-hop",
+      "kind": "region",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "atlanta", "houston", "bounce" ]
+    },
+    {
+      "id": "slow.music.hiphop.midwest",
+      "label": "Midwest hip-hop",
+      "kind": "region",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "chicago", "detroit", "ohio" ]
+    },
+    {
+      "id": "slow.music.hiphop.conscious",
+      "label": "Conscious / lyricist",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "message", "bars" ]
+    },
+    {
+      "id": "slow.music.hiphop.gangsta",
+      "label": "Gangsta / street narrative",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "story", "hard" ]
+    },
+    {
+      "id": "slow.music.hiphop.trap",
+      "label": "Trap",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "hats", "808", "atlanta" ]
+    },
+    {
+      "id": "slow.music.hiphop.drill",
+      "label": "Drill",
+      "kind": "style",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "chicago", "uk", "dark" ]
+    },
+    {
+      "id": "slow.music.hiphop.alternative",
+      "label": "Alternative / experimental",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "odd", "art" ]
+    },
+    {
+      "id": "slow.music.hiphop.boom_bap",
+      "label": "Boom-bap production love",
+      "kind": "style",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "drums", "sample" ]
+    },
+    {
+      "id": "slow.music.hiphop.melodic_rap",
+      "label": "Melodic rap / sing-rap",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "melody", "modern" ]
+    },
+    {
+      "id": "slow.music.hiphop.battle_culture",
+      "label": "Battle / punchline culture",
+      "kind": "style",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "bars", "compete" ]
+    },
+
+    {
+      "id": "slow.music.hiphop.rakim",
+      "label": "Rakim",
+      "kind": "artist",
+      "defaultRange": [ 20, 95 ],
+      "tags": [ "god-mc", "golden" ]
+    },
+    {
+      "id": "slow.music.hiphop.public_enemy",
+      "label": "Public Enemy",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "political", "noise" ]
+    },
+    {
+      "id": "slow.music.hiphop.nwa",
+      "label": "N.W.A",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "west", "shock" ]
+    },
+    {
+      "id": "slow.music.hiphop.tupac",
+      "label": "2Pac",
+      "kind": "artist",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "icon", "pain", "west" ]
+    },
+    {
+      "id": "slow.music.hiphop.biggie",
+      "label": "The Notorious B.I.G.",
+      "kind": "artist",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "icon", "east", "story" ]
+    },
+    {
+      "id": "slow.music.hiphop.nas",
+      "label": "Nas",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "illmatic", "lyric" ]
+    },
+    {
+      "id": "slow.music.hiphop.jayz",
+      "label": "JAY-Z",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "business", "longevity" ]
+    },
+    {
+      "id": "slow.music.hiphop.eminem",
+      "label": "Eminem",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "detroit", "technical", "midwest" ]
+    },
+    {
+      "id": "slow.music.hiphop.outkast",
+      "label": "OutKast",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "south", "weird", "classic" ]
+    },
+    {
+      "id": "slow.music.hiphop.andre_3000",
+      "label": "André 3000",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "poet", "unpredictable" ]
+    },
+    {
+      "id": "slow.music.hiphop.kanye",
+      "label": "Kanye West",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "producer", "shift", "debate" ]
+    },
+    {
+      "id": "slow.music.hiphop.kendrick",
+      "label": "Kendrick Lamar",
+      "kind": "artist",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "pulitzer", "lyric", "modern" ]
+    },
+    {
+      "id": "slow.music.hiphop.drake",
+      "label": "Drake",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "melodic", "charts", "debate" ]
+    },
+    {
+      "id": "slow.music.hiphop.jcole",
+      "label": "J. Cole",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "conscious", "story" ]
+    },
+    {
+      "id": "slow.music.hiphop.tyler",
+      "label": "Tyler, the Creator",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "alt", "growth" ]
+    },
+    {
+      "id": "slow.music.hiphop.childish",
+      "label": "Childish Gambino",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "multi", "art" ]
+    },
+    {
+      "id": "slow.music.hiphop.travis",
+      "label": "Travis Scott",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "rage", "festival" ]
+    },
+    {
+      "id": "slow.music.hiphop.future",
+      "label": "Future",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "trap", "voice" ]
+    },
+    {
+      "id": "slow.music.hiphop.migos",
+      "label": "Migos",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "triplet", "atlanta" ]
+    },
+    {
+      "id": "slow.music.hiphop.cardi",
+      "label": "Cardi B",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "personality", "charts" ]
+    },
+    {
+      "id": "slow.music.hiphop.nicki",
+      "label": "Nicki Minaj",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "bars", "persona" ]
+    },
+    {
+      "id": "slow.music.hiphop.megan",
+      "label": "Megan Thee Stallion",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "energy", "south" ]
+    },
+    {
+      "id": "slow.music.hiphop.doja",
+      "label": "Doja Cat",
+      "kind": "artist",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "crossover", "versatile" ]
+    },
+    {
+      "id": "slow.music.hiphop.lil_wayne",
+      "label": "Lil Wayne",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "carter", "punchline" ]
+    },
+    {
+      "id": "slow.music.hiphop.drake_debate",
+      "label": "Drake authenticity debate",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "rival", "talk" ]
+    },
+    {
+      "id": "slow.music.hiphop.mf_doom",
+      "label": "MF DOOM",
+      "kind": "artist",
+      "defaultRange": [ 20, 95 ],
+      "tags": [ "villain", "lyric", "cult" ]
+    },
+    {
+      "id": "slow.music.hiphop.wu_tang",
+      "label": "Wu-Tang Clan",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "clan", "east" ]
+    },
+    {
+      "id": "slow.music.hiphop.a_tribe",
+      "label": "A Tribe Called Quest",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "jazz-rap", "classic" ]
+    },
+    {
+      "id": "slow.music.hiphop.mosquito",
+      "label": "Mos Def / Yasiin Bey",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "conscious", "art" ]
+    },
+    {
+      "id": "slow.music.hiphop.common",
+      "label": "Common",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "chicago", "conscious" ]
+    },
+    {
+      "id": "slow.music.hiphop.kanye_midwest",
+      "label": "Midwest producer lineage pride",
+      "kind": "local",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "chicago", "influence" ]
+    },
+    {
+      "id": "slow.music.hiphop.bone_thugs",
+      "label": "Bone Thugs-N-Harmony",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "cleveland", "ohio", "harmony" ]
+    },
+    {
+      "id": "slow.music.hiphop.machine_gun_kelly",
+      "label": "Machine Gun Kelly",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "cleveland", "ohio", "crossover" ]
+    },
+    {
+      "id": "slow.music.hiphop.kid_cudi",
+      "label": "Kid Cudi",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "cleveland", "ohio", "mood" ]
+    },
+    {
+      "id": "slow.music.hiphop.doomtree_adj",
+      "label": "Midwest indie rap awareness",
+      "kind": "local",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "minneapolis", "underground" ]
+    },
+
+    {
+      "id": "slow.music.hiphop.lyric_first",
+      "label": "Lyrics first",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "bars", "writing" ]
+    },
+    {
+      "id": "slow.music.hiphop.beat_first",
+      "label": "Beat / vibe first",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "production", "feel" ]
+    },
+    {
+      "id": "slow.music.hiphop.purist_90s",
+      "label": "90s purist",
+      "kind": "attitude",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "gate", "real" ]
+    },
+    {
+      "id": "slow.music.hiphop.open_modern",
+      "label": "Open to modern trap/melodic",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "now", "flexible" ]
+    },
+    {
+      "id": "slow.music.hiphop.car_system",
+      "label": "Car system culture",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "bass", "ohio", "night" ]
+    },
+    {
+      "id": "slow.music.hiphop.gym_rap",
+      "label": "Gym rap",
+      "kind": "mood_role",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "lift", "energy" ]
+    },
+    {
+      "id": "slow.music.hiphop.late_night",
+      "label": "Late-night album listens",
+      "kind": "mood_role",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "headphones", "full" ]
+    },
+    {
+      "id": "slow.music.hiphop.cypher_local",
+      "label": "Local cypher / open mic",
+      "kind": "habit",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "scene", "bars" ]
+    },
+    {
+      "id": "slow.music.hiphop.producer_hobby",
+      "label": "Beats hobby",
+      "kind": "practice",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "flstudio", "sample" ]
+    },
+    {
+      "id": "slow.music.hiphop.album_vs_single",
+      "label": "Album listener vs singles",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "project", "depth" ]
+    },
+    {
+      "id": "slow.music.hiphop.ohio_pride",
+      "label": "Ohio hip-hop pride",
+      "kind": "local",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "bone", "cudi", "mgk", "cleveland" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "knows Drake/Eminem radio hits; no era identity",
+    "atOrAbove50": "attach 2-4; region + era + a few artists",
+    "atOrAbove70": "lyric vs beat debates; Ohio names unlock in talk",
+    "extreme95": "hip-hop is primary identity; purity fights and album rituals real"
+  },
+  "notes": "Ohio: Bone Thugs, Kid Cudi, MGK. rivalBias for 90s vs trap, Drake debates, East/West nostalgia."
+}

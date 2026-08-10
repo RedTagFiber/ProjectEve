@@ -1,0 +1,381 @@
+{
+  "id": "slow.life.travel",
+  "layer": "slow",
+  "domain": "life",
+  "label": "Travel bug",
+  "version": 1,
+  "description": "Life taste/identity: leaving town—road trips, flights, hotels, destinations, and how they travel.",
+  "priorIntensity": 5,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [ "trip", "road", "vacation", "flight", "hotel", "map", "passport", "weekend getaway", "airbnb" ],
+  "rivalBias": true,
+  "catalog": "Life",
+  "subTraits": [
+    {
+      "id": "slow.life.travel.road_trip",
+      "label": "Road trip loyal",
+      "kind": "mode",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "car", "ohio", "playlist" ]
+    },
+    {
+      "id": "slow.life.travel.flyer",
+      "label": "Flies when needed",
+      "kind": "mode",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "airport", "miles" ]
+    },
+    {
+      "id": "slow.life.travel.fear_fly",
+      "label": "Fear of flying",
+      "kind": "attitude",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "anxiety", "drive-instead" ]
+    },
+    {
+      "id": "slow.life.travel.train_bus",
+      "label": "Train / bus open",
+      "kind": "mode",
+      "defaultRange": [ 10, 75 ],
+      "tags": [ "slow", "window" ]
+    },
+    {
+      "id": "slow.life.travel.weekend_getaway",
+      "label": "Weekend getaway habit",
+      "kind": "style",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "short", "reset" ]
+    },
+    {
+      "id": "slow.life.travel.long_trip_planner",
+      "label": "Long-trip planner",
+      "kind": "style",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "weeks", "itinerary" ]
+    },
+    {
+      "id": "slow.life.travel.spontaneous",
+      "label": "Spontaneous trip booker",
+      "kind": "style",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "impulse", "deal" ]
+    },
+    {
+      "id": "slow.life.travel.itinerary_tight",
+      "label": "Tight itinerary",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "plan", "museum" ]
+    },
+    {
+      "id": "slow.life.travel.wander_loose",
+      "label": "Loose wanderer",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "no-plan", "cafe" ]
+    },
+    {
+      "id": "slow.life.travel.hotel_points",
+      "label": "Hotel points / loyalty",
+      "kind": "habit",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "points", "status" ]
+    },
+    {
+      "id": "slow.life.travel.airbnb_vrbo",
+      "label": "Airbnb / VRBO prefer",
+      "kind": "habit",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "kitchen", "space" ]
+    },
+    {
+      "id": "slow.life.travel.camping_travel",
+      "label": "Camp as travel",
+      "kind": "mode",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "tent", "cheap" ]
+    },
+    {
+      "id": "slow.life.travel.beach",
+      "label": "Beach destination",
+      "kind": "dest",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "sand", "warm" ]
+    },
+    {
+      "id": "slow.life.travel.mountains",
+      "label": "Mountains / hills",
+      "kind": "dest",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "view", "cool" ]
+    },
+    {
+      "id": "slow.life.travel.city_break",
+      "label": "City break",
+      "kind": "dest",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "food", "walk", "museum" ]
+    },
+    {
+      "id": "slow.life.travel.national_parks",
+      "label": "National parks",
+      "kind": "dest",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "hike", "photo" ]
+    },
+    {
+      "id": "slow.life.travel.theme_parks",
+      "label": "Theme parks",
+      "kind": "dest",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "disney", "kids", "lines" ]
+    },
+    {
+      "id": "slow.life.travel.family_visit",
+      "label": "Travel = family visit",
+      "kind": "purpose",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "mom", "holiday", "ohio-out" ]
+    },
+    {
+      "id": "slow.life.travel.work_travel",
+      "label": "Work travel regular",
+      "kind": "purpose",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "job", "hotel", "lonely" ]
+    },
+    {
+      "id": "slow.life.travel.sports_travel",
+      "label": "Travel for games",
+      "kind": "purpose",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "osu", "away", "tailgate" ]
+    },
+    {
+      "id": "slow.life.travel.concert_travel",
+      "label": "Travel for concerts",
+      "kind": "purpose",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "show", "city" ]
+    },
+    {
+      "id": "slow.life.travel.food_travel",
+      "label": "Travel for food",
+      "kind": "purpose",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "restaurant", "region" ]
+    },
+    {
+      "id": "slow.life.travel.international",
+      "label": "International itch",
+      "kind": "scope",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "passport", "abroad" ]
+    },
+    {
+      "id": "slow.life.travel.us_only",
+      "label": "US-only comfort",
+      "kind": "scope",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "domestic", "simple" ]
+    },
+    {
+      "id": "slow.life.travel.ohio_regional",
+      "label": "Ohio / nearby regional",
+      "kind": "scope",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "cleveland", "cincy", "columbus", "michigan" ]
+    },
+    {
+      "id": "slow.life.travel.lake_erie",
+      "label": "Lake Erie / north coast",
+      "kind": "local",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "ohio", "summer" ]
+    },
+    {
+      "id": "slow.life.travel.hocking_hills",
+      "label": "Hocking Hills regular",
+      "kind": "local",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "ohio", "cabin", "hike" ]
+    },
+    {
+      "id": "slow.life.travel.florida_escape",
+      "label": "Florida winter escape",
+      "kind": "dest",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "warm", "ohio-classic" ]
+    },
+    {
+      "id": "slow.life.travel.pack_light",
+      "label": "Packs light",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "carry-on", "minimal" ]
+    },
+    {
+      "id": "slow.life.travel.pack_everything",
+      "label": "Packs everything",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "checked", "ready" ]
+    },
+    {
+      "id": "slow.life.travel.early_airport",
+      "label": "Early to airport",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "anxiety", "buffer" ]
+    },
+    {
+      "id": "slow.life.travel.cut_it_close",
+      "label": "Cuts it close",
+      "kind": "habit",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "late", "stress" ]
+    },
+    {
+      "id": "slow.life.travel.budget_travel",
+      "label": "Budget travel pride",
+      "kind": "attitude",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "deal", "motel", "smart" ]
+    },
+    {
+      "id": "slow.life.travel.luxury_treat",
+      "label": "Luxury as rare treat",
+      "kind": "attitude",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "splurge", "once" ]
+    },
+    {
+      "id": "slow.life.travel.luxury_default",
+      "label": "Comfort/luxury default",
+      "kind": "attitude",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "money", "nice" ]
+    },
+    {
+      "id": "slow.life.travel.solo_travel",
+      "label": "Solo travel OK",
+      "kind": "social",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "alone", "brave" ]
+    },
+    {
+      "id": "slow.life.travel.partner_only",
+      "label": "Partner travel preferred",
+      "kind": "social",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "couple", "share" ]
+    },
+    {
+      "id": "slow.life.travel.group_friends",
+      "label": "Friend group trips",
+      "kind": "social",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "crew", "chaos" ]
+    },
+    {
+      "id": "slow.life.travel.kids_travel",
+      "label": "Travel with kids logistics",
+      "kind": "social",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "family", "patience" ]
+    },
+    {
+      "id": "slow.life.travel.photo_heavy",
+      "label": "Photos everything",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "camera", "memory" ]
+    },
+    {
+      "id": "slow.life.travel.live_not_lens",
+      "label": "Live it, few photos",
+      "kind": "habit",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "present", "rare-shots" ]
+    },
+    {
+      "id": "slow.life.travel.food_first_trip",
+      "label": "Food is the itinerary",
+      "kind": "purpose",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "restaurant", "market" ]
+    },
+    {
+      "id": "slow.life.travel.museum_culture",
+      "label": "Museums / culture",
+      "kind": "purpose",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "art", "history" ]
+    },
+    {
+      "id": "slow.life.travel.nightlife_trip",
+      "label": "Nightlife trips",
+      "kind": "purpose",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "bar", "club", "city" ]
+    },
+    {
+      "id": "slow.life.travel.rest_vacation",
+      "label": "Rest vacation (do nothing)",
+      "kind": "style",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "pool", "sleep", "book" ]
+    },
+    {
+      "id": "slow.life.travel.adventure_trip",
+      "label": "Adventure trip",
+      "kind": "style",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "hike", "risk", "active" ]
+    },
+    {
+      "id": "slow.life.travel.passport_current",
+      "label": "Keeps passport current",
+      "kind": "habit",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "ready", "dream" ]
+    },
+    {
+      "id": "slow.life.travel.never_abroad",
+      "label": "Never been abroad",
+      "kind": "history_hook",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "ohio", "curious-or-fine" ]
+    },
+    {
+      "id": "slow.life.travel.dream_list",
+      "label": "Long dream destination list",
+      "kind": "attitude",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "someday", "pinterest" ]
+    },
+    {
+      "id": "slow.life.travel.homebody_tension",
+      "label": "Wants trips but home pulls",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "conflict", "partner" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "takes rare trips; no identity",
+    "atOrAbove50": "attach 2-4; talks destinations and modes naturally",
+    "atOrAbove70": "vacation planning is a hobby; money stress vs trip desire",
+    "extreme95": "restless without trips; homebody partners create ongoing tension"
+  },
+  "notes": "Ohio realism: road trips, Hocking, Lake Erie, Florida, family visits, OSU away games. Pair with MoneyProfile for cost stress."
+}

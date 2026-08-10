@@ -1,0 +1,46 @@
+{
+    "catalog":  "tv_styles",
+    "version":  1,
+    "entries":  [
+                    {
+                        "label":  "Drama",
+                        "parent":  "slow.tv.drama",
+                        "id":  "tvstyle.drama"
+                    },
+                    {
+                        "label":  "Comedy",
+                        "parent":  "slow.tv.comedy",
+                        "id":  "tvstyle.comedy"
+                    },
+                    {
+                        "label":  "Reality",
+                        "parent":  "slow.tv.reality",
+                        "id":  "tvstyle.reality"
+                    },
+                    {
+                        "label":  "True Crime",
+                        "parent":  "slow.tv.true_crime",
+                        "id":  "tvstyle.true_crime"
+                    },
+                    {
+                        "label":  "Sci-Fi / Fantasy",
+                        "parent":  "slow.tv.scifi_fantasy",
+                        "id":  "tvstyle.scifi_fantasy"
+                    },
+                    {
+                        "label":  "Sports Media",
+                        "parent":  "slow.tv.sports_media",
+                        "id":  "tvstyle.sports_media"
+                    },
+                    {
+                        "label":  "Binge",
+                        "parent":  "slow.tv.streaming_binge",
+                        "id":  "tvstyle.streaming_binge"
+                    },
+                    {
+                        "label":  "Netflix and chill",
+                        "parent":  "slow.tv.netflix_and_chill",
+                        "id":  "tvstyle.netflix_chill"
+                    }
+                ]
+}

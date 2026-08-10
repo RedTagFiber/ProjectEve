@@ -1,0 +1,100 @@
+{
+    "catalog":  "nba_teams",
+    "version":  1,
+    "regionBias":  [
+                       "Ohio"
+                   ],
+    "entries":  [
+                    {
+                        "label":  "Cleveland Cavaliers",
+                        "factsSeed":  [
+                                          "The Land",
+                                          "Wine and gold"
+                                      ],
+                        "id":  "nba.cavaliers",
+                        "rivals":  [
+                                       "nba.warriors",
+                                       "nba.celtics"
+                                   ],
+                        "localWeight":  10
+                    },
+                    {
+                        "label":  "Los Angeles Lakers",
+                        "factsSeed":  [
+                                          "Purple and gold"
+                                      ],
+                        "id":  "nba.lakers",
+                        "rivals":  [
+                                       "nba.celtics",
+                                       "nba.clippers"
+                                   ],
+                        "localWeight":  3
+                    },
+                    {
+                        "label":  "Boston Celtics",
+                        "factsSeed":  [
+                                          "Green"
+                                      ],
+                        "id":  "nba.celtics",
+                        "rivals":  [
+                                       "nba.lakers"
+                                   ],
+                        "localWeight":  3
+                    },
+                    {
+                        "label":  "Chicago Bulls",
+                        "factsSeed":  [
+                                          "Jordan era residual"
+                                      ],
+                        "id":  "nba.bulls",
+                        "rivals":  [
+                                       "nba.pistons"
+                                   ],
+                        "localWeight":  4
+                    },
+                    {
+                        "label":  "Detroit Pistons",
+                        "factsSeed":  [
+                                          "Bad Boys history"
+                                      ],
+                        "id":  "nba.pistons",
+                        "rivals":  [
+                                       "nba.bulls"
+                                   ],
+                        "localWeight":  3
+                    },
+                    {
+                        "label":  "Golden State Warriors",
+                        "factsSeed":  [
+                                          "Dynasty era"
+                                      ],
+                        "id":  "nba.warriors",
+                        "rivals":  [
+                                       "nba.cavaliers"
+                                   ],
+                        "localWeight":  2
+                    },
+                    {
+                        "label":  "Miami Heat",
+                        "factsSeed":  [
+                                          "Black and red"
+                                      ],
+                        "id":  "nba.heat",
+                        "rivals":  [
+
+                                   ],
+                        "localWeight":  2
+                    },
+                    {
+                        "label":  "Milwaukee Bucks",
+                        "factsSeed":  [
+                                          "Giannis era"
+                                      ],
+                        "id":  "nba.bucks",
+                        "rivals":  [
+
+                                   ],
+                        "localWeight":  3
+                    }
+                ]
+}

@@ -1,0 +1,385 @@
+{
+  "id": "slow.sports.wwe",
+  "layer": "slow",
+  "domain": "sports",
+  "label": "WWE / Pro Wrestling",
+  "version": 1,
+  "description": "Pro wrestling interest—WWE primary, other promos optional. Kayfabe, eras, weekly shows, and live events.",
+  "priorIntensity": 3,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [
+    "wrestling",
+    "WWE",
+    "Raw",
+    "SmackDown",
+    "PPV",
+    "title",
+    "heel",
+    "face",
+    "promo",
+    "match",
+    "WrestleMania",
+    "AEW"
+  ],
+  "rivalBias": true,
+  "catalog": "Sports/WWE",
+  "subTraits": [
+    {
+      "id": "slow.sports.wwe.casual",
+      "label": "Casual / Mania only",
+      "kind": "intensity",
+      "defaultRange": [ 30, 70 ],
+      "tags": [ "big-events" ]
+    },
+    {
+      "id": "slow.sports.wwe.weekly",
+      "label": "Weekly show watcher",
+      "kind": "intensity",
+      "defaultRange": [ 50, 90 ],
+      "tags": [ "raw", "smackdown" ]
+    },
+    {
+      "id": "slow.sports.wwe.diehard",
+      "label": "Diehard",
+      "kind": "intensity",
+      "defaultRange": [ 70, 95 ],
+      "tags": [ "full-card", "lore" ]
+    },
+    {
+      "id": "slow.sports.wwe.marks_out",
+      "label": "Still marks out",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "joy" ]
+    },
+    {
+      "id": "slow.sports.wwe.smart_mark",
+      "label": "Smart mark / dirtsheet reader",
+      "kind": "knowledge",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "spoilers", "booking" ]
+    },
+    {
+      "id": "slow.sports.wwe.kayfabe_respect",
+      "label": "Respects kayfabe presentation",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "in-world" ]
+    },
+    {
+      "id": "slow.sports.wwe.history_buff",
+      "label": "Territory / history buff",
+      "kind": "knowledge",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "80s", "attitude" ]
+    },
+    {
+      "id": "slow.sports.wwe.live_events",
+      "label": "Goes to live shows",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "arena", "ohio" ]
+    },
+    {
+      "id": "slow.sports.wwe.ppv_buyer",
+      "label": "Peacock / PLE buyer",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "money" ]
+    },
+    {
+      "id": "slow.sports.wwe.merch",
+      "label": "Merch buyer",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "identity" ]
+    },
+
+    {
+      "id": "slow.sports.wwe.promo_wwe",
+      "label": "WWE primary",
+      "kind": "promo",
+      "defaultRange": [ 40, 95 ],
+      "tags": [ "main" ]
+    },
+    {
+      "id": "slow.sports.wwe.promo_aew",
+      "label": "AEW interest",
+      "kind": "promo",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "alt" ]
+    },
+    {
+      "id": "slow.sports.wwe.promo_njpw",
+      "label": "NJPW / strong style",
+      "kind": "promo",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "japan" ]
+    },
+    {
+      "id": "slow.sports.wwe.promo_impact",
+      "label": "Impact / TNA memory",
+      "kind": "promo",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "alt" ]
+    },
+    {
+      "id": "slow.sports.wwe.promo_indie",
+      "label": "Indies / local",
+      "kind": "promo",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "ohio" ]
+    },
+
+    {
+      "id": "slow.sports.wwe.era_attitude",
+      "label": "Attitude Era love",
+      "kind": "era",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "austin", "rock" ]
+    },
+    {
+      "id": "slow.sports.wwe.era_ruthless",
+      "label": "Ruthless Aggression",
+      "kind": "era",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "cena-edge" ]
+    },
+    {
+      "id": "slow.sports.wwe.era_pg",
+      "label": "PG / modern weekly",
+      "kind": "era",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "now" ]
+    },
+    {
+      "id": "slow.sports.wwe.era_golden",
+      "label": "80s / Hogan era",
+      "kind": "era",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "classic" ]
+    },
+    {
+      "id": "slow.sports.wwe.era_monday_night_wars",
+      "label": "Monday Night Wars nerd",
+      "kind": "era",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "wcw" ]
+    },
+
+    {
+      "id": "slow.sports.wwe.stone_cold",
+      "label": "Stone Cold Steve Austin",
+      "kind": "star",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "attitude" ]
+    },
+    {
+      "id": "slow.sports.wwe.the_rock",
+      "label": "The Rock",
+      "kind": "star",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "attitude", "crossover" ]
+    },
+    {
+      "id": "slow.sports.wwe.hogan",
+      "label": "Hulk Hogan",
+      "kind": "star",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "80s", "debate" ]
+    },
+    {
+      "id": "slow.sports.wwe.undertaker",
+      "label": "The Undertaker",
+      "kind": "star",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "legend" ]
+    },
+    {
+      "id": "slow.sports.wwe.hbk",
+      "label": "Shawn Michaels",
+      "kind": "star",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "workrate" ]
+    },
+    {
+      "id": "slow.sports.wwe.hart",
+      "label": "Bret Hart",
+      "kind": "star",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "excellence" ]
+    },
+    {
+      "id": "slow.sports.wwe.cena",
+      "label": "John Cena",
+      "kind": "star",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "pg-era", "debate" ]
+    },
+    {
+      "id": "slow.sports.wwe.orion_adj",
+      "label": "Orton / Edge generation",
+      "kind": "star",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "mid" ]
+    },
+    {
+      "id": "slow.sports.wwe.cm_punk",
+      "label": "CM Punk",
+      "kind": "star",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "pipebomb", "return" ]
+    },
+    {
+      "id": "slow.sports.wwe.daniel_bryan",
+      "label": "Daniel Bryan / Bryan Danielson",
+      "kind": "star",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "yes", "workrate" ]
+    },
+    {
+      "id": "slow.sports.wwe.roman",
+      "label": "Roman Reigns",
+      "kind": "star",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "tribal", "modern" ]
+    },
+    {
+      "id": "slow.sports.wwe.codys",
+      "label": "Cody Rhodes",
+      "kind": "star",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "story", "modern" ]
+    },
+    {
+      "id": "slow.sports.wwe.rheas",
+      "label": "Rhea Ripley",
+      "kind": "star",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "womens" ]
+    },
+    {
+      "id": "slow.sports.wwe.bianca",
+      "label": "Bianca Belair",
+      "kind": "star",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "womens" ]
+    },
+    {
+      "id": "slow.sports.wwe.charlotte",
+      "label": "Charlotte Flair",
+      "kind": "star",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "womens" ]
+    },
+    {
+      "id": "slow.sports.wwe.becky",
+      "label": "Becky Lynch",
+      "kind": "star",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "womens" ]
+    },
+    {
+      "id": "slow.sports.wwe.gunther",
+      "label": "Gunther",
+      "kind": "star",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "chop", "modern" ]
+    },
+    {
+      "id": "slow.sports.wwe.sami",
+      "label": "Sami Zayn",
+      "kind": "star",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "story" ]
+    },
+    {
+      "id": "slow.sports.wwe.kevin_owens",
+      "label": "Kevin Owens",
+      "kind": "star",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "everyman" ]
+    },
+    {
+      "id": "slow.sports.wwe.drew",
+      "label": "Drew McIntyre",
+      "kind": "star",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "modern" ]
+    },
+    {
+      "id": "slow.sports.wwe.seth",
+      "label": "Seth Rollins",
+      "kind": "star",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "visionary" ]
+    },
+
+    {
+      "id": "slow.sports.wwe.aew_elite",
+      "label": "Kenny / Elite AEW lane",
+      "kind": "star",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "aew" ]
+    },
+    {
+      "id": "slow.sports.wwe.moxley",
+      "label": "Jon Moxley",
+      "kind": "star",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "aew", "ohio-adj" ]
+    },
+    {
+      "id": "slow.sports.wwe.mjf",
+      "label": "MJF",
+      "kind": "star",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "aew", "heel" ]
+    },
+
+    {
+      "id": "slow.sports.wwe.wwe_vs_aew",
+      "label": "WWE vs AEW tribal",
+      "kind": "rival",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "online" ]
+    },
+    {
+      "id": "slow.sports.wwe.anti_corny",
+      "label": "Hates corny PG booking",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "critique" ]
+    },
+    {
+      "id": "slow.sports.wwe.just_fun",
+      "label": "It's just fun TV",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "light" ]
+    },
+    {
+      "id": "slow.sports.wwe.ohio_shows",
+      "label": "Ohio arena circuit regular",
+      "kind": "local",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "columbus", "cincy", "cleveland" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "knows Rock/Cena names; no weekly habit",
+    "atOrAbove50": "attach era + 2-3 stars + watch habit",
+    "atOrAbove70": "weekly or PLE structure; live shows possible",
+    "extreme95": "lore and booking debates are identity"
+  },
+  "notes": "Not pure 'sport' but lives in sports talk lanes. AEW optional so not every fan is WWE-only. Keep population moderate."
+}

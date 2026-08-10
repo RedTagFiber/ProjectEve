@@ -1,0 +1,70 @@
+{
+    "id":  "mid.loyal",
+    "layer":  "mid",
+    "label":  "Loyal",
+    "version":  1,
+    "cluster":  "attachment",
+    "description":  "Stays with people and causes under pressure; hard to abandon once committed.",
+    "priorIntensity":  6,
+    "moveSpeed":  "slow",
+    "bands":  {
+                  "off":  "0-29",
+                  "low":  "30-49",
+                  "mid":  "50-69",
+                  "high":  "70-84",
+                  "break":  "85-94",
+                  "extreme":  "95-100"
+              },
+    "styles":  [
+                   {
+                       "id":  "mid.loyal.quiet_loyalty",
+                       "label":  "Quiet loyalty"
+                   },
+                   {
+                       "id":  "mid.loyal.public_stand",
+                       "label":  "Public stand"
+                   },
+                   {
+                       "id":  "mid.loyal.self-cost_loyalty",
+                       "label":  "Self-cost loyalty"
+                   }
+               ],
+    "links":  {
+                  "boostedBy":  [
+                                    "trust",
+                                    "affection",
+                                    "guilt"
+                                ],
+                  "drainedBy":  [
+                                    "resentment",
+                                    "hurt"
+                                ],
+                  "opposes":  [
+                                  "mid.opportunistic",
+                                  "mid.avoidant"
+                              ]
+              },
+    "tagTriggers":  [
+                        {
+                            "tag":  "mid.loyal.test",
+                            "meaning":  "Situation tests this character trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.loyal.confirm",
+                            "meaning":  "Behavior confirms this trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.loyal.violate",
+                            "meaning":  "Acts against this trait under pressure",
+                            "deltaHint":  -2
+                        }
+                    ],
+    "relationScoped":  true,
+    "historyHooks":  {
+                         "patternFile":  "loyal_patterns.json",
+                         "fundingBudget":  2
+                     },
+    "notes":  "High loyal + high resentment can stay and still punish."
+}

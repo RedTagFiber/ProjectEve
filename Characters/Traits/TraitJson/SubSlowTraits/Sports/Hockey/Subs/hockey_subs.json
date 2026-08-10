@@ -1,0 +1,39 @@
+{
+    "parent":  "slow.sports.hockey",
+    "version":  1,
+    "fillThreshold":  50,
+    "subs":  [
+                 {
+                     "id":  "sub.hockey.team_primary",
+                     "label":  "Primary team",
+                     "required":  true,
+                     "type":  "catalog_ref",
+                     "catalogs":  [
+                                      "nhl_teams"
+                                  ],
+                     "pickCount":  1
+                 },
+                 {
+                     "label":  "Knowledge",
+                     "values":  [
+                                    "casual",
+                                    "fan",
+                                    "diehard"
+                                ],
+                     "default":  "casual",
+                     "id":  "sub.hockey.knowledge",
+                     "type":  "enum"
+                 },
+                 {
+                     "label":  "Rival heat",
+                     "values":  [
+                                    "low",
+                                    "mid",
+                                    "high"
+                                ],
+                     "default":  "mid",
+                     "id":  "sub.hockey.rival_heat",
+                     "type":  "enum"
+                 }
+             ]
+}

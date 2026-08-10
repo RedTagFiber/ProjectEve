@@ -1,0 +1,69 @@
+{
+    "id":  "mid.self_critical",
+    "layer":  "mid",
+    "label":  "Self-critical",
+    "version":  1,
+    "cluster":  "self",
+    "description":  "Inner prosecutor; faults self first and longest.",
+    "priorIntensity":  5,
+    "moveSpeed":  "slow",
+    "bands":  {
+                  "off":  "0-29",
+                  "low":  "30-49",
+                  "mid":  "50-69",
+                  "high":  "70-84",
+                  "break":  "85-94",
+                  "extreme":  "95-100"
+              },
+    "styles":  [
+                   {
+                       "id":  "mid.self_critical.self_blame",
+                       "label":  "Self blame"
+                   },
+                   {
+                       "id":  "mid.self_critical.replay_fault",
+                       "label":  "Replay fault"
+                   },
+                   {
+                       "id":  "mid.self_critical.hard_mirror",
+                       "label":  "Hard mirror"
+                   }
+               ],
+    "links":  {
+                  "boostedBy":  [
+                                    "shame",
+                                    "guilt",
+                                    "anxiety"
+                                ],
+                  "drainedBy":  [
+                                    "pride",
+                                    "hope"
+                                ],
+                  "opposes":  [
+                                  "mid.self_assured"
+                              ]
+              },
+    "tagTriggers":  [
+                        {
+                            "tag":  "mid.self_critical.test",
+                            "meaning":  "Situation tests this character trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.self_critical.confirm",
+                            "meaning":  "Behavior confirms this trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.self_critical.violate",
+                            "meaning":  "Acts against this trait under pressure",
+                            "deltaHint":  -2
+                        }
+                    ],
+    "relationScoped":  true,
+    "historyHooks":  {
+                         "patternFile":  "self_critical_patterns.json",
+                         "fundingBudget":  2
+                     },
+    "notes":  "Not the same as Fast shame spike; baseline voice."
+}

@@ -1,0 +1,376 @@
+{
+  "id": "slow.music.pop",
+  "layer": "slow",
+  "domain": "music",
+  "label": "Pop",
+  "version": 1,
+  "description": "Interest in pop—charts, hooks, eras, and guilty-pleasure vs proud-fan identity.",
+  "priorIntensity": 5,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [ "pop", "chart", "hook", "radio", "hit", "chorus", "karaoke", "top 40" ],
+  "rivalBias": true,
+  "catalog": "Music/Pop",
+  "subTraits": [
+    {
+      "id": "slow.music.pop.80s",
+      "label": "80s pop",
+      "kind": "era",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "synth", "mtv" ]
+    },
+    {
+      "id": "slow.music.pop.90s",
+      "label": "90s pop",
+      "kind": "era",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "boy-band", "diva" ]
+    },
+    {
+      "id": "slow.music.pop.2000s",
+      "label": "2000s pop",
+      "kind": "era",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "teen", "radio" ]
+    },
+    {
+      "id": "slow.music.pop.2010s",
+      "label": "2010s pop",
+      "kind": "era",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "edm-edge", "streaming" ]
+    },
+    {
+      "id": "slow.music.pop.modern",
+      "label": "Modern chart pop",
+      "kind": "era",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "now", "tiktok" ]
+    },
+    {
+      "id": "slow.music.pop.dance_pop",
+      "label": "Dance pop",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "club", "hook" ]
+    },
+    {
+      "id": "slow.music.pop.synth_pop",
+      "label": "Synth-pop",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "80s", "electronic" ]
+    },
+    {
+      "id": "slow.music.pop.teen_pop",
+      "label": "Teen / idol pop",
+      "kind": "style",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "young", "machine" ]
+    },
+    {
+      "id": "slow.music.pop.art_pop",
+      "label": "Art pop",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "weird", "prestige" ]
+    },
+    {
+      "id": "slow.music.pop.indie_pop",
+      "label": "Indie pop",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "soft", "cool" ]
+    },
+    {
+      "id": "slow.music.pop.power_ballad",
+      "label": "Power ballads",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "big", "cry" ]
+    },
+
+    {
+      "id": "slow.music.pop.michael_jackson",
+      "label": "Michael Jackson",
+      "kind": "artist",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "king", "dance" ]
+    },
+    {
+      "id": "slow.music.pop.madonna",
+      "label": "Madonna",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "reinvent", "icon" ]
+    },
+    {
+      "id": "slow.music.pop.prince_pop",
+      "label": "Prince (pop side)",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "genius", "funk" ]
+    },
+    {
+      "id": "slow.music.pop.whitney",
+      "label": "Whitney Houston",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "voice", "ballad" ]
+    },
+    {
+      "id": "slow.music.pop.mariah",
+      "label": "Mariah Carey",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "range", "christmas" ]
+    },
+    {
+      "id": "slow.music.pop.britney",
+      "label": "Britney Spears",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "2000s", "icon" ]
+    },
+    {
+      "id": "slow.music.pop.christina",
+      "label": "Christina Aguilera",
+      "kind": "artist",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "voice", "2000s" ]
+    },
+    {
+      "id": "slow.music.pop.nsync_backstreet",
+      "label": "NSYNC / Backstreet Boys",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "boy-band", "90s" ]
+    },
+    {
+      "id": "slow.music.pop.spice",
+      "label": "Spice Girls",
+      "kind": "artist",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "90s", "girl-power" ]
+    },
+    {
+      "id": "slow.music.pop.beyonce",
+      "label": "Beyoncé",
+      "kind": "artist",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "performance", "icon" ]
+    },
+    {
+      "id": "slow.music.pop.rihanna",
+      "label": "Rihanna",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "hits", "style" ]
+    },
+    {
+      "id": "slow.music.pop.lady_gaga",
+      "label": "Lady Gaga",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "art", "voice", "live" ]
+    },
+    {
+      "id": "slow.music.pop.taylor",
+      "label": "Taylor Swift",
+      "kind": "artist",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "writing", "eras", "stadium" ]
+    },
+    {
+      "id": "slow.music.pop.adele",
+      "label": "Adele",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "voice", "ballad" ]
+    },
+    {
+      "id": "slow.music.pop.bruno",
+      "label": "Bruno Mars",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "fun", "retro" ]
+    },
+    {
+      "id": "slow.music.pop.justin_timberlake",
+      "label": "Justin Timberlake",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "crossover", "dance" ]
+    },
+    {
+      "id": "slow.music.pop.katy",
+      "label": "Katy Perry",
+      "kind": "artist",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "hooks", "2010s" ]
+    },
+    {
+      "id": "slow.music.pop.pink",
+      "label": "P!nk",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "voice", "live" ]
+    },
+    {
+      "id": "slow.music.pop.kelly_clarkson",
+      "label": "Kelly Clarkson",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "voice", "idol" ]
+    },
+    {
+      "id": "slow.music.pop.ariana",
+      "label": "Ariana Grande",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "range", "modern" ]
+    },
+    {
+      "id": "slow.music.pop.dua",
+      "label": "Dua Lipa",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "dance", "cool" ]
+    },
+    {
+      "id": "slow.music.pop.billie",
+      "label": "Billie Eilish",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "alt-pop", "whisper" ]
+    },
+    {
+      "id": "slow.music.pop.olivia",
+      "label": "Olivia Rodrigo",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "writing", "gen-z" ]
+    },
+    {
+      "id": "slow.music.pop.harry",
+      "label": "Harry Styles",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "solo", "rock-edge" ]
+    },
+    {
+      "id": "slow.music.pop.the_weeknd",
+      "label": "The Weeknd",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "dark-pop", "rnb-edge" ]
+    },
+    {
+      "id": "slow.music.pop.ed_sheeran",
+      "label": "Ed Sheeran",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "writing", "acoustic-pop" ]
+    },
+    {
+      "id": "slow.music.pop.justin_bieber",
+      "label": "Justin Bieber",
+      "kind": "artist",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "growth", "charts" ]
+    },
+    {
+      "id": "slow.music.pop.sabrina",
+      "label": "Sabrina Carpenter",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "modern", "wit" ]
+    },
+    {
+      "id": "slow.music.pop.chappell",
+      "label": "Chappell Roan",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "theatrical", "now" ]
+    },
+
+    {
+      "id": "slow.music.pop.radio_daily",
+      "label": "Top 40 / pop radio daily",
+      "kind": "habit",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "car", "work" ]
+    },
+    {
+      "id": "slow.music.pop.karaoke",
+      "label": "Karaoke pop specialist",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "social", "hooks" ]
+    },
+    {
+      "id": "slow.music.pop.concert_stadium",
+      "label": "Stadium / arena pop shows",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "eras", "night" ]
+    },
+    {
+      "id": "slow.music.pop.proud_fan",
+      "label": "Proud pop fan",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "no-shame" ]
+    },
+    {
+      "id": "slow.music.pop.guilty",
+      "label": "Guilty pleasure framing",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "hide", "private" ]
+    },
+    {
+      "id": "slow.music.pop.dance_clean",
+      "label": "Clean dance-around-house pop",
+      "kind": "mood_role",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "home", "energy" ]
+    },
+    {
+      "id": "slow.music.pop.heartbreak_pop",
+      "label": "Heartbreak pop playlist",
+      "kind": "mood_role",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "cry", "alone" ]
+    },
+    {
+      "id": "slow.music.pop.workout_pop",
+      "label": "Workout pop",
+      "kind": "mood_role",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "gym", "up" ]
+    },
+    {
+      "id": "slow.music.pop.anti_pop_snob_fight",
+      "label": "Fights pop-is-dumb snobbery",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "rival", "defend" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "knows the big radio hits; no era loyalty",
+    "atOrAbove50": "attach 2-4; era + artists + proud-vs-guilty",
+    "atOrAbove70": "karaoke and concert habits; will defend hooks",
+    "extreme95": "pop is primary joy; chart cycles and Eras-level fandom possible"
+  },
+  "notes": "Guilty vs proud is a big personality split. Overlaps R&B and dance—don't max all three without intent."
+}

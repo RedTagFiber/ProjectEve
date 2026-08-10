@@ -1,0 +1,23 @@
+{
+    "catalog":  "tv_shows_reality",
+    "style":  "Reality",
+    "version":  1,
+    "entries":  [
+                    {
+                        "id":  "the_bachelor",
+                        "label":  "The Bachelor"
+                    },
+                    {
+                        "id":  "survivor",
+                        "label":  "Survivor"
+                    },
+                    {
+                        "id":  "below_deck",
+                        "label":  "Below Deck"
+                    },
+                    {
+                        "id":  "the_amazing_race",
+                        "label":  "The Amazing Race"
+                    }
+                ]
+}

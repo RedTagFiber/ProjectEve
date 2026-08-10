@@ -1,0 +1,9 @@
+﻿{
+  "bands": [
+    { "min": 0,  "max": 20,  "name": "hostile", "warmScale": 0.4,  "insultScale": 1.4,  "trustLossScale": 1.4 },
+    { "min": 21, "max": 40,  "name": "cold",    "warmScale": 0.7,  "insultScale": 1.2,  "trustLossScale": 1.2 },
+    { "min": 41, "max": 60,  "name": "neutral", "warmScale": 1.0,  "insultScale": 1.0,  "trustLossScale": 1.0 },
+    { "min": 61, "max": 80,  "name": "friend",  "warmScale": 1.15, "insultScale": 1.2,  "trustLossScale": 0.85 },
+    { "min": 81, "max": 100, "name": "close",   "warmScale": 1.25, "insultScale": 1.3,  "trustLossScale": 0.7 }
+  ]
+}

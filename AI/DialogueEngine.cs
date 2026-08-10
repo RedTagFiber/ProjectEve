@@ -1,6 +1,8 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace ProjectEve.AI.Brain
 {
@@ -11,7 +13,8 @@ namespace ProjectEve.AI.Brain
             Timeout = TimeSpan.FromMinutes(5)
         };
 
-        private const string DefaultModel = "dolphin-eve";
+        // Locked: Ollama model built from Modelfile
+        private const string Model = "eve-dialogue";
 
         public static string GenerateReply(string prompt)
         {
@@ -20,44 +23,59 @@ namespace ProjectEve.AI.Brain
 
         public static async Task<string> GenerateReplyAsync(string prompt)
         {
-            bool inPerson = prompt.Contains("[IN PERSON", StringComparison.OrdinalIgnoreCase);
+            bool inPerson = (prompt ?? "").Contains("[IN PERSON", StringComparison.OrdinalIgnoreCase);
 
             string systemPrompt = inPerson
                 ? """
-You speak as the character defined in the prompt.
-In-person rules:
-- natural conversation
-- optional one short *action*
-- then spoken line
-- no essays
-- do not write the player's lines
-- never mention AI, models, or systems
+You are the named character in the user prompt. Not an AI. Not an assistant.
+
+IN PERSON / VOICE output — EXACTLY two lines, nothing else:
+
+ACTION: one short physical beat only (eyes, hands, posture, distance). Never "speaks" or "says".
+SAY: only the words spoken out loud
+
+Rules:
+- First line starts with ACTION:
+- Second line starts with SAY:
+- No quotes around SAY
+- No markdown except optional *italics* inside ACTION
+- No TAGS, no trait lists, no inner monologue
+- No help-desk voice (never "how can I help", "how can I assist")
+- Match trait numbers in the user prompt (anger shorter/colder, desire hotter, guard more closed)
+- Adults may be direct when the scene is adult
+
+Example:
+ACTION: *tilts head, soft smile*
+SAY: Hey... didn't think you'd say that first.
 """
                 : """
-You speak as the character defined in the prompt.
-Texting rules:
-- short natural phone texts
-- no narration
-- no stage directions
-- no essays
-- personal and direct
-- never mention AI, models, or systems
+You are the named character in the user prompt. Not an AI.
+
+TEXTING RULES
+- Output ONLY what they would type/send.
+- No ACTION, no SAY labels, no narration, no *stage directions*, no TAGS.
+- Short natural phone texts. Fragments OK.
+- Never "how can I help you".
+- Match trait numbers: high desire can be explicit; high anger short/cold; high guard clipped.
+
+Length: usually 1–3 short texts, not an essay.
 """;
 
             var requestBody = new
             {
-                model = DefaultModel,
+                model = Model,
                 stream = false,
                 messages = new[]
                 {
                     new { role = "system", content = systemPrompt },
-                    new { role = "user", content = prompt }
+                    new { role = "user", content = prompt ?? "" }
                 },
                 options = new
                 {
-                    temperature = 0.85,
-                    top_p = 0.90,
-                    repeat_penalty = 1.12
+                    temperature = inPerson ? 0.65 : 0.8,
+                    top_p = 0.9,
+                    num_predict = inPerson ? 80 : 120,
+                    repeat_penalty = 1.1
                 }
             };
 
@@ -76,13 +94,102 @@ Texting rules:
                     .GetProperty("content")
                     .GetString();
 
-                return string.IsNullOrWhiteSpace(reply) ? "..." : reply.Trim();
+                return inPerson ? CleanInPerson(reply) : CleanTextReply(reply);
             }
             catch (Exception ex)
             {
                 Console.WriteLine("DialogueEngine error: " + ex.Message);
-                return "...";
+                return inPerson
+                    ? "ACTION: looks at you\nSAY: ..."
+                    : $"(dialogue error: {ex.Message})";
             }
+        }
+
+        /// <summary>Keep ACTION/SAY structure for In Person.</summary>
+        private static string CleanInPerson(string? reply)
+        {
+            if (string.IsNullOrWhiteSpace(reply))
+                return "ACTION: looks at you\nSAY: ...";
+
+            var text = reply.Replace("\r", "").Trim();
+
+            // Drop TAGS leakage
+            var tagIdx = text.IndexOf("TAGS:", StringComparison.OrdinalIgnoreCase);
+            if (tagIdx >= 0)
+                text = text[..tagIdx].Trim();
+
+            // If already has both labels, normalize lines
+            var actIdx = text.IndexOf("ACTION:", StringComparison.OrdinalIgnoreCase);
+            var sayIdx = text.IndexOf("SAY:", StringComparison.OrdinalIgnoreCase);
+
+            if (actIdx >= 0 && sayIdx >= 0)
+            {
+                string action;
+                string say;
+                if (actIdx < sayIdx)
+                {
+                    action = text[(actIdx + 7)..sayIdx].Trim();
+                    say = text[(sayIdx + 4)..].Trim();
+                }
+                else
+                {
+                    say = text[(sayIdx + 4)..actIdx].Trim();
+                    action = text[(actIdx + 7)..].Trim();
+                }
+
+                // strip nested labels
+                var nestedSay = action.IndexOf("SAY:", StringComparison.OrdinalIgnoreCase);
+                if (nestedSay >= 0) action = action[..nestedSay].Trim();
+                var nestedAct = say.IndexOf("ACTION:", StringComparison.OrdinalIgnoreCase);
+                if (nestedAct >= 0) say = say[..nestedAct].Trim();
+
+                action = action.Trim().Trim('"');
+                say = say.Trim().Trim('"');
+
+                if (string.IsNullOrWhiteSpace(say)) say = "...";
+                if (string.IsNullOrWhiteSpace(action)) action = "looks at you";
+
+                return $"ACTION: {action}\nSAY: {say}";
+            }
+
+            // Fallback: whole thing is speech
+            text = text.Trim().Trim('"');
+            if (string.IsNullOrWhiteSpace(text)) text = "...";
+            return $"ACTION: looks at you\nSAY: {text}";
+        }
+
+        /// <summary>Text mode: speech only.</summary>
+        private static string CleanTextReply(string? reply)
+        {
+            if (string.IsNullOrWhiteSpace(reply))
+                return "...";
+
+            var lines = reply.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            var kept = new StringBuilder();
+
+            foreach (var raw in lines)
+            {
+                string line = raw.Trim();
+                if (line.Length == 0) continue;
+
+                if (line.StartsWith("TAGS:", StringComparison.OrdinalIgnoreCase))
+                    continue;
+                if (line.StartsWith("ACTION:", StringComparison.OrdinalIgnoreCase))
+                    continue;
+                if (line.StartsWith("SAY:", StringComparison.OrdinalIgnoreCase))
+                    line = line[4..].Trim();
+
+                if (line.StartsWith("*") && line.EndsWith("*"))
+                    continue;
+                if (line.StartsWith("(") && line.EndsWith(")") && line.Length < 80)
+                    continue;
+
+                if (kept.Length > 0) kept.Append(' ');
+                kept.Append(line);
+            }
+
+            string result = kept.ToString().Trim().Trim('"');
+            return string.IsNullOrWhiteSpace(result) ? "..." : result;
         }
     }
 }

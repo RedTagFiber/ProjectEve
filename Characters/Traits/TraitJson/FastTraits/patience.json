@@ -1,0 +1,164 @@
+﻿{
+  "id": "patience",
+  "layer": "fast",
+  "label": "Patience",
+  "version": 1,
+  "description": "Tolerance before snap. Buffer against Anger, Anxiety, and Frustration. Low Patience means short fuse.",
+  "priorIntensity": {
+    "min": 2,
+    "max": 7,
+    "mean": 4
+  },
+  "spawn": {
+    "currentFromIntensity": true,
+    "noise": 3
+  },
+  "bands": {
+    "off": [ 0, 29 ],
+    "low": [ 30, 49 ],
+    "mid": [ 50, 69 ],
+    "high": [ 70, 84 ],
+    "break": [ 85, 94 ],
+    "extreme": [ 95, 100 ]
+  },
+  "styles": {
+    "warm_wait": {
+      "means": "Truly can wait; kind while waiting.",
+      "speechHints": [ "no_rush", "gentle" ],
+      "bodyHints": [ "relaxed" ],
+      "riskTags": []
+    },
+    "tight_smile": {
+      "means": "Holding it; politeness with strain.",
+      "speechHints": [ "fine", "measured" ],
+      "bodyHints": [ "tight_smile", "tense" ],
+      "riskTags": [ "about_to_snap" ]
+    },
+    "count_to_ten": {
+      "means": "Active self-control; pauses before reply.",
+      "speechHints": [ "slow", "careful" ],
+      "bodyHints": [ "breath", "pause" ],
+      "riskTags": []
+    },
+    "yield": {
+      "means": "Gives ground to keep peace; may resent later.",
+      "speechHints": [ "okay_whatever", "sure" ],
+      "bodyHints": [ "step_back" ],
+      "riskTags": [ "resentment_seed" ]
+    },
+    "snap_edge": {
+      "means": "Patience almost gone; voice and body show the edge.",
+      "speechHints": [ "clipped", "warning" ],
+      "bodyHints": [ "jaw", "point" ],
+      "riskTags": [ "pre_anger" ]
+    }
+  },
+  "defaultStyleWeights": {
+    "warm_wait": 0.8,
+    "tight_smile": 1.0,
+    "count_to_ten": 0.85,
+    "yield": 0.7,
+    "snap_edge": 0.6
+  },
+  "flavors": {
+    "with_people": "Tolerance for personality and pace.",
+    "with_tasks": "Delays, lines, tech failure.",
+    "with_pain": "Endurance under stress.",
+    "with_learning": "Teaching / repeating.",
+    "with_love": "Extra buffer for someone they care about."
+  },
+  "pull": {
+    "belowHomeDamageMult": 0.65,
+    "recoverMult": 1.2,
+    "aboveHomeSettleMult": 1.1
+  },
+  "funding": {
+    "required": true,
+    "budgetPerIntensityPoint": 1.0
+  },
+  "links": [
+    {
+      "trait": "anger",
+      "op": "-",
+      "weight": 0.5,
+      "when": "rise"
+    },
+    {
+      "trait": "anxiety",
+      "op": "-",
+      "weight": 0.25,
+      "when": "rise"
+    },
+    {
+      "trait": "playfulness",
+      "op": "+",
+      "weight": 0.15,
+      "when": "rise"
+    },
+    {
+      "trait": "tension",
+      "op": "-",
+      "weight": 0.2,
+      "when": "rise"
+    }
+  ],
+  "opposePairs": [
+    {
+      "with": "anger",
+      "policyHints": [ "buffer_then_break", "snap_edge" ]
+    }
+  ],
+  "tagTriggers": [
+    {
+      "tag": "conflict.delay",
+      "direction": "-",
+      "baseWeight": 0.7
+    },
+    {
+      "tag": "conflict.inefficiency",
+      "direction": "-",
+      "baseWeight": 0.65
+    },
+    {
+      "tag": "conflict.repeat_ask",
+      "direction": "-",
+      "baseWeight": 0.6
+    },
+    {
+      "tag": "conflict.insult",
+      "direction": "-",
+      "baseWeight": 0.55
+    },
+    {
+      "tag": "bond.soft_return",
+      "direction": "+",
+      "baseWeight": 0.4
+    },
+    {
+      "tag": "bond.reassurance",
+      "direction": "+",
+      "baseWeight": 0.35
+    },
+    {
+      "tag": "play.warm_tease",
+      "direction": "+",
+      "baseWeight": 0.3
+    }
+  ],
+  "relationScoped": true,
+  "historyHooks": {
+    "catalog": "Characters/Traits/TraitJson/TraitHistory/patience_patterns.json",
+    "filters": [ "style", "flavor", "sourceBucket" ],
+    "tellFraming": {
+      "prideHigh": "HeroSelf",
+      "prideLow": "VictimSelf",
+      "shameHigh": "VictimSelf",
+      "telephone": true
+    }
+  },
+  "debug": {
+    "showInDash": true,
+    "color": "#8fbc8f",
+    "sortPriority": 13
+  }
+}

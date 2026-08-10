@@ -1,0 +1,36 @@
+{
+    "id":  "slow.sports.golf",
+    "layer":  "slow",
+    "domain":  "sports",
+    "label":  "Golf",
+    "version":  1,
+    "description":  "Golf interest — watch or play.",
+    "priorIntensity":  3,
+    "moveSpeed":  "very_slow",
+    "fillThreshold":  50,
+    "bands":  {
+                  "off":  "0-29",
+                  "low":  "30-49",
+                  "mid":  "50-69",
+                  "high":  "70-84",
+                  "break":  "85-94",
+                  "extreme":  "95-100"
+              },
+    "talkTriggers":  [
+                         "round",
+                         "course",
+                         "masters",
+                         "pga"
+                     ],
+    "rivalBias":  false,
+    "catalog":  "Sports/Golf",
+    "subTraits":  [
+                      "sub.golf.watch_or_play",
+                      "sub.golf.knowledge"
+                  ],
+    "rules":  {
+                  "belowThreshold":  "vague knowledge only; no deep catalog attach",
+                  "atOrAbove50":  "attach 1-2 catalog picks + fill subTraits"
+              },
+    "notes":  "Slow wakes when topic is in the room. Almost fixed intensity."
+}

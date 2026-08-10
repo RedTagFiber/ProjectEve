@@ -1,0 +1,180 @@
+﻿{
+  "id": "jealousy",
+  "layer": "fast",
+  "label": "Jealousy",
+  "version": 1,
+  "description": "Claim threat — rival attention, being replaced, losing exclusive place. Can be romantic, social, or status.",
+  "priorIntensity": {
+    "min": 2,
+    "max": 6,
+    "mean": 3
+  },
+  "spawn": {
+    "currentFromIntensity": true,
+    "noise": 3
+  },
+  "bands": {
+    "off": [ 0, 29 ],
+    "low": [ 30, 49 ],
+    "mid": [ 50, 69 ],
+    "high": [ 70, 84 ],
+    "break": [ 85, 94 ],
+    "extreme": [ 95, 100 ]
+  },
+  "styles": {
+    "watch": {
+      "means": "Tracks the rival and the target; quiet scan.",
+      "speechHints": [ "probing", "too_casual" ],
+      "bodyHints": [ "watch", "tense_smile" ],
+      "riskTags": [ "surveil_light" ]
+    },
+    "probe": {
+      "means": "Questions: who was that, why did you laugh, where were you.",
+      "speechHints": [ "questions", "check" ],
+      "bodyHints": [ "lean_in", "searching" ],
+      "riskTags": [ "interrogation" ]
+    },
+    "compete": {
+      "means": "Tries to win the attention back; perform, outshine.",
+      "speechHints": [ "brag_light", "pull_focus" ],
+      "bodyHints": [ "display", "interrupt" ],
+      "riskTags": [ "one_up" ]
+    },
+    "withdraw": {
+      "means": "Pulls away to punish or protect; cold space.",
+      "speechHints": [ "short", "distant" ],
+      "bodyHints": [ "step_back", "exit" ],
+      "riskTags": [ "punish_silence" ]
+    },
+    "accuse": {
+      "means": "Names the threat; blames; confronts.",
+      "speechHints": [ "accuse", "sharp" ],
+      "bodyHints": [ "point", "glare" ],
+      "riskTags": [ "fight_start" ]
+    }
+  },
+  "defaultStyleWeights": {
+    "watch": 1.0,
+    "probe": 0.9,
+    "compete": 0.7,
+    "withdraw": 0.85,
+    "accuse": 0.55
+  },
+  "flavors": {
+    "romantic": "Partner / crush rival.",
+    "friend": "Best-friend attention stolen.",
+    "status": "Someone else gets the win / praise.",
+    "time": "They have time for everyone but me.",
+    "ex": "Ghost of an ex in the room."
+  },
+  "pull": {
+    "belowHomeDamageMult": 0.6,
+    "recoverMult": 1.25,
+    "aboveHomeSettleMult": 1.2
+  },
+  "funding": {
+    "required": true,
+    "budgetPerIntensityPoint": 1.0
+  },
+  "links": [
+    {
+      "trait": "anger",
+      "op": "+",
+      "weight": 0.4,
+      "when": "rise"
+    },
+    {
+      "trait": "hurt",
+      "op": "+",
+      "weight": 0.45,
+      "when": "rise"
+    },
+    {
+      "trait": "fear",
+      "op": "+",
+      "weight": 0.35,
+      "when": "rise"
+    },
+    {
+      "trait": "trust",
+      "op": "-",
+      "weight": 0.5,
+      "when": "rise"
+    },
+    {
+      "trait": "guard",
+      "op": "+",
+      "weight": 0.35,
+      "when": "rise"
+    },
+    {
+      "trait": "tension",
+      "op": "+",
+      "weight": 0.4,
+      "when": "rise"
+    }
+  ],
+  "opposePairs": [
+    {
+      "with": "trust",
+      "policyHints": [ "need_proof", "cannot_relax" ]
+    },
+    {
+      "with": "pride",
+      "policyHints": [ "hide_jealousy", "compete_harder" ]
+    }
+  ],
+  "tagTriggers": [
+    {
+      "tag": "rival.attention",
+      "direction": "+",
+      "baseWeight": 0.9
+    },
+    {
+      "tag": "bond.flirt_other",
+      "direction": "+",
+      "baseWeight": 0.95
+    },
+    {
+      "tag": "bond.compare",
+      "direction": "+",
+      "baseWeight": 0.8
+    },
+    {
+      "tag": "bond.secrecy",
+      "direction": "+",
+      "baseWeight": 0.75
+    },
+    {
+      "tag": "bond.reassurance",
+      "direction": "-",
+      "baseWeight": 0.65
+    },
+    {
+      "tag": "bond.choose_me",
+      "direction": "-",
+      "baseWeight": 0.8
+    },
+    {
+      "tag": "rival.gone",
+      "direction": "-",
+      "baseWeight": 0.5
+    }
+  ],
+  "relationScoped": true,
+  "historyHooks": {
+    "catalog": "Characters/Traits/TraitJson/TraitHistory/jealousy_patterns.json",
+    "filters": [ "style", "flavor", "sourceBucket" ],
+    "tellFraming": {
+      "prideHigh": "HeroSelf",
+      "prideLow": "VictimSelf",
+      "shameHigh": "VictimSelf",
+      "telephone": true
+    }
+  },
+  "debug": {
+    "showInDash": true,
+    "color": "#8b5a2b",
+    "sortPriority": 18
+  }
+}

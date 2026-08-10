@@ -1,0 +1,560 @@
+{
+  "id": "slow.sports.nascar",
+  "layer": "slow",
+  "domain": "sports",
+  "label": "NASCAR",
+  "version": 1,
+  "description": "NASCAR / stock car interest—Cup Series primary, drivers, tracks, and Sunday habits. Strong Midwest/South flavor; Ohio has real local roots.",
+  "priorIntensity": 3,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [
+    "race",
+    "NASCAR",
+    "Daytona",
+    "driver",
+    "lap",
+    "pit",
+    "caution",
+    "Cup",
+    "qualifying",
+    "restrictor",
+    "superspeedway",
+    "short track"
+  ],
+  "rivalBias": true,
+  "catalog": "Sports/NASCAR",
+  "subTraits": [
+    {
+      "id": "slow.sports.nascar.casual",
+      "label": "Casual / big-race fan",
+      "kind": "intensity",
+      "defaultRange": [ 30, 70 ],
+      "tags": [ "daytona", "highlights" ]
+    },
+    {
+      "id": "slow.sports.nascar.diehard",
+      "label": "Diehard",
+      "kind": "intensity",
+      "defaultRange": [ 70, 95 ],
+      "tags": [ "every-week" ]
+    },
+    {
+      "id": "slow.sports.nascar.stats_nerd",
+      "label": "Stats / fantasy nerd",
+      "kind": "knowledge",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "points", "stage" ]
+    },
+    {
+      "id": "slow.sports.nascar.history_buff",
+      "label": "History buff",
+      "kind": "knowledge",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "petty", "earnhardt" ]
+    },
+    {
+      "id": "slow.sports.nascar.technical",
+      "label": "Cars / setup interest",
+      "kind": "knowledge",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "aero", "setup" ]
+    },
+    {
+      "id": "slow.sports.nascar.tv_every_week",
+      "label": "Watches most Cup races",
+      "kind": "habit",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "sunday" ]
+    },
+    {
+      "id": "slow.sports.nascar.big_races_only",
+      "label": "Daytona / big events only",
+      "kind": "habit",
+      "defaultRange": [ 30, 85 ],
+      "tags": [ "selective" ]
+    },
+    {
+      "id": "slow.sports.nascar.trackside",
+      "label": "Goes to races",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "tickets", "travel" ]
+    },
+    {
+      "id": "slow.sports.nascar.fantasy",
+      "label": "Fantasy NASCAR",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "picks" ]
+    },
+    {
+      "id": "slow.sports.nascar.garage_hobby",
+      "label": "Works on cars / hobby mechanic",
+      "kind": "practice",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "shop" ]
+    },
+
+    {
+      "id": "slow.sports.nascar.series_cup",
+      "label": "Cup Series primary",
+      "kind": "series",
+      "defaultRange": [ 40, 95 ],
+      "tags": [ "main" ]
+    },
+    {
+      "id": "slow.sports.nascar.series_xfinity",
+      "label": "Xfinity interest",
+      "kind": "series",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "support" ]
+    },
+    {
+      "id": "slow.sports.nascar.series_trucks",
+      "label": "Craftsman Truck Series",
+      "kind": "series",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "support" ]
+    },
+    {
+      "id": "slow.sports.nascar.series_local_short",
+      "label": "Local short track / dirt",
+      "kind": "series",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "ohio", "friday-night" ]
+    },
+
+    {
+      "id": "slow.sports.nascar.track_daytona",
+      "label": "Daytona",
+      "kind": "track",
+      "defaultRange": [ 40, 95 ],
+      "tags": [ "superspeedway", "500" ]
+    },
+    {
+      "id": "slow.sports.nascar.track_talladega",
+      "label": "Talladega",
+      "kind": "track",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "superspeedway" ]
+    },
+    {
+      "id": "slow.sports.nascar.track_indianapolis",
+      "label": "Indianapolis / Brickyard",
+      "kind": "track",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "ohio-adj", "historic" ]
+    },
+    {
+      "id": "slow.sports.nascar.track_michigan",
+      "label": "Michigan",
+      "kind": "track",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "ohio-adj", "midwest" ]
+    },
+    {
+      "id": "slow.sports.nascar.track_bristol",
+      "label": "Bristol",
+      "kind": "track",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "short", "noise" ]
+    },
+    {
+      "id": "slow.sports.nascar.track_martinsville",
+      "label": "Martinsville",
+      "kind": "track",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "short", "paper-clip" ]
+    },
+    {
+      "id": "slow.sports.nascar.track_darlington",
+      "label": "Darlington",
+      "kind": "track",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "lady-in-black" ]
+    },
+    {
+      "id": "slow.sports.nascar.track_charlotte",
+      "label": "Charlotte / Coca-Cola 600",
+      "kind": "track",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "long" ]
+    },
+    {
+      "id": "slow.sports.nascar.track_atlanta",
+      "label": "Atlanta",
+      "kind": "track",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "speed" ]
+    },
+    {
+      "id": "slow.sports.nascar.track_vegas",
+      "label": "Las Vegas",
+      "kind": "track",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "1.5" ]
+    },
+    {
+      "id": "slow.sports.nascar.track_kansas",
+      "label": "Kansas",
+      "kind": "track",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "1.5" ]
+    },
+    {
+      "id": "slow.sports.nascar.track_texas",
+      "label": "Texas",
+      "kind": "track",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "1.5" ]
+    },
+    {
+      "id": "slow.sports.nascar.track_homestead",
+      "label": "Homestead",
+      "kind": "track",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "championship-adj" ]
+    },
+    {
+      "id": "slow.sports.nascar.track_phoenix",
+      "label": "Phoenix",
+      "kind": "track",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "championship" ]
+    },
+    {
+      "id": "slow.sports.nascar.track_road_america",
+      "label": "Road America / road courses",
+      "kind": "track",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "road" ]
+    },
+    {
+      "id": "slow.sports.nascar.track_watkins_glen",
+      "label": "Watkins Glen",
+      "kind": "track",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "road", "northeast" ]
+    },
+    {
+      "id": "slow.sports.nascar.track_cota",
+      "label": "COTA",
+      "kind": "track",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "road" ]
+    },
+    {
+      "id": "slow.sports.nascar.track_richmond",
+      "label": "Richmond",
+      "kind": "track",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "short" ]
+    },
+    {
+      "id": "slow.sports.nascar.track_nhms",
+      "label": "New Hampshire",
+      "kind": "track",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "mile" ]
+    },
+    {
+      "id": "slow.sports.nascar.track_dover",
+      "label": "Dover",
+      "kind": "track",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "concrete" ]
+    },
+    {
+      "id": "slow.sports.nascar.track_pocono",
+      "label": "Pocono",
+      "kind": "track",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "triangle" ]
+    },
+    {
+      "id": "slow.sports.nascar.track_sonoma",
+      "label": "Sonoma",
+      "kind": "track",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "road" ]
+    },
+
+    {
+      "id": "slow.sports.nascar.earnhardt_sr",
+      "label": "Dale Earnhardt Sr.",
+      "kind": "legend",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "intimidation", "legacy" ]
+    },
+    {
+      "id": "slow.sports.nascar.petty",
+      "label": "Richard Petty",
+      "kind": "legend",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "king" ]
+    },
+    {
+      "id": "slow.sports.nascar.pearson",
+      "label": "David Pearson",
+      "kind": "legend",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "history" ]
+    },
+    {
+      "id": "slow.sports.nascar.gordon",
+      "label": "Jeff Gordon",
+      "kind": "legend",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "90s-00s" ]
+    },
+    {
+      "id": "slow.sports.nascar.dale_jr",
+      "label": "Dale Earnhardt Jr.",
+      "kind": "legend",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "popular", "broadcast" ]
+    },
+    {
+      "id": "slow.sports.nascar.johnson",
+      "label": "Jimmie Johnson",
+      "kind": "legend",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "seven" ]
+    },
+    {
+      "id": "slow.sports.nascar.stewart",
+      "label": "Tony Stewart",
+      "kind": "legend",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "smoke", "ohio-adj" ]
+    },
+    {
+      "id": "slow.sports.nascar.wallace",
+      "label": "Rusty Wallace",
+      "kind": "legend",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "90s" ]
+    },
+    {
+      "id": "slow.sports.nascar.waltrip",
+      "label": "Darrell Waltrip",
+      "kind": "legend",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "history", "broadcast" ]
+    },
+    {
+      "id": "slow.sports.nascar.yarborough",
+      "label": "Cale Yarborough",
+      "kind": "legend",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "history" ]
+    },
+
+    {
+      "id": "slow.sports.nascar.elliott",
+      "label": "Chase Elliott",
+      "kind": "driver",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "popular" ]
+    },
+    {
+      "id": "slow.sports.nascar.hamlin",
+      "label": "Denny Hamlin",
+      "kind": "driver",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "joe-gibbs" ]
+    },
+    {
+      "id": "slow.sports.nascar.kyle_busch",
+      "label": "Kyle Busch",
+      "kind": "driver",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "rowdy", "debate" ]
+    },
+    {
+      "id": "slow.sports.nascar.keselowski",
+      "label": "Brad Keselowski",
+      "kind": "driver",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "rfk", "ohio-adj" ]
+    },
+    {
+      "id": "slow.sports.nascar.blaney",
+      "label": "Ryan Blaney",
+      "kind": "driver",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "penske", "ohio" ]
+    },
+    {
+      "id": "slow.sports.nascar.logano",
+      "label": "Joey Logano",
+      "kind": "driver",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "penske" ]
+    },
+    {
+      "id": "slow.sports.nascar.larson",
+      "label": "Kyle Larson",
+      "kind": "driver",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "talent", "dirt" ]
+    },
+    {
+      "id": "slow.sports.nascar.bowman",
+      "label": "Alex Bowman",
+      "kind": "driver",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "hendrick" ]
+    },
+    {
+      "id": "slow.sports.nascar.byron",
+      "label": "William Byron",
+      "kind": "driver",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "hendrick" ]
+    },
+    {
+      "id": "slow.sports.nascar.reddick",
+      "label": "Tyler Reddick",
+      "kind": "driver",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "23xi" ]
+    },
+    {
+      "id": "slow.sports.nascar.bell",
+      "label": "Christopher Bell",
+      "kind": "driver",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "joe-gibbs" ]
+    },
+    {
+      "id": "slow.sports.nascar.chastain",
+      "label": "Ross Chastain",
+      "kind": "driver",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "melon", "style" ]
+    },
+    {
+      "id": "slow.sports.nascar.bubba",
+      "label": "Bubba Wallace",
+      "kind": "driver",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "23xi" ]
+    },
+    {
+      "id": "slow.sports.nascar.truex",
+      "label": "Martin Truex Jr.",
+      "kind": "driver",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "veteran" ]
+    },
+    {
+      "id": "slow.sports.nascar.bowman_adj",
+      "label": "Hendrick depth fan",
+      "kind": "habit",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "team" ]
+    },
+    {
+      "id": "slow.sports.nascar.gibbs_fan",
+      "label": "Joe Gibbs Racing fan",
+      "kind": "habit",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "team" ]
+    },
+    {
+      "id": "slow.sports.nascar.penske_fan",
+      "label": "Team Penske fan",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "team" ]
+    },
+    {
+      "id": "slow.sports.nascar.hendrick_fan",
+      "label": "Hendrick Motorsports fan",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "team" ]
+    },
+
+    {
+      "id": "slow.sports.nascar.earnhardt_loyalty",
+      "label": "Earnhardt family loyalty",
+      "kind": "rival",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "3", "legacy" ]
+    },
+    {
+      "id": "slow.sports.nascar.gordon_vs_sr_memory",
+      "label": "Gordon vs Sr. era memory",
+      "kind": "rival",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "90s" ]
+    },
+    {
+      "id": "slow.sports.nascar.stage_racing_debate",
+      "label": "Stage racing / package debates",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "modern" ]
+    },
+    {
+      "id": "slow.sports.nascar.playoff_format_talk",
+      "label": "Playoff format opinions",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "chase" ]
+    },
+    {
+      "id": "slow.sports.nascar.old_school_aero",
+      "label": "Old-school / anti-package",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "purist" ]
+    },
+    {
+      "id": "slow.sports.nascar.ohio_blaney",
+      "label": "Ohio Blaney pride",
+      "kind": "local",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "hartford" ]
+    },
+    {
+      "id": "slow.sports.nascar.ohio_short_tracks",
+      "label": "Ohio short-track culture",
+      "kind": "local",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "friday", "dirt-or-asphalt" ]
+    },
+    {
+      "id": "slow.sports.nascar.mid_ohio_adj",
+      "label": "Mid-Ohio / road course awareness",
+      "kind": "local",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "lexington" ]
+    },
+    {
+      "id": "slow.sports.nascar.town_watched",
+      "label": "Big races on TownWatched / social",
+      "kind": "system",
+      "defaultRange": [ 30, 90 ],
+      "tags": [ "daytona-week" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "knows Daytona 500; no driver identity",
+    "atOrAbove50": "attach 2-4; driver/team + track taste + watch habit",
+    "atOrAbove70": "Cup Sundays matter; track trips or fantasy possible",
+    "extreme95": "season structures summer; short-track nights real"
+  },
+  "notes": "Ohio hooks: Ryan Blaney, short-track culture, Michigan/Indy adjacency, Mid-Ohio. Keep population below football; high NASCAR is strong regional flavor."
+}

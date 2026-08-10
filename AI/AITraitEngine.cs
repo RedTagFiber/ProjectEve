@@ -4,8 +4,9 @@ using System;
 namespace ProjectEve.AI.Brain
 {
     /// <summary>
-    /// Generic thought -> trait nudges for every NPC.
-    /// Trait IDs must match TraitRegistry exactly.
+    /// Thought → small Fast trait nudges.
+    /// Primary chat movement is TraitEngine.UpdateTraitsAfterChat.
+    /// This only reacts to internal monologue wording.
     /// </summary>
     public static class AITraitEngine
     {
@@ -17,227 +18,90 @@ namespace ProjectEve.AI.Brain
             var traits = brain.Owner.Traits;
             string t = thought.ToLowerInvariant();
 
-            // =====================================================
-            // SOCIAL / PERSONALITY
-            // =====================================================
-            if (ContainsAny(t, "alone", "quiet", "solitude", "drained"))
+            // Keep deltas small so we don't double-slam with TraitEngine
+            if (ContainsAny(t, "alone", "ignored", "left out", "nobody"))
             {
-                Adjust(traits, "trait.introversion", +1);
-                Adjust(traits, "trait.extroversion", -1);
+                Adjust(traits, "trait.loneliness", +1);
+                Adjust(traits, "trait.hurt", +1);
             }
 
-            if (ContainsAny(t, "people", "crowd", "talk", "text", "party", "group"))
-            {
-                Adjust(traits, "trait.extroversion", +1);
-                Adjust(traits, "trait.introversion", -1);
-                Adjust(traits, "trait.confidence", +1);
-            }
+            if (ContainsAny(t, "hope", "maybe we can", "still a chance"))
+                Adjust(traits, "trait.hope", +1);
 
-            if (ContainsAny(t, "hope", "bright side", "it'll be fine", "good outcome"))
-            {
-                Adjust(traits, "trait.optimism", +1);
-                Adjust(traits, "trait.pessimism", -1);
-            }
+            if (ContainsAny(t, "won't work", "pointless", "why bother"))
+                Adjust(traits, "trait.hope", -1);
 
-            if (ContainsAny(t, "won't work", "bad idea", "this ends badly", "doubt"))
-            {
-                Adjust(traits, "trait.pessimism", +1);
-                Adjust(traits, "trait.optimism", -1);
-            }
+            if (ContainsAny(t, "anxious", "worry", "what if", "overthinking"))
+                Adjust(traits, "trait.anxiety", +1);
 
-            if (ContainsAny(t, "screw it", "now", "can't wait", "just do it"))
-            {
-                Adjust(traits, "trait.impulsiveness", +2);
-            }
-
-            if (ContainsAny(t, "i got this", "sure", "confident"))
-            {
-                Adjust(traits, "trait.confidence", +1);
-                Adjust(traits, "trait.insecurity", -1);
-                Adjust(traits, "trait.sexualConfidence", +1);
-            }
-
-            if (ContainsAny(t, "not enough", "what if i fail", "do they like me", "second guess"))
-            {
-                Adjust(traits, "trait.insecurity", +1);
-                Adjust(traits, "trait.confidence", -1);
-            }
-
-            // =====================================================
-            // EMOTION / STRESS
-            // =====================================================
-            if (ContainsAny(t, "anxious", "worry", "stressed", "overwhelmed", "panic"))
-            {
-                Adjust(traits, "trait.anxiety", +2);
-                Adjust(traits, "trait.fearfulness", +1);
-                Adjust(traits, "trait.moodStability", -1);
-                Adjust(traits, "trait.stoicism", -1);
-            }
-
-            if (ContainsAny(t, "calm", "steady", "breathe", "composed"))
-            {
-                Adjust(traits, "trait.stoicism", +1);
-                Adjust(traits, "trait.moodStability", +1);
+            if (ContainsAny(t, "calm", "breathe", "steady"))
                 Adjust(traits, "trait.anxiety", -1);
-            }
 
-            if (ContainsAny(t, "hurt", "feel for", "poor them", "understand them"))
-            {
-                Adjust(traits, "trait.empathy", +1);
-                Adjust(traits, "trait.sensitivity", +1);
-            }
+            if (ContainsAny(t, "mad", "angry", "pissed", "how dare"))
+                Adjust(traits, "trait.anger", +1);
 
-            if (ContainsAny(t, "mad", "angry", "pissed", "furious", "rage"))
+            if (ContainsAny(t, "scared", "afraid", "dangerous"))
             {
-                Adjust(traits, "trait.anger", +2);
-                Adjust(traits, "trait.moodStability", -1);
-            }
-
-            if (ContainsAny(t, "scared", "afraid", "dangerous", "risky"))
-            {
-                Adjust(traits, "trait.fearfulness", +1);
+                Adjust(traits, "trait.fear", +1);
                 Adjust(traits, "trait.anxiety", +1);
             }
 
-            // =====================================================
-            // COGNITIVE
-            // =====================================================
-            if (ContainsAny(t, "think", "analyze", "plan", "makes sense"))
+            if (ContainsAny(t, "ashamed", "embarrassed", "humiliated"))
+                Adjust(traits, "trait.shame", +1);
+
+            if (ContainsAny(t, "my fault", "i shouldn't", "owe"))
+                Adjust(traits, "trait.guilt", +1);
+
+            if (ContainsAny(t, "hurt", "that stung", "why would they"))
+                Adjust(traits, "trait.hurt", +1);
+
+            if (ContainsAny(t, "other guy", "other girl", "with someone else", "jealous"))
+                Adjust(traits, "trait.jealousy", +1);
+
+            if (ContainsAny(t, "unfair", "always does this", "never listens"))
+                Adjust(traits, "trait.resentment", +1);
+
+            if (ContainsAny(t, "trust", "safe with", "can tell"))
+                Adjust(traits, "trait.trust", +1);
+
+            if (ContainsAny(t, "don't trust", "lying", "hiding something"))
+                Adjust(traits, "trait.trust", -1);
+
+            if (ContainsAny(t, "miss", "care about", "warm", "love"))
+                Adjust(traits, "trait.affection", +1);
+
+            if (ContainsAny(t, "want them", "turned on", "need them", "horny"))
             {
-                Adjust(traits, "trait.logic", +1);
-                Adjust(traits, "trait.focus", +1);
+                Adjust(traits, "trait.desire", +1);
+                Adjust(traits, "trait.attraction", +1);
             }
 
-            if (ContainsAny(t, "idea", "imagine", "what if", "create"))
+            if (ContainsAny(t, "charged", "on edge", "tension"))
+                Adjust(traits, "trait.tension", +1);
+
+            if (ContainsAny(t, "funny", "laugh", "tease", "joke"))
+                Adjust(traits, "trait.playfulness", +1);
+
+            if (ContainsAny(t, "right", "won't look weak", "status"))
+                Adjust(traits, "trait.pride", +1);
+
+            if (ContainsAny(t, "patience", "hold back", "not yet"))
+                Adjust(traits, "trait.patience", +1);
+
+            if (ContainsAny(t, "shut down", "walls up", "not talking"))
             {
-                Adjust(traits, "trait.creativity", +1);
+                Adjust(traits, "trait.guard", +1);
+                Adjust(traits, "trait.openness", -1);
             }
 
-            if (ContainsAny(t, "learn", "figure out", "new skill"))
+            if (ContainsAny(t, "open up", "tell them", "say it"))
             {
-                Adjust(traits, "trait.learningSpeed", +1);
-                Adjust(traits, "trait.understanding", +1);
-            }
-
-            // =====================================================
-            // SEXUAL / DESIRE
-            // =====================================================
-            if (ContainsAny(t, "horny", "wet", "turned on", "want him", "want her", "fuck", "cock", "pussy"))
-            {
-                Adjust(traits, "trait.sexualConfidence", +1);
-                Adjust(traits, "trait.sexualCuriosity", +1);
-                Adjust(traits, "trait.roughnessPreference", +1);
-            }
-
-            if (ContainsAny(t, "gentle", "soft", "slow", "kiss", "hold me"))
-            {
-                Adjust(traits, "trait.aftercareNeed", +1);
-                Adjust(traits, "trait.praiseKink", +1);
-                Adjust(traits, "trait.roughnessPreference", -1);
-            }
-
-            if (ContainsAny(t, "harder", "rough", "choke", "slap", "use me", "degrade"))
-            {
-                Adjust(traits, "trait.roughnessPreference", +2);
-                Adjust(traits, "trait.degradationDesire", +1);
-                Adjust(traits, "trait.objectificationDesire", +1);
-                Adjust(traits, "trait.painPlay", +1);
-            }
-
-            if (ContainsAny(t, "good girl", "good boy", "proud of you", "just like that"))
-            {
-                Adjust(traits, "trait.praiseKink", +2);
-            }
-
-            if (ContainsAny(t, "mine", "own me", "belong", "claim"))
-            {
-                Adjust(traits, "trait.possessiveDesire", +1);
-                Adjust(traits, "trait.ownershipDesire", +1);
-            }
-
-            if (ContainsAny(t, "tie", "restrain", "cuffs", "rope"))
-            {
-                Adjust(traits, "trait.bondageInterest", +1);
-                Adjust(traits, "trait.submission", +1);
-            }
-
-            if (ContainsAny(t, "watch me", "see us", "almost caught", "public"))
-            {
-                Adjust(traits, "trait.exhibitionism", +1);
-                Adjust(traits, "trait.publicRisk", +1);
-            }
-
-            if (ContainsAny(t, "watch them", "seeing her with", "seeing him with"))
-            {
-                Adjust(traits, "trait.voyeurism", +1);
-                Adjust(traits, "trait.compersion", +1);
-            }
-
-            if (ContainsAny(t, "secret", "hide", "behind his back", "if he knew", "double life"))
-            {
-                Adjust(traits, "trait.secrecyKink", +2);
-                Adjust(traits, "trait.doubleLifeComfort", +1);
-                Adjust(traits, "trait.sexualCompartmentalization", +1);
-            }
-
-            if (ContainsAny(t, "threesome", "group", "another person", "both of you"))
-            {
-                Adjust(traits, "trait.groupInterest", +1);
-                Adjust(traits, "trait.nonMonogamyComfort", +1);
-            }
-
-            if (ContainsAny(t, "with someone else", "sleep with others", "share me", "share him", "share her"))
-            {
-                Adjust(traits, "trait.cuckoldInterest", +1);
-                Adjust(traits, "trait.nonMonogamyComfort", +1);
-                Adjust(traits, "trait.compersion", +1);
-            }
-
-            if (ContainsAny(t, "mouth", "suck", "oral", "tongue"))
-            {
-                Adjust(traits, "trait.oralFixation", +1);
-            }
-
-            if (ContainsAny(t, "creampie", "breed", "inside me", "fill me"))
-            {
-                Adjust(traits, "trait.breedingKink", +1);
-            }
-
-            if (ContainsAny(t, "use me whenever", "free use", "available"))
-            {
-                Adjust(traits, "trait.freeuseInterest", +1);
-                Adjust(traits, "trait.objectificationDesire", +1);
-            }
-
-            if (ContainsAny(t, "ashamed", "guilty", "shouldn't want this"))
-            {
-                Adjust(traits, "trait.sexualShame", +2);
-                Adjust(traits, "trait.sexualConfidence", -1);
-            }
-
-            if (ContainsAny(t, "after", "hold me after", "stay close", "don't leave yet"))
-            {
-                Adjust(traits, "trait.aftercareNeed", +2);
-            }
-
-            // =====================================================
-            // POWER
-            // =====================================================
-            if (ContainsAny(t, "take control", "on your knees", "do what i say"))
-            {
-                Adjust(traits, "trait.dominance", +1);
-                Adjust(traits, "trait.submission", -1);
-            }
-
-            if (ContainsAny(t, "tell me what to do", "use me", "i'll obey", "yes sir", "yes ma'am"))
-            {
-                Adjust(traits, "trait.submission", +1);
-                Adjust(traits, "trait.dominance", -1);
+                Adjust(traits, "trait.openness", +1);
+                Adjust(traits, "trait.guard", -1);
             }
         }
 
-        // -------------------------------------------------
-        private static void Adjust(dynamic traits, string traitId, int amount)
+        private static void Adjust(NpcTraits traits, string traitId, float amount)
         {
             try
             {
@@ -248,20 +112,16 @@ namespace ProjectEve.AI.Brain
                 try
                 {
                     float current = traits.Get(traitId);
-                    float next = Math.Clamp(current + amount, 0f, 100f);
-                    traits.Set(traitId, next);
+                    traits.Set(traitId, Math.Clamp(current + amount, 0f, 100f));
                 }
-                catch
-                {
-                    // trait id not present on this NPC pack
-                }
+                catch { }
             }
         }
 
         private static bool ContainsAny(string text, params string[] words)
         {
             foreach (var w in words)
-                if (text.Contains(w))
+                if (text.Contains(w, StringComparison.OrdinalIgnoreCase))
                     return true;
             return false;
         }

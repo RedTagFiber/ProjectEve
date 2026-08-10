@@ -1,0 +1,70 @@
+{
+    "id":  "mid.peacemaker",
+    "layer":  "mid",
+    "label":  "Peacemaker",
+    "version":  1,
+    "cluster":  "conflict",
+    "description":  "Smoothes rupture; brokers; absorbs edge to keep the room.",
+    "priorIntensity":  5,
+    "moveSpeed":  "slow",
+    "bands":  {
+                  "off":  "0-29",
+                  "low":  "30-49",
+                  "mid":  "50-69",
+                  "high":  "70-84",
+                  "break":  "85-94",
+                  "extreme":  "95-100"
+              },
+    "styles":  [
+                   {
+                       "id":  "mid.peacemaker.broker",
+                       "label":  "Broker"
+                   },
+                   {
+                       "id":  "mid.peacemaker.absorb",
+                       "label":  "Absorb"
+                   },
+                   {
+                       "id":  "mid.peacemaker.redirect",
+                       "label":  "Redirect"
+                   }
+               ],
+    "links":  {
+                  "boostedBy":  [
+                                    "anxiety",
+                                    "guilt",
+                                    "affection"
+                                ],
+                  "drainedBy":  [
+                                    "anger",
+                                    "resentment"
+                                ],
+                  "opposes":  [
+                                  "mid.confrontational",
+                                  "mid.blunt"
+                              ]
+              },
+    "tagTriggers":  [
+                        {
+                            "tag":  "mid.peacemaker.test",
+                            "meaning":  "Situation tests this character trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.peacemaker.confirm",
+                            "meaning":  "Behavior confirms this trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.peacemaker.violate",
+                            "meaning":  "Acts against this trait under pressure",
+                            "deltaHint":  -2
+                        }
+                    ],
+    "relationScoped":  true,
+    "historyHooks":  {
+                         "patternFile":  "peacemaker_patterns.json",
+                         "fundingBudget":  2
+                     },
+    "notes":  "Can enable; pairs with people_pleasing."
+}

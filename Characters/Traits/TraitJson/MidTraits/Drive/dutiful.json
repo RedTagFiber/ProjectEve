@@ -1,0 +1,67 @@
+{
+    "id":  "mid.dutiful",
+    "layer":  "mid",
+    "label":  "Dutiful",
+    "version":  1,
+    "cluster":  "drive",
+    "description":  "Obligation first; shows up because it is owed.",
+    "priorIntensity":  6,
+    "moveSpeed":  "slow",
+    "bands":  {
+                  "off":  "0-29",
+                  "low":  "30-49",
+                  "mid":  "50-69",
+                  "high":  "70-84",
+                  "break":  "85-94",
+                  "extreme":  "95-100"
+              },
+    "styles":  [
+                   {
+                       "id":  "mid.dutiful.show_up",
+                       "label":  "Show up"
+                   },
+                   {
+                       "id":  "mid.dutiful.keep_word",
+                       "label":  "Keep word"
+                   },
+                   {
+                       "id":  "mid.dutiful.carry_load",
+                       "label":  "Carry load"
+                   }
+               ],
+    "links":  {
+                  "boostedBy":  [
+                                    "guilt",
+                                    "pride"
+                                ],
+                  "drainedBy":  [
+                                    "resentment"
+                                ],
+                  "opposes":  [
+                                  "mid.opportunistic"
+                              ]
+              },
+    "tagTriggers":  [
+                        {
+                            "tag":  "mid.dutiful.test",
+                            "meaning":  "Situation tests this character trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.dutiful.confirm",
+                            "meaning":  "Behavior confirms this trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.dutiful.violate",
+                            "meaning":  "Acts against this trait under pressure",
+                            "deltaHint":  -2
+                        }
+                    ],
+    "relationScoped":  true,
+    "historyHooks":  {
+                         "patternFile":  "dutiful_patterns.json",
+                         "fundingBudget":  2
+                     },
+    "notes":  "Strong history link to family role."
+}

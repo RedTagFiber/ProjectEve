@@ -1,0 +1,523 @@
+{
+  "appliesToParents": [
+    "slow.life.outdoors",
+    "slow.life.cars_trucks",
+    "slow.life.gaming",
+    "slow.life.reading",
+    "slow.life.fitness",
+    "slow.life.foodie",
+    "slow.life.pets",
+    "slow.life.crafts",
+    "slow.life.music_play",
+    "slow.life.collecting",
+    "slow.life.diy_home",
+    "slow.life.photography",
+    "slow.life.gardening"
+  ],
+  "version": 1,
+  "fillThreshold": 50,
+  "notes": "Shared hobby machinery. Parent JSON owns domain flavor; these subs attach when parent >= fillThreshold. Factory picks a few, not all.",
+  "subs": [
+    {
+      "id": "sub.hobby.time_per_week",
+      "label": "Time per week",
+      "type": "enum",
+      "values": [ "rare", "monthly", "weekly", "several_days", "daily", "obsessive" ],
+      "default": "weekly",
+      "tags": [ "intensity" ]
+    },
+    {
+      "id": "sub.hobby.session_length",
+      "label": "Typical session length",
+      "type": "enum",
+      "values": [ "quick_hit", "hour", "half_day", "full_day", "weekend_sink" ],
+      "default": "hour",
+      "tags": [ "intensity" ]
+    },
+    {
+      "id": "sub.hobby.social",
+      "label": "Social hobby",
+      "type": "bool",
+      "default": false,
+      "tags": [ "people" ]
+    },
+    {
+      "id": "sub.hobby.solo_only",
+      "label": "Strictly solo",
+      "type": "bool",
+      "default": false,
+      "tags": [ "people" ]
+    },
+    {
+      "id": "sub.hobby.talk_fuel",
+      "label": "Uses as talk fuel",
+      "type": "bool",
+      "default": true,
+      "tags": [ "dialogue" ]
+    },
+    {
+      "id": "sub.hobby.identity",
+      "label": "Part of identity / bio",
+      "type": "bool",
+      "default": false,
+      "tags": [ "self" ]
+    },
+    {
+      "id": "sub.hobby.secret",
+      "label": "Keeps it quiet / slightly embarrassed",
+      "type": "bool",
+      "default": false,
+      "tags": [ "self" ]
+    },
+    {
+      "id": "sub.hobby.evangelist",
+      "label": "Tries to get others into it",
+      "type": "bool",
+      "default": false,
+      "tags": [ "social" ]
+    },
+    {
+      "id": "sub.hobby.gatekeeps",
+      "label": "Light gatekeeping streak",
+      "type": "bool",
+      "default": false,
+      "tags": [ "attitude" ]
+    },
+    {
+      "id": "sub.hobby.budget_tier",
+      "label": "Money spent",
+      "type": "enum",
+      "values": [ "free_cheap", "moderate", "serious_money", "money_no_object" ],
+      "default": "moderate",
+      "tags": [ "money" ]
+    },
+    {
+      "id": "sub.hobby.gear_nerd",
+      "label": "Gear / tools / equipment nerd",
+      "type": "bool",
+      "default": false,
+      "tags": [ "stuff" ]
+    },
+    {
+      "id": "sub.hobby.min_gear",
+      "label": "Minimalist / uses what they have",
+      "type": "bool",
+      "default": false,
+      "tags": [ "stuff" ]
+    },
+    {
+      "id": "sub.hobby.skill_level",
+      "label": "Skill level",
+      "type": "enum",
+      "values": [ "beginner", "competent", "advanced", "near_pro", "teaches_others" ],
+      "default": "competent",
+      "tags": [ "skill" ]
+    },
+    {
+      "id": "sub.hobby.learning",
+      "label": "Actively learning / improving",
+      "type": "bool",
+      "default": true,
+      "tags": [ "skill" ]
+    },
+    {
+      "id": "sub.hobby.plateau",
+      "label": "Comfortable plateau / not grinding",
+      "type": "bool",
+      "default": false,
+      "tags": [ "skill" ]
+    },
+    {
+      "id": "sub.hobby.competitive",
+      "label": "Competitive streak",
+      "type": "bool",
+      "default": false,
+      "tags": [ "drive" ]
+    },
+    {
+      "id": "sub.hobby.casual_fun",
+      "label": "Pure casual fun only",
+      "type": "bool",
+      "default": true,
+      "tags": [ "drive" ]
+    },
+    {
+      "id": "sub.hobby.seasonal",
+      "label": "Seasonal hobby",
+      "type": "bool",
+      "default": false,
+      "tags": [ "calendar" ]
+    },
+    {
+      "id": "sub.hobby.year_round",
+      "label": "Year-round",
+      "type": "bool",
+      "default": true,
+      "tags": [ "calendar" ]
+    },
+    {
+      "id": "sub.hobby.weather_dependent",
+      "label": "Weather-dependent",
+      "type": "bool",
+      "default": false,
+      "tags": [ "calendar", "ohio" ]
+    },
+    {
+      "id": "sub.hobby.winter_adapt",
+      "label": "Has a winter version / indoor adapt",
+      "type": "bool",
+      "default": false,
+      "tags": [ "ohio" ]
+    },
+    {
+      "id": "sub.hobby.morning",
+      "label": "Morning person for this",
+      "type": "bool",
+      "default": false,
+      "tags": [ "schedule" ]
+    },
+    {
+      "id": "sub.hobby.night",
+      "label": "Night / late sessions",
+      "type": "bool",
+      "default": false,
+      "tags": [ "schedule" ]
+    },
+    {
+      "id": "sub.hobby.after_work",
+      "label": "After-work decompression",
+      "type": "bool",
+      "default": true,
+      "tags": [ "schedule" ]
+    },
+    {
+      "id": "sub.hobby.weekend_block",
+      "label": "Weekend block reserved",
+      "type": "bool",
+      "default": false,
+      "tags": [ "schedule" ]
+    },
+    {
+      "id": "sub.hobby.stress_relief",
+      "label": "Primary stress relief",
+      "type": "bool",
+      "default": false,
+      "tags": [ "emotion" ]
+    },
+    {
+      "id": "sub.hobby.mood_boost",
+      "label": "Reliable mood boost",
+      "type": "bool",
+      "default": true,
+      "tags": [ "emotion" ]
+    },
+    {
+      "id": "sub.hobby.avoid_when_low",
+      "label": "Avoids it when depressed / low energy",
+      "type": "bool",
+      "default": false,
+      "tags": [ "emotion" ]
+    },
+    {
+      "id": "sub.hobby.forces_when_low",
+      "label": "Forces it when low (discipline)",
+      "type": "bool",
+      "default": false,
+      "tags": [ "emotion" ]
+    },
+    {
+      "id": "sub.hobby.childhood",
+      "label": "From childhood",
+      "type": "bool",
+      "default": false,
+      "tags": [ "history" ]
+    },
+    {
+      "id": "sub.hobby.recent",
+      "label": "Recent pickup (last few years)",
+      "type": "bool",
+      "default": false,
+      "tags": [ "history" ]
+    },
+    {
+      "id": "sub.hobby.inherited",
+      "label": "Inherited from family",
+      "type": "bool",
+      "default": false,
+      "tags": [ "history", "family" ]
+    },
+    {
+      "id": "sub.hobby.partner_shared",
+      "label": "Shared with partner",
+      "type": "bool",
+      "default": false,
+      "tags": [ "relationship" ]
+    },
+    {
+      "id": "sub.hobby.partner_conflict",
+      "label": "Causes mild partner friction (time/money)",
+      "type": "bool",
+      "default": false,
+      "tags": [ "relationship" ]
+    },
+    {
+      "id": "sub.hobby.kids_involved",
+      "label": "Involves kids / family",
+      "type": "bool",
+      "default": false,
+      "tags": [ "family" ]
+    },
+    {
+      "id": "sub.hobby.club",
+      "label": "Club / group / league member",
+      "type": "bool",
+      "default": false,
+      "tags": [ "social" ]
+    },
+    {
+      "id": "sub.hobby.online_community",
+      "label": "Online community / discord / forums",
+      "type": "bool",
+      "default": false,
+      "tags": [ "social" ]
+    },
+    {
+      "id": "sub.hobby.content_creator_lite",
+      "label": "Posts about it (pics, clips, logs)",
+      "type": "bool",
+      "default": false,
+      "tags": [ "social" ]
+    },
+    {
+      "id": "sub.hobby.teaches",
+      "label": "Teaches or mentors others",
+      "type": "bool",
+      "default": false,
+      "tags": [ "social", "skill" ]
+    },
+    {
+      "id": "sub.hobby.travel_for_it",
+      "label": "Travels / day-trips for it",
+      "type": "bool",
+      "default": false,
+      "tags": [ "travel" ]
+    },
+    {
+      "id": "sub.hobby.local_only",
+      "label": "Keeps it local",
+      "type": "bool",
+      "default": true,
+      "tags": [ "travel" ]
+    },
+    {
+      "id": "sub.hobby.ohio_specific",
+      "label": "Ohio-flavored version (local spots, seasons)",
+      "type": "bool",
+      "default": true,
+      "tags": [ "local" ]
+    },
+    {
+      "id": "sub.hobby.collects",
+      "label": "Collects related stuff",
+      "type": "bool",
+      "default": false,
+      "tags": [ "stuff" ]
+    },
+    {
+      "id": "sub.hobby.finishes_projects",
+      "label": "Finishes projects",
+      "type": "bool",
+      "default": true,
+      "tags": [ "style" ]
+    },
+    {
+      "id": "sub.hobby.wip_pile",
+      "label": "Has a pile of unfinished WIPs",
+      "type": "bool",
+      "default": false,
+      "tags": [ "style" ]
+    },
+    {
+      "id": "sub.hobby.routine",
+      "label": "Hard routine / same days",
+      "type": "bool",
+      "default": false,
+      "tags": [ "schedule" ]
+    },
+    {
+      "id": "sub.hobby.mood_driven",
+      "label": "Only when the mood hits",
+      "type": "bool",
+      "default": true,
+      "tags": [ "schedule" ]
+    },
+    {
+      "id": "sub.hobby.public_facing",
+      "label": "Willing to do it in public / visible",
+      "type": "bool",
+      "default": true,
+      "tags": [ "social" ]
+    },
+    {
+      "id": "sub.hobby.private",
+      "label": "Private / home only",
+      "type": "bool",
+      "default": false,
+      "tags": [ "social" ]
+    },
+    {
+      "id": "sub.hobby.nostalgia",
+      "label": "Nostalgia-powered",
+      "type": "bool",
+      "default": false,
+      "tags": [ "emotion", "history" ]
+    },
+    {
+      "id": "sub.hobby.aspiration",
+      "label": "Aspirational (wants to be more into it)",
+      "type": "bool",
+      "default": false,
+      "tags": [ "self" ]
+    },
+    {
+      "id": "sub.hobby.burnout_risk",
+      "label": "Has burned out on it before",
+      "type": "bool",
+      "default": false,
+      "tags": [ "history" ]
+    },
+    {
+      "id": "sub.hobby.comeback",
+      "label": "Came back after a long break",
+      "type": "bool",
+      "default": false,
+      "tags": [ "history" ]
+    },
+    {
+      "id": "sub.hobby.pairs_with_music",
+      "label": "Always pairs with music / podcasts",
+      "type": "bool",
+      "default": false,
+      "tags": [ "cross" ]
+    },
+    {
+      "id": "sub.hobby.pairs_with_friends",
+      "label": "Excuse to see friends",
+      "type": "bool",
+      "default": false,
+      "tags": [ "social" ]
+    },
+    {
+      "id": "sub.hobby.date_activity",
+      "label": "Good date activity",
+      "type": "bool",
+      "default": false,
+      "tags": [ "relationship" ]
+    },
+    {
+      "id": "sub.hobby.solo_recharge",
+      "label": "Solo recharge sacred",
+      "type": "bool",
+      "default": false,
+      "tags": [ "self" ]
+    },
+    {
+      "id": "sub.hobby.photo_logs",
+      "label": "Takes photos / logs progress",
+      "type": "bool",
+      "default": false,
+      "tags": [ "memory" ]
+    },
+    {
+      "id": "sub.hobby.stories_ready",
+      "label": "Has ready stories from it",
+      "type": "bool",
+      "default": true,
+      "tags": [ "dialogue", "history" ]
+    },
+    {
+      "id": "sub.hobby.injury_risk",
+      "label": "Accepts injury / strain risk",
+      "type": "bool",
+      "default": false,
+      "tags": [ "body" ]
+    },
+    {
+      "id": "sub.hobby.body_limits",
+      "label": "Modified for body limits / age",
+      "type": "bool",
+      "default": false,
+      "tags": [ "body" ]
+    },
+    {
+      "id": "sub.hobby.weather_excuse",
+      "label": "Uses weather as cancel excuse often",
+      "type": "bool",
+      "default": false,
+      "tags": [ "ohio", "attitude" ]
+    },
+    {
+      "id": "sub.hobby.rain_or_shine",
+      "label": "Rain or shine commitment",
+      "type": "bool",
+      "default": false,
+      "tags": [ "attitude" ]
+    },
+    {
+      "id": "sub.hobby.early_adopter",
+      "label": "Early adopter of new gear/meta",
+      "type": "bool",
+      "default": false,
+      "tags": [ "style" ]
+    },
+    {
+      "id": "sub.hobby.old_school",
+      "label": "Old-school methods preferred",
+      "type": "bool",
+      "default": false,
+      "tags": [ "style" ]
+    },
+    {
+      "id": "sub.hobby.trivia_depth",
+      "label": "Deep trivia / lore knowledge",
+      "type": "bool",
+      "default": false,
+      "tags": [ "knowledge", "talk_fuel" ]
+    },
+    {
+      "id": "sub.hobby.recommend_ready",
+      "label": "Always ready with recommendations",
+      "type": "bool",
+      "default": true,
+      "tags": [ "dialogue" ]
+    },
+    {
+      "id": "sub.hobby.jealous_time",
+      "label": "Protective of hobby time",
+      "type": "bool",
+      "default": false,
+      "tags": [ "boundary" ]
+    },
+    {
+      "id": "sub.hobby.flexible",
+      "label": "Drops it easily for people/plans",
+      "type": "bool",
+      "default": true,
+      "tags": [ "boundary" ]
+    },
+    {
+      "id": "sub.hobby.side_income",
+      "label": "Sometimes makes side money from it",
+      "type": "bool",
+      "default": false,
+      "tags": [ "money" ]
+    },
+    {
+      "id": "sub.hobby.never_monetize",
+      "label": "Refuses to monetize (keeps pure)",
+      "type": "bool",
+      "default": false,
+      "tags": [ "attitude" ]
+    }
+  ]
+}

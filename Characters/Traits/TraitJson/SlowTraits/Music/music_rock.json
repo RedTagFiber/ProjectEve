@@ -1,0 +1,481 @@
+{
+  "id": "slow.music.rock",
+  "layer": "slow",
+  "domain": "music",
+  "label": "Rock",
+  "version": 1,
+  "description": "Interest in rock—classic, alternative, indie, arena, and guitar culture. Real bands for radio, bars, and garage identity.",
+  "priorIntensity": 5,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [ "rock", "guitar", "band", "concert", "riff", "classic rock", "alternative", "garage", "amp" ],
+  "rivalBias": true,
+  "catalog": "Music/Rock",
+  "subTraits": [
+    {
+      "id": "slow.music.rock.classic_rock",
+      "label": "Classic rock",
+      "kind": "style",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "radio", "70s", "ohio" ]
+    },
+    {
+      "id": "slow.music.rock.hard_rock",
+      "label": "Hard rock",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "riff", "loud" ]
+    },
+    {
+      "id": "slow.music.rock.southern_rock",
+      "label": "Southern rock",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "guitar", "dual" ]
+    },
+    {
+      "id": "slow.music.rock.arena_rock",
+      "label": "Arena rock",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "stadium", "anthem" ]
+    },
+    {
+      "id": "slow.music.rock.punk_edge",
+      "label": "Punk edge",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "fast", "attitude" ]
+    },
+    {
+      "id": "slow.music.rock.alternative_90s",
+      "label": "90s alternative",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "grunge-adj", "radio" ]
+    },
+    {
+      "id": "slow.music.rock.grunge",
+      "label": "Grunge",
+      "kind": "style",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "seattle", "raw" ]
+    },
+    {
+      "id": "slow.music.rock.indie_rock",
+      "label": "Indie rock",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "college", "cool" ]
+    },
+    {
+      "id": "slow.music.rock.garage_rock",
+      "label": "Garage rock",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "raw", "ohio" ]
+    },
+    {
+      "id": "slow.music.rock.blues_rock",
+      "label": "Blues rock",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "solo", "jam" ]
+    },
+    {
+      "id": "slow.music.rock.progressive",
+      "label": "Progressive rock",
+      "kind": "style",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "long", "complex" ]
+    },
+    {
+      "id": "slow.music.rock.post_rock",
+      "label": "Post-rock",
+      "kind": "style",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "build", "instrumental" ]
+    },
+    {
+      "id": "slow.music.rock.britpop",
+      "label": "Britpop / UK rock",
+      "kind": "style",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "oasis-adj", "attitude" ]
+    },
+    {
+      "id": "slow.music.rock.modern_rock_radio",
+      "label": "Modern rock radio",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "now", "charts" ]
+    },
+
+    {
+      "id": "slow.music.rock.beatles",
+      "label": "The Beatles",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "foundation", "song" ]
+    },
+    {
+      "id": "slow.music.rock.stones",
+      "label": "The Rolling Stones",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "longevity", "swagger" ]
+    },
+    {
+      "id": "slow.music.rock.led_zeppelin",
+      "label": "Led Zeppelin",
+      "kind": "artist",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "riff", "myth" ]
+    },
+    {
+      "id": "slow.music.rock.pink_floyd",
+      "label": "Pink Floyd",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "album", "space" ]
+    },
+    {
+      "id": "slow.music.rock.the_who",
+      "label": "The Who",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "power", "live" ]
+    },
+    {
+      "id": "slow.music.rock.queen",
+      "label": "Queen",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "theatrical", "anthem" ]
+    },
+    {
+      "id": "slow.music.rock.acdc",
+      "label": "AC/DC",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "riff", "simple", "party" ]
+    },
+    {
+      "id": "slow.music.rock.aerosmith",
+      "label": "Aerosmith",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "american", "blues-edge" ]
+    },
+    {
+      "id": "slow.music.rock.gunsnroses",
+      "label": "Guns N' Roses",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "80s", "danger" ]
+    },
+    {
+      "id": "slow.music.rock.van_halen",
+      "label": "Van Halen",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "guitar", "party" ]
+    },
+    {
+      "id": "slow.music.rock.tom_petty",
+      "label": "Tom Petty",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "american", "song" ]
+    },
+    {
+      "id": "slow.music.rock.bruce",
+      "label": "Bruce Springsteen",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "heartland", "work" ]
+    },
+    {
+      "id": "slow.music.rock.neil_young_rock",
+      "label": "Neil Young (rock side)",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "raw", "long" ]
+    },
+    {
+      "id": "slow.music.rock.lynyrd",
+      "label": "Lynyrd Skynyrd",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "southern", "freebird" ]
+    },
+    {
+      "id": "slow.music.rock.allman",
+      "label": "Allman Brothers",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "jam", "southern" ]
+    },
+    {
+      "id": "slow.music.rock.creedence",
+      "label": "Creedence Clearwater Revival",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "swamp", "radio" ]
+    },
+    {
+      "id": "slow.music.rock.eagles",
+      "label": "Eagles",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "california", "harmony" ]
+    },
+    {
+      "id": "slow.music.rock.fleetwood",
+      "label": "Fleetwood Mac",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "drama", "songs" ]
+    },
+    {
+      "id": "slow.music.rock.nirvana",
+      "label": "Nirvana",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "grunge", "shift" ]
+    },
+    {
+      "id": "slow.music.rock.pearl_jam",
+      "label": "Pearl Jam",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "grunge", "longevity" ]
+    },
+    {
+      "id": "slow.music.rock.soundgarden",
+      "label": "Soundgarden",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "heavy", "voice" ]
+    },
+    {
+      "id": "slow.music.rock.alice_in_chains",
+      "label": "Alice in Chains",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "dark", "harmony" ]
+    },
+    {
+      "id": "slow.music.rock.foo_fighters",
+      "label": "Foo Fighters",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "workhorse", "live" ]
+    },
+    {
+      "id": "slow.music.rock.rhcp",
+      "label": "Red Hot Chili Peppers",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "funk-rock", "california" ]
+    },
+    {
+      "id": "slow.music.rock.rage",
+      "label": "Rage Against the Machine",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "political", "riff" ]
+    },
+    {
+      "id": "slow.music.rock.tool",
+      "label": "Tool",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "prog", "heavy", "patient" ]
+    },
+    {
+      "id": "slow.music.rock.radiohead",
+      "label": "Radiohead",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "art", "change" ]
+    },
+    {
+      "id": "slow.music.rock.the_strokes",
+      "label": "The Strokes",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "garage", "2000s" ]
+    },
+    {
+      "id": "slow.music.rock.the_black_keys",
+      "label": "The Black Keys",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "ohio", "akron", "garage" ]
+    },
+    {
+      "id": "slow.music.rock.nine_inch_nails",
+      "label": "Nine Inch Nails",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "ohio", "cleveland", "industrial" ]
+    },
+    {
+      "id": "slow.music.rock.devo",
+      "label": "Devo",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "ohio", "akron", "weird" ]
+    },
+    {
+      "id": "slow.music.rock.the_national",
+      "label": "The National",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "ohio", "cincinnati", "mood" ]
+    },
+    {
+      "id": "slow.music.rock.guided_by_voices",
+      "label": "Guided by Voices",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "ohio", "dayton", "indie" ]
+    },
+    {
+      "id": "slow.music.rock.arcade_fire",
+      "label": "Arcade Fire",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "indie", "big" ]
+    },
+    {
+      "id": "slow.music.rock.arctic_monkeys",
+      "label": "Arctic Monkeys",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "uk", "cool" ]
+    },
+    {
+      "id": "slow.music.rock.queens_stone_age",
+      "label": "Queens of the Stone Age",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "desert", "groove" ]
+    },
+    {
+      "id": "slow.music.rock.jack_white",
+      "label": "Jack White / White Stripes",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "garage", "craft" ]
+    },
+    {
+      "id": "slow.music.rock.greta_van_fleet",
+      "label": "Greta Van Fleet",
+      "kind": "artist",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "retro", "debate" ]
+    },
+    {
+      "id": "slow.music.rock.greta_debate",
+      "label": "Retro-rock authenticity debate",
+      "kind": "attitude",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "rival", "copy" ]
+    },
+    {
+      "id": "slow.music.rock.umo",
+      "label": "Modern indie / DIY",
+      "kind": "style",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "small", "local" ]
+    },
+
+    {
+      "id": "slow.music.rock.classic_rock_radio",
+      "label": "Classic rock radio daily",
+      "kind": "habit",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "work", "ohio", "truck" ]
+    },
+    {
+      "id": "slow.music.rock.concert_goer",
+      "label": "Concert / amphitheater regular",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "live", "summer" ]
+    },
+    {
+      "id": "slow.music.rock.garage_band",
+      "label": "Played in a garage band",
+      "kind": "practice",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "history", "amp" ]
+    },
+    {
+      "id": "slow.music.rock.guitar_collector",
+      "label": "Guitar / gear nerd",
+      "kind": "practice",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "tone", "money" ]
+    },
+    {
+      "id": "slow.music.rock.vinyl_deep",
+      "label": "Deep vinyl crate digger",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "sides", "obscure" ]
+    },
+    {
+      "id": "slow.music.rock.drive_loud",
+      "label": "Drive with it loud",
+      "kind": "mood_role",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "car", "windows" ]
+    },
+    {
+      "id": "slow.music.rock.workout_riff",
+      "label": "Riffs for workout",
+      "kind": "mood_role",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "gym", "energy" ]
+    },
+    {
+      "id": "slow.music.rock.purist_classic",
+      "label": "Classic-only purist",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "gate", "old" ]
+    },
+    {
+      "id": "slow.music.rock.ohio_pride",
+      "label": "Ohio rock pride (Keys/NIN/National)",
+      "kind": "local",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "akron", "cleveland", "cincy" ]
+    },
+    {
+      "id": "slow.music.rock.festival_rock",
+      "label": "Rock festival goer",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "outdoor", "day" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "sings along on the radio; no band identity",
+    "atOrAbove50": "attach 2-4; era + a few bands + habit",
+    "atOrAbove70": "concerts and radio habits; Ohio band pride unlocks",
+    "extreme95": "rock is identity; gear and purity debates real"
+  },
+  "notes": "Ohio anchors: Black Keys, NIN, Devo, The National, Guided by Voices. Overlaps blues-rock and metal—factory should bias not triple-stack."
+}

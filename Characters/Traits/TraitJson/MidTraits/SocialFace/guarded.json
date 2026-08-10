@@ -1,0 +1,69 @@
+{
+    "id":  "mid.guarded",
+    "layer":  "mid",
+    "label":  "Guarded",
+    "version":  1,
+    "cluster":  "socialface",
+    "description":  "Gates up by default; shares late; watches before opening.",
+    "priorIntensity":  6,
+    "moveSpeed":  "slow",
+    "bands":  {
+                  "off":  "0-29",
+                  "low":  "30-49",
+                  "mid":  "50-69",
+                  "high":  "70-84",
+                  "break":  "85-94",
+                  "extreme":  "95-100"
+              },
+    "styles":  [
+                   {
+                       "id":  "mid.guarded.minimal_answer",
+                       "label":  "Minimal answer"
+                   },
+                   {
+                       "id":  "mid.guarded.test_first",
+                       "label":  "Test first"
+                   },
+                   {
+                       "id":  "mid.guarded.walls",
+                       "label":  "Walls"
+                   }
+               ],
+    "links":  {
+                  "boostedBy":  [
+                                    "guard",
+                                    "hurt",
+                                    "shame"
+                                ],
+                  "drainedBy":  [
+                                    "trust",
+                                    "openness"
+                                ],
+                  "opposes":  [
+                                  "mid.open_book"
+                              ]
+              },
+    "tagTriggers":  [
+                        {
+                            "tag":  "mid.guarded.test",
+                            "meaning":  "Situation tests this character trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.guarded.confirm",
+                            "meaning":  "Behavior confirms this trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.guarded.violate",
+                            "meaning":  "Acts against this trait under pressure",
+                            "deltaHint":  -2
+                        }
+                    ],
+    "relationScoped":  true,
+    "historyHooks":  {
+                         "patternFile":  "guarded_patterns.json",
+                         "fundingBudget":  2
+                     },
+    "notes":  "Character baseline; Fast guard is the spike."
+}

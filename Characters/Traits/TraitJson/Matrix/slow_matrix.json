@@ -1,0 +1,190 @@
+﻿{
+  "rows": [
+    {
+      "id": "slow.sports.college_football",
+      "layer": "slow",
+      "weight": 0.75,
+      "minParent": 50,
+      "sharedHigh": {
+        "like": 5,
+        "growthMult": 1.2
+      },
+      "targetHigh": { "like": 2 },
+      "targetLow": {}
+    },
+    {
+      "id": "slow.sports.team.osu",
+      "layer": "slow",
+      "weight": 0.85,
+      "minParent": 50,
+      "sharedHigh": {
+        "like": 8,
+        "growthMult": 1.35
+      },
+      "rivalIds": [ "slow.sports.team.michigan" ],
+      "rivalHigh": {
+        "like": -7,
+        "tension": 5,
+        "growthMult": 0.6
+      },
+      "targetHigh": { "like": 3 },
+      "targetLow": {}
+    },
+    {
+      "id": "slow.sports.team.michigan",
+      "layer": "slow",
+      "weight": 0.85,
+      "minParent": 50,
+      "sharedHigh": {
+        "like": 7,
+        "growthMult": 1.3
+      },
+      "rivalIds": [ "slow.sports.team.osu" ],
+      "rivalHigh": {
+        "like": -7,
+        "tension": 5,
+        "growthMult": 0.6
+      },
+      "targetHigh": { "like": 3 },
+      "targetLow": {}
+    },
+    {
+      "id": "slow.sports.team.bengals",
+      "layer": "slow",
+      "weight": 0.8,
+      "minParent": 50,
+      "sharedHigh": {
+        "like": 7,
+        "growthMult": 1.25
+      },
+      "rivalIds": [ "slow.sports.team.browns", "slow.sports.team.steelers" ],
+      "rivalHigh": {
+        "like": -5,
+        "tension": 3,
+        "growthMult": 0.7
+      },
+      "targetHigh": { "like": 2 },
+      "targetLow": {}
+    },
+    {
+      "id": "slow.sports.team.browns",
+      "layer": "slow",
+      "weight": 0.8,
+      "minParent": 50,
+      "sharedHigh": {
+        "like": 7,
+        "growthMult": 1.25
+      },
+      "rivalIds": [ "slow.sports.team.bengals", "slow.sports.team.steelers" ],
+      "rivalHigh": {
+        "like": -5,
+        "tension": 3,
+        "growthMult": 0.7
+      },
+      "targetHigh": { "like": 2 },
+      "targetLow": {}
+    },
+    {
+      "id": "slow.sports.team.steelers",
+      "layer": "slow",
+      "weight": 0.75,
+      "minParent": 50,
+      "sharedHigh": {
+        "like": 6,
+        "growthMult": 1.2
+      },
+      "rivalIds": [ "slow.sports.team.bengals", "slow.sports.team.browns" ],
+      "rivalHigh": {
+        "like": -5,
+        "tension": 3,
+        "growthMult": 0.7
+      },
+      "targetHigh": { "like": 2 },
+      "targetLow": {}
+    },
+    {
+      "id": "slow.sports.team.reds",
+      "layer": "slow",
+      "weight": 0.7,
+      "minParent": 50,
+      "sharedHigh": {
+        "like": 5,
+        "growthMult": 1.2
+      },
+      "rivalIds": [ "slow.sports.team.guardians" ],
+      "rivalHigh": {
+        "like": -3,
+        "tension": 2,
+        "growthMult": 0.8
+      },
+      "targetHigh": { "like": 2 },
+      "targetLow": {}
+    },
+    {
+      "id": "slow.sports.team.guardians",
+      "layer": "slow",
+      "weight": 0.7,
+      "minParent": 50,
+      "sharedHigh": {
+        "like": 5,
+        "growthMult": 1.2
+      },
+      "rivalIds": [ "slow.sports.team.reds" ],
+      "rivalHigh": {
+        "like": -3,
+        "tension": 2,
+        "growthMult": 0.8
+      },
+      "targetHigh": { "like": 2 },
+      "targetLow": {}
+    },
+    {
+      "id": "slow.music.country",
+      "layer": "slow",
+      "weight": 0.55,
+      "minParent": 50,
+      "sharedHigh": {
+        "like": 4,
+        "growthMult": 1.15
+      },
+      "targetHigh": { "like": 1 },
+      "targetLow": {}
+    },
+    {
+      "id": "slow.music.rock",
+      "layer": "slow",
+      "weight": 0.55,
+      "minParent": 50,
+      "sharedHigh": {
+        "like": 4,
+        "growthMult": 1.15
+      },
+      "targetHigh": { "like": 1 },
+      "targetLow": {}
+    },
+    {
+      "id": "slow.music.hiphop",
+      "layer": "slow",
+      "weight": 0.55,
+      "minParent": 50,
+      "sharedHigh": {
+        "like": 4,
+        "growthMult": 1.15
+      },
+      "targetHigh": { "like": 1 },
+      "targetLow": {}
+    },
+    {
+      "id": "slow.music.reggae",
+      "layer": "slow",
+      "weight": 0.5,
+      "minParent": 50,
+      "sharedHigh": {
+        "like": 5,
+        "growthMult": 1.2
+      },
+      "targetHigh": { "like": 1 },
+      "targetLow": {}
+    }
+  ]
+}

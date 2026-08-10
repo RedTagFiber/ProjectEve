@@ -1,23 +1,19 @@
-﻿using System;
+﻿using ProjectEve.Traits;
+using System;
 
 namespace ProjectEve.Characters.Emotion
 {
     /// <summary>
-    /// Current emotional state for any NPC.
-    /// Changes from time, traits, memories, and events.
+    /// Legacy emotion meters kept for compile / UI compatibility.
+    /// Gameplay truth is Fast traits on NpcTraits.
+    /// Call SyncFromFast(traits) after trait updates if something still reads this.
     /// </summary>
     public class EmotionalProfile
     {
-        // =====================================================
-        // CORE STATE
-        // =====================================================
         public EmotionState State { get; private set; } = EmotionState.Neutral;
         public string Mood { get; private set; } = "Neutral";
-        public float Intensity { get; set; } = 0.35f; // 0..1 how strong the current state feels
+        public float Intensity { get; set; } = 0.35f;
 
-        // =====================================================
-        // BASIC METERS (0..100)
-        // =====================================================
         public int Comfort { get; private set; } = 50;
         public int Stress { get; private set; } = 10;
         public int Happiness { get; private set; } = 45;
@@ -25,22 +21,42 @@ namespace ProjectEve.Characters.Emotion
         public int Anger { get; private set; } = 5;
         public int Affection { get; private set; } = 50;
 
-        // =====================================================
-        // SHADOW METERS (0..100)
-        // These unlock the less-nice states
-        // =====================================================
-        public int Desire { get; private set; } = 20;      // wanting / temptation
-        public int Resentment { get; private set; } = 0;   // spite, bitterness
-        public int Shame { get; private set; } = 0;        // guilt/shame after acts
-        public int Restlessness { get; private set; } = 15; // boredom, need for stimulation
+        public int Desire { get; private set; } = 20;
+        public int Resentment { get; private set; } = 0;
+        public int Shame { get; private set; } = 0;
+        public int Restlessness { get; private set; } = 15;
         public int Energy { get; private set; } = 70;
 
-        // Optional simple score if something still reads it
         public int CurrentMoodScore =>
             Happiness - Stress - Sadness - (Anger / 2) + (Comfort / 5);
 
         // =====================================================
-        // SETTERS / ADJUSTERS
+        // PREFERRED: pull from Fast traits
+        // =====================================================
+        public void SyncFromFast(NpcTraits? traits)
+        {
+            if (traits == null)
+                return;
+
+            float T(string id) => traits.Get(id);
+
+            Anger = Round(T("trait.anger"));
+            Stress = Round((T("trait.anxiety") + T("trait.fear") + T("trait.tension")) / 3f);
+            Affection = Round(T("trait.affection"));
+            Desire = Round(T("trait.desire"));
+            Resentment = Round(T("trait.resentment"));
+            Shame = Round(Math.Max(T("trait.shame"), T("trait.guilt") * 0.85f));
+            Sadness = Round((T("trait.hurt") + T("trait.loneliness")) / 2f);
+            Happiness = Round((T("trait.hope") + T("trait.playfulness") + T("trait.affection")) / 3f);
+            Comfort = Round(100f - (T("trait.anxiety") * 0.4f + T("trait.guard") * 0.3f + T("trait.hurt") * 0.3f));
+            Restlessness = Round((T("trait.tension") + T("trait.desire") + (100f - T("trait.patience"))) / 3f);
+            // Energy stays body-ish; leave unless you wire fatigue later
+
+            RecalculateFromMeters();
+        }
+
+        // =====================================================
+        // Direct setters — still work, but prefer SyncFromFast
         // =====================================================
         public void SetState(EmotionState state, float intensity = 0.5f)
         {
@@ -49,85 +65,24 @@ namespace ProjectEve.Characters.Emotion
             Intensity = Math.Clamp(intensity, 0f, 1f);
         }
 
-        public void AdjustComfort(int amount)
-        {
-            Comfort = Clamp(Comfort + amount);
-            Recalculate();
-        }
+        public void AdjustComfort(int amount) { Comfort = Clamp(Comfort + amount); RecalculateFromMeters(); }
+        public void AdjustStress(int amount) { Stress = Clamp(Stress + amount); RecalculateFromMeters(); }
+        public void AddHappiness(int amount) { Happiness = Clamp(Happiness + amount); RecalculateFromMeters(); }
+        public void AddSadness(int amount) { Sadness = Clamp(Sadness + amount); RecalculateFromMeters(); }
+        public void AddAnger(int amount) { Anger = Clamp(Anger + amount); RecalculateFromMeters(); }
+        public void AddStress(int amount) { Stress = Clamp(Stress + amount); RecalculateFromMeters(); }
+        public void AddAffection(int amount) { Affection = Clamp(Affection + amount); RecalculateFromMeters(); }
+        public void AddDesire(int amount) { Desire = Clamp(Desire + amount); RecalculateFromMeters(); }
+        public void AddResentment(int amount) { Resentment = Clamp(Resentment + amount); RecalculateFromMeters(); }
+        public void AddShame(int amount) { Shame = Clamp(Shame + amount); RecalculateFromMeters(); }
+        public void AddRestlessness(int amount) { Restlessness = Clamp(Restlessness + amount); RecalculateFromMeters(); }
+        public void AddEnergy(int amount) { Energy = Clamp(Energy + amount); RecalculateFromMeters(); }
 
-        public void AdjustStress(int amount)
-        {
-            Stress = Clamp(Stress + amount);
-            Recalculate();
-        }
+        /// <summary>Old name kept.</summary>
+        public void Recalculate() => RecalculateFromMeters();
 
-        public void AddHappiness(int amount)
+        public void RecalculateFromMeters()
         {
-            Happiness = Clamp(Happiness + amount);
-            Recalculate();
-        }
-
-        public void AddSadness(int amount)
-        {
-            Sadness = Clamp(Sadness + amount);
-            Recalculate();
-        }
-
-        public void AddAnger(int amount)
-        {
-            Anger = Clamp(Anger + amount);
-            Recalculate();
-        }
-
-        public void AddStress(int amount)
-        {
-            Stress = Clamp(Stress + amount);
-            Recalculate();
-        }
-
-        public void AddAffection(int amount)
-        {
-            Affection = Clamp(Affection + amount);
-            Recalculate();
-        }
-
-        public void AddDesire(int amount)
-        {
-            Desire = Clamp(Desire + amount);
-            Recalculate();
-        }
-
-        public void AddResentment(int amount)
-        {
-            Resentment = Clamp(Resentment + amount);
-            Recalculate();
-        }
-
-        public void AddShame(int amount)
-        {
-            Shame = Clamp(Shame + amount);
-            Recalculate();
-        }
-
-        public void AddRestlessness(int amount)
-        {
-            Restlessness = Clamp(Restlessness + amount);
-            Recalculate();
-        }
-
-        public void AddEnergy(int amount)
-        {
-            Energy = Clamp(Energy + amount);
-            Recalculate();
-        }
-
-        // =====================================================
-        // MAIN MOOD RESOLUTION
-        // Priority: strong negative/shadow first, then soft states
-        // =====================================================
-        public void Recalculate()
-        {
-            // Hard negatives / danger
             if (Anger >= 80) { SetState(EmotionState.Angry, Anger / 100f); return; }
             if (Anger >= 60) { SetState(EmotionState.Irritated, Anger / 100f); return; }
 
@@ -141,7 +96,6 @@ namespace ProjectEve.Characters.Emotion
             if (Resentment >= 55) { SetState(EmotionState.Spiteful, Resentment / 100f); return; }
             if (Resentment >= 40 && Anger >= 40) { SetState(EmotionState.Bitter, 0.55f); return; }
 
-            // Desire / bad-urge states
             if (Desire >= 75 && Stress < 50) { SetState(EmotionState.Horny, Desire / 100f); return; }
             if (Desire >= 60 && Shame >= 30) { SetState(EmotionState.Tempted, 0.65f); return; }
             if (Desire >= 55 && Restlessness >= 50) { SetState(EmotionState.Reckless, 0.6f); return; }
@@ -153,7 +107,6 @@ namespace ProjectEve.Characters.Emotion
             if (Energy <= 20) { SetState(EmotionState.Tired, 0.7f); return; }
             if (Energy <= 10 && Sadness >= 40) { SetState(EmotionState.Numb, 0.6f); return; }
 
-            // Soft / social
             if (Sadness >= 70) { SetState(EmotionState.Sad, Sadness / 100f); return; }
             if (Sadness >= 50 && Affection >= 40) { SetState(EmotionState.Lonely, 0.55f); return; }
 
@@ -171,10 +124,9 @@ namespace ProjectEve.Characters.Emotion
             SetState(EmotionState.Neutral, 0.3f);
         }
 
-        // =====================================================
-        // DRIFT OVER TIME
-        // Call on day tick / between scenes
-        // =====================================================
+        /// <summary>
+        /// Optional day drift on meters only. Prefer TraitEngine.UpdateTraitsDay on Fast.
+        /// </summary>
         public void DriftTowardBaseline()
         {
             Comfort = Drift(Comfort, 50, 8);
@@ -187,14 +139,12 @@ namespace ProjectEve.Characters.Emotion
             Shame = Drift(Shame, 0, 10);
             Restlessness = Drift(Restlessness, 15, 8);
             Energy = Drift(Energy, 70, 6);
-
-            Recalculate();
+            RecalculateFromMeters();
         }
 
-        // =====================================================
-        // HELPERS
-        // =====================================================
         private static int Clamp(int value) => Math.Clamp(value, 0, 100);
+
+        private static int Round(float v) => Clamp((int)Math.Round(v));
 
         private static int Drift(int value, int target, int divisor)
         {

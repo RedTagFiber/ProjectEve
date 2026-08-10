@@ -1,0 +1,56 @@
+{
+    "catalog":  "movie_styles",
+    "version":  1,
+    "entries":  [
+                    {
+                        "label":  "Drama",
+                        "parent":  "slow.movies.drama",
+                        "id":  "style.drama"
+                    },
+                    {
+                        "label":  "Comedy",
+                        "parent":  "slow.movies.comedy",
+                        "id":  "style.comedy"
+                    },
+                    {
+                        "label":  "Horror",
+                        "parent":  "slow.movies.horror",
+                        "id":  "style.horror"
+                    },
+                    {
+                        "label":  "Romance",
+                        "parent":  "slow.movies.romance",
+                        "id":  "style.romance"
+                    },
+                    {
+                        "label":  "Action",
+                        "parent":  "slow.movies.action",
+                        "id":  "style.action"
+                    },
+                    {
+                        "label":  "Sci-Fi / Fantasy",
+                        "parent":  "slow.movies.scifi_fantasy",
+                        "id":  "style.scifi_fantasy"
+                    },
+                    {
+                        "label":  "Thriller",
+                        "parent":  "slow.movies.thriller",
+                        "id":  "style.thriller"
+                    },
+                    {
+                        "label":  "Documentary",
+                        "parent":  "slow.movies.documentary",
+                        "id":  "style.documentary"
+                    },
+                    {
+                        "label":  "Animated",
+                        "parent":  "slow.movies.animated",
+                        "id":  "style.animated"
+                    },
+                    {
+                        "label":  "Cult / Indie",
+                        "parent":  "slow.movies.cult_indie",
+                        "id":  "style.cult_indie"
+                    }
+                ]
+}

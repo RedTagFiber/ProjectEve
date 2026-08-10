@@ -1,9 +1,16 @@
 ﻿using ProjectEve.AI.Brain;
 using ProjectEve.Characters.Base;
 using ProjectEve.Core.Chat;
+using ProjectEve.Traits;
+using System;
+using System.Threading.Tasks;
 
 namespace ProjectEve.Chat
 {
+    /// <summary>
+    /// Phone / Blazor path into the real Brain.
+    /// Order: load → ensure traits → Think (TAGS → TraitEngine) → Reply (speech).
+    /// </summary>
     public class BrainEveChatService : IEveChatService
     {
         public Task<string> GetReplyAsync(string sessionId, string userMessage)
@@ -19,15 +26,38 @@ namespace ProjectEve.Chat
                 if (eve == null)
                     return "...";
 
-                if (eve.Brain == null)
-                    eve.Brain = new Brain();
-
+                eve.Brain ??= new Brain();
                 eve.Brain.Owner = eve;
 
-                eve.Brain.Think(message);
-                var reply = eve.Brain.Reply(message);
+                eve.Traits ??= new NpcTraits();
+                if (eve.Traits.GetAll().Count == 0)
+                {
+                    try
+                    {
+                        TraitJsonLoader.ApplyRolledLayers(eve.Traits);
+                    }
+                    catch
+                    {
+                        eve.Traits.InitializeFastDefaults();
+                    }
+                }
 
-                return string.IsNullOrWhiteSpace(reply) ? "..." : reply;
+                // Think: private thought + TAGS → TraitEngine once + meter sync
+                eve.Brain.Think(message ?? "");
+
+                // Reply: spoken / texted words only
+                string reply = eve.Brain.Reply(message ?? "");
+
+                try
+                {
+                    CharacterRepository.SaveTraits(eve.Id, eve.Traits);
+                }
+                catch
+                {
+                    // non-fatal
+                }
+
+                return string.IsNullOrWhiteSpace(reply) ? "..." : reply.Trim();
             }
             catch (Exception ex)
             {

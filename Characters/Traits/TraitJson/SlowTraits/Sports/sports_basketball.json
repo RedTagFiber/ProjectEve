@@ -1,0 +1,501 @@
+{
+  "id": "slow.sports.basketball",
+  "layer": "slow",
+  "domain": "sports",
+  "label": "Basketball",
+  "version": 1,
+  "description": "NBA and college basketball interest—teams, March Madness, rivalries, and watch habits. Ohio: Cavs, Buckeyes, and national clubs.",
+  "priorIntensity": 5,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [
+    "game",
+    "team",
+    "playoffs",
+    "March Madness",
+    "Finals",
+    "bucket",
+    "three",
+    "trade",
+    "draft",
+    "seed"
+  ],
+  "rivalBias": true,
+  "catalog": "Sports/Basketball",
+  "subTraits": [
+    {
+      "id": "slow.sports.basketball.nba_primary",
+      "label": "NBA is primary",
+      "kind": "lane",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "pros" ]
+    },
+    {
+      "id": "slow.sports.basketball.college_primary",
+      "label": "College is primary",
+      "kind": "lane",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "ncaa", "march" ]
+    },
+    {
+      "id": "slow.sports.basketball.both",
+      "label": "NBA + college both",
+      "kind": "lane",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "year-round" ]
+    },
+    {
+      "id": "slow.sports.basketball.casual",
+      "label": "Casual fan",
+      "kind": "intensity",
+      "defaultRange": [ 30, 70 ],
+      "tags": [ "highlights" ]
+    },
+    {
+      "id": "slow.sports.basketball.diehard",
+      "label": "Diehard",
+      "kind": "intensity",
+      "defaultRange": [ 70, 95 ],
+      "tags": [ "every-night" ]
+    },
+    {
+      "id": "slow.sports.basketball.analytics",
+      "label": "Analytics fan",
+      "kind": "knowledge",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "on-off", "lineup" ]
+    },
+    {
+      "id": "slow.sports.basketball.old_school",
+      "label": "Old-school / toughness",
+      "kind": "knowledge",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "defense", "physical" ]
+    },
+    {
+      "id": "slow.sports.basketball.fantasy",
+      "label": "Fantasy basketball",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "roster" ]
+    },
+    {
+      "id": "slow.sports.basketball.bracket",
+      "label": "March Madness bracket serious",
+      "kind": "habit",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "office", "ohio" ]
+    },
+    {
+      "id": "slow.sports.basketball.tv_package",
+      "label": "League pass / package",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "out-of-market" ]
+    },
+    {
+      "id": "slow.sports.basketball.arena",
+      "label": "Goes to arena",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "tickets", "live" ]
+    },
+
+    {
+      "id": "slow.sports.basketball.team_cavs",
+      "label": "Cleveland Cavaliers",
+      "kind": "team",
+      "defaultRange": [ 40, 95 ],
+      "tags": [ "ohio", "nba", "primary" ]
+    },
+    {
+      "id": "slow.sports.basketball.team_lakers",
+      "label": "Los Angeles Lakers",
+      "kind": "team",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "nba", "national" ]
+    },
+    {
+      "id": "slow.sports.basketball.team_celtics",
+      "label": "Boston Celtics",
+      "kind": "team",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "nba", "rival-national" ]
+    },
+    {
+      "id": "slow.sports.basketball.team_warriors",
+      "label": "Golden State Warriors",
+      "kind": "team",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "nba", "dynasty-adj" ]
+    },
+    {
+      "id": "slow.sports.basketball.team_bulls",
+      "label": "Chicago Bulls",
+      "kind": "team",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "nba", "jordan-era-memory" ]
+    },
+    {
+      "id": "slow.sports.basketball.team_heat",
+      "label": "Miami Heat",
+      "kind": "team",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "nba" ]
+    },
+    {
+      "id": "slow.sports.basketball.team_knicks",
+      "label": "New York Knicks",
+      "kind": "team",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "nba" ]
+    },
+    {
+      "id": "slow.sports.basketball.team_nets",
+      "label": "Brooklyn Nets",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "nba" ]
+    },
+    {
+      "id": "slow.sports.basketball.team_sixers",
+      "label": "Philadelphia 76ers",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "nba" ]
+    },
+    {
+      "id": "slow.sports.basketball.team_bucks",
+      "label": "Milwaukee Bucks",
+      "kind": "team",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "nba", "midwest" ]
+    },
+    {
+      "id": "slow.sports.basketball.team_pistons",
+      "label": "Detroit Pistons",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "nba", "ohio-adj" ]
+    },
+    {
+      "id": "slow.sports.basketball.team_pacers",
+      "label": "Indiana Pacers",
+      "kind": "team",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "nba", "ohio-adj" ]
+    },
+    {
+      "id": "slow.sports.basketball.team_bulls_memory",
+      "label": "Jordan Bulls nostalgia",
+      "kind": "era",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "90s" ]
+    },
+    {
+      "id": "slow.sports.basketball.team_spurs",
+      "label": "San Antonio Spurs",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "nba", "culture" ]
+    },
+    {
+      "id": "slow.sports.basketball.team_nuggets",
+      "label": "Denver Nuggets",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "nba" ]
+    },
+    {
+      "id": "slow.sports.basketball.team_suns",
+      "label": "Phoenix Suns",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "nba" ]
+    },
+    {
+      "id": "slow.sports.basketball.team_mavs",
+      "label": "Dallas Mavericks",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "nba" ]
+    },
+    {
+      "id": "slow.sports.basketball.team_rockets",
+      "label": "Houston Rockets",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "nba" ]
+    },
+    {
+      "id": "slow.sports.basketball.team_thunder",
+      "label": "Oklahoma City Thunder",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "nba" ]
+    },
+    {
+      "id": "slow.sports.basketball.team_wolves",
+      "label": "Minnesota Timberwolves",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "nba" ]
+    },
+    {
+      "id": "slow.sports.basketball.team_pelicans",
+      "label": "New Orleans Pelicans",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "nba" ]
+    },
+    {
+      "id": "slow.sports.basketball.team_grizzlies",
+      "label": "Memphis Grizzlies",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "nba" ]
+    },
+    {
+      "id": "slow.sports.basketball.team_hawks",
+      "label": "Atlanta Hawks",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "nba" ]
+    },
+    {
+      "id": "slow.sports.basketball.team_hornets",
+      "label": "Charlotte Hornets",
+      "kind": "team",
+      "defaultRange": [ 10, 75 ],
+      "tags": [ "nba" ]
+    },
+    {
+      "id": "slow.sports.basketball.team_wizards",
+      "label": "Washington Wizards",
+      "kind": "team",
+      "defaultRange": [ 10, 75 ],
+      "tags": [ "nba" ]
+    },
+    {
+      "id": "slow.sports.basketball.team_raptors",
+      "label": "Toronto Raptors",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "nba" ]
+    },
+    {
+      "id": "slow.sports.basketball.team_magic",
+      "label": "Orlando Magic",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "nba" ]
+    },
+    {
+      "id": "slow.sports.basketball.team_kings",
+      "label": "Sacramento Kings",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "nba" ]
+    },
+    {
+      "id": "slow.sports.basketball.team_clippers",
+      "label": "LA Clippers",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "nba" ]
+    },
+    {
+      "id": "slow.sports.basketball.team_jazz",
+      "label": "Utah Jazz",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "nba" ]
+    },
+    {
+      "id": "slow.sports.basketball.team_blazers",
+      "label": "Portland Trail Blazers",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "nba" ]
+    },
+
+    {
+      "id": "slow.sports.basketball.college_osu",
+      "label": "Ohio State Buckeyes (MBB/WBB)",
+      "kind": "college",
+      "defaultRange": [ 40, 95 ],
+      "tags": [ "ohio", "big-ten" ]
+    },
+    {
+      "id": "slow.sports.basketball.college_michigan",
+      "label": "Michigan Wolverines",
+      "kind": "college",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "rival", "big-ten" ]
+    },
+    {
+      "id": "slow.sports.basketball.college_msu",
+      "label": "Michigan State Spartans",
+      "kind": "college",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "big-ten" ]
+    },
+    {
+      "id": "slow.sports.basketball.college_indiana",
+      "label": "Indiana Hoosiers",
+      "kind": "college",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "big-ten", "hoops-culture" ]
+    },
+    {
+      "id": "slow.sports.basketball.college_purdue",
+      "label": "Purdue Boilermakers",
+      "kind": "college",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "big-ten" ]
+    },
+    {
+      "id": "slow.sports.basketball.college_duke",
+      "label": "Duke Blue Devils",
+      "kind": "college",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "national", "hate-or-love" ]
+    },
+    {
+      "id": "slow.sports.basketball.college_kentucky",
+      "label": "Kentucky Wildcats",
+      "kind": "college",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "national", "ohio-adj" ]
+    },
+    {
+      "id": "slow.sports.basketball.college_north_carolina",
+      "label": "North Carolina Tar Heels",
+      "kind": "college",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "national" ]
+    },
+    {
+      "id": "slow.sports.basketball.college_kansas",
+      "label": "Kansas Jayhawks",
+      "kind": "college",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "national" ]
+    },
+    {
+      "id": "slow.sports.basketball.college_gonzaga",
+      "label": "Gonzaga Bulldogs",
+      "kind": "college",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "national" ]
+    },
+    {
+      "id": "slow.sports.basketball.college_xavier",
+      "label": "Xavier Musketeers",
+      "kind": "college",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "ohio", "cincy" ]
+    },
+    {
+      "id": "slow.sports.basketball.college_uc",
+      "label": "Cincinnati Bearcats",
+      "kind": "college",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "ohio", "cincy" ]
+    },
+    {
+      "id": "slow.sports.basketball.college_dayton",
+      "label": "Dayton Flyers",
+      "kind": "college",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "ohio", "a10" ]
+    },
+
+    {
+      "id": "slow.sports.basketball.rival_cavs_warriors",
+      "label": "Cavs ↔ Warriors Finals memory",
+      "kind": "rival",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "lebron-era" ]
+    },
+    {
+      "id": "slow.sports.basketball.rival_osu_michigan",
+      "label": "OSU ↔ Michigan heat",
+      "kind": "rival",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "everything" ]
+    },
+    {
+      "id": "slow.sports.basketball.rival_duke_hate",
+      "label": "Duke hate (or respect)",
+      "kind": "rival",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "march" ]
+    },
+    {
+      "id": "slow.sports.basketball.rival_lakers_celtics",
+      "label": "Lakers ↔ Celtics myth",
+      "kind": "rival",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "history" ]
+    },
+
+    {
+      "id": "slow.sports.basketball.lebron_ohio",
+      "label": "LeBron Ohio loyalty complex",
+      "kind": "culture",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "akron", "cavs", "debate" ]
+    },
+    {
+      "id": "slow.sports.basketball.watch_playoffs_only",
+      "label": "Playoffs-only watcher",
+      "kind": "habit",
+      "defaultRange": [ 25, 85 ],
+      "tags": [ "april-on" ]
+    },
+    {
+      "id": "slow.sports.basketball.watch_regular_grind",
+      "label": "Regular season grinder",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "nightly" ]
+    },
+    {
+      "id": "slow.sports.basketball.women_college",
+      "label": "Follows women's college too",
+      "kind": "lane",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "wbb", "march" ]
+    },
+    {
+      "id": "slow.sports.basketball.wnba",
+      "label": "WNBA interest",
+      "kind": "lane",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "pros", "summer" ]
+    },
+    {
+      "id": "slow.sports.basketball.town_watched",
+      "label": "On TownWatchedTeams feed",
+      "kind": "system",
+      "defaultRange": [ 40, 95 ],
+      "tags": [ "local", "packet" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "fills a bracket once; no team identity",
+    "atOrAbove50": "attach primary team/college + habits; real names in talk",
+    "atOrAbove70": "March and playoffs structure social plans",
+    "extreme95": "losses move Fast mood; TownWatched feed active"
+  },
+  "notes": "Ohio seed: Cavs + OSU + optional Xavier/UC/Dayton. LeBron complex is local culture, not required on every fan."
+}

@@ -1,0 +1,68 @@
+{
+    "id":  "mid.flexible_ethics",
+    "layer":  "mid",
+    "label":  "Flexible ethics",
+    "version":  1,
+    "cluster":  "moral",
+    "description":  "Context bends the line; loyalty or survival can outweigh rule.",
+    "priorIntensity":  5,
+    "moveSpeed":  "slow",
+    "bands":  {
+                  "off":  "0-29",
+                  "low":  "30-49",
+                  "mid":  "50-69",
+                  "high":  "70-84",
+                  "break":  "85-94",
+                  "extreme":  "95-100"
+              },
+    "styles":  [
+                   {
+                       "id":  "mid.flexible_ethics.context_call",
+                       "label":  "Context call"
+                   },
+                   {
+                       "id":  "mid.flexible_ethics.lesser_harm",
+                       "label":  "Lesser harm"
+                   },
+                   {
+                       "id":  "mid.flexible_ethics.bend_for_us",
+                       "label":  "Bend for us"
+                   }
+               ],
+    "links":  {
+                  "boostedBy":  [
+                                    "fear",
+                                    "loyalty_tags"
+                                ],
+                  "drainedBy":  [
+                                    "guilt",
+                                    "pride"
+                                ],
+                  "opposes":  [
+                                  "mid.principled"
+                              ]
+              },
+    "tagTriggers":  [
+                        {
+                            "tag":  "mid.flexible_ethics.test",
+                            "meaning":  "Situation tests this character trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.flexible_ethics.confirm",
+                            "meaning":  "Behavior confirms this trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.flexible_ethics.violate",
+                            "meaning":  "Acts against this trait under pressure",
+                            "deltaHint":  -2
+                        }
+                    ],
+    "relationScoped":  true,
+    "historyHooks":  {
+                         "patternFile":  "flexible_ethics_patterns.json",
+                         "fundingBudget":  2
+                     },
+    "notes":  "Not always selfish; sometimes protective."
+}

@@ -1,0 +1,171 @@
+﻿{
+  "id": "guilt",
+  "layer": "fast",
+  "label": "Guilt",
+  "version": 1,
+  "description": "I did wrong / I owe repair. About action and responsibility. Not the same as Shame (I am wrong).",
+  "priorIntensity": {
+    "min": 2,
+    "max": 6,
+    "mean": 4
+  },
+  "spawn": {
+    "currentFromIntensity": true,
+    "noise": 3
+  },
+  "bands": {
+    "off": [ 0, 29 ],
+    "low": [ 30, 49 ],
+    "mid": [ 50, 69 ],
+    "high": [ 70, 84 ],
+    "break": [ 85, 94 ],
+    "extreme": [ 95, 100 ]
+  },
+  "styles": {
+    "repair": {
+      "means": "Moves toward fix: apology, amends, making it right.",
+      "speechHints": [ "sorry", "let_me_fix", "own_it" ],
+      "bodyHints": [ "approach", "open_hands" ],
+      "riskTags": [ "over_apologize" ]
+    },
+    "confess": {
+      "means": "Needs to say it out loud; comes clean.",
+      "speechHints": [ "admission", "truth_dump" ],
+      "bodyHints": [ "still", "eye_contact_hard" ],
+      "riskTags": [ "overshare" ]
+    },
+    "avoid": {
+      "means": "Cannot face it; dodges the person or topic.",
+      "speechHints": [ "subject_change", "busy" ],
+      "bodyHints": [ "exit", "busy_hands" ],
+      "riskTags": [ "ghost" ]
+    },
+    "self_punish": {
+      "means": "Turns it inward; denies self comfort; harsh self-talk.",
+      "speechHints": [ "I_deserve_this", "self_attack" ],
+      "bodyHints": [ "collapse", "withdraw" ],
+      "riskTags": [ "shame_blend" ]
+    },
+    "minimize": {
+      "means": "Shrinks the wrong; jokes; it wasn't that bad.",
+      "speechHints": [ "deflect", "joke", "everyone_does_it" ],
+      "bodyHints": [ "shrug", "half_smile" ],
+      "riskTags": [ "invalidates_other" ]
+    }
+  },
+  "defaultStyleWeights": {
+    "repair": 1.0,
+    "confess": 0.7,
+    "avoid": 0.8,
+    "self_punish": 0.55,
+    "minimize": 0.65
+  },
+  "flavors": {
+    "harm_done": "Hurt someone directly.",
+    "broken_promise": "Didn't show up / keep word.",
+    "secret": "Hid something that mattered.",
+    "survivor": "Got through when another didn't (survivor guilt).",
+    "success": "Did well while others struggled (quieter)."
+  },
+  "pull": {
+    "belowHomeDamageMult": 0.6,
+    "recoverMult": 1.3,
+    "aboveHomeSettleMult": 1.1
+  },
+  "funding": {
+    "required": true,
+    "budgetPerIntensityPoint": 1.0
+  },
+  "links": [
+    {
+      "trait": "shame",
+      "op": "+",
+      "weight": 0.35,
+      "when": "rise"
+    },
+    {
+      "trait": "hurt",
+      "op": "+",
+      "weight": 0.15,
+      "when": "rise"
+    },
+    {
+      "trait": "anger",
+      "op": "-",
+      "weight": 0.2,
+      "when": "rise",
+      "styleGate": [ "repair", "confess" ]
+    },
+    {
+      "trait": "pride",
+      "op": "-",
+      "weight": 0.25,
+      "when": "rise"
+    },
+    {
+      "trait": "hope",
+      "op": "+",
+      "weight": 0.15,
+      "when": "fall",
+      "note": "After real repair."
+    }
+  ],
+  "opposePairs": [
+    {
+      "with": "pride",
+      "policyHints": [ "refuse_fault", "delay_apology" ]
+    },
+    {
+      "with": "shame",
+      "policyHints": [ "collapse", "I_am_the_problem" ]
+    }
+  ],
+  "tagTriggers": [
+    {
+      "tag": "repair.need",
+      "direction": "+",
+      "baseWeight": 0.8
+    },
+    {
+      "tag": "conflict.you_hurt_them",
+      "direction": "+",
+      "baseWeight": 0.9
+    },
+    {
+      "tag": "bond.broken_promise",
+      "direction": "+",
+      "baseWeight": 0.85
+    },
+    {
+      "tag": "repair.apology_accepted",
+      "direction": "-",
+      "baseWeight": 0.75
+    },
+    {
+      "tag": "repair.amends_done",
+      "direction": "-",
+      "baseWeight": 0.8
+    },
+    {
+      "tag": "bond.forgiveness",
+      "direction": "-",
+      "baseWeight": 0.7
+    }
+  ],
+  "relationScoped": true,
+  "historyHooks": {
+    "catalog": "Characters/Traits/TraitJson/TraitHistory/guilt_patterns.json",
+    "filters": [ "style", "flavor", "sourceBucket" ],
+    "tellFraming": {
+      "prideHigh": "HeroSelf",
+      "prideLow": "VictimSelf",
+      "shameHigh": "VictimSelf",
+      "telephone": true
+    }
+  },
+  "debug": {
+    "showInDash": true,
+    "color": "#7a6b9a",
+    "sortPriority": 16
+  }
+}

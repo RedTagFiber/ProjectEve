@@ -1,0 +1,204 @@
+﻿{
+  "id": "anxiety",
+  "layer": "fast",
+  "label": "Anxiety",
+  "version": 1,
+  "description": "Worry, scanning, need for reassurance. Not the same as Fear (immediate threat). Body and mind run ahead of the moment.",
+  "priorIntensity": {
+    "min": 2,
+    "max": 7,
+    "mean": 4
+  },
+  "spawn": {
+    "currentFromIntensity": true,
+    "noise": 3
+  },
+  "bands": {
+    "off": [ 0, 29 ],
+    "low": [ 30, 49 ],
+    "mid": [ 50, 69 ],
+    "high": [ 70, 84 ],
+    "break": [ 85, 94 ],
+    "extreme": [ 95, 100 ]
+  },
+  "styles": {
+    "fidget": {
+      "means": "Restless body: taps, checks phone, moves, cannot settle.",
+      "speechHints": [ "rushed", "tangential" ],
+      "bodyHints": [ "fidget", "scan_room", "phone_check" ],
+      "riskTags": [ "distracted" ]
+    },
+    "overtalk": {
+      "means": "Fills silence; over-explains; asks stacked questions.",
+      "speechHints": [ "fast", "too_many_words", "clarify_loop" ],
+      "bodyHints": [ "lean_in", "wide_eyes" ],
+      "riskTags": [ "exhaust_listener" ]
+    },
+    "withdraw": {
+      "means": "Pulls inward; quiet; avoids adding risk.",
+      "speechHints": [ "minimal", "soft", "uncertain" ],
+      "bodyHints": [ "shrink", "avoid_eye" ],
+      "riskTags": [ "shutdown" ]
+    },
+    "reassure_seek": {
+      "means": "Needs confirmation: are we ok, did I mess up, do you still…",
+      "speechHints": [ "checking", "are_we_ok", "repeat_ask" ],
+      "bodyHints": [ "searching_face" ],
+      "riskTags": [ "cling" ]
+    },
+    "freeze": {
+      "means": "Locks up; blank; hard to decide or speak.",
+      "speechHints": [ "stalled", "uh", "lost" ],
+      "bodyHints": [ "still", "shallow_breath" ],
+      "riskTags": [ "non_responsive" ]
+    },
+    "plan_spiral": {
+      "means": "What-if chains; plans and backups; cannot stop forecasting.",
+      "speechHints": [ "what_if", "list", "worst_case" ],
+      "bodyHints": [ "tense_shoulders" ],
+      "riskTags": [ "paralysis_by_analysis" ]
+    }
+  },
+  "defaultStyleWeights": {
+    "fidget": 1.0,
+    "overtalk": 0.85,
+    "withdraw": 0.9,
+    "reassure_seek": 1.0,
+    "freeze": 0.5,
+    "plan_spiral": 0.8
+  },
+  "flavors": {
+    "social": "Judgment, awkwardness, what they think of me.",
+    "attachment": "Relationship safety; abandonment scan.",
+    "performance": "Failing, looking incompetent, deadlines.",
+    "health": "Body / catastrophe health worries.",
+    "uncertainty": "Unknown outcomes; open loops."
+  },
+  "pull": {
+    "belowHomeDamageMult": 0.55,
+    "recoverMult": 1.25,
+    "aboveHomeSettleMult": 1.1
+  },
+  "funding": {
+    "required": true,
+    "budgetPerIntensityPoint": 1.0
+  },
+  "links": [
+    {
+      "trait": "fear",
+      "op": "+",
+      "weight": 0.35,
+      "when": "rise"
+    },
+    {
+      "trait": "guard",
+      "op": "+",
+      "weight": 0.4,
+      "when": "rise"
+    },
+    {
+      "trait": "openness",
+      "op": "-",
+      "weight": 0.35,
+      "when": "rise"
+    },
+    {
+      "trait": "patience",
+      "op": "-",
+      "weight": 0.25,
+      "when": "rise"
+    },
+    {
+      "trait": "playfulness",
+      "op": "-",
+      "weight": 0.3,
+      "when": "rise"
+    },
+    {
+      "trait": "trust",
+      "op": "-",
+      "weight": 0.2,
+      "when": "rise",
+      "note": "Situational; reassurance tags can restore."
+    },
+    {
+      "trait": "hope",
+      "op": "-",
+      "weight": 0.25,
+      "when": "rise"
+    }
+  ],
+  "opposePairs": [
+    {
+      "with": "playfulness",
+      "policyHints": [ "joke_as_cover", "cannot_joke_when_frozen" ]
+    },
+    {
+      "with": "pride",
+      "policyHints": [ "hide_the_shake", "overcontrol" ]
+    }
+  ],
+  "tagTriggers": [
+    {
+      "tag": "conflict.uncertainty",
+      "direction": "+",
+      "baseWeight": 0.8
+    },
+    {
+      "tag": "conflict.criticize",
+      "direction": "+",
+      "baseWeight": 0.75
+    },
+    {
+      "tag": "conflict.silence_long",
+      "direction": "+",
+      "baseWeight": 0.7
+    },
+    {
+      "tag": "status.evaluate",
+      "direction": "+",
+      "baseWeight": 0.65
+    },
+    {
+      "tag": "bond.rejection",
+      "direction": "+",
+      "baseWeight": 0.85
+    },
+    {
+      "tag": "bond.reassurance",
+      "direction": "-",
+      "baseWeight": 0.8
+    },
+    {
+      "tag": "bond.soft_return",
+      "direction": "-",
+      "baseWeight": 0.5
+    },
+    {
+      "tag": "repair.apology",
+      "direction": "-",
+      "baseWeight": 0.35
+    },
+    {
+      "tag": "play.warm_tease",
+      "direction": "-",
+      "baseWeight": 0.25
+    }
+  ],
+  "relationScoped": true,
+  "historyHooks": {
+    "catalog": "Characters/Traits/TraitJson/TraitHistory/anxiety_patterns.json",
+    "filters": [ "style", "flavor", "sourceBucket" ],
+    "tellFraming": {
+      "prideHigh": "HeroSelf",
+      "prideLow": "VictimSelf",
+      "shameHigh": "VictimSelf",
+      "telephone": true
+    }
+  },
+  "debug": {
+    "showInDash": true,
+    "color": "#c9b44a",
+    "sortPriority": 12
+  }
+}

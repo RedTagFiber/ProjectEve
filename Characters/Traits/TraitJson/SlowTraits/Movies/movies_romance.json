@@ -1,0 +1,381 @@
+{
+  "id": "slow.movies.romance",
+  "layer": "slow",
+  "domain": "movies",
+  "label": "Romance",
+  "version": 1,
+  "description": "Prefers romance films—rom-com to tragic love, heat level, fantasy vs realism, and rewatch comfort.",
+  "priorIntensity": 5,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [ "romance", "romcom", "love story", "meet cute", "chemistry", "kiss", "cry", "date movie" ],
+  "rivalBias": true,
+  "catalog": "Movies/Titles/Romance",
+  "subTraits": [
+    {
+      "id": "slow.movies.romance.romcom",
+      "label": "Rom-com core",
+      "kind": "subgenre",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "funny", "hea" ]
+    },
+    {
+      "id": "slow.movies.romance.romantic_drama",
+      "label": "Romantic drama",
+      "kind": "subgenre",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "weight", "tears" ]
+    },
+    {
+      "id": "slow.movies.romance.period_romance",
+      "label": "Period romance",
+      "kind": "subgenre",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "costume", "letters" ]
+    },
+    {
+      "id": "slow.movies.romance.tragic",
+      "label": "Tragic romance",
+      "kind": "subgenre",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "doomed", "cry" ]
+    },
+    {
+      "id": "slow.movies.romance.steamy",
+      "label": "Steamy / heat-forward",
+      "kind": "heat",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "chemistry", "+18" ]
+    },
+    {
+      "id": "slow.movies.romance.chaste",
+      "label": "Chaste / fade-to-black",
+      "kind": "heat",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "soft", "tension" ]
+    },
+    {
+      "id": "slow.movies.romance.meet_cute",
+      "label": "Meet-cute loyalty",
+      "kind": "trope",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "start", "charm" ]
+    },
+    {
+      "id": "slow.movies.romance.enemies_to_lovers",
+      "label": "Enemies to lovers",
+      "kind": "trope",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "sparks", "arc" ]
+    },
+    {
+      "id": "slow.movies.romance.friends_to_lovers",
+      "label": "Friends to lovers",
+      "kind": "trope",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "slow", "safe" ]
+    },
+    {
+      "id": "slow.movies.romance.second_chance",
+      "label": "Second chance",
+      "kind": "trope",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "ex", "repair" ]
+    },
+    {
+      "id": "slow.movies.romance.forbidden",
+      "label": "Forbidden love",
+      "kind": "trope",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "obstacle", "cost" ]
+    },
+    {
+      "id": "slow.movies.romance.workplace",
+      "label": "Workplace romance",
+      "kind": "trope",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "office", "risk" ]
+    },
+    {
+      "id": "slow.movies.romance.holiday",
+      "label": "Holiday romance",
+      "kind": "season",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "christmas", "hallmark-adj" ]
+    },
+    {
+      "id": "slow.movies.romance.hallmark_lean",
+      "label": "Hallmark-style comfort",
+      "kind": "style",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "safe", "formula" ]
+    },
+    {
+      "id": "slow.movies.romance.anti_hallmark",
+      "label": "Anti-formula romance",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "messy", "real" ]
+    },
+    {
+      "id": "slow.movies.romance.indie_romance",
+      "label": "Indie romance",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "awkward", "true" ]
+    },
+    {
+      "id": "slow.movies.romance.prestige",
+      "label": "Prestige romance",
+      "kind": "style",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "awards", "craft" ]
+    },
+    {
+      "id": "slow.movies.romance.hea_required",
+      "label": "HEA required",
+      "kind": "ending",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "together", "safe" ]
+    },
+    {
+      "id": "slow.movies.romance.bittersweet_ok",
+      "label": "Bittersweet OK",
+      "kind": "ending",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "real", "ache" ]
+    },
+    {
+      "id": "slow.movies.romance.tragic_ok",
+      "label": "Tragic end OK",
+      "kind": "ending",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "cry", "art" ]
+    },
+    {
+      "id": "slow.movies.romance.chemistry_first",
+      "label": "Chemistry over plot",
+      "kind": "priority",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "actors", "sparks" ]
+    },
+    {
+      "id": "slow.movies.romance.writing_first",
+      "label": "Writing over glamour",
+      "kind": "priority",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "dialogue", "truth" ]
+    },
+    {
+      "id": "slow.movies.romance.fantasy_love",
+      "label": "Fantasy love (grand gestures)",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "gesture", "dream" ]
+    },
+    {
+      "id": "slow.movies.romance.realistic_love",
+      "label": "Realistic love preferred",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "messy", "work" ]
+    },
+    {
+      "id": "slow.movies.romance.80s_90s",
+      "label": "80s/90s romance era",
+      "kind": "era",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "vhs", "quotable" ]
+    },
+    {
+      "id": "slow.movies.romance.2000s",
+      "label": "2000s rom-com era",
+      "kind": "era",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "meg", "formula" ]
+    },
+    {
+      "id": "slow.movies.romance.modern",
+      "label": "Modern romance",
+      "kind": "era",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "apps", "now" ]
+    },
+    {
+      "id": "slow.movies.romance.foreign",
+      "label": "Foreign romance",
+      "kind": "scope",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "subs", "feel" ]
+    },
+    {
+      "id": "slow.movies.romance.musical_romance",
+      "label": "Musical romance",
+      "kind": "cross",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "song", "dance" ]
+    },
+    {
+      "id": "slow.movies.romance.action_romance",
+      "label": "Action + romance blend",
+      "kind": "cross",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "danger", "kiss" ]
+    },
+    {
+      "id": "slow.movies.romance.date_default",
+      "label": "Default date-night genre",
+      "kind": "social",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "couple", "easy" ]
+    },
+    {
+      "id": "slow.movies.romance.solo_comfort",
+      "label": "Solo comfort romance",
+      "kind": "social",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "alone", "feel" ]
+    },
+    {
+      "id": "slow.movies.romance.private_taste",
+      "label": "Private about liking romance",
+      "kind": "social",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "shame", "hide" ]
+    },
+    {
+      "id": "slow.movies.romance.proud_fan",
+      "label": "Proud romance fan",
+      "kind": "social",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "no-shame", "recommend" ]
+    },
+    {
+      "id": "slow.movies.romance.rewatch_heavy",
+      "label": "Heavy rewatch library",
+      "kind": "viewing",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "comfort", "lines" ]
+    },
+    {
+      "id": "slow.movies.romance.background_ok",
+      "label": "Background comfort OK",
+      "kind": "viewing",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "half", "home" ]
+    },
+    {
+      "id": "slow.movies.romance.theater_event",
+      "label": "Theater for big romance",
+      "kind": "viewing",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "opening", "feel" ]
+    },
+    {
+      "id": "slow.movies.romance.quote_lines",
+      "label": "Quotes romance lines",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "memory", "sweet" ]
+    },
+    {
+      "id": "slow.movies.romance.grand_gesture_debate",
+      "label": "Grand gesture debate",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "talk", "real-life" ]
+    },
+    {
+      "id": "slow.movies.romance.anti_toxic",
+      "label": "Calls out toxic romance",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "boundary", "modern" ]
+    },
+    {
+      "id": "slow.movies.romance.loves_messy",
+      "label": "Loves messy couples",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "fight", "passion" ]
+    },
+    {
+      "id": "slow.movies.romance.age_gap_sensitive",
+      "label": "Age-gap sensitive",
+      "kind": "tolerance",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "boundary", "talk" ]
+    },
+    {
+      "id": "slow.movies.romance.lgbtq_romance",
+      "label": "LGBTQ romance seeker",
+      "kind": "scope",
+      "defaultRange": [ 20, 95 ],
+      "tags": [ "rep", "love" ]
+    },
+    {
+      "id": "slow.movies.romance.interracial_normal",
+      "label": "Interracial as normal not plot",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "default", "modern" ]
+    },
+    {
+      "id": "slow.movies.romance.slow_burn",
+      "label": "Slow-burn tension",
+      "kind": "structure",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "wait", "payoff" ]
+    },
+    {
+      "id": "slow.movies.romance.instant_spark",
+      "label": "Instant spark OK",
+      "kind": "structure",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "fast", "chemistry" ]
+    },
+    {
+      "id": "slow.movies.romance.ensemble_friends",
+      "label": "Friend-group romance ensemble",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "crew", "support" ]
+    },
+    {
+      "id": "slow.movies.romance.two_person",
+      "label": "Two-person focus",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "intimate", "tight" ]
+    },
+    {
+      "id": "slow.movies.romance.soundtrack_matters",
+      "label": "Soundtrack makes the film",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "song", "moment" ]
+    },
+    {
+      "id": "slow.movies.romance.rain_kiss",
+      "label": "Rain / airport scene soft spot",
+      "kind": "trope",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "iconic", "feel" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "fine with a love story; no romance identity",
+    "atOrAbove50": "attach 2-4; heat level and ending needs show",
+    "atOrAbove70": "romance is comfort system; private vs proud matters for talk",
+    "extreme95": "HEA vs tragedy is a values fight; date picks are loaded"
+  },
+  "notes": "Private taste common for some men NPCs—don't force reveal. Heat subs respect +18 run rating."
+}

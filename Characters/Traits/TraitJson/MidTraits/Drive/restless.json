@@ -1,0 +1,67 @@
+{
+    "id":  "mid.restless",
+    "layer":  "mid",
+    "label":  "Restless",
+    "version":  1,
+    "cluster":  "drive",
+    "description":  "Needs motion and change; stagnant rooms cost energy.",
+    "priorIntensity":  5,
+    "moveSpeed":  "slow",
+    "bands":  {
+                  "off":  "0-29",
+                  "low":  "30-49",
+                  "mid":  "50-69",
+                  "high":  "70-84",
+                  "break":  "85-94",
+                  "extreme":  "95-100"
+              },
+    "styles":  [
+                   {
+                       "id":  "mid.restless.move_on",
+                       "label":  "Move on"
+                   },
+                   {
+                       "id":  "mid.restless.new_plan",
+                       "label":  "New plan"
+                   },
+                   {
+                       "id":  "mid.restless.can\u0027t_sit",
+                       "label":  "Can\u0027t sit"
+                   }
+               ],
+    "links":  {
+                  "boostedBy":  [
+                                    "anxiety",
+                                    "tension"
+                                ],
+                  "drainedBy":  [
+                                    "patience"
+                                ],
+                  "opposes":  [
+                                  "mid.content"
+                              ]
+              },
+    "tagTriggers":  [
+                        {
+                            "tag":  "mid.restless.test",
+                            "meaning":  "Situation tests this character trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.restless.confirm",
+                            "meaning":  "Behavior confirms this trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.restless.violate",
+                            "meaning":  "Acts against this trait under pressure",
+                            "deltaHint":  -2
+                        }
+                    ],
+    "relationScoped":  true,
+    "historyHooks":  {
+                         "patternFile":  "restless_patterns.json",
+                         "fundingBudget":  2
+                     },
+    "notes":  "Can look ambitious without status goal."
+}

@@ -1,0 +1,199 @@
+{
+  "id": "slow.tv.anime",
+  "layer": "slow",
+  "domain": "tv",
+  "label": "Anime",
+  "version": 1,
+  "description": "Anime series interest—shonen, seinen, slice-of-life, prestige, and seasonal watching.",
+  "priorIntensity": 4,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [ "anime", "episode", "seasonal", "manga", "dub", "sub", "that arc" ],
+  "rivalBias": true,
+  "catalog": "TV/Shows/Anime",
+  "subTraits": [
+    {
+      "id": "slow.tv.anime.casual",
+      "label": "Casual / big titles only",
+      "kind": "intensity",
+      "defaultRange": [ 30, 70 ],
+      "tags": [ "gateway" ]
+    },
+    {
+      "id": "slow.tv.anime.seasonal",
+      "label": "Seasonal watcher",
+      "kind": "habit",
+      "defaultRange": [ 40, 95 ],
+      "tags": [ "weekly" ]
+    },
+    {
+      "id": "slow.tv.anime.binge_classics",
+      "label": "Binge classics",
+      "kind": "habit",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "catalog" ]
+    },
+    {
+      "id": "slow.tv.anime.sub_pref",
+      "label": "Sub preferred",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "purist" ]
+    },
+    {
+      "id": "slow.tv.anime.dub_ok",
+      "label": "Dub OK / prefers dub",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "access" ]
+    },
+    {
+      "id": "slow.tv.anime.shonen",
+      "label": "Shonen focus",
+      "kind": "style",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "battle" ]
+    },
+    {
+      "id": "slow.tv.anime.seinen",
+      "label": "Seinen / darker",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "mature" ]
+    },
+    {
+      "id": "slow.tv.anime.slice",
+      "label": "Slice of life / cozy",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "calm" ]
+    },
+    {
+      "id": "slow.tv.anime.mecha",
+      "label": "Mecha",
+      "kind": "style",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "robots" ]
+    },
+    {
+      "id": "slow.tv.anime.sports_anime",
+      "label": "Sports anime",
+      "kind": "style",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "team" ]
+    },
+    {
+      "id": "slow.tv.anime.naruto",
+      "label": "Naruto",
+      "kind": "show",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "gateway" ]
+    },
+    {
+      "id": "slow.tv.anime.one_piece",
+      "label": "One Piece",
+      "kind": "show",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "long" ]
+    },
+    {
+      "id": "slow.tv.anime.dbz",
+      "label": "Dragon Ball",
+      "kind": "show",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "classic" ]
+    },
+    {
+      "id": "slow.tv.anime.aot",
+      "label": "Attack on Titan",
+      "kind": "show",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "modern-giant" ]
+    },
+    {
+      "id": "slow.tv.anime.demon_slayer",
+      "label": "Demon Slayer",
+      "kind": "show",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "popular" ]
+    },
+    {
+      "id": "slow.tv.anime.jjk",
+      "label": "Jujutsu Kaisen",
+      "kind": "show",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "modern" ]
+    },
+    {
+      "id": "slow.tv.anime.fma",
+      "label": "Fullmetal Alchemist",
+      "kind": "show",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "goat-talk" ]
+    },
+    {
+      "id": "slow.tv.anime.death_note",
+      "label": "Death Note",
+      "kind": "show",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "gateway" ]
+    },
+    {
+      "id": "slow.tv.anime.cowboy_bebop",
+      "label": "Cowboy Bebop",
+      "kind": "show",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "prestige" ]
+    },
+    {
+      "id": "slow.tv.anime.eva",
+      "label": "Neon Genesis Evangelion",
+      "kind": "show",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "prestige", "debate" ]
+    },
+    {
+      "id": "slow.tv.anime.studio_ghibli_adj",
+      "label": "Ghibli / film-anime love",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "film" ]
+    },
+    {
+      "id": "slow.tv.anime.crunchyroll",
+      "label": "Crunchyroll / legal stream habit",
+      "kind": "habit",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "platform" ]
+    },
+    {
+      "id": "slow.tv.anime.manga_too",
+      "label": "Reads manga too",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "source" ]
+    },
+    {
+      "id": "slow.tv.anime.gatekeep",
+      "label": "Light gatekeeping streak",
+      "kind": "attitude",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "only-real" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "saw a few mainstream titles; no identity",
+    "atOrAbove50": "attach style + 2-3 shows + sub/dub lean",
+    "atOrAbove70": "seasonal or catalog habit real",
+    "extreme95": "anime is default entertainment lane"
+  },
+  "notes": "Keep population lower than general drama/comedy unless world needs it."
+}

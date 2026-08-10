@@ -1,0 +1,23 @@
+{
+    "catalog":  "movie_titles_drama",
+    "style":  "Drama",
+    "version":  1,
+    "entries":  [
+                    {
+                        "id":  "the_shawshank_redemption",
+                        "label":  "The Shawshank Redemption"
+                    },
+                    {
+                        "id":  "forrest_gump",
+                        "label":  "Forrest Gump"
+                    },
+                    {
+                        "id":  "manchester_by_the_sea",
+                        "label":  "Manchester by the Sea"
+                    },
+                    {
+                        "id":  "a_star_is_born",
+                        "label":  "A Star Is Born"
+                    }
+                ]
+}

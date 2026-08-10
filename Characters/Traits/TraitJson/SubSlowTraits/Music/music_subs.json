@@ -1,0 +1,86 @@
+{
+    "appliesToParents":  [
+                             "slow.music.rock",
+                             "slow.music.country",
+                             "slow.music.hip_hop",
+                             "slow.music.metal",
+                             "slow.music.pop",
+                             "slow.music.edm_dance",
+                             "slow.music.rnb_soul",
+                             "slow.music.reggae",
+                             "slow.music.folk_americana",
+                             "slow.music.classical_jazz",
+                             "slow.music.punk",
+                             "slow.music.indie",
+                             "slow.music.blues",
+                             "slow.music.christian_gospel",
+                             "slow.music.mood_driven"
+                         ],
+    "version":  1,
+    "fillThreshold":  50,
+    "description":  "Shared music sub-traits when any music parent \u003e= 50",
+    "subs":  [
+                 {
+                     "label":  "Era bias",
+                     "values":  [
+                                    "70s",
+                                    "80s",
+                                    "90s",
+                                    "2000s",
+                                    "2010s",
+                                    "current",
+                                    "mixed"
+                                ],
+                     "default":  "mixed",
+                     "id":  "sub.music.era",
+                     "type":  "enum"
+                 },
+                 {
+                     "label":  "Artist seeds",
+                     "source":  "Music/Artists",
+                     "id":  "sub.music.artists",
+                     "type":  "string_list",
+                     "maxItems":  12
+                 },
+                 {
+                     "id":  "sub.music.mood_roles",
+                     "label":  "Mood roles",
+                     "required":  true,
+                     "type":  "catalog_ref",
+                     "catalogs":  [
+                                      "music_mood_roles"
+                                  ],
+                     "pickCount":  3
+                 },
+                 {
+                     "label":  "Live shows",
+                     "values":  [
+                                    "never",
+                                    "rare",
+                                    "sometimes",
+                                    "often"
+                                ],
+                     "default":  "rare",
+                     "id":  "sub.music.live_shows",
+                     "type":  "enum"
+                 },
+                 {
+                     "label":  "Discovery",
+                     "values":  [
+                                    "radio",
+                                    "playlist",
+                                    "friends",
+                                    "deep_cuts"
+                                ],
+                     "default":  "playlist",
+                     "id":  "sub.music.discovery",
+                     "type":  "enum"
+                 },
+                 {
+                     "label":  "Loud identity",
+                     "default":  false,
+                     "id":  "sub.music.volume_identity",
+                     "type":  "bool"
+                 }
+             ]
+}

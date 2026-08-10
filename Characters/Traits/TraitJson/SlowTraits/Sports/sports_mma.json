@@ -1,0 +1,504 @@
+{
+  "id": "slow.sports.mma",
+  "layer": "slow",
+  "domain": "sports",
+  "label": "MMA",
+  "version": 1,
+  "description": "Mixed martial arts interest—UFC primary, other promos optional. Cards, fighters, gym culture, and PPV habits.",
+  "priorIntensity": 4,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [
+    "fight",
+    "card",
+    "UFC",
+    "PPV",
+    "octagon",
+    "submission",
+    "knockout",
+    "weight class",
+    "champ",
+    "gym",
+    "spar",
+    "decision",
+    "title fight"
+  ],
+  "rivalBias": true,
+  "catalog": "Sports/MMA",
+  "subTraits": [
+    {
+      "id": "slow.sports.mma.casual",
+      "label": "Casual big-card fan",
+      "kind": "intensity",
+      "defaultRange": [ 30, 70 ],
+      "tags": [ "main-event" ]
+    },
+    {
+      "id": "slow.sports.mma.diehard",
+      "label": "Diehard",
+      "kind": "intensity",
+      "defaultRange": [ 70, 95 ],
+      "tags": [ "prelims", "rankings" ]
+    },
+    {
+      "id": "slow.sports.mma.history_buff",
+      "label": "History / lineage buff",
+      "kind": "knowledge",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "pride", "early-ufc" ]
+    },
+    {
+      "id": "slow.sports.mma.technique_nerd",
+      "label": "Technique / film nerd",
+      "kind": "knowledge",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "grappling", "striking" ]
+    },
+    {
+      "id": "slow.sports.mma.judge_watcher",
+      "label": "Judges every decision",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "robbery", "scorecards" ]
+    },
+    {
+      "id": "slow.sports.mma.ppv_buyer",
+      "label": "Buys PPVs",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "money", "night" ]
+    },
+    {
+      "id": "slow.sports.mma.bar_watch",
+      "label": "Bar / watch-party cards",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "social" ]
+    },
+    {
+      "id": "slow.sports.mma.early_prelims",
+      "label": "Watches early prelims",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "full-card" ]
+    },
+    {
+      "id": "slow.sports.mma.gym_member",
+      "label": "Trains MMA / BJJ / striking",
+      "kind": "practice",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "local", "sweat" ]
+    },
+    {
+      "id": "slow.sports.mma.bjj_focus",
+      "label": "BJJ-focused training",
+      "kind": "practice",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "gi", "nogi" ]
+    },
+    {
+      "id": "slow.sports.mma.striking_focus",
+      "label": "Striking-focused training",
+      "kind": "practice",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "kickbox", "boxing" ]
+    },
+    {
+      "id": "slow.sports.mma.amateur_past",
+      "label": "Amateur fight past",
+      "kind": "practice",
+      "defaultRange": [ 20, 95 ],
+      "tags": [ "history", "pride" ]
+    },
+
+    {
+      "id": "slow.sports.mma.promo_ufc",
+      "label": "UFC primary",
+      "kind": "promo",
+      "defaultRange": [ 40, 95 ],
+      "tags": [ "main" ]
+    },
+    {
+      "id": "slow.sports.mma.promo_bellator",
+      "label": "Bellator interest",
+      "kind": "promo",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "alt" ]
+    },
+    {
+      "id": "slow.sports.mma.promo_one",
+      "label": "ONE Championship",
+      "kind": "promo",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "asia", "rules" ]
+    },
+    {
+      "id": "slow.sports.mma.promo_pfl",
+      "label": "PFL",
+      "kind": "promo",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "alt" ]
+    },
+    {
+      "id": "slow.sports.mma.promo_regional",
+      "label": "Regional / local cards",
+      "kind": "promo",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "ohio", "under" ]
+    },
+
+    {
+      "id": "slow.sports.mma.hw",
+      "label": "Heavyweight focus",
+      "kind": "division",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "power" ]
+    },
+    {
+      "id": "slow.sports.mma.lhw",
+      "label": "Light heavyweight",
+      "kind": "division",
+      "defaultRange": [ 25, 90 ],
+      "tags": []
+    },
+    {
+      "id": "slow.sports.mma.mw",
+      "label": "Middleweight",
+      "kind": "division",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "depth" ]
+    },
+    {
+      "id": "slow.sports.mma.ww",
+      "label": "Welterweight",
+      "kind": "division",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "depth" ]
+    },
+    {
+      "id": "slow.sports.mma.lw",
+      "label": "Lightweight",
+      "kind": "division",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "stacked" ]
+    },
+    {
+      "id": "slow.sports.mma.feather",
+      "label": "Featherweight",
+      "kind": "division",
+      "defaultRange": [ 25, 90 ],
+      "tags": []
+    },
+    {
+      "id": "slow.sports.mma.bantam",
+      "label": "Bantamweight",
+      "kind": "division",
+      "defaultRange": [ 25, 90 ],
+      "tags": []
+    },
+    {
+      "id": "slow.sports.mma.fly",
+      "label": "Flyweight",
+      "kind": "division",
+      "defaultRange": [ 20, 85 ],
+      "tags": []
+    },
+    {
+      "id": "slow.sports.mma.womens",
+      "label": "Women's divisions",
+      "kind": "division",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "follow" ]
+    },
+
+    {
+      "id": "slow.sports.mma.gsp",
+      "label": "Georges St-Pierre",
+      "kind": "legend",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "prime", "well-rounded" ]
+    },
+    {
+      "id": "slow.sports.mma.silva",
+      "label": "Anderson Silva",
+      "kind": "legend",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "striking", "prime" ]
+    },
+    {
+      "id": "slow.sports.mma.jones",
+      "label": "Jon Jones",
+      "kind": "legend",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "goat-debate", "controversy" ]
+    },
+    {
+      "id": "slow.sports.mma.fedor",
+      "label": "Fedor Emelianenko",
+      "kind": "legend",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "pride", "heavy" ]
+    },
+    {
+      "id": "slow.sports.mma.couture",
+      "label": "Randy Couture",
+      "kind": "legend",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "early", "grit" ]
+    },
+    {
+      "id": "slow.sports.mma.lesnar",
+      "label": "Brock Lesnar",
+      "kind": "legend",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "crossover", "hw" ]
+    },
+    {
+      "id": "slow.sports.mma.conor",
+      "label": "Conor McGregor",
+      "kind": "modern",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "star", "debate" ]
+    },
+    {
+      "id": "slow.sports.mma.khabib",
+      "label": "Khabib Nurmagomedov",
+      "kind": "modern",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "undisputed", "chain" ]
+    },
+    {
+      "id": "slow.sports.mma.islam",
+      "label": "Islam Makhachev",
+      "kind": "modern",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "lw", "dagestan" ]
+    },
+    {
+      "id": "slow.sports.mma.islam_chain",
+      "label": "Dagestani chain respect",
+      "kind": "culture",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "wrestling", "smother" ]
+    },
+    {
+      "id": "slow.sports.mma.adesanya",
+      "label": "Israel Adesanya",
+      "kind": "modern",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "mw", "kickbox" ]
+    },
+    {
+      "id": "slow.sports.mma.pereira",
+      "label": "Alex Pereira",
+      "kind": "modern",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "power", "kickbox" ]
+    },
+    {
+      "id": "slow.sports.mma.poatan_streak",
+      "label": "Pereira highlight chaser",
+      "kind": "habit",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "ko" ]
+    },
+    {
+      "id": "slow.sports.mma.volkanovski",
+      "label": "Alexander Volkanovski",
+      "kind": "modern",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "feather" ]
+    },
+    {
+      "id": "slow.sports.mma.makhachev_volk",
+      "label": "Islam–Volk type matchup nerd",
+      "kind": "taste",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "styles" ]
+    },
+    {
+      "id": "slow.sports.mma.omalley",
+      "label": "Sean O'Malley",
+      "kind": "modern",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "bantam", "style" ]
+    },
+    {
+      "id": "slow.sports.mma.merab",
+      "label": "Merab Dvalishvili",
+      "kind": "modern",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "pressure", "cardio" ]
+    },
+    {
+      "id": "slow.sports.mma.strickland",
+      "label": "Sean Strickland",
+      "kind": "modern",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "talk", "mw" ]
+    },
+    {
+      "id": "slow.sports.mma.du_plessis",
+      "label": "Dricus Du Plessis",
+      "kind": "modern",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "mw" ]
+    },
+    {
+      "id": "slow.sports.mma.topuria",
+      "label": "Ilia Topuria",
+      "kind": "modern",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "power", "feather" ]
+    },
+    {
+      "id": "slow.sports.mma.islam_only",
+      "label": "Lightweight division obsessive",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "stacked" ]
+    },
+    {
+      "id": "slow.sports.mma.ngannou",
+      "label": "Francis Ngannou",
+      "kind": "modern",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "power", "exit-drama" ]
+    },
+    {
+      "id": "slow.sports.mma.miocic",
+      "label": "Stipe Miocic",
+      "kind": "modern",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "ohio", "cleveland", "hw" ]
+    },
+    {
+      "id": "slow.sports.mma.gaethje",
+      "label": "Justin Gaethje",
+      "kind": "modern",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "war", "lw" ]
+    },
+    {
+      "id": "slow.sports.mma.poirier",
+      "label": "Dustin Poirier",
+      "kind": "modern",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "lw", "heart" ]
+    },
+    {
+      "id": "slow.sports.mma.oliveira",
+      "label": "Charles Oliveira",
+      "kind": "modern",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "subs", "lw" ]
+    },
+    {
+      "id": "slow.sports.mma.nunes",
+      "label": "Amanda Nunes",
+      "kind": "modern",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "womens", "goat" ]
+    },
+    {
+      "id": "slow.sports.mma.shevchenko",
+      "label": "Valentina Shevchenko",
+      "kind": "modern",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "womens" ]
+    },
+    {
+      "id": "slow.sports.mma.zhang",
+      "label": "Zhang Weili",
+      "kind": "modern",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "womens" ]
+    },
+    {
+      "id": "slow.sports.mma.grasso",
+      "label": "Alexa Grasso",
+      "kind": "modern",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "womens" ]
+    },
+    {
+      "id": "slow.sports.mma.pennington",
+      "label": "Raquel Pennington",
+      "kind": "modern",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "womens" ]
+    },
+
+    {
+      "id": "slow.sports.mma.conor_fatigue",
+      "label": "McGregor fatigue / still-draws",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "star-debate" ]
+    },
+    {
+      "id": "slow.sports.mma.jones_debate",
+      "label": "Jones GOAT debate participant",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "legacy" ]
+    },
+    {
+      "id": "slow.sports.mma.anti_boxing_crossover",
+      "label": "Anti boxing crossover exhibitions",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "purist" ]
+    },
+    {
+      "id": "slow.sports.mma.ok_crossover",
+      "label": "OK with crossover spectacle",
+      "kind": "attitude",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "fun" ]
+    },
+    {
+      "id": "slow.sports.mma.judging_hate",
+      "label": "Hates 29-28 robbery culture",
+      "kind": "attitude",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "scorecards" ]
+    },
+    {
+      "id": "slow.sports.mma.ohio_stipe",
+      "label": "Ohio Stipe pride",
+      "kind": "local",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "cleveland", "hw" ]
+    },
+    {
+      "id": "slow.sports.mma.ohio_gyms",
+      "label": "Ohio gym scene awareness",
+      "kind": "local",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "columbus", "cincy", "cleveland" ]
+    },
+    {
+      "id": "slow.sports.mma.town_watched",
+      "label": "Big cards on TownWatched / social",
+      "kind": "system",
+      "defaultRange": [ 30, 90 ],
+      "tags": [ "ppv-week" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "knows UFC exists; no card identity",
+    "atOrAbove50": "attach 2-4; promo + division + 1-2 fighters + watch habit",
+    "atOrAbove70": "PPV weeks matter; gym possible; scorecard debates",
+    "extreme95": "cards structure weekends; training is identity"
+  },
+  "notes": "Ohio hook: Stipe Miocic. Population below football/baseball; high MMA + gym_member is strong flavor. Boxing and MMA can co-exist but factory should not max both without intent."
+}

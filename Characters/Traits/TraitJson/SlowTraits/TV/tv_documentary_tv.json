@@ -1,0 +1,136 @@
+{
+  "id": "slow.tv.documentary_tv",
+  "layer": "slow",
+  "domain": "tv",
+  "label": "Documentary TV",
+  "version": 1,
+  "description": "Non-crime documentaries—nature, history, sports docs, music docs, social issue series.",
+  "priorIntensity": 4,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [ "documentary", "docuseries", "nature", "history", "that doc", "learned" ],
+  "rivalBias": false,
+  "catalog": "TV/Shows/Documentary",
+  "subTraits": [
+    {
+      "id": "slow.tv.documentary_tv.nature",
+      "label": "Nature / planet docs",
+      "kind": "style",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "calm" ]
+    },
+    {
+      "id": "slow.tv.documentary_tv.history",
+      "label": "History docs",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "war", "era" ]
+    },
+    {
+      "id": "slow.tv.documentary_tv.music_doc",
+      "label": "Music documentaries",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "bands" ]
+    },
+    {
+      "id": "slow.tv.documentary_tv.sports_doc",
+      "label": "Sports documentaries",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "30-for-30" ]
+    },
+    {
+      "id": "slow.tv.documentary_tv.social",
+      "label": "Social issue docs",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "serious" ]
+    },
+    {
+      "id": "slow.tv.documentary_tv.planet_earth",
+      "label": "Planet Earth / Blue Planet",
+      "kind": "show",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "nature" ]
+    },
+    {
+      "id": "slow.tv.documentary_tv.our_planet",
+      "label": "Our Planet / Attenborough",
+      "kind": "show",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "nature" ]
+    },
+    {
+      "id": "slow.tv.documentary_tv.free_solo_adj",
+      "label": "Adventure / extreme docs",
+      "kind": "show",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "risk" ]
+    },
+    {
+      "id": "slow.tv.documentary_tv.ken_burns",
+      "label": "Ken Burns style history",
+      "kind": "show",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "long" ]
+    },
+    {
+      "id": "slow.tv.documentary_tv.thirty_for_thirty",
+      "label": "30 for 30",
+      "kind": "show",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "sports" ]
+    },
+    {
+      "id": "slow.tv.documentary_tv.last_dance",
+      "label": "The Last Dance",
+      "kind": "show",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "sports" ]
+    },
+    {
+      "id": "slow.tv.documentary_tv.beatles_adj",
+      "label": "Music docs (Beatles/Quit/etc.)",
+      "kind": "show",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "music" ]
+    },
+    {
+      "id": "slow.tv.documentary_tv.formula1",
+      "label": "Formula 1: Drive to Survive",
+      "kind": "show",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "sports-media" ]
+    },
+    {
+      "id": "slow.tv.documentary_tv.learning",
+      "label": "Watches to learn",
+      "kind": "habit",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "curious" ]
+    },
+    {
+      "id": "slow.tv.documentary_tv.background_calm",
+      "label": "Calm background docs",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "wind-down" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "saw a nature doc once",
+    "atOrAbove50": "attach 1-2 styles + titles",
+    "atOrAbove70": "docs are regular diet not rare event",
+    "extreme95": "prefers docs over most scripted TV"
+  },
+  "notes": "True crime docs live under true_crime pack, not here."
+}

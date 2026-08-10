@@ -1,0 +1,178 @@
+{
+  "id": "slow.tv.reality",
+  "layer": "slow",
+  "domain": "tv",
+  "label": "Reality TV",
+  "version": 1,
+  "description": "Reality competition, dating, lifestyle, and unscripted chaos TV.",
+  "priorIntensity": 5,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [ "reality", "episode", "reunion", "vote", "that fight", "spoiler" ],
+  "rivalBias": true,
+  "catalog": "TV/Shows/Reality",
+  "subTraits": [
+    {
+      "id": "slow.tv.reality.competition",
+      "label": "Competition reality",
+      "kind": "style",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "votes" ]
+    },
+    {
+      "id": "slow.tv.reality.dating",
+      "label": "Dating reality",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "romance-chaos" ]
+    },
+    {
+      "id": "slow.tv.reality.lifestyle",
+      "label": "Lifestyle / home / fashion",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "makeover" ]
+    },
+    {
+      "id": "slow.tv.reality.survival",
+      "label": "Survival / outdoors",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "hardship" ]
+    },
+    {
+      "id": "slow.tv.reality.bachelor",
+      "label": "The Bachelor franchise",
+      "kind": "show",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "dating" ]
+    },
+    {
+      "id": "slow.tv.reality.love_island",
+      "label": "Love Island",
+      "kind": "show",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "dating" ]
+    },
+    {
+      "id": "slow.tv.reality.married_sight",
+      "label": "Married at First Sight",
+      "kind": "show",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "dating" ]
+    },
+    {
+      "id": "slow.tv.reality.survivor",
+      "label": "Survivor",
+      "kind": "show",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "competition" ]
+    },
+    {
+      "id": "slow.tv.reality.amazing_race",
+      "label": "The Amazing Race",
+      "kind": "show",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "competition" ]
+    },
+    {
+      "id": "slow.tv.reality.big_brother",
+      "label": "Big Brother",
+      "kind": "show",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "feeds" ]
+    },
+    {
+      "id": "slow.tv.reality.drag_race",
+      "label": "RuPaul's Drag Race",
+      "kind": "show",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "competition" ]
+    },
+    {
+      "id": "slow.tv.reality.traitors",
+      "label": "The Traitors",
+      "kind": "show",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "modern" ]
+    },
+    {
+      "id": "slow.tv.reality.below_deck",
+      "label": "Below Deck",
+      "kind": "show",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "bravo" ]
+    },
+    {
+      "id": "slow.tv.reality.real_housewives",
+      "label": "Real Housewives franchise",
+      "kind": "show",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "bravo" ]
+    },
+    {
+      "id": "slow.tv.reality.vanderpump",
+      "label": "Vanderpump Rules",
+      "kind": "show",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "bravo" ]
+    },
+    {
+      "id": "slow.tv.reality.selling",
+      "label": "Selling Sunset / property reality",
+      "kind": "show",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "lifestyle" ]
+    },
+    {
+      "id": "slow.tv.reality.alone",
+      "label": "Alone",
+      "kind": "show",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "survival" ]
+    },
+    {
+      "id": "slow.tv.reality.spoiler",
+      "label": "Looks up spoilers",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "impatient" ]
+    },
+    {
+      "id": "slow.tv.reality.live_tweet",
+      "label": "Live-watches / group chat",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "social" ]
+    },
+    {
+      "id": "slow.tv.reality.hate_watch",
+      "label": "Hate-watches on purpose",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "irony" ]
+    },
+    {
+      "id": "slow.tv.reality.pure_joy",
+      "label": "Unironically loves it",
+      "kind": "attitude",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "no-shame" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "knows Bachelor exists; no weekly habit",
+    "atOrAbove50": "attach style + 2 shows + social habit",
+    "atOrAbove70": "reunion/finale nights are plans",
+    "extreme95": "reality is primary entertainment + social currency"
+  },
+  "notes": "Strong female-skew possible but not required—men watch Survivor/Traitors/BB too."
+}

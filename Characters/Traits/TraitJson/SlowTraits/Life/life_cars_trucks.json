@@ -1,0 +1,402 @@
+{
+  "id": "slow.life.cars_trucks",
+  "layer": "slow",
+  "domain": "life",
+  "label": "Cars / trucks",
+  "version": 1,
+  "description": "Life taste/identity: cars, trucks, engines, builds, and road culture. Wakes when vehicles, driving, or shop talk is in the room.",
+  "priorIntensity": 5,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [
+    "truck",
+    "car",
+    "engine",
+    "ride",
+    "mustang",
+    "diesel",
+    "4x4",
+    "garage",
+    "oil",
+    "transmission",
+    "horsepower",
+    "torque",
+    "mileage",
+    "pickup",
+    "suv",
+    "classic",
+    "race",
+    "drag",
+    "offroad",
+    "lifted"
+  ],
+  "rivalBias": true,
+  "catalog": "Life",
+  "subTraits": [
+    {
+      "id": "slow.life.cars_trucks.ford",
+      "label": "Ford",
+      "kind": "make",
+      "defaultRange": [ 20, 80 ],
+      "tags": [ "detroit", "truck", "mustang" ]
+    },
+    {
+      "id": "slow.life.cars_trucks.chevy",
+      "label": "Chevrolet",
+      "kind": "make",
+      "defaultRange": [ 20, 80 ],
+      "tags": [ "detroit", "truck", "camaro" ]
+    },
+    {
+      "id": "slow.life.cars_trucks.gmc",
+      "label": "GMC",
+      "kind": "make",
+      "defaultRange": [ 15, 70 ],
+      "tags": [ "truck", "sierra" ]
+    },
+    {
+      "id": "slow.life.cars_trucks.ram",
+      "label": "Ram",
+      "kind": "make",
+      "defaultRange": [ 20, 80 ],
+      "tags": [ "truck", "diesel", "mopar" ]
+    },
+    {
+      "id": "slow.life.cars_trucks.toyota",
+      "label": "Toyota",
+      "kind": "make",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "reliability", "tacoma", "tundra" ]
+    },
+    {
+      "id": "slow.life.cars_trucks.honda",
+      "label": "Honda",
+      "kind": "make",
+      "defaultRange": [ 15, 75 ],
+      "tags": [ "reliability", "civic", "tuner" ]
+    },
+    {
+      "id": "slow.life.cars_trucks.jeep",
+      "label": "Jeep",
+      "kind": "make",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "offroad", "wrangler", "4x4" ]
+    },
+    {
+      "id": "slow.life.cars_trucks.tesla",
+      "label": "Tesla / EV",
+      "kind": "make",
+      "defaultRange": [ 10, 70 ],
+      "tags": [ "ev", "tech", "polarizing" ]
+    },
+    {
+      "id": "slow.life.cars_trucks.bmw",
+      "label": "BMW",
+      "kind": "make",
+      "defaultRange": [ 10, 70 ],
+      "tags": [ "euro", "sport" ]
+    },
+    {
+      "id": "slow.life.cars_trucks.mercedes",
+      "label": "Mercedes",
+      "kind": "make",
+      "defaultRange": [ 10, 65 ],
+      "tags": [ "euro", "luxury" ]
+    },
+    {
+      "id": "slow.life.cars_trucks.pickup_culture",
+      "label": "Pickup culture",
+      "kind": "interest",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "truck", "work", "ohio" ]
+    },
+    {
+      "id": "slow.life.cars_trucks.diesel",
+      "label": "Diesel",
+      "kind": "interest",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "torque", "cummins", "powerstroke", "duramax" ]
+    },
+    {
+      "id": "slow.life.cars_trucks.gas_v8",
+      "label": "Gas V8",
+      "kind": "interest",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "v8", "sound", "classic" ]
+    },
+    {
+      "id": "slow.life.cars_trucks.manual_trans",
+      "label": "Manual transmission",
+      "kind": "interest",
+      "defaultRange": [ 15, 80 ],
+      "tags": [ "stick", "driver" ]
+    },
+    {
+      "id": "slow.life.cars_trucks.automatic",
+      "label": "Automatic preference",
+      "kind": "interest",
+      "defaultRange": [ 20, 80 ],
+      "tags": [ "daily", "comfort" ]
+    },
+    {
+      "id": "slow.life.cars_trucks.offroad",
+      "label": "Off-road / 4x4",
+      "kind": "interest",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "trails", "mud", "lift" ]
+    },
+    {
+      "id": "slow.life.cars_trucks.lifted_trucks",
+      "label": "Lifted trucks",
+      "kind": "interest",
+      "defaultRange": [ 15, 80 ],
+      "tags": [ "lift", "tires", "stance" ]
+    },
+    {
+      "id": "slow.life.cars_trucks.stance_lowered",
+      "label": "Lowered / stance",
+      "kind": "interest",
+      "defaultRange": [ 10, 70 ],
+      "tags": [ "bagged", "static", "looks" ]
+    },
+    {
+      "id": "slow.life.cars_trucks.classic_muscle",
+      "label": "Classic muscle",
+      "kind": "interest",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "60s", "70s", "restoration" ]
+    },
+    {
+      "id": "slow.life.cars_trucks.modern_muscle",
+      "label": "Modern muscle",
+      "kind": "interest",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "hellcat", "gt500", "ss" ]
+    },
+    {
+      "id": "slow.life.cars_trucks.import_tuner",
+      "label": "Import tuner",
+      "kind": "interest",
+      "defaultRange": [ 15, 80 ],
+      "tags": [ "honda", "subaru", "turbo" ]
+    },
+    {
+      "id": "slow.life.cars_trucks.subaru_awd",
+      "label": "Subaru AWD",
+      "kind": "make_interest",
+      "defaultRange": [ 10, 75 ],
+      "tags": [ "awd", "wrx", "winter" ]
+    },
+    {
+      "id": "slow.life.cars_trucks.truck_work",
+      "label": "Work truck utility",
+      "kind": "interest",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "toolbox", "trailer", "job" ]
+    },
+    {
+      "id": "slow.life.cars_trucks.towing",
+      "label": "Towing / hauling",
+      "kind": "interest",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "trailer", "boat", "payload" ]
+    },
+    {
+      "id": "slow.life.cars_trucks.economy_daily",
+      "label": "Economy daily driver",
+      "kind": "interest",
+      "defaultRange": [ 15, 75 ],
+      "tags": [ "mpg", "cheap", "commute" ]
+    },
+    {
+      "id": "slow.life.cars_trucks.luxury_comfort",
+      "label": "Luxury comfort",
+      "kind": "interest",
+      "defaultRange": [ 10, 70 ],
+      "tags": [ "leather", "quiet", "options" ]
+    },
+    {
+      "id": "slow.life.cars_trucks.ev_curious",
+      "label": "EV curious",
+      "kind": "interest",
+      "defaultRange": [ 5, 70 ],
+      "tags": [ "ev", "charge", "range" ]
+    },
+    {
+      "id": "slow.life.cars_trucks.ev_skeptic",
+      "label": "EV skeptic",
+      "kind": "attitude",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "gas", "range-anxiety", "debate" ]
+    },
+    {
+      "id": "slow.life.cars_trucks.diy_mechanic",
+      "label": "DIY mechanic",
+      "kind": "skill_interest",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "garage", "tools", "youtube" ]
+    },
+    {
+      "id": "slow.life.cars_trucks.dealer_only",
+      "label": "Dealer-only service",
+      "kind": "attitude",
+      "defaultRange": [ 10, 70 ],
+      "tags": [ "warranty", "convenience" ]
+    },
+    {
+      "id": "slow.life.cars_trucks.detailing",
+      "label": "Detailing / clean build",
+      "kind": "interest",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "wash", "wax", "interior" ]
+    },
+    {
+      "id": "slow.life.cars_trucks.mud_proud",
+      "label": "Mud proud",
+      "kind": "attitude",
+      "defaultRange": [ 15, 80 ],
+      "tags": [ "dirty", "work", "offroad" ]
+    },
+    {
+      "id": "slow.life.cars_trucks.drag_race",
+      "label": "Drag / strip interest",
+      "kind": "interest",
+      "defaultRange": [ 10, 75 ],
+      "tags": [ "quarter-mile", "race" ]
+    },
+    {
+      "id": "slow.life.cars_trucks.road_course",
+      "label": "Road course / autocross",
+      "kind": "interest",
+      "defaultRange": [ 10, 70 ],
+      "tags": [ "track", "handling" ]
+    },
+    {
+      "id": "slow.life.cars_trucks.diesel_smoke",
+      "label": "Diesel roll coal debate",
+      "kind": "attitude",
+      "defaultRange": [ 5, 70 ],
+      "tags": [ "smoke", "polarizing" ]
+    },
+    {
+      "id": "slow.life.cars_trucks.ford_chevy_rival",
+      "label": "Ford vs Chevy rivalry",
+      "kind": "rival",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "rival", "brand", "talk" ]
+    },
+    {
+      "id": "slow.life.cars_trucks.mopar_loyal",
+      "label": "Mopar loyal",
+      "kind": "make_interest",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "dodge", "chrysler", "hellcat" ]
+    },
+    {
+      "id": "slow.life.cars_trucks.motorcycle_crossover",
+      "label": "Motorcycle crossover",
+      "kind": "interest",
+      "defaultRange": [ 10, 75 ],
+      "tags": [ "bike", "two-wheel" ]
+    },
+    {
+      "id": "slow.life.cars_trucks.boat_tow_life",
+      "label": "Boat-tow life",
+      "kind": "interest",
+      "defaultRange": [ 10, 70 ],
+      "tags": [ "lake", "trailer", "summer" ]
+    },
+    {
+      "id": "slow.life.cars_trucks.snow_winter_build",
+      "label": "Winter / snow build",
+      "kind": "interest",
+      "defaultRange": [ 15, 80 ],
+      "tags": [ "ohio", "salt", "4x4", "tires" ]
+    },
+    {
+      "id": "slow.life.cars_trucks.project_car",
+      "label": "Project car in the yard",
+      "kind": "lifestyle",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "unfinished", "dream", "garage" ]
+    },
+    {
+      "id": "slow.life.cars_trucks.paid_off_pride",
+      "label": "Paid-off vehicle pride",
+      "kind": "attitude",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "money", "no-payment" ]
+    },
+    {
+      "id": "slow.life.cars_trucks.payment_stress",
+      "label": "Car payment stress",
+      "kind": "attitude",
+      "defaultRange": [ 10, 75 ],
+      "tags": [ "money", "debt" ]
+    },
+    {
+      "id": "slow.life.cars_trucks.audio_system",
+      "label": "Aftermarket audio",
+      "kind": "interest",
+      "defaultRange": [ 10, 75 ],
+      "tags": [ "bass", "speakers" ]
+    },
+    {
+      "id": "slow.life.cars_trucks.lights_bars",
+      "label": "Light bars / LEDs",
+      "kind": "interest",
+      "defaultRange": [ 10, 70 ],
+      "tags": [ "lights", "truck" ]
+    },
+    {
+      "id": "slow.life.cars_trucks.tow_mirrors_work",
+      "label": "Work upfit gear",
+      "kind": "interest",
+      "defaultRange": [ 15, 80 ],
+      "tags": [ "upfit", "fleet", "job" ]
+    },
+    {
+      "id": "slow.life.cars_trucks.hybrid_practical",
+      "label": "Hybrid practical",
+      "kind": "interest",
+      "defaultRange": [ 10, 70 ],
+      "tags": [ "mpg", "prius", "commute" ]
+    },
+    {
+      "id": "slow.life.cars_trucks.suv_family",
+      "label": "Family SUV",
+      "kind": "interest",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "kids", "space", "safety" ]
+    },
+    {
+      "id": "slow.life.cars_trucks.minivan_practical",
+      "label": "Minivan practical (no shame)",
+      "kind": "interest",
+      "defaultRange": [ 5, 70 ],
+      "tags": [ "kids", "space", "uncool-proud" ]
+    },
+    {
+      "id": "slow.life.cars_trucks.classic_truck",
+      "label": "Classic truck love",
+      "kind": "interest",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "c10", "f100", "patina" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "vague knowledge only; no deep catalog attach",
+    "atOrAbove50": "attach 1-3 subTraits as signature likes + optional 1 rival dislike; can name real models in talk",
+    "atOrAbove70": "strong identity; brand rivalry and shop stories unlock; history hooks can reference first truck/car",
+    "extreme95": "life orbits vehicles; garage time competes with people time"
+  },
+  "notes": "Slow wakes when topic is in the room. Almost fixed intensity. Ohio-heavy makes (Ford/Chevy/Ram/Toyota/Jeep) should appear more often in factory weights than BMW/Mercedes. rivalBias true → Ford vs Chevy talk is free content."
+}

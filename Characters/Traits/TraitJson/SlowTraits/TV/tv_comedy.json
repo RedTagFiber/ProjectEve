@@ -1,0 +1,185 @@
+{
+  "id": "slow.tv.comedy",
+  "layer": "slow",
+  "domain": "tv",
+  "label": "TV Comedy",
+  "version": 1,
+  "description": "Sitcoms, single-cam, sketch-adjacent series, comfort rewatch comedies.",
+  "priorIntensity": 5,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [ "sitcom", "funny", "rewatch", "episode", "that bit", "comfort show" ],
+  "rivalBias": false,
+  "catalog": "TV/Shows/Comedy",
+  "subTraits": [
+    {
+      "id": "slow.tv.comedy.multi_cam",
+      "label": "Multi-cam / laugh track comfort",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "classic" ]
+    },
+    {
+      "id": "slow.tv.comedy.single_cam",
+      "label": "Single-cam / mockumentary",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "modern" ]
+    },
+    {
+      "id": "slow.tv.comedy.workplace",
+      "label": "Workplace comedy",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "office" ]
+    },
+    {
+      "id": "slow.tv.comedy.friends_era",
+      "label": "Friends / 90s-00s network",
+      "kind": "era",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "comfort" ]
+    },
+    {
+      "id": "slow.tv.comedy.office",
+      "label": "The Office (US)",
+      "kind": "show",
+      "defaultRange": [ 40, 95 ],
+      "tags": [ "rewatch-king" ]
+    },
+    {
+      "id": "slow.tv.comedy.parks",
+      "label": "Parks and Recreation",
+      "kind": "show",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "wholesome" ]
+    },
+    {
+      "id": "slow.tv.comedy.brooklyn_99",
+      "label": "Brooklyn Nine-Nine",
+      "kind": "show",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "cop-comedy" ]
+    },
+    {
+      "id": "slow.tv.comedy.iasip",
+      "label": "It's Always Sunny",
+      "kind": "show",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "mean", "long" ]
+    },
+    {
+      "id": "slow.tv.comedy.seinfeld",
+      "label": "Seinfeld",
+      "kind": "show",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "classic" ]
+    },
+    {
+      "id": "slow.tv.comedy.friends",
+      "label": "Friends",
+      "kind": "show",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "comfort" ]
+    },
+    {
+      "id": "slow.tv.comedy.how_i_met",
+      "label": "How I Met Your Mother",
+      "kind": "show",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "00s" ]
+    },
+    {
+      "id": "slow.tv.comedy.big_bang",
+      "label": "The Big Bang Theory",
+      "kind": "show",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "network" ]
+    },
+    {
+      "id": "slow.tv.comedy.community",
+      "label": "Community",
+      "kind": "show",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "meta" ]
+    },
+    {
+      "id": "slow.tv.comedy.arrested",
+      "label": "Arrested Development",
+      "kind": "show",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "callbacks" ]
+    },
+    {
+      "id": "slow.tv.comedy.30_rock",
+      "label": "30 Rock",
+      "kind": "show",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "joke-density" ]
+    },
+    {
+      "id": "slow.tv.comedy.schitts",
+      "label": "Schitt's Creek",
+      "kind": "show",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "heart" ]
+    },
+    {
+      "id": "slow.tv.comedy.abbott",
+      "label": "Abbott Elementary",
+      "kind": "show",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "modern" ]
+    },
+    {
+      "id": "slow.tv.comedy.what_we_do",
+      "label": "What We Do in the Shadows",
+      "kind": "show",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "mockumentary" ]
+    },
+    {
+      "id": "slow.tv.comedy.ted_lasso",
+      "label": "Ted Lasso",
+      "kind": "show",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "wholesome" ]
+    },
+    {
+      "id": "slow.tv.comedy.iasip_edge",
+      "label": "Dark / mean comedy taste",
+      "kind": "taste",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "boundary" ]
+    },
+    {
+      "id": "slow.tv.comedy.comfort_rewatch",
+      "label": "Endless comfort rewatch",
+      "kind": "habit",
+      "defaultRange": [ 40, 95 ],
+      "tags": [ "background" ]
+    },
+    {
+      "id": "slow.tv.comedy.quote_machine",
+      "label": "Quotes in daily talk",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "social" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "laughs at clips; no show identity",
+    "atOrAbove50": "attach 2-4 shows + rewatch or style",
+    "atOrAbove70": "comfort comedy is default background",
+    "extreme95": "quotes and rewatch order are personality"
+  },
+  "notes": "Office/Parks over-index is realistic for US NPCs."
+}

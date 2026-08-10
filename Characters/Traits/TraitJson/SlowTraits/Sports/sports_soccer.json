@@ -1,0 +1,462 @@
+{
+  "id": "slow.sports.soccer",
+  "layer": "slow",
+  "domain": "sports",
+  "label": "Soccer",
+  "version": 1,
+  "description": "Soccer / football interest—MLS, Premier League, international, and local. Ohio: Crew primary; FC Cincinnati strong in SW.",
+  "priorIntensity": 4,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [
+    "match",
+    "club",
+    "goal",
+    "Premier",
+    "MLS",
+    "World Cup",
+    "derby",
+    "transfer",
+    "table",
+    "clean sheet",
+    "Crew",
+    "FCC"
+  ],
+  "rivalBias": true,
+  "catalog": "Sports/Soccer",
+  "subTraits": [
+    {
+      "id": "slow.sports.soccer.casual",
+      "label": "Casual fan",
+      "kind": "intensity",
+      "defaultRange": [ 30, 70 ],
+      "tags": [ "big-games" ]
+    },
+    {
+      "id": "slow.sports.soccer.diehard",
+      "label": "Diehard",
+      "kind": "intensity",
+      "defaultRange": [ 70, 95 ],
+      "tags": [ "every-match" ]
+    },
+    {
+      "id": "slow.sports.soccer.mls_primary",
+      "label": "MLS primary",
+      "kind": "lane",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "local" ]
+    },
+    {
+      "id": "slow.sports.soccer.epl_primary",
+      "label": "Premier League primary",
+      "kind": "lane",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "morning" ]
+    },
+    {
+      "id": "slow.sports.soccer.international",
+      "label": "International / USMNT/WNT",
+      "kind": "lane",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "world-cup" ]
+    },
+    {
+      "id": "slow.sports.soccer.multi_league",
+      "label": "Follows multiple leagues",
+      "kind": "lane",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "addict" ]
+    },
+    {
+      "id": "slow.sports.soccer.tactics_nerd",
+      "label": "Tactics nerd",
+      "kind": "knowledge",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "shape", "press" ]
+    },
+    {
+      "id": "slow.sports.soccer.history_buff",
+      "label": "Club history buff",
+      "kind": "knowledge",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "legacy" ]
+    },
+    {
+      "id": "slow.sports.soccer.fantasy",
+      "label": "Fantasy / FPL",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "weekly" ]
+    },
+    {
+      "id": "slow.sports.soccer.early_kickoff",
+      "label": "Early Saturday/Sunday kickoffs",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "morning", "coffee" ]
+    },
+    {
+      "id": "slow.sports.soccer.pub_watch",
+      "label": "Pub / bar match watching",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "social" ]
+    },
+    {
+      "id": "slow.sports.soccer.stadium",
+      "label": "Goes to matches",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "tickets", "ohio" ]
+    },
+    {
+      "id": "slow.sports.soccer.played",
+      "label": "Played club / high school / adult league",
+      "kind": "practice",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "boots", "local" ]
+    },
+
+    {
+      "id": "slow.sports.soccer.team_crew",
+      "label": "Columbus Crew",
+      "kind": "team",
+      "defaultRange": [ 45, 95 ],
+      "tags": [ "ohio", "mls", "primary" ]
+    },
+    {
+      "id": "slow.sports.soccer.team_fcc",
+      "label": "FC Cincinnati",
+      "kind": "team",
+      "defaultRange": [ 40, 95 ],
+      "tags": [ "ohio", "mls", "primary" ]
+    },
+    {
+      "id": "slow.sports.soccer.team_atlanta_utd",
+      "label": "Atlanta United",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "mls" ]
+    },
+    {
+      "id": "slow.sports.soccer.team_lafc",
+      "label": "LAFC",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "mls" ]
+    },
+    {
+      "id": "slow.sports.soccer.team_lagalaxy",
+      "label": "LA Galaxy",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "mls" ]
+    },
+    {
+      "id": "slow.sports.soccer.team_seattle",
+      "label": "Seattle Sounders",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "mls" ]
+    },
+    {
+      "id": "slow.sports.soccer.team_portland",
+      "label": "Portland Timbers",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "mls" ]
+    },
+    {
+      "id": "slow.sports.soccer.team_inter_miami",
+      "label": "Inter Miami",
+      "kind": "team",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "mls", "messi" ]
+    },
+    {
+      "id": "slow.sports.soccer.team_nycfc",
+      "label": "NYCFC",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "mls" ]
+    },
+    {
+      "id": "slow.sports.soccer.team_redbulls",
+      "label": "New York Red Bulls",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "mls" ]
+    },
+    {
+      "id": "slow.sports.soccer.team_chicago",
+      "label": "Chicago Fire",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "mls", "midwest" ]
+    },
+    {
+      "id": "slow.sports.soccer.team_nashville",
+      "label": "Nashville SC",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "mls" ]
+    },
+    {
+      "id": "slow.sports.soccer.team_orlando",
+      "label": "Orlando City",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "mls" ]
+    },
+    {
+      "id": "slow.sports.soccer.team_minnesota",
+      "label": "Minnesota United",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "mls" ]
+    },
+    {
+      "id": "slow.sports.soccer.team_austin",
+      "label": "Austin FC",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "mls" ]
+    },
+    {
+      "id": "slow.sports.soccer.team_stlouis",
+      "label": "St. Louis City",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "mls", "midwest" ]
+    },
+
+    {
+      "id": "slow.sports.soccer.team_arsenal",
+      "label": "Arsenal",
+      "kind": "team",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "epl" ]
+    },
+    {
+      "id": "slow.sports.soccer.team_liverpool",
+      "label": "Liverpool",
+      "kind": "team",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "epl" ]
+    },
+    {
+      "id": "slow.sports.soccer.team_man_city",
+      "label": "Manchester City",
+      "kind": "team",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "epl" ]
+    },
+    {
+      "id": "slow.sports.soccer.team_man_united",
+      "label": "Manchester United",
+      "kind": "team",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "epl", "global" ]
+    },
+    {
+      "id": "slow.sports.soccer.team_chelsea",
+      "label": "Chelsea",
+      "kind": "team",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "epl" ]
+    },
+    {
+      "id": "slow.sports.soccer.team_tottenham",
+      "label": "Tottenham",
+      "kind": "team",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "epl" ]
+    },
+    {
+      "id": "slow.sports.soccer.team_newcastle",
+      "label": "Newcastle",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "epl" ]
+    },
+    {
+      "id": "slow.sports.soccer.team_west_ham",
+      "label": "West Ham",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "epl" ]
+    },
+    {
+      "id": "slow.sports.soccer.team_aston_villa",
+      "label": "Aston Villa",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "epl" ]
+    },
+    {
+      "id": "slow.sports.soccer.team_brighton",
+      "label": "Brighton",
+      "kind": "team",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "epl" ]
+    },
+
+    {
+      "id": "slow.sports.soccer.team_real_madrid",
+      "label": "Real Madrid",
+      "kind": "team",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "laliga" ]
+    },
+    {
+      "id": "slow.sports.soccer.team_barcelona",
+      "label": "Barcelona",
+      "kind": "team",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "laliga" ]
+    },
+    {
+      "id": "slow.sports.soccer.team_atletico",
+      "label": "Atlético Madrid",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "laliga" ]
+    },
+    {
+      "id": "slow.sports.soccer.team_bayern",
+      "label": "Bayern Munich",
+      "kind": "team",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "bundesliga" ]
+    },
+    {
+      "id": "slow.sports.soccer.team_dortmund",
+      "label": "Borussia Dortmund",
+      "kind": "team",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "bundesliga" ]
+    },
+    {
+      "id": "slow.sports.soccer.team_juventus",
+      "label": "Juventus",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "serie-a" ]
+    },
+    {
+      "id": "slow.sports.soccer.team_inter",
+      "label": "Inter Milan",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "serie-a" ]
+    },
+    {
+      "id": "slow.sports.soccer.team_ac_milan",
+      "label": "AC Milan",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "serie-a" ]
+    },
+    {
+      "id": "slow.sports.soccer.team_psg",
+      "label": "PSG",
+      "kind": "team",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "ligue-1" ]
+    },
+
+    {
+      "id": "slow.sports.soccer.messi",
+      "label": "Messi follower",
+      "kind": "star",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "goat-talk" ]
+    },
+    {
+      "id": "slow.sports.soccer.ronaldo",
+      "label": "Ronaldo follower",
+      "kind": "star",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "goat-talk" ]
+    },
+    {
+      "id": "slow.sports.soccer.goat_debate",
+      "label": "Messi vs Ronaldo participant",
+      "kind": "rival",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "endless" ]
+    },
+
+    {
+      "id": "slow.sports.soccer.rival_crew_fcc",
+      "label": "Crew ↔ FC Cincinnati heat",
+      "kind": "rival",
+      "defaultRange": [ 40, 95 ],
+      "tags": [ "ohio" ]
+    },
+    {
+      "id": "slow.sports.soccer.rival_epl_big6",
+      "label": "EPL Big Six tribal",
+      "kind": "rival",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "online" ]
+    },
+    {
+      "id": "slow.sports.soccer.usmnt",
+      "label": "USMNT investment",
+      "kind": "national",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "usa" ]
+    },
+    {
+      "id": "slow.sports.soccer.uswnt",
+      "label": "USWNT investment",
+      "kind": "national",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "usa" ]
+    },
+    {
+      "id": "slow.sports.soccer.world_cup_cycle",
+      "label": "World Cup cycle peak fan",
+      "kind": "habit",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "quadrennial" ]
+    },
+    {
+      "id": "slow.sports.soccer.ohio_crew_pride",
+      "label": "Crew Cup / history pride",
+      "kind": "local",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "columbus" ]
+    },
+    {
+      "id": "slow.sports.soccer.ohio_fcc_pride",
+      "label": "FCC rise pride",
+      "kind": "local",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "cincy" ]
+    },
+    {
+      "id": "slow.sports.soccer.town_watched",
+      "label": "On TownWatchedTeams feed",
+      "kind": "system",
+      "defaultRange": [ 40, 95 ],
+      "tags": [ "local", "packet" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "knows World Cup; no club identity",
+    "atOrAbove50": "attach primary club/league + 1-2 habits",
+    "atOrAbove70": "match days structure mornings or nights; stadium possible",
+    "extreme95": "table and transfers are weekly identity"
+  },
+  "notes": "Ohio seed: Crew or FCC (not both high). EPL morning culture common for non-MLS diehards. Full enough clubs for transplants without listing every MLS side."
+}

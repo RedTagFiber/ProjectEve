@@ -1,0 +1,95 @@
+{
+    "catalog":  "music_mood_roles",
+    "version":  1,
+    "roles":  [
+                  {
+                      "label":  "Drive",
+                      "tags":  [
+                                   "drive",
+                                   "road",
+                                   "night"
+                               ],
+                      "id":  "mood.drive"
+                  },
+                  {
+                      "label":  "Fight",
+                      "tags":  [
+                                   "fight",
+                                   "anger",
+                                   "edge"
+                               ],
+                      "id":  "mood.fight"
+                  },
+                  {
+                      "label":  "Romantic",
+                      "tags":  [
+                                   "romantic",
+                                   "date",
+                                   "soft"
+                               ],
+                      "id":  "mood.romantic"
+                  },
+                  {
+                      "label":  "Lonely",
+                      "tags":  [
+                                   "lonely",
+                                   "miss",
+                                   "empty"
+                               ],
+                      "id":  "mood.lonely"
+                  },
+                  {
+                      "label":  "Comfort",
+                      "tags":  [
+                                   "comfort",
+                                   "safe",
+                                   "warm"
+                               ],
+                      "id":  "mood.comfort"
+                  },
+                  {
+                      "label":  "Dance / club",
+                      "tags":  [
+                                   "dance",
+                                   "club",
+                                   "party"
+                               ],
+                      "id":  "mood.dance"
+                  },
+                  {
+                      "label":  "Rage",
+                      "tags":  [
+                                   "rage",
+                                   "scream",
+                                   "release"
+                               ],
+                      "id":  "mood.rage"
+                  },
+                  {
+                      "label":  "Jealous",
+                      "tags":  [
+                                   "jealous",
+                                   "rival"
+                               ],
+                      "id":  "mood.jealous"
+                  },
+                  {
+                      "label":  "Desire",
+                      "tags":  [
+                                   "desire",
+                                   "want",
+                                   "heat"
+                               ],
+                      "id":  "mood.desire"
+                  },
+                  {
+                      "label":  "Reggae chill",
+                      "tags":  [
+                                   "reggae",
+                                   "chill",
+                                   "smoke"
+                               ],
+                      "id":  "mood.reggae_chill"
+                  }
+              ]
+}

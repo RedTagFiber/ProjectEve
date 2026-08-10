@@ -1,0 +1,334 @@
+{
+  "id": "slow.music.reggae",
+  "layer": "slow",
+  "domain": "music",
+  "label": "Reggae",
+  "version": 1,
+  "description": "Interest in reggae, roots, dancehall, and ska—island feel, bass, and mood roles (including your planned reggae bed packs).",
+  "priorIntensity": 5,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [ "reggae", "dancehall", "island", "bob", "ska", "dub", "bass", "irie", "one drop" ],
+  "rivalBias": true,
+  "catalog": "Music/Reggae",
+  "subTraits": [
+    {
+      "id": "slow.music.reggae.roots",
+      "label": "Roots reggae",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "conscious", "classic" ]
+    },
+    {
+      "id": "slow.music.reggae.rocksteady",
+      "label": "Rocksteady",
+      "kind": "style",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "pre", "smooth" ]
+    },
+    {
+      "id": "slow.music.reggae.ska",
+      "label": "Ska (traditional + 2-tone)",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "upbeat", "horns" ]
+    },
+    {
+      "id": "slow.music.reggae.dub",
+      "label": "Dub",
+      "kind": "style",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "bass", "space", "mix" ]
+    },
+    {
+      "id": "slow.music.reggae.dancehall",
+      "label": "Dancehall",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "modern", "party" ]
+    },
+    {
+      "id": "slow.music.reggae.lovers_rock",
+      "label": "Lovers rock",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "romance", "soft" ]
+    },
+    {
+      "id": "slow.music.reggae.reggae_fusion",
+      "label": "Reggae fusion / crossover",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "radio", "band" ]
+    },
+    {
+      "id": "slow.music.reggae.rasta_conscious",
+      "label": "Rasta / conscious themes",
+      "kind": "attitude",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "message", "faith" ]
+    },
+
+    {
+      "id": "slow.music.reggae.bob_marley",
+      "label": "Bob Marley & The Wailers",
+      "kind": "artist",
+      "defaultRange": [ 40, 95 ],
+      "tags": [ "icon", "gateway" ]
+    },
+    {
+      "id": "slow.music.reggae.peter_tosh",
+      "label": "Peter Tosh",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "militant", "roots" ]
+    },
+    {
+      "id": "slow.music.reggae.bunny_wailer",
+      "label": "Bunny Wailer",
+      "kind": "artist",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "wailers", "roots" ]
+    },
+    {
+      "id": "slow.music.reggae.jimmy_cliff",
+      "label": "Jimmy Cliff",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "harder", "crossover" ]
+    },
+    {
+      "id": "slow.music.reggae.toots",
+      "label": "Toots and the Maytals",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "energy", "ska-root" ]
+    },
+    {
+      "id": "slow.music.reggae.burning_spear",
+      "label": "Burning Spear",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "roots", "chant" ]
+    },
+    {
+      "id": "slow.music.reggae.gregory_isaacs",
+      "label": "Gregory Isaacs",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "lovers", "cool" ]
+    },
+    {
+      "id": "slow.music.reggae.dennis_brown",
+      "label": "Dennis Brown",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "voice", "crown" ]
+    },
+    {
+      "id": "slow.music.reggae.steel_pulse",
+      "label": "Steel Pulse",
+      "kind": "artist",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "uk", "roots" ]
+    },
+    {
+      "id": "slow.music.reggae.black_uhuru",
+      "label": "Black Uhuru",
+      "kind": "artist",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "roots", "80s" ]
+    },
+    {
+      "id": "slow.music.reggae.lee_perry",
+      "label": "Lee 'Scratch' Perry",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "dub", "mad" ]
+    },
+    {
+      "id": "slow.music.reggae.king_tubby",
+      "label": "King Tubby",
+      "kind": "artist",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "dub", "mix" ]
+    },
+    {
+      "id": "slow.music.reggae.sizzla",
+      "label": "Sizzla",
+      "kind": "artist",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "dancehall", "conscious" ]
+    },
+    {
+      "id": "slow.music.reggae.buju",
+      "label": "Buju Banton",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "dancehall", "voice" ]
+    },
+    {
+      "id": "slow.music.reggae.beenie",
+      "label": "Beenie Man",
+      "kind": "artist",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "dancehall", "party" ]
+    },
+    {
+      "id": "slow.music.reggae.sean_paul",
+      "label": "Sean Paul",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "crossover", "2000s" ]
+    },
+    {
+      "id": "slow.music.reggae.shy_fx_adj",
+      "label": "Jungle / UK reggae-bass edge",
+      "kind": "style",
+      "defaultRange": [ 15, 80 ],
+      "tags": [ "uk", "bass" ]
+    },
+    {
+      "id": "slow.music.reggae.sublime",
+      "label": "Sublime",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "crossover", "ska-punk", "us" ]
+    },
+    {
+      "id": "slow.music.reggae.rebelution",
+      "label": "Rebelution",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "modern", "us-reggae" ]
+    },
+    {
+      "id": "slow.music.reggae.slightly_stoopid",
+      "label": "Slightly Stoopid",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "fusion", "live" ]
+    },
+    {
+      "id": "slow.music.reggae.pep",
+      "label": "Pepper",
+      "kind": "artist",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "island", "fusion" ]
+    },
+    {
+      "id": "slow.music.reggae.sticky_fingers",
+      "label": "Sticky Fingers",
+      "kind": "artist",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "aussie", "modern" ]
+    },
+    {
+      "id": "slow.music.reggae.chronixx",
+      "label": "Chronixx",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "modern-roots" ]
+    },
+    {
+      "id": "slow.music.reggae.protégé",
+      "label": "Protoje",
+      "kind": "artist",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "modern-roots" ]
+    },
+    {
+      "id": "slow.music.reggae.koffee",
+      "label": "Koffee",
+      "kind": "artist",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "modern", "young" ]
+    },
+    {
+      "id": "slow.music.reggae.ub40",
+      "label": "UB40",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "uk", "radio", "covers" ]
+    },
+
+    {
+      "id": "slow.music.reggae.cookout",
+      "label": "Cookout / summer reggae",
+      "kind": "mood_role",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "outdoor", "friends" ]
+    },
+    {
+      "id": "slow.music.reggae.car_cruise",
+      "label": "Cruise / windows-down",
+      "kind": "mood_role",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "car", "bass" ]
+    },
+    {
+      "id": "slow.music.reggae.chill_evening",
+      "label": "Evening chill / come-down",
+      "kind": "mood_role",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "relax", "bed-pack" ]
+    },
+    {
+      "id": "slow.music.reggae.party_dancehall",
+      "label": "Party dancehall",
+      "kind": "mood_role",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "club", "energy" ]
+    },
+    {
+      "id": "slow.music.reggae.live_shows",
+      "label": "Reggae / festival shows",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "outdoor", "summer" ]
+    },
+    {
+      "id": "slow.music.reggae.vinyl_dub",
+      "label": "Dub vinyl / sound system interest",
+      "kind": "habit",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "bass", "mix" ]
+    },
+    {
+      "id": "slow.music.reggae.gateway_marley_only",
+      "label": "Marley-only gateway",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "entry", "limit" ]
+    },
+    {
+      "id": "slow.music.reggae.deep_roots",
+      "label": "Deep roots beyond Marley",
+      "kind": "attitude",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "explore", "purist" ]
+    },
+    {
+      "id": "slow.music.reggae.bed_tag",
+      "label": "System musicTag reggae bed",
+      "kind": "system",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "thought-tag", "ambience" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "knows Marley hits; no style identity",
+    "atOrAbove50": "attach 2-4; roots vs dancehall + mood roles",
+    "atOrAbove70": "summer and chill beds; deeper catalog talk",
+    "extreme95": "reggae is default relax/party lane; sound system culture possible"
+  },
+  "notes": "bed_tag hooks your Thought musicTag → reggae pack plan. Sublime is the common US bridge."
+}

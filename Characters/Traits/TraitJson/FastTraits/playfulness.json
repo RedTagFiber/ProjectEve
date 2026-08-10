@@ -1,0 +1,175 @@
+﻿{
+  "id": "playfulness",
+  "layer": "fast",
+  "label": "Playfulness",
+  "version": 1,
+  "description": "Tease, joke, light. Can defuse or connect — or land wrong if Hurt/Anger high.",
+  "priorIntensity": {
+    "min": 3,
+    "max": 7,
+    "mean": 5
+  },
+  "spawn": {
+    "currentFromIntensity": true,
+    "noise": 3
+  },
+  "bands": {
+    "off": [ 0, 29 ],
+    "low": [ 30, 49 ],
+    "mid": [ 50, 69 ],
+    "high": [ 70, 84 ],
+    "break": [ 85, 94 ],
+    "extreme": [ 95, 100 ]
+  },
+  "styles": {
+    "tease": {
+      "means": "Light ribbing aimed at connection.",
+      "speechHints": [ "tease", "nickname" ],
+      "bodyHints": [ "grin", "bump" ],
+      "riskTags": [ "misread_mean" ]
+    },
+    "goof": {
+      "means": "Silly, absurd, physical comedy energy.",
+      "speechHints": [ "absurd", "funny_voice" ],
+      "bodyHints": [ "exaggerated" ],
+      "riskTags": [ "read_as_immature" ]
+    },
+    "banter": {
+      "means": "Back-and-forth wit; sparring with smiles.",
+      "speechHints": [ "quick", "witty" ],
+      "bodyHints": [ "animated" ],
+      "riskTags": [ "one_up" ]
+    },
+    "prank": {
+      "means": "Setup and punch; risks too far.",
+      "speechHints": [ "setup" ],
+      "bodyHints": [ "sneak" ],
+      "riskTags": [ "hurt_if_fails" ]
+    },
+    "soft_joke": {
+      "means": "Gentle humor under stress; pressure valve.",
+      "speechHints": [ "small_joke", "lighten" ],
+      "bodyHints": [ "half_smile" ],
+      "riskTags": [ "minimize_other" ]
+    }
+  },
+  "defaultStyleWeights": {
+    "tease": 1.0,
+    "goof": 0.7,
+    "banter": 0.95,
+    "prank": 0.4,
+    "soft_joke": 0.9
+  },
+  "flavors": {
+    "flirt": "Play as attraction.",
+    "friend": "Pack bonding.",
+    "defuse": "Break tension on purpose.",
+    "mask": "Hide anxiety or hurt.",
+    "cruel_edge": "Play that cuts (should be rare)."
+  },
+  "pull": {
+    "belowHomeDamageMult": 0.7,
+    "recoverMult": 1.25,
+    "aboveHomeSettleMult": 1.15
+  },
+  "funding": {
+    "required": false,
+    "budgetPerIntensityPoint": 0.8
+  },
+  "links": [
+    {
+      "trait": "tension",
+      "op": "-",
+      "weight": 0.3,
+      "when": "rise"
+    },
+    {
+      "trait": "anxiety",
+      "op": "-",
+      "weight": 0.2,
+      "when": "rise"
+    },
+    {
+      "trait": "affection",
+      "op": "+",
+      "weight": 0.2,
+      "when": "rise",
+      "styleGate": [ "tease", "soft_joke" ]
+    },
+    {
+      "trait": "anger",
+      "op": "-",
+      "weight": 0.25,
+      "when": "rise"
+    },
+    {
+      "trait": "guard",
+      "op": "-",
+      "weight": 0.15,
+      "when": "rise"
+    }
+  ],
+  "opposePairs": [
+    {
+      "with": "hurt",
+      "policyHints": [ "joke_too_soon", "cannot_joke" ]
+    },
+    {
+      "with": "anger",
+      "policyHints": [ "defuse_or_inflame" ]
+    }
+  ],
+  "tagTriggers": [
+    {
+      "tag": "play.warm_tease",
+      "direction": "+",
+      "baseWeight": 0.8
+    },
+    {
+      "tag": "play.joke_landed",
+      "direction": "+",
+      "baseWeight": 0.75
+    },
+    {
+      "tag": "bond.safe_presence",
+      "direction": "+",
+      "baseWeight": 0.45
+    },
+    {
+      "tag": "conflict.insult",
+      "direction": "-",
+      "baseWeight": 0.7
+    },
+    {
+      "tag": "bond.rejection",
+      "direction": "-",
+      "baseWeight": 0.6
+    },
+    {
+      "tag": "threat.physical",
+      "direction": "-",
+      "baseWeight": 0.9
+    },
+    {
+      "tag": "hurt.fresh",
+      "direction": "-",
+      "baseWeight": 0.8
+    }
+  ],
+  "relationScoped": true,
+  "historyHooks": {
+    "catalog": "Characters/Traits/TraitJson/TraitHistory/playfulness_patterns.json",
+    "filters": [ "style", "flavor", "sourceBucket" ],
+    "tellFraming": {
+      "prideHigh": "HeroSelf",
+      "prideLow": "VictimSelf",
+      "shameHigh": "VictimSelf",
+      "telephone": true
+    }
+  },
+  "debug": {
+    "showInDash": true,
+    "color": "#f0c14a",
+    "sortPriority": 24
+  }
+}

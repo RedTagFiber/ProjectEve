@@ -3,108 +3,94 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Rolls a balanced Fast + Mid + Slow bag for an NPC.
+/// Does not use old TraitRegistry fill-all.
+/// </summary>
 public static class NpcTraitInitializer
 {
     private static readonly Random Rng = new();
 
+    /// <summary>
+    /// Preferred path: TraitJson mid/slow + Fast scatter.
+    /// </summary>
     public static void GenerateBalancedTraits(NpcTraits traits)
     {
-        traits.InitializeFromRegistry();
-
-        var all = TraitRegistry.AllTraits
-            .Where(t => !string.IsNullOrWhiteSpace(t.Id))
-            .ToList();
-
-        if (all.Count == 0)
+        if (traits == null)
             return;
 
-        // Start everyone low-average so defaults aren't flat 50 forever
-        foreach (var def in all)
-            traits.Set(def.Id, Rng.Next(8, 28));
-
-        // Group by category
-        var byCategory = all
-            .GroupBy(t => string.IsNullOrWhiteSpace(t.Category) ? "General" : t.Category)
-            .ToDictionary(g => g.Key, g => g.ToList());
-
-        // 1) Pick signature traits across different categories
-        var signature = PickAcrossCategories(byCategory, take: 10);
-        foreach (var t in signature)
-            traits.Set(t.Id, Rng.Next(72, 93));
-
-        // 2) Strong traits, still spread
-        var strong = PickAcrossCategories(byCategory, take: 20, excludeIds: signature.Select(x => x.Id));
-        foreach (var t in strong)
-            traits.Set(t.Id, Rng.Next(55, 71));
-
-        // 3) Average band
-        var used = new HashSet<string>(signature.Concat(strong).Select(x => x.Id));
-        var averagePool = all.Where(t => !used.Contains(t.Id)).OrderBy(_ => Rng.Next()).Take(40);
-        foreach (var t in averagePool)
-            traits.Set(t.Id, Rng.Next(34, 55));
-
-        // 4) Soft opposing pulls so personality isn't one-note
-        SoftBalanceOpposites(traits);
-    }
-
-    private static List<TraitRegistry.TraitDefinition> PickAcrossCategories(
-        Dictionary<string, List<TraitRegistry.TraitDefinition>> byCategory,
-        int take,
-        IEnumerable<string>? excludeIds = null)
-    {
-        var exclude = new HashSet<string>(excludeIds ?? Enumerable.Empty<string>());
-        var result = new List<TraitRegistry.TraitDefinition>();
-
-        // round-robin categories
-        var cats = byCategory.Keys.OrderBy(_ => Rng.Next()).ToList();
-        int guard = 0;
-
-        while (result.Count < take && guard < take * 20)
+        try
         {
-            guard++;
-            foreach (var cat in cats)
-            {
-                if (result.Count >= take) break;
-
-                // max 2 signature/strong picks per category in this pass wave
-                int already = result.Count(r => r.Category == cat);
-                if (already >= 2) continue;
-
-                var pick = byCategory[cat]
-                    .Where(t => !exclude.Contains(t.Id) && result.All(r => r.Id != t.Id))
-                    .OrderBy(_ => Rng.Next())
-                    .FirstOrDefault();
-
-                if (pick != null)
-                    result.Add(pick);
-            }
-
-            // if categories exhausted on caps, loosen cap
-            if (result.Count < take)
-            {
-                foreach (var cat in cats)
-                {
-                    if (result.Count >= take) break;
-                    var pick = byCategory[cat]
-                        .Where(t => !exclude.Contains(t.Id) && result.All(r => r.Id != t.Id))
-                        .OrderBy(_ => Rng.Next())
-                        .FirstOrDefault();
-                    if (pick != null)
-                        result.Add(pick);
-                }
-            }
+            TraitJsonLoader.ApplyRolledLayers(traits, Rng);
+            SoftBalanceFastOpposites(traits);
         }
-
-        return result;
+        catch
+        {
+            // JSON missing / loader fail → Fast only
+            GenerateFastOnly(traits);
+        }
     }
 
-    private static void SoftBalanceOpposites(NpcTraits traits)
+    /// <summary>
+    /// Fast 20 only, with a few highs and soft opposites.
+    /// </summary>
+    public static void GenerateFastOnly(NpcTraits traits)
     {
-        BalancePair(traits, "trait.introversion", "trait.extroversion");
-        BalancePair(traits, "trait.optimism", "trait.pessimism");
-        BalancePair(traits, "trait.confidence", "trait.insecurity");
-        BalancePair(traits, "trait.dominance", "trait.submission");
-        BalancePair(traits, "trait.sexualShame", "trait.sexualConfidence");
+        if (traits == null)
+            return;
+
+        var fast = TraitJsonLoader.BuildFastDefaults(42f);
+        var keys = fast.Keys.ToList();
+
+        foreach (var k in keys)
+            fast[k] = Clamp(fast[k] + Rng.Next(-6, 7));
+
+        // Signature highs (3–5)
+        Shuffle(keys);
+        int sig = Rng.Next(3, 6);
+        for (int i = 0; i < sig && i < keys.Count; i++)
+            fast[keys[i]] = Rng.Next(70, 92);
+
+        // A few lows
+        for (int i = sig; i < sig + 3 && i < keys.Count; i++)
+            fast[keys[i]] = Rng.Next(15, 32);
+
+        traits.InitializeFromLayers(fast, null, null);
+        SoftBalanceFastOpposites(traits);
+    }
+
+    /// <summary>
+    /// Explicit layers when factory already picked mid/slow ids.
+    /// </summary>
+    public static void ApplyLayers(
+        NpcTraits traits,
+        IDictionary<string, float> fast,
+        IDictionary<string, float>? mid = null,
+        IDictionary<string, float>? slow = null)
+    {
+        if (traits == null || fast == null)
+            return;
+
+        traits.InitializeFromLayers(fast, mid, slow);
+        SoftBalanceFastOpposites(traits);
+    }
+
+    // ------------------------------------------------------------------
+    // Fast opposition soft-balance (same ladder, not old personality pairs)
+    // ------------------------------------------------------------------
+    private static void SoftBalanceFastOpposites(NpcTraits traits)
+    {
+        // Guard vs openness
+        BalancePair(traits, "trait.guard", "trait.openness");
+        // Fear/anxiety vs hope
+        BalancePair(traits, "trait.fear", "trait.hope");
+        BalancePair(traits, "trait.anxiety", "trait.hope");
+        // Hurt vs affection (can coexist, but both extreme is rare)
+        BalancePair(traits, "trait.hurt", "trait.affection");
+        // Anger vs patience
+        BalancePair(traits, "trait.anger", "trait.patience");
+        // Shame vs pride
+        BalancePair(traits, "trait.shame", "trait.pride");
     }
 
     private static void BalancePair(NpcTraits traits, string a, string b)
@@ -112,13 +98,23 @@ public static class NpcTraitInitializer
         float va = traits.Get(a);
         float vb = traits.Get(b);
 
-        // if both high, push one down
-        if (va > 65 && vb > 65)
+        if (va > 68 && vb > 68)
         {
             if (Rng.Next(2) == 0)
-                traits.Set(b, Rng.Next(20, 45));
+                traits.Set(b, Rng.Next(22, 48));
             else
-                traits.Set(a, Rng.Next(20, 45));
+                traits.Set(a, Rng.Next(22, 48));
+        }
+    }
+
+    private static float Clamp(float v) => Math.Clamp(v, 0f, 100f);
+
+    private static void Shuffle<T>(IList<T> list)
+    {
+        for (int i = list.Count - 1; i > 0; i--)
+        {
+            int j = Rng.Next(i + 1);
+            (list[i], list[j]) = (list[j], list[i]);
         }
     }
 }

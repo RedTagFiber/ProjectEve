@@ -1,0 +1,70 @@
+{
+    "id":  "mid.confrontational",
+    "layer":  "mid",
+    "label":  "Confrontational",
+    "version":  1,
+    "cluster":  "conflict",
+    "description":  "Goes at conflict direct; prefers clean break over slow rot.",
+    "priorIntensity":  5,
+    "moveSpeed":  "slow",
+    "bands":  {
+                  "off":  "0-29",
+                  "low":  "30-49",
+                  "mid":  "50-69",
+                  "high":  "70-84",
+                  "break":  "85-94",
+                  "extreme":  "95-100"
+              },
+    "styles":  [
+                   {
+                       "id":  "mid.confrontational.name_it_now",
+                       "label":  "Name it now"
+                   },
+                   {
+                       "id":  "mid.confrontational.push_for_air",
+                       "label":  "Push for air"
+                   },
+                   {
+                       "id":  "mid.confrontational.heat_first",
+                       "label":  "Heat first"
+                   }
+               ],
+    "links":  {
+                  "boostedBy":  [
+                                    "anger",
+                                    "pride"
+                                ],
+                  "drainedBy":  [
+                                    "fear",
+                                    "shame",
+                                    "anxiety"
+                                ],
+                  "opposes":  [
+                                  "mid.conflict_avoidant",
+                                  "mid.peacemaker"
+                              ]
+              },
+    "tagTriggers":  [
+                        {
+                            "tag":  "mid.confrontational.test",
+                            "meaning":  "Situation tests this character trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.confrontational.confirm",
+                            "meaning":  "Behavior confirms this trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.confrontational.violate",
+                            "meaning":  "Acts against this trait under pressure",
+                            "deltaHint":  -2
+                        }
+                    ],
+    "relationScoped":  true,
+    "historyHooks":  {
+                         "patternFile":  "confrontational_patterns.json",
+                         "fundingBudget":  2
+                     },
+    "notes":  "Style of fight, not always high Fast anger."
+}

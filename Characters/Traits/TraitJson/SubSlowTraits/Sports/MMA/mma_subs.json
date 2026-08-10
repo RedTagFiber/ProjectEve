@@ -1,0 +1,36 @@
+{
+    "parent":  "slow.sports.mma",
+    "version":  1,
+    "fillThreshold":  50,
+    "subs":  [
+                 {
+                     "label":  "Promotion focus",
+                     "values":  [
+                                    "ufc",
+                                    "bellator",
+                                    "local",
+                                    "all"
+                                ],
+                     "default":  "ufc",
+                     "id":  "sub.mma.promotion",
+                     "type":  "enum"
+                 },
+                 {
+                     "label":  "Knowledge",
+                     "values":  [
+                                    "casual",
+                                    "fan",
+                                    "diehard"
+                                ],
+                     "default":  "fan",
+                     "id":  "sub.mma.knowledge",
+                     "type":  "enum"
+                 },
+                 {
+                     "label":  "Weight interest",
+                     "optional":  true,
+                     "id":  "sub.mma.weight_class_interest",
+                     "type":  "string"
+                 }
+             ]
+}

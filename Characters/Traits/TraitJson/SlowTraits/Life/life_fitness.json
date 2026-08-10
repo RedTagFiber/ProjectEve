@@ -1,0 +1,402 @@
+{
+  "id": "slow.life.fitness",
+  "layer": "slow",
+  "domain": "life",
+  "label": "Fitness identity",
+  "version": 1,
+  "description": "Life taste/identity: training, body goals, sport-conditioning, and the habits around them. Not the same as sports fandom—this is what they do with their body.",
+  "priorIntensity": 5,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [
+    "gym",
+    "run",
+    "lift",
+    "workout",
+    "cardio",
+    "macros",
+    "protein",
+    "pr",
+    "squat",
+    "deadlift",
+    "mile",
+    "steps",
+    "class",
+    "yoga",
+    "coach",
+    "cut",
+    "bulk",
+    "sore",
+    "rest day",
+    "trainer"
+  ],
+  "rivalBias": true,
+  "catalog": "Life",
+  "subTraits": [
+    {
+      "id": "slow.life.fitness.powerlifting",
+      "label": "Powerlifting",
+      "kind": "style",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "squat", "bench", "deadlift", "strength" ]
+    },
+    {
+      "id": "slow.life.fitness.bodybuilding",
+      "label": "Bodybuilding / physique",
+      "kind": "style",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "hypertrophy", "mirror", "show" ]
+    },
+    {
+      "id": "slow.life.fitness.olympic_lift",
+      "label": "Olympic lifting",
+      "kind": "style",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "snatch", "clean", "tech" ]
+    },
+    {
+      "id": "slow.life.fitness.crossfit_style",
+      "label": "CrossFit-style",
+      "kind": "style",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "wod", "metcon", "box" ]
+    },
+    {
+      "id": "slow.life.fitness.functional_fitness",
+      "label": "Functional fitness",
+      "kind": "style",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "move", "practical", "core" ]
+    },
+    {
+      "id": "slow.life.fitness.calisthenics",
+      "label": "Calisthenics / bodyweight",
+      "kind": "style",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "pullup", "street", "no-gym" ]
+    },
+    {
+      "id": "slow.life.fitness.running_road",
+      "label": "Road running",
+      "kind": "style",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "miles", "road", "race" ]
+    },
+    {
+      "id": "slow.life.fitness.running_trail",
+      "label": "Trail running",
+      "kind": "style",
+      "defaultRange": [ 10, 85 ],
+      "tags": [ "trail", "hills", "dirt" ]
+    },
+    {
+      "id": "slow.life.fitness.marathon_goal",
+      "label": "Marathon / long distance",
+      "kind": "goal",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "26.2", "endurance", "training-block" ]
+    },
+    {
+      "id": "slow.life.fitness.sprinting",
+      "label": "Sprint / speed work",
+      "kind": "style",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "speed", "track", "explosive" ]
+    },
+    {
+      "id": "slow.life.fitness.cycling",
+      "label": "Cycling",
+      "kind": "style",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "bike", "road", "spin" ]
+    },
+    {
+      "id": "slow.life.fitness.swimming",
+      "label": "Swimming",
+      "kind": "style",
+      "defaultRange": [ 10, 85 ],
+      "tags": [ "pool", "laps", "low-impact" ]
+    },
+    {
+      "id": "slow.life.fitness.rowing",
+      "label": "Rowing / erg",
+      "kind": "style",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "erg", "cardio", "back" ]
+    },
+    {
+      "id": "slow.life.fitness.hyrox_endurance",
+      "label": "Hybrid race / Hyrox-style",
+      "kind": "style",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "hybrid", "race", "grind" ]
+    },
+    {
+      "id": "slow.life.fitness.yoga",
+      "label": "Yoga",
+      "kind": "style",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "flex", "breath", "mat" ]
+    },
+    {
+      "id": "slow.life.fitness.pilates",
+      "label": "Pilates",
+      "kind": "style",
+      "defaultRange": [ 10, 80 ],
+      "tags": [ "core", "control", "reformer" ]
+    },
+    {
+      "id": "slow.life.fitness.mobility",
+      "label": "Mobility / stretching focus",
+      "kind": "style",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "stretch", "joints", "recovery" ]
+    },
+    {
+      "id": "slow.life.fitness.martial_conditioning",
+      "label": "Martial arts conditioning",
+      "kind": "style",
+      "defaultRange": [ 15, 90 ],
+      "tags": [ "fight", "pad", "discipline" ]
+    },
+    {
+      "id": "slow.life.fitness.boxing_fit",
+      "label": "Boxing fitness",
+      "kind": "style",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "bag", "cardio", "hands" ]
+    },
+    {
+      "id": "slow.life.fitness.bjj_fit",
+      "label": "BJJ / grappling fitness",
+      "kind": "style",
+      "defaultRange": [ 10, 85 ],
+      "tags": [ "roll", "gi", "cardio" ]
+    },
+    {
+      "id": "slow.life.fitness.home_gym",
+      "label": "Home gym identity",
+      "kind": "context",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "garage", "rack", "no-crowd" ]
+    },
+    {
+      "id": "slow.life.fitness.commercial_gym",
+      "label": "Commercial gym regular",
+      "kind": "context",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "planet", "membership", "routine" ]
+    },
+    {
+      "id": "slow.life.fitness.outdoor_only",
+      "label": "Outdoor-only training",
+      "kind": "context",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "park", "weather", "free" ]
+    },
+    {
+      "id": "slow.life.fitness.class_based",
+      "label": "Class-based (spin/HIIT)",
+      "kind": "context",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "instructor", "schedule", "music" ]
+    },
+    {
+      "id": "slow.life.fitness.personal_trainer",
+      "label": "Works with a trainer",
+      "kind": "context",
+      "defaultRange": [ 15, 80 ],
+      "tags": [ "coach", "money", "accountability" ]
+    },
+    {
+      "id": "slow.life.fitness.self_coached",
+      "label": "Self-coached",
+      "kind": "context",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "program", "youtube", "app" ]
+    },
+    {
+      "id": "slow.life.fitness.early_morning",
+      "label": "Early-morning trainer",
+      "kind": "habit",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "5am", "discipline", "quiet" ]
+    },
+    {
+      "id": "slow.life.fitness.late_night",
+      "label": "Late-night gym",
+      "kind": "habit",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "night", "empty", "after-work" ]
+    },
+    {
+      "id": "slow.life.fitness.steps_obsessed",
+      "label": "Steps / watch obsessed",
+      "kind": "habit",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "watch", "10k", "data" ]
+    },
+    {
+      "id": "slow.life.fitness.macros_track",
+      "label": "Macro tracker",
+      "kind": "habit",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "food", "log", "cut-bulk" ]
+    },
+    {
+      "id": "slow.life.fitness.intuitive_eat_train",
+      "label": "Intuitive eat + train",
+      "kind": "habit",
+      "defaultRange": [ 15, 80 ],
+      "tags": [ "feel", "no-log" ]
+    },
+    {
+      "id": "slow.life.fitness.bulk_season",
+      "label": "Bulk season mindset",
+      "kind": "goal",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "mass", "eat", "winter" ]
+    },
+    {
+      "id": "slow.life.fitness.cut_season",
+      "label": "Cut season mindset",
+      "kind": "goal",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "lean", "deficit", "summer" ]
+    },
+    {
+      "id": "slow.life.fitness.recomp",
+      "label": "Recomp slow path",
+      "kind": "goal",
+      "defaultRange": [ 15, 80 ],
+      "tags": [ "patient", "both" ]
+    },
+    {
+      "id": "slow.life.fitness.strength_over_looks",
+      "label": "Strength over looks",
+      "kind": "attitude",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "numbers", "useful", "pride" ]
+    },
+    {
+      "id": "slow.life.fitness.aesthetics_first",
+      "label": "Aesthetics first",
+      "kind": "attitude",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "mirror", "photo", "shape" ]
+    },
+    {
+      "id": "slow.life.fitness.health_only",
+      "label": "Health-only (not vanity)",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "doctor", "bp", "longevity" ]
+    },
+    {
+      "id": "slow.life.fitness.sport_support",
+      "label": "Trains for a sport",
+      "kind": "goal",
+      "defaultRange": [ 20, 95 ],
+      "tags": [ "season", "coach", "team" ]
+    },
+    {
+      "id": "slow.life.fitness.rehab_focus",
+      "label": "Rehab / injury-aware",
+      "kind": "context",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "pt", "pain", "careful" ]
+    },
+    {
+      "id": "slow.life.fitness.consistency_pride",
+      "label": "Consistency pride",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "streak", "show-up", "boring" ]
+    },
+    {
+      "id": "slow.life.fitness.all_or_nothing",
+      "label": "All-or-nothing streaker",
+      "kind": "attitude",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "binge", "quit", "restart" ]
+    },
+    {
+      "id": "slow.life.fitness.gym_timid",
+      "label": "Gym-timid / judgment fear",
+      "kind": "attitude",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "anxiety", "beginner", "mirror" ]
+    },
+    {
+      "id": "slow.life.fitness.gym_bro_energy",
+      "label": "Gym-bro energy",
+      "kind": "attitude",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "loud", "advice", "protein" ]
+    },
+    {
+      "id": "slow.life.fitness.anti_bro",
+      "label": "Anti-gym-bro",
+      "kind": "attitude",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "quiet", "hate-advice", "rival" ]
+    },
+    {
+      "id": "slow.life.fitness.walking_only",
+      "label": "Walking as primary fitness",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "walk", "simple", "daily" ]
+    },
+    {
+      "id": "slow.life.fitness.labor_is_gym",
+      "label": "Job labor is the gym",
+      "kind": "context",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "work", "trades", "no-membership" ]
+    },
+    {
+      "id": "slow.life.fitness.pickup_sports",
+      "label": "Pickup sports as fitness",
+      "kind": "style",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "basketball", "softball", "rec" ]
+    },
+    {
+      "id": "slow.life.fitness.hiking",
+      "label": "Hiking fitness",
+      "kind": "style",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "trail", "weekend", "ohio-parks" ]
+    },
+    {
+      "id": "slow.life.fitness.supplement_heavy",
+      "label": "Supplement heavy",
+      "kind": "habit",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "powder", "creatine", "stack" ]
+    },
+    {
+      "id": "slow.life.fitness.minimal_equipment",
+      "label": "Minimal equipment pride",
+      "kind": "attitude",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "simple", "no-fad", "basics" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "knows gym exists; no program identity or body-goal talk",
+    "atOrAbove50": "attach 1-3 subTraits (style + habit/attitude); can talk routine without preaching",
+    "atOrAbove70": "training shapes schedule and mood; missed weeks show in Fast stress/irritation; history hooks to injury or first race",
+    "extreme95": "identity fused to training; rest days feel like guilt; rivalBias heats form advice and gym culture arguments"
+  },
+  "notes": "Separate from slow sports fandom. Labor-is-gym and walking-only keep blue-collar Ohio NPCs real. rivalBias true for gym-bro vs anti-bro and strength vs aesthetics debates."
+}

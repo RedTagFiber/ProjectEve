@@ -1,0 +1,381 @@
+{
+  "id": "slow.movies.action",
+  "layer": "slow",
+  "domain": "movies",
+  "label": "Action",
+  "version": 1,
+  "description": "Prefers action films—stunts, set pieces, competence porn, and kinetic storytelling.",
+  "priorIntensity": 5,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [ "movie", "film", "action", "stunt", "chase", "fight scene", "explosion", "one-man army", "rewatch" ],
+  "rivalBias": true,
+  "catalog": "Movies/Titles/Action",
+  "subTraits": [
+    {
+      "id": "slow.movies.action.practical_stunts",
+      "label": "Practical stunts over CGI",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "real", "mission-impossible" ]
+    },
+    {
+      "id": "slow.movies.action.cgi_spectacle",
+      "label": "CGI spectacle OK",
+      "kind": "style",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "big", "blockbuster" ]
+    },
+    {
+      "id": "slow.movies.action.hand_to_hand",
+      "label": "Hand-to-hand / martial",
+      "kind": "style",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "fight", "choreography" ]
+    },
+    {
+      "id": "slow.movies.action.gun_fu",
+      "label": "Gun-fu / ballistic ballet",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "john-wick", "shootouts" ]
+    },
+    {
+      "id": "slow.movies.action.car_chase",
+      "label": "Car chase priority",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "fast", "driving" ]
+    },
+    {
+      "id": "slow.movies.action.heist",
+      "label": "Heist action",
+      "kind": "subgenre",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "crew", "plan" ]
+    },
+    {
+      "id": "slow.movies.action.military",
+      "label": "Military / war-adjacent action",
+      "kind": "subgenre",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "ops", "gear" ]
+    },
+    {
+      "id": "slow.movies.action.spy",
+      "label": "Spy / espionage action",
+      "kind": "subgenre",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "bond", "mission" ]
+    },
+    {
+      "id": "slow.movies.action.superhero_action",
+      "label": "Superhero as action",
+      "kind": "subgenre",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "marvel", "dc", "cape" ]
+    },
+    {
+      "id": "slow.movies.action.disaster",
+      "label": "Disaster / survival action",
+      "kind": "subgenre",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "scale", "escape" ]
+    },
+    {
+      "id": "slow.movies.action.revenge",
+      "label": "Revenge path action",
+      "kind": "subgenre",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "payback", "grim" ]
+    },
+    {
+      "id": "slow.movies.action.buddy_cop",
+      "label": "Buddy-cop chemistry",
+      "kind": "subgenre",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "banter", "pair" ]
+    },
+    {
+      "id": "slow.movies.action.lone_wolf",
+      "label": "Lone wolf competence",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "solo", "silent" ]
+    },
+    {
+      "id": "slow.movies.action.80s_90s",
+      "label": "80s/90s action era",
+      "kind": "era",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "arnold", "sly", "vhs" ]
+    },
+    {
+      "id": "slow.movies.action.2000s",
+      "label": "2000s action era",
+      "kind": "era",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "bournes", "matrix-adjacent" ]
+    },
+    {
+      "id": "slow.movies.action.modern_keanu",
+      "label": "Modern precision action",
+      "kind": "era",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "wick", "tactical" ]
+    },
+    {
+      "id": "slow.movies.action.hong_kong",
+      "label": "Hong Kong / Asian action",
+      "kind": "style",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "wire", "kung-fu" ]
+    },
+    {
+      "id": "slow.movies.action.euro_grit",
+      "label": "Euro grit action",
+      "kind": "style",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "taken", "brutal" ]
+    },
+    {
+      "id": "slow.movies.action.comedy_blend",
+      "label": "Action-comedy blend",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "funny", "rush-hour" ]
+    },
+    {
+      "id": "slow.movies.action.no_comedy",
+      "label": "No jokes—serious tone",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "grim", "straight" ]
+    },
+    {
+      "id": "slow.movies.action.pg13_ok",
+      "label": "PG-13 action fine",
+      "kind": "rating",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "broad", "fun" ]
+    },
+    {
+      "id": "slow.movies.action.r_rated_need",
+      "label": "Needs R-rated edge",
+      "kind": "rating",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "blood", "language" ]
+    },
+    {
+      "id": "slow.movies.action.one_man_army",
+      "label": "One-man army fantasy",
+      "kind": "trope",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "die-hard", "impossible" ]
+    },
+    {
+      "id": "slow.movies.action.underdog_crew",
+      "label": "Underdog crew",
+      "kind": "trope",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "team", "odds" ]
+    },
+    {
+      "id": "slow.movies.action.final_fight",
+      "label": "Lives for final fight",
+      "kind": "structure",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "climax", "payoff" ]
+    },
+    {
+      "id": "slow.movies.action.world_building_light",
+      "label": "Light plot, heavy set pieces",
+      "kind": "structure",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "simple", "fun" ]
+    },
+    {
+      "id": "slow.movies.action.smart_plot",
+      "label": "Smart plot + action",
+      "kind": "structure",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "brain", "twist" ]
+    },
+    {
+      "id": "slow.movies.action.franchise_loyal",
+      "label": "Franchise loyal (Mission/Fast/Wick)",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "sequel", "night-one" ]
+    },
+    {
+      "id": "slow.movies.action.original_only",
+      "label": "Originals over sequels",
+      "kind": "habit",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "fresh", "no-number" ]
+    },
+    {
+      "id": "slow.movies.action.theater_big",
+      "label": "Must see big on screen",
+      "kind": "viewing",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "imax", "sound" ]
+    },
+    {
+      "id": "slow.movies.action.rewatch_comfort",
+      "label": "Comfort rewatch action",
+      "kind": "viewing",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "known", "relax" ]
+    },
+    {
+      "id": "slow.movies.action.background_ok",
+      "label": "Background-TV action OK",
+      "kind": "viewing",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "half-attention" ]
+    },
+    {
+      "id": "slow.movies.action.date_safe",
+      "label": "Safe date action pick",
+      "kind": "social",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "crowd", "fun" ]
+    },
+    {
+      "id": "slow.movies.action.bros_night",
+      "label": "Bros / group night pick",
+      "kind": "social",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "group", "loud" ]
+    },
+    {
+      "id": "slow.movies.action.actor_draw",
+      "label": "Picks by action star",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "keanu", "tom", "charlize" ]
+    },
+    {
+      "id": "slow.movies.action.director_draw",
+      "label": "Picks by action director",
+      "kind": "habit",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "chad", "gunkata", "woo" ]
+    },
+    {
+      "id": "slow.movies.action.practical_effects_snob",
+      "label": "Practical-effects snob",
+      "kind": "attitude",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "cgi-hate", "rival" ]
+    },
+    {
+      "id": "slow.movies.action.shake_cam_hate",
+      "label": "Hates shaky cam",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "clarity", "bournehate" ]
+    },
+    {
+      "id": "slow.movies.action.long_take_love",
+      "label": "Long-take fight love",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "oner", "craft" ]
+    },
+    {
+      "id": "slow.movies.action.score_matters",
+      "label": "Score / needle-drop matters",
+      "kind": "style",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "music", "wick" ]
+    },
+    {
+      "id": "slow.movies.action.female_lead_action",
+      "label": "Female-led action prefer",
+      "kind": "style",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "atomic", "lead" ]
+    },
+    {
+      "id": "slow.movies.action.ensemble",
+      "label": "Ensemble action casts",
+      "kind": "style",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "expendables", "team" ]
+    },
+    {
+      "id": "slow.movies.action.short_runtime",
+      "label": "Prefers tight runtime",
+      "kind": "structure",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "90min", "pace" ]
+    },
+    {
+      "id": "slow.movies.action.epic_length_ok",
+      "label": "Epic length OK if payoff",
+      "kind": "structure",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "long", "saga" ]
+    },
+    {
+      "id": "slow.movies.action.real_world",
+      "label": "Real-world setting action",
+      "kind": "setting",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "grounded" ]
+    },
+    {
+      "id": "slow.movies.action.near_future",
+      "label": "Near-future action",
+      "kind": "setting",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "tech", "edge" ]
+    },
+    {
+      "id": "slow.movies.action.video_game_adapt",
+      "label": "Game adaptations interest",
+      "kind": "source",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "game", "fan" ]
+    },
+    {
+      "id": "slow.movies.action.comic_adapt",
+      "label": "Comic adaptations as action",
+      "kind": "source",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "panel", "cape" ]
+    },
+    {
+      "id": "slow.movies.action.training_arc",
+      "label": "Training arc payoff",
+      "kind": "trope",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "montage", "growth" ]
+    },
+    {
+      "id": "slow.movies.action.silent_protagonist",
+      "label": "Quiet / minimal dialogue hero",
+      "kind": "style",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "stoic", "looks" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "will watch action if others pick; no strong taste",
+    "atOrAbove50": "attach 2-4 subs + 1-2 catalog titles; can argue stunts vs CGI",
+    "atOrAbove70": "action is default weekend pick; franchise nights common",
+    "extreme95": "judges films by set-piece craft; shaky-cam is personal"
+  },
+  "notes": "Shared viewing axes (theater, rewatch, date) live here as genre-colored subs. Catalog holds specific titles."
+}

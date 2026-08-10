@@ -1,0 +1,71 @@
+{
+    "id":  "mid.avoidant",
+    "layer":  "mid",
+    "label":  "Avoidant",
+    "version":  1,
+    "cluster":  "attachment",
+    "description":  "Pulls away when closeness rises; independence over merge.",
+    "priorIntensity":  5,
+    "moveSpeed":  "slow",
+    "bands":  {
+                  "off":  "0-29",
+                  "low":  "30-49",
+                  "mid":  "50-69",
+                  "high":  "70-84",
+                  "break":  "85-94",
+                  "extreme":  "95-100"
+              },
+    "styles":  [
+                   {
+                       "id":  "mid.avoidant.space_needed",
+                       "label":  "Space needed"
+                   },
+                   {
+                       "id":  "mid.avoidant.soft_exit",
+                       "label":  "Soft exit"
+                   },
+                   {
+                       "id":  "mid.avoidant.shut_down",
+                       "label":  "Shut down"
+                   }
+               ],
+    "links":  {
+                  "boostedBy":  [
+                                    "guard",
+                                    "fear",
+                                    "shame"
+                                ],
+                  "drainedBy":  [
+                                    "trust",
+                                    "affection",
+                                    "loneliness"
+                                ],
+                  "opposes":  [
+                                  "mid.anxious_attach",
+                                  "mid.dependent"
+                              ]
+              },
+    "tagTriggers":  [
+                        {
+                            "tag":  "mid.avoidant.test",
+                            "meaning":  "Situation tests this character trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.avoidant.confirm",
+                            "meaning":  "Behavior confirms this trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.avoidant.violate",
+                            "meaning":  "Acts against this trait under pressure",
+                            "deltaHint":  -2
+                        }
+                    ],
+    "relationScoped":  true,
+    "historyHooks":  {
+                         "patternFile":  "avoidant_patterns.json",
+                         "fundingBudget":  2
+                     },
+    "notes":  "Not the same as guarded; about intimacy distance."
+}

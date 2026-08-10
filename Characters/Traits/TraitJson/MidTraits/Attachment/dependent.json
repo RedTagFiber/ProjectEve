@@ -1,0 +1,70 @@
+{
+    "id":  "mid.dependent",
+    "layer":  "mid",
+    "label":  "Dependent",
+    "version":  1,
+    "cluster":  "attachment",
+    "description":  "Leans hard on key people for decisions, calm, and direction.",
+    "priorIntensity":  4,
+    "moveSpeed":  "slow",
+    "bands":  {
+                  "off":  "0-29",
+                  "low":  "30-49",
+                  "mid":  "50-69",
+                  "high":  "70-84",
+                  "break":  "85-94",
+                  "extreme":  "95-100"
+              },
+    "styles":  [
+                   {
+                       "id":  "mid.dependent.decision_lean",
+                       "label":  "Decision lean"
+                   },
+                   {
+                       "id":  "mid.dependent.presence_need",
+                       "label":  "Presence need"
+                   },
+                   {
+                       "id":  "mid.dependent.defer",
+                       "label":  "Defer"
+                   }
+               ],
+    "links":  {
+                  "boostedBy":  [
+                                    "anxiety",
+                                    "trust",
+                                    "affection"
+                                ],
+                  "drainedBy":  [
+                                    "pride",
+                                    "guard"
+                                ],
+                  "opposes":  [
+                                  "mid.independent",
+                                  "mid.avoidant"
+                              ]
+              },
+    "tagTriggers":  [
+                        {
+                            "tag":  "mid.dependent.test",
+                            "meaning":  "Situation tests this character trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.dependent.confirm",
+                            "meaning":  "Behavior confirms this trait",
+                            "deltaHint":  1
+                        },
+                        {
+                            "tag":  "mid.dependent.violate",
+                            "meaning":  "Acts against this trait under pressure",
+                            "deltaHint":  -2
+                        }
+                    ],
+    "relationScoped":  true,
+    "historyHooks":  {
+                         "patternFile":  "dependent_patterns.json",
+                         "fundingBudget":  2
+                     },
+    "notes":  "Not weakness only; can be trained family role."
+}

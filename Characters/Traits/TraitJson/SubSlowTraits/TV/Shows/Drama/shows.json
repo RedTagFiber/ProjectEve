@@ -1,0 +1,23 @@
+{
+    "catalog":  "tv_shows_drama",
+    "style":  "Drama",
+    "version":  1,
+    "entries":  [
+                    {
+                        "id":  "breaking_bad",
+                        "label":  "Breaking Bad"
+                    },
+                    {
+                        "id":  "the_sopranos",
+                        "label":  "The Sopranos"
+                    },
+                    {
+                        "id":  "this_is_us",
+                        "label":  "This Is Us"
+                    },
+                    {
+                        "id":  "succession",
+                        "label":  "Succession"
+                    }
+                ]
+}

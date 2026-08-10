@@ -1,0 +1,42 @@
+{
+    "parent":  "slow.sports.wrestling_wwe",
+    "version":  1,
+    "fillThreshold":  50,
+    "subs":  [
+                 {
+                     "label":  "Knowledge",
+                     "values":  [
+                                    "casual",
+                                    "fan",
+                                    "diehard"
+                                ],
+                     "default":  "fan",
+                     "id":  "sub.wwe.knowledge",
+                     "type":  "enum"
+                 },
+                 {
+                     "label":  "Style",
+                     "values":  [
+                                    "sports_entertainment",
+                                    "workrate",
+                                    "retro",
+                                    "all"
+                                ],
+                     "default":  "sports_entertainment",
+                     "id":  "sub.wwe.favorite_style",
+                     "type":  "enum"
+                 },
+                 {
+                     "label":  "Show bias",
+                     "values":  [
+                                    "raw",
+                                    "smackdown",
+                                    "nxt",
+                                    "ppv_only"
+                                ],
+                     "default":  "raw",
+                     "id":  "sub.wwe.show_bias",
+                     "type":  "enum"
+                 }
+             ]
+}

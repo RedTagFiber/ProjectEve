@@ -1,4 +1,5 @@
-﻿// SceneTransitionController.cs
+﻿using System.Linq;
+
 namespace ProjectEve.Narrative.Scenes
 {
     public static class SceneTransitionController
@@ -12,10 +13,8 @@ namespace ProjectEve.Narrative.Scenes
             var loc = locationStyle ?? LocationStyleDescriber.Describe(scene.Location);
             var npc = npcAppearance ?? "";
 
-            // no forced Eve/phone line — UI decides mode
             return string.Join(" ",
-                new[] { env, loc, npc }.Where(s => !string.IsNullOrWhiteSpace(s))
-            );
+                new[] { env, loc, npc }.Where(s => !string.IsNullOrWhiteSpace(s)));
         }
     }
 }

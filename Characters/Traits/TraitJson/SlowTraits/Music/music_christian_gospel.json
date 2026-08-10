@@ -1,0 +1,332 @@
+{
+  "id": "slow.music.christian_gospel",
+  "layer": "slow",
+  "domain": "music",
+  "label": "Christian / Gospel",
+  "version": 1,
+  "description": "Interest in gospel, worship, CCM, and southern gospel—church, radio, and private faith listening.",
+  "priorIntensity": 5,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [ "gospel", "worship", "church music", "choir", "hymn", "ccm", "praise", "sunday morning" ],
+  "rivalBias": true,
+  "catalog": "Music/ChristianGospel",
+  "subTraits": [
+    {
+      "id": "slow.music.christian_gospel.traditional_hymns",
+      "label": "Traditional hymns",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "organ", "old" ]
+    },
+    {
+      "id": "slow.music.christian_gospel.southern_gospel",
+      "label": "Southern gospel",
+      "kind": "style",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "quartet", "ohio" ]
+    },
+    {
+      "id": "slow.music.christian_gospel.black_gospel",
+      "label": "Black gospel / choir",
+      "kind": "style",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "choir", "power" ]
+    },
+    {
+      "id": "slow.music.christian_gospel.contemporary_worship",
+      "label": "Contemporary worship",
+      "kind": "style",
+      "defaultRange": [ 35, 95 ],
+      "tags": [ "band", "sunday" ]
+    },
+    {
+      "id": "slow.music.christian_gospel.ccm",
+      "label": "CCM radio",
+      "kind": "style",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "radio", "modern" ]
+    },
+    {
+      "id": "slow.music.christian_gospel.christian_hiphop",
+      "label": "Christian hip-hop",
+      "kind": "style",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "rap", "faith" ]
+    },
+    {
+      "id": "slow.music.christian_gospel.christian_rock",
+      "label": "Christian rock",
+      "kind": "style",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "band", "youth" ]
+    },
+    {
+      "id": "slow.music.christian_gospel.mahalia",
+      "label": "Mahalia Jackson",
+      "kind": "artist",
+      "defaultRange": [ 20, 95 ],
+      "tags": [ "classic", "voice" ]
+    },
+    {
+      "id": "slow.music.christian_gospel.aretha_gospel",
+      "label": "Aretha gospel side",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "church", "soul" ]
+    },
+    {
+      "id": "slow.music.christian_gospel.kirk_franklin",
+      "label": "Kirk Franklin",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "modern", "choir", "energy" ]
+    },
+    {
+      "id": "slow.music.christian_gospel.cece_winans",
+      "label": "CeCe Winans",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "voice", "worship" ]
+    },
+    {
+      "id": "slow.music.christian_gospel.tasha_cobbs",
+      "label": "Tasha Cobbs Leonard",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "worship", "power" ]
+    },
+    {
+      "id": "slow.music.christian_gospel.elevation",
+      "label": "Elevation Worship",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "modern", "church" ]
+    },
+    {
+      "id": "slow.music.christian_gospel.hillsong",
+      "label": "Hillsong",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "worship", "global" ]
+    },
+    {
+      "id": "slow.music.christian_gospel.bethel",
+      "label": "Bethel Music",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "worship", "modern" ]
+    },
+    {
+      "id": "slow.music.christian_gospel.passion",
+      "label": "Passion",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "conference", "youth" ]
+    },
+    {
+      "id": "slow.music.christian_gospel.chris_tomlin",
+      "label": "Chris Tomlin",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "radio", "singable" ]
+    },
+    {
+      "id": "slow.music.christian_gospel.casting_crowns",
+      "label": "Casting Crowns",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "ccm", "story" ]
+    },
+    {
+      "id": "slow.music.christian_gospel.mercyme",
+      "label": "MercyMe",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "i-can-only-imagine", "radio" ]
+    },
+    {
+      "id": "slow.music.christian_gospel.for_king_country",
+      "label": "for KING & COUNTRY",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "pop", "live" ]
+    },
+    {
+      "id": "slow.music.christian_gospel.lauren_daigle",
+      "label": "Lauren Daigle",
+      "kind": "artist",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "crossover", "voice" ]
+    },
+    {
+      "id": "slow.music.christian_gospel.brandon_lake",
+      "label": "Brandon Lake",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "modern", "worship" ]
+    },
+    {
+      "id": "slow.music.christian_gospel.maverick_city",
+      "label": "Maverick City Music",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "choir", "modern" ]
+    },
+    {
+      "id": "slow.music.christian_gospel.amy_grant",
+      "label": "Amy Grant",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "ccm-pioneer", "crossover" ]
+    },
+    {
+      "id": "slow.music.christian_gospel.michael_w_smith",
+      "label": "Michael W. Smith",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "ccm", "worship" ]
+    },
+    {
+      "id": "slow.music.christian_gospel.dc_talk",
+      "label": "dc Talk",
+      "kind": "artist",
+      "defaultRange": [ 20, 85 ],
+      "tags": [ "90s", "youth" ]
+    },
+    {
+      "id": "slow.music.christian_gospel.switchfoot",
+      "label": "Switchfoot",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "rock", "crossover" ]
+    },
+    {
+      "id": "slow.music.christian_gospel.skillet",
+      "label": "Skillet",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "rock", "youth" ]
+    },
+    {
+      "id": "slow.music.christian_gospel.needtobreathe",
+      "label": "NEEDTOBREATHE",
+      "kind": "artist",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "southern", "rock-edge" ]
+    },
+    {
+      "id": "slow.music.christian_gospel.gaither",
+      "label": "Gaither / homecoming",
+      "kind": "artist",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "southern", "older", "ohio" ]
+    },
+    {
+      "id": "slow.music.christian_gospel.bill_gaither",
+      "label": "Bill & Gloria Gaither",
+      "kind": "artist",
+      "defaultRange": [ 20, 90 ],
+      "tags": [ "southern", "legacy" ]
+    },
+    {
+      "id": "slow.music.christian_gospel.selah",
+      "label": "Selah",
+      "kind": "artist",
+      "defaultRange": [ 15, 85 ],
+      "tags": [ "hymns", "harmony" ]
+    },
+    {
+      "id": "slow.music.christian_gospel.sunday_only",
+      "label": "Sunday / church only",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "service", "not-daily" ]
+    },
+    {
+      "id": "slow.music.christian_gospel.daily_worship",
+      "label": "Daily worship listening",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "car", "morning" ]
+    },
+    {
+      "id": "slow.music.christian_gospel.radio_klove",
+      "label": "K-LOVE / Christian radio",
+      "kind": "habit",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "radio", "ohio" ]
+    },
+    {
+      "id": "slow.music.christian_gospel.choir_member",
+      "label": "Sings in choir / team",
+      "kind": "practice",
+      "defaultRange": [ 25, 95 ],
+      "tags": [ "church", "serve" ]
+    },
+    {
+      "id": "slow.music.christian_gospel.concerts",
+      "label": "Christian concerts",
+      "kind": "habit",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "live", "arena" ]
+    },
+    {
+      "id": "slow.music.christian_gospel.hymns_only",
+      "label": "Hymns only (skeptical of CCM)",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "purist", "old" ]
+    },
+    {
+      "id": "slow.music.christian_gospel.modern_only",
+      "label": "Modern worship only",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "new", "band" ]
+    },
+    {
+      "id": "slow.music.christian_gospel.private_faith_music",
+      "label": "Private—won't push playlist",
+      "kind": "attitude",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "quiet", "personal" ]
+    },
+    {
+      "id": "slow.music.christian_gospel.shares_freely",
+      "label": "Shares faith music freely",
+      "kind": "attitude",
+      "defaultRange": [ 25, 90 ],
+      "tags": [ "witness", "open" ]
+    },
+    {
+      "id": "slow.music.christian_gospel.comfort_grief",
+      "label": "Grief / comfort listening",
+      "kind": "mood_role",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "hurt", "hope" ]
+    },
+    {
+      "id": "slow.music.christian_gospel.drive_worship",
+      "label": "Drive-time worship",
+      "kind": "mood_role",
+      "defaultRange": [ 30, 95 ],
+      "tags": [ "car", "reset" ]
+    }
+  ],
+  "rules": {
+    "belowThreshold": "knows a Christmas hymn; no listening identity",
+    "atOrAbove50": "attach 2-4; church vs radio habits show",
+    "atOrAbove70": "playlist and Sunday music are part of life rhythm",
+    "extreme95": "faith music is primary soundtrack; style wars (hymns vs CCM) real"
+  },
+  "notes": "Pairs with slow.life.faith. Don't force share—private_faith_music is common."
+}
