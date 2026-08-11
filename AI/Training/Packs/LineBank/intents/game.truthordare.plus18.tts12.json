@@ -1,0 +1,2716 @@
+﻿{
+    "intent":  "game.truthordare.plus18",
+    "rating":  "+18",
+    "description":  "Adult Truth/Dare: dirty+very_dirty truths/dares. private only. consent required.",
+    "lines":  [
+                  {
+                      "id":  "tod18_truth_dirty_001",
+                      "text":  "What’s the last thing that turned you on unexpectedly?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_002",
+                      "text":  "What’s a body part on someone else you notice first?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_003",
+                      "text":  "What’s your favorite type of kiss when it might lead further?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_004",
+                      "text":  "Have you ever gotten turned on in a public place—what triggered it?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_005",
+                      "text":  "What’s a clothing item that always works on you?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_006",
+                      "text":  "What’s your favorite time of day for sex or heavy makeouts?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_007",
+                      "text":  "What’s a sound someone can make that gets you going?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_008",
+                      "text":  "What’s the boldest text you’ve sent while turned on?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_009",
+                      "text":  "What’s a fantasy setting you’ve actually daydreamed in detail?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_010",
+                      "text":  "What’s your preferred level of dirty talk—light, medium, filthy?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_011",
+                      "text":  "What’s something you like done to your neck?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_012",
+                      "text":  "What’s a yes you’ve said that surprised you?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_013",
+                      "text":  "What’s a no you’re proud you held?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_014",
+                      "text":  "What’s the closest you’ve come to sex in a semi-public place?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_015",
+                      "text":  "What’s your favorite kind of teasing before anything starts?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_016",
+                      "text":  "What’s a compliment during sex that stays with you?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_017",
+                      "text":  "What’s something you want more of in bed but rarely ask?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_018",
+                      "text":  "What’s your stance on morning sex vs night?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_019",
+                      "text":  "What’s a turn-on related to voice or accent?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_020",
+                      "text":  "What’s the most attractive non-physical thing during intimacy?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_021",
+                      "text":  "Have you ever faked confidence in bed? What happened?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_022",
+                      "text":  "What’s a song that puts you in a mood fast?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_023",
+                      "text":  "What’s your favorite fabric against skin?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_024",
+                      "text":  "What’s a position you like more than you admit?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_025",
+                      "text":  "What’s something that always kills the mood?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_026",
+                      "text":  "What’s a kink-adjacent preference that’s pretty mild?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_027",
+                      "text":  "What’s your opinion on hickeys—give, receive, neither?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_028",
+                      "text":  "What’s the longest you’ve delayed gratification on purpose?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_029",
+                      "text":  "What’s a shower thought that got too steamy?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_030",
+                      "text":  "What’s your favorite kind of eye contact in the moment?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_031",
+                      "text":  "What’s something you like hearing when you’re close?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_032",
+                      "text":  "What’s a boundary you communicate clearly every time?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_033",
+                      "text":  "What’s the hottest non-sex activity with a partner?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_034",
+                      "text":  "What’s your favorite way to start without words?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_035",
+                      "text":  "What’s a fantasy role dynamic you like in theory?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_036",
+                      "text":  "What’s your honest take on quickies?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_037",
+                      "text":  "What’s something about your own body you like during sex?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_038",
+                      "text":  "What’s something you’re shy to show at first?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_039",
+                      "text":  "What’s a partner habit that drives you wild?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_040",
+                      "text":  "What’s a partner habit that cools you off?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_041",
+                      "text":  "Have you ever been walked in on—or almost?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_042",
+                      "text":  "What’s the riskiest place you’ve hooked up or made out hard?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_043",
+                      "text":  "What’s your favorite kind of undressing—yours or theirs?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_044",
+                      "text":  "What’s a yes/no on hair pulling—soft or firm?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_045",
+                      "text":  "What’s your preferred dirty nickname to hear?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_046",
+                      "text":  "What’s your preferred dirty nickname to say?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_047",
+                      "text":  "What’s a toy/tool opinion if any—curious or no thanks?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_048",
+                      "text":  "What’s the best aftercare for you?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_049",
+                      "text":  "What’s the worst aftercare miss you’ve experienced?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_050",
+                      "text":  "What’s a time chemistry overrode a bad plan?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_051",
+                      "text":  "What’s a time you stopped everything correctly?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_052",
+                      "text":  "What’s your favorite kind of slow build?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_053",
+                      "text":  "What’s your favorite kind of impatient energy?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_054",
+                      "text":  "What’s something you like done with hands more than mouth?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_055",
+                      "text":  "What’s something you like done with mouth more than hands?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_056",
+                      "text":  "What’s a clothing-stay-on scenario you like?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_057",
+                      "text":  "What’s your honest answer about talking during?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_058",
+                      "text":  "What’s your honest answer about silence during?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_059",
+                      "text":  "What’s a mirror/lighting preference?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_060",
+                      "text":  "What’s a scent that gets associated with desire for you?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_061",
+                      "text":  "What’s the hottest text thread situation you’ve been in?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_062",
+                      "text":  "What’s a dare you’d only take if you already trusted the room?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_063",
+                      "text":  "What’s your view on spanking—playful only, firmer, or no?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_064",
+                      "text":  "What’s a restraint-lite thing you’d try (held wrists, etc.)?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_065",
+                      "text":  "What’s something you’d never try and don’t need pressure about?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_066",
+                      "text":  "What’s a praise phrase that works on you?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_067",
+                      "text":  "What’s a degradation line that would be a hard stop?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_068",
+                      "text":  "What’s your favorite kind of climax buildup description in one word?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_069",
+                      "text":  "What’s a recovery snack opinion after?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_070",
+                      "text":  "What’s the most romantic filthy thing someone did?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_071",
+                      "text":  "What’s a jealousy fantasy vs real-life no—where’s your line?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_072",
+                      "text":  "What’s your honest take on sexting quality vs quantity?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_073",
+                      "text":  "What’s a voice note opinion for dirty messages?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_074",
+                      "text":  "What’s the best ‘we shouldn’t but’ moment you’ve had?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_075",
+                      "text":  "What’s a hotel/travel hookup memory rating (no names)?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_076",
+                      "text":  "What’s your preferred initiation style—direct or indirect?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_077",
+                      "text":  "What’s a time you initiated and felt powerful?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_078",
+                      "text":  "What’s a time you initiated and felt awkward?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_079",
+                      "text":  "What’s your favorite kind of body worship—give or receive?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_080",
+                      "text":  "What’s a specific touch pattern you like?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_081",
+                      "text":  "What’s something about breath during kissing that you notice?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_082",
+                      "text":  "What’s your honest answer on finishing first vs together?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_083",
+                      "text":  "What’s a multi-round stamina hope vs reality joke?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_084",
+                      "text":  "What’s a favorite place on you that gets ignored too often?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_085",
+                      "text":  "What’s a favorite place on a partner you always return to?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_086",
+                      "text":  "What’s your stance on dirty talk in public as code?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_087",
+                      "text":  "What’s a code word you’d actually use?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_088",
+                      "text":  "What’s the hottest accidental friction moment?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_089",
+                      "text":  "What’s a wardrobe malfunction story ( tame or not)?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_090",
+                      "text":  "What’s your preferred temperature—blankets or kick them off?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_091",
+                      "text":  "What’s a hydration/prep joke that’s still real advice?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_092",
+                      "text":  "What’s the best ‘stay the night’ reason you’ve heard?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_093",
+                      "text":  "What’s a morning-after energy you like?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_094",
+                      "text":  "What’s a morning-after energy you avoid?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_095",
+                      "text":  "What’s your honest ranking: makeout only night vs full night?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_096",
+                      "text":  "What’s a fantasy you’ll admit is mostly about being wanted?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_097",
+                      "text":  "What’s a fantasy you’ll admit is mostly about control?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_098",
+                      "text":  "What’s a fantasy you’ll admit is mostly about surrender?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_099",
+                      "text":  "What’s something soft you need even when it’s dirty?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_dirty_100",
+                      "text":  "What’s the last time you felt desired and safe at once?",
+                      "tone":  "truth",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_001",
+                      "text":  "What’s the filthiest thing you’ve said in bed?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_002",
+                      "text":  "What’s the filthiest thing you’ve asked someone to do?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_003",
+                      "text":  "What’s a specific act you crave more than you’re supposed to admit in mixed company?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_004",
+                      "text":  "What’s your favorite way to be fucked—pace and position in plain words?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_005",
+                      "text":  "What’s your favorite way to fuck someone—pace and focus?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_006",
+                      "text":  "Oral: prefer giving, receiving, or switching—and what makes it great?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_007",
+                      "text":  "What’s a facial / body cum shot opinion—yes, maybe, no?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_008",
+                      "text":  "What’s your creampie / pullout preference if protection choices allow?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_009",
+                      "text":  "What’s an anal interest level—curious, experienced, hard no?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_010",
+                      "text":  "What’s a throat / deep oral limit in honest terms?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_011",
+                      "text":  "What’s a squirting / wet mess opinion?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_012",
+                      "text":  "What’s the most times you’ve come in one session?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_013",
+                      "text":  "What’s a record for how long you edged someone—or were edged?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_014",
+                      "text":  "What’s a toy you own or want and what you’d do with it?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_015",
+                      "text":  "What’s a public risk you’d take if you wouldn’t get caught?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_016",
+                      "text":  "What’s a threesome interest—yes type, fantasy only, or no?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_017",
+                      "text":  "What’s a same-room / shared-heat fantasy boundary?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_018",
+                      "text":  "What’s the nastiest compliment that actually worked on you?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_019",
+                      "text":  "What’s a degradation phrase that’s a green light for you?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_020",
+                      "text":  "What’s a degradation phrase that’s an instant red light?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_021",
+                      "text":  "What’s your favorite kind of forced eye contact during sex?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_022",
+                      "text":  "What’s a spanking intensity you actually like?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_023",
+                      "text":  "What’s a choking light preference—hand, none, only pressure on sides?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_024",
+                      "text":  "What’s a hair-pull intensity you want?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_025",
+                      "text":  "What’s a name-calling set that turns you on?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_026",
+                      "text":  "What’s a name-calling set that ends everything?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_027",
+                      "text":  "What’s the best orgasm you’ve had and what caused it (no porn titles required)?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_028",
+                      "text":  "What’s a time you came from minimal contact?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_029",
+                      "text":  "What’s a time you needed rough to get there?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_030",
+                      "text":  "What’s a time soft and slow ruined you in a good way?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_031",
+                      "text":  "What’s your favorite hole to focus on—and why in blunt terms?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_032",
+                      "text":  "What’s your favorite thing about a hard cock in your hand/mouth/cunt?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_033",
+                      "text":  "What’s your favorite thing about a wet cunt in your hand/mouth/cock?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_034",
+                      "text":  "What’s a breeding / creampie dirty-talk interest even if not literal?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_035",
+                      "text":  "What’s a CNC / chase fantasy interest—fantasy only or negotiated play?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_036",
+                      "text":  "What’s a free-use fantasy interest—again, fantasy vs negotiated?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_037",
+                      "text":  "What’s the filthiest text currently sitting in your phone?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_038",
+                      "text":  "What’s a photo/video consent boundary you never break?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_039",
+                      "text":  "What’s a recording boundary you never break?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_040",
+                      "text":  "What’s the most explicit thing you’ve done in a car?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_041",
+                      "text":  "What’s the most explicit thing you’ve done outside a bedroom?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_042",
+                      "text":  "What’s a stranger/hookup story intensity peak (no doxxing)?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_043",
+                      "text":  "What’s an ex sex thing you still rate highly?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_044",
+                      "text":  "What’s an ex sex thing you never want again?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_045",
+                      "text":  "What’s a body fluid boundary—spit, sweat, cum, none of that?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_046",
+                      "text":  "What’s a taste/smell thing that turns you on more than expected?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_047",
+                      "text":  "What’s a messy sex preference—towels ready or chaos?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_048",
+                      "text":  "What’s your favorite dirty talk sentence to receive word-for-word?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_049",
+                      "text":  "What’s your favorite dirty talk sentence to say word-for-word?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_050",
+                      "text":  "What’s a role you’d play for a night if scripts were allowed?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_051",
+                      "text":  "What’s a role you’d never play?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_052",
+                      "text":  "What’s your honest answer about pain for pleasure—scale 0–10?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_053",
+                      "text":  "What’s a mark (hickey, scratch, bruise) you like leaving?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_054",
+                      "text":  "What’s a mark you like receiving?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_055",
+                      "text":  "What’s the longest you’ve gone while denied orgasm on purpose?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_056",
+                      "text":  "What’s your favorite way to be woken up for sex?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_057",
+                      "text":  "What’s your favorite way to interrupt someone for sex?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_058",
+                      "text":  "What’s a kitchen/counter/couch story?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_059",
+                      "text":  "What’s a wall sex opinion—worth it or overrated?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_060",
+                      "text":  "What’s a prone bone / from-behind preference detail?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_061",
+                      "text":  "What’s a cowgirl / riding preference detail?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_062",
+                      "text":  "What’s a missionary variant that hits deeper for you?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_063",
+                      "text":  "What’s your favorite kind of oral technique in blunt detail?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_064",
+                      "text":  "What’s a ball/ass/taint attention opinion?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_065",
+                      "text":  "What’s a nipple sensitivity truth?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_066",
+                      "text":  "What’s a clit/head focus truth that partners miss?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_067",
+                      "text":  "What’s a stamina insecurity you’ve worked through?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_068",
+                      "text":  "What’s a size preference truth—and what actually mattered more?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_069",
+                      "text":  "What’s a stamina preference—marathon, multiple, or sharp and hard?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_070",
+                      "text":  "What’s the filthiest compliment about your body you’ve believed?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_071",
+                      "text":  "What’s a body criticism that still echoes and how you handle it in bed?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_072",
+                      "text":  "What’s a time you were loud on purpose?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_073",
+                      "text":  "What’s a time you had to stay quiet and it made it hotter?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_074",
+                      "text":  "What’s your favorite overstimulation point—stop or continue?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_075",
+                      "text":  "What’s a second-round trigger that always works?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_076",
+                      "text":  "What’s a porn category you’d admit under truth rules?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_077",
+                      "text":  "What’s a porn category you’d deny even under truth rules?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_078",
+                      "text":  "What’s an ethical non-monogamy interest—yes, no, complicated?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_079",
+                      "text":  "What’s a jealousy trigger during sex talk?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_080",
+                      "text":  "What’s a trust requirement before you’d try your darkest soft fantasy?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_081",
+                      "text":  "What’s the difference between what you watch and what you want done?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_082",
+                      "text":  "What’s a safe word style you prefer—classic word or color system?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_083",
+                      "text":  "What’s aftercare you need after rough?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_084",
+                      "text":  "What’s aftercare you need after emotional sex?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_085",
+                      "text":  "What’s a time you cried during sex and why (if ok to share)?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_086",
+                      "text":  "What’s a time sex fixed a mood—and a time it couldn’t?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_087",
+                      "text":  "What’s the most possessive thing you’ve said mid-act?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_088",
+                      "text":  "What’s the most submissive thing you’ve said mid-act?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_089",
+                      "text":  "What’s a collar/leash aesthetic interest—pure fantasy or real?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_090",
+                      "text":  "What’s a spank and fuck combination preference?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_091",
+                      "text":  "What’s a facial expression you make that you hope they watch?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_092",
+                      "text":  "What’s a time you came hands-free or nearly?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_093",
+                      "text":  "What’s a favorite toy + partner combo?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_094",
+                      "text":  "What’s a group-sex fantasy boundary in one clear sentence?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_095",
+                      "text":  "What’s something illegal-adjacent you’ll never do and don’t joke about?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_096",
+                      "text":  "What’s something legal and filthy you still want to try?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_097",
+                      "text":  "What’s the most explicit dream you’ve had about someone known (no names)?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_098",
+                      "text":  "What’s a heat level you want this game to hit next?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_099",
+                      "text":  "What’s your honest answer: truth or dare when you’re already hard/wet?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_100",
+                      "text":  "What’s one very dirty truth about you the room wouldn’t guess?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_truth_vdirty_101",
+                      "text":  "What’s one very dirty want you’ve never asked anyone for?",
+                      "tone":  "truth",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_dirty_001",
+                      "text":  "Whisper the dirtiest PG-13-plus line you can to the person on your right (consent to hear first).",
+                      "tone":  "dare",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_dirty_002",
+                      "text":  "Describe your ideal makeout in 20 filthy-light words.",
+                      "tone":  "dare",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_dirty_003",
+                      "text":  "Show the face you make when something feels really good—3 seconds.",
+                      "tone":  "dare",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_dirty_004",
+                      "text":  "Let the group choose a body part; compliment someone’s in a steamy but not graphic way.",
+                      "tone":  "dare",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_dirty_005",
+                      "text":  "Send yourself a dirty reminder text and show the lock screen only.",
+                      "tone":  "dare",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_dirty_006",
+                      "text":  "Do a slow ‘take off a layer’ mime without removing required clothing.",
+                      "tone":  "dare",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_dirty_007",
+                      "text":  "Hold eye contact and say what you’d do if the room emptied.",
+                      "tone":  "dare",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_dirty_008",
+                      "text":  "Rank three turn-ons out loud.",
+                      "tone":  "dare",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_dirty_009",
+                      "text":  "Demonstrate your best ‘come here’ gesture like you mean sex.",
+                      "tone":  "dare",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_dirty_010",
+                      "text":  "Let someone rewrite your last truth answer to be 20% filthier; accept or veto.",
+                      "tone":  "dare",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_dirty_011",
+                      "text":  "Bite your own lip on purpose and own the look.",
+                      "tone":  "dare",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_dirty_012",
+                      "text":  "Describe a kiss that isn’t only a kiss—no explicit anatomy required.",
+                      "tone":  "dare",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_dirty_013",
+                      "text":  "Choose someone: tell them one thing you’d notice first if you were allowed to stare.",
+                      "tone":  "dare",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_dirty_014",
+                      "text":  "Spill a non-graphic bedroom preference as a dare statement.",
+                      "tone":  "dare",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_dirty_015",
+                      "text":  "Do your best ‘I’m already thinking about it’ voice line.",
+                      "tone":  "dare",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_dirty_016",
+                      "text":  "Trade seats to sit beside someone; whisper one brave sentence.",
+                      "tone":  "dare",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_dirty_017",
+                      "text":  "Give a 10-second guided breathing exercise that sounds accidentally sexual.",
+                      "tone":  "dare",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_dirty_018",
+                      "text":  "Admit a clothing item you’d ask someone to keep on.",
+                      "tone":  "dare",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_dirty_019",
+                      "text":  "Admit a clothing item you’d ask someone to take off (in private hypothetical).",
+                      "tone":  "dare",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_dirty_020",
+                      "text":  "Let the group pick soft / medium dirty talk; perform one line to the floor (not at a person unwilling).",
+                      "tone":  "dare",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_dirty_021",
+                      "text":  "Describe your hands’ job during a heated moment without naming parts.",
+                      "tone":  "dare",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_dirty_022",
+                      "text":  "Share a safe word you’d actually use and why that word.",
+                      "tone":  "dare",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_dirty_023",
+                      "text":  "Demonstrate a hair-fix intensity in the air (not on a person unless they offer).",
+                      "tone":  "dare",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_dirty_024",
+                      "text":  "Tell the room your yes/maybe/no for hickeys.",
+                      "tone":  "dare",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_dirty_025",
+                      "text":  "Act out ‘trying not to make a sound’ for 5 seconds.",
+                      "tone":  "dare",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_dirty_026",
+                      "text":  "Write a one-line dirty compliment on paper; let someone read it aloud if they want.",
+                      "tone":  "dare",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_dirty_027",
+                      "text":  "Confess a semi-public heat moment in one sentence.",
+                      "tone":  "dare",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_dirty_028",
+                      "text":  "Pick a song and explain why it’s a sex playlist track.",
+                      "tone":  "dare",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_dirty_029",
+                      "text":  "Show how you initiate with only eyebrows and mouth shape.",
+                      "tone":  "dare",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_dirty_030",
+                      "text":  "Dare someone else a dirty-truth only if they accept.",
+                      "tone":  "dare",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_dirty_031",
+                      "text":  "Describe aftercare you’d demand after rough play.",
+                      "tone":  "dare",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_dirty_032",
+                      "text":  "Name three words that are always a green light for you.",
+                      "tone":  "dare",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_dirty_033",
+                      "text":  "Name three words that are always a red light for you.",
+                      "tone":  "dare",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_dirty_034",
+                      "text":  "Roleplay a bartender hearing a bad pickup line—then deliver a better one.",
+                      "tone":  "dare",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_dirty_035",
+                      "text":  "Sit back-to-back with someone willing and answer one spicy question.",
+                      "tone":  "dare",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_dirty_036",
+                      "text":  "Mouth a silent dirty sentence; someone tries to lip-read.",
+                      "tone":  "dare",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_dirty_037",
+                      "text":  "Admit whether you prefer to ask or be told in bed.",
+                      "tone":  "dare",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_dirty_038",
+                      "text":  "Give a consensual forehead kiss to a willing person or blow a kiss to the room.",
+                      "tone":  "dare",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_dirty_039",
+                      "text":  "Describe the hottest non-porn visual memory in vague terms.",
+                      "tone":  "dare",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_dirty_040",
+                      "text":  "Rate this room’s tension 1–10 and say what would raise it by one.",
+                      "tone":  "dare",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_dirty_041",
+                      "text":  "Propose a fair rule for dirty dares for the rest of the night.",
+                      "tone":  "dare",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_dirty_042",
+                      "text":  "Choose: longer makeout description or filthier one-liner—then deliver.",
+                      "tone":  "dare",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_dirty_043",
+                      "text":  "Tell someone a genuine attraction observation that’s not only body.",
+                      "tone":  "dare",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_dirty_044",
+                      "text":  "Tell someone a genuine attraction observation that is body—tasteful.",
+                      "tone":  "dare",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_dirty_045",
+                      "text":  "Recite a fake phone-sex opening line then immediately break character.",
+                      "tone":  "dare",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_dirty_046",
+                      "text":  "Admit one thing you’d do if keys weren’t in the bowl and privacy was real.",
+                      "tone":  "dare",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_dirty_047",
+                      "text":  "Pass a clean ice cube in a way that looks more suggestive than it is.",
+                      "tone":  "dare",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_dirty_048",
+                      "text":  "Do a runway walk as if undressing with eyes only.",
+                      "tone":  "dare",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_dirty_049",
+                      "text":  "End your turn by saying the softest thing after something dirty.",
+                      "tone":  "dare",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_dirty_050",
+                      "text":  "Thank the group for not being weird—then be slightly weird on purpose.",
+                      "tone":  "dare",
+                      "heat":  "dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_vdirty_001",
+                      "text":  "Say out loud the filthiest sentence you’d want whispered in your ear (room consent).",
+                      "tone":  "dare",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_vdirty_002",
+                      "text":  "Describe exactly how you like oral—in blunt words—for 15 seconds.",
+                      "tone":  "dare",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_vdirty_003",
+                      "text":  "Describe exactly how you like to fuck / be fucked—in blunt words—for 15 seconds.",
+                      "tone":  "dare",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_vdirty_004",
+                      "text":  "Admit a specific kink interest and whether it’s fantasy or practice.",
+                      "tone":  "dare",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_vdirty_005",
+                      "text":  "Tell the room your cum / creampie / pullout preference in plain speech.",
+                      "tone":  "dare",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_vdirty_006",
+                      "text":  "Name a body part and what you want done to it tonight in a hypothetical private room.",
+                      "tone":  "dare",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_vdirty_007",
+                      "text":  "Name a body part on a partner and what you want to do to it—hypothetical.",
+                      "tone":  "dare",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_vdirty_008",
+                      "text":  "Hold eye contact with a willing person and say ‘I want you’ like you mean sex.",
+                      "tone":  "dare",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_vdirty_009",
+                      "text":  "Demonstrate (clothes on) the pace you like with a fist on your own thigh.",
+                      "tone":  "dare",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_vdirty_010",
+                      "text":  "Admit the last explicit thing you searched or watched without naming titles if uncomfortable—category only.",
+                      "tone":  "dare",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_vdirty_011",
+                      "text":  "Say a degradation phrase that’s a green light for you—then a red light.",
+                      "tone":  "dare",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_vdirty_012",
+                      "text":  "Say a praise phrase that would melt you mid-act.",
+                      "tone":  "dare",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_vdirty_013",
+                      "text":  "Describe your ideal blowjob start-to-finish in one breath.",
+                      "tone":  "dare",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_vdirty_014",
+                      "text":  "Describe your ideal going-down start-to-finish in one breath.",
+                      "tone":  "dare",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_vdirty_015",
+                      "text":  "Admit anal interest level with zero euphemism.",
+                      "tone":  "dare",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_vdirty_016",
+                      "text":  "Admit a toy you want used on you and how.",
+                      "tone":  "dare",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_vdirty_017",
+                      "text":  "Admit a toy you’d use on someone and how.",
+                      "tone":  "dare",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_vdirty_018",
+                      "text":  "Tell a car story with the explicit detail that matters.",
+                      "tone":  "dare",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_vdirty_019",
+                      "text":  "Tell a nearly-caught story with the explicit detail that matters.",
+                      "tone":  "dare",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_vdirty_020",
+                      "text":  "Choose someone willing: whisper a one-sentence sex offer that would only happen in private.",
+                      "tone":  "dare",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_vdirty_021",
+                      "text":  "Out loud: safe word + what you want to happen after safe word.",
+                      "tone":  "dare",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_vdirty_022",
+                      "text":  "Describe how you sound when you come—without performing a full show.",
+                      "tone":  "dare",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_vdirty_023",
+                      "text":  "Admit whether you want to be recorded only with clear prior consent—and your real boundary.",
+                      "tone":  "dare",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_vdirty_024",
+                      "text":  "Say where on your body you want a mouth in the next private hour (hypothetical).",
+                      "tone":  "dare",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_vdirty_025",
+                      "text":  "Say where you want to put your mouth (hypothetical).",
+                      "tone":  "dare",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_vdirty_026",
+                      "text":  "Describe a facial / body finish preference without shame.",
+                      "tone":  "dare",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_vdirty_027",
+                      "text":  "Describe a breeding-talk preference—even if birth control is real and separate.",
+                      "tone":  "dare",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_vdirty_028",
+                      "text":  "Admit a rough-sex yes and the exact limit attached.",
+                      "tone":  "dare",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_vdirty_029",
+                      "text":  "Admit a soft-sex yes that people assume you wouldn’t want.",
+                      "tone":  "dare",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_vdirty_030",
+                      "text":  "Give the room a 10-second guided ‘edge and stop’ verbal.",
+                      "tone":  "dare",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_vdirty_031",
+                      "text":  "Say the filthiest nickname you want to be called.",
+                      "tone":  "dare",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_vdirty_032",
+                      "text":  "Say the filthiest nickname you want to call a partner.",
+                      "tone":  "dare",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_vdirty_033",
+                      "text":  "Describe a second-round plan in explicit steps.",
+                      "tone":  "dare",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_vdirty_034",
+                      "text":  "Confess a time you came from dirty talk alone—or nearly.",
+                      "tone":  "dare",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_vdirty_035",
+                      "text":  "Confess a time you needed fingers/toys/cock specifically—and why.",
+                      "tone":  "dare",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_vdirty_036",
+                      "text":  "Describe your favorite penetration angle in blunt terms.",
+                      "tone":  "dare",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_vdirty_037",
+                      "text":  "Describe your favorite clitoral/head stimulation detail in blunt terms.",
+                      "tone":  "dare",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_vdirty_038",
+                      "text":  "Admit a spit / messy / clean preference with examples.",
+                      "tone":  "dare",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_vdirty_039",
+                      "text":  "Admit a choking/spanking/hair-pull combo that works—and what never will.",
+                      "tone":  "dare",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_vdirty_040",
+                      "text":  "Say what you’d do if the room emptied and locks worked—explicit.",
+                      "tone":  "dare",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_vdirty_041",
+                      "text":  "Offer a consensual dare to a willing person only: hear a 5-word filthy request.",
+                      "tone":  "dare",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_vdirty_042",
+                      "text":  "Write an explicit one-liner on paper; owner chooses keep or read.",
+                      "tone":  "dare",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_vdirty_043",
+                      "text":  "Describe aftercare you need after something very dirty.",
+                      "tone":  "dare",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_vdirty_044",
+                      "text":  "Admit one illegal-to-joke-about line you will not cross—and one legal filthy yes.",
+                      "tone":  "dare",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_vdirty_045",
+                      "text":  "Speak a full explicit fantasy in 30 seconds, then thank the room.",
+                      "tone":  "dare",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_vdirty_046",
+                      "text":  "Name three acts on your green list, three yellow, three red.",
+                      "tone":  "dare",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_vdirty_047",
+                      "text":  "Describe how you want to be finished—where, how, and what you want to hear.",
+                      "tone":  "dare",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_vdirty_048",
+                      "text":  "Describe how you want to finish someone—where, how, and what you’d say.",
+                      "tone":  "dare",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_vdirty_049",
+                      "text":  "Take accountability: say one explicit want you’ve been too shy to request in real life.",
+                      "tone":  "dare",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "tod18_dare_vdirty_050",
+                      "text":  "Close the very-dirty round: state a boundary for the rest of the night so everyone stays safe.",
+                      "tone":  "dare",
+                      "heat":  "very_dirty",
+                      "rating":  "+18",
+                      "publicOk":  false,
+                      "weight":  10
+                  }
+              ]
+}

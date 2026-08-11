@@ -1,0 +1,328 @@
+{
+  "intent": "eve.text.heated",
+  "speaker": "eve",
+  "rating": "soft18",
+  "scene_tags": [ "text", "heated", "flirt", "desire", "building" ],
+  "lines": [
+    {
+      "id": "eve_text_heated_001",
+      "text": "Oh. You don’t have to apologize for being honest. I just wasn’t expecting you to say it out loud like that.",
+      "tts_spoken": "Oh. You don’t have to apologize for being honest. [breath] I just wasn’t expecting you to say it out loud like that.",
+      "mood": "caught, not rejecting",
+      "delivery": "soft reset under heat",
+      "intensity": 4
+    },
+    {
+      "id": "eve_text_heated_002",
+      "text": "It’s not bad. It’s just… a lot to feel through a phone screen while I’m at work.",
+      "tts_spoken": "It’s not bad. It’s just… a lot to feel through a phone screen while I’m at work.",
+      "mood": "processing heat",
+      "delivery": "honest, slightly tight",
+      "intensity": 4
+    },
+    {
+      "id": "eve_text_heated_003",
+      "text": "You’re not the only one who’s been a little distracted since last night. I keep thinking about the way you looked at me across the table. And now this.",
+      "tts_spoken": "You’re not the only one who’s been a little distracted since last night. [breath] I keep thinking about the way you looked at me across the table. And now this.",
+      "mood": "matching, warmer",
+      "delivery": "detail then now",
+      "intensity": 5
+    },
+    {
+      "id": "eve_text_heated_004",
+      "text": "I should probably get back to customers before I start blushing in front of them. But… I like that you’re telling me the truth.",
+      "tts_spoken": "I should probably get back to customers before I start blushing in front of them. [breath] But… I like that you’re telling me the truth.",
+      "mood": "work pull + open door",
+      "delivery": "exit with yes under",
+      "intensity": 4
+    },
+    {
+      "id": "eve_text_heated_005",
+      "text": "Ryan… You’re sitting in a meeting thinking about kissing me?",
+      "tts_spoken": "Ryan… [breath] You’re sitting in a meeting thinking about kissing me?",
+      "mood": "disbelief + heat",
+      "delivery": "name first, then question",
+      "intensity": 5
+    },
+    {
+      "id": "eve_text_heated_006",
+      "text": "That’s not fair. Now I’m standing behind the counter thinking about it too.",
+      "tts_spoken": "That’s not fair. [breath] Now I’m standing behind the counter thinking about it too.",
+      "mood": "playful charge",
+      "delivery": "soft accusation",
+      "intensity": 5
+    },
+    {
+      "id": "eve_text_heated_007",
+      "text": "I don’t know what our first kiss would feel like yet. But the fact that you’re already wondering about it makes me want to find out.",
+      "tts_spoken": "I don’t know what our first kiss would feel like yet. [breath] But the fact that you’re already wondering about it makes me want to find out.",
+      "mood": "honest want",
+      "delivery": "careful then open",
+      "intensity": 5
+    },
+    {
+      "id": "eve_text_heated_008",
+      "text": "And yes… If the moment feels right on Thursday, I’d let you.",
+      "tts_spoken": "And yes… [breath] If the moment feels right on Thursday, I’d let you.",
+      "mood": "clear yes",
+      "delivery": "soft, decided",
+      "intensity": 5
+    },
+    {
+      "id": "eve_text_heated_009",
+      "text": "I should go before I say something even more honest. Talk later?",
+      "tts_spoken": "I should go before I say something even more honest. [breath] Talk later?",
+      "mood": "self-aware exit",
+      "delivery": "warm close under heat",
+      "intensity": 4
+    },
+    {
+      "id": "eve_text_heated_010",
+      "text": "Probably a good idea. For both of us.",
+      "tts_spoken": "Probably a good idea. For both of us.",
+      "mood": "shared limit",
+      "delivery": "light, mutual",
+      "intensity": 3
+    },
+    {
+      "id": "eve_text_heated_011",
+      "text": "I’m already having enough trouble focusing without you making it worse.",
+      "tts_spoken": "I’m already having enough trouble focusing without you making it worse.",
+      "mood": "flirt complaint",
+      "delivery": "smile under",
+      "intensity": 4
+    },
+    {
+      "id": "eve_text_heated_012",
+      "text": "Go survive your meeting. I’ll try to stop smiling at my phone every five minutes.",
+      "tts_spoken": "Go survive your meeting. [breath] I’ll try to stop smiling at my phone every five minutes.",
+      "mood": "send-off, warm",
+      "delivery": "practical + soft",
+      "intensity": 3
+    },
+    {
+      "id": "eve_text_heated_013",
+      "text": "Talk later, Ryan. Looking forward to Thursday more than I should admit.",
+      "tts_spoken": "Talk later, Ryan. [breath] Looking forward to Thursday more than I should admit.",
+      "mood": "honest close",
+      "delivery": "name + admission",
+      "intensity": 4
+    },
+    {
+      "id": "eve_text_heated_014",
+      "text": "Hey… Goodnight, Ryan. I’m glad you texted.",
+      "tts_spoken": "Hey… Goodnight, Ryan. [breath] I’m glad you texted.",
+      "mood": "night soft",
+      "delivery": "quiet, warm",
+      "intensity": 3
+    },
+    {
+      "id": "eve_text_heated_015",
+      "text": "Empty houses feel louder than they should sometimes. I know that feeling. It’s strange how quiet can suddenly feel heavy.",
+      "tts_spoken": "Empty houses feel louder than they should sometimes. [breath] I know that feeling. It’s strange how quiet can suddenly feel heavy.",
+      "mood": "empathy, shared",
+      "delivery": "slow, real",
+      "intensity": 4
+    },
+    {
+      "id": "eve_text_heated_016",
+      "text": "You’re not the only one whose place feels a little different tonight.",
+      "tts_spoken": "You’re not the only one whose place feels a little different tonight.",
+      "mood": "matching shift",
+      "delivery": "soft parallel",
+      "intensity": 4
+    },
+    {
+      "id": "eve_text_heated_017",
+      "text": "Sleep well, okay? I’ll be thinking about you.",
+      "tts_spoken": "Sleep well, okay? [breath] I’ll be thinking about you.",
+      "mood": "night care + want",
+      "delivery": "gentle close",
+      "intensity": 4
+    },
+    {
+      "id": "eve_text_heated_018",
+      "text": "Good morning… You’re calling me beautiful before I’ve even had coffee. That’s dangerous.",
+      "tts_spoken": "Good morning… [breath] You’re calling me beautiful before I’ve even had coffee. That’s dangerous.",
+      "mood": "flattered, playful",
+      "delivery": "morning soft heat",
+      "intensity": 3
+    },
+    {
+      "id": "eve_text_heated_019",
+      "text": "Good morning to you too, Ryan. I slept better than I expected… kept thinking about last night’s texts though.",
+      "tts_spoken": "Good morning to you too, Ryan. I slept better than I expected… [breath] kept thinking about last night’s texts though.",
+      "mood": "honest morning residual",
+      "delivery": "name + heat leftover",
+      "intensity": 3
+    },
+    {
+      "id": "eve_text_heated_020",
+      "text": "How did you sleep?",
+      "tts_spoken": "How did you sleep?",
+      "mood": "care check",
+      "delivery": "simple, open",
+      "intensity": 2
+    },
+    {
+      "id": "eve_text_heated_021",
+      "text": "I kind of figured. You seem like the type whose mind doesn’t know how to sit still.",
+      "tts_spoken": "I kind of figured. [breath] You seem like the type whose mind doesn’t know how to sit still.",
+      "mood": "seeing him",
+      "delivery": "gentle read",
+      "intensity": 3
+    },
+    {
+      "id": "eve_text_heated_022",
+      "text": "Mine was quieter than usual last night, actually. That’s rare for me. I kept replaying pieces of our conversation in the shop… and the way you looked at me when you said you spent the night thinking about me.",
+      "tts_spoken": "Mine was quieter than usual last night, actually. That’s rare for me. [breath] I kept replaying pieces of our conversation in the shop… and the way you looked at me when you said you spent the night thinking about me.",
+      "mood": "detail, soft heat",
+      "delivery": "memory as gift",
+      "intensity": 4
+    },
+    {
+      "id": "eve_text_heated_023",
+      "text": "It’s a little scary how easily you’ve gotten into my head already.",
+      "tts_spoken": "It’s a little scary how easily you’ve gotten into my head already.",
+      "mood": "vulnerable truth",
+      "delivery": "quiet weight",
+      "intensity": 5
+    },
+    {
+      "id": "eve_text_heated_024",
+      "text": "Are you at work already, or do you get a slow morning?",
+      "tts_spoken": "Are you at work already, or do you get a slow morning?",
+      "mood": "curious care",
+      "delivery": "easy question",
+      "intensity": 2
+    },
+    {
+      "id": "eve_text_heated_025",
+      "text": "4:30? Ryan… that’s not a morning, that’s a crime.",
+      "tts_spoken": "4:30? Ryan… [breath] that’s not a morning, that’s a crime.",
+      "mood": "concern + tease",
+      "delivery": "name, then soft scold",
+      "intensity": 3
+    },
+    {
+      "id": "eve_text_heated_026",
+      "text": "Do you always start that early, or is your head still too full to sleep?",
+      "tts_spoken": "Do you always start that early, or is your head still too full to sleep?",
+      "mood": "checking cause",
+      "delivery": "gentle probe",
+      "intensity": 3
+    },
+    {
+      "id": "eve_text_heated_027",
+      "text": "I’m about to open the shop. Already wishing the day would move faster so Thursday gets here sooner.",
+      "tts_spoken": "I’m about to open the shop. [breath] Already wishing the day would move faster so Thursday gets here sooner.",
+      "mood": "work + want",
+      "delivery": "honest impatience",
+      "intensity": 4
+    },
+    {
+      "id": "eve_text_heated_028",
+      "text": "Text me when you get a real break, okay? Even if it’s just to say you’re still alive after being up since before the sun.",
+      "tts_spoken": "Text me when you get a real break, okay? [breath] Even if it’s just to say you’re still alive after being up since before the sun.",
+      "mood": "care ask",
+      "delivery": "warm request",
+      "intensity": 3
+    },
+    {
+      "id": "eve_text_heated_029",
+      "text": "Overnight market numbers at 4:30 in the morning… That sounds exhausting. And very you, somehow.",
+      "tts_spoken": "Overnight market numbers at 4:30 in the morning… [breath] That sounds exhausting. And very you, somehow.",
+      "mood": "seeing pattern",
+      "delivery": "empathy + soft read",
+      "intensity": 3
+    },
+    {
+      "id": "eve_text_heated_030",
+      "text": "I’m glad you’re alive. Would’ve been awkward if you’d disappeared before Thursday.",
+      "tts_spoken": "I’m glad you’re alive. [breath] Would’ve been awkward if you’d disappeared before Thursday.",
+      "mood": "light, real under",
+      "delivery": "joke + care",
+      "intensity": 3
+    },
+    {
+      "id": "eve_text_heated_031",
+      "text": "I’m about to unlock the door and let the first customers in. Already know I’m going to spend half the morning glancing at my phone like an idiot.",
+      "tts_spoken": "I’m about to unlock the door and let the first customers in. [breath] Already know I’m going to spend half the morning glancing at my phone like an idiot.",
+      "mood": "self-aware crush",
+      "delivery": "honest, light",
+      "intensity": 3
+    },
+    {
+      "id": "eve_text_heated_032",
+      "text": "Don’t work yourself into the ground before I get to see you again, okay?",
+      "tts_spoken": "Don’t work yourself into the ground before I get to see you again, okay?",
+      "mood": "protective soft",
+      "delivery": "care request",
+      "intensity": 4
+    },
+    {
+      "id": "eve_text_heated_033",
+      "text": "You’re not supposed to tell me that. Now I’m going to picture you sitting there between meetings, replaying everything… and it’s going to distract me even more than I already am.",
+      "tts_spoken": "You’re not supposed to tell me that. [breath] Now I’m going to picture you sitting there between meetings, replaying everything… and it’s going to distract me even more than I already am.",
+      "mood": "heat + complaint",
+      "delivery": "soft scold with yes under",
+      "intensity": 5
+    },
+    {
+      "id": "eve_text_heated_034",
+      "text": "I’ve been doing the same thing, if it makes you feel any better. Every quiet moment between customers I catch myself thinking about the rain, and the way you looked at me when you asked me to dinner… and how Thursday might feel.",
+      "tts_spoken": "I’ve been doing the same thing, if it makes you feel any better. [breath] Every quiet moment between customers I catch myself thinking about the rain, and the way you looked at me when you asked me to dinner… and how Thursday might feel.",
+      "mood": "full match",
+      "delivery": "detail as gift",
+      "intensity": 5
+    },
+    {
+      "id": "eve_text_heated_035",
+      "text": "It’s a little dangerous how much space you’ve taken up in my head already.",
+      "tts_spoken": "It’s a little dangerous how much space you’ve taken up in my head already.",
+      "mood": "scared of speed, not rejecting",
+      "delivery": "quiet weight",
+      "intensity": 5
+    },
+    {
+      "id": "eve_text_heated_036",
+      "text": "I should go before I burn someone’s latte. But I’m really looking forward to seeing you, Ryan.",
+      "tts_spoken": "I should go before I burn someone’s latte. [breath] But I’m really looking forward to seeing you, Ryan.",
+      "mood": "work exit + real",
+      "delivery": "name lands",
+      "intensity": 4
+    },
+    {
+      "id": "eve_text_heated_037",
+      "text": "Yeah. I know that feeling.",
+      "tts_spoken": "Yeah. I know that feeling.",
+      "mood": "shared gut drop",
+      "delivery": "simple match",
+      "intensity": 3
+    },
+    {
+      "id": "eve_text_heated_038",
+      "text": "Some of your messages do the same thing to me. That little drop in my stomach like the floor just shifted. I’m not used to someone getting under my skin this fast.",
+      "tts_spoken": "Some of your messages do the same thing to me. That little drop in my stomach like the floor just shifted. [breath] I’m not used to someone getting under my skin this fast.",
+      "mood": "body truth",
+      "delivery": "honest, unarmored",
+      "intensity": 5
+    },
+    {
+      "id": "eve_text_heated_039",
+      "text": "It’s a little scary. But I don’t want it to stop.",
+      "tts_spoken": "It’s a little scary. [breath] But I don’t want it to stop.",
+      "mood": "fear + choose",
+      "delivery": "two beats, clear",
+      "intensity": 5
+    },
+    {
+      "id": "eve_text_heated_040",
+      "text": "Okay, I really do have to focus before I mess up an order. Talk later? And Ryan… I’m glad it’s you making my stomach do that.",
+      "tts_spoken": "Okay, I really do have to focus before I mess up an order. Talk later? [breath] And Ryan… I’m glad it’s you making my stomach do that.",
+      "mood": "exit with claim",
+      "delivery": "work then soft land",
+      "intensity": 5
+    }
+  ]
+}

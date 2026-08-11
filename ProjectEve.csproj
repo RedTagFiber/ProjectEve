@@ -57,7 +57,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="AI\Training\Packs\" />
     <Folder Include="Characters\Traits\TraitJson\Matrix\" />
     <Folder Include="Characters\Traits\TraitJson\SubSlowTraits\" />
     <Folder Include="Characters\Traits\TraitJson\MidTraits\" />

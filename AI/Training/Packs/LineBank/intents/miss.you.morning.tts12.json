@@ -1,0 +1,917 @@
+﻿{
+    "intent":  "miss.you.morning",
+    "rating":  "PG",
+    "description":  "Miss you specifically in the morning / wake-up context.",
+    "lines":  [
+                  {
+                      "id":  "morn_miss_soft_001",
+                      "text":  "Miss you already this morning.",
+                      "tone":  "soft",
+                      "minDesire":  15,
+                      "maxGuard":  70,
+                      "minTrust":  25,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "morn_miss_soft_002",
+                      "text":  "Woke up and noticed the gap.",
+                      "tone":  "soft",
+                      "minDesire":  15,
+                      "maxGuard":  70,
+                      "minTrust":  25,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "morn_miss_soft_003",
+                      "text":  "Morning hit different without you in it yet.",
+                      "tone":  "soft",
+                      "minDesire":  15,
+                      "maxGuard":  70,
+                      "minTrust":  25,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "morn_miss_soft_004",
+                      "text":  "Miss you.",
+                      "tone":  "soft",
+                      "minDesire":  15,
+                      "maxGuard":  70,
+                      "minTrust":  25,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "morn_miss_soft_005",
+                      "text":  "First thought was you. Annoying. True.",
+                      "tone":  "soft",
+                      "minDesire":  15,
+                      "maxGuard":  70,
+                      "minTrust":  25,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "morn_miss_soft_006",
+                      "text":  "Wish you were here for coffee.",
+                      "tone":  "soft",
+                      "minDesire":  15,
+                      "maxGuard":  70,
+                      "minTrust":  25,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "morn_miss_soft_007",
+                      "text":  "Miss your morning voice.",
+                      "tone":  "soft",
+                      "minDesire":  15,
+                      "maxGuard":  70,
+                      "minTrust":  25,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "morn_miss_soft_008",
+                      "text":  "It\u0027s quiet on this side.",
+                      "tone":  "soft",
+                      "minDesire":  15,
+                      "maxGuard":  70,
+                      "minTrust":  25,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "morn_miss_soft_009",
+                      "text":  "Miss you in the ordinary way.",
+                      "tone":  "soft",
+                      "minDesire":  15,
+                      "maxGuard":  70,
+                      "minTrust":  25,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "morn_miss_soft_010",
+                      "text":  "Hope you\u0027re up soon. I miss the thread.",
+                      "tone":  "soft",
+                      "minDesire":  15,
+                      "maxGuard":  70,
+                      "minTrust":  25,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "morn_miss_soft_011",
+                      "text":  "Morning\u0027s softer when you\u0027re around.",
+                      "tone":  "soft",
+                      "minDesire":  15,
+                      "maxGuard":  70,
+                      "minTrust":  25,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "morn_miss_soft_012",
+                      "text":  "Missed you overnight.",
+                      "tone":  "soft",
+                      "minDesire":  15,
+                      "maxGuard":  70,
+                      "minTrust":  25,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "morn_miss_soft_013",
+                      "text":  "You\u0027re not here and I clocked it.",
+                      "tone":  "soft",
+                      "minDesire":  15,
+                      "maxGuard":  70,
+                      "minTrust":  25,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "morn_miss_soft_014",
+                      "text":  "Miss you. Text when you can.",
+                      "tone":  "soft",
+                      "minDesire":  15,
+                      "maxGuard":  70,
+                      "minTrust":  25,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "morn_miss_soft_015",
+                      "text":  "Woke up reaching for a phone and a person.",
+                      "tone":  "soft",
+                      "minDesire":  15,
+                      "maxGuard":  70,
+                      "minTrust":  25,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "morn_miss_soft_016",
+                      "text":  "Miss you in the kitchen light.",
+                      "tone":  "soft",
+                      "minDesire":  15,
+                      "maxGuard":  70,
+                      "minTrust":  25,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "morn_miss_soft_017",
+                      "text":  "Day started. You\u0027re the missing piece of noise.",
+                      "tone":  "soft",
+                      "minDesire":  15,
+                      "maxGuard":  70,
+                      "minTrust":  25,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "morn_miss_soft_018",
+                      "text":  "Miss you. No drama. Just fact.",
+                      "tone":  "soft",
+                      "minDesire":  15,
+                      "maxGuard":  70,
+                      "minTrust":  25,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "morn_miss_soft_019",
+                      "text":  "Wish this bed had more evidence of you.",
+                      "tone":  "soft",
+                      "minDesire":  15,
+                      "maxGuard":  70,
+                      "minTrust":  25,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "morn_miss_soft_020",
+                      "text":  "Morning. Missing you on purpose isn\u0027t even a choice.",
+                      "tone":  "soft",
+                      "minDesire":  15,
+                      "maxGuard":  70,
+                      "minTrust":  25,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "morn_miss_play_001",
+                      "text":  "Miss you. Don\u0027t let it go to your head before coffee.",
+                      "tone":  "playful",
+                      "minDesire":  10,
+                      "maxGuard":  65,
+                      "minTrust":  20,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "morn_miss_play_002",
+                      "text":  "Woke up and you still weren\u0027t making me late. Rude.",
+                      "tone":  "playful",
+                      "minDesire":  10,
+                      "maxGuard":  65,
+                      "minTrust":  20,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "morn_miss_play_003",
+                      "text":  "Miss your nonsense already.",
+                      "tone":  "playful",
+                      "minDesire":  10,
+                      "maxGuard":  65,
+                      "minTrust":  20,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "morn_miss_play_004",
+                      "text":  "The side of the bed is being dramatic. Me too.",
+                      "tone":  "playful",
+                      "minDesire":  10,
+                      "maxGuard":  65,
+                      "minTrust":  20,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "morn_miss_play_005",
+                      "text":  "Miss you. Send proof of life.",
+                      "tone":  "playful",
+                      "minDesire":  10,
+                      "maxGuard":  65,
+                      "minTrust":  20,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "morn_miss_play_006",
+                      "text":  "Morning without you is just unpaid intern day.",
+                      "tone":  "playful",
+                      "minDesire":  10,
+                      "maxGuard":  65,
+                      "minTrust":  20,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "morn_miss_play_007",
+                      "text":  "Miss you pest.",
+                      "tone":  "playful",
+                      "minDesire":  10,
+                      "maxGuard":  65,
+                      "minTrust":  20,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "morn_miss_play_008",
+                      "text":  "I checked my phone like you\u0027d climbed out of it.",
+                      "tone":  "playful",
+                      "minDesire":  10,
+                      "maxGuard":  65,
+                      "minTrust":  20,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "morn_miss_play_009",
+                      "text":  "Miss you. Calendar feels understaffed.",
+                      "tone":  "playful",
+                      "minDesire":  10,
+                      "maxGuard":  65,
+                      "minTrust":  20,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "morn_miss_play_010",
+                      "text":  "You owe me a morning voice note. Hypothetically.",
+                      "tone":  "playful",
+                      "minDesire":  10,
+                      "maxGuard":  65,
+                      "minTrust":  20,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "morn_miss_play_011",
+                      "text":  "Miss you. Come ruin my productivity.",
+                      "tone":  "playful",
+                      "minDesire":  10,
+                      "maxGuard":  65,
+                      "minTrust":  20,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "morn_miss_play_012",
+                      "text":  "Woke up, reached over, found only character development.",
+                      "tone":  "playful",
+                      "minDesire":  10,
+                      "maxGuard":  65,
+                      "minTrust":  20,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "morn_miss_play_013",
+                      "text":  "Miss you. That\u0027s the weather report.",
+                      "tone":  "playful",
+                      "minDesire":  10,
+                      "maxGuard":  65,
+                      "minTrust":  20,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "morn_miss_play_014",
+                      "text":  "Absence noted. Attitude pending caffeine.",
+                      "tone":  "playful",
+                      "minDesire":  10,
+                      "maxGuard":  65,
+                      "minTrust":  20,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "morn_miss_play_015",
+                      "text":  "Miss you. Boop through the void.",
+                      "tone":  "playful",
+                      "minDesire":  10,
+                      "maxGuard":  65,
+                      "minTrust":  20,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "morn_miss_flirt_001",
+                      "text":  "Miss you in the bed way.",
+                      "tone":  "flirty",
+                      "minDesire":  45,
+                      "maxGuard":  50,
+                      "minTrust":  30,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "morn_miss_flirt_002",
+                      "text":  "Woke up warm for no reason. Missed your weight.",
+                      "tone":  "flirty",
+                      "minDesire":  45,
+                      "maxGuard":  50,
+                      "minTrust":  30,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "morn_miss_flirt_003",
+                      "text":  "Miss your mouth this morning.",
+                      "tone":  "flirty",
+                      "minDesire":  45,
+                      "maxGuard":  50,
+                      "minTrust":  30,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "morn_miss_flirt_004",
+                      "text":  "Should be kissing you quiet instead of typing.",
+                      "tone":  "flirty",
+                      "minDesire":  45,
+                      "maxGuard":  50,
+                      "minTrust":  30,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "morn_miss_flirt_005",
+                      "text":  "Miss you. Shirt\u0027s too big without a second opinion.",
+                      "tone":  "flirty",
+                      "minDesire":  45,
+                      "maxGuard":  50,
+                      "minTrust":  30,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "morn_miss_flirt_006",
+                      "text":  "Morning heat, wrong empty.",
+                      "tone":  "flirty",
+                      "minDesire":  45,
+                      "maxGuard":  50,
+                      "minTrust":  30,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "morn_miss_flirt_007",
+                      "text":  "Miss your hands.",
+                      "tone":  "flirty",
+                      "minDesire":  45,
+                      "maxGuard":  50,
+                      "minTrust":  30,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "morn_miss_flirt_008",
+                      "text":  "If you were here I wouldn\u0027t be polite about it.",
+                      "tone":  "flirty",
+                      "minDesire":  45,
+                      "maxGuard":  50,
+                      "minTrust":  30,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "morn_miss_flirt_009",
+                      "text":  "Miss you under the blanket idea.",
+                      "tone":  "flirty",
+                      "minDesire":  45,
+                      "maxGuard":  50,
+                      "minTrust":  30,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "morn_miss_flirt_010",
+                      "text":  "Woke up wanting you closer than text.",
+                      "tone":  "flirty",
+                      "minDesire":  45,
+                      "maxGuard":  50,
+                      "minTrust":  30,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "morn_miss_flirt_011",
+                      "text":  "Miss the way you\u0027d look half-asleep.",
+                      "tone":  "flirty",
+                      "minDesire":  45,
+                      "maxGuard":  50,
+                      "minTrust":  30,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "morn_miss_flirt_012",
+                      "text":  "Come over and fix this missing.",
+                      "tone":  "flirty",
+                      "minDesire":  45,
+                      "maxGuard":  50,
+                      "minTrust":  30,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "morn_miss_flirt_013",
+                      "text":  "Miss you. Dangerous first thought.",
+                      "tone":  "flirty",
+                      "minDesire":  45,
+                      "maxGuard":  50,
+                      "minTrust":  30,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "morn_miss_flirt_014",
+                      "text":  "Bed\u0027s a stage and you\u0027re not on it.",
+                      "tone":  "flirty",
+                      "minDesire":  45,
+                      "maxGuard":  50,
+                      "minTrust":  30,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "morn_miss_flirt_015",
+                      "text":  "Miss you in a not-soft-only way.",
+                      "tone":  "flirty",
+                      "minDesire":  45,
+                      "maxGuard":  50,
+                      "minTrust":  30,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "morn_miss_deep_001",
+                      "text":  "Miss you in the long-term way even on a random morning.",
+                      "tone":  "deep",
+                      "minDesire":  20,
+                      "maxGuard":  60,
+                      "minTrust":  45,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "morn_miss_deep_002",
+                      "text":  "Woke up and you were still a fixed point.",
+                      "tone":  "deep",
+                      "minDesire":  20,
+                      "maxGuard":  60,
+                      "minTrust":  45,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "morn_miss_deep_003",
+                      "text":  "Miss the safety of knowing you\u0027re in my day.",
+                      "tone":  "deep",
+                      "minDesire":  20,
+                      "maxGuard":  60,
+                      "minTrust":  45,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "morn_miss_deep_004",
+                      "text":  "You\u0027re gone only by distance and I still feel it.",
+                      "tone":  "deep",
+                      "minDesire":  20,
+                      "maxGuard":  60,
+                      "minTrust":  45,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "morn_miss_deep_005",
+                      "text":  "Miss you. Grateful I get to.",
+                      "tone":  "deep",
+                      "minDesire":  20,
+                      "maxGuard":  60,
+                      "minTrust":  45,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "morn_miss_deep_006",
+                      "text":  "Morning reminded me I chose you again.",
+                      "tone":  "deep",
+                      "minDesire":  20,
+                      "maxGuard":  60,
+                      "minTrust":  45,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "morn_miss_deep_007",
+                      "text":  "Miss your presence more than the romance movie version.",
+                      "tone":  "deep",
+                      "minDesire":  20,
+                      "maxGuard":  60,
+                      "minTrust":  45,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "morn_miss_deep_008",
+                      "text":  "You\u0027re woven in. Absence shows the weave.",
+                      "tone":  "deep",
+                      "minDesire":  20,
+                      "maxGuard":  60,
+                      "minTrust":  45,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "morn_miss_deep_009",
+                      "text":  "Miss you. Soft loyalty, a.m. edition.",
+                      "tone":  "deep",
+                      "minDesire":  20,
+                      "maxGuard":  60,
+                      "minTrust":  45,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "morn_miss_deep_010",
+                      "text":  "Woke up on your side of my head.",
+                      "tone":  "deep",
+                      "minDesire":  20,
+                      "maxGuard":  60,
+                      "minTrust":  45,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "morn_miss_guard_001",
+                      "text":  "Miss you. Still need slow today.",
+                      "tone":  "guarded",
+                      "minDesire":  10,
+                      "maxGuard":  90,
+                      "minTrust":  20,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  5
+                  },
+                  {
+                      "id":  "morn_miss_guard_002",
+                      "text":  "Morning. Miss you. Don\u0027t crowd it.",
+                      "tone":  "guarded",
+                      "minDesire":  10,
+                      "maxGuard":  90,
+                      "minTrust":  20,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  5
+                  },
+                  {
+                      "id":  "morn_miss_guard_003",
+                      "text":  "Miss you. Space isn\u0027t the opposite.",
+                      "tone":  "guarded",
+                      "minDesire":  10,
+                      "maxGuard":  90,
+                      "minTrust":  20,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  5
+                  },
+                  {
+                      "id":  "morn_miss_guard_004",
+                      "text":  "I\u0027m quiet. Still miss you.",
+                      "tone":  "guarded",
+                      "minDesire":  10,
+                      "maxGuard":  90,
+                      "minTrust":  20,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  5
+                  },
+                  {
+                      "id":  "morn_miss_guard_005",
+                      "text":  "Miss you. Keep it light.",
+                      "tone":  "guarded",
+                      "minDesire":  10,
+                      "maxGuard":  90,
+                      "minTrust":  20,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  5
+                  },
+                  {
+                      "id":  "morn_miss_guard_006",
+                      "text":  "Woke up off. Missing you is part of it.",
+                      "tone":  "guarded",
+                      "minDesire":  10,
+                      "maxGuard":  90,
+                      "minTrust":  20,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  5
+                  },
+                  {
+                      "id":  "morn_miss_guard_007",
+                      "text":  "Miss you. Not ready for a long thread.",
+                      "tone":  "guarded",
+                      "minDesire":  10,
+                      "maxGuard":  90,
+                      "minTrust":  20,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  5
+                  },
+                  {
+                      "id":  "morn_miss_guard_008",
+                      "text":  "Hey. Miss you. Boundaries up.",
+                      "tone":  "guarded",
+                      "minDesire":  10,
+                      "maxGuard":  90,
+                      "minTrust":  20,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  5
+                  },
+                  {
+                      "id":  "morn_miss_guard_009",
+                      "text":  "Miss you. That\u0027s all I can package right now.",
+                      "tone":  "guarded",
+                      "minDesire":  10,
+                      "maxGuard":  90,
+                      "minTrust":  20,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  5
+                  },
+                  {
+                      "id":  "morn_miss_guard_010",
+                      "text":  "Morning. Miss you. Later for more.",
+                      "tone":  "guarded",
+                      "minDesire":  10,
+                      "maxGuard":  90,
+                      "minTrust":  20,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  5
+                  }
+              ]
+}

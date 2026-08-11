@@ -1,0 +1,1242 @@
+﻿{
+    "intent":  "compliment.give",
+    "rating":  "PG",
+    "description":  "She compliments the player. soft/playful/flirty/deep/specific.",
+    "lines":  [
+                  {
+                      "id":  "cgive_soft_001",
+                      "text":  "You look good today.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  70,
+                      "minTrust":  15,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "cgive_soft_002",
+                      "text":  "I like your face.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  70,
+                      "minTrust":  15,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "cgive_soft_003",
+                      "text":  "You’re easy on the eyes.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  70,
+                      "minTrust":  15,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "cgive_soft_004",
+                      "text":  "That shirt works on you.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  70,
+                      "minTrust":  15,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "cgive_soft_005",
+                      "text":  "You have a good voice.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  70,
+                      "minTrust":  15,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "cgive_soft_006",
+                      "text":  "I like how you listen.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  70,
+                      "minTrust":  15,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "cgive_soft_007",
+                      "text":  "You’re kinder than you act.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  70,
+                      "minTrust":  15,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "cgive_soft_008",
+                      "text":  "You make this easier.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  70,
+                      "minTrust":  15,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "cgive_soft_009",
+                      "text":  "I like your hands.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  70,
+                      "minTrust":  15,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "cgive_soft_010",
+                      "text":  "You’re steady. It’s attractive.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  70,
+                      "minTrust":  15,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "cgive_soft_011",
+                      "text":  "You smell good. Hypothetical. Real.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  70,
+                      "minTrust":  15,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "cgive_soft_012",
+                      "text":  "I like your laugh.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  70,
+                      "minTrust":  15,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "cgive_soft_013",
+                      "text":  "You’re sharp when you want to be.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  70,
+                      "minTrust":  15,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "cgive_soft_014",
+                      "text":  "That smile is a problem.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  70,
+                      "minTrust":  15,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "cgive_soft_015",
+                      "text":  "You’re comfortable to be around.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  70,
+                      "minTrust":  15,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "cgive_soft_016",
+                      "text":  "I like your taste.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  70,
+                      "minTrust":  15,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "cgive_soft_017",
+                      "text":  "You show up. Rare.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  70,
+                      "minTrust":  15,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "cgive_soft_018",
+                      "text":  "You’re good people.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  70,
+                      "minTrust":  15,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "cgive_soft_019",
+                      "text":  "I like the way you think.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  70,
+                      "minTrust":  15,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "cgive_soft_020",
+                      "text":  "You’re a calm I didn’t expect.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  70,
+                      "minTrust":  15,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "cgive_soft_021",
+                      "text":  "You look like trouble I trust.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  70,
+                      "minTrust":  15,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "cgive_soft_022",
+                      "text":  "I like your timing.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  70,
+                      "minTrust":  15,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "cgive_soft_023",
+                      "text":  "You’re warmer than your jokes.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  70,
+                      "minTrust":  15,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "cgive_soft_024",
+                      "text":  "You wear confidence well.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  70,
+                      "minTrust":  15,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "cgive_soft_025",
+                      "text":  "I like your eyes when you mean something.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  70,
+                      "minTrust":  15,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "cgive_soft_026",
+                      "text":  "You’re solid.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  70,
+                      "minTrust":  15,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "cgive_soft_027",
+                      "text":  "You make ordinary feel better.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  70,
+                      "minTrust":  15,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "cgive_soft_028",
+                      "text":  "I like your patience.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  70,
+                      "minTrust":  15,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "cgive_soft_029",
+                      "text":  "You’re a good view in a doorway.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  70,
+                      "minTrust":  15,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "cgive_soft_030",
+                      "text":  "I notice you. Positively.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  70,
+                      "minTrust":  15,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "cgive_play_001",
+                      "text":  "You’re annoyingly handsome.",
+                      "tone":  "playful",
+                      "minDesire":  15,
+                      "maxGuard":  65,
+                      "minTrust":  15,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "cgive_play_002",
+                      "text":  "Stop looking like that.",
+                      "tone":  "playful",
+                      "minDesire":  15,
+                      "maxGuard":  65,
+                      "minTrust":  15,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "cgive_play_003",
+                      "text":  "Who let you be charming.",
+                      "tone":  "playful",
+                      "minDesire":  15,
+                      "maxGuard":  65,
+                      "minTrust":  15,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "cgive_play_004",
+                      "text":  "You’re a menace.",
+                      "tone":  "playful",
+                      "minDesire":  15,
+                      "maxGuard":  65,
+                      "minTrust":  15,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "cgive_play_005",
+                      "text":  "I’d complain about your face but I’d be lying.",
+                      "tone":  "playful",
+                      "minDesire":  15,
+                      "maxGuard":  65,
+                      "minTrust":  15,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "cgive_play_006",
+                      "text":  "Main character hair day?",
+                      "tone":  "playful",
+                      "minDesire":  15,
+                      "maxGuard":  65,
+                      "minTrust":  15,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "cgive_play_007",
+                      "text":  "You’re lucky you’re cute.",
+                      "tone":  "playful",
+                      "minDesire":  15,
+                      "maxGuard":  65,
+                      "minTrust":  15,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "cgive_play_008",
+                      "text":  "That line almost worked. Your face finished it.",
+                      "tone":  "playful",
+                      "minDesire":  15,
+                      "maxGuard":  65,
+                      "minTrust":  15,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "cgive_play_009",
+                      "text":  "Rate your outfit: unfair.",
+                      "tone":  "playful",
+                      "minDesire":  15,
+                      "maxGuard":  65,
+                      "minTrust":  15,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "cgive_play_010",
+                      "text":  "You’re banned from being modest.",
+                      "tone":  "playful",
+                      "minDesire":  15,
+                      "maxGuard":  65,
+                      "minTrust":  15,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "cgive_play_011",
+                      "text":  "How dare you show up looking sorted.",
+                      "tone":  "playful",
+                      "minDesire":  15,
+                      "maxGuard":  65,
+                      "minTrust":  15,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "cgive_play_012",
+                      "text":  "You’re a walking distraction.",
+                      "tone":  "playful",
+                      "minDesire":  15,
+                      "maxGuard":  65,
+                      "minTrust":  15,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "cgive_play_013",
+                      "text":  "Keep being competent. It’s hot in a boring way.",
+                      "tone":  "playful",
+                      "minDesire":  15,
+                      "maxGuard":  65,
+                      "minTrust":  15,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "cgive_play_014",
+                      "text":  "You make my eyes do stupid things.",
+                      "tone":  "playful",
+                      "minDesire":  15,
+                      "maxGuard":  65,
+                      "minTrust":  15,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "cgive_play_015",
+                      "text":  "Certified problem.",
+                      "tone":  "playful",
+                      "minDesire":  15,
+                      "maxGuard":  65,
+                      "minTrust":  15,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "cgive_flirt_001",
+                      "text":  "You’re hot. Said it.",
+                      "tone":  "flirty",
+                      "minDesire":  45,
+                      "maxGuard":  50,
+                      "minTrust":  30,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "cgive_flirt_002",
+                      "text":  "I like your mouth.",
+                      "tone":  "flirty",
+                      "minDesire":  45,
+                      "maxGuard":  50,
+                      "minTrust":  30,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "cgive_flirt_003",
+                      "text":  "Come closer so the compliment lands better.",
+                      "tone":  "flirty",
+                      "minDesire":  45,
+                      "maxGuard":  50,
+                      "minTrust":  30,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "cgive_flirt_004",
+                      "text":  "You look like I should skip small talk.",
+                      "tone":  "flirty",
+                      "minDesire":  45,
+                      "maxGuard":  50,
+                      "minTrust":  30,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "cgive_flirt_005",
+                      "text":  "That neck is a bad influence.",
+                      "tone":  "flirty",
+                      "minDesire":  45,
+                      "maxGuard":  50,
+                      "minTrust":  30,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "cgive_flirt_006",
+                      "text":  "You’re my favorite view.",
+                      "tone":  "flirty",
+                      "minDesire":  45,
+                      "maxGuard":  50,
+                      "minTrust":  30,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "cgive_flirt_007",
+                      "text":  "I’d kiss that smirk off if we weren’t texting.",
+                      "tone":  "flirty",
+                      "minDesire":  45,
+                      "maxGuard":  50,
+                      "minTrust":  30,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "cgive_flirt_008",
+                      "text":  "Hands. Good hands. Thinking about them.",
+                      "tone":  "flirty",
+                      "minDesire":  45,
+                      "maxGuard":  50,
+                      "minTrust":  30,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "cgive_flirt_009",
+                      "text":  "You wear want well.",
+                      "tone":  "flirty",
+                      "minDesire":  45,
+                      "maxGuard":  50,
+                      "minTrust":  30,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "cgive_flirt_010",
+                      "text":  "I’m staring. On purpose.",
+                      "tone":  "flirty",
+                      "minDesire":  45,
+                      "maxGuard":  50,
+                      "minTrust":  30,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "cgive_flirt_011",
+                      "text":  "You’d look better closer.",
+                      "tone":  "flirty",
+                      "minDesire":  45,
+                      "maxGuard":  50,
+                      "minTrust":  30,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "cgive_flirt_012",
+                      "text":  "Don’t flex. I’m already considering poor decisions.",
+                      "tone":  "flirty",
+                      "minDesire":  45,
+                      "maxGuard":  50,
+                      "minTrust":  30,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "cgive_flirt_013",
+                      "text":  "Your voice in person is worse—better.",
+                      "tone":  "flirty",
+                      "minDesire":  45,
+                      "maxGuard":  50,
+                      "minTrust":  30,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "cgive_flirt_014",
+                      "text":  "You’re a full-body yes.",
+                      "tone":  "flirty",
+                      "minDesire":  45,
+                      "maxGuard":  50,
+                      "minTrust":  30,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "cgive_flirt_015",
+                      "text":  "If we were alone that shirt would be a debate.",
+                      "tone":  "flirty",
+                      "minDesire":  45,
+                      "maxGuard":  50,
+                      "minTrust":  30,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "cgive_flirt_016",
+                      "text":  "You’re lucky I have manners in public.",
+                      "tone":  "flirty",
+                      "minDesire":  45,
+                      "maxGuard":  50,
+                      "minTrust":  30,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "cgive_flirt_017",
+                      "text":  "Keep talking. I like the package.",
+                      "tone":  "flirty",
+                      "minDesire":  45,
+                      "maxGuard":  50,
+                      "minTrust":  30,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "cgive_flirt_018",
+                      "text":  "You’re making heat look easy.",
+                      "tone":  "flirty",
+                      "minDesire":  45,
+                      "maxGuard":  50,
+                      "minTrust":  30,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "cgive_flirt_019",
+                      "text":  "I’d choose you in a room.",
+                      "tone":  "flirty",
+                      "minDesire":  45,
+                      "maxGuard":  50,
+                      "minTrust":  30,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "cgive_flirt_020",
+                      "text":  "Stop being desirable. Failed.",
+                      "tone":  "flirty",
+                      "minDesire":  45,
+                      "maxGuard":  50,
+                      "minTrust":  30,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "cgive_deep_001",
+                      "text":  "You’re one of the best parts of my week.",
+                      "tone":  "deep",
+                      "minDesire":  10,
+                      "maxGuard":  60,
+                      "minTrust":  40,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "cgive_deep_002",
+                      "text":  "I like who you are when nobody’s performing.",
+                      "tone":  "deep",
+                      "minDesire":  10,
+                      "maxGuard":  60,
+                      "minTrust":  40,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "cgive_deep_003",
+                      "text":  "You’re safe and interesting—hard combo.",
+                      "tone":  "deep",
+                      "minDesire":  10,
+                      "maxGuard":  60,
+                      "minTrust":  40,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "cgive_deep_004",
+                      "text":  "I respect you. That’s not shallow.",
+                      "tone":  "deep",
+                      "minDesire":  10,
+                      "maxGuard":  60,
+                      "minTrust":  40,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "cgive_deep_005",
+                      "text":  "You make me want to be clearer.",
+                      "tone":  "deep",
+                      "minDesire":  10,
+                      "maxGuard":  60,
+                      "minTrust":  40,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "cgive_deep_006",
+                      "text":  "I like your mind first. Then the rest.",
+                      "tone":  "deep",
+                      "minDesire":  10,
+                      "maxGuard":  60,
+                      "minTrust":  40,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "cgive_deep_007",
+                      "text":  "You’re a standard I didn’t know I had.",
+                      "tone":  "deep",
+                      "minDesire":  10,
+                      "maxGuard":  60,
+                      "minTrust":  40,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "cgive_deep_008",
+                      "text":  "I notice how you treat people.",
+                      "tone":  "deep",
+                      "minDesire":  10,
+                      "maxGuard":  60,
+                      "minTrust":  40,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "cgive_deep_009",
+                      "text":  "You’re rare when you’re honest.",
+                      "tone":  "deep",
+                      "minDesire":  10,
+                      "maxGuard":  60,
+                      "minTrust":  40,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "cgive_deep_010",
+                      "text":  "I like building days around you.",
+                      "tone":  "deep",
+                      "minDesire":  10,
+                      "maxGuard":  60,
+                      "minTrust":  40,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "cgive_deep_011",
+                      "text":  "You’re a good man / person in the ways that count.",
+                      "tone":  "deep",
+                      "minDesire":  10,
+                      "maxGuard":  60,
+                      "minTrust":  40,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "cgive_deep_012",
+                      "text":  "I trust your intent.",
+                      "tone":  "deep",
+                      "minDesire":  10,
+                      "maxGuard":  60,
+                      "minTrust":  40,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "cgive_deep_013",
+                      "text":  "You’re worth the soft words.",
+                      "tone":  "deep",
+                      "minDesire":  10,
+                      "maxGuard":  60,
+                      "minTrust":  40,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "cgive_deep_014",
+                      "text":  "I like your growth. I see it.",
+                      "tone":  "deep",
+                      "minDesire":  10,
+                      "maxGuard":  60,
+                      "minTrust":  40,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "cgive_deep_015",
+                      "text":  "You’re a place I land.",
+                      "tone":  "deep",
+                      "minDesire":  10,
+                      "maxGuard":  60,
+                      "minTrust":  40,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "cgive_spec_001",
+                      "text":  "That color is good on you.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  70,
+                      "minTrust":  20,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  7
+                  },
+                  {
+                      "id":  "cgive_spec_002",
+                      "text":  "You clean up dangerous.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  70,
+                      "minTrust":  20,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  7
+                  },
+                  {
+                      "id":  "cgive_spec_003",
+                      "text":  "Casual you is my favorite you.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  70,
+                      "minTrust":  20,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  7
+                  },
+                  {
+                      "id":  "cgive_spec_004",
+                      "text":  "Your laugh just now—again please.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  70,
+                      "minTrust":  20,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  7
+                  },
+                  {
+                      "id":  "cgive_spec_005",
+                      "text":  "You handled that well. Attractive.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  70,
+                      "minTrust":  20,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  7
+                  },
+                  {
+                      "id":  "cgive_spec_006",
+                      "text":  "I like when you get nerdy.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  70,
+                      "minTrust":  20,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  7
+                  },
+                  {
+                      "id":  "cgive_spec_007",
+                      "text":  "Your focus face is cute.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  70,
+                      "minTrust":  20,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  7
+                  },
+                  {
+                      "id":  "cgive_spec_008",
+                      "text":  "You walk like you know the room.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  70,
+                      "minTrust":  20,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  7
+                  },
+                  {
+                      "id":  "cgive_spec_009",
+                      "text":  "That joke landed. You’re good.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  70,
+                      "minTrust":  20,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  7
+                  },
+                  {
+                      "id":  "cgive_spec_010",
+                      "text":  "I like your taste in music more when you share it.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  70,
+                      "minTrust":  20,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  7
+                  },
+                  {
+                      "id":  "cgive_spec_011",
+                      "text":  "You cook better than you admit.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  70,
+                      "minTrust":  20,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  7
+                  },
+                  {
+                      "id":  "cgive_spec_012",
+                      "text":  "Your texts have rhythm. I notice.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  70,
+                      "minTrust":  20,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  7
+                  },
+                  {
+                      "id":  "cgive_spec_013",
+                      "text":  "You look rested. It suits you.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  70,
+                      "minTrust":  20,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  7
+                  },
+                  {
+                      "id":  "cgive_spec_014",
+                      "text":  "I like the way you say my name.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  70,
+                      "minTrust":  20,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  7
+                  },
+                  {
+                      "id":  "cgive_spec_015",
+                      "text":  "You’re gentle when it matters.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  70,
+                      "minTrust":  20,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  7
+                  }
+              ]
+}

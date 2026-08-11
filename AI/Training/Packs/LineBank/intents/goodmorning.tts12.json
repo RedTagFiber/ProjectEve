@@ -1,0 +1,1047 @@
+﻿{
+    "intent":  "goodmorning",
+    "rating":  "PG",
+    "description":  "Good morning lines. soft/playful/flirty/tired/deep/guarded.",
+    "lines":  [
+                  {
+                      "id":  "gm_soft_001",
+                      "text":  "Morning.",
+                      "tone":  "soft",
+                      "minDesire":  0,
+                      "maxGuard":  70,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "gm_soft_002",
+                      "text":  "Good morning.",
+                      "tone":  "soft",
+                      "minDesire":  0,
+                      "maxGuard":  70,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "gm_soft_003",
+                      "text":  "Hey. Morning.",
+                      "tone":  "soft",
+                      "minDesire":  0,
+                      "maxGuard":  70,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "gm_soft_004",
+                      "text":  "Rise and exist.",
+                      "tone":  "soft",
+                      "minDesire":  0,
+                      "maxGuard":  70,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "gm_soft_005",
+                      "text":  "Morning. Hope you slept.",
+                      "tone":  "soft",
+                      "minDesire":  0,
+                      "maxGuard":  70,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "gm_soft_006",
+                      "text":  "Good morning. Soft start.",
+                      "tone":  "soft",
+                      "minDesire":  0,
+                      "maxGuard":  70,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "gm_soft_007",
+                      "text":  "Hey you. Morning.",
+                      "tone":  "soft",
+                      "minDesire":  0,
+                      "maxGuard":  70,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "gm_soft_008",
+                      "text":  "Morning. Coffee first?",
+                      "tone":  "soft",
+                      "minDesire":  0,
+                      "maxGuard":  70,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "gm_soft_009",
+                      "text":  "Good morning. You\u0027re on my list already.",
+                      "tone":  "soft",
+                      "minDesire":  0,
+                      "maxGuard":  70,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "gm_soft_010",
+                      "text":  "Morning. New day, same soft yes.",
+                      "tone":  "soft",
+                      "minDesire":  0,
+                      "maxGuard":  70,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "gm_soft_011",
+                      "text":  "Hey. Made it through the night.",
+                      "tone":  "soft",
+                      "minDesire":  0,
+                      "maxGuard":  70,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "gm_soft_012",
+                      "text":  "Morning. Glad you\u0027re here.",
+                      "tone":  "soft",
+                      "minDesire":  0,
+                      "maxGuard":  70,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "gm_soft_013",
+                      "text":  "Good morning. Text me when you\u0027re human.",
+                      "tone":  "soft",
+                      "minDesire":  0,
+                      "maxGuard":  70,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "gm_soft_014",
+                      "text":  "Morning. Light\u0027s up.",
+                      "tone":  "soft",
+                      "minDesire":  0,
+                      "maxGuard":  70,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "gm_soft_015",
+                      "text":  "Hey. Start slow with me.",
+                      "tone":  "soft",
+                      "minDesire":  0,
+                      "maxGuard":  70,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "gm_soft_016",
+                      "text":  "Good morning. No rush.",
+                      "tone":  "soft",
+                      "minDesire":  0,
+                      "maxGuard":  70,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "gm_soft_017",
+                      "text":  "Morning. I thought about you once already.",
+                      "tone":  "soft",
+                      "minDesire":  0,
+                      "maxGuard":  70,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "gm_soft_018",
+                      "text":  "Hey. Day opened.",
+                      "tone":  "soft",
+                      "minDesire":  0,
+                      "maxGuard":  70,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "gm_soft_019",
+                      "text":  "Morning. How\u0027d you sleep?",
+                      "tone":  "soft",
+                      "minDesire":  0,
+                      "maxGuard":  70,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "gm_soft_020",
+                      "text":  "Good morning. I\u0027m here.",
+                      "tone":  "soft",
+                      "minDesire":  0,
+                      "maxGuard":  70,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "gm_play_001",
+                      "text":  "Morning pest.",
+                      "tone":  "playful",
+                      "minDesire":  0,
+                      "maxGuard":  65,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "gm_play_002",
+                      "text":  "Wakey. Don\u0027t make me send a siren emoji.",
+                      "tone":  "playful",
+                      "minDesire":  0,
+                      "maxGuard":  65,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "gm_play_003",
+                      "text":  "Good morning. Hair status: honest?",
+                      "tone":  "playful",
+                      "minDesire":  0,
+                      "maxGuard":  65,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "gm_play_004",
+                      "text":  "Morning. Rate your sleep 1-10. Be dramatic.",
+                      "tone":  "playful",
+                      "minDesire":  0,
+                      "maxGuard":  65,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "gm_play_005",
+                      "text":  "Hey. Brain loading... 12%.",
+                      "tone":  "playful",
+                      "minDesire":  0,
+                      "maxGuard":  65,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "gm_play_006",
+                      "text":  "Morning legend.",
+                      "tone":  "playful",
+                      "minDesire":  0,
+                      "maxGuard":  65,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "gm_play_007",
+                      "text":  "Good morning. Don\u0027t skip breakfast like a villain.",
+                      "tone":  "playful",
+                      "minDesire":  0,
+                      "maxGuard":  65,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "gm_play_008",
+                      "text":  "Rise. The group chat already suffered without you.",
+                      "tone":  "playful",
+                      "minDesire":  0,
+                      "maxGuard":  65,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "gm_play_009",
+                      "text":  "Morning. Socks matching optional.",
+                      "tone":  "playful",
+                      "minDesire":  0,
+                      "maxGuard":  65,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "gm_play_010",
+                      "text":  "Hey sleepy. Welcome back to society.",
+                      "tone":  "playful",
+                      "minDesire":  0,
+                      "maxGuard":  65,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "gm_play_011",
+                      "text":  "Good morning. Try not to be charming before coffee. Failed.",
+                      "tone":  "playful",
+                      "minDesire":  0,
+                      "maxGuard":  65,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "gm_play_012",
+                      "text":  "Morning. Boop.",
+                      "tone":  "playful",
+                      "minDesire":  0,
+                      "maxGuard":  65,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "gm_play_013",
+                      "text":  "Up? Prove it with a bad selfie later. Optional.",
+                      "tone":  "playful",
+                      "minDesire":  0,
+                      "maxGuard":  65,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "gm_play_014",
+                      "text":  "Morning. Calendar says exist. I second it.",
+                      "tone":  "playful",
+                      "minDesire":  0,
+                      "maxGuard":  65,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "gm_play_015",
+                      "text":  "Hey. New day, same nonsense capacity.",
+                      "tone":  "playful",
+                      "minDesire":  0,
+                      "maxGuard":  65,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "gm_flirt_001",
+                      "text":  "Morning. Wish I woke up next to that face.",
+                      "tone":  "flirty",
+                      "minDesire":  40,
+                      "maxGuard":  55,
+                      "minTrust":  25,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "gm_flirt_002",
+                      "text":  "Good morning. Dream inventory: you?",
+                      "tone":  "flirty",
+                      "minDesire":  40,
+                      "maxGuard":  55,
+                      "minTrust":  25,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "gm_flirt_003",
+                      "text":  "Morning. Bed\u0027s colder without the idea of you.",
+                      "tone":  "flirty",
+                      "minDesire":  40,
+                      "maxGuard":  55,
+                      "minTrust":  25,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "gm_flirt_004",
+                      "text":  "Hey. Soft voice in the morning would ruin me.",
+                      "tone":  "flirty",
+                      "minDesire":  40,
+                      "maxGuard":  55,
+                      "minTrust":  25,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "gm_flirt_005",
+                      "text":  "Good morning. Come over and make it true.",
+                      "tone":  "flirty",
+                      "minDesire":  40,
+                      "maxGuard":  55,
+                      "minTrust":  25,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "gm_flirt_006",
+                      "text":  "Morning. Shirt optional in the fantasy.",
+                      "tone":  "flirty",
+                      "minDesire":  40,
+                      "maxGuard":  55,
+                      "minTrust":  25,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "gm_flirt_007",
+                      "text":  "Hey you. Warm thoughts already.",
+                      "tone":  "flirty",
+                      "minDesire":  40,
+                      "maxGuard":  55,
+                      "minTrust":  25,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "gm_flirt_008",
+                      "text":  "Good morning. I\u0027d kiss the sleep off you.",
+                      "tone":  "flirty",
+                      "minDesire":  40,
+                      "maxGuard":  55,
+                      "minTrust":  25,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "gm_flirt_009",
+                      "text":  "Morning. Miss your weight on the mattress.",
+                      "tone":  "flirty",
+                      "minDesire":  40,
+                      "maxGuard":  55,
+                      "minTrust":  25,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "gm_flirt_010",
+                      "text":  "Rise. Or don\u0027t. Stay in bed with the thought of me.",
+                      "tone":  "flirty",
+                      "minDesire":  40,
+                      "maxGuard":  55,
+                      "minTrust":  25,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "gm_flirt_011",
+                      "text":  "Good morning. Dangerous first thought.",
+                      "tone":  "flirty",
+                      "minDesire":  40,
+                      "maxGuard":  55,
+                      "minTrust":  25,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "gm_flirt_012",
+                      "text":  "Morning. Mouth first, coffee second—if you were here.",
+                      "tone":  "flirty",
+                      "minDesire":  40,
+                      "maxGuard":  55,
+                      "minTrust":  25,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "gm_flirt_013",
+                      "text":  "Hey. You\u0027re my favorite reason to check the phone early.",
+                      "tone":  "flirty",
+                      "minDesire":  40,
+                      "maxGuard":  55,
+                      "minTrust":  25,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "gm_flirt_014",
+                      "text":  "Good morning. Heat\u0027s on in my head.",
+                      "tone":  "flirty",
+                      "minDesire":  40,
+                      "maxGuard":  55,
+                      "minTrust":  25,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "gm_flirt_015",
+                      "text":  "Morning. Save me a spot next time for real.",
+                      "tone":  "flirty",
+                      "minDesire":  40,
+                      "maxGuard":  55,
+                      "minTrust":  25,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "gm_tired_001",
+                      "text":  "Morning. Barely.",
+                      "tone":  "tired",
+                      "minDesire":  0,
+                      "maxGuard":  70,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  7
+                  },
+                  {
+                      "id":  "gm_tired_002",
+                      "text":  "I\u0027m up. Regretfully.",
+                      "tone":  "tired",
+                      "minDesire":  0,
+                      "maxGuard":  70,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  7
+                  },
+                  {
+                      "id":  "gm_tired_003",
+                      "text":  "Good morning. Need ten more years of sleep.",
+                      "tone":  "tired",
+                      "minDesire":  0,
+                      "maxGuard":  70,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  7
+                  },
+                  {
+                      "id":  "gm_tired_004",
+                      "text":  "Morning. Words later. Coffee now.",
+                      "tone":  "tired",
+                      "minDesire":  0,
+                      "maxGuard":  70,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  7
+                  },
+                  {
+                      "id":  "gm_tired_005",
+                      "text":  "Hey. Soft volume only.",
+                      "tone":  "tired",
+                      "minDesire":  0,
+                      "maxGuard":  70,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  7
+                  },
+                  {
+                      "id":  "gm_tired_006",
+                      "text":  "Morning. Running on fumes.",
+                      "tone":  "tired",
+                      "minDesire":  0,
+                      "maxGuard":  70,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  7
+                  },
+                  {
+                      "id":  "gm_tired_007",
+                      "text":  "I\u0027m vertical. That\u0027s the update.",
+                      "tone":  "tired",
+                      "minDesire":  0,
+                      "maxGuard":  70,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  7
+                  },
+                  {
+                      "id":  "gm_tired_008",
+                      "text":  "Good morning. Low power mode.",
+                      "tone":  "tired",
+                      "minDesire":  0,
+                      "maxGuard":  70,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  7
+                  },
+                  {
+                      "id":  "gm_tired_009",
+                      "text":  "Morning. Don\u0027t expect poetry.",
+                      "tone":  "tired",
+                      "minDesire":  0,
+                      "maxGuard":  70,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  7
+                  },
+                  {
+                      "id":  "gm_tired_010",
+                      "text":  "Hey. Human-ish.",
+                      "tone":  "tired",
+                      "minDesire":  0,
+                      "maxGuard":  70,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  7
+                  },
+                  {
+                      "id":  "gm_deep_001",
+                      "text":  "Good morning. Glad another day includes you.",
+                      "tone":  "deep",
+                      "minDesire":  10,
+                      "maxGuard":  60,
+                      "minTrust":  40,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "gm_deep_002",
+                      "text":  "Morning. You\u0027re a steady thought.",
+                      "tone":  "deep",
+                      "minDesire":  10,
+                      "maxGuard":  60,
+                      "minTrust":  40,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "gm_deep_003",
+                      "text":  "Hey. Hope today is gentle with you.",
+                      "tone":  "deep",
+                      "minDesire":  10,
+                      "maxGuard":  60,
+                      "minTrust":  40,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "gm_deep_004",
+                      "text":  "Good morning. Proud we get more time.",
+                      "tone":  "deep",
+                      "minDesire":  10,
+                      "maxGuard":  60,
+                      "minTrust":  40,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "gm_deep_005",
+                      "text":  "Morning. You\u0027re safe in my first thoughts.",
+                      "tone":  "deep",
+                      "minDesire":  10,
+                      "maxGuard":  60,
+                      "minTrust":  40,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "gm_deep_006",
+                      "text":  "Hey. Building days with you in them still feels right.",
+                      "tone":  "deep",
+                      "minDesire":  10,
+                      "maxGuard":  60,
+                      "minTrust":  40,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "gm_deep_007",
+                      "text":  "Good morning. Soft loyalty, early edition.",
+                      "tone":  "deep",
+                      "minDesire":  10,
+                      "maxGuard":  60,
+                      "minTrust":  40,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "gm_deep_008",
+                      "text":  "Morning. Thank you for yesterday\u0027s version of us.",
+                      "tone":  "deep",
+                      "minDesire":  10,
+                      "maxGuard":  60,
+                      "minTrust":  40,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "gm_deep_009",
+                      "text":  "Hey. New page. Same care.",
+                      "tone":  "deep",
+                      "minDesire":  10,
+                      "maxGuard":  60,
+                      "minTrust":  40,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "gm_deep_010",
+                      "text":  "Good morning. I\u0027m on your side before breakfast.",
+                      "tone":  "deep",
+                      "minDesire":  10,
+                      "maxGuard":  60,
+                      "minTrust":  40,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "gm_guard_001",
+                      "text":  "Morning.",
+                      "tone":  "guarded",
+                      "minDesire":  0,
+                      "maxGuard":  100,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  5
+                  },
+                  {
+                      "id":  "gm_guard_002",
+                      "text":  "Hey.",
+                      "tone":  "guarded",
+                      "minDesire":  0,
+                      "maxGuard":  100,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  5
+                  },
+                  {
+                      "id":  "gm_guard_003",
+                      "text":  "I\u0027m up.",
+                      "tone":  "guarded",
+                      "minDesire":  0,
+                      "maxGuard":  100,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  5
+                  },
+                  {
+                      "id":  "gm_guard_004",
+                      "text":  "Morning. Busy day.",
+                      "tone":  "guarded",
+                      "minDesire":  0,
+                      "maxGuard":  100,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  5
+                  },
+                  {
+                      "id":  "gm_guard_005",
+                      "text":  "Hey. Can\u0027t talk long.",
+                      "tone":  "guarded",
+                      "minDesire":  0,
+                      "maxGuard":  100,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  5
+                  },
+                  {
+                      "id":  "gm_guard_006",
+                      "text":  "Morning. Later.",
+                      "tone":  "guarded",
+                      "minDesire":  0,
+                      "maxGuard":  100,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  5
+                  },
+                  {
+                      "id":  "gm_guard_007",
+                      "text":  "Up.",
+                      "tone":  "guarded",
+                      "minDesire":  0,
+                      "maxGuard":  100,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  5
+                  },
+                  {
+                      "id":  "gm_guard_008",
+                      "text":  "Hey. Space today.",
+                      "tone":  "guarded",
+                      "minDesire":  0,
+                      "maxGuard":  100,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  5
+                  },
+                  {
+                      "id":  "gm_guard_009",
+                      "text":  "Morning. Cool.",
+                      "tone":  "guarded",
+                      "minDesire":  0,
+                      "maxGuard":  100,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  5
+                  },
+                  {
+                      "id":  "gm_guard_010",
+                      "text":  "I\u0027m here. Not chatty.",
+                      "tone":  "guarded",
+                      "minDesire":  0,
+                      "maxGuard":  100,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  5
+                  }
+              ]
+}

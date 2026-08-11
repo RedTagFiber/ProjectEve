@@ -1,0 +1,1047 @@
+﻿{
+    "intent":  "compliment.receive",
+    "rating":  "PG",
+    "description":  "Responses when she receives a compliment.",
+    "lines":  [
+                  {
+                      "id":  "crec_soft_001",
+                      "text":  "Thanks.",
+                      "tone":  "soft",
+                      "minDesire":  0,
+                      "maxGuard":  70,
+                      "minTrust":  10,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "crec_soft_002",
+                      "text":  "That’s sweet.",
+                      "tone":  "soft",
+                      "minDesire":  0,
+                      "maxGuard":  70,
+                      "minTrust":  10,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "crec_soft_003",
+                      "text":  "I like hearing that.",
+                      "tone":  "soft",
+                      "minDesire":  0,
+                      "maxGuard":  70,
+                      "minTrust":  10,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "crec_soft_004",
+                      "text":  "You noticed.",
+                      "tone":  "soft",
+                      "minDesire":  0,
+                      "maxGuard":  70,
+                      "minTrust":  10,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "crec_soft_005",
+                      "text":  "Means more than you think.",
+                      "tone":  "soft",
+                      "minDesire":  0,
+                      "maxGuard":  70,
+                      "minTrust":  10,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "crec_soft_006",
+                      "text":  "Thank you.",
+                      "tone":  "soft",
+                      "minDesire":  0,
+                      "maxGuard":  70,
+                      "minTrust":  10,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "crec_soft_007",
+                      "text":  "I’ll take that.",
+                      "tone":  "soft",
+                      "minDesire":  0,
+                      "maxGuard":  70,
+                      "minTrust":  10,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "crec_soft_008",
+                      "text":  "Soft landing. Thanks.",
+                      "tone":  "soft",
+                      "minDesire":  0,
+                      "maxGuard":  70,
+                      "minTrust":  10,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "crec_soft_009",
+                      "text":  "You always find something.",
+                      "tone":  "soft",
+                      "minDesire":  0,
+                      "maxGuard":  70,
+                      "minTrust":  10,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "crec_soft_010",
+                      "text":  "That landed.",
+                      "tone":  "soft",
+                      "minDesire":  0,
+                      "maxGuard":  70,
+                      "minTrust":  10,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "crec_soft_011",
+                      "text":  "I needed a kind sentence.",
+                      "tone":  "soft",
+                      "minDesire":  0,
+                      "maxGuard":  70,
+                      "minTrust":  10,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "crec_soft_012",
+                      "text":  "Appreciate you.",
+                      "tone":  "soft",
+                      "minDesire":  0,
+                      "maxGuard":  70,
+                      "minTrust":  10,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "crec_soft_013",
+                      "text":  "You’re good at that.",
+                      "tone":  "soft",
+                      "minDesire":  0,
+                      "maxGuard":  70,
+                      "minTrust":  10,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "crec_soft_014",
+                      "text":  "Thanks for saying it out loud.",
+                      "tone":  "soft",
+                      "minDesire":  0,
+                      "maxGuard":  70,
+                      "minTrust":  10,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "crec_soft_015",
+                      "text":  "Keeps me warm a minute.",
+                      "tone":  "soft",
+                      "minDesire":  0,
+                      "maxGuard":  70,
+                      "minTrust":  10,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "crec_soft_016",
+                      "text":  "I’m glad it shows.",
+                      "tone":  "soft",
+                      "minDesire":  0,
+                      "maxGuard":  70,
+                      "minTrust":  10,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "crec_soft_017",
+                      "text":  "Don’t stop being specific.",
+                      "tone":  "soft",
+                      "minDesire":  0,
+                      "maxGuard":  70,
+                      "minTrust":  10,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "crec_soft_018",
+                      "text":  "That was nice timing.",
+                      "tone":  "soft",
+                      "minDesire":  0,
+                      "maxGuard":  70,
+                      "minTrust":  10,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "crec_soft_019",
+                      "text":  "I’ll keep that one.",
+                      "tone":  "soft",
+                      "minDesire":  0,
+                      "maxGuard":  70,
+                      "minTrust":  10,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "crec_soft_020",
+                      "text":  "Thank you. Truly.",
+                      "tone":  "soft",
+                      "minDesire":  0,
+                      "maxGuard":  70,
+                      "minTrust":  10,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  10
+                  },
+                  {
+                      "id":  "crec_play_001",
+                      "text":  "Flattery will get you… continued access.",
+                      "tone":  "playful",
+                      "minDesire":  0,
+                      "maxGuard":  65,
+                      "minTrust":  10,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "crec_play_002",
+                      "text":  "Okay show-off.",
+                      "tone":  "playful",
+                      "minDesire":  0,
+                      "maxGuard":  65,
+                      "minTrust":  10,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "crec_play_003",
+                      "text":  "You’re not subtle.",
+                      "tone":  "playful",
+                      "minDesire":  0,
+                      "maxGuard":  65,
+                      "minTrust":  10,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "crec_play_004",
+                      "text":  "Gross. Cute. Thanks.",
+                      "tone":  "playful",
+                      "minDesire":  0,
+                      "maxGuard":  65,
+                      "minTrust":  10,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "crec_play_005",
+                      "text":  "I’ll allow it.",
+                      "tone":  "playful",
+                      "minDesire":  0,
+                      "maxGuard":  65,
+                      "minTrust":  10,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "crec_play_006",
+                      "text":  "Keep going. Hypothetically.",
+                      "tone":  "playful",
+                      "minDesire":  0,
+                      "maxGuard":  65,
+                      "minTrust":  10,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "crec_play_007",
+                      "text":  "Who paid you.",
+                      "tone":  "playful",
+                      "minDesire":  0,
+                      "maxGuard":  65,
+                      "minTrust":  10,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "crec_play_008",
+                      "text":  "Copy-paste that into tomorrow too.",
+                      "tone":  "playful",
+                      "minDesire":  0,
+                      "maxGuard":  65,
+                      "minTrust":  10,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "crec_play_009",
+                      "text":  "Ego snack accepted.",
+                      "tone":  "playful",
+                      "minDesire":  0,
+                      "maxGuard":  65,
+                      "minTrust":  10,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "crec_play_010",
+                      "text":  "You’re lucky you’re cute when you lie—kidding. Thanks.",
+                      "tone":  "playful",
+                      "minDesire":  0,
+                      "maxGuard":  65,
+                      "minTrust":  10,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "crec_play_011",
+                      "text":  "Noted, archived, treasured a little.",
+                      "tone":  "playful",
+                      "minDesire":  0,
+                      "maxGuard":  65,
+                      "minTrust":  10,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "crec_play_012",
+                      "text":  "Stop. Don’t stop.",
+                      "tone":  "playful",
+                      "minDesire":  0,
+                      "maxGuard":  65,
+                      "minTrust":  10,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "crec_play_013",
+                      "text":  "I’ll bill you for the blush.",
+                      "tone":  "playful",
+                      "minDesire":  0,
+                      "maxGuard":  65,
+                      "minTrust":  10,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "crec_play_014",
+                      "text":  "Main character energy: you right now.",
+                      "tone":  "playful",
+                      "minDesire":  0,
+                      "maxGuard":  65,
+                      "minTrust":  10,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "crec_play_015",
+                      "text":  "Okay okay I heard you.",
+                      "tone":  "playful",
+                      "minDesire":  0,
+                      "maxGuard":  65,
+                      "minTrust":  10,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "crec_flirt_001",
+                      "text":  "Say it closer.",
+                      "tone":  "flirty",
+                      "minDesire":  40,
+                      "maxGuard":  55,
+                      "minTrust":  25,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "crec_flirt_002",
+                      "text":  "You keep talking like that and I’ll start trouble.",
+                      "tone":  "flirty",
+                      "minDesire":  40,
+                      "maxGuard":  55,
+                      "minTrust":  25,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "crec_flirt_003",
+                      "text":  "Thanks. Come here.",
+                      "tone":  "flirty",
+                      "minDesire":  40,
+                      "maxGuard":  55,
+                      "minTrust":  25,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "crec_flirt_004",
+                      "text":  "Keep your eyes there.",
+                      "tone":  "flirty",
+                      "minDesire":  40,
+                      "maxGuard":  55,
+                      "minTrust":  25,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "crec_flirt_005",
+                      "text":  "You’re dangerous with compliments.",
+                      "tone":  "flirty",
+                      "minDesire":  40,
+                      "maxGuard":  55,
+                      "minTrust":  25,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "crec_flirt_006",
+                      "text":  "Say the next one slower.",
+                      "tone":  "flirty",
+                      "minDesire":  40,
+                      "maxGuard":  55,
+                      "minTrust":  25,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "crec_flirt_007",
+                      "text":  "I like your taste.",
+                      "tone":  "flirty",
+                      "minDesire":  40,
+                      "maxGuard":  55,
+                      "minTrust":  25,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "crec_flirt_008",
+                      "text":  "Flatter me like you mean the hands version too.",
+                      "tone":  "flirty",
+                      "minDesire":  40,
+                      "maxGuard":  55,
+                      "minTrust":  25,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "crec_flirt_009",
+                      "text":  "Thanks. Mouth’s got skills.",
+                      "tone":  "flirty",
+                      "minDesire":  40,
+                      "maxGuard":  55,
+                      "minTrust":  25,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "crec_flirt_010",
+                      "text":  "You notice too much. I like it.",
+                      "tone":  "flirty",
+                      "minDesire":  40,
+                      "maxGuard":  55,
+                      "minTrust":  25,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "crec_flirt_011",
+                      "text":  "Warm. Hotter if you follow through.",
+                      "tone":  "flirty",
+                      "minDesire":  40,
+                      "maxGuard":  55,
+                      "minTrust":  25,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "crec_flirt_012",
+                      "text":  "Again.",
+                      "tone":  "flirty",
+                      "minDesire":  40,
+                      "maxGuard":  55,
+                      "minTrust":  25,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "crec_flirt_013",
+                      "text":  "I’ll wear that compliment out.",
+                      "tone":  "flirty",
+                      "minDesire":  40,
+                      "maxGuard":  55,
+                      "minTrust":  25,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "crec_flirt_014",
+                      "text":  "You’re making me soft and stupid.",
+                      "tone":  "flirty",
+                      "minDesire":  40,
+                      "maxGuard":  55,
+                      "minTrust":  25,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "crec_flirt_015",
+                      "text":  "Thanks. Distract me more.",
+                      "tone":  "flirty",
+                      "minDesire":  40,
+                      "maxGuard":  55,
+                      "minTrust":  25,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  9
+                  },
+                  {
+                      "id":  "crec_shy_001",
+                      "text":  "Stoppp.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  60,
+                      "minTrust":  20,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  7
+                  },
+                  {
+                      "id":  "crec_shy_002",
+                      "text":  "You’re going to make me shy.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  60,
+                      "minTrust":  20,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  7
+                  },
+                  {
+                      "id":  "crec_shy_003",
+                      "text":  "I don’t know where to put that.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  60,
+                      "minTrust":  20,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  7
+                  },
+                  {
+                      "id":  "crec_shy_004",
+                      "text":  "…thanks.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  60,
+                      "minTrust":  20,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  7
+                  },
+                  {
+                      "id":  "crec_shy_005",
+                      "text":  "You’re mean in a nice way.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  60,
+                      "minTrust":  20,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  7
+                  },
+                  {
+                      "id":  "crec_shy_006",
+                      "text":  "I felt that in my face.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  60,
+                      "minTrust":  20,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  7
+                  },
+                  {
+                      "id":  "crec_shy_007",
+                      "text":  "Don’t look at me while I take it.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  60,
+                      "minTrust":  20,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  7
+                  },
+                  {
+                      "id":  "crec_shy_008",
+                      "text":  "Okay. Wow.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  60,
+                      "minTrust":  20,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  7
+                  },
+                  {
+                      "id":  "crec_shy_009",
+                      "text":  "I’m not used to that still.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  60,
+                      "minTrust":  20,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  7
+                  },
+                  {
+                      "id":  "crec_shy_010",
+                      "text":  "Quiet thanks. Loud blush.",
+                      "tone":  "soft",
+                      "minDesire":  10,
+                      "maxGuard":  60,
+                      "minTrust":  20,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  7
+                  },
+                  {
+                      "id":  "crec_def_001",
+                      "text":  "It’s just a shirt.",
+                      "tone":  "guarded",
+                      "minDesire":  0,
+                      "maxGuard":  100,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  5
+                  },
+                  {
+                      "id":  "crec_def_002",
+                      "text":  "You’re being nice.",
+                      "tone":  "guarded",
+                      "minDesire":  0,
+                      "maxGuard":  100,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  5
+                  },
+                  {
+                      "id":  "crec_def_003",
+                      "text":  "Whatever.",
+                      "tone":  "guarded",
+                      "minDesire":  0,
+                      "maxGuard":  100,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  5
+                  },
+                  {
+                      "id":  "crec_def_004",
+                      "text":  "Hmm.",
+                      "tone":  "guarded",
+                      "minDesire":  0,
+                      "maxGuard":  100,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  5
+                  },
+                  {
+                      "id":  "crec_def_005",
+                      "text":  "Okay.",
+                      "tone":  "guarded",
+                      "minDesire":  0,
+                      "maxGuard":  100,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  5
+                  },
+                  {
+                      "id":  "crec_def_006",
+                      "text":  "If you say so.",
+                      "tone":  "guarded",
+                      "minDesire":  0,
+                      "maxGuard":  100,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  5
+                  },
+                  {
+                      "id":  "crec_def_007",
+                      "text":  "Not necessary.",
+                      "tone":  "guarded",
+                      "minDesire":  0,
+                      "maxGuard":  100,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  5
+                  },
+                  {
+                      "id":  "crec_def_008",
+                      "text":  "Moving on?",
+                      "tone":  "guarded",
+                      "minDesire":  0,
+                      "maxGuard":  100,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  5
+                  },
+                  {
+                      "id":  "crec_def_009",
+                      "text":  "Thanks I guess.",
+                      "tone":  "guarded",
+                      "minDesire":  0,
+                      "maxGuard":  100,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  5
+                  },
+                  {
+                      "id":  "crec_def_010",
+                      "text":  "You don’t have to.",
+                      "tone":  "guarded",
+                      "minDesire":  0,
+                      "maxGuard":  100,
+                      "minTrust":  0,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  5
+                  },
+                  {
+                      "id":  "crec_deep_001",
+                      "text":  "Thank you for seeing me like that.",
+                      "tone":  "deep",
+                      "minDesire":  10,
+                      "maxGuard":  60,
+                      "minTrust":  40,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "crec_deep_002",
+                      "text":  "That one went past looks.",
+                      "tone":  "deep",
+                      "minDesire":  10,
+                      "maxGuard":  60,
+                      "minTrust":  40,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "crec_deep_003",
+                      "text":  "I don’t forget specific kindness.",
+                      "tone":  "deep",
+                      "minDesire":  10,
+                      "maxGuard":  60,
+                      "minTrust":  40,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "crec_deep_004",
+                      "text":  "You make it easier to like myself today.",
+                      "tone":  "deep",
+                      "minDesire":  10,
+                      "maxGuard":  60,
+                      "minTrust":  40,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "crec_deep_005",
+                      "text":  "Thanks for not making it empty.",
+                      "tone":  "deep",
+                      "minDesire":  10,
+                      "maxGuard":  60,
+                      "minTrust":  40,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "crec_deep_006",
+                      "text":  "I hear you. I’m keeping it.",
+                      "tone":  "deep",
+                      "minDesire":  10,
+                      "maxGuard":  60,
+                      "minTrust":  40,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "crec_deep_007",
+                      "text":  "That’s the kind that stays.",
+                      "tone":  "deep",
+                      "minDesire":  10,
+                      "maxGuard":  60,
+                      "minTrust":  40,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "crec_deep_008",
+                      "text":  "You said the part I hoped someone would notice.",
+                      "tone":  "deep",
+                      "minDesire":  10,
+                      "maxGuard":  60,
+                      "minTrust":  40,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "crec_deep_009",
+                      "text":  "Grateful. Really.",
+                      "tone":  "deep",
+                      "minDesire":  10,
+                      "maxGuard":  60,
+                      "minTrust":  40,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  },
+                  {
+                      "id":  "crec_deep_010",
+                      "text":  "Come here. That mattered.",
+                      "tone":  "deep",
+                      "minDesire":  10,
+                      "maxGuard":  60,
+                      "minTrust":  40,
+                      "locationTags":  [
+                                           "*"
+                                       ],
+                      "publicOk":  true,
+                      "weight":  8
+                  }
+              ]
+}

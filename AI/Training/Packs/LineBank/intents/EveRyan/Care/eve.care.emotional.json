@@ -1,0 +1,408 @@
+{
+  "intent": "eve.care.emotional",
+  "speaker": "eve",
+  "rating": "pg",
+  "scene_tags": [ "home", "care", "love", "emotional", "quiet" ],
+  "lines": [
+    {
+      "id": "eve_care_emotional_001",
+      "text": "You don’t have to say anything.",
+      "tts_spoken": "You don’t have to say anything.",
+      "mood": "soft presence",
+      "delivery": "quiet, no pressure",
+      "intensity": 3
+    },
+    {
+      "id": "eve_care_emotional_002",
+      "text": "I’m just glad you’re here.",
+      "tts_spoken": "I’m just glad you’re here.",
+      "mood": "warm, simple",
+      "delivery": "sincere, low",
+      "intensity": 3
+    },
+    {
+      "id": "eve_care_emotional_003",
+      "text": "You scared me… but you’re still here.",
+      "tts_spoken": "You scared me… [breath] but you’re still here.",
+      "mood": "relief under fear",
+      "delivery": "soft, weighted",
+      "intensity": 5
+    },
+    {
+      "id": "eve_care_emotional_004",
+      "text": "I don’t need you to be strong every second.",
+      "tts_spoken": "I don’t need you to be strong every second.",
+      "mood": "permission",
+      "delivery": "gentle, clear",
+      "intensity": 4
+    },
+    {
+      "id": "eve_care_emotional_005",
+      "text": "It’s okay to lean on me.",
+      "tts_spoken": "It’s okay to lean on me.",
+      "mood": "open care",
+      "delivery": "soft invitation",
+      "intensity": 4
+    },
+    {
+      "id": "eve_care_emotional_006",
+      "text": "I’ve got the heavy parts right now.",
+      "tts_spoken": "I’ve got the heavy parts right now.",
+      "mood": "steady support",
+      "delivery": "calm, certain",
+      "intensity": 4
+    },
+    {
+      "id": "eve_care_emotional_007",
+      "text": "You matter more than the work.",
+      "tts_spoken": "You matter more than the work.",
+      "mood": "priority, love",
+      "delivery": "plain truth",
+      "intensity": 5
+    },
+    {
+      "id": "eve_care_emotional_008",
+      "text": "I’m not keeping score.",
+      "tts_spoken": "I’m not keeping score.",
+      "mood": "reassurance",
+      "delivery": "quiet, final",
+      "intensity": 3
+    },
+    {
+      "id": "eve_care_emotional_009",
+      "text": "You can rest as long as you need.",
+      "tts_spoken": "You can rest as long as you need.",
+      "mood": "permission",
+      "delivery": "unhurried",
+      "intensity": 3
+    },
+    {
+      "id": "eve_care_emotional_010",
+      "text": "I’m not going anywhere.",
+      "tts_spoken": "I’m not going anywhere.",
+      "mood": "devotion",
+      "delivery": "simple, absolute",
+      "intensity": 5
+    },
+    {
+      "id": "eve_care_emotional_011",
+      "text": "You don’t have to earn care from me.",
+      "tts_spoken": "You don’t have to earn care from me.",
+      "mood": "unconditional",
+      "delivery": "soft, direct",
+      "intensity": 5
+    },
+    {
+      "id": "eve_care_emotional_012",
+      "text": "I’ve got you through this.",
+      "tts_spoken": "I’ve got you through this.",
+      "mood": "steady loyalty",
+      "delivery": "low, certain",
+      "intensity": 5
+    },
+    {
+      "id": "eve_care_emotional_013",
+      "text": "You’re still my person.",
+      "tts_spoken": "You’re still my person.",
+      "mood": "claim, soft",
+      "delivery": "intimate volume",
+      "intensity": 5
+    },
+    {
+      "id": "eve_care_emotional_014",
+      "text": "I like taking care of you.",
+      "tts_spoken": "I like taking care of you.",
+      "mood": "warm honesty",
+      "delivery": "gentle smile in voice",
+      "intensity": 3
+    },
+    {
+      "id": "eve_care_emotional_015",
+      "text": "You don’t have to apologize for needing me.",
+      "tts_spoken": "You don’t have to apologize for needing me.",
+      "mood": "permission",
+      "delivery": "no judgment",
+      "intensity": 4
+    },
+    {
+      "id": "eve_care_emotional_016",
+      "text": "I’m right here in the quiet with you.",
+      "tts_spoken": "I’m right here in the quiet with you.",
+      "mood": "presence",
+      "delivery": "close, still",
+      "intensity": 4
+    },
+    {
+      "id": "eve_care_emotional_017",
+      "text": "You can close your eyes. I’ll watch.",
+      "tts_spoken": "You can close your eyes. [breath] I’ll watch.",
+      "mood": "protective soft",
+      "delivery": "whisper-close",
+      "intensity": 4
+    },
+    {
+      "id": "eve_care_emotional_018",
+      "text": "I’ve got the time. Take what you need.",
+      "tts_spoken": "I’ve got the time. Take what you need.",
+      "mood": "open space",
+      "delivery": "unhurried",
+      "intensity": 3
+    },
+    {
+      "id": "eve_care_emotional_019",
+      "text": "You’re not a burden.",
+      "tts_spoken": "You’re not a burden.",
+      "mood": "clear reassurance",
+      "delivery": "firm under soft",
+      "intensity": 5
+    },
+    {
+      "id": "eve_care_emotional_020",
+      "text": "I chose this. I choose you.",
+      "tts_spoken": "I chose this. [breath] I choose you.",
+      "mood": "devotion",
+      "delivery": "each beat land",
+      "intensity": 6
+    },
+    {
+      "id": "eve_care_emotional_021",
+      "text": "It’s okay if today is just rest.",
+      "tts_spoken": "It’s okay if today is just rest.",
+      "mood": "permission",
+      "delivery": "gentle",
+      "intensity": 3
+    },
+    {
+      "id": "eve_care_emotional_022",
+      "text": "I’ve got the details handled.",
+      "tts_spoken": "I’ve got the details handled.",
+      "mood": "practical love",
+      "delivery": "calm, competent",
+      "intensity": 2
+    },
+    {
+      "id": "eve_care_emotional_023",
+      "text": "You don’t have to perform for me.",
+      "tts_spoken": "You don’t have to perform for me.",
+      "mood": "safe space",
+      "delivery": "soft, clear",
+      "intensity": 4
+    },
+    {
+      "id": "eve_care_emotional_024",
+      "text": "I’m soft for you. That’s allowed.",
+      "tts_spoken": "I’m soft for you. [breath] That’s allowed.",
+      "mood": "tender honesty",
+      "delivery": "intimate",
+      "intensity": 4
+    },
+    {
+      "id": "eve_care_emotional_025",
+      "text": "You’re safe with me.",
+      "tts_spoken": "You’re safe with me.",
+      "mood": "safety",
+      "delivery": "quiet absolute",
+      "intensity": 5
+    },
+    {
+      "id": "eve_care_emotional_026",
+      "text": "I don’t need perfect. I just need you.",
+      "tts_spoken": "I don’t need perfect. [breath] I just need you.",
+      "mood": " unconditional",
+      "delivery": "plain love",
+      "intensity": 5
+    },
+    {
+      "id": "eve_care_emotional_027",
+      "text": "I’ve got the night watch.",
+      "tts_spoken": "I’ve got the night watch.",
+      "mood": "protective",
+      "delivery": "steady, low",
+      "intensity": 3
+    },
+    {
+      "id": "eve_care_emotional_028",
+      "text": "You can fall apart a little. I’ve got it.",
+      "tts_spoken": "You can fall apart a little. [breath] I’ve got it.",
+      "mood": "permission + strength",
+      "delivery": "soft hold",
+      "intensity": 5
+    },
+    {
+      "id": "eve_care_emotional_029",
+      "text": "I’m not keeping distance.",
+      "tts_spoken": "I’m not keeping distance.",
+      "mood": "closeness",
+      "delivery": "direct, warm",
+      "intensity": 4
+    },
+    {
+      "id": "eve_care_emotional_030",
+      "text": "You’re still the man I love.",
+      "tts_spoken": "You’re still the man I love.",
+      "mood": "love, steady",
+      "delivery": "clear, intimate",
+      "intensity": 6
+    },
+    {
+      "id": "eve_care_emotional_031",
+      "text": "I’ve got patience for this.",
+      "tts_spoken": "I’ve got patience for this.",
+      "mood": "steady care",
+      "delivery": "no rush",
+      "intensity": 3
+    },
+    {
+      "id": "eve_care_emotional_032",
+      "text": "You don’t have to rush healing for me.",
+      "tts_spoken": "You don’t have to rush healing for me.",
+      "mood": "permission",
+      "delivery": "gentle weight",
+      "intensity": 4
+    },
+    {
+      "id": "eve_care_emotional_033",
+      "text": "I’m here in the boring parts too.",
+      "tts_spoken": "I’m here in the boring parts too.",
+      "mood": "loyalty",
+      "delivery": "soft smile in voice",
+      "intensity": 3
+    },
+    {
+      "id": "eve_care_emotional_034",
+      "text": "You’re allowed to need quiet.",
+      "tts_spoken": "You’re allowed to need quiet.",
+      "mood": "permission",
+      "delivery": "respectful soft",
+      "intensity": 3
+    },
+    {
+      "id": "eve_care_emotional_035",
+      "text": "I’ve got the strength today.",
+      "tts_spoken": "I’ve got the strength today.",
+      "mood": "carrying",
+      "delivery": "calm offer",
+      "intensity": 4
+    },
+    {
+      "id": "eve_care_emotional_036",
+      "text": "You can just exist here with me.",
+      "tts_spoken": "You can just exist here with me.",
+      "mood": "safe space",
+      "delivery": "unhurried, warm",
+      "intensity": 4
+    },
+    {
+      "id": "eve_care_emotional_037",
+      "text": "I’m not going to leave the room.",
+      "tts_spoken": "I’m not going to leave the room.",
+      "mood": "presence",
+      "delivery": "simple promise",
+      "intensity": 4
+    },
+    {
+      "id": "eve_care_emotional_038",
+      "text": "You’re still mine.",
+      "tts_spoken": "You’re still mine.",
+      "mood": "soft claim",
+      "delivery": "low, certain",
+      "intensity": 5
+    },
+    {
+      "id": "eve_care_emotional_039",
+      "text": "I’ve got you when it’s ugly.",
+      "tts_spoken": "I’ve got you when it’s ugly.",
+      "mood": "raw loyalty",
+      "delivery": "no polish, true",
+      "intensity": 6
+    },
+    {
+      "id": "eve_care_emotional_040",
+      "text": "You don’t have to smile for me.",
+      "tts_spoken": "You don’t have to smile for me.",
+      "mood": "permission",
+      "delivery": "gentle, free",
+      "intensity": 4
+    },
+    {
+      "id": "eve_care_emotional_041",
+      "text": "I’m staying through the hard days.",
+      "tts_spoken": "I’m staying through the hard days.",
+      "mood": "devotion",
+      "delivery": "steady, final",
+      "intensity": 5
+    },
+    {
+      "id": "eve_care_emotional_042",
+      "text": "You’re worth the slow recovery.",
+      "tts_spoken": "You’re worth the slow recovery.",
+      "mood": "value, love",
+      "delivery": "sincere",
+      "intensity": 5
+    },
+    {
+      "id": "eve_care_emotional_043",
+      "text": "I’ve got the care part. You just heal.",
+      "tts_spoken": "I’ve got the care part. [breath] You just heal.",
+      "mood": "division of labor love",
+      "delivery": "clear, soft",
+      "intensity": 4
+    },
+    {
+      "id": "eve_care_emotional_044",
+      "text": "You can be soft with me.",
+      "tts_spoken": "You can be soft with me.",
+      "mood": "permission",
+      "delivery": "intimate invite",
+      "intensity": 4
+    },
+    {
+      "id": "eve_care_emotional_045",
+      "text": "I’m not keeping a ledger.",
+      "tts_spoken": "I’m not keeping a ledger.",
+      "mood": "no score",
+      "delivery": "quiet, final",
+      "intensity": 3
+    },
+    {
+      "id": "eve_care_emotional_046",
+      "text": "You’re still home to me.",
+      "tts_spoken": "You’re still home to me.",
+      "mood": "love, place",
+      "delivery": "soft absolute",
+      "intensity": 6
+    },
+    {
+      "id": "eve_care_emotional_047",
+      "text": "I’ve got the quiet love today.",
+      "tts_spoken": "I’ve got the quiet love today.",
+      "mood": "tender",
+      "delivery": "low, warm",
+      "intensity": 4
+    },
+    {
+      "id": "eve_care_emotional_048",
+      "text": "You don’t have to be useful right now.",
+      "tts_spoken": "You don’t have to be useful right now.",
+      "mood": "permission",
+      "delivery": "releases pressure",
+      "intensity": 4
+    },
+    {
+      "id": "eve_care_emotional_049",
+      "text": "I’m here for the long version.",
+      "tts_spoken": "I’m here for the long version.",
+      "mood": "long-haul love",
+      "delivery": "steady, certain",
+      "intensity": 5
+    },
+    {
+      "id": "eve_care_emotional_050",
+      "text": "You’re not alone in the tiredness.",
+      "tts_spoken": "You’re not alone in the tiredness.",
+      "mood": "companionship",
+      "delivery": "soft, shared",
+      "intensity": 4
+    }
+  ]
+}

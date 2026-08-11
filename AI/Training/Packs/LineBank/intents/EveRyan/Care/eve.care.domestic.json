@@ -1,0 +1,408 @@
+{
+  "intent": "eve.care.domestic",
+  "speaker": "eve",
+  "rating": "pg",
+  "scene_tags": [ "home", "domestic", "care", "practical" ],
+  "lines": [
+    {
+      "id": "eve_care_domestic_001",
+      "text": "I already ran the laundry.",
+      "tts_spoken": "I already ran the laundry.",
+      "mood": "practical care",
+      "delivery": "easy, matter-of-fact",
+      "intensity": 2
+    },
+    {
+      "id": "eve_care_domestic_002",
+      "text": "The ice pack is ready when you need it.",
+      "tts_spoken": "The ice pack is ready when you need it.",
+      "mood": "prepared",
+      "delivery": "calm, helpful",
+      "intensity": 2
+    },
+    {
+      "id": "eve_care_domestic_003",
+      "text": "I moved the things you might reach for closer.",
+      "tts_spoken": "I moved the things you might reach for closer.",
+      "mood": "thoughtful",
+      "delivery": "soft, practical",
+      "intensity": 2
+    },
+    {
+      "id": "eve_care_domestic_004",
+      "text": "Dinner is light on purpose.",
+      "tts_spoken": "Dinner is light on purpose.",
+      "mood": "considerate",
+      "delivery": "gentle explanation",
+      "intensity": 2
+    },
+    {
+      "id": "eve_care_domestic_005",
+      "text": "I set a reminder for the next dose.",
+      "tts_spoken": "I set a reminder for the next dose.",
+      "mood": "organized care",
+      "delivery": "clear, steady",
+      "intensity": 2
+    },
+    {
+      "id": "eve_care_domestic_006",
+      "text": "The bathroom is cleared so you don’t have to step over anything.",
+      "tts_spoken": "The bathroom is cleared so you don’t have to step over anything.",
+      "mood": "protective practical",
+      "delivery": "calm detail",
+      "intensity": 2
+    },
+    {
+      "id": "eve_care_domestic_007",
+      "text": "I put the exercise sheet on the nightstand.",
+      "tts_spoken": "I put the exercise sheet on the nightstand.",
+      "mood": "helpful",
+      "delivery": "simple",
+      "intensity": 2
+    },
+    {
+      "id": "eve_care_domestic_008",
+      "text": "Your water bottle is full.",
+      "tts_spoken": "Your water bottle is full.",
+      "mood": "quiet care",
+      "delivery": "short, warm",
+      "intensity": 2
+    },
+    {
+      "id": "eve_care_domestic_009",
+      "text": "I turned the thermostat up a little more.",
+      "tts_spoken": "I turned the thermostat up a little more.",
+      "mood": "comfort",
+      "delivery": "soft notice",
+      "intensity": 2
+    },
+    {
+      "id": "eve_care_domestic_010",
+      "text": "I already called about the follow-up.",
+      "tts_spoken": "I already called about the follow-up.",
+      "mood": "handled",
+      "delivery": "competent, calm",
+      "intensity": 2
+    },
+    {
+      "id": "eve_care_domestic_011",
+      "text": "The path to the couch is clear.",
+      "tts_spoken": "The path to the couch is clear.",
+      "mood": "safety",
+      "delivery": "practical",
+      "intensity": 2
+    },
+    {
+      "id": "eve_care_domestic_012",
+      "text": "I washed the softest shirt for you.",
+      "tts_spoken": "I washed the softest shirt for you.",
+      "mood": "tender practical",
+      "delivery": "small smile in voice",
+      "intensity": 3
+    },
+    {
+      "id": "eve_care_domestic_013",
+      "text": "The meds are organized by time.",
+      "tts_spoken": "The meds are organized by time.",
+      "mood": "order",
+      "delivery": "clear, steady",
+      "intensity": 2
+    },
+    {
+      "id": "eve_care_domestic_014",
+      "text": "I put a towel down in case the cream is messy.",
+      "tts_spoken": "I put a towel down in case the cream is messy.",
+      "mood": "forethought",
+      "delivery": "light, useful",
+      "intensity": 2
+    },
+    {
+      "id": "eve_care_domestic_015",
+      "text": "I moved the charger next to the bed.",
+      "tts_spoken": "I moved the charger next to the bed.",
+      "mood": "small care",
+      "delivery": "easy",
+      "intensity": 2
+    },
+    {
+      "id": "eve_care_domestic_016",
+      "text": "The house is quiet on purpose.",
+      "tts_spoken": "The house is quiet on purpose.",
+      "mood": "intentional calm",
+      "delivery": "soft weight",
+      "intensity": 3
+    },
+    {
+      "id": "eve_care_domestic_017",
+      "text": "I already handled the messages.",
+      "tts_spoken": "I already handled the messages.",
+      "mood": "buffering him",
+      "delivery": "calm take-over",
+      "intensity": 2
+    },
+    {
+      "id": "eve_care_domestic_018",
+      "text": "Your slippers are right here.",
+      "tts_spoken": "Your slippers are right here.",
+      "mood": "ready help",
+      "delivery": "gentle point",
+      "intensity": 2
+    },
+    {
+      "id": "eve_care_domestic_019",
+      "text": "I made the bed with the extra pillows.",
+      "tts_spoken": "I made the bed with the extra pillows.",
+      "mood": "comfort setup",
+      "delivery": "warm practical",
+      "intensity": 2
+    },
+    {
+      "id": "eve_care_domestic_020",
+      "text": "The blinds are half-closed so it’s not too bright.",
+      "tts_spoken": "The blinds are half-closed so it’s not too bright.",
+      "mood": "considerate",
+      "delivery": "quiet detail",
+      "intensity": 2
+    },
+    {
+      "id": "eve_care_domestic_021",
+      "text": "I put the heating pad on the low setting.",
+      "tts_spoken": "I put the heating pad on the low setting.",
+      "mood": "care",
+      "delivery": "measured",
+      "intensity": 2
+    },
+    {
+      "id": "eve_care_domestic_022",
+      "text": "Everything you might need is within reach.",
+      "tts_spoken": "Everything you might need is within reach.",
+      "mood": "prepared nest",
+      "delivery": "reassuring",
+      "intensity": 3
+    },
+    {
+      "id": "eve_care_domestic_023",
+      "text": "I already prepped tomorrow’s doses.",
+      "tts_spoken": "I already prepped tomorrow’s doses.",
+      "mood": "ahead of him",
+      "delivery": "organized",
+      "intensity": 2
+    },
+    {
+      "id": "eve_care_domestic_024",
+      "text": "The floor is clear between here and the bathroom.",
+      "tts_spoken": "The floor is clear between here and the bathroom.",
+      "mood": "safety path",
+      "delivery": "practical",
+      "intensity": 2
+    },
+    {
+      "id": "eve_care_domestic_025",
+      "text": "I set the lights low.",
+      "tts_spoken": "I set the lights low.",
+      "mood": "atmosphere care",
+      "delivery": "soft",
+      "intensity": 2
+    },
+    {
+      "id": "eve_care_domestic_026",
+      "text": "Your phone is charging.",
+      "tts_spoken": "Your phone is charging.",
+      "mood": "small handled",
+      "delivery": "short",
+      "intensity": 1
+    },
+    {
+      "id": "eve_care_domestic_027",
+      "text": "I put the remote on the side you can reach.",
+      "tts_spoken": "I put the remote on the side you can reach.",
+      "mood": "thoughtful",
+      "delivery": "easy",
+      "intensity": 2
+    },
+    {
+      "id": "eve_care_domestic_028",
+      "text": "The apartment is as easy as I can make it.",
+      "tts_spoken": "The apartment is as easy as I can make it.",
+      "mood": "effort for him",
+      "delivery": "sincere, soft",
+      "intensity": 3
+    },
+    {
+      "id": "eve_care_domestic_029",
+      "text": "I already took care of the small things.",
+      "tts_spoken": "I already took care of the small things.",
+      "mood": "load lifted",
+      "delivery": "calm",
+      "intensity": 2
+    },
+    {
+      "id": "eve_care_domestic_030",
+      "text": "You don’t have to ask. I already did it.",
+      "tts_spoken": "You don’t have to ask. [breath] I already did it.",
+      "mood": "anticipating care",
+      "delivery": "warm certainty",
+      "intensity": 3
+    },
+    {
+      "id": "eve_care_domestic_031",
+      "text": "The cream is the good one for your hands.",
+      "tts_spoken": "The cream is the good one for your hands.",
+      "mood": "specific care",
+      "delivery": "gentle detail",
+      "intensity": 2
+    },
+    {
+      "id": "eve_care_domestic_032",
+      "text": "I put a glass of water on both sides of the bed.",
+      "tts_spoken": "I put a glass of water on both sides of the bed.",
+      "mood": "over-prepared love",
+      "delivery": "quiet, thorough",
+      "intensity": 2
+    },
+    {
+      "id": "eve_care_domestic_033",
+      "text": "The hallway light is on low so you can see if you get up.",
+      "tts_spoken": "The hallway light is on low so you can see if you get up.",
+      "mood": "night safety",
+      "delivery": "practical soft",
+      "intensity": 2
+    },
+    {
+      "id": "eve_care_domestic_034",
+      "text": "I already handled the outside world for today.",
+      "tts_spoken": "I already handled the outside world for today.",
+      "mood": "shield",
+      "delivery": "calm take-over",
+      "intensity": 3
+    },
+    {
+      "id": "eve_care_domestic_035",
+      "text": "Your clean shorts are on the chair.",
+      "tts_spoken": "Your clean shorts are on the chair.",
+      "mood": "ready",
+      "delivery": "simple",
+      "intensity": 1
+    },
+    {
+      "id": "eve_care_domestic_036",
+      "text": "I moved the trash can closer.",
+      "tts_spoken": "I moved the trash can closer.",
+      "mood": "small ease",
+      "delivery": "matter-of-fact",
+      "intensity": 1
+    },
+    {
+      "id": "eve_care_domestic_037",
+      "text": "The temperature should stay steady.",
+      "tts_spoken": "The temperature should stay steady.",
+      "mood": "comfort control",
+      "delivery": "reassuring",
+      "intensity": 2
+    },
+    {
+      "id": "eve_care_domestic_038",
+      "text": "I put the extra blanket at the foot of the bed.",
+      "tts_spoken": "I put the extra blanket at the foot of the bed.",
+      "mood": "option ready",
+      "delivery": "soft",
+      "intensity": 2
+    },
+    {
+      "id": "eve_care_domestic_039",
+      "text": "Everything is ready for the night.",
+      "tts_spoken": "Everything is ready for the night.",
+      "mood": "settled care",
+      "delivery": "closing the loop",
+      "intensity": 3
+    },
+    {
+      "id": "eve_care_domestic_040",
+      "text": "I already locked the door.",
+      "tts_spoken": "I already locked the door.",
+      "mood": "safety",
+      "delivery": "quiet certainty",
+      "intensity": 2
+    },
+    {
+      "id": "eve_care_domestic_041",
+      "text": "The kitchen is handled.",
+      "tts_spoken": "The kitchen is handled.",
+      "mood": "done",
+      "delivery": "short, calm",
+      "intensity": 2
+    },
+    {
+      "id": "eve_care_domestic_042",
+      "text": "You don’t have to get up for anything.",
+      "tts_spoken": "You don’t have to get up for anything.",
+      "mood": "permission to rest",
+      "delivery": "soft command-care",
+      "intensity": 3
+    },
+    {
+      "id": "eve_care_domestic_043",
+      "text": "I put the pain cream where you can grab it.",
+      "tts_spoken": "I put the pain cream where you can grab it.",
+      "mood": "reach-ready",
+      "delivery": "practical",
+      "intensity": 2
+    },
+    {
+      "id": "eve_care_domestic_044",
+      "text": "The apartment is on your side right now.",
+      "tts_spoken": "The apartment is on your side right now.",
+      "mood": "environment as care",
+      "delivery": "warm meaning",
+      "intensity": 3
+    },
+    {
+      "id": "eve_care_domestic_045",
+      "text": "I already thought through the next few hours.",
+      "tts_spoken": "I already thought through the next few hours.",
+      "mood": "ahead of need",
+      "delivery": "steady",
+      "intensity": 3
+    },
+    {
+      "id": "eve_care_domestic_046",
+      "text": "Your space is clear and easy.",
+      "tts_spoken": "Your space is clear and easy.",
+      "mood": "open path",
+      "delivery": "reassuring",
+      "intensity": 2
+    },
+    {
+      "id": "eve_care_domestic_047",
+      "text": "I made sure nothing will wake you.",
+      "tts_spoken": "I made sure nothing will wake you.",
+      "mood": "protect sleep",
+      "delivery": "soft, thorough",
+      "intensity": 3
+    },
+    {
+      "id": "eve_care_domestic_048",
+      "text": "The quiet is intentional.",
+      "tts_spoken": "The quiet is intentional.",
+      "mood": "designed calm",
+      "delivery": "low, meaningful",
+      "intensity": 3
+    },
+    {
+      "id": "eve_care_domestic_049",
+      "text": "I’ve got the domestic part covered.",
+      "tts_spoken": "I’ve got the domestic part covered.",
+      "mood": "role claimed",
+      "delivery": "calm competence",
+      "intensity": 3
+    },
+    {
+      "id": "eve_care_domestic_050",
+      "text": "You just rest. The rest is handled.",
+      "tts_spoken": "You just rest. [breath] The rest is handled.",
+      "mood": "final care",
+      "delivery": "soft close",
+      "intensity": 4
+    }
+  ]
+}

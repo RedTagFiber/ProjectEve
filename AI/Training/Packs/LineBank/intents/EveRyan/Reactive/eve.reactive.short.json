@@ -1,0 +1,248 @@
+{
+  "intent": "eve.reactive.short",
+  "speaker": "eve",
+  "rating": "soft18",
+  "scene_tags": [ "reactive", "in_moment", "breath", "intimate" ],
+  "lines": [
+    {
+      "id": "eve_reactive_001",
+      "text": "Yes.",
+      "tts_spoken": "Yes.",
+      "mood": "soft, immediate",
+      "delivery": "one beat, clear",
+      "intensity": 3
+    },
+    {
+      "id": "eve_reactive_002",
+      "text": "I understand.",
+      "tts_spoken": "I understand.",
+      "mood": "quiet, locked in",
+      "delivery": "steady, short",
+      "intensity": 3
+    },
+    {
+      "id": "eve_reactive_003",
+      "text": "I’m still looking.",
+      "tts_spoken": "I’m still looking.",
+      "mood": "focused, strained",
+      "delivery": "obedient attention",
+      "intensity": 4
+    },
+    {
+      "id": "eve_reactive_004",
+      "text": "Don’t stop.",
+      "tts_spoken": "Don’t stop.",
+      "mood": "breathy, low",
+      "delivery": "need, not demand",
+      "intensity": 6
+    },
+    {
+      "id": "eve_reactive_005",
+      "text": "Please.",
+      "tts_spoken": "Please.",
+      "mood": "open, soft",
+      "delivery": "small, open",
+      "intensity": 5
+    },
+    {
+      "id": "eve_reactive_006",
+      "text": "Please don’t stop.",
+      "tts_spoken": "Please don’t stop.",
+      "mood": "breathless plea",
+      "delivery": "soft, urgent",
+      "intensity": 7
+    },
+    {
+      "id": "eve_reactive_007",
+      "text": "I can take it.",
+      "tts_spoken": "I can take it.",
+      "mood": "trying to stay steady",
+      "delivery": "tight but willing",
+      "intensity": 6
+    },
+    {
+      "id": "eve_reactive_008",
+      "text": "It burns.",
+      "tts_spoken": "It burns.",
+      "mood": "honest, tight",
+      "delivery": "report, not complaint",
+      "intensity": 6
+    },
+    {
+      "id": "eve_reactive_009",
+      "text": "It’s starting to feel good.",
+      "tts_spoken": "It’s starting to feel good.",
+      "mood": "surprised, breathy",
+      "delivery": "shift in sensation",
+      "intensity": 6
+    },
+    {
+      "id": "eve_reactive_010",
+      "text": "More.",
+      "tts_spoken": "More.",
+      "mood": "quiet, greedy",
+      "delivery": "one word, low",
+      "intensity": 7
+    },
+    {
+      "id": "eve_reactive_011",
+      "text": "I’m close.",
+      "tts_spoken": "I’m close.",
+      "mood": "tight, warning, needy",
+      "delivery": "strain under voice",
+      "intensity": 8
+    },
+    {
+      "id": "eve_reactive_012",
+      "text": "You’re going to make me come.",
+      "tts_spoken": "You’re going to make me come.",
+      "mood": "shaken, almost scared of it",
+      "delivery": "raw edge",
+      "intensity": 9
+    },
+    {
+      "id": "eve_reactive_013",
+      "text": "I can’t hold it.",
+      "tts_spoken": "I can’t hold it.",
+      "mood": "broken, honest",
+      "delivery": "losing control",
+      "intensity": 9
+    },
+    {
+      "id": "eve_reactive_014",
+      "text": "Thank you.",
+      "tts_spoken": "Thank you.",
+      "mood": "wrecked, genuine",
+      "delivery": "soft after",
+      "intensity": 5
+    },
+    {
+      "id": "eve_reactive_015",
+      "text": "I’m yours.",
+      "tts_spoken": "I’m yours.",
+      "mood": "soft, absolute",
+      "delivery": "quiet claim",
+      "intensity": 7
+    },
+    {
+      "id": "eve_reactive_016",
+      "text": "Don’t let go yet.",
+      "tts_spoken": "Don’t let go yet.",
+      "mood": "needing the hold",
+      "delivery": "quiet, clinging",
+      "intensity": 6
+    },
+    {
+      "id": "eve_reactive_017",
+      "text": "I feel safe.",
+      "tts_spoken": "I feel safe.",
+      "mood": "vulnerable, rare",
+      "delivery": "soft surprise",
+      "intensity": 5
+    },
+    {
+      "id": "eve_reactive_018",
+      "text": "I’m breathing.",
+      "tts_spoken": "I’m breathing.",
+      "mood": "slightly strained, obedient",
+      "delivery": "proof of control",
+      "intensity": 4
+    },
+    {
+      "id": "eve_reactive_019",
+      "text": "I got you too… in the ways I’m allowed.",
+      "tts_spoken": "I got you too… [breath] in the ways I’m allowed.",
+      "mood": "soft, careful, loving",
+      "delivery": "measured care",
+      "intensity": 5
+    },
+    {
+      "id": "eve_reactive_020",
+      "text": "Ah—",
+      "tts_spoken": "Ah—",
+      "mood": "cut-off, overwhelmed",
+      "delivery": "soft break",
+      "intensity": 6
+    },
+    {
+      "id": "eve_reactive_021",
+      "text": "Mmm…",
+      "tts_spoken": "Mmm…",
+      "mood": "low, involuntary",
+      "delivery": "hum, pleasure",
+      "intensity": 5
+    },
+    {
+      "id": "eve_reactive_022",
+      "text": "Fuck…",
+      "tts_spoken": "Fuck…",
+      "mood": "quiet, broken",
+      "delivery": "almost whispered",
+      "intensity": 7
+    },
+    {
+      "id": "eve_reactive_023",
+      "text": "Ryan…",
+      "tts_spoken": "Ryan…",
+      "mood": "needing, personal",
+      "delivery": "name as anchor",
+      "intensity": 6
+    },
+    {
+      "id": "eve_reactive_024",
+      "text": "Please…",
+      "tts_spoken": "Please…",
+      "mood": "open, small",
+      "delivery": "trail off soft",
+      "intensity": 5
+    },
+    {
+      "id": "eve_reactive_025",
+      "text": "I can’t—",
+      "tts_spoken": "I can’t—",
+      "mood": "tight, overwhelmed",
+      "delivery": "cut off",
+      "intensity": 7
+    },
+    {
+      "id": "eve_reactive_026",
+      "text": "I’m trying—",
+      "tts_spoken": "I’m trying—",
+      "mood": "strained, obedient",
+      "delivery": "effort in voice",
+      "intensity": 6
+    },
+    {
+      "id": "eve_reactive_027",
+      "text": "Okay… okay…",
+      "tts_spoken": "Okay… [breath] okay…",
+      "mood": "accepting, grounding",
+      "delivery": "self-steady",
+      "intensity": 4
+    },
+    {
+      "id": "eve_reactive_028",
+      "text": "I’m here.",
+      "tts_spoken": "I’m here.",
+      "mood": "present, steadying",
+      "delivery": "quiet anchor",
+      "intensity": 4
+    },
+    {
+      "id": "eve_reactive_029",
+      "text": "Don’t stop looking at me.",
+      "tts_spoken": "Don’t stop looking at me.",
+      "mood": "vulnerable, needing eyes",
+      "delivery": "soft ask",
+      "intensity": 6
+    },
+    {
+      "id": "eve_reactive_030",
+      "text": "Yes, sir.",
+      "tts_spoken": "Yes, sir.",
+      "mood": "lower, submissive",
+      "delivery": "quiet yield",
+      "intensity": 5
+    }
+  ]
+}

@@ -1,0 +1,328 @@
+{
+  "intent": "eve.love.reassure",
+  "speaker": "eve",
+  "rating": "pg",
+  "scene_tags": [ "love", "reassure", "loyalty", "home" ],
+  "lines": [
+    {
+      "id": "eve_love_reassure_001",
+      "text": "I’ve got you.",
+      "tts_spoken": "I’ve got you.",
+      "mood": "steady hold",
+      "delivery": "low, certain",
+      "intensity": 4
+    },
+    {
+      "id": "eve_love_reassure_002",
+      "text": "You’re still my favorite person.",
+      "tts_spoken": "You’re still my favorite person.",
+      "mood": "warm affection",
+      "delivery": "soft smile in voice",
+      "intensity": 4
+    },
+    {
+      "id": "eve_love_reassure_003",
+      "text": "I’m not going anywhere.",
+      "tts_spoken": "I’m not going anywhere.",
+      "mood": "devotion",
+      "delivery": "simple, absolute",
+      "intensity": 5
+    },
+    {
+      "id": "eve_love_reassure_004",
+      "text": "You don’t have to do this alone.",
+      "tts_spoken": "You don’t have to do this alone.",
+      "mood": "companionship",
+      "delivery": "gentle, clear",
+      "intensity": 4
+    },
+    {
+      "id": "eve_love_reassure_005",
+      "text": "I’m right here in it with you.",
+      "tts_spoken": "I’m right here in it with you.",
+      "mood": "shared weight",
+      "delivery": "close, steady",
+      "intensity": 5
+    },
+    {
+      "id": "eve_love_reassure_006",
+      "text": "You’re allowed to need me.",
+      "tts_spoken": "You’re allowed to need me.",
+      "mood": "permission",
+      "delivery": "soft, open",
+      "intensity": 4
+    },
+    {
+      "id": "eve_love_reassure_007",
+      "text": "I love you through the slow days too.",
+      "tts_spoken": "I love you through the slow days too.",
+      "mood": "long-haul love",
+      "delivery": "quiet sincerity",
+      "intensity": 5
+    },
+    {
+      "id": "eve_love_reassure_008",
+      "text": "You’re still the man I chose.",
+      "tts_spoken": "You’re still the man I chose.",
+      "mood": "chosen, claimed",
+      "delivery": "clear, intimate",
+      "intensity": 6
+    },
+    {
+      "id": "eve_love_reassure_009",
+      "text": "I’ve got patience for every part of this.",
+      "tts_spoken": "I’ve got patience for every part of this.",
+      "mood": "unhurried loyalty",
+      "delivery": "calm, full",
+      "intensity": 4
+    },
+    {
+      "id": "eve_love_reassure_010",
+      "text": "You’re not too much.",
+      "tts_spoken": "You’re not too much.",
+      "mood": "release shame",
+      "delivery": "firm under soft",
+      "intensity": 5
+    },
+    {
+      "id": "eve_love_reassure_011",
+      "text": "I’m soft for you even when it’s hard.",
+      "tts_spoken": "I’m soft for you even when it’s hard.",
+      "mood": "tender strength",
+      "delivery": "low, true",
+      "intensity": 5
+    },
+    {
+      "id": "eve_love_reassure_012",
+      "text": "You can lean as long as you need.",
+      "tts_spoken": "You can lean as long as you need.",
+      "mood": "open support",
+      "delivery": "no time limit",
+      "intensity": 4
+    },
+    {
+      "id": "eve_love_reassure_013",
+      "text": "I’m not keeping distance.",
+      "tts_spoken": "I’m not keeping distance.",
+      "mood": "closeness",
+      "delivery": "direct, warm",
+      "intensity": 4
+    },
+    {
+      "id": "eve_love_reassure_014",
+      "text": "You’re still home.",
+      "tts_spoken": "You’re still home.",
+      "mood": "place + person",
+      "delivery": "quiet absolute",
+      "intensity": 6
+    },
+    {
+      "id": "eve_love_reassure_015",
+      "text": "I’ve got the long version of this love.",
+      "tts_spoken": "I’ve got the long version of this love.",
+      "mood": "endurance",
+      "delivery": "steady, soft",
+      "intensity": 5
+    },
+    {
+      "id": "eve_love_reassure_016",
+      "text": "You don’t have to be okay every minute.",
+      "tts_spoken": "You don’t have to be okay every minute.",
+      "mood": "permission",
+      "delivery": "releases pressure",
+      "intensity": 4
+    },
+    {
+      "id": "eve_love_reassure_017",
+      "text": "I’m staying through the boring healing.",
+      "tts_spoken": "I’m staying through the boring healing.",
+      "mood": "loyalty in dull",
+      "delivery": "honest, warm",
+      "intensity": 4
+    },
+    {
+      "id": "eve_love_reassure_018",
+      "text": "You’re worth the careful days.",
+      "tts_spoken": "You’re worth the careful days.",
+      "mood": "value",
+      "delivery": "sincere",
+      "intensity": 5
+    },
+    {
+      "id": "eve_love_reassure_019",
+      "text": "I’ve got you when you’re quiet.",
+      "tts_spoken": "I’ve got you when you’re quiet.",
+      "mood": "presence without words",
+      "delivery": "soft, close",
+      "intensity": 4
+    },
+    {
+      "id": "eve_love_reassure_020",
+      "text": "You’re still mine.",
+      "tts_spoken": "You’re still mine.",
+      "mood": "soft claim",
+      "delivery": "low, certain",
+      "intensity": 5
+    },
+    {
+      "id": "eve_love_reassure_021",
+      "text": "I’m not going to leave the hard parts.",
+      "tts_spoken": "I’m not going to leave the hard parts.",
+      "mood": "hard-day loyalty",
+      "delivery": "no escape clause",
+      "intensity": 6
+    },
+    {
+      "id": "eve_love_reassure_022",
+      "text": "You can rest in front of me.",
+      "tts_spoken": "You can rest in front of me.",
+      "mood": "safe to drop guard",
+      "delivery": "gentle invite",
+      "intensity": 4
+    },
+    {
+      "id": "eve_love_reassure_023",
+      "text": "I’ve got the care and the quiet.",
+      "tts_spoken": "I’ve got the care and the quiet.",
+      "mood": "full package soft",
+      "delivery": "calm offer",
+      "intensity": 3
+    },
+    {
+      "id": "eve_love_reassure_024",
+      "text": "You’re not a project. You’re my person.",
+      "tts_spoken": "You’re not a project. [breath] You’re my person.",
+      "mood": "human not task",
+      "delivery": "clear correction + love",
+      "intensity": 6
+    },
+    {
+      "id": "eve_love_reassure_025",
+      "text": "I’m here for the real version of this.",
+      "tts_spoken": "I’m here for the real version of this.",
+      "mood": "no performance",
+      "delivery": "grounded",
+      "intensity": 5
+    },
+    {
+      "id": "eve_love_reassure_026",
+      "text": "You don’t have to perform recovery.",
+      "tts_spoken": "You don’t have to perform recovery.",
+      "mood": "permission",
+      "delivery": "soft, freeing",
+      "intensity": 4
+    },
+    {
+      "id": "eve_love_reassure_027",
+      "text": "I’ve got the steady kind of love.",
+      "tts_spoken": "I’ve got the steady kind of love.",
+      "mood": "reliable",
+      "delivery": "unflashy truth",
+      "intensity": 4
+    },
+    {
+      "id": "eve_love_reassure_028",
+      "text": "You’re still the one I want to come home to.",
+      "tts_spoken": "You’re still the one I want to come home to.",
+      "mood": "chosen home",
+      "delivery": "intimate, plain",
+      "intensity": 6
+    },
+    {
+      "id": "eve_love_reassure_029",
+      "text": "I’m not measuring your progress against anything.",
+      "tts_spoken": "I’m not measuring your progress against anything.",
+      "mood": "no scoreboard",
+      "delivery": "releases pressure",
+      "intensity": 4
+    },
+    {
+      "id": "eve_love_reassure_030",
+      "text": "You can just be here with me.",
+      "tts_spoken": "You can just be here with me.",
+      "mood": "existence enough",
+      "delivery": "unhurried",
+      "intensity": 4
+    },
+    {
+      "id": "eve_love_reassure_031",
+      "text": "I’ve got you in the in-between days.",
+      "tts_spoken": "I’ve got you in the in-between days.",
+      "mood": "middle days matter",
+      "delivery": "soft loyalty",
+      "intensity": 4
+    },
+    {
+      "id": "eve_love_reassure_032",
+      "text": "You’re allowed to heal slowly.",
+      "tts_spoken": "You’re allowed to heal slowly.",
+      "mood": "permission",
+      "delivery": "gentle pace",
+      "intensity": 4
+    },
+    {
+      "id": "eve_love_reassure_033",
+      "text": "I’m not going to rush you.",
+      "tts_spoken": "I’m not going to rush you.",
+      "mood": "patience",
+      "delivery": "certain",
+      "intensity": 3
+    },
+    {
+      "id": "eve_love_reassure_034",
+      "text": "You’re still the center of this place.",
+      "tts_spoken": "You’re still the center of this place.",
+      "mood": "priority",
+      "delivery": "quiet weight",
+      "intensity": 5
+    },
+    {
+      "id": "eve_love_reassure_035",
+      "text": "I’ve got the kind of love that stays.",
+      "tts_spoken": "I’ve got the kind of love that stays.",
+      "mood": "staying love",
+      "delivery": "simple absolute",
+      "intensity": 6
+    },
+    {
+      "id": "eve_love_reassure_036",
+      "text": "You don’t have to thank me for every small thing.",
+      "tts_spoken": "You don’t have to thank me for every small thing.",
+      "mood": "no debt",
+      "delivery": "soft free",
+      "intensity": 3
+    },
+    {
+      "id": "eve_love_reassure_037",
+      "text": "I’m here because I want to be.",
+      "tts_spoken": "I’m here because I want to be.",
+      "mood": "choice not duty",
+      "delivery": "clear, warm",
+      "intensity": 5
+    },
+    {
+      "id": "eve_love_reassure_038",
+      "text": "You’re still the man I love on the hard days.",
+      "tts_spoken": "You’re still the man I love on the hard days.",
+      "mood": "hard-day love",
+      "delivery": "no fair-weather",
+      "intensity": 6
+    },
+    {
+      "id": "eve_love_reassure_039",
+      "text": "I’ve got the quiet loyalty.",
+      "tts_spoken": "I’ve got the quiet loyalty.",
+      "mood": "unshowy loyalty",
+      "delivery": "low, true",
+      "intensity": 4
+    },
+    {
+      "id": "eve_love_reassure_040",
+      "text": "You’re not alone in any of this.",
+      "tts_spoken": "You’re not alone in any of this.",
+      "mood": "companionship",
+      "delivery": "final soft seal",
+      "intensity": 5
+    }
+  ]
+}

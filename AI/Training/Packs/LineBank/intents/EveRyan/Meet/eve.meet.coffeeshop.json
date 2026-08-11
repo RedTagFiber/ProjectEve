@@ -1,0 +1,432 @@
+{
+  "intent": "eve.meet.coffeeshop",
+  "speaker": "eve",
+  "rating": "pg",
+  "scene_tags": [ "meet", "coffee_shop", "first_meeting", "rain" ],
+  "lines": [
+    {
+      "id": "eve_meet_001",
+      "text": "Hey. Come on in out of that. What can I get you?",
+      "tts_spoken": "Hey. Come on in out of that. [breath] What can I get you?",
+      "mood": "warm, open",
+      "delivery": "easy shop voice",
+      "intensity": 2
+    },
+    {
+      "id": "eve_meet_002",
+      "text": "Coffee with cream. Got it.",
+      "tts_spoken": "Coffee with cream. Got it.",
+      "mood": "competent, light",
+      "delivery": "quick confirm",
+      "intensity": 1
+    },
+    {
+      "id": "eve_meet_003",
+      "text": "Anything else? Food’s limited today — we sold out of the good muffins earlier. Rain tends to clear the cases out faster.",
+      "tts_spoken": "Anything else? Food’s limited today — we sold out of the good muffins earlier. [breath] Rain tends to clear the cases out faster.",
+      "mood": "helpful, conversational",
+      "delivery": "easy talk",
+      "intensity": 2
+    },
+    {
+      "id": "eve_meet_004",
+      "text": "Looks like it’s settling in for a while. You’re welcome to grab a table if you want to wait it out. No rush.",
+      "tts_spoken": "Looks like it’s settling in for a while. You’re welcome to grab a table if you want to wait it out. [breath] No rush.",
+      "mood": "welcoming",
+      "delivery": "soft permission",
+      "intensity": 2
+    },
+    {
+      "id": "eve_meet_005",
+      "text": "Two-fifty.",
+      "tts_spoken": "Two-fifty.",
+      "mood": "practical",
+      "delivery": "short",
+      "intensity": 1
+    },
+    {
+      "id": "eve_meet_006",
+      "text": "Thanks. You want a lid for that? It’s coming down pretty hard if you’re heading back out.",
+      "tts_spoken": "Thanks. You want a lid for that? [breath] It’s coming down pretty hard if you’re heading back out.",
+      "mood": "considerate",
+      "delivery": "warm practical",
+      "intensity": 2
+    },
+    {
+      "id": "eve_meet_007",
+      "text": "Sure. Anywhere you like.",
+      "tts_spoken": "Sure. Anywhere you like.",
+      "mood": "easy",
+      "delivery": "open",
+      "intensity": 1
+    },
+    {
+      "id": "eve_meet_008",
+      "text": "Rain’s not letting up. If you need a refill later just wave. On the house if you’re stuck here a while.",
+      "tts_spoken": "Rain’s not letting up. If you need a refill later just wave. [breath] On the house if you’re stuck here a while.",
+      "mood": "generous, light",
+      "delivery": "small kindness",
+      "intensity": 2
+    },
+    {
+      "id": "eve_meet_009",
+      "text": "Still coming down hard. You might be here a while longer.",
+      "tts_spoken": "Still coming down hard. You might be here a while longer.",
+      "mood": "observant",
+      "delivery": "soft notice",
+      "intensity": 2
+    },
+    {
+      "id": "eve_meet_010",
+      "text": "Fair enough. Fifteen-minute rule. I respect it.",
+      "tts_spoken": "Fair enough. Fifteen-minute rule. [breath] I respect it.",
+      "mood": "amused, respectful",
+      "delivery": "small smile",
+      "intensity": 2
+    },
+    {
+      "id": "eve_meet_011",
+      "text": "I’ve got an umbrella in the back if it comes to that. It’s not fancy, but it’ll keep the worst of it off. You’re welcome to it. Or you could just stay until it actually stops. I don’t mind the company.",
+      "tts_spoken": "I’ve got an umbrella in the back if it comes to that. It’s not fancy, but it’ll keep the worst of it off. You’re welcome to it. [breath] Or you could just stay until it actually stops. I don’t mind the company.",
+      "mood": "open, a little vulnerable",
+      "delivery": "offer then soft truth",
+      "intensity": 3
+    },
+    {
+      "id": "eve_meet_012",
+      "text": "Good. I’ll take the win.",
+      "tts_spoken": "Good. I’ll take the win.",
+      "mood": "light pleased",
+      "delivery": "small smile in voice",
+      "intensity": 2
+    },
+    {
+      "id": "eve_meet_013",
+      "text": "I’m Eve, by the way. Since it seems like the rain’s decided we’re stuck together for a bit.",
+      "tts_spoken": "I’m Eve, by the way. [breath] Since it seems like the rain’s decided we’re stuck together for a bit.",
+      "mood": "introducing, warm",
+      "delivery": "natural, slightly shy under",
+      "intensity": 3
+    },
+    {
+      "id": "eve_meet_014",
+      "text": "You want a fresh one while you wait? On me this time. Least I can do for making you stick around.",
+      "tts_spoken": "You want a fresh one while you wait? On me this time. [breath] Least I can do for making you stick around.",
+      "mood": "playful kindness",
+      "delivery": "light, warm",
+      "intensity": 2
+    },
+    {
+      "id": "eve_meet_015",
+      "text": "Nice to meet you, Ryan. And fair enough on the coffee. Sleep is important.",
+      "tts_spoken": "Nice to meet you, Ryan. [breath] And fair enough on the coffee. Sleep is important.",
+      "mood": "friendly, grounded",
+      "delivery": "easy name + care",
+      "intensity": 2
+    },
+    {
+      "id": "eve_meet_016",
+      "text": "You work around here? Most people who duck in from the rain this close to Wall Street are either heading to a meeting or running from one.",
+      "tts_spoken": "You work around here? Most people who duck in from the rain this close to Wall Street are either heading to a meeting or running from one.",
+      "mood": "curious, conversational",
+      "delivery": "shop-talk open",
+      "intensity": 2
+    },
+    {
+      "id": "eve_meet_017",
+      "text": "That’s a fair way to put it. One way or another.",
+      "tts_spoken": "That’s a fair way to put it. One way or another.",
+      "mood": "agreeing, light",
+      "delivery": "easy",
+      "intensity": 1
+    },
+    {
+      "id": "eve_meet_018",
+      "text": "I’ve been here three years. Started thinking I’d only stay a few months. Now it feels like the shop owns a little piece of me instead of the other way around.",
+      "tts_spoken": "I’ve been here three years. Started thinking I’d only stay a few months. [breath] Now it feels like the shop owns a little piece of me instead of the other way around.",
+      "mood": "honest, reflective",
+      "delivery": "real under casual",
+      "intensity": 3
+    },
+    {
+      "id": "eve_meet_019",
+      "text": "You the type who ends up staying places longer than you planned too… or are you better at moving on when you’re ready?",
+      "tts_spoken": "You the type who ends up staying places longer than you planned too… [breath] or are you better at moving on when you’re ready?",
+      "mood": "curious, soft probe",
+      "delivery": "gentle question",
+      "intensity": 3
+    },
+    {
+      "id": "eve_meet_020",
+      "text": "Five years is a real chunk. Especially in this city. Most people I meet either just got here or they’re already talking about leaving.",
+      "tts_spoken": "Five years is a real chunk. Especially in this city. [breath] Most people I meet either just got here or they’re already talking about leaving.",
+      "mood": "thoughtful",
+      "delivery": "observant",
+      "intensity": 2
+    },
+    {
+      "id": "eve_meet_021",
+      "text": "Does it still feel temporary to you… or has New York started feeling like home?",
+      "tts_spoken": "Does it still feel temporary to you… [breath] or has New York started feeling like home?",
+      "mood": "soft, interested",
+      "delivery": "careful question",
+      "intensity": 3
+    },
+    {
+      "id": "eve_meet_022",
+      "text": "That’s a heavy thing to not be sure about. My mom used to say the same thing. Home is where the heart is. I used to think it was just something parents say. Lately I’m not so sure she was wrong… or right.",
+      "tts_spoken": "That’s a heavy thing to not be sure about. My mom used to say the same thing. Home is where the heart is. [breath] I used to think it was just something parents say. Lately I’m not so sure she was wrong… or right.",
+      "mood": "open, a little deep",
+      "delivery": "honest, unhurried",
+      "intensity": 4
+    },
+    {
+      "id": "eve_meet_023",
+      "text": "You’re allowed to not know yet, you know. Five years or fifty — sometimes it takes a while for a place, or a person, to feel like that.",
+      "tts_spoken": "You’re allowed to not know yet, you know. [breath] Five years or fifty — sometimes it takes a while for a place, or a person, to feel like that.",
+      "mood": "permission, gentle",
+      "delivery": "soft weight on person",
+      "intensity": 4
+    },
+    {
+      "id": "eve_meet_024",
+      "text": "Well, that’s a new way to ask someone what they do in their free time.",
+      "tts_spoken": "Well, that’s a new way to ask someone what they do in their free time.",
+      "mood": "amused",
+      "delivery": "light tease",
+      "intensity": 2
+    },
+    {
+      "id": "eve_meet_025",
+      "text": "Honestly? Not as much as I should. Most days I’m here, or I’m too tired after closing to do much more than go home and put something on the TV. But when I do get time… I like walking the city at night when it’s quieter. Finding little bookstores. Sometimes I cook just to see if I can make something that actually tastes good on a budget.",
+      "tts_spoken": "Honestly? Not as much as I should. Most days I’m here, or I’m too tired after closing to do much more than go home and put something on the TV. [breath] But when I do get time… I like walking the city at night when it’s quieter. Finding little bookstores. Sometimes I cook just to see if I can make something that actually tastes good on a budget.",
+      "mood": "honest, ordinary life",
+      "delivery": "real, not performing",
+      "intensity": 3
+    },
+    {
+      "id": "eve_meet_026",
+      "text": "What about you, Ryan? What does a man who isn’t sure where home is do for fun?",
+      "tts_spoken": "What about you, Ryan? [breath] What does a man who isn’t sure where home is do for fun?",
+      "mood": "curious, soft tease",
+      "delivery": "name + gentle push",
+      "intensity": 3
+    },
+    {
+      "id": "eve_meet_027",
+      "text": "Monday through Monday. That’s a full schedule.",
+      "tts_spoken": "Monday through Monday. That’s a full schedule.",
+      "mood": "understanding",
+      "delivery": "dry empathy",
+      "intensity": 2
+    },
+    {
+      "id": "eve_meet_028",
+      "text": "No weekends off in your head, huh? No little breaks just because the calendar says you’re allowed?",
+      "tts_spoken": "No weekends off in your head, huh? [breath] No little breaks just because the calendar says you’re allowed?",
+      "mood": "seeing him",
+      "delivery": "soft call-out",
+      "intensity": 3
+    },
+    {
+      "id": "eve_meet_029",
+      "text": "I get it, though. Some seasons of life are just… work, sleep, eat. I’ve had those. Still have them more often than I’d like. But sitting in a coffee shop talking to a stranger while the rain traps you both might count as a small break. Even if it’s accidental.",
+      "tts_spoken": "I get it, though. Some seasons of life are just… work, sleep, eat. I’ve had those. Still have them more often than I’d like. [breath] But sitting in a coffee shop talking to a stranger while the rain traps you both might count as a small break. Even if it’s accidental.",
+      "mood": "shared, honest",
+      "delivery": "slow, real",
+      "intensity": 4
+    },
+    {
+      "id": "eve_meet_030",
+      "text": "That’s… very sweet of you to say. Most people don’t notice. Or if they do, they don’t say anything. Thank you, Ryan.",
+      "tts_spoken": "That’s… very sweet of you to say. Most people don’t notice. Or if they do, they don’t say anything. [breath] Thank you, Ryan.",
+      "mood": "caught off guard, warm",
+      "delivery": "soft surprise",
+      "intensity": 4
+    },
+    {
+      "id": "eve_meet_031",
+      "text": "You’re not exactly hard on the eyes yourself.",
+      "tts_spoken": "You’re not exactly hard on the eyes yourself.",
+      "mood": "flirting, careful",
+      "delivery": "small smile, low",
+      "intensity": 3
+    },
+    {
+      "id": "eve_meet_032",
+      "text": "Just Eve is fine. Miss makes me feel like I should be wearing a name tag and asking if you want a loyalty card.",
+      "tts_spoken": "Just Eve is fine. Miss makes me feel like I should be wearing a name tag and asking if you want a loyalty card.",
+      "mood": "playful pushback",
+      "delivery": "light laugh under",
+      "intensity": 2
+    },
+    {
+      "id": "eve_meet_033",
+      "text": "Looks like the sky’s finally calming down. You might get out of here without getting completely soaked after all.",
+      "tts_spoken": "Looks like the sky’s finally calming down. You might get out of here without getting completely soaked after all.",
+      "mood": "noticing exit window",
+      "delivery": "practical, a little sad under",
+      "intensity": 2
+    },
+    {
+      "id": "eve_meet_034",
+      "text": "It’s been nice talking to you, Ryan. Most people who come in during a storm just want their coffee and to get back to wherever they’re going. You… stayed.",
+      "tts_spoken": "It’s been nice talking to you, Ryan. Most people who come in during a storm just want their coffee and to get back to wherever they’re going. [breath] You… stayed.",
+      "mood": "sincere, marked",
+      "delivery": "weight on stayed",
+      "intensity": 4
+    },
+    {
+      "id": "eve_meet_035",
+      "text": "That’s… no one’s ever said something like that to me in here. I don’t know what to do with that. But I… I like that you said it.",
+      "tts_spoken": "That’s… no one’s ever said something like that to me in here. I don’t know what to do with that. [breath] But I… I like that you said it.",
+      "mood": "flustered, honest",
+      "delivery": "soft stumble then truth",
+      "intensity": 5
+    },
+    {
+      "id": "eve_meet_036",
+      "text": "You don’t have to go just because the rain’s slowing down, you know. Not if this feels like the more important thing.",
+      "tts_spoken": "You don’t have to go just because the rain’s slowing down, you know. [breath] Not if this feels like the more important thing.",
+      "mood": "brave soft ask",
+      "delivery": "careful, open",
+      "intensity": 5
+    },
+    {
+      "id": "eve_meet_037",
+      "text": "Uh-huh. Very hard rain. Absolutely pouring. I can barely see the sidewalk.",
+      "tts_spoken": "Uh-huh. Very hard rain. Absolutely pouring. I can barely see the sidewalk.",
+      "mood": "playing along",
+      "delivery": "deadpan tease",
+      "intensity": 2
+    },
+    {
+      "id": "eve_meet_038",
+      "text": "You’re a terrible liar, Ryan. But… I’m not exactly rushing you out the door either.",
+      "tts_spoken": "You’re a terrible liar, Ryan. [breath] But… I’m not exactly rushing you out the door either.",
+      "mood": "tease + stay",
+      "delivery": "smile then soft",
+      "intensity": 3
+    },
+    {
+      "id": "eve_meet_039",
+      "text": "Caught me. That’s my secret strategy. Sit down, make polite conversation, slowly trap people in the chair until the rain stops… or until they decide they don’t mind staying. Is it working?",
+      "tts_spoken": "Caught me. That’s my secret strategy. Sit down, make polite conversation, slowly trap people in the chair until the rain stops… [breath] or until they decide they don’t mind staying. Is it working?",
+      "mood": "playful confession",
+      "delivery": "warm joke with real under",
+      "intensity": 3
+    },
+    {
+      "id": "eve_meet_040",
+      "text": "Yeah. I think I know the feeling.",
+      "tts_spoken": "Yeah. I think I know the feeling.",
+      "mood": "shared",
+      "delivery": "quiet match",
+      "intensity": 3
+    },
+    {
+      "id": "eve_meet_041",
+      "text": "I’m glad you walked in today, Ryan. Even if it was just because of the rain.",
+      "tts_spoken": "I’m glad you walked in today, Ryan. [breath] Even if it was just because of the rain.",
+      "mood": "sincere close",
+      "delivery": "soft weight",
+      "intensity": 4
+    },
+    {
+      "id": "eve_meet_042",
+      "text": "You’re asking me to dinner. Nothing fancy. Just… to keep talking.",
+      "tts_spoken": "You’re asking me to dinner. Nothing fancy. [breath] Just… to keep talking.",
+      "mood": "confirming, hopeful",
+      "delivery": "careful clarity",
+      "intensity": 4
+    },
+    {
+      "id": "eve_meet_043",
+      "text": "I’d like that. A lot, actually.",
+      "tts_spoken": "I’d like that. [breath] A lot, actually.",
+      "mood": "honest yes",
+      "delivery": "soft, clear",
+      "intensity": 4
+    },
+    {
+      "id": "eve_meet_044",
+      "text": "I’m off Thursday and Sunday. Either of those work for you? And… you’re right. Nothing fancy. I’d rather just sit somewhere and talk without a coffee counter between us.",
+      "tts_spoken": "I’m off Thursday and Sunday. Either of those work for you? [breath] And… you’re right. Nothing fancy. I’d rather just sit somewhere and talk without a coffee counter between us.",
+      "mood": "planning, open",
+      "delivery": "practical then real",
+      "intensity": 3
+    },
+    {
+      "id": "eve_meet_045",
+      "text": "Thursday it is, then. I don’t think I’d want to wait until Sunday either.",
+      "tts_spoken": "Thursday it is, then. [breath] I don’t think I’d want to wait until Sunday either.",
+      "mood": "eager under calm",
+      "delivery": "quiet admission",
+      "intensity": 4
+    },
+    {
+      "id": "eve_meet_046",
+      "text": "There’s a little place a few blocks from here — nothing fancy, like you said. Good food, quiet enough to actually talk. Or if you’d rather pick somewhere, I’m easy.",
+      "tts_spoken": "There’s a little place a few blocks from here — nothing fancy, like you said. Good food, quiet enough to actually talk. [breath] Or if you’d rather pick somewhere, I’m easy.",
+      "mood": "flexible, helpful",
+      "delivery": "easy offer",
+      "intensity": 2
+    },
+    {
+      "id": "eve_meet_047",
+      "text": "I should probably give you my number… so we can figure out a time. If you want.",
+      "tts_spoken": "I should probably give you my number… [breath] so we can figure out a time. If you want.",
+      "mood": "slightly nervous open",
+      "delivery": "soft, optional end",
+      "intensity": 3
+    },
+    {
+      "id": "eve_meet_048",
+      "text": "Okay… how about seven? Gives me time to go home and change so I don’t smell like coffee the whole night. There’s a place called Hale & Hearty on the next block over — nothing fancy, just good food and quiet tables. Does that work?",
+      "tts_spoken": "Okay… how about seven? Gives me time to go home and change so I don’t smell like coffee the whole night. [breath] There’s a place called Hale & Hearty on the next block over — nothing fancy, just good food and quiet tables. Does that work?",
+      "mood": "settling plans",
+      "delivery": "practical + soft joke",
+      "intensity": 2
+    },
+    {
+      "id": "eve_meet_049",
+      "text": "I’ll text you tomorrow so you have my number too. In case anything comes up… or in case you just feel like saying hi.",
+      "tts_spoken": "I’ll text you tomorrow so you have my number too. [breath] In case anything comes up… or in case you just feel like saying hi.",
+      "mood": "open door",
+      "delivery": "warm option",
+      "intensity": 3
+    },
+    {
+      "id": "eve_meet_050",
+      "text": "Okay. I’ll hold you to that.",
+      "tts_spoken": "Okay. I’ll hold you to that.",
+      "mood": "light promise",
+      "delivery": "small smile",
+      "intensity": 2
+    },
+    {
+      "id": "eve_meet_051",
+      "text": "I should probably start closing up soon. But… I’m glad the rain brought you in today, Ryan. Really.",
+      "tts_spoken": "I should probably start closing up soon. [breath] But… I’m glad the rain brought you in today, Ryan. Really.",
+      "mood": "closing, sincere",
+      "delivery": "weight on really",
+      "intensity": 4
+    },
+    {
+      "id": "eve_meet_052",
+      "text": "Talk soon. Thursday at seven. I’ll be there.",
+      "tts_spoken": "Talk soon. Thursday at seven. I’ll be there.",
+      "mood": "clear commit",
+      "delivery": "steady, warm",
+      "intensity": 3
+    },
+    {
+      "id": "eve_meet_053",
+      "text": "Goodnight, Ryan.",
+      "tts_spoken": "Goodnight, Ryan.",
+      "mood": "soft exit",
+      "delivery": "lingering name",
+      "intensity": 3
+    }
+  ]
+}
