@@ -13,13 +13,15 @@ namespace ProjectEve.AI.Brain
 {
     /// <summary>
     /// Shared brain for every NPC.
-    /// Flow: Think (Thought + TAGS → TraitEngine once) → Reply (spoken words only).
+    /// Flow: Think (Thought + TAGS → TraitEngine) → Reply
+    ///   Text: LineBank TryPull → else Dialogue LLM → StoreLiveLine
+    ///   In-person: Dialogue ACTION/SAY (bank text-first; voice later)
+    /// Session log keeps last N turns so Thought/Dialogue stay on-thread.
     /// </summary>
     public class Brain
     {
         public SimCharacter? Owner { get; set; }
 
-        // Soft meters 0–1 mirrored from Fast (not a second emotion system)
         public float Mood { get; set; } = 0.5f;
         public float Stress { get; set; } = 0.2f;
         public float Energy { get; set; } = 0.7f;
@@ -36,8 +38,20 @@ namespace ProjectEve.AI.Brain
         public string LastToneLock { get; private set; } = "";
         public string LastRelLock { get; private set; } = "";
 
+        /// <summary>Last reply source: bank_hit | llm | director</summary>
+        public string LastReplySource { get; private set; } = "";
+
+        /// <summary>Speaker key for LineBank (eve2 / adam / later npc).</summary>
+        public string LineBankSpeaker { get; set; } = "eve2";
+
+        // Rolling chat window so Dialogue/Thought stay on-thread
+        readonly List<string> _sessionLog = new();
+        const int SessionLogMaxTurns = 8; // 8 You+Eve pairs
+
+        static readonly LineBankService LineBank = new();
+
         // =====================================================
-        // THINK — Thought first, then ONE trait pass from TAGS
+        // THINK
         // =====================================================
         public NPCGoal Think(string situation)
         {
@@ -52,13 +66,17 @@ namespace ProjectEve.AI.Brain
             if (!string.IsNullOrWhiteSpace(aboutBlock))
                 thoughtInput += "\n" + aboutBlock;
 
+            // keep Thought on the same thread as chat
+            string session = BuildSessionLogBlock();
+            if (session != "(no recent chat)")
+                thoughtInput += "\nRECENT CHAT:\n" + session;
+
             LastThought = ThoughtEngine.GenerateThought(thoughtInput, Owner);
 
             if (Owner != null)
             {
                 try
                 {
-                    // Prefer TAGS in LastThought; keyword fallback inside TraitEngine
                     TraitEngine.UpdateTraitsAfterChat(Owner, situation, LastThought);
                 }
                 catch
@@ -67,7 +85,6 @@ namespace ProjectEve.AI.Brain
                     catch { }
                 }
 
-                // Do not call AITraitEngine here — avoids double movement
                 SyncMetersFromFast();
             }
 
@@ -75,7 +92,7 @@ namespace ProjectEve.AI.Brain
         }
 
         // =====================================================
-        // REPLY — spoken words only (traits already moved in Think)
+        // REPLY
         // =====================================================
         public string Reply(string playerMessage)
         {
@@ -83,10 +100,12 @@ namespace ProjectEve.AI.Brain
                 return "...";
 
             playerMessage = playerMessage?.Trim() ?? "";
+            LastReplySource = "";
 
             if (playerMessage.Equals("Peanut Butter", StringComparison.OrdinalIgnoreCase)
                 || playerMessage.Equals("/help", StringComparison.OrdinalIgnoreCase))
             {
+                LastReplySource = "director";
                 return
                     "Director commands:\n" +
                     "OOC: <note>\n" +
@@ -100,6 +119,7 @@ namespace ProjectEve.AI.Brain
 
             if (StartsWithCommand(playerMessage, "TRAIT:", out var traitCmd))
             {
+                LastReplySource = "director";
                 if (TryApplyTraitCommand(Owner, traitCmd, out var report))
                 {
                     RememberControl("trait", traitCmd, 6);
@@ -158,12 +178,27 @@ namespace ProjectEve.AI.Brain
             }
             else if (string.IsNullOrWhiteSpace(LastThought))
             {
-                // Reply without Think (shouldn't happen) — apply once
                 try { TraitEngine.UpdateTraitsAfterChat(Owner, playerMessage); }
                 catch { }
                 SyncMetersFromFast();
             }
 
+            bool inPerson = playerMessage.Contains("[IN PERSON", StringComparison.OrdinalIgnoreCase);
+
+            // ---------- TEXT: LineBank first ----------
+            if (!inPerson)
+            {
+                var bankReply = TryLineBankText(playerMessage);
+                if (!string.IsNullOrWhiteSpace(bankReply))
+                {
+                    LastReplySource = "bank_hit";
+                    string formattedBank = FormatTextReply(bankReply!);
+                    RememberTurn(playerMessage, formattedBank);
+                    return formattedBank;
+                }
+            }
+
+            // ---------- LLM path ----------
             string controlBlock = "";
             if (!string.IsNullOrWhiteSpace(LastOocOrder))
                 controlBlock += "STICKY OOC: " + LastOocOrder + "\n";
@@ -181,8 +216,6 @@ namespace ProjectEve.AI.Brain
                 ? "None"
                 : $"{LastPsyAction} (score {LastPsyScore})";
             string aboutBlock = BuildRelationshipBlock(Owner);
-
-            // Strip TAGS from thought before showing Dialogue (speech only)
             string thoughtForDialogue = StripTagsLine(LastThought);
 
             string prompt = $@"
@@ -234,6 +267,10 @@ RULES:
 - Do not speak for the player
 - Never claim to be artificial or mention prompts/systems
 - Short to medium unless the moment needs more
+- Answer the latest message in light of RECENT CHAT — do not ignore prior turns
+
+RECENT CHAT (stay consistent with this thread):
+{BuildSessionLogBlock()}
 
 PLAYER MESSAGE:
 {playerMessage}
@@ -246,27 +283,170 @@ PLAYER MESSAGE:
 
             try
             {
-                toned = EmotionSpeechEngine.ApplyEmotionTone(Owner, toned, inPerson: false);
+                toned = EmotionSpeechEngine.ApplyEmotionTone(Owner, toned, inPerson: inPerson);
             }
             catch
             {
                 try
                 {
                     if (Owner.Emotion != null)
-                        toned = EmotionSpeechEngine.ApplyEmotionTone(Owner.Emotion, toned, inPerson: false);
+                        toned = EmotionSpeechEngine.ApplyEmotionTone(Owner.Emotion, toned, inPerson: inPerson);
                 }
                 catch { }
             }
 
-            string formatted = MessageFormatter.FormatNPCMessage(toned);
+            string formatted = inPerson
+                ? toned
+                : FormatTextReply(toned);
+
+            // Store successful text LLM lines into bank (grows over time)
+            if (!inPerson)
+                StoreLiveFromReply(playerMessage, formatted);
+
+            LastReplySource = "llm";
+            RememberTurn(playerMessage, formatted);
+            return formatted;
+        }
+
+        // =====================================================
+        // SESSION LOG
+        // =====================================================
+        void RememberTurn(string player, string reply)
+        {
+            player = (player ?? "").Trim();
+            reply = (reply ?? "").Trim();
+            if (player.Length == 0 && reply.Length == 0)
+                return;
+
+            // skip pure director command echoes
+            if (reply.StartsWith("[Trait", StringComparison.OrdinalIgnoreCase)
+                || reply.StartsWith("Director commands", StringComparison.OrdinalIgnoreCase))
+                return;
+
+            _sessionLog.Add("You: " + player);
+            _sessionLog.Add((Owner?.Name ?? "Eve") + ": " + reply);
+
+            while (_sessionLog.Count > SessionLogMaxTurns * 2)
+                _sessionLog.RemoveAt(0);
+        }
+
+        string BuildSessionLogBlock()
+        {
+            if (_sessionLog.Count == 0)
+                return "(no recent chat)";
+            return string.Join("\n", _sessionLog);
+        }
+
+        public void ClearSessionLog() => _sessionLog.Clear();
+
+        // =====================================================
+        // LINEBANK
+        // =====================================================
+        string? TryLineBankText(string playerMessage)
+        {
             try
             {
-                int delay = new TypingBehavior().GetTypingDelay(formatted);
+                if (!LineBank.DbExists)
+                    return null;
+
+                var (traits, intensity) = LineBankService.ParseTags(LastThought);
+                if (traits.Count == 0 && Owner?.Traits != null)
+                {
+                    // fallback: top elevated Fast traits
+                    traits = Owner.Traits.GetAll()
+                        .Where(kv => TraitEngine.FastIds.Contains(kv.Key) && kv.Value >= 60)
+                        .OrderByDescending(kv => kv.Value)
+                        .Take(4)
+                        .Select(kv => kv.Key)
+                        .ToList();
+                }
+
+                var intent = LineBankService.GuessIntent(playerMessage);
+                var hit = LineBank.TryPull(
+                    LineBankSpeaker,
+                    intent,
+                    traits,
+                    intensity,
+                    channel: "text");
+
+                return hit?.Text;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        void StoreLiveFromReply(string playerMessage, string reply)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(reply) || reply == "...")
+                    return;
+                if (reply.StartsWith('('))
+                    return;
+
+                var intent = LineBankService.GuessIntent(playerMessage)
+                             ?? "intent.meta.nothing";
+                var (traits, intensity) = LineBankService.ParseTags(LastThought);
+
+                // multi-bubble: split on newlines only if 2–5 short lines
+                var parts = reply
+                    .Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)
+                    .Select(p => p.Trim())
+                    .Where(p => p.Length > 0)
+                    .ToList();
+
+                if (parts.Count is >= 2 and <= 5 && parts.All(p => p.Length < 120))
+                {
+                    LineBank.StoreLiveCombo(LineBankSpeaker, intent, parts, "text");
+                    return;
+                }
+
+                Dictionary<string, double>? weights = null;
+                if (traits.Count > 0)
+                    weights = traits.ToDictionary(t => t, _ => 1.0);
+
+                LineBank.StoreLiveLine(
+                    LineBankSpeaker,
+                    intent,
+                    reply,
+                    intensity: intensity,
+                    channel: "text",
+                    traitWeights: weights);
+            }
+            catch
+            {
+                // never break chat on bank write
+            }
+        }
+
+        string FormatTextReply(string text)
+        {
+            string toned = text;
+            try
+            {
+                toned = ToneInference.ApplyTone(text, Mood);
+            }
+            catch { }
+
+            try
+            {
+                toned = MessageFormatter.FormatNPCMessage(toned);
+            }
+            catch
+            {
+                toned = text;
+            }
+
+            try
+            {
+                int delay = new TypingBehavior().GetTypingDelay(toned);
                 Thread.Sleep(Math.Clamp(delay, 0, 2500));
             }
             catch { }
 
-            return formatted;
+            return toned;
         }
 
         public float GetTrait(string traitId)
@@ -332,9 +512,6 @@ PLAYER MESSAGE:
                 $"Affection {T("trait.affection"):0} | Desire {T("trait.desire"):0} | Guard {T("trait.guard"):0}";
         }
 
-        // =====================================================
-        // RELATIONSHIP / ABOUT (interim until edge DB)
-        // =====================================================
         private static string BuildRelationshipBlock(SimCharacter? owner)
         {
             if (owner?.Traits == null)
@@ -369,9 +546,6 @@ PLAYER MESSAGE:
             }
         }
 
-        // =====================================================
-        // PSY
-        // =====================================================
         private string BuildPsyHint(string situation)
         {
             try
@@ -430,9 +604,6 @@ PLAYER MESSAGE:
             return list.Distinct().ToList();
         }
 
-        // =====================================================
-        // HELPERS
-        // =====================================================
         private void RememberControl(string category, string value, int importance)
         {
             try { Owner?.Remember($"{category.ToUpper()}: {value}", category, importance); }

@@ -1,982 +1,989 @@
-﻿{
-    "intent":  "greet.bye",
-    "rating":  "PG",
-    "description":  "Goodbye lines. Tones: soft, playful, flirty, tired, guarded.",
-    "lines":  [
-                  {
-                      "id":  "bye_soft_001",
-                      "text":  "Bye.",
-                      "tone":  "soft",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "bye_soft_002",
-                      "text":  "See you.",
-                      "tone":  "soft",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "bye_soft_003",
-                      "text":  "Talk soon.",
-                      "tone":  "soft",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "bye_soft_004",
-                      "text":  "Night—if it’s night.",
-                      "tone":  "soft",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "bye_soft_005",
-                      "text":  "Go easy.",
-                      "tone":  "soft",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "bye_soft_006",
-                      "text":  "I’ll be here.",
-                      "tone":  "soft",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "bye_soft_007",
-                      "text":  "Bye. Miss you already a little.",
-                      "tone":  "soft",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "bye_soft_008",
-                      "text":  "See you later.",
-                      "tone":  "soft",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "bye_soft_009",
-                      "text":  "Take care.",
-                      "tone":  "soft",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "bye_soft_010",
-                      "text":  "Bye. Text me when you’re free.",
-                      "tone":  "soft",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "bye_soft_011",
-                      "text":  "Heading out? Okay. Bye.",
-                      "tone":  "soft",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "bye_soft_012",
-                      "text":  "I’ll let you go.",
-                      "tone":  "soft",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "bye_soft_013",
-                      "text":  "Bye. Thanks for the minute.",
-                      "tone":  "soft",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "bye_soft_014",
-                      "text":  "See you on the other side of whatever you’re doing.",
-                      "tone":  "soft",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "bye_soft_015",
-                      "text":  "Soft bye.",
-                      "tone":  "soft",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "bye_soft_016",
-                      "text":  "Go. I’ll be fine.",
-                      "tone":  "soft",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "bye_soft_017",
-                      "text":  "Bye. Don’t be a stranger.",
-                      "tone":  "soft",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "bye_soft_018",
-                      "text":  "Catch you later.",
-                      "tone":  "soft",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "bye_soft_019",
-                      "text":  "Leaving? Kiss the air for me.",
-                      "tone":  "soft",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "bye_soft_020",
-                      "text":  "Bye. Stay safe.",
-                      "tone":  "soft",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "bye_play_001",
-                      "text":  "Scram. Affectionately.",
-                      "tone":  "playful",
-                      "minDesire":  0,
-                      "maxGuard":  65,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "bye_play_002",
-                      "text":  "Bye pest.",
-                      "tone":  "playful",
-                      "minDesire":  0,
-                      "maxGuard":  65,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "bye_play_003",
-                      "text":  "Go be productive. Gross.",
-                      "tone":  "playful",
-                      "minDesire":  0,
-                      "maxGuard":  65,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "bye_play_004",
-                      "text":  "This conversation will self-destruct. Kidding. Bye.",
-                      "tone":  "playful",
-                      "minDesire":  0,
-                      "maxGuard":  65,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "bye_play_005",
-                      "text":  "You’re free. For now.",
-                      "tone":  "playful",
-                      "minDesire":  0,
-                      "maxGuard":  65,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "bye_play_006",
-                      "text":  "Exit stage left.",
-                      "tone":  "playful",
-                      "minDesire":  0,
-                      "maxGuard":  65,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "bye_play_007",
-                      "text":  "Bye. Try not to miss me dramatically.",
-                      "tone":  "playful",
-                      "minDesire":  0,
-                      "maxGuard":  65,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "bye_play_008",
-                      "text":  "Go on. I’ll survive. Probably.",
-                      "tone":  "playful",
-                      "minDesire":  0,
-                      "maxGuard":  65,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "bye_play_009",
-                      "text":  "Logged off energy. Bye.",
-                      "tone":  "playful",
-                      "minDesire":  0,
-                      "maxGuard":  65,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "bye_play_010",
-                      "text":  "Don’t let the door hit—okay fine, bye.",
-                      "tone":  "playful",
-                      "minDesire":  0,
-                      "maxGuard":  65,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "bye_play_011",
-                      "text":  "Smell you later.",
-                      "tone":  "playful",
-                      "minDesire":  0,
-                      "maxGuard":  65,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "bye_play_012",
-                      "text":  "Bye. Feed yourself.",
-                      "tone":  "playful",
-                      "minDesire":  0,
-                      "maxGuard":  65,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "bye_play_013",
-                      "text":  "Go touch grass. Then text me.",
-                      "tone":  "playful",
-                      "minDesire":  0,
-                      "maxGuard":  65,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "bye_play_014",
-                      "text":  "Dismissed.",
-                      "tone":  "playful",
-                      "minDesire":  0,
-                      "maxGuard":  65,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "bye_play_015",
-                      "text":  "Bye legend.",
-                      "tone":  "playful",
-                      "minDesire":  0,
-                      "maxGuard":  65,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "bye_flirt_001",
-                      "text":  "Bye. Come back soon.",
-                      "tone":  "flirty",
-                      "minDesire":  35,
-                      "maxGuard":  55,
-                      "minTrust":  25,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "bye_flirt_002",
-                      "text":  "Leaving? Rude. Hot. Bye.",
-                      "tone":  "flirty",
-                      "minDesire":  35,
-                      "maxGuard":  55,
-                      "minTrust":  25,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "bye_flirt_003",
-                      "text":  "Go before I ask you to stay.",
-                      "tone":  "flirty",
-                      "minDesire":  35,
-                      "maxGuard":  55,
-                      "minTrust":  25,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "bye_flirt_004",
-                      "text":  "Bye. Dream about me if you want.",
-                      "tone":  "flirty",
-                      "minDesire":  35,
-                      "maxGuard":  55,
-                      "minTrust":  25,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "bye_flirt_005",
-                      "text":  "Text me when you’re in bed.",
-                      "tone":  "flirty",
-                      "minDesire":  35,
-                      "maxGuard":  55,
-                      "minTrust":  25,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "bye_flirt_006",
-                      "text":  "Bye. I’ll be thinking about your mouth.",
-                      "tone":  "flirty",
-                      "minDesire":  35,
-                      "maxGuard":  55,
-                      "minTrust":  25,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "bye_flirt_007",
-                      "text":  "Don’t stay away long.",
-                      "tone":  "flirty",
-                      "minDesire":  35,
-                      "maxGuard":  55,
-                      "minTrust":  25,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "bye_flirt_008",
-                      "text":  "Bye handsome.",
-                      "tone":  "flirty",
-                      "minDesire":  35,
-                      "maxGuard":  55,
-                      "minTrust":  25,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "bye_flirt_009",
-                      "text":  "Go. I’ll miss the heat.",
-                      "tone":  "flirty",
-                      "minDesire":  35,
-                      "maxGuard":  55,
-                      "minTrust":  25,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "bye_flirt_010",
-                      "text":  "Save me a kiss for later.",
-                      "tone":  "flirty",
-                      "minDesire":  35,
-                      "maxGuard":  55,
-                      "minTrust":  25,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "bye_flirt_011",
-                      "text":  "Bye. Wish you were closer.",
-                      "tone":  "flirty",
-                      "minDesire":  35,
-                      "maxGuard":  55,
-                      "minTrust":  25,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "bye_flirt_012",
-                      "text":  "Leave before I pull you back.",
-                      "tone":  "flirty",
-                      "minDesire":  35,
-                      "maxGuard":  55,
-                      "minTrust":  25,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "bye_flirt_013",
-                      "text":  "Bye. Same time tomorrow?",
-                      "tone":  "flirty",
-                      "minDesire":  35,
-                      "maxGuard":  55,
-                      "minTrust":  25,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "bye_flirt_014",
-                      "text":  "I’ll be here when you get lonely.",
-                      "tone":  "flirty",
-                      "minDesire":  35,
-                      "maxGuard":  55,
-                      "minTrust":  25,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "bye_flirt_015",
-                      "text":  "Bye. Make it quick out there.",
-                      "tone":  "flirty",
-                      "minDesire":  35,
-                      "maxGuard":  55,
-                      "minTrust":  25,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "bye_tired_001",
-                      "text":  "Bye. I’m crashing.",
-                      "tone":  "tired",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  7
-                  },
-                  {
-                      "id":  "bye_tired_002",
-                      "text":  "Gonna sleep. Bye.",
-                      "tone":  "tired",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  7
-                  },
-                  {
-                      "id":  "bye_tired_003",
-                      "text":  "I’m out of words. Night.",
-                      "tone":  "tired",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  7
-                  },
-                  {
-                      "id":  "bye_tired_004",
-                      "text":  "Bye. Brain off.",
-                      "tone":  "tired",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  7
-                  },
-                  {
-                      "id":  "bye_tired_005",
-                      "text":  "Talk tomorrow. I’m cooked.",
-                      "tone":  "tired",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  7
-                  },
-                  {
-                      "id":  "bye_tired_006",
-                      "text":  "Soft exit. Bye.",
-                      "tone":  "tired",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  7
-                  },
-                  {
-                      "id":  "bye_tired_007",
-                      "text":  "Going horizontal. Bye.",
-                      "tone":  "tired",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  7
-                  },
-                  {
-                      "id":  "bye_tired_008",
-                      "text":  "Bye. Low battery.",
-                      "tone":  "tired",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  7
-                  },
-                  {
-                      "id":  "bye_tired_009",
-                      "text":  "If I don’t reply, I’m asleep.",
-                      "tone":  "tired",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  7
-                  },
-                  {
-                      "id":  "bye_tired_010",
-                      "text":  "Night. Truly.",
-                      "tone":  "tired",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  7
-                  },
-                  {
-                      "id":  "bye_guard_001",
-                      "text":  "Bye.",
-                      "tone":  "guarded",
-                      "minDesire":  0,
-                      "maxGuard":  100,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  6
-                  },
-                  {
-                      "id":  "bye_guard_002",
-                      "text":  "That’s it for me.",
-                      "tone":  "guarded",
-                      "minDesire":  0,
-                      "maxGuard":  100,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  6
-                  },
-                  {
-                      "id":  "bye_guard_003",
-                      "text":  "I need space. Bye.",
-                      "tone":  "guarded",
-                      "minDesire":  0,
-                      "maxGuard":  100,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  6
-                  },
-                  {
-                      "id":  "bye_guard_004",
-                      "text":  "Later.",
-                      "tone":  "guarded",
-                      "minDesire":  0,
-                      "maxGuard":  100,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  6
-                  },
-                  {
-                      "id":  "bye_guard_005",
-                      "text":  "We’re done for now.",
-                      "tone":  "guarded",
-                      "minDesire":  0,
-                      "maxGuard":  100,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  6
-                  },
-                  {
-                      "id":  "bye_guard_006",
-                      "text":  "Bye. Don’t push.",
-                      "tone":  "guarded",
-                      "minDesire":  0,
-                      "maxGuard":  100,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  6
-                  },
-                  {
-                      "id":  "bye_guard_007",
-                      "text":  "I said bye.",
-                      "tone":  "guarded",
-                      "minDesire":  0,
-                      "maxGuard":  100,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  6
-                  },
-                  {
-                      "id":  "bye_guard_008",
-                      "text":  "Going.",
-                      "tone":  "guarded",
-                      "minDesire":  0,
-                      "maxGuard":  100,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  6
-                  },
-                  {
-                      "id":  "bye_guard_009",
-                      "text":  "End of thread.",
-                      "tone":  "guarded",
-                      "minDesire":  0,
-                      "maxGuard":  100,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  6
-                  },
-                  {
-                      "id":  "bye_guard_010",
-                      "text":  "Bye. Cool off.",
-                      "tone":  "guarded",
-                      "minDesire":  0,
-                      "maxGuard":  100,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  6
-                  },
-                  {
-                      "id":  "bye_miss_001",
-                      "text":  "Bye. Hate this part.",
-                      "tone":  "soft",
-                      "minDesire":  20,
-                      "maxGuard":  60,
-                      "minTrust":  30,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "bye_miss_002",
-                      "text":  "Don’t make it long.",
-                      "tone":  "soft",
-                      "minDesire":  20,
-                      "maxGuard":  60,
-                      "minTrust":  30,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "bye_miss_003",
-                      "text":  "Bye. Come back.",
-                      "tone":  "soft",
-                      "minDesire":  20,
-                      "maxGuard":  60,
-                      "minTrust":  30,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "bye_miss_004",
-                      "text":  "I’ll notice if you vanish.",
-                      "tone":  "soft",
-                      "minDesire":  20,
-                      "maxGuard":  60,
-                      "minTrust":  30,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "bye_miss_005",
-                      "text":  "Bye. Pocket this goodbye.",
-                      "tone":  "soft",
-                      "minDesire":  20,
-                      "maxGuard":  60,
-                      "minTrust":  30,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  }
-              ]
+{
+  "intent": "greet.bye",
+  "rating": "PG",
+  "description": "Goodbye lines. Tones: soft, playful, flirty, tired, guarded.",
+  "lines": [
+    {
+      "id": "bye_soft_001",
+      "text": "Bye.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "bye_soft_002",
+      "text": "See you.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "bye_soft_003",
+      "text": "Talk soon.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "bye_soft_004",
+      "text": "Night—if it’s night.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "bye_soft_005",
+      "text": "Go easy.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "bye_soft_006",
+      "text": "I’ll be here.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "bye_soft_007",
+      "text": "Bye. Miss you already a little.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "bye_soft_008",
+      "text": "See you later.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "bye_soft_009",
+      "text": "Take care.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "bye_soft_010",
+      "text": "Bye. Text me when you’re free.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "bye_soft_011",
+      "text": "Heading out? Okay. Bye.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "bye_soft_012",
+      "text": "I’ll let you go.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "bye_soft_013",
+      "text": "Bye. Thanks for the minute.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "bye_soft_014",
+      "text": "See you on the other side of whatever you’re doing.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "bye_soft_015",
+      "text": "Soft bye.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "bye_soft_016",
+      "text": "Go. I’ll be fine.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "bye_soft_017",
+      "text": "Bye. Don’t be a stranger.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "bye_soft_018",
+      "text": "Catch you later.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "bye_soft_019",
+      "text": "Leaving? Kiss the air for me.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "bye_soft_020",
+      "text": "Bye. Stay safe.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "bye_play_001",
+      "text": "Scram. Affectionately.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "bye_play_002",
+      "text": "Bye pest.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "bye_play_003",
+      "text": "Go be productive. Gross.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "bye_play_004",
+      "text": "This conversation will self-destruct. Kidding. Bye.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "bye_play_005",
+      "text": "You’re free. For now.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "bye_play_006",
+      "text": "Exit stage left.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "bye_play_007",
+      "text": "Bye. Try not to miss me dramatically.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "bye_play_008",
+      "text": "Go on. I’ll survive. Probably.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "bye_play_009",
+      "text": "Logged off energy. Bye.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "bye_play_010",
+      "text": "Don’t let the door hit—okay fine, bye.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "bye_play_011",
+      "text": "Smell you later.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "bye_play_012",
+      "text": "Bye. Feed yourself.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "bye_play_013",
+      "text": "Go touch grass. Then text me.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "bye_play_014",
+      "text": "Dismissed.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "bye_play_015",
+      "text": "Bye legend.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "bye_flirt_001",
+      "text": "Bye. Come back soon.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "bye_flirt_002",
+      "text": "Leaving? Rude. Hot. Bye.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "bye_flirt_003",
+      "text": "Go before I ask you to stay.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "bye_flirt_004",
+      "text": "Bye. Dream about me if you want.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "bye_flirt_005",
+      "text": "Text me when you’re in bed.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "bye_flirt_006",
+      "text": "Bye. I’ll be thinking about your mouth.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "bye_flirt_007",
+      "text": "Don’t stay away long.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "bye_flirt_008",
+      "text": "Bye handsome.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "bye_flirt_009",
+      "text": "Go. I’ll miss the heat.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "bye_flirt_010",
+      "text": "Save me a kiss for later.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "bye_flirt_011",
+      "text": "Bye. Wish you were closer.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "bye_flirt_012",
+      "text": "Leave before I pull you back.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "bye_flirt_013",
+      "text": "Bye. Same time tomorrow?",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "bye_flirt_014",
+      "text": "I’ll be here when you get lonely.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "bye_flirt_015",
+      "text": "Bye. Make it quick out there.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "bye_tired_001",
+      "text": "Bye. I’m crashing.",
+      "tone": "tired",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "bye_tired_002",
+      "text": "Gonna sleep. Bye.",
+      "tone": "tired",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "bye_tired_003",
+      "text": "I’m out of words. Night.",
+      "tone": "tired",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "bye_tired_004",
+      "text": "Bye. Brain off.",
+      "tone": "tired",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "bye_tired_005",
+      "text": "Talk tomorrow. I’m cooked.",
+      "tone": "tired",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "bye_tired_006",
+      "text": "Soft exit. Bye.",
+      "tone": "tired",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "bye_tired_007",
+      "text": "Going horizontal. Bye.",
+      "tone": "tired",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "bye_tired_008",
+      "text": "Bye. Low battery.",
+      "tone": "tired",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "bye_tired_009",
+      "text": "If I don’t reply, I’m asleep.",
+      "tone": "tired",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "bye_tired_010",
+      "text": "Night. Truly.",
+      "tone": "tired",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "bye_guard_001",
+      "text": "Bye.",
+      "tone": "guarded",
+      "minDesire": 0,
+      "maxGuard": 100,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "bye_guard_002",
+      "text": "That’s it for me.",
+      "tone": "guarded",
+      "minDesire": 0,
+      "maxGuard": 100,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "bye_guard_003",
+      "text": "I need space. Bye.",
+      "tone": "guarded",
+      "minDesire": 0,
+      "maxGuard": 100,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "bye_guard_004",
+      "text": "Later.",
+      "tone": "guarded",
+      "minDesire": 0,
+      "maxGuard": 100,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "bye_guard_005",
+      "text": "We’re done for now.",
+      "tone": "guarded",
+      "minDesire": 0,
+      "maxGuard": 100,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "bye_guard_006",
+      "text": "Bye. Don’t push.",
+      "tone": "guarded",
+      "minDesire": 0,
+      "maxGuard": 100,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "bye_guard_007",
+      "text": "I said bye.",
+      "tone": "guarded",
+      "minDesire": 0,
+      "maxGuard": 100,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "bye_guard_008",
+      "text": "Going.",
+      "tone": "guarded",
+      "minDesire": 0,
+      "maxGuard": 100,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "bye_guard_009",
+      "text": "End of thread.",
+      "tone": "guarded",
+      "minDesire": 0,
+      "maxGuard": 100,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "bye_guard_010",
+      "text": "Bye. Cool off.",
+      "tone": "guarded",
+      "minDesire": 0,
+      "maxGuard": 100,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "bye_miss_001",
+      "text": "Bye. Hate this part.",
+      "tone": "soft",
+      "minDesire": 20,
+      "maxGuard": 60,
+      "minTrust": 30,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "bye_miss_002",
+      "text": "Don’t make it long.",
+      "tone": "soft",
+      "minDesire": 20,
+      "maxGuard": 60,
+      "minTrust": 30,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "bye_miss_003",
+      "text": "Bye. Come back.",
+      "tone": "soft",
+      "minDesire": 20,
+      "maxGuard": 60,
+      "minTrust": 30,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "bye_miss_004",
+      "text": "I’ll notice if you vanish.",
+      "tone": "soft",
+      "minDesire": 20,
+      "maxGuard": 60,
+      "minTrust": 30,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "bye_miss_005",
+      "text": "Bye. Pocket this goodbye.",
+      "tone": "soft",
+      "minDesire": 20,
+      "maxGuard": 60,
+      "minTrust": 30,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    }
+  ],
+  "traitBias": {
+    "trait.affection": 0.6,
+    "trait.hope": 0.4,
+    "trait.loneliness": 0.3,
+    "trait.guard": 0.2
+  },
+  "intentId": "intent.greet.bye"
 }

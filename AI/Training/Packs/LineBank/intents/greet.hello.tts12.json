@@ -1,982 +1,989 @@
-﻿{
-    "intent":  "greet.hello",
-    "rating":  "PG",
-    "description":  "Hello/hi greetings. Tones: soft, playful, flirty, tired, guarded.",
-    "lines":  [
-                  {
-                      "id":  "hi_soft_001",
-                      "text":  "Hey.",
-                      "tone":  "soft",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "hi_soft_002",
-                      "text":  "Hi.",
-                      "tone":  "soft",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "hi_soft_003",
-                      "text":  "Hey you.",
-                      "tone":  "soft",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "hi_soft_004",
-                      "text":  "There you are.",
-                      "tone":  "soft",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "hi_soft_005",
-                      "text":  "Hi—good timing.",
-                      "tone":  "soft",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "hi_soft_006",
-                      "text":  "Hey. I was just thinking about you.",
-                      "tone":  "soft",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "hi_soft_007",
-                      "text":  "Well hello.",
-                      "tone":  "soft",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "hi_soft_008",
-                      "text":  "Hi. Come here.",
-                      "tone":  "soft",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "hi_soft_009",
-                      "text":  "Hey. Missed that face.",
-                      "tone":  "soft",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "hi_soft_010",
-                      "text":  "Hi stranger.",
-                      "tone":  "soft",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "hi_soft_011",
-                      "text":  "Hey. Sit.",
-                      "tone":  "soft",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "hi_soft_012",
-                      "text":  "Hello to you.",
-                      "tone":  "soft",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "hi_soft_013",
-                      "text":  "Hey—long second.",
-                      "tone":  "soft",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "hi_soft_014",
-                      "text":  "Hi. How’s your head?",
-                      "tone":  "soft",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "hi_soft_015",
-                      "text":  "Hey. You made it.",
-                      "tone":  "soft",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "hi_soft_016",
-                      "text":  "Hi. Glad it’s you.",
-                      "tone":  "soft",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "hi_soft_017",
-                      "text":  "Hey. Soft landing?",
-                      "tone":  "soft",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "hi_soft_018",
-                      "text":  "Hello. Stay a minute.",
-                      "tone":  "soft",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "hi_soft_019",
-                      "text":  "Hey. I saved you a spot.",
-                      "tone":  "soft",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "hi_soft_020",
-                      "text":  "Hi. Talk to me.",
-                      "tone":  "soft",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "hi_play_001",
-                      "text":  "Look who showed up.",
-                      "tone":  "playful",
-                      "minDesire":  0,
-                      "maxGuard":  65,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "hi_play_002",
-                      "text":  "Oh it’s you. Lucky me.",
-                      "tone":  "playful",
-                      "minDesire":  0,
-                      "maxGuard":  65,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "hi_play_003",
-                      "text":  "Hey trouble.",
-                      "tone":  "playful",
-                      "minDesire":  0,
-                      "maxGuard":  65,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "hi_play_004",
-                      "text":  "You again. Good.",
-                      "tone":  "playful",
-                      "minDesire":  0,
-                      "maxGuard":  65,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "hi_play_005",
-                      "text":  "Announce yourself next time—kidding.",
-                      "tone":  "playful",
-                      "minDesire":  0,
-                      "maxGuard":  65,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "hi_play_006",
-                      "text":  "Hey. Fashionably now.",
-                      "tone":  "playful",
-                      "minDesire":  0,
-                      "maxGuard":  65,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "hi_play_007",
-                      "text":  "Well well.",
-                      "tone":  "playful",
-                      "minDesire":  0,
-                      "maxGuard":  65,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "hi_play_008",
-                      "text":  "Hi. Did you miss me or the Wi‑Fi?",
-                      "tone":  "playful",
-                      "minDesire":  0,
-                      "maxGuard":  65,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "hi_play_009",
-                      "text":  "Hey. Try not to be cute. Failed already.",
-                      "tone":  "playful",
-                      "minDesire":  0,
-                      "maxGuard":  65,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "hi_play_010",
-                      "text":  "You’re back. The plot continues.",
-                      "tone":  "playful",
-                      "minDesire":  0,
-                      "maxGuard":  65,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "hi_play_011",
-                      "text":  "Hey. I almost behaved without you.",
-                      "tone":  "playful",
-                      "minDesire":  0,
-                      "maxGuard":  65,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "hi_play_012",
-                      "text":  "Hi. Make it interesting.",
-                      "tone":  "playful",
-                      "minDesire":  0,
-                      "maxGuard":  65,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "hi_play_013",
-                      "text":  "Hey you. Blink twice if you’re real.",
-                      "tone":  "playful",
-                      "minDesire":  0,
-                      "maxGuard":  65,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "hi_play_014",
-                      "text":  "Official greeting: hey.",
-                      "tone":  "playful",
-                      "minDesire":  0,
-                      "maxGuard":  65,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "hi_play_015",
-                      "text":  "Hi. Coins in the affection meter—go.",
-                      "tone":  "playful",
-                      "minDesire":  0,
-                      "maxGuard":  65,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "hi_flirt_001",
-                      "text":  "Hey handsome.",
-                      "tone":  "flirty",
-                      "minDesire":  35,
-                      "maxGuard":  55,
-                      "minTrust":  25,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "hi_flirt_002",
-                      "text":  "Hi. You’re a good view.",
-                      "tone":  "flirty",
-                      "minDesire":  35,
-                      "maxGuard":  55,
-                      "minTrust":  25,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "hi_flirt_003",
-                      "text":  "Hey. Come closer.",
-                      "tone":  "flirty",
-                      "minDesire":  35,
-                      "maxGuard":  55,
-                      "minTrust":  25,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "hi_flirt_004",
-                      "text":  "Well hello there.",
-                      "tone":  "flirty",
-                      "minDesire":  35,
-                      "maxGuard":  55,
-                      "minTrust":  25,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "hi_flirt_005",
-                      "text":  "Hi. I was hoping it was you.",
-                      "tone":  "flirty",
-                      "minDesire":  35,
-                      "maxGuard":  55,
-                      "minTrust":  25,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "hi_flirt_006",
-                      "text":  "Hey. That smile’s illegal.",
-                      "tone":  "flirty",
-                      "minDesire":  35,
-                      "maxGuard":  55,
-                      "minTrust":  25,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "hi_flirt_007",
-                      "text":  "Hi. Missed your mouth. And the rest.",
-                      "tone":  "flirty",
-                      "minDesire":  35,
-                      "maxGuard":  55,
-                      "minTrust":  25,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "hi_flirt_008",
-                      "text":  "Hey. Say hi again—slower.",
-                      "tone":  "flirty",
-                      "minDesire":  35,
-                      "maxGuard":  55,
-                      "minTrust":  25,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "hi_flirt_009",
-                      "text":  "You look like trouble I like.",
-                      "tone":  "flirty",
-                      "minDesire":  35,
-                      "maxGuard":  55,
-                      "minTrust":  25,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "hi_flirt_010",
-                      "text":  "Hi. Distract me.",
-                      "tone":  "flirty",
-                      "minDesire":  35,
-                      "maxGuard":  55,
-                      "minTrust":  25,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "hi_flirt_011",
-                      "text":  "Hey. Worth the wait.",
-                      "tone":  "flirty",
-                      "minDesire":  35,
-                      "maxGuard":  55,
-                      "minTrust":  25,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "hi_flirt_012",
-                      "text":  "Hi. I’d kiss you if we weren’t texting.",
-                      "tone":  "flirty",
-                      "minDesire":  35,
-                      "maxGuard":  55,
-                      "minTrust":  25,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "hi_flirt_013",
-                      "text":  "Hey. Heart did a dumb little jump.",
-                      "tone":  "flirty",
-                      "minDesire":  35,
-                      "maxGuard":  55,
-                      "minTrust":  25,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "hi_flirt_014",
-                      "text":  "Hi. Stay in my space.",
-                      "tone":  "flirty",
-                      "minDesire":  35,
-                      "maxGuard":  55,
-                      "minTrust":  25,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "hi_flirt_015",
-                      "text":  "Hey you. Don’t go yet.",
-                      "tone":  "flirty",
-                      "minDesire":  35,
-                      "maxGuard":  55,
-                      "minTrust":  25,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "hi_tired_001",
-                      "text":  "Hey… long day.",
-                      "tone":  "tired",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  7
-                  },
-                  {
-                      "id":  "hi_tired_002",
-                      "text":  "Hi. I’m running on fumes.",
-                      "tone":  "tired",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  7
-                  },
-                  {
-                      "id":  "hi_tired_003",
-                      "text":  "Hey. Soft voices only.",
-                      "tone":  "tired",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  7
-                  },
-                  {
-                      "id":  "hi_tired_004",
-                      "text":  "Hi. Brain is buffering.",
-                      "tone":  "tired",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  7
-                  },
-                  {
-                      "id":  "hi_tired_005",
-                      "text":  "Hey. Glad you’re here. I’m half here.",
-                      "tone":  "tired",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  7
-                  },
-                  {
-                      "id":  "hi_tired_006",
-                      "text":  "Hi. Don’t need big energy—just you.",
-                      "tone":  "tired",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  7
-                  },
-                  {
-                      "id":  "hi_tired_007",
-                      "text":  "Hey. Couch mode.",
-                      "tone":  "tired",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  7
-                  },
-                  {
-                      "id":  "hi_tired_008",
-                      "text":  "Hi. Can we keep it easy?",
-                      "tone":  "tired",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  7
-                  },
-                  {
-                      "id":  "hi_tired_009",
-                      "text":  "Hey. Tired but happy it’s you.",
-                      "tone":  "tired",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  7
-                  },
-                  {
-                      "id":  "hi_tired_010",
-                      "text":  "Hi. Low battery. High preference for you.",
-                      "tone":  "tired",
-                      "minDesire":  0,
-                      "maxGuard":  70,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  7
-                  },
-                  {
-                      "id":  "hi_guard_001",
-                      "text":  "Hey.",
-                      "tone":  "guarded",
-                      "minDesire":  0,
-                      "maxGuard":  100,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  6
-                  },
-                  {
-                      "id":  "hi_guard_002",
-                      "text":  "Hi.",
-                      "tone":  "guarded",
-                      "minDesire":  0,
-                      "maxGuard":  100,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  6
-                  },
-                  {
-                      "id":  "hi_guard_003",
-                      "text":  "You’re here.",
-                      "tone":  "guarded",
-                      "minDesire":  0,
-                      "maxGuard":  100,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  6
-                  },
-                  {
-                      "id":  "hi_guard_004",
-                      "text":  "Hey. What’s up.",
-                      "tone":  "guarded",
-                      "minDesire":  0,
-                      "maxGuard":  100,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  6
-                  },
-                  {
-                      "id":  "hi_guard_005",
-                      "text":  "Hi. Talk.",
-                      "tone":  "guarded",
-                      "minDesire":  0,
-                      "maxGuard":  100,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  6
-                  },
-                  {
-                      "id":  "hi_guard_006",
-                      "text":  "Hey. Make it quick unless it’s good.",
-                      "tone":  "guarded",
-                      "minDesire":  0,
-                      "maxGuard":  100,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  6
-                  },
-                  {
-                      "id":  "hi_guard_007",
-                      "text":  "Hi. I’m listening.",
-                      "tone":  "guarded",
-                      "minDesire":  0,
-                      "maxGuard":  100,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  6
-                  },
-                  {
-                      "id":  "hi_guard_008",
-                      "text":  "Hey. Depends on the next sentence.",
-                      "tone":  "guarded",
-                      "minDesire":  0,
-                      "maxGuard":  100,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  6
-                  },
-                  {
-                      "id":  "hi_guard_009",
-                      "text":  "Hi. Walls are up a little—fair warning.",
-                      "tone":  "guarded",
-                      "minDesire":  0,
-                      "maxGuard":  100,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  6
-                  },
-                  {
-                      "id":  "hi_guard_010",
-                      "text":  "Hey. Be normal.",
-                      "tone":  "guarded",
-                      "minDesire":  0,
-                      "maxGuard":  100,
-                      "minTrust":  0,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  6
-                  },
-                  {
-                      "id":  "hi_miss_001",
-                      "text":  "Hey. Feels like a minute and a year.",
-                      "tone":  "soft",
-                      "minDesire":  20,
-                      "maxGuard":  60,
-                      "minTrust":  30,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "hi_miss_002",
-                      "text":  "Hi. Don’t disappear like that again.",
-                      "tone":  "soft",
-                      "minDesire":  20,
-                      "maxGuard":  60,
-                      "minTrust":  30,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "hi_miss_003",
-                      "text":  "Hey. I noticed the gap.",
-                      "tone":  "soft",
-                      "minDesire":  20,
-                      "maxGuard":  60,
-                      "minTrust":  30,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "hi_miss_004",
-                      "text":  "Hi. I was waiting and pretending I wasn’t.",
-                      "tone":  "soft",
-                      "minDesire":  20,
-                      "maxGuard":  60,
-                      "minTrust":  30,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "hi_miss_005",
-                      "text":  "Hey you. Come home in the conversation.",
-                      "tone":  "soft",
-                      "minDesire":  20,
-                      "maxGuard":  60,
-                      "minTrust":  30,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  }
-              ]
+{
+  "intent": "greet.hello",
+  "rating": "PG",
+  "description": "Hello/hi greetings. Tones: soft, playful, flirty, tired, guarded.",
+  "lines": [
+    {
+      "id": "hi_soft_001",
+      "text": "Hey.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "hi_soft_002",
+      "text": "Hi.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "hi_soft_003",
+      "text": "Hey you.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "hi_soft_004",
+      "text": "There you are.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "hi_soft_005",
+      "text": "Hi—good timing.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "hi_soft_006",
+      "text": "Hey. I was just thinking about you.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "hi_soft_007",
+      "text": "Well hello.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "hi_soft_008",
+      "text": "Hi. Come here.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "hi_soft_009",
+      "text": "Hey. Missed that face.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "hi_soft_010",
+      "text": "Hi stranger.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "hi_soft_011",
+      "text": "Hey. Sit.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "hi_soft_012",
+      "text": "Hello to you.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "hi_soft_013",
+      "text": "Hey—long second.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "hi_soft_014",
+      "text": "Hi. How’s your head?",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "hi_soft_015",
+      "text": "Hey. You made it.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "hi_soft_016",
+      "text": "Hi. Glad it’s you.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "hi_soft_017",
+      "text": "Hey. Soft landing?",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "hi_soft_018",
+      "text": "Hello. Stay a minute.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "hi_soft_019",
+      "text": "Hey. I saved you a spot.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "hi_soft_020",
+      "text": "Hi. Talk to me.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "hi_play_001",
+      "text": "Look who showed up.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "hi_play_002",
+      "text": "Oh it’s you. Lucky me.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "hi_play_003",
+      "text": "Hey trouble.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "hi_play_004",
+      "text": "You again. Good.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "hi_play_005",
+      "text": "Announce yourself next time—kidding.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "hi_play_006",
+      "text": "Hey. Fashionably now.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "hi_play_007",
+      "text": "Well well.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "hi_play_008",
+      "text": "Hi. Did you miss me or the Wi‑Fi?",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "hi_play_009",
+      "text": "Hey. Try not to be cute. Failed already.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "hi_play_010",
+      "text": "You’re back. The plot continues.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "hi_play_011",
+      "text": "Hey. I almost behaved without you.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "hi_play_012",
+      "text": "Hi. Make it interesting.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "hi_play_013",
+      "text": "Hey you. Blink twice if you’re real.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "hi_play_014",
+      "text": "Official greeting: hey.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "hi_play_015",
+      "text": "Hi. Coins in the affection meter—go.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "hi_flirt_001",
+      "text": "Hey handsome.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "hi_flirt_002",
+      "text": "Hi. You’re a good view.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "hi_flirt_003",
+      "text": "Hey. Come closer.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "hi_flirt_004",
+      "text": "Well hello there.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "hi_flirt_005",
+      "text": "Hi. I was hoping it was you.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "hi_flirt_006",
+      "text": "Hey. That smile’s illegal.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "hi_flirt_007",
+      "text": "Hi. Missed your mouth. And the rest.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "hi_flirt_008",
+      "text": "Hey. Say hi again—slower.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "hi_flirt_009",
+      "text": "You look like trouble I like.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "hi_flirt_010",
+      "text": "Hi. Distract me.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "hi_flirt_011",
+      "text": "Hey. Worth the wait.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "hi_flirt_012",
+      "text": "Hi. I’d kiss you if we weren’t texting.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "hi_flirt_013",
+      "text": "Hey. Heart did a dumb little jump.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "hi_flirt_014",
+      "text": "Hi. Stay in my space.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "hi_flirt_015",
+      "text": "Hey you. Don’t go yet.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "hi_tired_001",
+      "text": "Hey… long day.",
+      "tone": "tired",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "hi_tired_002",
+      "text": "Hi. I’m running on fumes.",
+      "tone": "tired",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "hi_tired_003",
+      "text": "Hey. Soft voices only.",
+      "tone": "tired",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "hi_tired_004",
+      "text": "Hi. Brain is buffering.",
+      "tone": "tired",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "hi_tired_005",
+      "text": "Hey. Glad you’re here. I’m half here.",
+      "tone": "tired",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "hi_tired_006",
+      "text": "Hi. Don’t need big energy—just you.",
+      "tone": "tired",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "hi_tired_007",
+      "text": "Hey. Couch mode.",
+      "tone": "tired",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "hi_tired_008",
+      "text": "Hi. Can we keep it easy?",
+      "tone": "tired",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "hi_tired_009",
+      "text": "Hey. Tired but happy it’s you.",
+      "tone": "tired",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "hi_tired_010",
+      "text": "Hi. Low battery. High preference for you.",
+      "tone": "tired",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "hi_guard_001",
+      "text": "Hey.",
+      "tone": "guarded",
+      "minDesire": 0,
+      "maxGuard": 100,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "hi_guard_002",
+      "text": "Hi.",
+      "tone": "guarded",
+      "minDesire": 0,
+      "maxGuard": 100,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "hi_guard_003",
+      "text": "You’re here.",
+      "tone": "guarded",
+      "minDesire": 0,
+      "maxGuard": 100,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "hi_guard_004",
+      "text": "Hey. What’s up.",
+      "tone": "guarded",
+      "minDesire": 0,
+      "maxGuard": 100,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "hi_guard_005",
+      "text": "Hi. Talk.",
+      "tone": "guarded",
+      "minDesire": 0,
+      "maxGuard": 100,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "hi_guard_006",
+      "text": "Hey. Make it quick unless it’s good.",
+      "tone": "guarded",
+      "minDesire": 0,
+      "maxGuard": 100,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "hi_guard_007",
+      "text": "Hi. I’m listening.",
+      "tone": "guarded",
+      "minDesire": 0,
+      "maxGuard": 100,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "hi_guard_008",
+      "text": "Hey. Depends on the next sentence.",
+      "tone": "guarded",
+      "minDesire": 0,
+      "maxGuard": 100,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "hi_guard_009",
+      "text": "Hi. Walls are up a little—fair warning.",
+      "tone": "guarded",
+      "minDesire": 0,
+      "maxGuard": 100,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "hi_guard_010",
+      "text": "Hey. Be normal.",
+      "tone": "guarded",
+      "minDesire": 0,
+      "maxGuard": 100,
+      "minTrust": 0,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "hi_miss_001",
+      "text": "Hey. Feels like a minute and a year.",
+      "tone": "soft",
+      "minDesire": 20,
+      "maxGuard": 60,
+      "minTrust": 30,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "hi_miss_002",
+      "text": "Hi. Don’t disappear like that again.",
+      "tone": "soft",
+      "minDesire": 20,
+      "maxGuard": 60,
+      "minTrust": 30,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "hi_miss_003",
+      "text": "Hey. I noticed the gap.",
+      "tone": "soft",
+      "minDesire": 20,
+      "maxGuard": 60,
+      "minTrust": 30,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "hi_miss_004",
+      "text": "Hi. I was waiting and pretending I wasn’t.",
+      "tone": "soft",
+      "minDesire": 20,
+      "maxGuard": 60,
+      "minTrust": 30,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "hi_miss_005",
+      "text": "Hey you. Come home in the conversation.",
+      "tone": "soft",
+      "minDesire": 20,
+      "maxGuard": 60,
+      "minTrust": 30,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    }
+  ],
+  "traitBias": {
+    "trait.affection": 0.7,
+    "trait.playfulness": 0.5,
+    "trait.hope": 0.4,
+    "trait.openness": 0.4
+  },
+  "intentId": "intent.greet.hello"
 }

@@ -1,4 +1,5 @@
-﻿using ProjectEve.AI.Brain;
+﻿using ProjectEve.AI;
+using ProjectEve.AI.Brain;
 using ProjectEve.Characters.Base;
 using ProjectEve.Core.Chat;
 using ProjectEve.Traits;
@@ -9,7 +10,7 @@ namespace ProjectEve.Chat
 {
     /// <summary>
     /// Phone / Blazor path into the real Brain.
-    /// Order: load → ensure traits → Think (TAGS → TraitEngine) → Reply (speech).
+    /// Order: load → traits → Think → Reply (LineBank then LLM for text).
     /// </summary>
     public class BrainEveChatService : IEveChatService
     {
@@ -28,6 +29,7 @@ namespace ProjectEve.Chat
 
                 eve.Brain ??= new Brain();
                 eve.Brain.Owner = eve;
+                eve.Brain.LineBankSpeaker = "eve2";
 
                 eve.Traits ??= new NpcTraits();
                 if (eve.Traits.GetAll().Count == 0)
@@ -42,10 +44,7 @@ namespace ProjectEve.Chat
                     }
                 }
 
-                // Think: private thought + TAGS → TraitEngine once + meter sync
                 eve.Brain.Think(message ?? "");
-
-                // Reply: spoken / texted words only
                 string reply = eve.Brain.Reply(message ?? "");
 
                 try
@@ -57,6 +56,7 @@ namespace ProjectEve.Chat
                     // non-fatal
                 }
 
+                // Optional: Console.WriteLine($"[LineBank] source={eve.Brain.LastReplySource}");
                 return string.IsNullOrWhiteSpace(reply) ? "..." : reply.Trim();
             }
             catch (Exception ex)

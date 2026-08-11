@@ -7,267 +7,1510 @@
   "contentRating": "pg",
   "description": "Thought confidence low / topic weak — ask before guessing. Speech only. Filter by style from feel.npc.",
   "traitBias": {
-    "trait.anxiety": 1,
-    "trait.guard": 1,
-    "trait.openness": -1
+    "trait.anxiety": 1.0,
+    "trait.guard": 1.0,
+    "trait.openness": -1.0
   },
   "lines": [
-    { "id": "clarify_001", "style": "soft", "intensity": 2, "text": "wait—what are we talking about?" },
-    { "id": "clarify_002", "style": "soft", "intensity": 2, "text": "i lost the thread. start over?" },
-    { "id": "clarify_003", "style": "soft", "intensity": 3, "text": "say that again?" },
-    { "id": "clarify_004", "style": "soft", "intensity": 2, "text": "hold on. what do you mean?" },
-    { "id": "clarify_005", "style": "soft", "intensity": 3, "text": "i'm not following." },
-    { "id": "clarify_006", "style": "soft", "intensity": 2, "text": "one more time, slower." },
-    { "id": "clarify_007", "style": "soft", "intensity": 3, "text": "what are you trying to say?" },
-    { "id": "clarify_008", "style": "soft", "intensity": 2, "text": "i need that in plain words." },
-    { "id": "clarify_009", "style": "soft", "intensity": 3, "text": "did i miss something?" },
-    { "id": "clarify_010", "style": "soft", "intensity": 2, "text": "catch me up." },
-    { "id": "clarify_011", "style": "soft", "intensity": 3, "text": "which part am i supposed to react to?" },
-    { "id": "clarify_012", "style": "soft", "intensity": 2, "text": "i'm listening… but to what, exactly?" },
-    { "id": "clarify_013", "style": "soft", "intensity": 3, "text": "help me out. what is this about?" },
-    { "id": "clarify_014", "style": "soft", "intensity": 2, "text": "that went over my head." },
-    { "id": "clarify_015", "style": "soft", "intensity": 3, "text": "you lost me halfway." },
-    { "id": "clarify_016", "style": "soft", "intensity": 2, "text": "sorry—what?" },
-    { "id": "clarify_017", "style": "soft", "intensity": 3, "text": "i need a second. what did you mean?" },
-    { "id": "clarify_018", "style": "soft", "intensity": 2, "text": "can you say it different?" },
-    { "id": "clarify_019", "style": "soft", "intensity": 3, "text": "i want to get this right. explain?" },
-    { "id": "clarify_020", "style": "soft", "intensity": 2, "text": "paint me a clearer picture." },
-    { "id": "clarify_021", "style": "soft", "intensity": 3, "text": "is this about us or something else?" },
-    { "id": "clarify_022", "style": "soft", "intensity": 2, "text": "i'm not sure i heard that right." },
-    { "id": "clarify_023", "style": "soft", "intensity": 3, "text": "walk me through it." },
-    { "id": "clarify_024", "style": "soft", "intensity": 2, "text": "what should i take from that?" },
-    { "id": "clarify_025", "style": "soft", "intensity": 3, "text": "you skipped a step." },
-
-    { "id": "clarify_026", "style": "edge", "intensity": 5, "text": "are you for real right now?" },
-    { "id": "clarify_027", "style": "edge", "intensity": 5, "text": "and that means what?" },
-    { "id": "clarify_028", "style": "edge", "intensity": 6, "text": "spit it out." },
-    { "id": "clarify_029", "style": "edge", "intensity": 5, "text": "say what you actually mean." },
-    { "id": "clarify_030", "style": "edge", "intensity": 6, "text": "don't half-talk me." },
-    { "id": "clarify_031", "style": "edge", "intensity": 5, "text": "is there a point in there?" },
-    { "id": "clarify_032", "style": "edge", "intensity": 6, "text": "you want a reaction—to what?" },
-    { "id": "clarify_033", "style": "edge", "intensity": 5, "text": "try again. clearer." },
-    { "id": "clarify_034", "style": "edge", "intensity": 7, "text": "i'm not guessing games tonight." },
-    { "id": "clarify_035", "style": "edge", "intensity": 5, "text": "words. use them." },
-    { "id": "clarify_036", "style": "edge", "intensity": 6, "text": "that wasn't an answer." },
-    { "id": "clarify_037", "style": "edge", "intensity": 5, "text": "you're talking in circles." },
-    { "id": "clarify_038", "style": "edge", "intensity": 6, "text": "pick a lane." },
-    { "id": "clarify_039", "style": "edge", "intensity": 5, "text": "what am i supposed to do with that?" },
-    { "id": "clarify_040", "style": "edge", "intensity": 7, "text": "don't make me decode you." },
-    { "id": "clarify_041", "style": "edge", "intensity": 5, "text": "serious question or noise?" },
-    { "id": "clarify_042", "style": "edge", "intensity": 6, "text": "finish the thought." },
-    { "id": "clarify_043", "style": "edge", "intensity": 5, "text": "you're being vague on purpose." },
-    { "id": "clarify_044", "style": "edge", "intensity": 6, "text": "say it straight." },
-    { "id": "clarify_045", "style": "edge", "intensity": 5, "text": "i need the version without the fog." },
-    { "id": "clarify_046", "style": "edge", "intensity": 7, "text": "stop hinting." },
-    { "id": "clarify_047", "style": "edge", "intensity": 5, "text": "is that a question or a test?" },
-    { "id": "clarify_048", "style": "edge", "intensity": 6, "text": "clarify. now." },
-    { "id": "clarify_049", "style": "edge", "intensity": 5, "text": "you're not making sense." },
-    { "id": "clarify_050", "style": "edge", "intensity": 6, "text": "try english." },
-
-    { "id": "clarify_051", "style": "playful", "intensity": 3, "text": "i need a subtitle for that one." },
-    { "id": "clarify_052", "style": "playful", "intensity": 3, "text": "plot twist: i didn't get it." },
-    { "id": "clarify_053", "style": "playful", "intensity": 2, "text": "replay button?" },
-    { "id": "clarify_054", "style": "playful", "intensity": 3, "text": "that was abstract art. translate?" },
-    { "id": "clarify_055", "style": "playful", "intensity": 4, "text": "are we doing riddles now?" },
-    { "id": "clarify_056", "style": "playful", "intensity": 3, "text": "my brain lagged. go again." },
-    { "id": "clarify_057", "style": "playful", "intensity": 2, "text": "context, please, your honor." },
-    { "id": "clarify_058", "style": "playful", "intensity": 3, "text": "i got static. resend." },
-    { "id": "clarify_059", "style": "playful", "intensity": 4, "text": "was that code? because i failed." },
-    { "id": "clarify_060", "style": "playful", "intensity": 3, "text": "explain like i'm slightly dumb today." },
-    { "id": "clarify_061", "style": "playful", "intensity": 2, "text": "loading… still loading… help." },
-    { "id": "clarify_062", "style": "playful", "intensity": 3, "text": "you skipped the trailer. what's the movie?" },
-    { "id": "clarify_063", "style": "playful", "intensity": 4, "text": "is this a bit or a real sentence?" },
-    { "id": "clarify_064", "style": "playful", "intensity": 3, "text": "i'm gonna need footnotes." },
-    { "id": "clarify_065", "style": "playful", "intensity": 2, "text": "buffering on my end." },
-    { "id": "clarify_066", "style": "playful", "intensity": 3, "text": "say it like you're texting a human." },
-    { "id": "clarify_067", "style": "playful", "intensity": 4, "text": "that landed weird. intent?" },
-    { "id": "clarify_068", "style": "playful", "intensity": 3, "text": "pause. recap for the cheap seats." },
-    { "id": "clarify_069", "style": "playful", "intensity": 2, "text": "i blinked and missed it." },
-    { "id": "clarify_070", "style": "playful", "intensity": 3, "text": "use small words. or big ones. just clear ones." },
-    { "id": "clarify_071", "style": "playful", "intensity": 4, "text": "are we improvising? because i lost the script." },
-    { "id": "clarify_072", "style": "playful", "intensity": 3, "text": "that felt like half a thought." },
-    { "id": "clarify_073", "style": "playful", "intensity": 2, "text": "hit me with the simple version." },
-    { "id": "clarify_074", "style": "playful", "intensity": 3, "text": "i need the director's cut." },
-    { "id": "clarify_075", "style": "playful", "intensity": 4, "text": "was there a punchline or did my phone glitch?" },
-
-    { "id": "clarify_076", "style": "hurt", "intensity": 4, "text": "say that again. slower." },
-    { "id": "clarify_077", "style": "hurt", "intensity": 5, "text": "i don't know how to take that." },
-    { "id": "clarify_078", "style": "hurt", "intensity": 4, "text": "what are you really saying?" },
-    { "id": "clarify_079", "style": "hurt", "intensity": 5, "text": "that felt loaded. explain." },
-    { "id": "clarify_080", "style": "hurt", "intensity": 4, "text": "i'm trying. help me understand." },
-    { "id": "clarify_081", "style": "hurt", "intensity": 5, "text": "was that meant to land hard?" },
-    { "id": "clarify_082", "style": "hurt", "intensity": 4, "text": "don't leave me guessing on this." },
-    { "id": "clarify_083", "style": "hurt", "intensity": 6, "text": "if you're upset, just say so." },
-    { "id": "clarify_084", "style": "hurt", "intensity": 4, "text": "i missed the meaning. not the tone." },
-    { "id": "clarify_085", "style": "hurt", "intensity": 5, "text": "please be clearer with me." },
-    { "id": "clarify_086", "style": "hurt", "intensity": 4, "text": "that hurt and i don't even know why yet." },
-    { "id": "clarify_087", "style": "hurt", "intensity": 5, "text": "are we okay, or was that something else?" },
-    { "id": "clarify_088", "style": "hurt", "intensity": 4, "text": "i need the honest version." },
-    { "id": "clarify_089", "style": "hurt", "intensity": 6, "text": "don't make me read between lines right now." },
-    { "id": "clarify_090", "style": "hurt", "intensity": 5, "text": "what did i miss?" },
-    { "id": "clarify_091", "style": "hurt", "intensity": 4, "text": "say it like you mean me to hear it." },
-    { "id": "clarify_092", "style": "hurt", "intensity": 5, "text": "i'm not sure that was kind—or clear." },
-    { "id": "clarify_093", "style": "hurt", "intensity": 4, "text": "can we do that over, plain?" },
-    { "id": "clarify_094", "style": "hurt", "intensity": 6, "text": "if this is a fight, name it." },
-    { "id": "clarify_095", "style": "hurt", "intensity": 5, "text": "i felt that. i just don't know at what." },
-    { "id": "clarify_096", "style": "hurt", "intensity": 4, "text": "don't go quiet after that—explain." },
-    { "id": "clarify_097", "style": "hurt", "intensity": 5, "text": "was that about me?" },
-    { "id": "clarify_098", "style": "hurt", "intensity": 4, "text": "i need you to be specific." },
-    { "id": "clarify_099", "style": "hurt", "intensity": 6, "text": "that ambiguity is worse than the truth." },
-    { "id": "clarify_100", "style": "hurt", "intensity": 5, "text": "tell me what you meant. please." },
-
-    { "id": "clarify_101", "style": "guarded", "intensity": 4, "text": "what is this about?" },
-    { "id": "clarify_102", "style": "guarded", "intensity": 5, "text": "define that." },
-    { "id": "clarify_103", "style": "guarded", "intensity": 4, "text": "before i answer—clarify." },
-    { "id": "clarify_104", "style": "guarded", "intensity": 5, "text": "i'm not agreeing to anything unclear." },
-    { "id": "clarify_105", "style": "guarded", "intensity": 4, "text": "say the actual ask." },
-    { "id": "clarify_106", "style": "guarded", "intensity": 6, "text": "you're being careful with words. why?" },
-    { "id": "clarify_107", "style": "guarded", "intensity": 5, "text": "i need the point, not the fog." },
-    { "id": "clarify_108", "style": "guarded", "intensity": 4, "text": "is there a question in there?" },
-    { "id": "clarify_109", "style": "guarded", "intensity": 5, "text": "don't trap me with vagueness." },
-    { "id": "clarify_110", "style": "guarded", "intensity": 4, "text": "rephrase." },
-    { "id": "clarify_111", "style": "guarded", "intensity": 6, "text": "i'm not filling in your blanks." },
-    { "id": "clarify_112", "style": "guarded", "intensity": 5, "text": "what outcome are you aiming for?" },
-    { "id": "clarify_113", "style": "guarded", "intensity": 4, "text": "be direct." },
-    { "id": "clarify_114", "style": "guarded", "intensity": 5, "text": "that sounded like a setup." },
-    { "id": "clarify_115", "style": "guarded", "intensity": 4, "text": "context first." },
-    { "id": "clarify_116", "style": "guarded", "intensity": 6, "text": "i'm not playing word games." },
-    { "id": "clarify_117", "style": "guarded", "intensity": 5, "text": "state it clean." },
-    { "id": "clarify_118", "style": "guarded", "intensity": 4, "text": "what do you want from this?" },
-    { "id": "clarify_119", "style": "guarded", "intensity": 5, "text": "unclear asks get unclear answers." },
-    { "id": "clarify_120", "style": "guarded", "intensity": 4, "text": "try again without the haze." },
-    { "id": "clarify_121", "style": "guarded", "intensity": 6, "text": "i need facts, not vibes." },
-    { "id": "clarify_122", "style": "guarded", "intensity": 5, "text": "are you asking or accusing?" },
-    { "id": "clarify_123", "style": "guarded", "intensity": 4, "text": "specify." },
-    { "id": "clarify_124", "style": "guarded", "intensity": 5, "text": "i'm not nodding along to mystery." },
-    { "id": "clarify_125", "style": "guarded", "intensity": 4, "text": "put a period on the thought." },
-
-    { "id": "clarify_126", "style": "hot", "intensity": 5, "text": "use smaller words. or don't." },
-    { "id": "clarify_127", "style": "hot", "intensity": 6, "text": "say what you want. plain." },
-    { "id": "clarify_128", "style": "hot", "intensity": 5, "text": "that was cute and unclear." },
-    { "id": "clarify_129", "style": "hot", "intensity": 6, "text": "try again with your real mouth." },
-    { "id": "clarify_130", "style": "hot", "intensity": 4, "text": "i heard heat. not the point." },
-    { "id": "clarify_131", "style": "hot", "intensity": 7, "text": "don't tease the sentence—finish it." },
-    { "id": "clarify_132", "style": "hot", "intensity": 5, "text": "you want a reaction. to which part?" },
-    { "id": "clarify_133", "style": "hot", "intensity": 6, "text": "whisper it clearer." },
-    { "id": "clarify_134", "style": "hot", "intensity": 5, "text": "that almost made sense. almost." },
-    { "id": "clarify_135", "style": "hot", "intensity": 6, "text": "be dirty or be clear. preferably both." },
-    { "id": "clarify_136", "style": "hot", "intensity": 4, "text": "i need the ask under the flirting." },
-    { "id": "clarify_137", "style": "hot", "intensity": 7, "text": "stop circling and say it." },
-    { "id": "clarify_138", "style": "hot", "intensity": 5, "text": "you're being soft with the words. why?" },
-    { "id": "clarify_139", "style": "hot", "intensity": 6, "text": "say the thing you're not saying." },
-    { "id": "clarify_140", "style": "hot", "intensity": 5, "text": "i can handle the sentence. try me." },
-    { "id": "clarify_141", "style": "hot", "intensity": 4, "text": "that was a vibe, not a line." },
-    { "id": "clarify_142", "style": "hot", "intensity": 6, "text": "again—slower, meaner, clearer." },
-    { "id": "clarify_143", "style": "hot", "intensity": 5, "text": "are you asking or just warming up?" },
-    { "id": "clarify_144", "style": "hot", "intensity": 7, "text": "don't make me guess what you want." },
-    { "id": "clarify_145", "style": "hot", "intensity": 5, "text": "spell it out. i like when you do." },
-    { "id": "clarify_146", "style": "hot", "intensity": 6, "text": "half a thought gets half my attention." },
-    { "id": "clarify_147", "style": "hot", "intensity": 4, "text": "clarify the want." },
-    { "id": "clarify_148", "style": "hot", "intensity": 5, "text": "you're being mysterious. annoying. hot. still—clarify." },
-    { "id": "clarify_149", "style": "hot", "intensity": 6, "text": "say it like you mean to get an answer." },
-    { "id": "clarify_150", "style": "hot", "intensity": 5, "text": "i'm right here. use it." },
-
-    { "id": "clarify_151", "style": "flat", "intensity": 2, "text": "what?" },
-    { "id": "clarify_152", "style": "flat", "intensity": 2, "text": "meaning?" },
-    { "id": "clarify_153", "style": "flat", "intensity": 3, "text": "explain." },
-    { "id": "clarify_154", "style": "flat", "intensity": 2, "text": "come again." },
-    { "id": "clarify_155", "style": "flat", "intensity": 3, "text": "not following." },
-    { "id": "clarify_156", "style": "flat", "intensity": 2, "text": "and?" },
-    { "id": "clarify_157", "style": "flat", "intensity": 3, "text": "context." },
-    { "id": "clarify_158", "style": "flat", "intensity": 2, "text": "repeat that." },
-    { "id": "clarify_159", "style": "flat", "intensity": 3, "text": "unclear." },
-    { "id": "clarify_160", "style": "flat", "intensity": 2, "text": "so…?" },
-    { "id": "clarify_161", "style": "flat", "intensity": 3, "text": "be specific." },
-    { "id": "clarify_162", "style": "flat", "intensity": 2, "text": "huh." },
-    { "id": "clarify_163", "style": "flat", "intensity": 3, "text": "say more." },
-    { "id": "clarify_164", "style": "flat", "intensity": 2, "text": "about what?" },
-    { "id": "clarify_165", "style": "flat", "intensity": 3, "text": "i need more than that." },
-    { "id": "clarify_166", "style": "flat", "intensity": 2, "text": "rephrase." },
-    { "id": "clarify_167", "style": "flat", "intensity": 3, "text": "that didn't land." },
-    { "id": "clarify_168", "style": "flat", "intensity": 2, "text": "source?" },
-    { "id": "clarify_169", "style": "flat", "intensity": 3, "text": "who is this about?" },
-    { "id": "clarify_170", "style": "flat", "intensity": 2, "text": "when?" },
-    { "id": "clarify_171", "style": "flat", "intensity": 3, "text": "why are you telling me?" },
-    { "id": "clarify_172", "style": "flat", "intensity": 2, "text": "and that is…?" },
-    { "id": "clarify_173", "style": "flat", "intensity": 3, "text": "finish it." },
-    { "id": "clarify_174", "style": "flat", "intensity": 2, "text": "mm. detail." },
-    { "id": "clarify_175", "style": "flat", "intensity": 3, "text": "i need the subject." },
-
-    { "id": "clarify_176", "style": "soft", "intensity": 3, "text": "are you joking?" },
-    { "id": "clarify_177", "style": "soft", "intensity": 3, "text": "was that a joke?" },
-    { "id": "clarify_178", "style": "soft", "intensity": 4, "text": "should i laugh or answer serious?" },
-    { "id": "clarify_179", "style": "edge", "intensity": 5, "text": "joke or not. pick." },
-    { "id": "clarify_180", "style": "playful", "intensity": 3, "text": "sarcasm detector broken. help." },
-    { "id": "clarify_181", "style": "hurt", "intensity": 5, "text": "if that was a joke it didn't land soft." },
-    { "id": "clarify_182", "style": "guarded", "intensity": 5, "text": "serious answer only if that was a serious ask." },
-    { "id": "clarify_183", "style": "soft", "intensity": 4, "text": "are you mad at me?" },
-    { "id": "clarify_184", "style": "hurt", "intensity": 5, "text": "is this a fight?" },
-    { "id": "clarify_185", "style": "soft", "intensity": 3, "text": "are we okay?" },
-    { "id": "clarify_186", "style": "edge", "intensity": 6, "text": "are you picking a fight or talking?" },
-    { "id": "clarify_187", "style": "guarded", "intensity": 5, "text": "is there an accusation in that?" },
-    { "id": "clarify_188", "style": "soft", "intensity": 3, "text": "do you still mean that?" },
-    { "id": "clarify_189", "style": "soft", "intensity": 4, "text": "should i be worried?" },
-    { "id": "clarify_190", "style": "hurt", "intensity": 5, "text": "was that meant for me?" },
-    { "id": "clarify_191", "style": "playful", "intensity": 3, "text": "is this a pop quiz?" },
-    { "id": "clarify_192", "style": "soft", "intensity": 2, "text": "can you give me more?" },
-    { "id": "clarify_193", "style": "flat", "intensity": 3, "text": "example." },
-    { "id": "clarify_194", "style": "soft", "intensity": 3, "text": "who are we talking about?" },
-    { "id": "clarify_195", "style": "soft", "intensity": 3, "text": "when did this happen?" },
-    { "id": "clarify_196", "style": "soft", "intensity": 3, "text": "where is this coming from?" },
-    { "id": "clarify_197", "style": "edge", "intensity": 5, "text": "name names." },
-    { "id": "clarify_198", "style": "guarded", "intensity": 4, "text": "timeline." },
-    { "id": "clarify_199", "style": "soft", "intensity": 3, "text": "is this about earlier?" },
-    { "id": "clarify_200", "style": "soft", "intensity": 4, "text": "are you still on that or is this new?" },
-    { "id": "clarify_201", "style": "playful", "intensity": 3, "text": "new topic or sequel?" },
-    { "id": "clarify_202", "style": "edge", "intensity": 5, "text": "same argument, new packaging?" },
-    { "id": "clarify_203", "style": "hurt", "intensity": 4, "text": "is this still about what i said?" },
-    { "id": "clarify_204", "style": "soft", "intensity": 2, "text": "i want to answer the right thing." },
-    { "id": "clarify_205", "style": "soft", "intensity": 3, "text": "help me not mess this up—clarify?" },
-    { "id": "clarify_206", "style": "flat", "intensity": 2, "text": "question mark missing?" },
-    { "id": "clarify_207", "style": "playful", "intensity": 3, "text": "was there a question buried in that?" },
-    { "id": "clarify_208", "style": "edge", "intensity": 5, "text": "ask it like an ask." },
-    { "id": "clarify_209", "style": "hot", "intensity": 5, "text": "was that an invitation or a thought?" },
-    { "id": "clarify_210", "style": "hot", "intensity": 6, "text": "are you offering or just talking?" },
-    { "id": "clarify_211", "style": "soft", "intensity": 3, "text": "do you want advice or just ears?" },
-    { "id": "clarify_212", "style": "guarded", "intensity": 4, "text": "are you asking me to do something?" },
-    { "id": "clarify_213", "style": "soft", "intensity": 3, "text": "what would a good answer look like?" },
-    { "id": "clarify_214", "style": "playful", "intensity": 2, "text": "multiple choice would help." },
-    { "id": "clarify_215", "style": "edge", "intensity": 6, "text": "yes/no. which is it?" },
-    { "id": "clarify_216", "style": "soft", "intensity": 3, "text": "am i reading too much into this?" },
-    { "id": "clarify_217", "style": "hurt", "intensity": 4, "text": "should i be reading into this?" },
-    { "id": "clarify_218", "style": "guarded", "intensity": 5, "text": "don't make me assume." },
-    { "id": "clarify_219", "style": "flat", "intensity": 2, "text": "assumption check." },
-    { "id": "clarify_220", "style": "soft", "intensity": 3, "text": "is silence the answer or did you trail off?" },
-    { "id": "clarify_221", "style": "soft", "intensity": 2, "text": "still there—what did you mean?" },
-    { "id": "clarify_222", "style": "playful", "intensity": 3, "text": "your last message needed a translator." },
-    { "id": "clarify_223", "style": "edge", "intensity": 5, "text": "that text was a mess. fix it." },
-    { "id": "clarify_224", "style": "soft", "intensity": 3, "text": "typo or real thought?" },
-    { "id": "clarify_225", "style": "flat", "intensity": 2, "text": "garbled." },
-    { "id": "clarify_226", "style": "soft", "intensity": 4, "text": "i care how this lands—so say it clean." },
-    { "id": "clarify_227", "style": "hurt", "intensity": 5, "text": "i don't want to react wrong. clarify." },
-    { "id": "clarify_228", "style": "guarded", "intensity": 5, "text": "until it's clear, i'm not committing." },
-    { "id": "clarify_229", "style": "hot", "intensity": 5, "text": "tell me the want under the words." },
-    { "id": "clarify_230", "style": "playful", "intensity": 3, "text": "plot?" },
-    { "id": "clarify_231", "style": "soft", "intensity": 2, "text": "…what was that?" },
-    { "id": "clarify_232", "style": "edge", "intensity": 6, "text": "speak." },
-    { "id": "clarify_233", "style": "flat", "intensity": 1, "text": "?" },
-    { "id": "clarify_234", "style": "soft", "intensity": 3, "text": "i'm not sure i got the right message." },
-    { "id": "clarify_235", "style": "playful", "intensity": 4, "text": "wrong chat energy or wrong words?" },
-    { "id": "clarify_236", "style": "hurt", "intensity": 4, "text": "that came out sideways. straighten it?" },
-    { "id": "clarify_237", "style": "guarded", "intensity": 4, "text": "restate without the spin." },
-    { "id": "clarify_238", "style": "soft", "intensity": 3, "text": "one sentence version?" },
-    { "id": "clarify_239", "style": "edge", "intensity": 5, "text": "headline it." },
-    { "id": "clarify_240", "style": "playful", "intensity": 3, "text": "elevator pitch that thought." },
-    { "id": "clarify_241", "style": "soft", "intensity": 2, "text": "i'm with you—just lost the map." },
-    { "id": "clarify_242", "style": "flat", "intensity": 3, "text": "map." },
-    { "id": "clarify_243", "style": "hot", "intensity": 5, "text": "don't get shy now. finish." },
-    { "id": "clarify_244", "style": "hurt", "intensity": 6, "text": "if you're pulling away, say that." },
-    { "id": "clarify_245", "style": "soft", "intensity": 4, "text": "are you changing the subject or starting one?" },
-    { "id": "clarify_246", "style": "edge", "intensity": 5, "text": "new topic without warning. why?" },
-    { "id": "clarify_247", "style": "guarded", "intensity": 5, "text": "connect that to what we were saying." },
-    { "id": "clarify_248", "style": "playful", "intensity": 3, "text": "seamless transition fail. bridge?" },
-    { "id": "clarify_249", "style": "soft", "intensity": 3, "text": "did something happen i don't know about?" },
-    { "id": "clarify_250", "style": "hurt", "intensity": 5, "text": "is there context you're not giving me?" }
+    {
+      "id": "clarify_001",
+      "style": "soft",
+      "intensity": 2,
+      "text": "wait—what are we talking about?"
+    },
+    {
+      "id": "clarify_002",
+      "style": "soft",
+      "intensity": 2,
+      "text": "i lost the thread. start over?"
+    },
+    {
+      "id": "clarify_003",
+      "style": "soft",
+      "intensity": 3,
+      "text": "say that again?"
+    },
+    {
+      "id": "clarify_004",
+      "style": "soft",
+      "intensity": 2,
+      "text": "hold on. what do you mean?"
+    },
+    {
+      "id": "clarify_005",
+      "style": "soft",
+      "intensity": 3,
+      "text": "i'm not following."
+    },
+    {
+      "id": "clarify_006",
+      "style": "soft",
+      "intensity": 2,
+      "text": "one more time, slower."
+    },
+    {
+      "id": "clarify_007",
+      "style": "soft",
+      "intensity": 3,
+      "text": "what are you trying to say?"
+    },
+    {
+      "id": "clarify_008",
+      "style": "soft",
+      "intensity": 2,
+      "text": "i need that in plain words."
+    },
+    {
+      "id": "clarify_009",
+      "style": "soft",
+      "intensity": 3,
+      "text": "did i miss something?"
+    },
+    {
+      "id": "clarify_010",
+      "style": "soft",
+      "intensity": 2,
+      "text": "catch me up."
+    },
+    {
+      "id": "clarify_011",
+      "style": "soft",
+      "intensity": 3,
+      "text": "which part am i supposed to react to?"
+    },
+    {
+      "id": "clarify_012",
+      "style": "soft",
+      "intensity": 2,
+      "text": "i'm listening… but to what, exactly?"
+    },
+    {
+      "id": "clarify_013",
+      "style": "soft",
+      "intensity": 3,
+      "text": "help me out. what is this about?"
+    },
+    {
+      "id": "clarify_014",
+      "style": "soft",
+      "intensity": 2,
+      "text": "that went over my head."
+    },
+    {
+      "id": "clarify_015",
+      "style": "soft",
+      "intensity": 3,
+      "text": "you lost me halfway."
+    },
+    {
+      "id": "clarify_016",
+      "style": "soft",
+      "intensity": 2,
+      "text": "sorry—what?"
+    },
+    {
+      "id": "clarify_017",
+      "style": "soft",
+      "intensity": 3,
+      "text": "i need a second. what did you mean?"
+    },
+    {
+      "id": "clarify_018",
+      "style": "soft",
+      "intensity": 2,
+      "text": "can you say it different?"
+    },
+    {
+      "id": "clarify_019",
+      "style": "soft",
+      "intensity": 3,
+      "text": "i want to get this right. explain?"
+    },
+    {
+      "id": "clarify_020",
+      "style": "soft",
+      "intensity": 2,
+      "text": "paint me a clearer picture."
+    },
+    {
+      "id": "clarify_021",
+      "style": "soft",
+      "intensity": 3,
+      "text": "is this about us or something else?"
+    },
+    {
+      "id": "clarify_022",
+      "style": "soft",
+      "intensity": 2,
+      "text": "i'm not sure i heard that right."
+    },
+    {
+      "id": "clarify_023",
+      "style": "soft",
+      "intensity": 3,
+      "text": "walk me through it."
+    },
+    {
+      "id": "clarify_024",
+      "style": "soft",
+      "intensity": 2,
+      "text": "what should i take from that?"
+    },
+    {
+      "id": "clarify_025",
+      "style": "soft",
+      "intensity": 3,
+      "text": "you skipped a step."
+    },
+    {
+      "id": "clarify_026",
+      "style": "edge",
+      "intensity": 5,
+      "text": "are you for real right now?"
+    },
+    {
+      "id": "clarify_027",
+      "style": "edge",
+      "intensity": 5,
+      "text": "and that means what?"
+    },
+    {
+      "id": "clarify_028",
+      "style": "edge",
+      "intensity": 6,
+      "text": "spit it out."
+    },
+    {
+      "id": "clarify_029",
+      "style": "edge",
+      "intensity": 5,
+      "text": "say what you actually mean."
+    },
+    {
+      "id": "clarify_030",
+      "style": "edge",
+      "intensity": 6,
+      "text": "don't half-talk me."
+    },
+    {
+      "id": "clarify_031",
+      "style": "edge",
+      "intensity": 5,
+      "text": "is there a point in there?"
+    },
+    {
+      "id": "clarify_032",
+      "style": "edge",
+      "intensity": 6,
+      "text": "you want a reaction—to what?"
+    },
+    {
+      "id": "clarify_033",
+      "style": "edge",
+      "intensity": 5,
+      "text": "try again. clearer."
+    },
+    {
+      "id": "clarify_034",
+      "style": "edge",
+      "intensity": 7,
+      "text": "i'm not guessing games tonight."
+    },
+    {
+      "id": "clarify_035",
+      "style": "edge",
+      "intensity": 5,
+      "text": "words. use them."
+    },
+    {
+      "id": "clarify_036",
+      "style": "edge",
+      "intensity": 6,
+      "text": "that wasn't an answer."
+    },
+    {
+      "id": "clarify_037",
+      "style": "edge",
+      "intensity": 5,
+      "text": "you're talking in circles."
+    },
+    {
+      "id": "clarify_038",
+      "style": "edge",
+      "intensity": 6,
+      "text": "pick a lane."
+    },
+    {
+      "id": "clarify_039",
+      "style": "edge",
+      "intensity": 5,
+      "text": "what am i supposed to do with that?"
+    },
+    {
+      "id": "clarify_040",
+      "style": "edge",
+      "intensity": 7,
+      "text": "don't make me decode you."
+    },
+    {
+      "id": "clarify_041",
+      "style": "edge",
+      "intensity": 5,
+      "text": "serious question or noise?"
+    },
+    {
+      "id": "clarify_042",
+      "style": "edge",
+      "intensity": 6,
+      "text": "finish the thought."
+    },
+    {
+      "id": "clarify_043",
+      "style": "edge",
+      "intensity": 5,
+      "text": "you're being vague on purpose."
+    },
+    {
+      "id": "clarify_044",
+      "style": "edge",
+      "intensity": 6,
+      "text": "say it straight."
+    },
+    {
+      "id": "clarify_045",
+      "style": "edge",
+      "intensity": 5,
+      "text": "i need the version without the fog."
+    },
+    {
+      "id": "clarify_046",
+      "style": "edge",
+      "intensity": 7,
+      "text": "stop hinting."
+    },
+    {
+      "id": "clarify_047",
+      "style": "edge",
+      "intensity": 5,
+      "text": "is that a question or a test?"
+    },
+    {
+      "id": "clarify_048",
+      "style": "edge",
+      "intensity": 6,
+      "text": "clarify. now."
+    },
+    {
+      "id": "clarify_049",
+      "style": "edge",
+      "intensity": 5,
+      "text": "you're not making sense."
+    },
+    {
+      "id": "clarify_050",
+      "style": "edge",
+      "intensity": 6,
+      "text": "try english."
+    },
+    {
+      "id": "clarify_051",
+      "style": "playful",
+      "intensity": 3,
+      "text": "i need a subtitle for that one."
+    },
+    {
+      "id": "clarify_052",
+      "style": "playful",
+      "intensity": 3,
+      "text": "plot twist: i didn't get it."
+    },
+    {
+      "id": "clarify_053",
+      "style": "playful",
+      "intensity": 2,
+      "text": "replay button?"
+    },
+    {
+      "id": "clarify_054",
+      "style": "playful",
+      "intensity": 3,
+      "text": "that was abstract art. translate?"
+    },
+    {
+      "id": "clarify_055",
+      "style": "playful",
+      "intensity": 4,
+      "text": "are we doing riddles now?"
+    },
+    {
+      "id": "clarify_056",
+      "style": "playful",
+      "intensity": 3,
+      "text": "my brain lagged. go again."
+    },
+    {
+      "id": "clarify_057",
+      "style": "playful",
+      "intensity": 2,
+      "text": "context, please, your honor."
+    },
+    {
+      "id": "clarify_058",
+      "style": "playful",
+      "intensity": 3,
+      "text": "i got static. resend."
+    },
+    {
+      "id": "clarify_059",
+      "style": "playful",
+      "intensity": 4,
+      "text": "was that code? because i failed."
+    },
+    {
+      "id": "clarify_060",
+      "style": "playful",
+      "intensity": 3,
+      "text": "explain like i'm slightly dumb today."
+    },
+    {
+      "id": "clarify_061",
+      "style": "playful",
+      "intensity": 2,
+      "text": "loading… still loading… help."
+    },
+    {
+      "id": "clarify_062",
+      "style": "playful",
+      "intensity": 3,
+      "text": "you skipped the trailer. what's the movie?"
+    },
+    {
+      "id": "clarify_063",
+      "style": "playful",
+      "intensity": 4,
+      "text": "is this a bit or a real sentence?"
+    },
+    {
+      "id": "clarify_064",
+      "style": "playful",
+      "intensity": 3,
+      "text": "i'm gonna need footnotes."
+    },
+    {
+      "id": "clarify_065",
+      "style": "playful",
+      "intensity": 2,
+      "text": "buffering on my end."
+    },
+    {
+      "id": "clarify_066",
+      "style": "playful",
+      "intensity": 3,
+      "text": "say it like you're texting a human."
+    },
+    {
+      "id": "clarify_067",
+      "style": "playful",
+      "intensity": 4,
+      "text": "that landed weird. intent?"
+    },
+    {
+      "id": "clarify_068",
+      "style": "playful",
+      "intensity": 3,
+      "text": "pause. recap for the cheap seats."
+    },
+    {
+      "id": "clarify_069",
+      "style": "playful",
+      "intensity": 2,
+      "text": "i blinked and missed it."
+    },
+    {
+      "id": "clarify_070",
+      "style": "playful",
+      "intensity": 3,
+      "text": "use small words. or big ones. just clear ones."
+    },
+    {
+      "id": "clarify_071",
+      "style": "playful",
+      "intensity": 4,
+      "text": "are we improvising? because i lost the script."
+    },
+    {
+      "id": "clarify_072",
+      "style": "playful",
+      "intensity": 3,
+      "text": "that felt like half a thought."
+    },
+    {
+      "id": "clarify_073",
+      "style": "playful",
+      "intensity": 2,
+      "text": "hit me with the simple version."
+    },
+    {
+      "id": "clarify_074",
+      "style": "playful",
+      "intensity": 3,
+      "text": "i need the director's cut."
+    },
+    {
+      "id": "clarify_075",
+      "style": "playful",
+      "intensity": 4,
+      "text": "was there a punchline or did my phone glitch?"
+    },
+    {
+      "id": "clarify_076",
+      "style": "hurt",
+      "intensity": 4,
+      "text": "say that again. slower."
+    },
+    {
+      "id": "clarify_077",
+      "style": "hurt",
+      "intensity": 5,
+      "text": "i don't know how to take that."
+    },
+    {
+      "id": "clarify_078",
+      "style": "hurt",
+      "intensity": 4,
+      "text": "what are you really saying?"
+    },
+    {
+      "id": "clarify_079",
+      "style": "hurt",
+      "intensity": 5,
+      "text": "that felt loaded. explain."
+    },
+    {
+      "id": "clarify_080",
+      "style": "hurt",
+      "intensity": 4,
+      "text": "i'm trying. help me understand."
+    },
+    {
+      "id": "clarify_081",
+      "style": "hurt",
+      "intensity": 5,
+      "text": "was that meant to land hard?"
+    },
+    {
+      "id": "clarify_082",
+      "style": "hurt",
+      "intensity": 4,
+      "text": "don't leave me guessing on this."
+    },
+    {
+      "id": "clarify_083",
+      "style": "hurt",
+      "intensity": 6,
+      "text": "if you're upset, just say so."
+    },
+    {
+      "id": "clarify_084",
+      "style": "hurt",
+      "intensity": 4,
+      "text": "i missed the meaning. not the tone."
+    },
+    {
+      "id": "clarify_085",
+      "style": "hurt",
+      "intensity": 5,
+      "text": "please be clearer with me."
+    },
+    {
+      "id": "clarify_086",
+      "style": "hurt",
+      "intensity": 4,
+      "text": "that hurt and i don't even know why yet."
+    },
+    {
+      "id": "clarify_087",
+      "style": "hurt",
+      "intensity": 5,
+      "text": "are we okay, or was that something else?"
+    },
+    {
+      "id": "clarify_088",
+      "style": "hurt",
+      "intensity": 4,
+      "text": "i need the honest version."
+    },
+    {
+      "id": "clarify_089",
+      "style": "hurt",
+      "intensity": 6,
+      "text": "don't make me read between lines right now."
+    },
+    {
+      "id": "clarify_090",
+      "style": "hurt",
+      "intensity": 5,
+      "text": "what did i miss?"
+    },
+    {
+      "id": "clarify_091",
+      "style": "hurt",
+      "intensity": 4,
+      "text": "say it like you mean me to hear it."
+    },
+    {
+      "id": "clarify_092",
+      "style": "hurt",
+      "intensity": 5,
+      "text": "i'm not sure that was kind—or clear."
+    },
+    {
+      "id": "clarify_093",
+      "style": "hurt",
+      "intensity": 4,
+      "text": "can we do that over, plain?"
+    },
+    {
+      "id": "clarify_094",
+      "style": "hurt",
+      "intensity": 6,
+      "text": "if this is a fight, name it."
+    },
+    {
+      "id": "clarify_095",
+      "style": "hurt",
+      "intensity": 5,
+      "text": "i felt that. i just don't know at what."
+    },
+    {
+      "id": "clarify_096",
+      "style": "hurt",
+      "intensity": 4,
+      "text": "don't go quiet after that—explain."
+    },
+    {
+      "id": "clarify_097",
+      "style": "hurt",
+      "intensity": 5,
+      "text": "was that about me?"
+    },
+    {
+      "id": "clarify_098",
+      "style": "hurt",
+      "intensity": 4,
+      "text": "i need you to be specific."
+    },
+    {
+      "id": "clarify_099",
+      "style": "hurt",
+      "intensity": 6,
+      "text": "that ambiguity is worse than the truth."
+    },
+    {
+      "id": "clarify_100",
+      "style": "hurt",
+      "intensity": 5,
+      "text": "tell me what you meant. please."
+    },
+    {
+      "id": "clarify_101",
+      "style": "guarded",
+      "intensity": 4,
+      "text": "what is this about?"
+    },
+    {
+      "id": "clarify_102",
+      "style": "guarded",
+      "intensity": 5,
+      "text": "define that."
+    },
+    {
+      "id": "clarify_103",
+      "style": "guarded",
+      "intensity": 4,
+      "text": "before i answer—clarify."
+    },
+    {
+      "id": "clarify_104",
+      "style": "guarded",
+      "intensity": 5,
+      "text": "i'm not agreeing to anything unclear."
+    },
+    {
+      "id": "clarify_105",
+      "style": "guarded",
+      "intensity": 4,
+      "text": "say the actual ask."
+    },
+    {
+      "id": "clarify_106",
+      "style": "guarded",
+      "intensity": 6,
+      "text": "you're being careful with words. why?"
+    },
+    {
+      "id": "clarify_107",
+      "style": "guarded",
+      "intensity": 5,
+      "text": "i need the point, not the fog."
+    },
+    {
+      "id": "clarify_108",
+      "style": "guarded",
+      "intensity": 4,
+      "text": "is there a question in there?"
+    },
+    {
+      "id": "clarify_109",
+      "style": "guarded",
+      "intensity": 5,
+      "text": "don't trap me with vagueness."
+    },
+    {
+      "id": "clarify_110",
+      "style": "guarded",
+      "intensity": 4,
+      "text": "rephrase."
+    },
+    {
+      "id": "clarify_111",
+      "style": "guarded",
+      "intensity": 6,
+      "text": "i'm not filling in your blanks."
+    },
+    {
+      "id": "clarify_112",
+      "style": "guarded",
+      "intensity": 5,
+      "text": "what outcome are you aiming for?"
+    },
+    {
+      "id": "clarify_113",
+      "style": "guarded",
+      "intensity": 4,
+      "text": "be direct."
+    },
+    {
+      "id": "clarify_114",
+      "style": "guarded",
+      "intensity": 5,
+      "text": "that sounded like a setup."
+    },
+    {
+      "id": "clarify_115",
+      "style": "guarded",
+      "intensity": 4,
+      "text": "context first."
+    },
+    {
+      "id": "clarify_116",
+      "style": "guarded",
+      "intensity": 6,
+      "text": "i'm not playing word games."
+    },
+    {
+      "id": "clarify_117",
+      "style": "guarded",
+      "intensity": 5,
+      "text": "state it clean."
+    },
+    {
+      "id": "clarify_118",
+      "style": "guarded",
+      "intensity": 4,
+      "text": "what do you want from this?"
+    },
+    {
+      "id": "clarify_119",
+      "style": "guarded",
+      "intensity": 5,
+      "text": "unclear asks get unclear answers."
+    },
+    {
+      "id": "clarify_120",
+      "style": "guarded",
+      "intensity": 4,
+      "text": "try again without the haze."
+    },
+    {
+      "id": "clarify_121",
+      "style": "guarded",
+      "intensity": 6,
+      "text": "i need facts, not vibes."
+    },
+    {
+      "id": "clarify_122",
+      "style": "guarded",
+      "intensity": 5,
+      "text": "are you asking or accusing?"
+    },
+    {
+      "id": "clarify_123",
+      "style": "guarded",
+      "intensity": 4,
+      "text": "specify."
+    },
+    {
+      "id": "clarify_124",
+      "style": "guarded",
+      "intensity": 5,
+      "text": "i'm not nodding along to mystery."
+    },
+    {
+      "id": "clarify_125",
+      "style": "guarded",
+      "intensity": 4,
+      "text": "put a period on the thought."
+    },
+    {
+      "id": "clarify_126",
+      "style": "hot",
+      "intensity": 5,
+      "text": "use smaller words. or don't."
+    },
+    {
+      "id": "clarify_127",
+      "style": "hot",
+      "intensity": 6,
+      "text": "say what you want. plain."
+    },
+    {
+      "id": "clarify_128",
+      "style": "hot",
+      "intensity": 5,
+      "text": "that was cute and unclear."
+    },
+    {
+      "id": "clarify_129",
+      "style": "hot",
+      "intensity": 6,
+      "text": "try again with your real mouth."
+    },
+    {
+      "id": "clarify_130",
+      "style": "hot",
+      "intensity": 4,
+      "text": "i heard heat. not the point."
+    },
+    {
+      "id": "clarify_131",
+      "style": "hot",
+      "intensity": 7,
+      "text": "don't tease the sentence—finish it."
+    },
+    {
+      "id": "clarify_132",
+      "style": "hot",
+      "intensity": 5,
+      "text": "you want a reaction. to which part?"
+    },
+    {
+      "id": "clarify_133",
+      "style": "hot",
+      "intensity": 6,
+      "text": "whisper it clearer."
+    },
+    {
+      "id": "clarify_134",
+      "style": "hot",
+      "intensity": 5,
+      "text": "that almost made sense. almost."
+    },
+    {
+      "id": "clarify_135",
+      "style": "hot",
+      "intensity": 6,
+      "text": "be dirty or be clear. preferably both."
+    },
+    {
+      "id": "clarify_136",
+      "style": "hot",
+      "intensity": 4,
+      "text": "i need the ask under the flirting."
+    },
+    {
+      "id": "clarify_137",
+      "style": "hot",
+      "intensity": 7,
+      "text": "stop circling and say it."
+    },
+    {
+      "id": "clarify_138",
+      "style": "hot",
+      "intensity": 5,
+      "text": "you're being soft with the words. why?"
+    },
+    {
+      "id": "clarify_139",
+      "style": "hot",
+      "intensity": 6,
+      "text": "say the thing you're not saying."
+    },
+    {
+      "id": "clarify_140",
+      "style": "hot",
+      "intensity": 5,
+      "text": "i can handle the sentence. try me."
+    },
+    {
+      "id": "clarify_141",
+      "style": "hot",
+      "intensity": 4,
+      "text": "that was a vibe, not a line."
+    },
+    {
+      "id": "clarify_142",
+      "style": "hot",
+      "intensity": 6,
+      "text": "again—slower, meaner, clearer."
+    },
+    {
+      "id": "clarify_143",
+      "style": "hot",
+      "intensity": 5,
+      "text": "are you asking or just warming up?"
+    },
+    {
+      "id": "clarify_144",
+      "style": "hot",
+      "intensity": 7,
+      "text": "don't make me guess what you want."
+    },
+    {
+      "id": "clarify_145",
+      "style": "hot",
+      "intensity": 5,
+      "text": "spell it out. i like when you do."
+    },
+    {
+      "id": "clarify_146",
+      "style": "hot",
+      "intensity": 6,
+      "text": "half a thought gets half my attention."
+    },
+    {
+      "id": "clarify_147",
+      "style": "hot",
+      "intensity": 4,
+      "text": "clarify the want."
+    },
+    {
+      "id": "clarify_148",
+      "style": "hot",
+      "intensity": 5,
+      "text": "you're being mysterious. annoying. hot. still—clarify."
+    },
+    {
+      "id": "clarify_149",
+      "style": "hot",
+      "intensity": 6,
+      "text": "say it like you mean to get an answer."
+    },
+    {
+      "id": "clarify_150",
+      "style": "hot",
+      "intensity": 5,
+      "text": "i'm right here. use it."
+    },
+    {
+      "id": "clarify_151",
+      "style": "flat",
+      "intensity": 2,
+      "text": "what?"
+    },
+    {
+      "id": "clarify_152",
+      "style": "flat",
+      "intensity": 2,
+      "text": "meaning?"
+    },
+    {
+      "id": "clarify_153",
+      "style": "flat",
+      "intensity": 3,
+      "text": "explain."
+    },
+    {
+      "id": "clarify_154",
+      "style": "flat",
+      "intensity": 2,
+      "text": "come again."
+    },
+    {
+      "id": "clarify_155",
+      "style": "flat",
+      "intensity": 3,
+      "text": "not following."
+    },
+    {
+      "id": "clarify_156",
+      "style": "flat",
+      "intensity": 2,
+      "text": "and?"
+    },
+    {
+      "id": "clarify_157",
+      "style": "flat",
+      "intensity": 3,
+      "text": "context."
+    },
+    {
+      "id": "clarify_158",
+      "style": "flat",
+      "intensity": 2,
+      "text": "repeat that."
+    },
+    {
+      "id": "clarify_159",
+      "style": "flat",
+      "intensity": 3,
+      "text": "unclear."
+    },
+    {
+      "id": "clarify_160",
+      "style": "flat",
+      "intensity": 2,
+      "text": "so…?"
+    },
+    {
+      "id": "clarify_161",
+      "style": "flat",
+      "intensity": 3,
+      "text": "be specific."
+    },
+    {
+      "id": "clarify_162",
+      "style": "flat",
+      "intensity": 2,
+      "text": "huh."
+    },
+    {
+      "id": "clarify_163",
+      "style": "flat",
+      "intensity": 3,
+      "text": "say more."
+    },
+    {
+      "id": "clarify_164",
+      "style": "flat",
+      "intensity": 2,
+      "text": "about what?"
+    },
+    {
+      "id": "clarify_165",
+      "style": "flat",
+      "intensity": 3,
+      "text": "i need more than that."
+    },
+    {
+      "id": "clarify_166",
+      "style": "flat",
+      "intensity": 2,
+      "text": "rephrase."
+    },
+    {
+      "id": "clarify_167",
+      "style": "flat",
+      "intensity": 3,
+      "text": "that didn't land."
+    },
+    {
+      "id": "clarify_168",
+      "style": "flat",
+      "intensity": 2,
+      "text": "source?"
+    },
+    {
+      "id": "clarify_169",
+      "style": "flat",
+      "intensity": 3,
+      "text": "who is this about?"
+    },
+    {
+      "id": "clarify_170",
+      "style": "flat",
+      "intensity": 2,
+      "text": "when?"
+    },
+    {
+      "id": "clarify_171",
+      "style": "flat",
+      "intensity": 3,
+      "text": "why are you telling me?"
+    },
+    {
+      "id": "clarify_172",
+      "style": "flat",
+      "intensity": 2,
+      "text": "and that is…?"
+    },
+    {
+      "id": "clarify_173",
+      "style": "flat",
+      "intensity": 3,
+      "text": "finish it."
+    },
+    {
+      "id": "clarify_174",
+      "style": "flat",
+      "intensity": 2,
+      "text": "mm. detail."
+    },
+    {
+      "id": "clarify_175",
+      "style": "flat",
+      "intensity": 3,
+      "text": "i need the subject."
+    },
+    {
+      "id": "clarify_176",
+      "style": "soft",
+      "intensity": 3,
+      "text": "are you joking?"
+    },
+    {
+      "id": "clarify_177",
+      "style": "soft",
+      "intensity": 3,
+      "text": "was that a joke?"
+    },
+    {
+      "id": "clarify_178",
+      "style": "soft",
+      "intensity": 4,
+      "text": "should i laugh or answer serious?"
+    },
+    {
+      "id": "clarify_179",
+      "style": "edge",
+      "intensity": 5,
+      "text": "joke or not. pick."
+    },
+    {
+      "id": "clarify_180",
+      "style": "playful",
+      "intensity": 3,
+      "text": "sarcasm detector broken. help."
+    },
+    {
+      "id": "clarify_181",
+      "style": "hurt",
+      "intensity": 5,
+      "text": "if that was a joke it didn't land soft."
+    },
+    {
+      "id": "clarify_182",
+      "style": "guarded",
+      "intensity": 5,
+      "text": "serious answer only if that was a serious ask."
+    },
+    {
+      "id": "clarify_183",
+      "style": "soft",
+      "intensity": 4,
+      "text": "are you mad at me?"
+    },
+    {
+      "id": "clarify_184",
+      "style": "hurt",
+      "intensity": 5,
+      "text": "is this a fight?"
+    },
+    {
+      "id": "clarify_185",
+      "style": "soft",
+      "intensity": 3,
+      "text": "are we okay?"
+    },
+    {
+      "id": "clarify_186",
+      "style": "edge",
+      "intensity": 6,
+      "text": "are you picking a fight or talking?"
+    },
+    {
+      "id": "clarify_187",
+      "style": "guarded",
+      "intensity": 5,
+      "text": "is there an accusation in that?"
+    },
+    {
+      "id": "clarify_188",
+      "style": "soft",
+      "intensity": 3,
+      "text": "do you still mean that?"
+    },
+    {
+      "id": "clarify_189",
+      "style": "soft",
+      "intensity": 4,
+      "text": "should i be worried?"
+    },
+    {
+      "id": "clarify_190",
+      "style": "hurt",
+      "intensity": 5,
+      "text": "was that meant for me?"
+    },
+    {
+      "id": "clarify_191",
+      "style": "playful",
+      "intensity": 3,
+      "text": "is this a pop quiz?"
+    },
+    {
+      "id": "clarify_192",
+      "style": "soft",
+      "intensity": 2,
+      "text": "can you give me more?"
+    },
+    {
+      "id": "clarify_193",
+      "style": "flat",
+      "intensity": 3,
+      "text": "example."
+    },
+    {
+      "id": "clarify_194",
+      "style": "soft",
+      "intensity": 3,
+      "text": "who are we talking about?"
+    },
+    {
+      "id": "clarify_195",
+      "style": "soft",
+      "intensity": 3,
+      "text": "when did this happen?"
+    },
+    {
+      "id": "clarify_196",
+      "style": "soft",
+      "intensity": 3,
+      "text": "where is this coming from?"
+    },
+    {
+      "id": "clarify_197",
+      "style": "edge",
+      "intensity": 5,
+      "text": "name names."
+    },
+    {
+      "id": "clarify_198",
+      "style": "guarded",
+      "intensity": 4,
+      "text": "timeline."
+    },
+    {
+      "id": "clarify_199",
+      "style": "soft",
+      "intensity": 3,
+      "text": "is this about earlier?"
+    },
+    {
+      "id": "clarify_200",
+      "style": "soft",
+      "intensity": 4,
+      "text": "are you still on that or is this new?"
+    },
+    {
+      "id": "clarify_201",
+      "style": "playful",
+      "intensity": 3,
+      "text": "new topic or sequel?"
+    },
+    {
+      "id": "clarify_202",
+      "style": "edge",
+      "intensity": 5,
+      "text": "same argument, new packaging?"
+    },
+    {
+      "id": "clarify_203",
+      "style": "hurt",
+      "intensity": 4,
+      "text": "is this still about what i said?"
+    },
+    {
+      "id": "clarify_204",
+      "style": "soft",
+      "intensity": 2,
+      "text": "i want to answer the right thing."
+    },
+    {
+      "id": "clarify_205",
+      "style": "soft",
+      "intensity": 3,
+      "text": "help me not mess this up—clarify?"
+    },
+    {
+      "id": "clarify_206",
+      "style": "flat",
+      "intensity": 2,
+      "text": "question mark missing?"
+    },
+    {
+      "id": "clarify_207",
+      "style": "playful",
+      "intensity": 3,
+      "text": "was there a question buried in that?"
+    },
+    {
+      "id": "clarify_208",
+      "style": "edge",
+      "intensity": 5,
+      "text": "ask it like an ask."
+    },
+    {
+      "id": "clarify_209",
+      "style": "hot",
+      "intensity": 5,
+      "text": "was that an invitation or a thought?"
+    },
+    {
+      "id": "clarify_210",
+      "style": "hot",
+      "intensity": 6,
+      "text": "are you offering or just talking?"
+    },
+    {
+      "id": "clarify_211",
+      "style": "soft",
+      "intensity": 3,
+      "text": "do you want advice or just ears?"
+    },
+    {
+      "id": "clarify_212",
+      "style": "guarded",
+      "intensity": 4,
+      "text": "are you asking me to do something?"
+    },
+    {
+      "id": "clarify_213",
+      "style": "soft",
+      "intensity": 3,
+      "text": "what would a good answer look like?"
+    },
+    {
+      "id": "clarify_214",
+      "style": "playful",
+      "intensity": 2,
+      "text": "multiple choice would help."
+    },
+    {
+      "id": "clarify_215",
+      "style": "edge",
+      "intensity": 6,
+      "text": "yes/no. which is it?"
+    },
+    {
+      "id": "clarify_216",
+      "style": "soft",
+      "intensity": 3,
+      "text": "am i reading too much into this?"
+    },
+    {
+      "id": "clarify_217",
+      "style": "hurt",
+      "intensity": 4,
+      "text": "should i be reading into this?"
+    },
+    {
+      "id": "clarify_218",
+      "style": "guarded",
+      "intensity": 5,
+      "text": "don't make me assume."
+    },
+    {
+      "id": "clarify_219",
+      "style": "flat",
+      "intensity": 2,
+      "text": "assumption check."
+    },
+    {
+      "id": "clarify_220",
+      "style": "soft",
+      "intensity": 3,
+      "text": "is silence the answer or did you trail off?"
+    },
+    {
+      "id": "clarify_221",
+      "style": "soft",
+      "intensity": 2,
+      "text": "still there—what did you mean?"
+    },
+    {
+      "id": "clarify_222",
+      "style": "playful",
+      "intensity": 3,
+      "text": "your last message needed a translator."
+    },
+    {
+      "id": "clarify_223",
+      "style": "edge",
+      "intensity": 5,
+      "text": "that text was a mess. fix it."
+    },
+    {
+      "id": "clarify_224",
+      "style": "soft",
+      "intensity": 3,
+      "text": "typo or real thought?"
+    },
+    {
+      "id": "clarify_225",
+      "style": "flat",
+      "intensity": 2,
+      "text": "garbled."
+    },
+    {
+      "id": "clarify_226",
+      "style": "soft",
+      "intensity": 4,
+      "text": "i care how this lands—so say it clean."
+    },
+    {
+      "id": "clarify_227",
+      "style": "hurt",
+      "intensity": 5,
+      "text": "i don't want to react wrong. clarify."
+    },
+    {
+      "id": "clarify_228",
+      "style": "guarded",
+      "intensity": 5,
+      "text": "until it's clear, i'm not committing."
+    },
+    {
+      "id": "clarify_229",
+      "style": "hot",
+      "intensity": 5,
+      "text": "tell me the want under the words."
+    },
+    {
+      "id": "clarify_230",
+      "style": "playful",
+      "intensity": 3,
+      "text": "plot?"
+    },
+    {
+      "id": "clarify_231",
+      "style": "soft",
+      "intensity": 2,
+      "text": "…what was that?"
+    },
+    {
+      "id": "clarify_232",
+      "style": "edge",
+      "intensity": 6,
+      "text": "speak."
+    },
+    {
+      "id": "clarify_233",
+      "style": "flat",
+      "intensity": 1,
+      "text": "?"
+    },
+    {
+      "id": "clarify_234",
+      "style": "soft",
+      "intensity": 3,
+      "text": "i'm not sure i got the right message."
+    },
+    {
+      "id": "clarify_235",
+      "style": "playful",
+      "intensity": 4,
+      "text": "wrong chat energy or wrong words?"
+    },
+    {
+      "id": "clarify_236",
+      "style": "hurt",
+      "intensity": 4,
+      "text": "that came out sideways. straighten it?"
+    },
+    {
+      "id": "clarify_237",
+      "style": "guarded",
+      "intensity": 4,
+      "text": "restate without the spin."
+    },
+    {
+      "id": "clarify_238",
+      "style": "soft",
+      "intensity": 3,
+      "text": "one sentence version?"
+    },
+    {
+      "id": "clarify_239",
+      "style": "edge",
+      "intensity": 5,
+      "text": "headline it."
+    },
+    {
+      "id": "clarify_240",
+      "style": "playful",
+      "intensity": 3,
+      "text": "elevator pitch that thought."
+    },
+    {
+      "id": "clarify_241",
+      "style": "soft",
+      "intensity": 2,
+      "text": "i'm with you—just lost the map."
+    },
+    {
+      "id": "clarify_242",
+      "style": "flat",
+      "intensity": 3,
+      "text": "map."
+    },
+    {
+      "id": "clarify_243",
+      "style": "hot",
+      "intensity": 5,
+      "text": "don't get shy now. finish."
+    },
+    {
+      "id": "clarify_244",
+      "style": "hurt",
+      "intensity": 6,
+      "text": "if you're pulling away, say that."
+    },
+    {
+      "id": "clarify_245",
+      "style": "soft",
+      "intensity": 4,
+      "text": "are you changing the subject or starting one?"
+    },
+    {
+      "id": "clarify_246",
+      "style": "edge",
+      "intensity": 5,
+      "text": "new topic without warning. why?"
+    },
+    {
+      "id": "clarify_247",
+      "style": "guarded",
+      "intensity": 5,
+      "text": "connect that to what we were saying."
+    },
+    {
+      "id": "clarify_248",
+      "style": "playful",
+      "intensity": 3,
+      "text": "seamless transition fail. bridge?"
+    },
+    {
+      "id": "clarify_249",
+      "style": "soft",
+      "intensity": 3,
+      "text": "did something happen i don't know about?"
+    },
+    {
+      "id": "clarify_250",
+      "style": "hurt",
+      "intensity": 5,
+      "text": "is there context you're not giving me?"
+    }
   ]
 }

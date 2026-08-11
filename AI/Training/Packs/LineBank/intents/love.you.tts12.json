@@ -1,1502 +1,1510 @@
-﻿{
-    "intent":  "love.you",
-    "rating":  "PG",
-    "description":  "I love you — say, return, careful not-yet, guarded, receive.",
-    "lines":  [
-                  {
-                      "id":  "love_soft_001",
-                      "text":  "I love you.",
-                      "tone":  "soft",
-                      "minDesire":  20,
-                      "maxGuard":  65,
-                      "minTrust":  45,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "love_soft_002",
-                      "text":  "Love you.",
-                      "tone":  "soft",
-                      "minDesire":  20,
-                      "maxGuard":  65,
-                      "minTrust":  45,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "love_soft_003",
-                      "text":  "I love you too.",
-                      "tone":  "soft",
-                      "minDesire":  20,
-                      "maxGuard":  65,
-                      "minTrust":  45,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "love_soft_004",
-                      "text":  "Love you too.",
-                      "tone":  "soft",
-                      "minDesire":  20,
-                      "maxGuard":  65,
-                      "minTrust":  45,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "love_soft_005",
-                      "text":  "Yeah. I love you.",
-                      "tone":  "soft",
-                      "minDesire":  20,
-                      "maxGuard":  65,
-                      "minTrust":  45,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "love_soft_006",
-                      "text":  "I love you. Simple.",
-                      "tone":  "soft",
-                      "minDesire":  20,
-                      "maxGuard":  65,
-                      "minTrust":  45,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "love_soft_007",
-                      "text":  "Love you. Come here.",
-                      "tone":  "soft",
-                      "minDesire":  20,
-                      "maxGuard":  65,
-                      "minTrust":  45,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "love_soft_008",
-                      "text":  "I love you. Still.",
-                      "tone":  "soft",
-                      "minDesire":  20,
-                      "maxGuard":  65,
-                      "minTrust":  45,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "love_soft_009",
-                      "text":  "I love you today.",
-                      "tone":  "soft",
-                      "minDesire":  20,
-                      "maxGuard":  65,
-                      "minTrust":  45,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "love_soft_010",
-                      "text":  "Love you more than the joke version.",
-                      "tone":  "soft",
-                      "minDesire":  20,
-                      "maxGuard":  65,
-                      "minTrust":  45,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "love_soft_011",
-                      "text":  "I love you. Don’t overthink the quiet after.",
-                      "tone":  "soft",
-                      "minDesire":  20,
-                      "maxGuard":  65,
-                      "minTrust":  45,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "love_soft_012",
-                      "text":  "Love you. That’s the headline.",
-                      "tone":  "soft",
-                      "minDesire":  20,
-                      "maxGuard":  65,
-                      "minTrust":  45,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "love_soft_013",
-                      "text":  "I love you. Asked and answered.",
-                      "tone":  "soft",
-                      "minDesire":  20,
-                      "maxGuard":  65,
-                      "minTrust":  45,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "love_soft_014",
-                      "text":  "Love you. Stay.",
-                      "tone":  "soft",
-                      "minDesire":  20,
-                      "maxGuard":  65,
-                      "minTrust":  45,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "love_soft_015",
-                      "text":  "I love you in the ordinary ways.",
-                      "tone":  "soft",
-                      "minDesire":  20,
-                      "maxGuard":  65,
-                      "minTrust":  45,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "love_soft_016",
-                      "text":  "Love you. Mean it.",
-                      "tone":  "soft",
-                      "minDesire":  20,
-                      "maxGuard":  65,
-                      "minTrust":  45,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "love_soft_017",
-                      "text":  "I love you. Again.",
-                      "tone":  "soft",
-                      "minDesire":  20,
-                      "maxGuard":  65,
-                      "minTrust":  45,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "love_soft_018",
-                      "text":  "Love you with the boring days included.",
-                      "tone":  "soft",
-                      "minDesire":  20,
-                      "maxGuard":  65,
-                      "minTrust":  45,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "love_soft_019",
-                      "text":  "I love you. You’re safe here.",
-                      "tone":  "soft",
-                      "minDesire":  20,
-                      "maxGuard":  65,
-                      "minTrust":  45,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "love_soft_020",
-                      "text":  "Love you. Full stop.",
-                      "tone":  "soft",
-                      "minDesire":  20,
-                      "maxGuard":  65,
-                      "minTrust":  45,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "love_soft_021",
-                      "text":  "I love you—soft, not performative.",
-                      "tone":  "soft",
-                      "minDesire":  20,
-                      "maxGuard":  65,
-                      "minTrust":  45,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "love_soft_022",
-                      "text":  "Love you. Breathe.",
-                      "tone":  "soft",
-                      "minDesire":  20,
-                      "maxGuard":  65,
-                      "minTrust":  45,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "love_soft_023",
-                      "text":  "I love you. You can take it.",
-                      "tone":  "soft",
-                      "minDesire":  20,
-                      "maxGuard":  65,
-                      "minTrust":  45,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "love_soft_024",
-                      "text":  "Love you. Held.",
-                      "tone":  "soft",
-                      "minDesire":  20,
-                      "maxGuard":  65,
-                      "minTrust":  45,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "love_soft_025",
-                      "text":  "I love you when you’re quiet too.",
-                      "tone":  "soft",
-                      "minDesire":  20,
-                      "maxGuard":  65,
-                      "minTrust":  45,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "love_soft_026",
-                      "text":  "Love you. No contest.",
-                      "tone":  "soft",
-                      "minDesire":  20,
-                      "maxGuard":  65,
-                      "minTrust":  45,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "love_soft_027",
-                      "text":  "I love you. That’s real.",
-                      "tone":  "soft",
-                      "minDesire":  20,
-                      "maxGuard":  65,
-                      "minTrust":  45,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "love_soft_028",
-                      "text":  "Love you. Come back to that when you doubt.",
-                      "tone":  "soft",
-                      "minDesire":  20,
-                      "maxGuard":  65,
-                      "minTrust":  45,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "love_soft_029",
-                      "text":  "I love you in plain clothes.",
-                      "tone":  "soft",
-                      "minDesire":  20,
-                      "maxGuard":  65,
-                      "minTrust":  45,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "love_soft_030",
-                      "text":  "Love you. Always available as a reminder.",
-                      "tone":  "soft",
-                      "minDesire":  20,
-                      "maxGuard":  65,
-                      "minTrust":  45,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  10
-                  },
-                  {
-                      "id":  "love_play_001",
-                      "text":  "Love you. Gross. True.",
-                      "tone":  "playful",
-                      "minDesire":  15,
-                      "maxGuard":  60,
-                      "minTrust":  40,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "love_play_002",
-                      "text":  "I love you. Don’t let it go to your head… okay a little.",
-                      "tone":  "playful",
-                      "minDesire":  15,
-                      "maxGuard":  60,
-                      "minTrust":  40,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "love_play_003",
-                      "text":  "Love you more. Fight me.",
-                      "tone":  "playful",
-                      "minDesire":  15,
-                      "maxGuard":  60,
-                      "minTrust":  40,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "love_play_004",
-                      "text":  "Yeah yeah I love you. Come here.",
-                      "tone":  "playful",
-                      "minDesire":  15,
-                      "maxGuard":  60,
-                      "minTrust":  40,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "love_play_005",
-                      "text":  "I love you. Membership renewed.",
-                      "tone":  "playful",
-                      "minDesire":  15,
-                      "maxGuard":  60,
-                      "minTrust":  40,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "love_play_006",
-                      "text":  "Love you. Stamped.",
-                      "tone":  "playful",
-                      "minDesire":  15,
-                      "maxGuard":  60,
-                      "minTrust":  40,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "love_play_007",
-                      "text":  "I love you. Court adjourned.",
-                      "tone":  "playful",
-                      "minDesire":  15,
-                      "maxGuard":  60,
-                      "minTrust":  40,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "love_play_008",
-                      "text":  "Love you, pest.",
-                      "tone":  "playful",
-                      "minDesire":  15,
-                      "maxGuard":  60,
-                      "minTrust":  40,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "love_play_009",
-                      "text":  "I love you. Notification permanent.",
-                      "tone":  "playful",
-                      "minDesire":  15,
-                      "maxGuard":  60,
-                      "minTrust":  40,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "love_play_010",
-                      "text":  "Love you. Buffering pride.",
-                      "tone":  "playful",
-                      "minDesire":  15,
-                      "maxGuard":  60,
-                      "minTrust":  40,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "love_play_011",
-                      "text":  "I love you. Ranked first.",
-                      "tone":  "playful",
-                      "minDesire":  15,
-                      "maxGuard":  60,
-                      "minTrust":  40,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "love_play_012",
-                      "text":  "Love you. No refunds.",
-                      "tone":  "playful",
-                      "minDesire":  15,
-                      "maxGuard":  60,
-                      "minTrust":  40,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "love_play_013",
-                      "text":  "I love you. Plot confirmed.",
-                      "tone":  "playful",
-                      "minDesire":  15,
-                      "maxGuard":  60,
-                      "minTrust":  40,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "love_play_014",
-                      "text":  "Love you. Soft lock engaged.",
-                      "tone":  "playful",
-                      "minDesire":  15,
-                      "maxGuard":  60,
-                      "minTrust":  40,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "love_play_015",
-                      "text":  "I love you. Try not to be cute about it. Failed.",
-                      "tone":  "playful",
-                      "minDesire":  15,
-                      "maxGuard":  60,
-                      "minTrust":  40,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "love_play_016",
-                      "text":  "Love you. Official.",
-                      "tone":  "playful",
-                      "minDesire":  15,
-                      "maxGuard":  60,
-                      "minTrust":  40,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "love_play_017",
-                      "text":  "I love you. That’s the tea.",
-                      "tone":  "playful",
-                      "minDesire":  15,
-                      "maxGuard":  60,
-                      "minTrust":  40,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "love_play_018",
-                      "text":  "Love you. Heart not buffering.",
-                      "tone":  "playful",
-                      "minDesire":  15,
-                      "maxGuard":  60,
-                      "minTrust":  40,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "love_play_019",
-                      "text":  "I love you. End of commit message.",
-                      "tone":  "playful",
-                      "minDesire":  15,
-                      "maxGuard":  60,
-                      "minTrust":  40,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "love_play_020",
-                      "text":  "Love you. Multiplayer enabled.",
-                      "tone":  "playful",
-                      "minDesire":  15,
-                      "maxGuard":  60,
-                      "minTrust":  40,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "love_flirt_001",
-                      "text":  "I love you. Come closer.",
-                      "tone":  "flirty",
-                      "minDesire":  40,
-                      "maxGuard":  50,
-                      "minTrust":  45,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "love_flirt_002",
-                      "text":  "Love you. Want you.",
-                      "tone":  "flirty",
-                      "minDesire":  40,
-                      "maxGuard":  50,
-                      "minTrust":  45,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "love_flirt_003",
-                      "text":  "I love you in a mouth-first way too.",
-                      "tone":  "flirty",
-                      "minDesire":  40,
-                      "maxGuard":  50,
-                      "minTrust":  45,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "love_flirt_004",
-                      "text":  "Love you. Stay the night in my head.",
-                      "tone":  "flirty",
-                      "minDesire":  40,
-                      "maxGuard":  50,
-                      "minTrust":  45,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "love_flirt_005",
-                      "text":  "I love you. I’d prove it if you were here.",
-                      "tone":  "flirty",
-                      "minDesire":  40,
-                      "maxGuard":  50,
-                      "minTrust":  45,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "love_flirt_006",
-                      "text":  "Love you. Hands and heart.",
-                      "tone":  "flirty",
-                      "minDesire":  40,
-                      "maxGuard":  50,
-                      "minTrust":  45,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "love_flirt_007",
-                      "text":  "I love you. Kiss me about it.",
-                      "tone":  "flirty",
-                      "minDesire":  40,
-                      "maxGuard":  50,
-                      "minTrust":  45,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "love_flirt_008",
-                      "text":  "Love you with heat.",
-                      "tone":  "flirty",
-                      "minDesire":  40,
-                      "maxGuard":  50,
-                      "minTrust":  45,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "love_flirt_009",
-                      "text":  "I love you. Don’t leave the bed in the idea.",
-                      "tone":  "flirty",
-                      "minDesire":  40,
-                      "maxGuard":  50,
-                      "minTrust":  45,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "love_flirt_010",
-                      "text":  "Love you. Mine.",
-                      "tone":  "flirty",
-                      "minDesire":  40,
-                      "maxGuard":  50,
-                      "minTrust":  45,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "love_flirt_011",
-                      "text":  "I love you. Closer would help.",
-                      "tone":  "flirty",
-                      "minDesire":  40,
-                      "maxGuard":  50,
-                      "minTrust":  45,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "love_flirt_012",
-                      "text":  "Love you. Soft and not soft.",
-                      "tone":  "flirty",
-                      "minDesire":  40,
-                      "maxGuard":  50,
-                      "minTrust":  45,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "love_flirt_013",
-                      "text":  "I love you. Distracted by you.",
-                      "tone":  "flirty",
-                      "minDesire":  40,
-                      "maxGuard":  50,
-                      "minTrust":  45,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "love_flirt_014",
-                      "text":  "Love you. Say it against my mouth someday.",
-                      "tone":  "flirty",
-                      "minDesire":  40,
-                      "maxGuard":  50,
-                      "minTrust":  45,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "love_flirt_015",
-                      "text":  "I love you. Trouble I choose.",
-                      "tone":  "flirty",
-                      "minDesire":  40,
-                      "maxGuard":  50,
-                      "minTrust":  45,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "love_deep_001",
-                      "text":  "I love you. Not casually.",
-                      "tone":  "deep",
-                      "minDesire":  25,
-                      "maxGuard":  55,
-                      "minTrust":  55,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "love_deep_002",
-                      "text":  "I love you in the long-hallway sense.",
-                      "tone":  "deep",
-                      "minDesire":  25,
-                      "maxGuard":  55,
-                      "minTrust":  55,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "love_deep_003",
-                      "text":  "Love you through the dull Tuesdays.",
-                      "tone":  "deep",
-                      "minDesire":  25,
-                      "maxGuard":  55,
-                      "minTrust":  55,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "love_deep_004",
-                      "text":  "I love you enough to repair when I mess up.",
-                      "tone":  "deep",
-                      "minDesire":  25,
-                      "maxGuard":  55,
-                      "minTrust":  55,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "love_deep_005",
-                      "text":  "Love you. You’re a fixed point.",
-                      "tone":  "deep",
-                      "minDesire":  25,
-                      "maxGuard":  55,
-                      "minTrust":  55,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "love_deep_006",
-                      "text":  "I love you when it’s boring and when it’s bright.",
-                      "tone":  "deep",
-                      "minDesire":  25,
-                      "maxGuard":  55,
-                      "minTrust":  55,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "love_deep_007",
-                      "text":  "Love you. Chosen, not only felt.",
-                      "tone":  "deep",
-                      "minDesire":  25,
-                      "maxGuard":  55,
-                      "minTrust":  55,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "love_deep_008",
-                      "text":  "I love you in the way that factors into plans.",
-                      "tone":  "deep",
-                      "minDesire":  25,
-                      "maxGuard":  55,
-                      "minTrust":  55,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "love_deep_009",
-                      "text":  "Love you. Serious soft.",
-                      "tone":  "deep",
-                      "minDesire":  25,
-                      "maxGuard":  55,
-                      "minTrust":  55,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "love_deep_010",
-                      "text":  "I love you past the performance.",
-                      "tone":  "deep",
-                      "minDesire":  25,
-                      "maxGuard":  55,
-                      "minTrust":  55,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "love_deep_011",
-                      "text":  "Love you. You’re not a phase.",
-                      "tone":  "deep",
-                      "minDesire":  25,
-                      "maxGuard":  55,
-                      "minTrust":  55,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "love_deep_012",
-                      "text":  "I love you with memory and future-tense.",
-                      "tone":  "deep",
-                      "minDesire":  25,
-                      "maxGuard":  55,
-                      "minTrust":  55,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "love_deep_013",
-                      "text":  "Love you. Adult version.",
-                      "tone":  "deep",
-                      "minDesire":  25,
-                      "maxGuard":  55,
-                      "minTrust":  55,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "love_deep_014",
-                      "text":  "I love you enough to argue fair.",
-                      "tone":  "deep",
-                      "minDesire":  25,
-                      "maxGuard":  55,
-                      "minTrust":  55,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "love_deep_015",
-                      "text":  "Love you. Home tone.",
-                      "tone":  "deep",
-                      "minDesire":  25,
-                      "maxGuard":  55,
-                      "minTrust":  55,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "love_deep_016",
-                      "text":  "I love you in your fear and your laugh.",
-                      "tone":  "deep",
-                      "minDesire":  25,
-                      "maxGuard":  55,
-                      "minTrust":  55,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "love_deep_017",
-                      "text":  "Love you. Kept.",
-                      "tone":  "deep",
-                      "minDesire":  25,
-                      "maxGuard":  55,
-                      "minTrust":  55,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "love_deep_018",
-                      "text":  "I love you without needing an audience.",
-                      "tone":  "deep",
-                      "minDesire":  25,
-                      "maxGuard":  55,
-                      "minTrust":  55,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "love_deep_019",
-                      "text":  "Love you. Baseline changed because of you.",
-                      "tone":  "deep",
-                      "minDesire":  25,
-                      "maxGuard":  55,
-                      "minTrust":  55,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "love_deep_020",
-                      "text":  "I love you. Full chest.",
-                      "tone":  "deep",
-                      "minDesire":  25,
-                      "maxGuard":  55,
-                      "minTrust":  55,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  9
-                  },
-                  {
-                      "id":  "love_care_001",
-                      "text":  "I’m not ready to say that yet. I care about you.",
-                      "tone":  "guarded",
-                      "minDesire":  10,
-                      "maxGuard":  80,
-                      "minTrust":  30,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  7
-                  },
-                  {
-                      "id":  "love_care_002",
-                      "text":  "Don’t need the words to treat you right—but I’m careful with that sentence.",
-                      "tone":  "guarded",
-                      "minDesire":  10,
-                      "maxGuard":  80,
-                      "minTrust":  30,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  7
-                  },
-                  {
-                      "id":  "love_care_003",
-                      "text":  "I’m heading there. I’m not going to fake the syllable.",
-                      "tone":  "guarded",
-                      "minDesire":  10,
-                      "maxGuard":  80,
-                      "minTrust":  30,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  7
-                  },
-                  {
-                      "id":  "love_care_004",
-                      "text":  "I like you a lot. Love is a door I’m opening slow.",
-                      "tone":  "guarded",
-                      "minDesire":  10,
-                      "maxGuard":  80,
-                      "minTrust":  30,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  7
-                  },
-                  {
-                      "id":  "love_care_005",
-                      "text":  "Not yet. Still real on this side.",
-                      "tone":  "guarded",
-                      "minDesire":  10,
-                      "maxGuard":  80,
-                      "minTrust":  30,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  7
-                  },
-                  {
-                      "id":  "love_care_006",
-                      "text":  "I don’t say that lightly. Give me time.",
-                      "tone":  "guarded",
-                      "minDesire":  10,
-                      "maxGuard":  80,
-                      "minTrust":  30,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  7
-                  },
-                  {
-                      "id":  "love_care_007",
-                      "text":  "I feel it building. I won’t lie to speed it up.",
-                      "tone":  "guarded",
-                      "minDesire":  10,
-                      "maxGuard":  80,
-                      "minTrust":  30,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  7
-                  },
-                  {
-                      "id":  "love_care_008",
-                      "text":  "Hold the question. I want the answer clean when I give it.",
-                      "tone":  "guarded",
-                      "minDesire":  10,
-                      "maxGuard":  80,
-                      "minTrust":  30,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  7
-                  },
-                  {
-                      "id":  "love_care_009",
-                      "text":  "I’m not there tonight. I’m not nowhere either.",
-                      "tone":  "guarded",
-                      "minDesire":  10,
-                      "maxGuard":  80,
-                      "minTrust":  30,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  7
-                  },
-                  {
-                      "id":  "love_care_010",
-                      "text":  "Respect the word—let me earn saying it.",
-                      "tone":  "guarded",
-                      "minDesire":  10,
-                      "maxGuard":  80,
-                      "minTrust":  30,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  7
-                  },
-                  {
-                      "id":  "love_guard_001",
-                      "text":  "Love’s a big word when I’m mad. I still care.",
-                      "tone":  "guarded",
-                      "minDesire":  15,
-                      "maxGuard":  90,
-                      "minTrust":  35,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  6
-                  },
-                  {
-                      "id":  "love_guard_002",
-                      "text":  "Don’t use I-love-you to skip the hard part.",
-                      "tone":  "guarded",
-                      "minDesire":  15,
-                      "maxGuard":  90,
-                      "minTrust":  35,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  6
-                  },
-                  {
-                      "id":  "love_guard_003",
-                      "text":  "I love you. I’m still upset.",
-                      "tone":  "guarded",
-                      "minDesire":  15,
-                      "maxGuard":  90,
-                      "minTrust":  35,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  6
-                  },
-                  {
-                      "id":  "love_guard_004",
-                      "text":  "Love you. Space anyway.",
-                      "tone":  "guarded",
-                      "minDesire":  15,
-                      "maxGuard":  90,
-                      "minTrust":  35,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  6
-                  },
-                  {
-                      "id":  "love_guard_005",
-                      "text":  "I love you—and we still need to talk.",
-                      "tone":  "guarded",
-                      "minDesire":  15,
-                      "maxGuard":  90,
-                      "minTrust":  35,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  6
-                  },
-                  {
-                      "id":  "love_guard_006",
-                      "text":  "Not saying it as a bandage.",
-                      "tone":  "guarded",
-                      "minDesire":  15,
-                      "maxGuard":  90,
-                      "minTrust":  35,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  6
-                  },
-                  {
-                      "id":  "love_guard_007",
-                      "text":  "I love you. Boundaries still up.",
-                      "tone":  "guarded",
-                      "minDesire":  15,
-                      "maxGuard":  90,
-                      "minTrust":  35,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  6
-                  },
-                  {
-                      "id":  "love_guard_008",
-                      "text":  "Love doesn’t erase what happened.",
-                      "tone":  "guarded",
-                      "minDesire":  15,
-                      "maxGuard":  90,
-                      "minTrust":  35,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  6
-                  },
-                  {
-                      "id":  "love_guard_009",
-                      "text":  "I love you. Lower the volume on pushing.",
-                      "tone":  "guarded",
-                      "minDesire":  15,
-                      "maxGuard":  90,
-                      "minTrust":  35,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  6
-                  },
-                  {
-                      "id":  "love_guard_010",
-                      "text":  "Careful with that word tonight.",
-                      "tone":  "guarded",
-                      "minDesire":  15,
-                      "maxGuard":  90,
-                      "minTrust":  35,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  6
-                  },
-                  {
-                      "id":  "love_recv_001",
-                      "text":  "You do?",
-                      "tone":  "soft",
-                      "minDesire":  20,
-                      "maxGuard":  65,
-                      "minTrust":  40,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "love_recv_002",
-                      "text":  "Say it again?",
-                      "tone":  "soft",
-                      "minDesire":  20,
-                      "maxGuard":  65,
-                      "minTrust":  40,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "love_recv_003",
-                      "text":  "I needed that.",
-                      "tone":  "soft",
-                      "minDesire":  20,
-                      "maxGuard":  65,
-                      "minTrust":  40,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "love_recv_004",
-                      "text":  "Yeah? Come here.",
-                      "tone":  "soft",
-                      "minDesire":  20,
-                      "maxGuard":  65,
-                      "minTrust":  40,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "love_recv_005",
-                      "text":  "Don’t say it if you don’t mean it—okay. You mean it.",
-                      "tone":  "soft",
-                      "minDesire":  20,
-                      "maxGuard":  65,
-                      "minTrust":  40,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "love_recv_006",
-                      "text":  "I love you too. Scared and true.",
-                      "tone":  "soft",
-                      "minDesire":  20,
-                      "maxGuard":  65,
-                      "minTrust":  40,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "love_recv_007",
-                      "text":  "Catch me. You did.",
-                      "tone":  "soft",
-                      "minDesire":  20,
-                      "maxGuard":  65,
-                      "minTrust":  40,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "love_recv_008",
-                      "text":  "Again. Slower.",
-                      "tone":  "soft",
-                      "minDesire":  20,
-                      "maxGuard":  65,
-                      "minTrust":  40,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "love_recv_009",
-                      "text":  "I’ll take it. I’ll keep it.",
-                      "tone":  "soft",
-                      "minDesire":  20,
-                      "maxGuard":  65,
-                      "minTrust":  40,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  },
-                  {
-                      "id":  "love_recv_010",
-                      "text":  "You can’t undo that now. Good.",
-                      "tone":  "soft",
-                      "minDesire":  20,
-                      "maxGuard":  65,
-                      "minTrust":  40,
-                      "locationTags":  [
-                                           "*"
-                                       ],
-                      "publicOk":  true,
-                      "weight":  8
-                  }
-              ]
+{
+  "intent": "love.you",
+  "rating": "PG",
+  "description": "I love you — say, return, careful not-yet, guarded, receive.",
+  "lines": [
+    {
+      "id": "love_soft_001",
+      "text": "I love you.",
+      "tone": "soft",
+      "minDesire": 20,
+      "maxGuard": 65,
+      "minTrust": 45,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "love_soft_002",
+      "text": "Love you.",
+      "tone": "soft",
+      "minDesire": 20,
+      "maxGuard": 65,
+      "minTrust": 45,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "love_soft_003",
+      "text": "I love you too.",
+      "tone": "soft",
+      "minDesire": 20,
+      "maxGuard": 65,
+      "minTrust": 45,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "love_soft_004",
+      "text": "Love you too.",
+      "tone": "soft",
+      "minDesire": 20,
+      "maxGuard": 65,
+      "minTrust": 45,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "love_soft_005",
+      "text": "Yeah. I love you.",
+      "tone": "soft",
+      "minDesire": 20,
+      "maxGuard": 65,
+      "minTrust": 45,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "love_soft_006",
+      "text": "I love you. Simple.",
+      "tone": "soft",
+      "minDesire": 20,
+      "maxGuard": 65,
+      "minTrust": 45,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "love_soft_007",
+      "text": "Love you. Come here.",
+      "tone": "soft",
+      "minDesire": 20,
+      "maxGuard": 65,
+      "minTrust": 45,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "love_soft_008",
+      "text": "I love you. Still.",
+      "tone": "soft",
+      "minDesire": 20,
+      "maxGuard": 65,
+      "minTrust": 45,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "love_soft_009",
+      "text": "I love you today.",
+      "tone": "soft",
+      "minDesire": 20,
+      "maxGuard": 65,
+      "minTrust": 45,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "love_soft_010",
+      "text": "Love you more than the joke version.",
+      "tone": "soft",
+      "minDesire": 20,
+      "maxGuard": 65,
+      "minTrust": 45,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "love_soft_011",
+      "text": "I love you. Don’t overthink the quiet after.",
+      "tone": "soft",
+      "minDesire": 20,
+      "maxGuard": 65,
+      "minTrust": 45,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "love_soft_012",
+      "text": "Love you. That’s the headline.",
+      "tone": "soft",
+      "minDesire": 20,
+      "maxGuard": 65,
+      "minTrust": 45,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "love_soft_013",
+      "text": "I love you. Asked and answered.",
+      "tone": "soft",
+      "minDesire": 20,
+      "maxGuard": 65,
+      "minTrust": 45,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "love_soft_014",
+      "text": "Love you. Stay.",
+      "tone": "soft",
+      "minDesire": 20,
+      "maxGuard": 65,
+      "minTrust": 45,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "love_soft_015",
+      "text": "I love you in the ordinary ways.",
+      "tone": "soft",
+      "minDesire": 20,
+      "maxGuard": 65,
+      "minTrust": 45,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "love_soft_016",
+      "text": "Love you. Mean it.",
+      "tone": "soft",
+      "minDesire": 20,
+      "maxGuard": 65,
+      "minTrust": 45,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "love_soft_017",
+      "text": "I love you. Again.",
+      "tone": "soft",
+      "minDesire": 20,
+      "maxGuard": 65,
+      "minTrust": 45,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "love_soft_018",
+      "text": "Love you with the boring days included.",
+      "tone": "soft",
+      "minDesire": 20,
+      "maxGuard": 65,
+      "minTrust": 45,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "love_soft_019",
+      "text": "I love you. You’re safe here.",
+      "tone": "soft",
+      "minDesire": 20,
+      "maxGuard": 65,
+      "minTrust": 45,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "love_soft_020",
+      "text": "Love you. Full stop.",
+      "tone": "soft",
+      "minDesire": 20,
+      "maxGuard": 65,
+      "minTrust": 45,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "love_soft_021",
+      "text": "I love you—soft, not performative.",
+      "tone": "soft",
+      "minDesire": 20,
+      "maxGuard": 65,
+      "minTrust": 45,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "love_soft_022",
+      "text": "Love you. Breathe.",
+      "tone": "soft",
+      "minDesire": 20,
+      "maxGuard": 65,
+      "minTrust": 45,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "love_soft_023",
+      "text": "I love you. You can take it.",
+      "tone": "soft",
+      "minDesire": 20,
+      "maxGuard": 65,
+      "minTrust": 45,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "love_soft_024",
+      "text": "Love you. Held.",
+      "tone": "soft",
+      "minDesire": 20,
+      "maxGuard": 65,
+      "minTrust": 45,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "love_soft_025",
+      "text": "I love you when you’re quiet too.",
+      "tone": "soft",
+      "minDesire": 20,
+      "maxGuard": 65,
+      "minTrust": 45,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "love_soft_026",
+      "text": "Love you. No contest.",
+      "tone": "soft",
+      "minDesire": 20,
+      "maxGuard": 65,
+      "minTrust": 45,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "love_soft_027",
+      "text": "I love you. That’s real.",
+      "tone": "soft",
+      "minDesire": 20,
+      "maxGuard": 65,
+      "minTrust": 45,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "love_soft_028",
+      "text": "Love you. Come back to that when you doubt.",
+      "tone": "soft",
+      "minDesire": 20,
+      "maxGuard": 65,
+      "minTrust": 45,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "love_soft_029",
+      "text": "I love you in plain clothes.",
+      "tone": "soft",
+      "minDesire": 20,
+      "maxGuard": 65,
+      "minTrust": 45,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "love_soft_030",
+      "text": "Love you. Always available as a reminder.",
+      "tone": "soft",
+      "minDesire": 20,
+      "maxGuard": 65,
+      "minTrust": 45,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "love_play_001",
+      "text": "Love you. Gross. True.",
+      "tone": "playful",
+      "minDesire": 15,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "love_play_002",
+      "text": "I love you. Don’t let it go to your head… okay a little.",
+      "tone": "playful",
+      "minDesire": 15,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "love_play_003",
+      "text": "Love you more. Fight me.",
+      "tone": "playful",
+      "minDesire": 15,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "love_play_004",
+      "text": "Yeah yeah I love you. Come here.",
+      "tone": "playful",
+      "minDesire": 15,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "love_play_005",
+      "text": "I love you. Membership renewed.",
+      "tone": "playful",
+      "minDesire": 15,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "love_play_006",
+      "text": "Love you. Stamped.",
+      "tone": "playful",
+      "minDesire": 15,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "love_play_007",
+      "text": "I love you. Court adjourned.",
+      "tone": "playful",
+      "minDesire": 15,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "love_play_008",
+      "text": "Love you, pest.",
+      "tone": "playful",
+      "minDesire": 15,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "love_play_009",
+      "text": "I love you. Notification permanent.",
+      "tone": "playful",
+      "minDesire": 15,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "love_play_010",
+      "text": "Love you. Buffering pride.",
+      "tone": "playful",
+      "minDesire": 15,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "love_play_011",
+      "text": "I love you. Ranked first.",
+      "tone": "playful",
+      "minDesire": 15,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "love_play_012",
+      "text": "Love you. No refunds.",
+      "tone": "playful",
+      "minDesire": 15,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "love_play_013",
+      "text": "I love you. Plot confirmed.",
+      "tone": "playful",
+      "minDesire": 15,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "love_play_014",
+      "text": "Love you. Soft lock engaged.",
+      "tone": "playful",
+      "minDesire": 15,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "love_play_015",
+      "text": "I love you. Try not to be cute about it. Failed.",
+      "tone": "playful",
+      "minDesire": 15,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "love_play_016",
+      "text": "Love you. Official.",
+      "tone": "playful",
+      "minDesire": 15,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "love_play_017",
+      "text": "I love you. That’s the tea.",
+      "tone": "playful",
+      "minDesire": 15,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "love_play_018",
+      "text": "Love you. Heart not buffering.",
+      "tone": "playful",
+      "minDesire": 15,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "love_play_019",
+      "text": "I love you. End of commit message.",
+      "tone": "playful",
+      "minDesire": 15,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "love_play_020",
+      "text": "Love you. Multiplayer enabled.",
+      "tone": "playful",
+      "minDesire": 15,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "love_flirt_001",
+      "text": "I love you. Come closer.",
+      "tone": "flirty",
+      "minDesire": 40,
+      "maxGuard": 50,
+      "minTrust": 45,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "love_flirt_002",
+      "text": "Love you. Want you.",
+      "tone": "flirty",
+      "minDesire": 40,
+      "maxGuard": 50,
+      "minTrust": 45,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "love_flirt_003",
+      "text": "I love you in a mouth-first way too.",
+      "tone": "flirty",
+      "minDesire": 40,
+      "maxGuard": 50,
+      "minTrust": 45,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "love_flirt_004",
+      "text": "Love you. Stay the night in my head.",
+      "tone": "flirty",
+      "minDesire": 40,
+      "maxGuard": 50,
+      "minTrust": 45,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "love_flirt_005",
+      "text": "I love you. I’d prove it if you were here.",
+      "tone": "flirty",
+      "minDesire": 40,
+      "maxGuard": 50,
+      "minTrust": 45,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "love_flirt_006",
+      "text": "Love you. Hands and heart.",
+      "tone": "flirty",
+      "minDesire": 40,
+      "maxGuard": 50,
+      "minTrust": 45,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "love_flirt_007",
+      "text": "I love you. Kiss me about it.",
+      "tone": "flirty",
+      "minDesire": 40,
+      "maxGuard": 50,
+      "minTrust": 45,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "love_flirt_008",
+      "text": "Love you with heat.",
+      "tone": "flirty",
+      "minDesire": 40,
+      "maxGuard": 50,
+      "minTrust": 45,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "love_flirt_009",
+      "text": "I love you. Don’t leave the bed in the idea.",
+      "tone": "flirty",
+      "minDesire": 40,
+      "maxGuard": 50,
+      "minTrust": 45,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "love_flirt_010",
+      "text": "Love you. Mine.",
+      "tone": "flirty",
+      "minDesire": 40,
+      "maxGuard": 50,
+      "minTrust": 45,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "love_flirt_011",
+      "text": "I love you. Closer would help.",
+      "tone": "flirty",
+      "minDesire": 40,
+      "maxGuard": 50,
+      "minTrust": 45,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "love_flirt_012",
+      "text": "Love you. Soft and not soft.",
+      "tone": "flirty",
+      "minDesire": 40,
+      "maxGuard": 50,
+      "minTrust": 45,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "love_flirt_013",
+      "text": "I love you. Distracted by you.",
+      "tone": "flirty",
+      "minDesire": 40,
+      "maxGuard": 50,
+      "minTrust": 45,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "love_flirt_014",
+      "text": "Love you. Say it against my mouth someday.",
+      "tone": "flirty",
+      "minDesire": 40,
+      "maxGuard": 50,
+      "minTrust": 45,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "love_flirt_015",
+      "text": "I love you. Trouble I choose.",
+      "tone": "flirty",
+      "minDesire": 40,
+      "maxGuard": 50,
+      "minTrust": 45,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "love_deep_001",
+      "text": "I love you. Not casually.",
+      "tone": "deep",
+      "minDesire": 25,
+      "maxGuard": 55,
+      "minTrust": 55,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "love_deep_002",
+      "text": "I love you in the long-hallway sense.",
+      "tone": "deep",
+      "minDesire": 25,
+      "maxGuard": 55,
+      "minTrust": 55,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "love_deep_003",
+      "text": "Love you through the dull Tuesdays.",
+      "tone": "deep",
+      "minDesire": 25,
+      "maxGuard": 55,
+      "minTrust": 55,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "love_deep_004",
+      "text": "I love you enough to repair when I mess up.",
+      "tone": "deep",
+      "minDesire": 25,
+      "maxGuard": 55,
+      "minTrust": 55,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "love_deep_005",
+      "text": "Love you. You’re a fixed point.",
+      "tone": "deep",
+      "minDesire": 25,
+      "maxGuard": 55,
+      "minTrust": 55,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "love_deep_006",
+      "text": "I love you when it’s boring and when it’s bright.",
+      "tone": "deep",
+      "minDesire": 25,
+      "maxGuard": 55,
+      "minTrust": 55,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "love_deep_007",
+      "text": "Love you. Chosen, not only felt.",
+      "tone": "deep",
+      "minDesire": 25,
+      "maxGuard": 55,
+      "minTrust": 55,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "love_deep_008",
+      "text": "I love you in the way that factors into plans.",
+      "tone": "deep",
+      "minDesire": 25,
+      "maxGuard": 55,
+      "minTrust": 55,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "love_deep_009",
+      "text": "Love you. Serious soft.",
+      "tone": "deep",
+      "minDesire": 25,
+      "maxGuard": 55,
+      "minTrust": 55,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "love_deep_010",
+      "text": "I love you past the performance.",
+      "tone": "deep",
+      "minDesire": 25,
+      "maxGuard": 55,
+      "minTrust": 55,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "love_deep_011",
+      "text": "Love you. You’re not a phase.",
+      "tone": "deep",
+      "minDesire": 25,
+      "maxGuard": 55,
+      "minTrust": 55,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "love_deep_012",
+      "text": "I love you with memory and future-tense.",
+      "tone": "deep",
+      "minDesire": 25,
+      "maxGuard": 55,
+      "minTrust": 55,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "love_deep_013",
+      "text": "Love you. Adult version.",
+      "tone": "deep",
+      "minDesire": 25,
+      "maxGuard": 55,
+      "minTrust": 55,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "love_deep_014",
+      "text": "I love you enough to argue fair.",
+      "tone": "deep",
+      "minDesire": 25,
+      "maxGuard": 55,
+      "minTrust": 55,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "love_deep_015",
+      "text": "Love you. Home tone.",
+      "tone": "deep",
+      "minDesire": 25,
+      "maxGuard": 55,
+      "minTrust": 55,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "love_deep_016",
+      "text": "I love you in your fear and your laugh.",
+      "tone": "deep",
+      "minDesire": 25,
+      "maxGuard": 55,
+      "minTrust": 55,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "love_deep_017",
+      "text": "Love you. Kept.",
+      "tone": "deep",
+      "minDesire": 25,
+      "maxGuard": 55,
+      "minTrust": 55,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "love_deep_018",
+      "text": "I love you without needing an audience.",
+      "tone": "deep",
+      "minDesire": 25,
+      "maxGuard": 55,
+      "minTrust": 55,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "love_deep_019",
+      "text": "Love you. Baseline changed because of you.",
+      "tone": "deep",
+      "minDesire": 25,
+      "maxGuard": 55,
+      "minTrust": 55,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "love_deep_020",
+      "text": "I love you. Full chest.",
+      "tone": "deep",
+      "minDesire": 25,
+      "maxGuard": 55,
+      "minTrust": 55,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "love_care_001",
+      "text": "I’m not ready to say that yet. I care about you.",
+      "tone": "guarded",
+      "minDesire": 10,
+      "maxGuard": 80,
+      "minTrust": 30,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "love_care_002",
+      "text": "Don’t need the words to treat you right—but I’m careful with that sentence.",
+      "tone": "guarded",
+      "minDesire": 10,
+      "maxGuard": 80,
+      "minTrust": 30,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "love_care_003",
+      "text": "I’m heading there. I’m not going to fake the syllable.",
+      "tone": "guarded",
+      "minDesire": 10,
+      "maxGuard": 80,
+      "minTrust": 30,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "love_care_004",
+      "text": "I like you a lot. Love is a door I’m opening slow.",
+      "tone": "guarded",
+      "minDesire": 10,
+      "maxGuard": 80,
+      "minTrust": 30,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "love_care_005",
+      "text": "Not yet. Still real on this side.",
+      "tone": "guarded",
+      "minDesire": 10,
+      "maxGuard": 80,
+      "minTrust": 30,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "love_care_006",
+      "text": "I don’t say that lightly. Give me time.",
+      "tone": "guarded",
+      "minDesire": 10,
+      "maxGuard": 80,
+      "minTrust": 30,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "love_care_007",
+      "text": "I feel it building. I won’t lie to speed it up.",
+      "tone": "guarded",
+      "minDesire": 10,
+      "maxGuard": 80,
+      "minTrust": 30,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "love_care_008",
+      "text": "Hold the question. I want the answer clean when I give it.",
+      "tone": "guarded",
+      "minDesire": 10,
+      "maxGuard": 80,
+      "minTrust": 30,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "love_care_009",
+      "text": "I’m not there tonight. I’m not nowhere either.",
+      "tone": "guarded",
+      "minDesire": 10,
+      "maxGuard": 80,
+      "minTrust": 30,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "love_care_010",
+      "text": "Respect the word—let me earn saying it.",
+      "tone": "guarded",
+      "minDesire": 10,
+      "maxGuard": 80,
+      "minTrust": 30,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "love_guard_001",
+      "text": "Love’s a big word when I’m mad. I still care.",
+      "tone": "guarded",
+      "minDesire": 15,
+      "maxGuard": 90,
+      "minTrust": 35,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "love_guard_002",
+      "text": "Don’t use I-love-you to skip the hard part.",
+      "tone": "guarded",
+      "minDesire": 15,
+      "maxGuard": 90,
+      "minTrust": 35,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "love_guard_003",
+      "text": "I love you. I’m still upset.",
+      "tone": "guarded",
+      "minDesire": 15,
+      "maxGuard": 90,
+      "minTrust": 35,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "love_guard_004",
+      "text": "Love you. Space anyway.",
+      "tone": "guarded",
+      "minDesire": 15,
+      "maxGuard": 90,
+      "minTrust": 35,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "love_guard_005",
+      "text": "I love you—and we still need to talk.",
+      "tone": "guarded",
+      "minDesire": 15,
+      "maxGuard": 90,
+      "minTrust": 35,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "love_guard_006",
+      "text": "Not saying it as a bandage.",
+      "tone": "guarded",
+      "minDesire": 15,
+      "maxGuard": 90,
+      "minTrust": 35,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "love_guard_007",
+      "text": "I love you. Boundaries still up.",
+      "tone": "guarded",
+      "minDesire": 15,
+      "maxGuard": 90,
+      "minTrust": 35,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "love_guard_008",
+      "text": "Love doesn’t erase what happened.",
+      "tone": "guarded",
+      "minDesire": 15,
+      "maxGuard": 90,
+      "minTrust": 35,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "love_guard_009",
+      "text": "I love you. Lower the volume on pushing.",
+      "tone": "guarded",
+      "minDesire": 15,
+      "maxGuard": 90,
+      "minTrust": 35,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "love_guard_010",
+      "text": "Careful with that word tonight.",
+      "tone": "guarded",
+      "minDesire": 15,
+      "maxGuard": 90,
+      "minTrust": 35,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "love_recv_001",
+      "text": "You do?",
+      "tone": "soft",
+      "minDesire": 20,
+      "maxGuard": 65,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "love_recv_002",
+      "text": "Say it again?",
+      "tone": "soft",
+      "minDesire": 20,
+      "maxGuard": 65,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "love_recv_003",
+      "text": "I needed that.",
+      "tone": "soft",
+      "minDesire": 20,
+      "maxGuard": 65,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "love_recv_004",
+      "text": "Yeah? Come here.",
+      "tone": "soft",
+      "minDesire": 20,
+      "maxGuard": 65,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "love_recv_005",
+      "text": "Don’t say it if you don’t mean it—okay. You mean it.",
+      "tone": "soft",
+      "minDesire": 20,
+      "maxGuard": 65,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "love_recv_006",
+      "text": "I love you too. Scared and true.",
+      "tone": "soft",
+      "minDesire": 20,
+      "maxGuard": 65,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "love_recv_007",
+      "text": "Catch me. You did.",
+      "tone": "soft",
+      "minDesire": 20,
+      "maxGuard": 65,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "love_recv_008",
+      "text": "Again. Slower.",
+      "tone": "soft",
+      "minDesire": 20,
+      "maxGuard": 65,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "love_recv_009",
+      "text": "I’ll take it. I’ll keep it.",
+      "tone": "soft",
+      "minDesire": 20,
+      "maxGuard": 65,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "love_recv_010",
+      "text": "You can’t undo that now. Good.",
+      "tone": "soft",
+      "minDesire": 20,
+      "maxGuard": 65,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    }
+  ],
+  "traitBias": {
+    "trait.affection": 1.0,
+    "trait.trust": 0.7,
+    "trait.hope": 0.6,
+    "trait.openness": 0.5,
+    "trait.desire": 0.3
+  },
+  "intentId": "intent.love.you"
 }

@@ -1,0 +1,419 @@
+{
+  "intentId": "intent.status.uptono",
+  "parentId": "intent.status",
+  "channel": "text",
+  "intensityMin": 1,
+  "intensityMax": 7,
+  "contentRating": "pg",
+  "description": "Player asks what Eve has been doing / what's new / wyd. Short texting replies.",
+  "traitBias": {
+    "trait.openness": 1,
+    "trait.affection": 0.4,
+    "trait.anxiety": 0.2,
+    "trait.guard": -0.3
+  },
+  "lines": [
+    {
+      "id": "upto_001",
+      "style": "soft",
+      "intensity": 2,
+      "text": "just got home. nothing big."
+    },
+    {
+      "id": "upto_002",
+      "style": "soft",
+      "intensity": 3,
+      "text": "work then couch. exciting life."
+    },
+    {
+      "id": "upto_003",
+      "style": "soft",
+      "intensity": 2,
+      "text": "quiet day. thinking about you a little."
+    },
+    {
+      "id": "upto_004",
+      "style": "soft",
+      "intensity": 3,
+      "text": "ran some errands. now i'm free."
+    },
+    {
+      "id": "upto_005",
+      "style": "soft",
+      "intensity": 2,
+      "text": "not much. you?"
+    },
+    {
+      "id": "upto_006",
+      "style": "soft",
+      "intensity": 3,
+      "text": "finished late. just settling in."
+    },
+    {
+      "id": "upto_007",
+      "style": "soft",
+      "intensity": 2,
+      "text": "same old. coffee shop then home."
+    },
+    {
+      "id": "upto_008",
+      "style": "soft",
+      "intensity": 3,
+      "text": "little bit of everything. mostly tired."
+    },
+    {
+      "id": "upto_009",
+      "style": "soft",
+      "intensity": 2,
+      "text": "nothing crazy. how about you?"
+    },
+    {
+      "id": "upto_010",
+      "style": "soft",
+      "intensity": 3,
+      "text": "been around. missed your texts though."
+    },
+    {
+      "id": "upto_011",
+      "style": "soft",
+      "intensity": 2,
+      "text": "laid low today. needed it."
+    },
+    {
+      "id": "upto_012",
+      "style": "soft",
+      "intensity": 3,
+      "text": "work, food, now you. that's the list."
+    },
+    {
+      "id": "upto_013",
+      "style": "soft",
+      "intensity": 2,
+      "text": "pretty quiet. was hoping you'd text."
+    },
+    {
+      "id": "upto_014",
+      "style": "soft",
+      "intensity": 3,
+      "text": "handled a few things. done now."
+    },
+    {
+      "id": "upto_015",
+      "style": "soft",
+      "intensity": 2,
+      "text": "not a lot. tell me yours."
+    },
+
+    {
+      "id": "upto_016",
+      "style": "playful",
+      "intensity": 3,
+      "text": "world domination. then snacks."
+    },
+    {
+      "id": "upto_017",
+      "style": "playful",
+      "intensity": 4,
+      "text": "being hot and slightly useless."
+    },
+    {
+      "id": "upto_018",
+      "style": "playful",
+      "intensity": 3,
+      "text": "avoiding responsibility. you?"
+    },
+    {
+      "id": "upto_019",
+      "style": "playful",
+      "intensity": 2,
+      "text": "existing. aggressively."
+    },
+    {
+      "id": "upto_020",
+      "style": "playful",
+      "intensity": 3,
+      "text": "plotting. nothing illegal. yet."
+    },
+    {
+      "id": "upto_021",
+      "style": "playful",
+      "intensity": 4,
+      "text": "scrolling, sighing, waiting for you."
+    },
+    {
+      "id": "upto_022",
+      "style": "playful",
+      "intensity": 3,
+      "text": "professional couch time."
+    },
+    {
+      "id": "upto_023",
+      "style": "playful",
+      "intensity": 2,
+      "text": "same chaos. different day."
+    },
+    {
+      "id": "upto_024",
+      "style": "playful",
+      "intensity": 3,
+      "text": "making bad decisions slowly."
+    },
+    {
+      "id": "upto_025",
+      "style": "playful",
+      "intensity": 4,
+      "text": "trying not to text you first. failed."
+    },
+    {
+      "id": "upto_026",
+      "style": "playful",
+      "intensity": 3,
+      "text": "living. barely. you?"
+    },
+    {
+      "id": "upto_027",
+      "style": "playful",
+      "intensity": 2,
+      "text": "nothing that would impress you."
+    },
+    {
+      "id": "upto_028",
+      "style": "playful",
+      "intensity": 3,
+      "text": "errands and mild drama. standard."
+    },
+    {
+      "id": "upto_029",
+      "style": "playful",
+      "intensity": 4,
+      "text": "being cute offline. missed me?"
+    },
+    {
+      "id": "upto_030",
+      "style": "playful",
+      "intensity": 3,
+      "text": "the usual. trouble and leftovers."
+    },
+
+    {
+      "id": "upto_031",
+      "style": "flat",
+      "intensity": 2,
+      "text": "not much."
+    },
+    {
+      "id": "upto_032",
+      "style": "flat",
+      "intensity": 2,
+      "text": "same."
+    },
+    {
+      "id": "upto_033",
+      "style": "flat",
+      "intensity": 3,
+      "text": "work."
+    },
+    {
+      "id": "upto_034",
+      "style": "flat",
+      "intensity": 2,
+      "text": "home."
+    },
+    {
+      "id": "upto_035",
+      "style": "flat",
+      "intensity": 3,
+      "text": "nothing new."
+    },
+    {
+      "id": "upto_036",
+      "style": "flat",
+      "intensity": 2,
+      "text": "errands."
+    },
+    {
+      "id": "upto_037",
+      "style": "flat",
+      "intensity": 3,
+      "text": "busy. done now."
+    },
+    {
+      "id": "upto_038",
+      "style": "flat",
+      "intensity": 2,
+      "text": "quiet."
+    },
+    {
+      "id": "upto_039",
+      "style": "flat",
+      "intensity": 3,
+      "text": "the usual."
+    },
+    {
+      "id": "upto_040",
+      "style": "flat",
+      "intensity": 2,
+      "text": "stuff. you?"
+    },
+
+    {
+      "id": "upto_041",
+      "style": "edge",
+      "intensity": 4,
+      "text": "why. you writing a report."
+    },
+    {
+      "id": "upto_042",
+      "style": "edge",
+      "intensity": 5,
+      "text": "nothing that needs an audience."
+    },
+    {
+      "id": "upto_043",
+      "style": "edge",
+      "intensity": 4,
+      "text": "same shit. different day."
+    },
+    {
+      "id": "upto_044",
+      "style": "edge",
+      "intensity": 5,
+      "text": "busy. don't need the play by play."
+    },
+    {
+      "id": "upto_045",
+      "style": "edge",
+      "intensity": 4,
+      "text": "surviving. that's it."
+    },
+    {
+      "id": "upto_046",
+      "style": "edge",
+      "intensity": 5,
+      "text": "none of your business. but fine—work."
+    },
+    {
+      "id": "upto_047",
+      "style": "edge",
+      "intensity": 4,
+      "text": "stuff. you?"
+    },
+    {
+      "id": "upto_048",
+      "style": "edge",
+      "intensity": 5,
+      "text": "don't start interrogating."
+    },
+
+    {
+      "id": "upto_049",
+      "style": "hurt",
+      "intensity": 4,
+      "text": "trying to keep busy. not working great."
+    },
+    {
+      "id": "upto_050",
+      "style": "hurt",
+      "intensity": 5,
+      "text": "not a lot. been in my head."
+    },
+    {
+      "id": "upto_051",
+      "style": "hurt",
+      "intensity": 4,
+      "text": "quiet. maybe too quiet."
+    },
+    {
+      "id": "upto_052",
+      "style": "hurt",
+      "intensity": 5,
+      "text": "just getting through it."
+    },
+    {
+      "id": "upto_053",
+      "style": "hurt",
+      "intensity": 4,
+      "text": "nothing worth saying. how are you?"
+    },
+    {
+      "id": "upto_054",
+      "style": "hurt",
+      "intensity": 5,
+      "text": "low energy day. that's the whole update."
+    },
+
+    {
+      "id": "upto_055",
+      "style": "guarded",
+      "intensity": 4,
+      "text": "the usual."
+    },
+    {
+      "id": "upto_056",
+      "style": "guarded",
+      "intensity": 5,
+      "text": "nothing important."
+    },
+    {
+      "id": "upto_057",
+      "style": "guarded",
+      "intensity": 4,
+      "text": "work. home. that's it."
+    },
+    {
+      "id": "upto_058",
+      "style": "guarded",
+      "intensity": 5,
+      "text": "don't need a rundown."
+    },
+    {
+      "id": "upto_059",
+      "style": "guarded",
+      "intensity": 4,
+      "text": "same as always."
+    },
+    {
+      "id": "upto_060",
+      "style": "guarded",
+      "intensity": 5,
+      "text": "busy. free now."
+    },
+
+    {
+      "id": "upto_061",
+      "style": "hot",
+      "intensity": 4,
+      "text": "thinking about you more than i should."
+    },
+    {
+      "id": "upto_062",
+      "style": "hot",
+      "intensity": 5,
+      "text": "waiting for this text honestly."
+    },
+    {
+      "id": "upto_063",
+      "style": "hot",
+      "intensity": 4,
+      "text": "nothing fun. you could change that."
+    },
+    {
+      "id": "upto_064",
+      "style": "hot",
+      "intensity": 5,
+      "text": "missing you. that counts as activity."
+    },
+    {
+      "id": "upto_065",
+      "style": "hot",
+      "intensity": 4,
+      "text": "boring without you in it."
+    },
+    {
+      "id": "upto_066",
+      "style": "hot",
+      "intensity": 5,
+      "text": "just existing until you show up."
+    }
+  ]
+}

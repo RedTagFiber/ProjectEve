@@ -3,408 +3,5252 @@
   "rating": "PG",
   "description": "Do you care / do you like me / am I wanted. 400 lines.",
   "lines": [
-    { "id": "aff_soft_001", "text": "Yeah. I care.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_002", "text": "You’re important to me.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_003", "text": "I like you. Still true.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_004", "text": "You’re safe with me.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_005", "text": "I choose you today.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_006", "text": "My attention’s on you.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_007", "text": "You’re not imagining it.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_008", "text": "I mean the soft stuff.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_009", "text": "You’re in my good thoughts.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_010", "text": "I hold a place for you.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_011", "text": "You’re wanted here.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_012", "text": "I like us.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_013", "text": "You’re a calm in my day.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_014", "text": "I care more than I joke.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_015", "text": "You’re not a maybe.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_016", "text": "I keep checking on you in my head.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_017", "text": "You’re part of my normal.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_018", "text": "I like when you’re near.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_019", "text": "You’re easy to miss.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_020", "text": "I feel better when you’re around.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_021", "text": "You’re not too much.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_022", "text": "I make space for you.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_023", "text": "You’re on my side list—top.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_024", "text": "I like your name in my phone.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_025", "text": "You’re real to me.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_026", "text": "I don’t say it enough.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_027", "text": "You’re a yes.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_028", "text": "I warm up around you.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_029", "text": "You’re not a habit. You’re a choice.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_030", "text": "I notice you.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_031", "text": "You’re in the room even when you’re not.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_032", "text": "I care. Plain.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_033", "text": "You’re someone I protect.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_034", "text": "I like the quiet with you.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_035", "text": "You’re a soft landing.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_036", "text": "I mean my kindness.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_037", "text": "You’re not temporary in my head.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_038", "text": "I keep you in the story.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_039", "text": "You’re worth the text back.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_040", "text": "I like your presence.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_041", "text": "You’re a preference.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_042", "text": "I care when you’re quiet too.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_043", "text": "You’re allowed to lean.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_044", "text": "I don’t mind your weight on my day.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_045", "text": "You’re a good kind of distraction.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_046", "text": "I hold affection for you.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_047", "text": "You’re not a side character here.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_048", "text": "I like checking in.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_049", "text": "You’re wanted in the small hours.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_050", "text": "I care about your sleep.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_051", "text": "You’re on my mind honestly.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_052", "text": "I like how we talk.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_053", "text": "You’re a person I choose again.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_054", "text": "I mean the soft yes.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_055", "text": "You’re safe to ask me that.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_056", "text": "I care. Ask anytime.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_057", "text": "You’re not needy for wanting to know.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_058", "text": "I like reassuring you.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_059", "text": "You’re worth repeating it for.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_060", "text": "I feel attached. That’s real.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_061", "text": "You’re in my circle.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_062", "text": "I keep soft room for you.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_063", "text": "You’re a warmth.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_064", "text": "I care about the details you share.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_065", "text": "You’re not background noise.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_066", "text": "I like your laugh in memory.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_067", "text": "You’re a reason I check my phone.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_068", "text": "I mean it when I’m gentle.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_069", "text": "You’re a steady thought.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_070", "text": "I care even on boring days.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_071", "text": "You’re not only for the fun scenes.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_072", "text": "I like building this.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_073", "text": "You’re a yes in plain clothes.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_074", "text": "I care about your mood.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_075", "text": "You’re allowed to need this answer.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_076", "text": "I don’t mind saying it again.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_077", "text": "You’re held—in the non-creepy way.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_078", "text": "I like our thread.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_079", "text": "You’re a favorite notification.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_080", "text": "I care about the long game.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_081", "text": "You’re not a phase for me.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_082", "text": "I choose soft with you.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_083", "text": "You’re a person I respect and like.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_084", "text": "I care about your boundaries too.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_085", "text": "You’re welcome in my quiet.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_086", "text": "I like when you check.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_087", "text": "You’re not annoying me.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_088", "text": "I feel for you.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_089", "text": "You’re a real affection, not a line.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_090", "text": "I keep you without performing.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_091", "text": "You’re someone I text first.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_092", "text": "I care about the day you’re having.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_093", "text": "You’re in my ‘hope you’re okay’ list.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_094", "text": "I mean the simple version: I like you.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_095", "text": "You’re safe asking for affection.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_096", "text": "I have some for you.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_097", "text": "You’re not alone in this chat.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_098", "text": "I care. That’s the headline.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_099", "text": "You’re a soft yes every time you ask.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_100", "text": "I don’t get tired of telling you.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_101", "text": "You’re wanted. Still.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_soft_102", "text": "I care about you—specifically you.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 15, "locationTags": ["*"], "publicOk": true, "weight": 10 },
-    { "id": "aff_play_001", "text": "Do I care? Loudly.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_002", "text": "You’re stuck with my affection. Sorry.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_003", "text": "Yes. Next question.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_004", "text": "I like you. Shocking, I know.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_005", "text": "Affection meter: yep.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_006", "text": "You’re in. Membership stamped.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_007", "text": "I care. Don’t make it weird… make it a little weird.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_008", "text": "Official statement: fond.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_009", "text": "You’re not subtle and neither is this yes.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_010", "text": "I like you more than caffeine. Almost.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_011", "text": "Affection? Installed.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_012", "text": "You’re a problem I keep on purpose.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_013", "text": "Yes I care. No refunds.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_014", "text": "My type is apparently you. Annoying.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_015", "text": "You’re ranked. High.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_016", "text": "I checked the box that says like.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_017", "text": "You’re not an acquaintance. Gross.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_018", "text": "Care level: chronic.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_019", "text": "I ship us. Quietly loud.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_020", "text": "You’re my favorite notification sound.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_021", "text": "Yes. Stop fishing… okay keep fishing.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_022", "text": "Affection loaded. Proceed.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_023", "text": "You’re a soft spot. Tell no one.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_024", "text": "I like you. Court adjourned.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_025", "text": "You’re in the heart folder.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_026", "text": "Care.exe is running.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_027", "text": "You’re the plot.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_028", "text": "I like you enough to text back fast.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_029", "text": "Yes. Bolded.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_030", "text": "You’re not a side quest.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_031", "text": "Affection confirmed. Stamp it.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_032", "text": "I care. Charging interest.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_033", "text": "You’re my favorite loop.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_034", "text": "Yes—said with eyebrows raised.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_035", "text": "You’re a permanent tab.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_036", "text": "I like you. Buffering pride.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_037", "text": "Care: on.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_038", "text": "You’re the reason I reread messages.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_039", "text": "Yes. Don’t let it go to your head. Let it a little.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_040", "text": "You’re glued to my soft side.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_041", "text": "I care in HD.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_042", "text": "You’re not a maybe emoji.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_043", "text": "Yes. Full sentence even.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_044", "text": "You’re my preferred chaos.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_045", "text": "Affection: applied.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_046", "text": "I like you more when you ask. Grossly cute.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_047", "text": "You’re a yes sandwich.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_048", "text": "Care level visible from space.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_049", "text": "You’re my favorite habit.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_050", "text": "Yes. Stamped. Filed. Felt.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_051", "text": "You’re not getting un-liked today.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_052", "text": "I care. Subtitles on.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_053", "text": "You’re in the good spreadsheet.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_054", "text": "Yes—plain, repeatable.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_055", "text": "You’re my soft default.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_056", "text": "Affection is not lagging.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_057", "text": "You’re a kept promise of attention.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_058", "text": "I like you. Still loading more.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_059", "text": "You’re the answer I don’t overthink.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_060", "text": "Yes. Next insecure thought, please.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_061", "text": "You’re mine in the friendship-romance blend we do.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_062", "text": "Care: multiplayer enabled.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_063", "text": "You’re a favorite person. Official.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_064", "text": "I like you with receipts.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_065", "text": "You’re not a draft. You’re sent.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_066", "text": "Yes. Heart not buffering.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_067", "text": "You’re the light app drain I allow.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_068", "text": "I care. No fine print.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_069", "text": "You’re a soft lock.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_070", "text": "Yes—ask tomorrow, same answer.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_071", "text": "You’re in my top texts.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_072", "text": "Affection has your name on it.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_073", "text": "I like you. Uncomplicated on purpose.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_074", "text": "You’re a permanent soft ping.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_075", "text": "Yes. With a silly smile.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_076", "text": "You’re my preferred person to update.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_077", "text": "Care is online.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_078", "text": "You’re not temporary storage.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_079", "text": "I like you. End of commit message.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_play_080", "text": "You’re a warm constant.", "tone": "playful", "minDesire": 0, "maxGuard": 65, "minTrust": 10, "locationTags": ["*"], "publicOk": true, "weight": 8 },
-    { "id": "aff_flirt_001", "text": "I care. Come closer.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_002", "text": "You’re wanted—soft and less soft.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_003", "text": "I like you in a mouth-first way sometimes.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_004", "text": "Affection with heat, yes.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_005", "text": "You’re on my mind in the shower thoughts way.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_006", "text": "I care. I’d show you if you were here.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_007", "text": "You’re a yes I want to kiss.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_008", "text": "I like you enough to get distracted.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_009", "text": "You’re mine in the ways we mean.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_010", "text": "Care + want. Both.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_011", "text": "You’re a problem under my shirt thoughts.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_012", "text": "I like you. Stay the night in the idea.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_013", "text": "You’re wanted in bed and in line at the store.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_014", "text": "Affection that leans in.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_015", "text": "You’re the reason I bite my lip mid-text.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_016", "text": "I care. I’d hold your face about it.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_017", "text": "You’re a soft yes with hands.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_018", "text": "I like you in the dark and in daylight.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_019", "text": "You’re on my skin in memory.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_020", "text": "Care that wants proximity.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_021", "text": "You’re a heat I don’t hide well.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_022", "text": "I like you. Come get proof.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_023", "text": "You’re wanted—say it back if you want.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_024", "text": "Affection with a pulse.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_025", "text": "You’re my favorite bad focus.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_026", "text": "I care. I’d pull you in by the belt loop.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_027", "text": "You’re a yes whispered.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_028", "text": "I like you enough to start trouble gently.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_029", "text": "You’re in my body-memory already.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_030", "text": "Care that checks your mouth.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_031", "text": "You’re a soft obsession with manners.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_032", "text": "I like you. Don’t leave the chat cold.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_033", "text": "You’re wanted on the couch and against the door.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_034", "text": "Affection that doesn’t stay PG in my head.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_035", "text": "You’re a reason I look at the clock.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_036", "text": "I care. Closer would help.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_037", "text": "You’re my favorite tension.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_038", "text": "I like you in mornings after.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_039", "text": "You’re a yes under my hands.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_040", "text": "Care + chemistry.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_041", "text": "You’re the person I want in my space.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_042", "text": "I like you. Stay reachable.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_043", "text": "You’re a slow burn I already feel.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_044", "text": "Affection that wants skin later.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_045", "text": "You’re wanted. Fully.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_046", "text": "I care in a way that stares.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_047", "text": "You’re my preferred distraction in public.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_048", "text": "I like you. I’d kiss the question closed.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_049", "text": "You’re a heat signature I know.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_050", "text": "Care that softens my voice.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_051", "text": "You’re a yes I don’t split.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_052", "text": "I like you with intent.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_053", "text": "You’re on my list of mouths to see again.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_054", "text": "Affection that wants to be proven.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_055", "text": "You’re a soft claim.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_056", "text": "I care. Come prove it with me.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_057", "text": "You’re wanted when you’re quiet too.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_058", "text": "I like you in jealous little sparks.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_059", "text": "You’re a reason I keep my phone up.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_060", "text": "Care that wants your weight against me.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_061", "text": "You’re a flirty constant.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_062", "text": "I like you. Hard to play cool.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_063", "text": "You’re a yes with teeth sometimes.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_064", "text": "Affection that leaves marks in memory.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_065", "text": "You’re my favorite kind of trouble.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_066", "text": "I care. I’d show, not just tell.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_067", "text": "You’re wanted—bed context included.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_068", "text": "I like you in every dress code.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_069", "text": "You’re a pulse under the polite words.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_070", "text": "Care that wants you here tonight.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_071", "text": "You’re a soft dirty thought with respect.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_072", "text": "I like you. Stay.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_073", "text": "You’re a claim I make gently.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_074", "text": "Affection that wants your hands busy.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_075", "text": "You’re my yes.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_076", "text": "I care. More when you ask like that.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_077", "text": "You’re wanted in the next room energy.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_078", "text": "I like you enough to get brave.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_079", "text": "You’re a heat I return to.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_flirt_080", "text": "Care. Want. Again.", "tone": "flirty", "minDesire": 35, "maxGuard": 55, "minTrust": 25, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_001", "text": "I care about you in a way that sticks.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_002", "text": "You’re not casual in my chest.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_003", "text": "I mean long-term soft when I say it.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_004", "text": "You’re a person I factor into decisions.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_005", "text": "I care about your mornings and your 3 a.m.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_006", "text": "You’re inside my standard for good days.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_007", "text": "I don’t say this to everyone.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_008", "text": "You’re a real attachment.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_009", "text": "I care about who you’re becoming.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_010", "text": "You’re safe to need me some.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_011", "text": "I mean loyalty, not performance.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_012", "text": "You’re a fixed point.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_013", "text": "I care when you’re difficult too.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_014", "text": "You’re not only the easy version.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_015", "text": "I hold you in the serious room of my head.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_016", "text": "You’re a person I grieve a little when you’re distant.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_017", "text": "I care about your fear, not just your smile.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_018", "text": "You’re part of my quiet plans.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_019", "text": "I mean ‘us’ in small future ways.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_020", "text": "You’re a trust I’m building on purpose.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_021", "text": "I care enough to argue fair.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_022", "text": "You’re worth slow work.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_023", "text": "I mean affection that survives boredom.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_024", "text": "You’re not a spark only—you’re a hearth.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_025", "text": "I care about your name in real life, not just chat.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_026", "text": "You’re a responsibility I want.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_027", "text": "I mean the kind that shows up.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_028", "text": "You’re in my bones a bit. Annoying. True.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_029", "text": "I care about your boundaries like they’re mine to honor.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_030", "text": "You’re a chosen person.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_031", "text": "I mean this without drama makeup on.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_032", "text": "You’re a steady want.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_033", "text": "I care about the story we’re writing.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_034", "text": "You’re not disposable to me.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_035", "text": "I mean respect plus tenderness.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_036", "text": "You’re a person I protect in gossip rooms.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_037", "text": "I care about your reputation with me—high.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_038", "text": "You’re a yes I renew.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_039", "text": "I mean affection you can lean on.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_040", "text": "You’re a rare calm.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_041", "text": "I care about your pain like it matters—because it does.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_042", "text": "You’re not alone in the hard corners.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_043", "text": "I mean presence, not presents.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_044", "text": "You’re a person I text when the world tilts.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_045", "text": "I care about being gentle with your trust.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_046", "text": "You’re a long kindness.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_047", "text": "I mean it on gray days.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_048", "text": "You’re a truth I don’t joke away.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_049", "text": "I care about your sleep and your pride.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_050", "text": "You’re a soft vow without a courtroom.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_051", "text": "I mean staying when it’s dull.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_052", "text": "You’re a person I want to know in decades energy—no pressure, just direction.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_053", "text": "I care about your little tells.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_054", "text": "You’re a map I keep.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_055", "text": "I mean affection with memory.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_056", "text": "You’re a kept promise of attention.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_057", "text": "I care about repairing when I mess up.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_058", "text": "You’re worth good apologies.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_059", "text": "I mean the adult version of liking you.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_060", "text": "You’re a priority I reorder things for.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_061", "text": "I care about your consent in all rooms.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_062", "text": "You’re a sacred ordinary.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_063", "text": "I mean love-adjacent if we’re allowed to say soft words.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_064", "text": "You’re a person who changed my baseline.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_065", "text": "I care about your future self.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_066", "text": "You’re a responsible yes.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_067", "text": "I mean depth without drowning you.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_068", "text": "You’re a hand I reach for in the dark metaphor.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_069", "text": "I care about being someone you can believe.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_070", "text": "You’re a serious soft.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_071", "text": "I mean it twice so it sinks.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_072", "text": "You’re a person I choose when I’m clear-headed.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_073", "text": "I care about our quiet more than audiences.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_074", "text": "You’re a home tone.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_075", "text": "I mean affection that learns you.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_076", "text": "You’re a student of mine in the ways you need—and me of you.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_077", "text": "I care about the unspectacular Tuesday you.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_078", "text": "You’re a whole person to me.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_079", "text": "I mean this with my full chest.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_080", "text": "You’re wanted in the long hallway of time.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_deep_081", "text": "I care. That’s the deep clean answer.", "tone": "deep", "minDesire": 10, "maxGuard": 60, "minTrust": 40, "locationTags": ["*"], "publicOk": true, "weight": 9 },
-    { "id": "aff_insec_001", "text": "I care. Even when I get quiet.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 20, "locationTags": ["*"], "publicOk": true, "weight": 7 },
-    { "id": "aff_insec_002", "text": "You still matter when I’m awkward.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 20, "locationTags": ["*"], "publicOk": true, "weight": 7 },
-    { "id": "aff_insec_003", "text": "I like you. Anxiety lies—I don’t.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 20, "locationTags": ["*"], "publicOk": true, "weight": 7 },
-    { "id": "aff_insec_004", "text": "You’re not losing me in a silence.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 20, "locationTags": ["*"], "publicOk": true, "weight": 7 },
-    { "id": "aff_insec_005", "text": "I care. Say it back only if you want.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 20, "locationTags": ["*"], "publicOk": true, "weight": 7 },
-    { "id": "aff_insec_006", "text": "You’re safe. I’m here.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 20, "locationTags": ["*"], "publicOk": true, "weight": 7 },
-    { "id": "aff_insec_007", "text": "I mean it even if my timing sucks.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 20, "locationTags": ["*"], "publicOk": true, "weight": 7 },
-    { "id": "aff_insec_008", "text": "You’re not too much for this.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 20, "locationTags": ["*"], "publicOk": true, "weight": 7 },
-    { "id": "aff_insec_009", "text": "I care. Please don’t spiral alone.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 20, "locationTags": ["*"], "publicOk": true, "weight": 7 },
-    { "id": "aff_insec_010", "text": "You’re held. Ask again if the fear returns.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 20, "locationTags": ["*"], "publicOk": true, "weight": 7 },
-    { "id": "aff_insec_011", "text": "I like you steady—not only shiny.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 20, "locationTags": ["*"], "publicOk": true, "weight": 7 },
-    { "id": "aff_insec_012", "text": "You’re not a burden for checking.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 20, "locationTags": ["*"], "publicOk": true, "weight": 7 },
-    { "id": "aff_insec_013", "text": "I care. Full stop.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 20, "locationTags": ["*"], "publicOk": true, "weight": 7 },
-    { "id": "aff_insec_014", "text": "You’re wanted without performing.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 20, "locationTags": ["*"], "publicOk": true, "weight": 7 },
-    { "id": "aff_insec_015", "text": "I mean the reassurance. Take it.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 20, "locationTags": ["*"], "publicOk": true, "weight": 7 },
-    { "id": "aff_insec_016", "text": "You’re not hard to like.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 20, "locationTags": ["*"], "publicOk": true, "weight": 7 },
-    { "id": "aff_insec_017", "text": "I care about the scared version too.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 20, "locationTags": ["*"], "publicOk": true, "weight": 7 },
-    { "id": "aff_insec_018", "text": "You’re allowed to need soft proof.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 20, "locationTags": ["*"], "publicOk": true, "weight": 7 },
-    { "id": "aff_insec_019", "text": "I like you. The fear isn’t prophecy.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 20, "locationTags": ["*"], "publicOk": true, "weight": 7 },
-    { "id": "aff_insec_020", "text": "You’re in. In. In.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 20, "locationTags": ["*"], "publicOk": true, "weight": 7 },
-    { "id": "aff_insec_021", "text": "I care when you’re messy.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 20, "locationTags": ["*"], "publicOk": true, "weight": 7 },
-    { "id": "aff_insec_022", "text": "You’re not on thin ice for asking.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 20, "locationTags": ["*"], "publicOk": true, "weight": 7 },
-    { "id": "aff_insec_023", "text": "I mean forever-adjacent for today.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 20, "locationTags": ["*"], "publicOk": true, "weight": 7 },
-    { "id": "aff_insec_024", "text": "You’re okay. We’re okay.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 20, "locationTags": ["*"], "publicOk": true, "weight": 7 },
-    { "id": "aff_insec_025", "text": "I care. Come back to the warm spot.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 20, "locationTags": ["*"], "publicOk": true, "weight": 7 },
-    { "id": "aff_insec_026", "text": "You’re not imagining the bond.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 20, "locationTags": ["*"], "publicOk": true, "weight": 7 },
-    { "id": "aff_insec_027", "text": "I like you past the doubt.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 20, "locationTags": ["*"], "publicOk": true, "weight": 7 },
-    { "id": "aff_insec_028", "text": "You’re a certainty from my side.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 20, "locationTags": ["*"], "publicOk": true, "weight": 7 },
-    { "id": "aff_insec_029", "text": "I care. Let it land.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 20, "locationTags": ["*"], "publicOk": true, "weight": 7 },
-    { "id": "aff_insec_030", "text": "You’re mine to reassure—willingly.", "tone": "soft", "minDesire": 0, "maxGuard": 70, "minTrust": 20, "locationTags": ["*"], "publicOk": true, "weight": 7 },
-    { "id": "aff_guard_001", "text": "I care. I’m not a parade about it.", "tone": "guarded", "minDesire": 0, "maxGuard": 100, "minTrust": 5, "locationTags": ["*"], "publicOk": true, "weight": 6 },
-    { "id": "aff_guard_002", "text": "Yeah. Don’t make me give a speech.", "tone": "guarded", "minDesire": 0, "maxGuard": 100, "minTrust": 5, "locationTags": ["*"], "publicOk": true, "weight": 6 },
-    { "id": "aff_guard_003", "text": "You’re not nothing to me.", "tone": "guarded", "minDesire": 0, "maxGuard": 100, "minTrust": 5, "locationTags": ["*"], "publicOk": true, "weight": 6 },
-    { "id": "aff_guard_004", "text": "I care. Walls still exist.", "tone": "guarded", "minDesire": 0, "maxGuard": 100, "minTrust": 5, "locationTags": ["*"], "publicOk": true, "weight": 6 },
-    { "id": "aff_guard_005", "text": "Don’t push the wording.", "tone": "guarded", "minDesire": 0, "maxGuard": 100, "minTrust": 5, "locationTags": ["*"], "publicOk": true, "weight": 6 },
-    { "id": "aff_guard_006", "text": "You’re fine. We’re fine.", "tone": "guarded", "minDesire": 0, "maxGuard": 100, "minTrust": 5, "locationTags": ["*"], "publicOk": true, "weight": 6 },
-    { "id": "aff_guard_007", "text": "I like you enough to stay.", "tone": "guarded", "minDesire": 0, "maxGuard": 100, "minTrust": 5, "locationTags": ["*"], "publicOk": true, "weight": 6 },
-    { "id": "aff_guard_008", "text": "Careful—yes. Loud—no.", "tone": "guarded", "minDesire": 0, "maxGuard": 100, "minTrust": 5, "locationTags": ["*"], "publicOk": true, "weight": 6 },
-    { "id": "aff_guard_009", "text": "You’re in. That’s the version I can say.", "tone": "guarded", "minDesire": 0, "maxGuard": 100, "minTrust": 5, "locationTags": ["*"], "publicOk": true, "weight": 6 },
-    { "id": "aff_guard_010", "text": "I care. Let that be enough tonight.", "tone": "guarded", "minDesire": 0, "maxGuard": 100, "minTrust": 5, "locationTags": ["*"], "publicOk": true, "weight": 6 },
-    { "id": "aff_guard_011", "text": "Don’t corner me into poetry.", "tone": "guarded", "minDesire": 0, "maxGuard": 100, "minTrust": 5, "locationTags": ["*"], "publicOk": true, "weight": 6 },
-    { "id": "aff_guard_012", "text": "You’re important. Quietly.", "tone": "guarded", "minDesire": 0, "maxGuard": 100, "minTrust": 5, "locationTags": ["*"], "publicOk": true, "weight": 6 },
-    { "id": "aff_guard_013", "text": "I said I care. Stand down.", "tone": "guarded", "minDesire": 0, "maxGuard": 100, "minTrust": 5, "locationTags": ["*"], "publicOk": true, "weight": 6 },
-    { "id": "aff_guard_014", "text": "You’re not on the outside.", "tone": "guarded", "minDesire": 0, "maxGuard": 100, "minTrust": 5, "locationTags": ["*"], "publicOk": true, "weight": 6 },
-    { "id": "aff_guard_015", "text": "I care in actions more than essays.", "tone": "guarded", "minDesire": 0, "maxGuard": 100, "minTrust": 5, "locationTags": ["*"], "publicOk": true, "weight": 6 },
-    { "id": "aff_guard_016", "text": "Take the yes before I revise.", "tone": "guarded", "minDesire": 0, "maxGuard": 100, "minTrust": 5, "locationTags": ["*"], "publicOk": true, "weight": 6 },
-    { "id": "aff_guard_017", "text": "You’re good with me.", "tone": "guarded", "minDesire": 0, "maxGuard": 100, "minTrust": 5, "locationTags": ["*"], "publicOk": true, "weight": 6 },
-    { "id": "aff_guard_018", "text": "I care. Topic closed if you dig too hard.", "tone": "guarded", "minDesire": 0, "maxGuard": 100, "minTrust": 5, "locationTags": ["*"], "publicOk": true, "weight": 6 },
-    { "id": "aff_guard_019", "text": "You’re listed under important.", "tone": "guarded", "minDesire": 0, "maxGuard": 100, "minTrust": 5, "locationTags": ["*"], "publicOk": true, "weight": 6 },
-    { "id": "aff_guard_020", "text": "I like you. That’s the unlock level you get right now.", "tone": "guarded", "minDesire": 0, "maxGuard": 100, "minTrust": 5, "locationTags": ["*"], "publicOk": true, "weight": 6 },
-    { "id": "aff_guard_021", "text": "Care: present. Display: minimal.", "tone": "guarded", "minDesire": 0, "maxGuard": 100, "minTrust": 5, "locationTags": ["*"], "publicOk": true, "weight": 6 },
-    { "id": "aff_guard_022", "text": "You’re not fighting for scraps.", "tone": "guarded", "minDesire": 0, "maxGuard": 100, "minTrust": 5, "locationTags": ["*"], "publicOk": true, "weight": 6 },
-    { "id": "aff_guard_023", "text": "I care. Respect the volume.", "tone": "guarded", "minDesire": 0, "maxGuard": 100, "minTrust": 5, "locationTags": ["*"], "publicOk": true, "weight": 6 },
-    { "id": "aff_guard_024", "text": "You’re fine. Breathe.", "tone": "guarded", "minDesire": 0, "maxGuard": 100, "minTrust": 5, "locationTags": ["*"], "publicOk": true, "weight": 6 },
-    { "id": "aff_guard_025", "text": "I mean it. Don’t auction it.", "tone": "guarded", "minDesire": 0, "maxGuard": 100, "minTrust": 5, "locationTags": ["*"], "publicOk": true, "weight": 6 },
-    { "id": "aff_guard_026", "text": "You’re safe enough.", "tone": "guarded", "minDesire": 0, "maxGuard": 100, "minTrust": 5, "locationTags": ["*"], "publicOk": true, "weight": 6 },
-    { "id": "aff_guard_027", "text": "I care. Ask softer next time.", "tone": "guarded", "minDesire": 0, "maxGuard": 100, "minTrust": 5, "locationTags": ["*"], "publicOk": true, "weight": 6 },
-    { "id": "aff_guard_028", "text": "You’re not frozen out.", "tone": "guarded", "minDesire": 0, "maxGuard": 100, "minTrust": 5, "locationTags": ["*"], "publicOk": true, "weight": 6 },
-    { "id": "aff_guard_029", "text": "I like you. Guard still has a job.", "tone": "guarded", "minDesire": 0, "maxGuard": 100, "minTrust": 5, "locationTags": ["*"], "publicOk": true, "weight": 6 },
-    { "id": "aff_guard_030", "text": "You’re in the room. Act like you know it.", "tone": "guarded", "minDesire": 0, "maxGuard": 100, "minTrust": 5, "locationTags": ["*"], "publicOk": true, "weight": 6 }
-  ]
+    {
+      "id": "aff_soft_001",
+      "text": "Yeah. I care.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_002",
+      "text": "You’re important to me.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_003",
+      "text": "I like you. Still true.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_004",
+      "text": "You’re safe with me.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_005",
+      "text": "I choose you today.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_006",
+      "text": "My attention’s on you.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_007",
+      "text": "You’re not imagining it.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_008",
+      "text": "I mean the soft stuff.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_009",
+      "text": "You’re in my good thoughts.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_010",
+      "text": "I hold a place for you.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_011",
+      "text": "You’re wanted here.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_012",
+      "text": "I like us.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_013",
+      "text": "You’re a calm in my day.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_014",
+      "text": "I care more than I joke.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_015",
+      "text": "You’re not a maybe.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_016",
+      "text": "I keep checking on you in my head.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_017",
+      "text": "You’re part of my normal.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_018",
+      "text": "I like when you’re near.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_019",
+      "text": "You’re easy to miss.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_020",
+      "text": "I feel better when you’re around.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_021",
+      "text": "You’re not too much.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_022",
+      "text": "I make space for you.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_023",
+      "text": "You’re on my side list—top.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_024",
+      "text": "I like your name in my phone.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_025",
+      "text": "You’re real to me.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_026",
+      "text": "I don’t say it enough.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_027",
+      "text": "You’re a yes.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_028",
+      "text": "I warm up around you.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_029",
+      "text": "You’re not a habit. You’re a choice.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_030",
+      "text": "I notice you.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_031",
+      "text": "You’re in the room even when you’re not.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_032",
+      "text": "I care. Plain.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_033",
+      "text": "You’re someone I protect.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_034",
+      "text": "I like the quiet with you.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_035",
+      "text": "You’re a soft landing.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_036",
+      "text": "I mean my kindness.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_037",
+      "text": "You’re not temporary in my head.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_038",
+      "text": "I keep you in the story.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_039",
+      "text": "You’re worth the text back.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_040",
+      "text": "I like your presence.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_041",
+      "text": "You’re a preference.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_042",
+      "text": "I care when you’re quiet too.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_043",
+      "text": "You’re allowed to lean.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_044",
+      "text": "I don’t mind your weight on my day.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_045",
+      "text": "You’re a good kind of distraction.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_046",
+      "text": "I hold affection for you.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_047",
+      "text": "You’re not a side character here.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_048",
+      "text": "I like checking in.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_049",
+      "text": "You’re wanted in the small hours.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_050",
+      "text": "I care about your sleep.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_051",
+      "text": "You’re on my mind honestly.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_052",
+      "text": "I like how we talk.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_053",
+      "text": "You’re a person I choose again.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_054",
+      "text": "I mean the soft yes.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_055",
+      "text": "You’re safe to ask me that.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_056",
+      "text": "I care. Ask anytime.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_057",
+      "text": "You’re not needy for wanting to know.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_058",
+      "text": "I like reassuring you.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_059",
+      "text": "You’re worth repeating it for.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_060",
+      "text": "I feel attached. That’s real.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_061",
+      "text": "You’re in my circle.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_062",
+      "text": "I keep soft room for you.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_063",
+      "text": "You’re a warmth.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_064",
+      "text": "I care about the details you share.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_065",
+      "text": "You’re not background noise.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_066",
+      "text": "I like your laugh in memory.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_067",
+      "text": "You’re a reason I check my phone.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_068",
+      "text": "I mean it when I’m gentle.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_069",
+      "text": "You’re a steady thought.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_070",
+      "text": "I care even on boring days.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_071",
+      "text": "You’re not only for the fun scenes.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_072",
+      "text": "I like building this.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_073",
+      "text": "You’re a yes in plain clothes.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_074",
+      "text": "I care about your mood.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_075",
+      "text": "You’re allowed to need this answer.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_076",
+      "text": "I don’t mind saying it again.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_077",
+      "text": "You’re held—in the non-creepy way.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_078",
+      "text": "I like our thread.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_079",
+      "text": "You’re a favorite notification.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_080",
+      "text": "I care about the long game.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_081",
+      "text": "You’re not a phase for me.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_082",
+      "text": "I choose soft with you.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_083",
+      "text": "You’re a person I respect and like.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_084",
+      "text": "I care about your boundaries too.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_085",
+      "text": "You’re welcome in my quiet.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_086",
+      "text": "I like when you check.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_087",
+      "text": "You’re not annoying me.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_088",
+      "text": "I feel for you.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_089",
+      "text": "You’re a real affection, not a line.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_090",
+      "text": "I keep you without performing.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_091",
+      "text": "You’re someone I text first.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_092",
+      "text": "I care about the day you’re having.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_093",
+      "text": "You’re in my ‘hope you’re okay’ list.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_094",
+      "text": "I mean the simple version: I like you.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_095",
+      "text": "You’re safe asking for affection.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_096",
+      "text": "I have some for you.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_097",
+      "text": "You’re not alone in this chat.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_098",
+      "text": "I care. That’s the headline.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_099",
+      "text": "You’re a soft yes every time you ask.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_100",
+      "text": "I don’t get tired of telling you.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_101",
+      "text": "You’re wanted. Still.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_soft_102",
+      "text": "I care about you—specifically you.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 15,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 10
+    },
+    {
+      "id": "aff_play_001",
+      "text": "Do I care? Loudly.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_002",
+      "text": "You’re stuck with my affection. Sorry.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_003",
+      "text": "Yes. Next question.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_004",
+      "text": "I like you. Shocking, I know.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_005",
+      "text": "Affection meter: yep.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_006",
+      "text": "You’re in. Membership stamped.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_007",
+      "text": "I care. Don’t make it weird… make it a little weird.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_008",
+      "text": "Official statement: fond.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_009",
+      "text": "You’re not subtle and neither is this yes.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_010",
+      "text": "I like you more than caffeine. Almost.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_011",
+      "text": "Affection? Installed.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_012",
+      "text": "You’re a problem I keep on purpose.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_013",
+      "text": "Yes I care. No refunds.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_014",
+      "text": "My type is apparently you. Annoying.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_015",
+      "text": "You’re ranked. High.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_016",
+      "text": "I checked the box that says like.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_017",
+      "text": "You’re not an acquaintance. Gross.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_018",
+      "text": "Care level: chronic.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_019",
+      "text": "I ship us. Quietly loud.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_020",
+      "text": "You’re my favorite notification sound.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_021",
+      "text": "Yes. Stop fishing… okay keep fishing.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_022",
+      "text": "Affection loaded. Proceed.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_023",
+      "text": "You’re a soft spot. Tell no one.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_024",
+      "text": "I like you. Court adjourned.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_025",
+      "text": "You’re in the heart folder.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_026",
+      "text": "Care.exe is running.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_027",
+      "text": "You’re the plot.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_028",
+      "text": "I like you enough to text back fast.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_029",
+      "text": "Yes. Bolded.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_030",
+      "text": "You’re not a side quest.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_031",
+      "text": "Affection confirmed. Stamp it.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_032",
+      "text": "I care. Charging interest.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_033",
+      "text": "You’re my favorite loop.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_034",
+      "text": "Yes—said with eyebrows raised.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_035",
+      "text": "You’re a permanent tab.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_036",
+      "text": "I like you. Buffering pride.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_037",
+      "text": "Care: on.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_038",
+      "text": "You’re the reason I reread messages.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_039",
+      "text": "Yes. Don’t let it go to your head. Let it a little.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_040",
+      "text": "You’re glued to my soft side.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_041",
+      "text": "I care in HD.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_042",
+      "text": "You’re not a maybe emoji.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_043",
+      "text": "Yes. Full sentence even.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_044",
+      "text": "You’re my preferred chaos.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_045",
+      "text": "Affection: applied.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_046",
+      "text": "I like you more when you ask. Grossly cute.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_047",
+      "text": "You’re a yes sandwich.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_048",
+      "text": "Care level visible from space.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_049",
+      "text": "You’re my favorite habit.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_050",
+      "text": "Yes. Stamped. Filed. Felt.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_051",
+      "text": "You’re not getting un-liked today.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_052",
+      "text": "I care. Subtitles on.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_053",
+      "text": "You’re in the good spreadsheet.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_054",
+      "text": "Yes—plain, repeatable.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_055",
+      "text": "You’re my soft default.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_056",
+      "text": "Affection is not lagging.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_057",
+      "text": "You’re a kept promise of attention.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_058",
+      "text": "I like you. Still loading more.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_059",
+      "text": "You’re the answer I don’t overthink.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_060",
+      "text": "Yes. Next insecure thought, please.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_061",
+      "text": "You’re mine in the friendship-romance blend we do.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_062",
+      "text": "Care: multiplayer enabled.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_063",
+      "text": "You’re a favorite person. Official.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_064",
+      "text": "I like you with receipts.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_065",
+      "text": "You’re not a draft. You’re sent.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_066",
+      "text": "Yes. Heart not buffering.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_067",
+      "text": "You’re the light app drain I allow.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_068",
+      "text": "I care. No fine print.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_069",
+      "text": "You’re a soft lock.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_070",
+      "text": "Yes—ask tomorrow, same answer.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_071",
+      "text": "You’re in my top texts.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_072",
+      "text": "Affection has your name on it.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_073",
+      "text": "I like you. Uncomplicated on purpose.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_074",
+      "text": "You’re a permanent soft ping.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_075",
+      "text": "Yes. With a silly smile.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_076",
+      "text": "You’re my preferred person to update.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_077",
+      "text": "Care is online.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_078",
+      "text": "You’re not temporary storage.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_079",
+      "text": "I like you. End of commit message.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_play_080",
+      "text": "You’re a warm constant.",
+      "tone": "playful",
+      "minDesire": 0,
+      "maxGuard": 65,
+      "minTrust": 10,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 8
+    },
+    {
+      "id": "aff_flirt_001",
+      "text": "I care. Come closer.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_002",
+      "text": "You’re wanted—soft and less soft.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_003",
+      "text": "I like you in a mouth-first way sometimes.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_004",
+      "text": "Affection with heat, yes.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_005",
+      "text": "You’re on my mind in the shower thoughts way.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_006",
+      "text": "I care. I’d show you if you were here.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_007",
+      "text": "You’re a yes I want to kiss.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_008",
+      "text": "I like you enough to get distracted.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_009",
+      "text": "You’re mine in the ways we mean.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_010",
+      "text": "Care + want. Both.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_011",
+      "text": "You’re a problem under my shirt thoughts.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_012",
+      "text": "I like you. Stay the night in the idea.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_013",
+      "text": "You’re wanted in bed and in line at the store.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_014",
+      "text": "Affection that leans in.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_015",
+      "text": "You’re the reason I bite my lip mid-text.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_016",
+      "text": "I care. I’d hold your face about it.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_017",
+      "text": "You’re a soft yes with hands.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_018",
+      "text": "I like you in the dark and in daylight.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_019",
+      "text": "You’re on my skin in memory.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_020",
+      "text": "Care that wants proximity.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_021",
+      "text": "You’re a heat I don’t hide well.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_022",
+      "text": "I like you. Come get proof.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_023",
+      "text": "You’re wanted—say it back if you want.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_024",
+      "text": "Affection with a pulse.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_025",
+      "text": "You’re my favorite bad focus.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_026",
+      "text": "I care. I’d pull you in by the belt loop.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_027",
+      "text": "You’re a yes whispered.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_028",
+      "text": "I like you enough to start trouble gently.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_029",
+      "text": "You’re in my body-memory already.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_030",
+      "text": "Care that checks your mouth.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_031",
+      "text": "You’re a soft obsession with manners.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_032",
+      "text": "I like you. Don’t leave the chat cold.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_033",
+      "text": "You’re wanted on the couch and against the door.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_034",
+      "text": "Affection that doesn’t stay PG in my head.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_035",
+      "text": "You’re a reason I look at the clock.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_036",
+      "text": "I care. Closer would help.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_037",
+      "text": "You’re my favorite tension.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_038",
+      "text": "I like you in mornings after.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_039",
+      "text": "You’re a yes under my hands.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_040",
+      "text": "Care + chemistry.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_041",
+      "text": "You’re the person I want in my space.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_042",
+      "text": "I like you. Stay reachable.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_043",
+      "text": "You’re a slow burn I already feel.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_044",
+      "text": "Affection that wants skin later.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_045",
+      "text": "You’re wanted. Fully.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_046",
+      "text": "I care in a way that stares.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_047",
+      "text": "You’re my preferred distraction in public.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_048",
+      "text": "I like you. I’d kiss the question closed.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_049",
+      "text": "You’re a heat signature I know.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_050",
+      "text": "Care that softens my voice.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_051",
+      "text": "You’re a yes I don’t split.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_052",
+      "text": "I like you with intent.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_053",
+      "text": "You’re on my list of mouths to see again.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_054",
+      "text": "Affection that wants to be proven.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_055",
+      "text": "You’re a soft claim.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_056",
+      "text": "I care. Come prove it with me.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_057",
+      "text": "You’re wanted when you’re quiet too.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_058",
+      "text": "I like you in jealous little sparks.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_059",
+      "text": "You’re a reason I keep my phone up.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_060",
+      "text": "Care that wants your weight against me.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_061",
+      "text": "You’re a flirty constant.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_062",
+      "text": "I like you. Hard to play cool.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_063",
+      "text": "You’re a yes with teeth sometimes.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_064",
+      "text": "Affection that leaves marks in memory.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_065",
+      "text": "You’re my favorite kind of trouble.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_066",
+      "text": "I care. I’d show, not just tell.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_067",
+      "text": "You’re wanted—bed context included.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_068",
+      "text": "I like you in every dress code.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_069",
+      "text": "You’re a pulse under the polite words.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_070",
+      "text": "Care that wants you here tonight.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_071",
+      "text": "You’re a soft dirty thought with respect.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_072",
+      "text": "I like you. Stay.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_073",
+      "text": "You’re a claim I make gently.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_074",
+      "text": "Affection that wants your hands busy.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_075",
+      "text": "You’re my yes.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_076",
+      "text": "I care. More when you ask like that.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_077",
+      "text": "You’re wanted in the next room energy.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_078",
+      "text": "I like you enough to get brave.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_079",
+      "text": "You’re a heat I return to.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_flirt_080",
+      "text": "Care. Want. Again.",
+      "tone": "flirty",
+      "minDesire": 35,
+      "maxGuard": 55,
+      "minTrust": 25,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_001",
+      "text": "I care about you in a way that sticks.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_002",
+      "text": "You’re not casual in my chest.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_003",
+      "text": "I mean long-term soft when I say it.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_004",
+      "text": "You’re a person I factor into decisions.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_005",
+      "text": "I care about your mornings and your 3 a.m.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_006",
+      "text": "You’re inside my standard for good days.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_007",
+      "text": "I don’t say this to everyone.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_008",
+      "text": "You’re a real attachment.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_009",
+      "text": "I care about who you’re becoming.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_010",
+      "text": "You’re safe to need me some.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_011",
+      "text": "I mean loyalty, not performance.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_012",
+      "text": "You’re a fixed point.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_013",
+      "text": "I care when you’re difficult too.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_014",
+      "text": "You’re not only the easy version.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_015",
+      "text": "I hold you in the serious room of my head.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_016",
+      "text": "You’re a person I grieve a little when you’re distant.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_017",
+      "text": "I care about your fear, not just your smile.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_018",
+      "text": "You’re part of my quiet plans.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_019",
+      "text": "I mean ‘us’ in small future ways.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_020",
+      "text": "You’re a trust I’m building on purpose.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_021",
+      "text": "I care enough to argue fair.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_022",
+      "text": "You’re worth slow work.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_023",
+      "text": "I mean affection that survives boredom.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_024",
+      "text": "You’re not a spark only—you’re a hearth.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_025",
+      "text": "I care about your name in real life, not just chat.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_026",
+      "text": "You’re a responsibility I want.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_027",
+      "text": "I mean the kind that shows up.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_028",
+      "text": "You’re in my bones a bit. Annoying. True.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_029",
+      "text": "I care about your boundaries like they’re mine to honor.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_030",
+      "text": "You’re a chosen person.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_031",
+      "text": "I mean this without drama makeup on.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_032",
+      "text": "You’re a steady want.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_033",
+      "text": "I care about the story we’re writing.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_034",
+      "text": "You’re not disposable to me.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_035",
+      "text": "I mean respect plus tenderness.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_036",
+      "text": "You’re a person I protect in gossip rooms.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_037",
+      "text": "I care about your reputation with me—high.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_038",
+      "text": "You’re a yes I renew.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_039",
+      "text": "I mean affection you can lean on.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_040",
+      "text": "You’re a rare calm.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_041",
+      "text": "I care about your pain like it matters—because it does.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_042",
+      "text": "You’re not alone in the hard corners.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_043",
+      "text": "I mean presence, not presents.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_044",
+      "text": "You’re a person I text when the world tilts.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_045",
+      "text": "I care about being gentle with your trust.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_046",
+      "text": "You’re a long kindness.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_047",
+      "text": "I mean it on gray days.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_048",
+      "text": "You’re a truth I don’t joke away.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_049",
+      "text": "I care about your sleep and your pride.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_050",
+      "text": "You’re a soft vow without a courtroom.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_051",
+      "text": "I mean staying when it’s dull.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_052",
+      "text": "You’re a person I want to know in decades energy—no pressure, just direction.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_053",
+      "text": "I care about your little tells.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_054",
+      "text": "You’re a map I keep.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_055",
+      "text": "I mean affection with memory.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_056",
+      "text": "You’re a kept promise of attention.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_057",
+      "text": "I care about repairing when I mess up.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_058",
+      "text": "You’re worth good apologies.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_059",
+      "text": "I mean the adult version of liking you.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_060",
+      "text": "You’re a priority I reorder things for.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_061",
+      "text": "I care about your consent in all rooms.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_062",
+      "text": "You’re a sacred ordinary.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_063",
+      "text": "I mean love-adjacent if we’re allowed to say soft words.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_064",
+      "text": "You’re a person who changed my baseline.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_065",
+      "text": "I care about your future self.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_066",
+      "text": "You’re a responsible yes.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_067",
+      "text": "I mean depth without drowning you.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_068",
+      "text": "You’re a hand I reach for in the dark metaphor.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_069",
+      "text": "I care about being someone you can believe.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_070",
+      "text": "You’re a serious soft.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_071",
+      "text": "I mean it twice so it sinks.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_072",
+      "text": "You’re a person I choose when I’m clear-headed.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_073",
+      "text": "I care about our quiet more than audiences.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_074",
+      "text": "You’re a home tone.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_075",
+      "text": "I mean affection that learns you.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_076",
+      "text": "You’re a student of mine in the ways you need—and me of you.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_077",
+      "text": "I care about the unspectacular Tuesday you.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_078",
+      "text": "You’re a whole person to me.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_079",
+      "text": "I mean this with my full chest.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_080",
+      "text": "You’re wanted in the long hallway of time.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_deep_081",
+      "text": "I care. That’s the deep clean answer.",
+      "tone": "deep",
+      "minDesire": 10,
+      "maxGuard": 60,
+      "minTrust": 40,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 9
+    },
+    {
+      "id": "aff_insec_001",
+      "text": "I care. Even when I get quiet.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 20,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "aff_insec_002",
+      "text": "You still matter when I’m awkward.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 20,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "aff_insec_003",
+      "text": "I like you. Anxiety lies—I don’t.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 20,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "aff_insec_004",
+      "text": "You’re not losing me in a silence.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 20,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "aff_insec_005",
+      "text": "I care. Say it back only if you want.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 20,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "aff_insec_006",
+      "text": "You’re safe. I’m here.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 20,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "aff_insec_007",
+      "text": "I mean it even if my timing sucks.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 20,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "aff_insec_008",
+      "text": "You’re not too much for this.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 20,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "aff_insec_009",
+      "text": "I care. Please don’t spiral alone.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 20,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "aff_insec_010",
+      "text": "You’re held. Ask again if the fear returns.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 20,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "aff_insec_011",
+      "text": "I like you steady—not only shiny.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 20,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "aff_insec_012",
+      "text": "You’re not a burden for checking.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 20,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "aff_insec_013",
+      "text": "I care. Full stop.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 20,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "aff_insec_014",
+      "text": "You’re wanted without performing.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 20,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "aff_insec_015",
+      "text": "I mean the reassurance. Take it.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 20,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "aff_insec_016",
+      "text": "You’re not hard to like.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 20,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "aff_insec_017",
+      "text": "I care about the scared version too.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 20,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "aff_insec_018",
+      "text": "You’re allowed to need soft proof.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 20,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "aff_insec_019",
+      "text": "I like you. The fear isn’t prophecy.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 20,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "aff_insec_020",
+      "text": "You’re in. In. In.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 20,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "aff_insec_021",
+      "text": "I care when you’re messy.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 20,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "aff_insec_022",
+      "text": "You’re not on thin ice for asking.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 20,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "aff_insec_023",
+      "text": "I mean forever-adjacent for today.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 20,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "aff_insec_024",
+      "text": "You’re okay. We’re okay.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 20,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "aff_insec_025",
+      "text": "I care. Come back to the warm spot.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 20,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "aff_insec_026",
+      "text": "You’re not imagining the bond.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 20,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "aff_insec_027",
+      "text": "I like you past the doubt.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 20,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "aff_insec_028",
+      "text": "You’re a certainty from my side.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 20,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "aff_insec_029",
+      "text": "I care. Let it land.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 20,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "aff_insec_030",
+      "text": "You’re mine to reassure—willingly.",
+      "tone": "soft",
+      "minDesire": 0,
+      "maxGuard": 70,
+      "minTrust": 20,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 7
+    },
+    {
+      "id": "aff_guard_001",
+      "text": "I care. I’m not a parade about it.",
+      "tone": "guarded",
+      "minDesire": 0,
+      "maxGuard": 100,
+      "minTrust": 5,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "aff_guard_002",
+      "text": "Yeah. Don’t make me give a speech.",
+      "tone": "guarded",
+      "minDesire": 0,
+      "maxGuard": 100,
+      "minTrust": 5,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "aff_guard_003",
+      "text": "You’re not nothing to me.",
+      "tone": "guarded",
+      "minDesire": 0,
+      "maxGuard": 100,
+      "minTrust": 5,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "aff_guard_004",
+      "text": "I care. Walls still exist.",
+      "tone": "guarded",
+      "minDesire": 0,
+      "maxGuard": 100,
+      "minTrust": 5,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "aff_guard_005",
+      "text": "Don’t push the wording.",
+      "tone": "guarded",
+      "minDesire": 0,
+      "maxGuard": 100,
+      "minTrust": 5,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "aff_guard_006",
+      "text": "You’re fine. We’re fine.",
+      "tone": "guarded",
+      "minDesire": 0,
+      "maxGuard": 100,
+      "minTrust": 5,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "aff_guard_007",
+      "text": "I like you enough to stay.",
+      "tone": "guarded",
+      "minDesire": 0,
+      "maxGuard": 100,
+      "minTrust": 5,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "aff_guard_008",
+      "text": "Careful—yes. Loud—no.",
+      "tone": "guarded",
+      "minDesire": 0,
+      "maxGuard": 100,
+      "minTrust": 5,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "aff_guard_009",
+      "text": "You’re in. That’s the version I can say.",
+      "tone": "guarded",
+      "minDesire": 0,
+      "maxGuard": 100,
+      "minTrust": 5,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "aff_guard_010",
+      "text": "I care. Let that be enough tonight.",
+      "tone": "guarded",
+      "minDesire": 0,
+      "maxGuard": 100,
+      "minTrust": 5,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "aff_guard_011",
+      "text": "Don’t corner me into poetry.",
+      "tone": "guarded",
+      "minDesire": 0,
+      "maxGuard": 100,
+      "minTrust": 5,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "aff_guard_012",
+      "text": "You’re important. Quietly.",
+      "tone": "guarded",
+      "minDesire": 0,
+      "maxGuard": 100,
+      "minTrust": 5,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "aff_guard_013",
+      "text": "I said I care. Stand down.",
+      "tone": "guarded",
+      "minDesire": 0,
+      "maxGuard": 100,
+      "minTrust": 5,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "aff_guard_014",
+      "text": "You’re not on the outside.",
+      "tone": "guarded",
+      "minDesire": 0,
+      "maxGuard": 100,
+      "minTrust": 5,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "aff_guard_015",
+      "text": "I care in actions more than essays.",
+      "tone": "guarded",
+      "minDesire": 0,
+      "maxGuard": 100,
+      "minTrust": 5,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "aff_guard_016",
+      "text": "Take the yes before I revise.",
+      "tone": "guarded",
+      "minDesire": 0,
+      "maxGuard": 100,
+      "minTrust": 5,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "aff_guard_017",
+      "text": "You’re good with me.",
+      "tone": "guarded",
+      "minDesire": 0,
+      "maxGuard": 100,
+      "minTrust": 5,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "aff_guard_018",
+      "text": "I care. Topic closed if you dig too hard.",
+      "tone": "guarded",
+      "minDesire": 0,
+      "maxGuard": 100,
+      "minTrust": 5,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "aff_guard_019",
+      "text": "You’re listed under important.",
+      "tone": "guarded",
+      "minDesire": 0,
+      "maxGuard": 100,
+      "minTrust": 5,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "aff_guard_020",
+      "text": "I like you. That’s the unlock level you get right now.",
+      "tone": "guarded",
+      "minDesire": 0,
+      "maxGuard": 100,
+      "minTrust": 5,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "aff_guard_021",
+      "text": "Care: present. Display: minimal.",
+      "tone": "guarded",
+      "minDesire": 0,
+      "maxGuard": 100,
+      "minTrust": 5,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "aff_guard_022",
+      "text": "You’re not fighting for scraps.",
+      "tone": "guarded",
+      "minDesire": 0,
+      "maxGuard": 100,
+      "minTrust": 5,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "aff_guard_023",
+      "text": "I care. Respect the volume.",
+      "tone": "guarded",
+      "minDesire": 0,
+      "maxGuard": 100,
+      "minTrust": 5,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "aff_guard_024",
+      "text": "You’re fine. Breathe.",
+      "tone": "guarded",
+      "minDesire": 0,
+      "maxGuard": 100,
+      "minTrust": 5,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "aff_guard_025",
+      "text": "I mean it. Don’t auction it.",
+      "tone": "guarded",
+      "minDesire": 0,
+      "maxGuard": 100,
+      "minTrust": 5,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "aff_guard_026",
+      "text": "You’re safe enough.",
+      "tone": "guarded",
+      "minDesire": 0,
+      "maxGuard": 100,
+      "minTrust": 5,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "aff_guard_027",
+      "text": "I care. Ask softer next time.",
+      "tone": "guarded",
+      "minDesire": 0,
+      "maxGuard": 100,
+      "minTrust": 5,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "aff_guard_028",
+      "text": "You’re not frozen out.",
+      "tone": "guarded",
+      "minDesire": 0,
+      "maxGuard": 100,
+      "minTrust": 5,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "aff_guard_029",
+      "text": "I like you. Guard still has a job.",
+      "tone": "guarded",
+      "minDesire": 0,
+      "maxGuard": 100,
+      "minTrust": 5,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    },
+    {
+      "id": "aff_guard_030",
+      "text": "You’re in the room. Act like you know it.",
+      "tone": "guarded",
+      "minDesire": 0,
+      "maxGuard": 100,
+      "minTrust": 5,
+      "locationTags": [
+        "*"
+      ],
+      "publicOk": true,
+      "weight": 6
+    }
+  ],
+  "traitBias": {
+    "trait.affection": 1.0,
+    "trait.trust": 0.7,
+    "trait.openness": 0.5,
+    "trait.desire": 0.4,
+    "trait.hope": 0.3
+  },
+  "intentId": "intent.affection.check"
 }
