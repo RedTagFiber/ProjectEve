@@ -61,6 +61,10 @@
     <Folder Include="Characters\Traits\TraitJson\SubSlowTraits\" />
     <Folder Include="Characters\Traits\TraitJson\MidTraits\" />
     <Folder Include="Characters\Traits\TraitJson\TraitHistory\" />
+    <Folder Include="World\SmallTown\NewFolder1\" />
+    <Folder Include="World\SmallTown\NewFolder2\" />
+    <Folder Include="World\SmallTown\NewFolder3\" />
+    <Folder Include="World\SmallTown\NewFolder\" />
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,274 @@
+{
+  "schema_version": "1.0.0",
+  "file": "work.json",
+  "project": "Project Eve",
+  "region": "Bellefontaine, OH",
+  "last_updated": "2026-08-12",
+  "employers": [
+    {
+      "id": "emp_mary_rutan",
+      "name": "Mary Rutan Hospital",
+      "type": "healthcare",
+      "category": "hospital",
+      "address": "205 Palmer Ave, Bellefontaine, OH 43311",
+      "employees_total": 620,
+      "is_largest_employer": true,
+      "description": "The primary regional hospital serving Logan County and surrounding counties. Full acute care, emergency, surgical, and specialty services. Affiliated with OhioHealth.",
+      "positions": [
+        {"title": "Registered Nurse", "department": "Medical/Surgical", "pay_hourly": 30.50, "pay_type": "hourly", "shift_options": ["day", "night", "rotating"], "full_time": true, "benefits": ["health", "dental", "vision", "retirement_403b", "tuition_reimbursement"]},
+        {"title": "Licensed Practical Nurse", "department": "Long-Term Care", "pay_hourly": 22.00, "pay_type": "hourly", "shift_options": ["day", "evening", "night"], "full_time": true, "benefits": ["health", "dental", "vision", "retirement"]},
+        {"title": "Medical Assistant", "department": "Outpatient Clinics", "pay_hourly": 17.50, "pay_type": "hourly", "shift_options": ["day"], "full_time": true, "benefits": ["health", "dental", "vision", "retirement"]},
+        {"title": "ER Technician", "department": "Emergency", "pay_hourly": 19.00, "pay_type": "hourly", "shift_options": ["rotating"], "full_time": true, "benefits": ["health", "dental", "vision", "retirement"]},
+        {"title": "Hospitalist Physician", "department": "Medicine", "pay_annual": 245000, "pay_type": "salary", "shift_options": ["day", "night"], "full_time": true, "benefits": ["full_package", "malpractice", "CME_allowance"]},
+        {"title": "Radiology Tech", "department": "Imaging", "pay_hourly": 27.00, "pay_type": "hourly", "shift_options": ["day", "night"], "full_time": true, "benefits": ["health", "dental", "vision", "retirement"]},
+        {"title": "Food Service Worker", "department": "Dietary", "pay_hourly": 14.50, "pay_type": "hourly", "shift_options": ["day", "evening"], "full_time": false, "benefits": ["health_eligible_FT"]},
+        {"title": "Environmental Services", "department": "Housekeeping", "pay_hourly": 14.00, "pay_type": "hourly", "shift_options": ["day", "night"], "full_time": true, "benefits": ["health", "retirement"]},
+        {"title": "Healthcare Administrator", "department": "Administration", "pay_annual": 68000, "pay_type": "salary", "shift_options": ["day"], "full_time": true, "benefits": ["full_package"]}
+      ],
+      "npc_archetypes": ["nurse", "doctor", "technician", "administrator", "support_staff"],
+      "commute_from_neighborhoods": {
+        "nbhd_west_belle": "3 min walk",
+        "nbhd_downtown_core": "7 min drive",
+        "nbhd_north_side": "9 min drive",
+        "nbhd_south_side": "8 min drive",
+        "nbhd_east_belle": "14 min drive",
+        "nbhd_lake_ridge": "16 min drive",
+        "nbhd_rural_fringe": "25 min drive"
+      },
+      "parking": "free_staff_lot",
+      "union": false,
+      "flavor_text": "The hospital is the heartbeat of Bellefontaine. Three generations of families have been born, healed, and died within its walls. The ER waiting room on a Friday night tells you everything about the county."
+    },
+    {
+      "id": "emp_honda_mfg",
+      "name": "Honda of America Mfg. — Marysville Plant (Nearby)",
+      "type": "manufacturing",
+      "category": "automotive",
+      "address": "24000 Honda Pkwy, Marysville, OH 43040",
+      "distance_from_belle_miles": 28,
+      "commute_time_min": 38,
+      "employees_total": 11000,
+      "description": "Honda's flagship North American manufacturing plant. Produces Accord and other models. Massive regional employer drawing workers from Logan, Union, and surrounding counties.",
+      "positions": [
+        {"title": "Production Associate", "department": "Assembly", "pay_hourly": 22.50, "pay_type": "hourly", "shift_options": ["day", "night", "rotating"], "full_time": true, "benefits": ["health", "dental", "vision", "retirement", "profit_sharing", "tuition"]},
+        {"title": "Quality Control Technician", "department": "Quality", "pay_hourly": 26.00, "pay_type": "hourly", "shift_options": ["day", "night"], "full_time": true, "benefits": ["health", "dental", "vision", "retirement", "profit_sharing"]},
+        {"title": "Maintenance Technician", "department": "Facilities", "pay_hourly": 30.00, "pay_type": "hourly", "shift_options": ["rotating"], "full_time": true, "benefits": ["full_package"]},
+        {"title": "Process Engineer", "department": "Engineering", "pay_annual": 82000, "pay_type": "salary", "shift_options": ["day"], "full_time": true, "benefits": ["full_package"]},
+        {"title": "Logistics Coordinator", "department": "Supply Chain", "pay_annual": 58000, "pay_type": "salary", "shift_options": ["day"], "full_time": true, "benefits": ["full_package"]}
+      ],
+      "npc_archetypes": ["factory_worker", "shift_worker", "engineer", "commuter"],
+      "commute_note": "Many Bellefontaine residents commute SR-33 east to Marysville daily. Carpool culture strong.",
+      "parking": "large_free_lot",
+      "union": true,
+      "union_name": "Honda Associates (non-UAW, company union structure)",
+      "flavor_text": "Half the county drives to Marysville every morning. You can tell by the SR-33 on-ramp at 5:45 AM — a river of headlights heading east."
+    },
+    {
+      "id": "emp_bellefontaine_city_schools",
+      "name": "Bellefontaine City School District",
+      "type": "education",
+      "category": "public_k12",
+      "address": "820 Ludlow Rd, Bellefontaine, OH 43311",
+      "employees_total": 380,
+      "description": "The public school district serving the city of Bellefontaine. Includes elementary, middle, and high school. Known for athletics and vocational programs.",
+      "schools": [
+        {"name": "Bellefontaine High School", "address": "820 Ludlow Rd", "grades": "9-12", "enrollment": 820},
+        {"name": "Bellefontaine Middle School", "address": "300 Mound Ave", "grades": "6-8", "enrollment": 580},
+        {"name": "Bellefontaine Elementary — Primary", "address": "100 School Ave", "grades": "K-2", "enrollment": 380},
+        {"name": "Bellefontaine Elementary — Intermediate", "address": "204 Elm St", "grades": "3-5", "enrollment": 370}
+      ],
+      "positions": [
+        {"title": "High School Teacher", "department": "Secondary Education", "pay_annual": 52000, "pay_type": "salary", "shift_options": ["day"], "full_time": true, "benefits": ["health", "dental", "vision", "STRS_pension", "summers_off"]},
+        {"title": "Elementary Teacher", "department": "Primary Education", "pay_annual": 46000, "pay_type": "salary", "shift_options": ["day"], "full_time": true, "benefits": ["health", "dental", "vision", "STRS_pension"]},
+        {"title": "School Counselor", "department": "Student Services", "pay_annual": 54000, "pay_type": "salary", "shift_options": ["day"], "full_time": true, "benefits": ["health", "dental", "vision", "STRS_pension"]},
+        {"title": "Bus Driver", "department": "Transportation", "pay_hourly": 18.50, "pay_type": "hourly", "shift_options": ["split_shift"], "full_time": false, "benefits": ["health_eligible"]},
+        {"title": "Custodian", "department": "Facilities", "pay_hourly": 16.00, "pay_type": "hourly", "shift_options": ["day", "evening"], "full_time": true, "benefits": ["health", "OPERS_pension"]},
+        {"title": "Special Education Aide", "department": "Special Ed", "pay_hourly": 15.50, "pay_type": "hourly", "shift_options": ["day"], "full_time": true, "benefits": ["health", "OPERS_pension"]},
+        {"title": "Athletic Coach (Secondary)", "department": "Athletics", "pay_stipend": 4500, "pay_type": "stipend_per_season", "shift_options": ["afternoon_evening"], "full_time": false, "benefits": ["none_unless_primary_staff"]}
+      ],
+      "npc_archetypes": ["teacher", "coach", "administrator", "support_staff", "bus_driver"],
+      "commute_from_neighborhoods": {
+        "nbhd_downtown_core": "5 min drive",
+        "nbhd_north_side": "6 min drive",
+        "nbhd_east_belle": "10 min drive"
+      },
+      "parking": "free_staff_lot",
+      "union": true,
+      "union_name": "Bellefontaine Education Association (OEA affiliated)",
+      "flavor_text": "Everyone in town has an opinion about the school board. Half the staff has kids in the district. Football Fridays in October stop the whole town."
+    },
+    {
+      "id": "emp_benjamin_logan",
+      "name": "Benjamin Logan Local School District",
+      "type": "education",
+      "category": "public_k12",
+      "address": "4540 CR 26, Bellefontaine, OH 43311",
+      "employees_total": 180,
+      "description": "Rural school district serving the townships surrounding Bellefontaine. Strong agricultural and vocational programs. Tight-knit community.",
+      "schools": [
+        {"name": "Benjamin Logan High School", "address": "4540 CR 26", "grades": "9-12", "enrollment": 380},
+        {"name": "Benjamin Logan Middle School", "address": "4540 CR 26", "grades": "6-8", "enrollment": 280},
+        {"name": "Benjamin Logan Elementary", "address": "4540 CR 26", "grades": "K-5", "enrollment": 520}
+      ],
+      "positions": [
+        {"title": "Teacher", "department": "K-12", "pay_annual": 44000, "pay_type": "salary", "shift_options": ["day"], "full_time": true, "benefits": ["health", "dental", "STRS_pension"]},
+        {"title": "Agriculture Teacher / FFA Advisor", "department": "Vocational", "pay_annual": 50000, "pay_type": "salary", "shift_options": ["day", "occasional_evening"], "full_time": true, "benefits": ["health", "STRS_pension"]},
+        {"title": "Maintenance", "department": "Facilities", "pay_hourly": 17.00, "pay_type": "hourly", "shift_options": ["day"], "full_time": true, "benefits": ["health", "OPERS_pension"]}
+      ],
+      "npc_archetypes": ["rural_teacher", "coach", "ag_teacher"],
+      "union": true,
+      "flavor_text": "If you grew up in the townships, you went to Benjamin Logan. The rivalry with Bellefontaine City Schools runs generations deep."
+    },
+    {
+      "id": "emp_ohio_hi_point",
+      "name": "Ohio Hi-Point Career Technology Center",
+      "type": "education",
+      "category": "vocational_career_tech",
+      "address": "2280 St Rt 540, Bellefontaine, OH 43311",
+      "employees_total": 120,
+      "description": "Joint vocational school district serving Logan County high schoolers and adult learners. Programs in welding, HVAC, cosmetology, medical assisting, culinary arts, auto tech, and more.",
+      "programs": ["Welding", "HVAC/R", "Cosmetology", "Medical Assisting", "Culinary Arts", "Automotive Technology", "Construction Trades", "Criminal Justice", "Early Childhood Education", "Computer Technology", "Precision Machining"],
+      "positions": [
+        {"title": "Welding Instructor", "department": "Trades", "pay_annual": 55000, "pay_type": "salary", "shift_options": ["day"], "full_time": true, "benefits": ["health", "STRS_pension"]},
+        {"title": "Cosmetology Instructor", "department": "Personal Services", "pay_annual": 44000, "pay_type": "salary", "shift_options": ["day"], "full_time": true, "benefits": ["health", "STRS_pension"]},
+        {"title": "Medical Assisting Instructor", "department": "Health Sciences", "pay_annual": 52000, "pay_type": "salary", "shift_options": ["day"], "full_time": true, "benefits": ["health", "STRS_pension"]},
+        {"title": "Adult Education Coordinator", "department": "Continuing Ed", "pay_annual": 48000, "pay_type": "salary", "shift_options": ["day", "evening"], "full_time": true, "benefits": ["health", "OPERS_pension"]}
+      ],
+      "npc_archetypes": ["vocational_instructor", "adult_learner", "trades_specialist"],
+      "flavor_text": "The welding shop smells like burnt metal and ambition. Half the county's tradespeople trained here."
+    },
+    {
+      "id": "emp_walmart_belle",
+      "name": "Walmart Supercenter — Bellefontaine",
+      "type": "retail",
+      "category": "big_box_retail",
+      "address": "1515 S Main St, Bellefontaine, OH 43311",
+      "employees_total": 350,
+      "description": "The largest single retail employer in the county. Open 24 hours. Hub for grocery, general merchandise, auto, pharmacy, and vision services.",
+      "positions": [
+        {"title": "Cashier / Front End", "department": "Front End", "pay_hourly": 14.00, "pay_type": "hourly", "shift_options": ["day", "evening", "overnight"], "full_time": false, "benefits": ["health_eligible_FT"]},
+        {"title": "Stocker / Overnight Associate", "department": "Stocking", "pay_hourly": 15.00, "pay_type": "hourly", "shift_options": ["overnight"], "full_time": true, "benefits": ["health", "401k"]},
+        {"title": "Department Manager", "department": "Various", "pay_annual": 42000, "pay_type": "salary", "shift_options": ["rotating"], "full_time": true, "benefits": ["health", "dental", "401k"]},
+        {"title": "Pharmacy Technician", "department": "Pharmacy", "pay_hourly": 17.00, "pay_type": "hourly", "shift_options": ["day", "evening"], "full_time": true, "benefits": ["health", "dental", "401k"]},
+        {"title": "Asset Protection Associate", "department": "LP", "pay_hourly": 16.00, "pay_type": "hourly", "shift_options": ["rotating"], "full_time": true, "benefits": ["health", "401k"]},
+        {"title": "Store Manager", "department": "Management", "pay_annual": 115000, "pay_type": "salary", "shift_options": ["day"], "full_time": true, "benefits": ["full_package"]}
+      ],
+      "npc_archetypes": ["retail_worker", "overnight_stocker", "manager", "pharmacy_tech"],
+      "parking": "large_free_lot",
+      "union": false,
+      "flavor_text": "It's open at 3 AM on Christmas Eve and someone is always there. The overnight crew knows each other's birthdays."
+    },
+    {
+      "id": "emp_logan_county_govt",
+      "name": "Logan County Government",
+      "type": "government",
+      "category": "county_municipal",
+      "address": "100 S Main St, Bellefontaine, OH 43311",
+      "employees_total": 210,
+      "description": "County government operations including auditor, treasurer, sheriff, courts, engineer, DJFS, and commissioners offices.",
+      "departments": ["Sheriff's Office", "Common Pleas Court", "Juvenile Court", "Probate Court", "Auditor", "Treasurer", "Recorder", "Engineer", "DJFS — Job & Family Services", "Board of Elections", "Dog Warden"],
+      "positions": [
+        {"title": "Sheriff's Deputy", "department": "Sheriff", "pay_annual": 52000, "pay_type": "salary", "shift_options": ["rotating_24_7"], "full_time": true, "benefits": ["health", "dental", "OPERS_pension", "gun_allowance"]},
+        {"title": "County Clerk", "department": "Courts", "pay_hourly": 17.50, "pay_type": "hourly", "shift_options": ["day"], "full_time": true, "benefits": ["health", "OPERS_pension"]},
+        {"title": "Caseworker", "department": "DJFS", "pay_annual": 41000, "pay_type": "salary", "shift_options": ["day"], "full_time": true, "benefits": ["health", "dental", "OPERS_pension"]},
+        {"title": "County Engineer Technician", "department": "Engineer", "pay_annual": 48000, "pay_type": "salary", "shift_options": ["day"], "full_time": true, "benefits": ["health", "OPERS_pension"]},
+        {"title": "Corrections Officer", "department": "Jail", "pay_annual": 45000, "pay_type": "salary", "shift_options": ["rotating"], "full_time": true, "benefits": ["health", "OPERS_pension"]}
+      ],
+      "npc_archetypes": ["sheriff", "deputy", "clerk", "caseworker", "judge", "commissioner"],
+      "parking": "courthouse_lot",
+      "union": false,
+      "flavor_text": "The courthouse is the center of Bellefontaine in more ways than one. Everybody downtown knows the clerks by name."
+    },
+    {
+      "id": "emp_city_belle",
+      "name": "City of Bellefontaine",
+      "type": "government",
+      "category": "municipal",
+      "address": "135 N Detroit St, Bellefontaine, OH 43311",
+      "employees_total": 130,
+      "description": "Municipal services including utilities, street maintenance, parks & rec, fire, and administration.",
+      "departments": ["Fire Department", "Street/Utilities", "Parks & Recreation", "City Administration", "Building & Zoning"],
+      "positions": [
+        {"title": "Firefighter / EMT", "department": "Fire", "pay_annual": 49000, "pay_type": "salary", "shift_options": ["24_on_48_off"], "full_time": true, "benefits": ["health", "dental", "OPERS_pension"]},
+        {"title": "Utility Lineworker", "department": "Utilities", "pay_hourly": 24.00, "pay_type": "hourly", "shift_options": ["day", "on_call"], "full_time": true, "benefits": ["health", "OPERS_pension"]},
+        {"title": "Parks Maintenance Worker", "department": "Parks", "pay_hourly": 16.00, "pay_type": "hourly", "shift_options": ["day"], "full_time": true, "benefits": ["health", "OPERS_pension"]},
+        {"title": "City Planner", "department": "Administration", "pay_annual": 58000, "pay_type": "salary", "shift_options": ["day"], "full_time": true, "benefits": ["health", "OPERS_pension"]}
+      ],
+      "npc_archetypes": ["firefighter", "utility_worker", "city_employee"],
+      "flavor_text": "The fire station sits two blocks from downtown. On quiet nights you can hear the tones drop from half the neighborhood."
+    },
+    {
+      "id": "emp_rw_inc",
+      "name": "RW Inc. / Regional Manufacturers (Composite)",
+      "type": "manufacturing",
+      "category": "light_industrial",
+      "address": "Industrial Pkwy, Bellefontaine, OH 43311",
+      "employees_total": 480,
+      "description": "Composite of small-to-mid manufacturing operations in the Bellefontaine industrial corridor. Plastics, metal fabrication, food processing. Actual employers: Riteway Mfg, Logan Aluminum (nearby Raymond), Superior Industries.",
+      "positions": [
+        {"title": "Machine Operator", "department": "Production", "pay_hourly": 17.00, "pay_type": "hourly", "shift_options": ["day", "night"], "full_time": true, "benefits": ["health", "401k"]},
+        {"title": "Welder / Fabricator", "department": "Fabrication", "pay_hourly": 22.00, "pay_type": "hourly", "shift_options": ["day", "night"], "full_time": true, "benefits": ["health", "401k"]},
+        {"title": "Forklift Operator", "department": "Warehouse", "pay_hourly": 18.00, "pay_type": "hourly", "shift_options": ["day", "night"], "full_time": true, "benefits": ["health", "401k"]},
+        {"title": "Quality Inspector", "department": "QC", "pay_hourly": 20.00, "pay_type": "hourly", "shift_options": ["day"], "full_time": true, "benefits": ["health", "401k"]},
+        {"title": "Production Supervisor", "department": "Management", "pay_annual": 58000, "pay_type": "salary", "shift_options": ["rotating"], "full_time": true, "benefits": ["full_package"]}
+      ],
+      "npc_archetypes": ["factory_worker", "shift_worker", "welder", "supervisor"],
+      "parking": "plant_lot",
+      "union": false,
+      "flavor_text": "The night shift trades at 11 PM. You see them at the gas station, still in work boots, filling thermoses."
+    },
+    {
+      "id": "emp_kroger_belle",
+      "name": "Kroger — Bellefontaine",
+      "type": "retail",
+      "category": "grocery",
+      "address": "1235 S Main St, Bellefontaine, OH 43311",
+      "employees_total": 120,
+      "positions": [
+        {"title": "Cashier", "department": "Front End", "pay_hourly": 14.50, "pay_type": "hourly", "shift_options": ["day", "evening"], "full_time": false, "benefits": ["union_health_eligible"]},
+        {"title": "Deli Associate", "department": "Deli", "pay_hourly": 15.00, "pay_type": "hourly", "shift_options": ["morning", "afternoon"], "full_time": false, "benefits": ["union_health_eligible"]},
+        {"title": "Grocery Manager", "department": "Management", "pay_annual": 55000, "pay_type": "salary", "shift_options": ["day"], "full_time": true, "benefits": ["health", "401k", "union"]},
+        {"title": "Pharmacy Technician", "department": "Pharmacy", "pay_hourly": 17.00, "pay_type": "hourly", "shift_options": ["day"], "full_time": true, "benefits": ["health", "401k"]}
+      ],
+      "npc_archetypes": ["grocery_worker", "cashier", "pharmacist"],
+      "union": true,
+      "union_name": "UFCW Local 1059",
+      "flavor_text": "The Kroger is where everybody runs into everybody. Tuesday evenings are surprisingly social."
+    },
+    {
+      "id": "emp_self_employed",
+      "name": "Self-Employed / Small Business",
+      "type": "entrepreneurial",
+      "category": "various",
+      "address": "Various — Bellefontaine, OH",
+      "employees_total": null,
+      "description": "Catch-all for small business owners, farmers, tradespeople, and freelancers who are their own employer.",
+      "archetypes": [
+        {"label": "Farmer", "avg_annual_income": 42000, "income_stability": "variable", "schedule": "dawn_to_dusk_seasonal"},
+        {"label": "Electrician / Plumber / HVAC (Independent)", "avg_annual_income": 68000, "income_stability": "stable", "schedule": "day_on_call"},
+        {"label": "Hair Salon Owner", "avg_annual_income": 32000, "income_stability": "moderate", "schedule": "tue_sat_days"},
+        {"label": "Daycare Operator", "avg_annual_income": 28000, "income_stability": "moderate", "schedule": "early_morning_to_evening"},
+        {"label": "Freelance Remote Worker", "avg_annual_income": 72000, "income_stability": "variable", "schedule": "flexible_home_office"},
+        {"label": "Bar / Restaurant Owner", "avg_annual_income": 38000, "income_stability": "volatile", "schedule": "evenings_weekends"},
+        {"label": "Grain Farmer (Large Scale)", "avg_annual_income": 85000, "income_stability": "variable_weather_dependent", "schedule": "seasonal_extreme"}
+      ],
+      "flavor_text": "A third of Bellefontaine is technically self-employed if you count the farm families and side hustles."
+    }
+  ],
+  "commute_patterns": {
+    "internal_commute_avg_min": 8,
+    "external_commute_destinations": [
+      {"destination": "Marysville, OH", "miles": 28, "avg_min": 38, "primary_route": "SR-33 East", "employer_draw": "Honda Mfg"},
+      {"destination": "Columbus, OH", "miles": 55, "avg_min": 65, "primary_route": "SR-33 to US-33", "employer_draw": "Remote workers, professional services"},
+      {"destination": "Lima, OH", "miles": 35, "avg_min": 42, "primary_route": "SR-117 West", "employer_draw": "Ford Lima Engine Plant, medical"},
+      {"destination": "Kenton, OH", "miles": 25, "avg_min": 32, "primary_route": "SR-67 North", "employer_draw": "Hardin County employers"},
+      {"destination": "Urbana, OH", "miles": 22, "avg_min": 28, "primary_route": "SR-540 East", "employer_draw": "Champaign County employers"}
+    ],
+    "remote_work_prevalence_pct": 18,
+    "notes": "SR-33 is the economic lifeline. Columbus metro remote workers increasingly common post-2020."
+  },
+  "unemployment_rate_pct": 4.8,
+  "median_household_income": 51200,
+  "workforce_size": 6100,
+  "dominant_industries": ["healthcare", "manufacturing", "education", "retail", "agriculture", "government"]
+}
