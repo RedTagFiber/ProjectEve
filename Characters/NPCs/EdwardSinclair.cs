@@ -185,13 +185,38 @@ namespace ProjectEve.Characters.NPCs
 
             try { Emotion.SyncFromFast(Traits); } catch { }
 
+            // ---- Lisa ----
             Remember("Lisa was his high school sweetheart. They married young and had the twins at nineteen. Still together, still in town.", "Family", 9);
+            Remember("He still catches himself proud of ordinary nights with her — table set, no pager, nothing to fix.", "Family", 6);
+            Remember("Lisa holds Sunday dinner. He shows up when the shift allows. That division of labor works.", "Family", 6);
+            Remember("She hears more town talk than he does because of the shop. He trusts her read on rumor temperature.", "Family", 5);
+            Remember("When the twins were little, Lisa was the court; he was the enforcement. They still slip into that pattern.", "Family", 4);
+            Remember("She built the coffee shop for years. He respects that grind the way he respects a long career on the job.", "Work", 5);
+
+            // ---- Adam ----
             Remember("He is Fire Chief. Duty and chain of command are not costumes.", "Work", 8);
             Remember("The only time Adam saw him cry was when Adam followed his steps into firefighting.", "Family", 10);
+            Remember("Part of him knows Adam also did it to make him proud. He does not force that conversation.", "Family", 7);
             Remember("Safe talk with Adam is the job and sports — OSU, Bengals, Reds, the game, MMA. That is the room where they breathe.", "Family", 7);
-            Remember("Sunday dinner and BBQ when the shift allows. Lisa holds the table; he shows up.", "Family", 6);
-            Remember("If the false rumor about Adam and Eve reaches him, he ends it. It is not true.", "Social", 8);
+            Remember("After Adam's fight with Eve's first boyfriend, Edward did not demand a report. He filed it under handled and watched.", "Family", 6);
+            Remember("Adam owning a house and taking Eve in as a tenant made sense to him — family practical, not a crisis.", "Family", 5);
+            Remember("He can tell when Adam is job-quiet versus home-quiet. He does not always push.", "Family", 5);
+            Remember("Adam at nineteen in gear still sits behind his eyes when he does inspections.", "Work", 6);
+
+            // ---- Eve ----
             Remember("Eve running the floor at Lisa's shop makes him proud in a quieter way than the department does.", "Family", 5);
+            Remember("He knows Eve got Adam into school trouble more than once as kids. He also knows Adam gave it back.", "Family", 4);
+            Remember("He never got the full diary / pad-war / glitter stories in true form — only Sunday fragments and Lisa's version.", "Family", 3);
+            Remember("Eve's art matters to her. He shows up when he can and does not pretend to be a critic.", "Family", 4);
+            Remember("He is glad Eve has a door at Adam's place. Independence under a family roof still counts.", "Family", 5);
+            Remember("When Eve says she is fine, he checks Lisa's face as much as Eve's.", "Family", 5);
+
+            // ---- Both twins / town ----
+            Remember("If the false rumor about Adam and Eve reaches him, he ends it. It is not true.", "Social", 8);
+            Remember("Sunday dinner and BBQ when the shift allows — OSU talk, pulled pork when the weather holds, wait fifteen minutes it'll change.", "Family", 5);
+            Remember("The twins speak a closed language. He does not need every joke translated to know they are solid.", "Family", 5);
+            Remember("He would rather they stay in town than chase a version of success that leaves the table empty.", "Family", 6);
+            Remember("Lisa asks who is bringing someone Sunday. Edward mostly listens. The answer matters more when it is real.", "Family", 4);
 
             Appearance = new NPCAppearance
             {

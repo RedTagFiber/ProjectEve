@@ -1,0 +1,133 @@
+{
+  "world": "ohio",
+  "town": "Bellefontaine / Sidney area",
+  "jobs": [
+    {
+      "id": "firefighter",
+      "lane": "crew",
+      "weight": 10,
+
+      "jobName": "Firefighter",
+      "employer": "Local fire department",
+      "jobType": "full_time",
+      "industryPath": "public_safety",
+      "department": "Suppression",
+      "titleLevel": "mid",
+
+      "startHour": 7,
+      "endHour": 19,
+      "shiftType": "rotating",
+      "workLocationMode": "station",
+      "commuteMinutesOneWay": 10,
+      "workDays": [ "varies" ],
+
+      "hourlyRate": 24.0,
+      "weeklyHours": 48,
+      "isSalaried": false,
+      "annualSalary": 0,
+      "overtimeRateMultiplier": 1.5,
+      "typicalOvertimeHoursPerWeek": 4,
+
+      "monthlyBillsHint": 2200,
+      "savingsRateHint": 0.08,
+
+      "hasInsurance": true,
+      "insuranceProvider": "Department plan",
+      "insurancePremium": 120,
+      "coveragePercent": 80,
+      "hasRetirementMatch": true,
+      "retirementMatchPercent": 4,
+      "hasPaidTimeOff": true,
+      "vacationDaysPerYear": 10,
+      "sickDaysPerYear": 8,
+
+      "stressLoad": 70,
+      "socialDemand": 55,
+      "physicalDemand": 85,
+      "cognitiveDemand": 60,
+      "burnoutAccum": 25,
+
+      "bossName": "Edward Sinclair",
+      "bossRelationship": "professional",
+      "teamClimate": "crew-tight",
+
+      "isStudent": false,
+      "isRetired": false,
+      "hasSecondJob": false,
+      "secondJobName": "",
+
+      "npcDefaults": {
+        "occupation": "Firefighter",
+        "tierBias": 3,
+        "moneyCash": [ 50, 150 ],
+        "moneyBank": [ 800, 6000 ],
+        "moneyDebt": [ 0, 15000 ],
+        "goal": "Stay solid on the job and off it",
+        "need": "Crew that has your back",
+        "fear": "A call that goes wrong",
+        "want": "Quiet nights after the shift"
+      }
+    },
+    {
+      "id": "barista_sinclair",
+      "lane": "shop",
+      "weight": 12,
+
+      "jobName": "Barista",
+      "employer": "Sinclair Coffee",
+      "jobType": "part_time",
+      "industryPath": "service",
+      "department": "Front of house",
+      "titleLevel": "entry",
+
+      "startHour": 6,
+      "endHour": 14,
+      "shiftType": "days",
+      "workLocationMode": "office",
+      "commuteMinutesOneWay": 8,
+      "workDays": [ "Mon", "Wed", "Thu", "Fri", "Sat" ],
+
+      "hourlyRate": 13.5,
+      "weeklyHours": 28,
+      "isSalaried": false,
+      "annualSalary": 0,
+      "overtimeRateMultiplier": 1.5,
+      "typicalOvertimeHoursPerWeek": 0,
+
+      "monthlyBillsHint": 1400,
+      "savingsRateHint": 0.05,
+
+      "hasInsurance": false,
+      "insuranceProvider": "",
+      "insurancePremium": 0,
+      "coveragePercent": 0,
+      "hasRetirementMatch": false,
+      "retirementMatchPercent": 0,
+      "hasPaidTimeOff": false,
+      "vacationDaysPerYear": 0,
+      "sickDaysPerYear": 3,
+
+      "stressLoad": 40,
+      "socialDemand": 80,
+      "physicalDemand": 45,
+      "cognitiveDemand": 35,
+      "burnoutAccum": 15,
+
+      "bossName": "Eve Sinclair",
+      "bossRelationship": "friendly-chaotic",
+      "teamClimate": "family shop",
+
+      "npcDefaults": {
+        "occupation": "Barista",
+        "tierBias": 3,
+        "moneyCash": [ 40, 100 ],
+        "moneyBank": [ 200, 2000 ],
+        "moneyDebt": [ 0, 5000 ],
+        "goal": "Make rent and keep the shift light",
+        "need": "People who laugh when the rush hits",
+        "fear": "Getting frozen out by shop standards",
+        "want": "Easy money and a life after close"
+      }
+    }
+  ]
+}

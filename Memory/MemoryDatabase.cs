@@ -29,23 +29,55 @@ namespace ProjectEve.Memory
 
             using var conn = new SqliteConnection(ConnStr);
             conn.Open();
-            using var cmd = conn.CreateCommand();
-            cmd.CommandText = """
-                CREATE TABLE IF NOT EXISTS Memories (
-                    Id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    NpcId INTEGER NOT NULL DEFAULT 0,
-                    CharacterName TEXT,
-                    Summary TEXT NOT NULL,
-                    Category TEXT,
-                    Importance INTEGER DEFAULT 1,
-                    Strength REAL DEFAULT 70,
-                    IsLockedPeak INTEGER DEFAULT 0,
-                    RelatedPerson TEXT,
-                    EventId TEXT,
-                    Timestamp TEXT
-                );
-                """;
-            cmd.ExecuteNonQuery();
+
+            using (var cmd = conn.CreateCommand())
+            {
+                cmd.CommandText = """
+                    CREATE TABLE IF NOT EXISTS Memories (
+                        Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        NpcId INTEGER NOT NULL DEFAULT 0,
+                        CharacterName TEXT,
+                        Summary TEXT NOT NULL,
+                        Category TEXT,
+                        Importance INTEGER DEFAULT 1,
+                        Strength REAL DEFAULT 70,
+                        IsLockedPeak INTEGER DEFAULT 0,
+                        RelatedPerson TEXT,
+                        EventId TEXT,
+                        Timestamp TEXT
+                    );
+                    """;
+                cmd.ExecuteNonQuery();
+            }
+
+            // Existing DBs may have been created by DatabaseInitializer without these columns.
+            // CREATE TABLE IF NOT EXISTS will not upgrade them — ALTER does.
+            string[] alters =
+            {
+                "ALTER TABLE Memories ADD COLUMN CharacterName TEXT",
+                "ALTER TABLE Memories ADD COLUMN Strength REAL DEFAULT 70",
+                "ALTER TABLE Memories ADD COLUMN IsLockedPeak INTEGER DEFAULT 0",
+                "ALTER TABLE Memories ADD COLUMN RelatedPerson TEXT",
+                "ALTER TABLE Memories ADD COLUMN EventId TEXT",
+                "ALTER TABLE Memories ADD COLUMN NpcId INTEGER NOT NULL DEFAULT 0",
+                "ALTER TABLE Memories ADD COLUMN Category TEXT",
+                "ALTER TABLE Memories ADD COLUMN Importance INTEGER DEFAULT 1",
+                "ALTER TABLE Memories ADD COLUMN Timestamp TEXT"
+            };
+
+            foreach (var sql in alters)
+            {
+                try
+                {
+                    using var cmd = conn.CreateCommand();
+                    cmd.CommandText = sql;
+                    cmd.ExecuteNonQuery();
+                }
+                catch
+                {
+                    // column already exists
+                }
+            }
         }
 
         public void AddMemory(MemoryRecord memory)

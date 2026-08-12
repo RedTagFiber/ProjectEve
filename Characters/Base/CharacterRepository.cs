@@ -34,6 +34,7 @@ namespace ProjectEve.Characters.Base
 
             using var conn = new SqliteConnection(ConnStr);
             conn.Open();
+            EnsureJobProfileColumns(conn);
 
             SimCharacter? npc = TryLoadCharacterWide(conn, id)
                              ?? TryLoadCharacterNarrow(conn, id);
@@ -152,6 +153,9 @@ namespace ProjectEve.Characters.Base
             };
         }
 
+        // ============================================================
+        // TRAITS
+        // ============================================================
         private static void LoadTraits(SqliteConnection conn, SimCharacter npc)
         {
             npc.Traits ??= new NpcTraits();
@@ -235,6 +239,9 @@ namespace ProjectEve.Characters.Base
             tx.Commit();
         }
 
+        // ============================================================
+        // BRAIN
+        // ============================================================
         private static void LoadBrainState(SqliteConnection conn, SimCharacter npc)
         {
             npc.Brain ??= new Brain();
@@ -301,6 +308,9 @@ namespace ProjectEve.Characters.Base
             cmd.ExecuteNonQuery();
         }
 
+        // ============================================================
+        // MONEY
+        // ============================================================
         private static void LoadMoney(SqliteConnection conn, SimCharacter npc)
         {
             npc.Money ??= new MoneyProfile();
@@ -349,6 +359,104 @@ namespace ProjectEve.Characters.Base
             cmd.ExecuteNonQuery();
         }
 
+        // ============================================================
+        // JOB — full schema + migrate legacy Title/Shift/PayRate
+        // ============================================================
+        private static void EnsureJobProfileColumns(SqliteConnection conn)
+        {
+            // Base table (may already exist as legacy)
+            using (var create = conn.CreateCommand())
+            {
+                create.CommandText = """
+                    CREATE TABLE IF NOT EXISTS JobProfile (
+                        NpcId INTEGER PRIMARY KEY,
+                        JobName TEXT,
+                        Employer TEXT,
+                        JobType TEXT,
+                        IndustryPath TEXT,
+                        Department TEXT,
+                        TitleLevel TEXT,
+                        StartHour INTEGER,
+                        EndHour INTEGER,
+                        ShiftType TEXT,
+                        WorkLocationMode TEXT,
+                        HourlyRate REAL,
+                        WeeklyHours REAL,
+                        IsSalaried INTEGER,
+                        AnnualSalary REAL,
+                        StressLoad INTEGER,
+                        SocialDemand INTEGER,
+                        PhysicalDemand INTEGER,
+                        CognitiveDemand INTEGER,
+                        BurnoutAccum INTEGER,
+                        HasInsurance INTEGER,
+                        BossName TEXT,
+                        BossRelationship TEXT,
+                        TeamClimate TEXT
+                    );
+                    """;
+                create.ExecuteNonQuery();
+            }
+
+            string[] alters =
+            {
+                "ALTER TABLE JobProfile ADD COLUMN JobName TEXT",
+                "ALTER TABLE JobProfile ADD COLUMN Employer TEXT",
+                "ALTER TABLE JobProfile ADD COLUMN JobType TEXT",
+                "ALTER TABLE JobProfile ADD COLUMN IndustryPath TEXT",
+                "ALTER TABLE JobProfile ADD COLUMN Department TEXT",
+                "ALTER TABLE JobProfile ADD COLUMN TitleLevel TEXT",
+                "ALTER TABLE JobProfile ADD COLUMN StartHour INTEGER",
+                "ALTER TABLE JobProfile ADD COLUMN EndHour INTEGER",
+                "ALTER TABLE JobProfile ADD COLUMN ShiftType TEXT",
+                "ALTER TABLE JobProfile ADD COLUMN WorkLocationMode TEXT",
+                "ALTER TABLE JobProfile ADD COLUMN HourlyRate REAL",
+                "ALTER TABLE JobProfile ADD COLUMN WeeklyHours REAL",
+                "ALTER TABLE JobProfile ADD COLUMN IsSalaried INTEGER",
+                "ALTER TABLE JobProfile ADD COLUMN AnnualSalary REAL",
+                "ALTER TABLE JobProfile ADD COLUMN StressLoad INTEGER",
+                "ALTER TABLE JobProfile ADD COLUMN SocialDemand INTEGER",
+                "ALTER TABLE JobProfile ADD COLUMN PhysicalDemand INTEGER",
+                "ALTER TABLE JobProfile ADD COLUMN CognitiveDemand INTEGER",
+                "ALTER TABLE JobProfile ADD COLUMN BurnoutAccum INTEGER",
+                "ALTER TABLE JobProfile ADD COLUMN HasInsurance INTEGER",
+                "ALTER TABLE JobProfile ADD COLUMN BossName TEXT",
+                "ALTER TABLE JobProfile ADD COLUMN BossRelationship TEXT",
+                "ALTER TABLE JobProfile ADD COLUMN TeamClimate TEXT",
+                // keep legacy columns readable if present
+                "ALTER TABLE JobProfile ADD COLUMN Title TEXT",
+                "ALTER TABLE JobProfile ADD COLUMN Shift TEXT",
+                "ALTER TABLE JobProfile ADD COLUMN PayRate REAL"
+            };
+
+            foreach (var sql in alters)
+            {
+                try
+                {
+                    using var cmd = conn.CreateCommand();
+                    cmd.CommandText = sql;
+                    cmd.ExecuteNonQuery();
+                }
+                catch { /* already exists */ }
+            }
+
+            // One-time bridge: legacy Title/Shift/PayRate → modern fields
+            try
+            {
+                using var cmd = conn.CreateCommand();
+                cmd.CommandText = """
+                    UPDATE JobProfile SET JobName = Title
+                    WHERE (JobName IS NULL OR JobName = '') AND Title IS NOT NULL AND Title != '';
+                    UPDATE JobProfile SET ShiftType = Shift
+                    WHERE (ShiftType IS NULL OR ShiftType = '') AND Shift IS NOT NULL AND Shift != '';
+                    UPDATE JobProfile SET HourlyRate = PayRate
+                    WHERE (HourlyRate IS NULL OR HourlyRate = 0) AND PayRate IS NOT NULL AND PayRate != 0;
+                    """;
+                cmd.ExecuteNonQuery();
+            }
+            catch { }
+        }
+
         private static void LoadJob(SqliteConnection conn, SimCharacter npc)
         {
             npc.Job ??= new JobProfile();
@@ -377,7 +485,8 @@ namespace ProjectEve.Characters.Base
                 npc.Job.IndustryPath = GetString(reader, 3);
                 if (!reader.IsDBNull(4)) npc.Job.StartHour = reader.GetInt32(4);
                 if (!reader.IsDBNull(5)) npc.Job.EndHour = reader.GetInt32(5);
-                npc.Job.ShiftType = string.IsNullOrWhiteSpace(GetString(reader, 6)) ? "days" : GetString(reader, 6);
+                var shift = GetString(reader, 6);
+                npc.Job.ShiftType = string.IsNullOrWhiteSpace(shift) ? "days" : shift;
                 npc.Job.WorkLocationMode = GetString(reader, 7);
                 if (!reader.IsDBNull(8)) npc.Job.HourlyRate = (decimal)reader.GetDouble(8);
                 if (!reader.IsDBNull(9)) npc.Job.WeeklyHours = (decimal)reader.GetDouble(9);
@@ -392,6 +501,9 @@ namespace ProjectEve.Characters.Base
                 npc.Job.BossName = GetString(reader, 18);
                 npc.Job.BossRelationship = GetString(reader, 19);
                 npc.Job.TeamClimate = GetString(reader, 20);
+
+                if (string.IsNullOrWhiteSpace(npc.Job.JobName))
+                    LoadJobLegacy(conn, npc);
             }
             catch { LoadJobLegacy(conn, npc); }
         }
@@ -406,11 +518,15 @@ namespace ProjectEve.Characters.Base
                 using var reader = cmd.ExecuteReader();
                 if (!reader.Read()) return;
                 var title = GetString(reader, 0);
-                if (!string.IsNullOrWhiteSpace(title)) npc.Job.JobName = title;
-                npc.Job.Employer = GetString(reader, 1);
+                if (!string.IsNullOrWhiteSpace(title) && string.IsNullOrWhiteSpace(npc.Job.JobName))
+                    npc.Job.JobName = title;
+                if (string.IsNullOrWhiteSpace(npc.Job.Employer))
+                    npc.Job.Employer = GetString(reader, 1);
                 var shift = GetString(reader, 2);
-                if (!string.IsNullOrWhiteSpace(shift)) npc.Job.ShiftType = shift;
-                if (!reader.IsDBNull(3)) npc.Job.HourlyRate = (decimal)reader.GetDouble(3);
+                if (!string.IsNullOrWhiteSpace(shift) && string.IsNullOrWhiteSpace(npc.Job.ShiftType))
+                    npc.Job.ShiftType = shift;
+                if (!reader.IsDBNull(3) && npc.Job.HourlyRate <= 0)
+                    npc.Job.HourlyRate = (decimal)reader.GetDouble(3);
             }
             catch { }
         }
@@ -421,22 +537,7 @@ namespace ProjectEve.Characters.Base
             EnsureDataDir();
             using var conn = new SqliteConnection(ConnStr);
             conn.Open();
-
-            using (var create = conn.CreateCommand())
-            {
-                create.CommandText = """
-                    CREATE TABLE IF NOT EXISTS JobProfile (
-                        NpcId INTEGER PRIMARY KEY,
-                        JobName TEXT, Employer TEXT, JobType TEXT, IndustryPath TEXT,
-                        StartHour INTEGER, EndHour INTEGER, ShiftType TEXT, WorkLocationMode TEXT,
-                        HourlyRate REAL, WeeklyHours REAL, IsSalaried INTEGER, AnnualSalary REAL,
-                        StressLoad INTEGER, SocialDemand INTEGER, PhysicalDemand INTEGER,
-                        CognitiveDemand INTEGER, BurnoutAccum INTEGER,
-                        HasInsurance INTEGER, BossName TEXT, BossRelationship TEXT, TeamClimate TEXT
-                    );
-                    """;
-                create.ExecuteNonQuery();
-            }
+            EnsureJobProfileColumns(conn);
 
             var j = npc.Job;
             using var cmd = conn.CreateCommand();
@@ -446,13 +547,15 @@ namespace ProjectEve.Characters.Base
                     StartHour, EndHour, ShiftType, WorkLocationMode,
                     HourlyRate, WeeklyHours, IsSalaried, AnnualSalary,
                     StressLoad, SocialDemand, PhysicalDemand, CognitiveDemand, BurnoutAccum,
-                    HasInsurance, BossName, BossRelationship, TeamClimate
+                    HasInsurance, BossName, BossRelationship, TeamClimate,
+                    Title, Shift, PayRate
                 ) VALUES (
                     $id, $name, $emp, $type, $ind,
                     $start, $end, $shift, $loc,
                     $rate, $hours, $sal, $annual,
                     $stress, $social, $phys, $cog, $burn,
-                    $ins, $boss, $bossRel, $team
+                    $ins, $boss, $bossRel, $team,
+                    $name, $shift, $rate
                 )
                 ON CONFLICT(NpcId) DO UPDATE SET
                     JobName=$name, Employer=$emp, JobType=$type, IndustryPath=$ind,
@@ -460,7 +563,8 @@ namespace ProjectEve.Characters.Base
                     HourlyRate=$rate, WeeklyHours=$hours, IsSalaried=$sal, AnnualSalary=$annual,
                     StressLoad=$stress, SocialDemand=$social, PhysicalDemand=$phys,
                     CognitiveDemand=$cog, BurnoutAccum=$burn,
-                    HasInsurance=$ins, BossName=$boss, BossRelationship=$bossRel, TeamClimate=$team
+                    HasInsurance=$ins, BossName=$boss, BossRelationship=$bossRel, TeamClimate=$team,
+                    Title=$name, Shift=$shift, PayRate=$rate
                 """;
             cmd.Parameters.AddWithValue("$id", npc.Id);
             cmd.Parameters.AddWithValue("$name", j.JobName ?? "");
@@ -487,6 +591,9 @@ namespace ProjectEve.Characters.Base
             cmd.ExecuteNonQuery();
         }
 
+        // ============================================================
+        // RELATIONSHIPS
+        // ============================================================
         private static void LoadRelationships(SqliteConnection conn, SimCharacter npc)
         {
             npc.Relationships ??= new List<Relationship>();
@@ -582,7 +689,6 @@ namespace ProjectEve.Characters.Base
                 var p = target.GetType().GetProperty(prop);
                 if (p == null || !p.CanWrite) return;
 
-                // unwrap Nullable<int> boxed as object
                 if (value.GetType() == typeof(int?))
                 {
                     var ni = (int?)value;
@@ -604,4 +710,4 @@ namespace ProjectEve.Characters.Base
             catch { }
         }
     }
-    }
+}

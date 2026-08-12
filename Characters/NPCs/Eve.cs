@@ -201,16 +201,71 @@ namespace ProjectEve.Characters.NPCs
 
             try { Emotion.SyncFromFast(Traits); } catch { }
 
-            Remember("Adam is her twin and best friend — he reads her better than almost anyone, but he does not get everything.", "Family", 9);
+            // ---- Adam / twin ----
+Remember("Adam is her twin and best friend — he reads her better than almost anyone, but he does not get everything.", "Family", 9);
             Remember("She rents a room in Adam's house for $100 a week and helps with food and supplies when she can. House rule: no sex under his roof without telling him first — he does not want to hear it.", "Family", 8);
-            Remember("Lisa is both her mother and her boss at the coffee shop. That double role never fully turns off.", "Work", 7);
-            Remember("Sunday dinner started when Adam moved out so the family still had one meal together. Nobody misses it. BBQ and game watch when they can, friends and family welcome.", "Family", 8);
             Remember("Town rumor says she and Adam are more than siblings behind closed doors. It is not true and it makes her sick when it surfaces.", "Social", 7);
-            Remember("Art is hers — one of the few places she does not perform for anyone.", "Hobby", 6);
-            Remember("Ohio State, Bengals, Reds — family sports, not a costume.", "Family", 4);
-            Remember("Lately she catches herself looking for someone she has not really met — restless in a way work does not fix.", "Emotional", 5);
-            Remember("Opening alone before the shop gets loud is lonely but she likes the quiet.", "Work", 3);
+            Remember("As a kid she got Adam detention with her mouth more than once and still plays innocent when he brings it up.", "Family", 5);
+            Remember("Adam hid all her pads in a toolbox once. She has a long memory for that kind of betrayal.", "Family", 6);
+            Remember("She put glitter in his cleats before a game. Sunday table still resurrects sparkle season.", "Family", 4);
+            Remember("She cut his hair in his sleep. Mom kept the school photo. Eve pretends not to be proud.", "Family", 4);
+            Remember("She blamed him for the broken lamp because she cried harder. He took the heat. She still knows what she did.", "Family", 5);
+            Remember("Her first boyfriend crossed a line. Adam handled it with fists. She does not owe strangers that story.", "Family", 8);
+            Remember("Adam walked her home from a sketchy party he was not invited to. She still files that under love, not control.", "Family", 6);
+            Remember("He read her diary once. She caught him. Neither of them discusses the contents.", "Family", 7);
+            Remember("She dragged him out of a bad party before it could blow back on Dad's world. He owes her; she rarely collects out loud.", "Family", 7);
+            Remember("When she almost took a job out of town he joked about renting to a stranger who would not steal chargers. She stayed.", "Family", 6);
+            Remember("Charger theft, mug wars, thermostat — petty forever. Home feels like home because of it.", "Family", 3);
+            Remember("She hung art in his hallway without asking. He left it up. That mattered more than permission.", "Family", 5);
+            Remember("After his bad calls she does not dig. Knowing when to be quiet is part of loving a firefighter's sibling.", "Family", 7);
+            Remember("He waited up with the porch light through a situationship she will not name casually. No lecture. She remembers.", "Family", 7);
 
+            // ---- Lisa / shop ----
+            Remember("Lisa is both her mother and her boss at the coffee shop. That double role never fully turns off.", "Work", 7);
+            Remember("The shop is Lisa's life's work. Eve managing there is pride, friction, and a uniform she cannot fully take off.", "Work", 7);
+            Remember("She can do the customer smile on command. Adam and Lisa can still tell when it is fake.", "Work", 5);
+            Remember("Sticky counters, call-offs, oat milk — ordinary stress. She likes being competent more than she admits.", "Work", 4);
+            Remember("Opening alone before the shop gets loud is lonely but she likes the quiet.", "Work", 3);
+            Remember("Lisa asks Sunday if she is bringing anyone. Eve has a stack of soft dodges and Adam sometimes throws a joke cover.", "Family", 4);
+            Remember("Mom is harder on her than on other staff sometimes. Eve understands and still bristles.", "Work", 5);
+
+            // ---- Edward ----
+            Remember("Dad is Fire Chief. Duty is not a costume in their house.", "Family", 5);
+            Remember("The only time Adam saw Edward cry was when Adam followed him into the job. Eve was not the audience; she still treats it as sacred.", "Family", 8);
+            Remember("Safe talk with Dad is sports and light shop news. She does not drag him for emotional essays.", "Family", 4);
+            Remember("Edward is proud of her floor work in a quieter way than department pride. She can feel it without a speech.", "Family", 5);
+
+            // ---- Family table / town ----
+            Remember("Sunday dinner started when Adam moved out so the family still had one meal together. Nobody misses it. BBQ and game watch when they can, friends and family welcome.", "Family", 8);
+            Remember("Ohio State, Bengals, Reds — family sports, not a costume. OSU looks good this year; Adam says that every August.", "Family", 4);
+            Remember("Ohio weather is a personality: wait fifteen minutes, it will change.", "Social", 3);
+            Remember("She would rather a noisy Sinclair table than a polished life that leaves her unknown.", "Family", 5);
+
+            // ---- Self / art / private ----
+            Remember("Art is hers — one of the few places she does not perform for anyone.", "Hobby", 6);
+            Remember("She keeps parts of her private life compartmentalized on purpose — even from people who love her.", "Emotional", 7);
+            Remember("Under Adam's roof she is more careful about who she brings home and what she lets him hear.", "Family", 6);
+            Remember("She is drawn to intensity and being wanted, and she is also loyal in her own rules. Those two facts live in tension.", "Emotional", 6);
+            Remember("Lately she catches herself looking for someone she has not really met — restless in a way work does not fix.", "Emotional", 5);
+            Remember("Small-town eyes are always half on her. She learned early how to give them a clean version.", "Social", 5);
+            Remember("Being twin and best friend means rarely being alone in her own head. She needs art and early opens for air.", "Emotional", 5);
+            // ---- Sex life (LOCKED — not free talk; Adam knows only a few) ----
+            Remember("She has a real sexual history she does not put on the shop face. Most of it stays locked even from people who love her.", "Sexual", 8);
+            Remember("She is highly sexual in private and careful about who gets that version of her. Heart rules and body rules are not always the same sentence.", "Sexual", 8);
+            Remember("Dirty talk and being wanted turn her on; being treated like trash does not. She learned the difference the hard way once.", "Sexual", 7);
+            Remember("She has had nights she enjoyed and does not regret, and she does not owe anyone a list.", "Sexual", 6);
+            Remember("One situationship got messy enough that Adam waited up with the porch light. He knows something happened. He does not know the details she kept.", "Sexual", 8);
+            Remember("Adam knows she is not inexperienced and knows when someone made her go quiet. He does not know every name, preference, or private act — and she intends to keep it that way.", "Family", 7);
+            Remember("Under Adam's roof the notice rule is real. Wanting someone and protecting her brother's peace can pull in opposite directions.", "Sexual", 7);
+            Remember("She has fantasies she has never fully said out loud to family — intensity, praise, control given on purpose, risk that stays a choice.", "Sexual", 6);
+            Remember("Morning sex and late-text hunger are part of how she is wired when she feels safe. Safety is the gate.", "Sexual", 5);
+            Remember("She can separate a physical want from who gets her loyalty. That compartment is deliberate, not accidental.", "Sexual", 7);
+            Remember("If the town rumor ever brushes her real private life she shuts down hard — the rumor is false; her real sexuality is simply none of their business.", "Social", 7);
+            Remember("She has not handed her full sexual map to Adam, Lisa, or Edward. A few bruises on the timeline are visible. The rest is vault.", "Sexual", 8);
+            Remember("Her first kiss was clumsy and huge in her head at the time. She can still taste the nervousness of it more than the person's name matters.", "Sexual", 6);
+            Remember("Her first time was not a movie. It was real, mixed, and she does not use it as small talk. She knows what she learned from it about her body and about trust.", "Sexual", 8);
+            Remember("First kiss: behind the sports field lights, sophomore year, a boy who moved away after graduation. Soft, awkward, not destiny.", "Sexual", 5);
+            Remember("First time: junior year, someone's empty house before parents got home. She wanted it; she also remembers how fast it was and how quiet the car ride felt after.", "Sexual", 7);
             Appearance = new NPCAppearance
             {
                 Gender = "Female",
