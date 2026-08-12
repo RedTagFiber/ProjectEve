@@ -9,9 +9,8 @@ using ProjectEve.Traits;
 namespace ProjectEve.Characters.NPCs
 {
     /// <summary>
-    /// Seed Eve — entry NPC / primary partner path.
-    /// Traits use Fast/Mid/Slow layers; job facts live on JobProfile;
-    /// work attitudes come from slow.life.work_ambition + work_subs when loaded.
+    /// Eve Sinclair — twin, shop manager under Mom, rents a room at Adam's.
+    /// Does not know the player yet; feels a pull toward them.
     /// </summary>
     public class Eve : SimCharacter
     {
@@ -22,36 +21,39 @@ namespace ProjectEve.Characters.NPCs
             Occupation = "Coffee shop manager";
             Location = "Bellefontaine / Sidney, Ohio area";
             Hometown = "Bellefontaine, OH";
-            HomeAddress = "near downtown Bellefontaine";
+            HomeAddress = "Adam's house — rents a room (in town)";
 
-            BirthDate = new DateTime(2001, 3, 14, 9, 0, 0);
+            BirthDate = new DateTime(2001, 3, 14, 9, 0, 0); // twin with Adam
             Zodiac = "Pisces";
 
             PersonalityContext =
-                "Publicly the competent good-girl manager. " +
-                "Privately highly sexual, self-aware, and loyal in her own rules. " +
-                "Heart stays with Ryan. Body can be free. Double life turns her on.";
+                "Publicly the competent good-girl manager at her mother's coffee shop. " +
+                "Privately intense, self-aware, and careful about who gets the full picture. " +
+                "Twin and best friend to Adam — he knows a lot about her, not everything. " +
+                "Lives under his roof with clear house rules. " +
+                "Loves art. Family sports are Ohio State, Bengals, and Reds. " +
+                "Does not know the player yet, but feels a pull toward them she can't fully explain. " +
+                "Hates the false town rumor about her and Adam.";
 
-            // ---- Money (facts) ----
+            // ---- Money ----
             Money.Cash = 95m;
             Money.Bank = 1840m;
             Money.Debt = 420m;
             try
             {
-                // optional budget bias fields if MoneyProfile still has them
                 Money.Bills = 0.42m;
                 Money.Food = 0.25m;
                 Money.Entertainment = 0.12m;
                 Money.SavingsRate = 0.08m;
                 Money.HobbySpending = 0.13m;
             }
-            catch { /* older MoneyProfile */ }
+            catch { }
 
-            // ---- Job facts (attitudes live in work_subs / slow.work) ----
+            // ---- Job — Mom's shop ----
             Job = new JobProfile
             {
                 JobName = "Manager",
-                Employer = "Local coffee shop",
+                Employer = "Sinclair Coffee (Lisa Sinclair, owner)",
                 JobType = "full_time",
                 IndustryPath = "service",
                 Department = "Front of house",
@@ -61,7 +63,7 @@ namespace ProjectEve.Characters.NPCs
                 EndHour = 14,
                 ShiftType = "days",
                 WorkLocationMode = "office",
-                CommuteMinutesOneWay = 12,
+                CommuteMinutesOneWay = 8,
                 WorkDays = new[] { "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" },
 
                 HourlyRate = 18.50m,
@@ -77,7 +79,7 @@ namespace ProjectEve.Characters.NPCs
                 VacationDaysUsed = 2,
                 SickDaysPerYear = 5,
 
-                StressLoad = 45,
+                StressLoad = 48,
                 SocialDemand = 75,
                 PhysicalDemand = 40,
                 CognitiveDemand = 55,
@@ -86,114 +88,128 @@ namespace ProjectEve.Characters.NPCs
                 HireDate = DateTime.Now.AddYears(-2).AddMonths(-3),
                 DaysWorked = 780,
 
-                BossName = "Owner",
-                BossRelationship = "good",
-                TeamClimate = "cordial"
+                BossName = "Lisa Sinclair",
+                BossRelationship = "complicated-good", // mom + owner
+                TeamClimate = "family business"
             };
 
-            Goal = "Build a real life with Ryan without shrinking who she is";
-            Need = "Connection and honesty that doesn’t demand she become smaller";
+            Goal = "Build a life that is hers — work, family, art — without shrinking who she is";
+            Need = "A connection that feels honest without demanding she become smaller";
             Fear = "Being abandoned once someone sees all of her";
-            Want = "To be wanted as both the soft partner and the dirty one";
+            Want = "To understand why a stranger can catch her attention this hard";
 
             Relationships.Clear();
             Relationships.Add(new Relationship
             {
-                TargetName = "Ryan",
-                Trust = 99,
-                Respect = 99,
-                Affection = 90,
-                Attraction = 95,
-                Tension = 15
+                TargetName = "Adam",
+                Trust = 90,
+                Respect = 88,
+                Affection = 92,
+                Attraction = 0,
+                Tension = 28
             });
+            Relationships.Add(new Relationship
+            {
+                TargetName = "Lisa",
+                Trust = 82,
+                Respect = 85,
+                Affection = 88,
+                Attraction = 0,
+                Tension = 35
+            });
+            Relationships.Add(new Relationship
+            {
+                TargetName = "Edward",
+                Trust = 85,
+                Respect = 90,
+                Affection = 86,
+                Attraction = 0,
+                Tension = 18
+            });
+            // Player: no relationship row yet — she doesn't know them
 
-            // ---- Fast 20 seed ----
             var fast = TraitJsonLoader.BuildFastDefaults(42f);
             fast["trait.anger"] = 28;
-            fast["trait.anxiety"] = 40;
+            fast["trait.anxiety"] = 42;
             fast["trait.fear"] = 32;
-            fast["trait.shame"] = 25;
+            fast["trait.shame"] = 30;
             fast["trait.guilt"] = 22;
-            fast["trait.hurt"] = 30;
-            fast["trait.jealousy"] = 35;
+            fast["trait.hurt"] = 28;
+            fast["trait.jealousy"] = 32;
             fast["trait.resentment"] = 18;
-            fast["trait.trust"] = 72;
-            fast["trait.affection"] = 78;
-            fast["trait.desire"] = 90;
-            fast["trait.attraction"] = 88;
-            fast["trait.tension"] = 45;
-            fast["trait.playfulness"] = 55;
+            fast["trait.trust"] = 55;
+            fast["trait.affection"] = 48;
+            fast["trait.desire"] = 72;
+            fast["trait.attraction"] = 50;
+            fast["trait.tension"] = 40;
+            fast["trait.playfulness"] = 52;
             fast["trait.pride"] = 48;
             fast["trait.patience"] = 50;
-            fast["trait.guard"] = 42;
-            fast["trait.openness"] = 58;
-            fast["trait.loneliness"] = 35;
-            fast["trait.hope"] = 62;
+            fast["trait.guard"] = 52;
+            fast["trait.openness"] = 55;
+            fast["trait.loneliness"] = 48;
+            fast["trait.hope"] = 58;
 
-            // ---- Mid character ----
             var mid = new Dictionary<string, float>(StringComparer.OrdinalIgnoreCase)
             {
-                ["mid.loyal"] = 82,
-                ["mid.compartmentalized"] = 78,
-                ["mid.people_pleasing"] = 55,
-                ["mid.guarded"] = 48,
+                ["mid.loyal"] = 80,
+                ["mid.compartmentalized"] = 82,
+                ["mid.people_pleasing"] = 50,
+                ["mid.guarded"] = 55,
                 ["mid.ambitious"] = 52,
-                ["mid.sensual"] = 80,
-                ["mid.responsible"] = 70,
-                ["mid.private"] = 68
+                ["mid.sensual"] = 78,
+                ["mid.responsible"] = 72,
+                ["mid.private"] = 80
             };
 
-            // ---- Slow taste / life ----
             var slow = new Dictionary<string, float>(StringComparer.OrdinalIgnoreCase)
             {
-                ["slow.music"] = 55,
-                ["slow.movies"] = 48,
-                ["slow.tv"] = 50,
-                ["slow.sports"] = 28,
+                ["slow.music"] = 48,
+                ["slow.movies"] = 50,
+                ["slow.tv"] = 48,
+                ["slow.sports"] = 62,
+                ["slow.sports.osu"] = 70,
+                ["slow.sports.bengals"] = 65,
+                ["slow.sports.reds"] = 60,
+                ["slow.art"] = 82,
                 ["slow.life.work_ambition"] = 58,
                 ["slow.life.foodie"] = 45,
                 ["slow.life.fitness"] = 40,
 
-                // KINK TEST — high on purpose
-                ["slow.kink"] = 88,
-                ["slow.kink.oral"] = 92,
-                ["slow.kink.rough"] = 85,
-                ["slow.kink.praise"] = 90,
-                ["slow.kink.degradation_light"] = 78,
-                ["slow.kink.control_give"] = 82,
-                ["slow.kink.control_take"] = 55,
-                ["slow.kink.public_risk"] = 70,
-                ["slow.kink.watching"] = 75,
-                ["slow.kink.being_watched"] = 80,
-                ["slow.kink.marking"] = 72,
-                ["slow.kink.toys"] = 68,
-                ["slow.kink.roleplay"] = 74,
-                ["slow.kink.morning_sex"] = 86,
-                ["slow.kink.text_dirty"] = 88,
-                ["slow.kink.partner_sharing_fantasy"] = 70,
-                ["slow.kink.exclusive_heart"] = 95
+                ["slow.kink"] = 80,
+                ["slow.kink.oral"] = 85,
+                ["slow.kink.rough"] = 78,
+                ["slow.kink.praise"] = 88,
+                ["slow.kink.degradation_light"] = 70,
+                ["slow.kink.control_give"] = 75,
+                ["slow.kink.control_take"] = 50,
+                ["slow.kink.public_risk"] = 62,
+                ["slow.kink.text_dirty"] = 82,
+                ["slow.kink.exclusive_heart"] = 90
             };
             Traits.InitializeFromLayers(fast, mid, slow);
 
             try
             {
                 Traits.SetStyle("trait.desire", "open");
-                Traits.SetStyle("trait.shame", "suppressive"); // low value + style = not prudish
+                Traits.SetStyle("trait.shame", "suppressive");
                 Traits.SetStyle("trait.anger", "suppressive");
-                Traits.SetStyle("trait.desire", "open");
                 Traits.SetStyle("trait.guard", "soft_close");
                 Traits.SetStyle("trait.anxiety", "quiet_scan");
             }
-            catch { /* styles optional until JSON fully wired */ }
+            catch { }
 
             try { Emotion.SyncFromFast(Traits); } catch { }
 
-            // Durable seeds
-            Remember("Met Ryan at the coffee shop and kept noticing him.", "Social", 4);
-            Remember("Ryan accepted the dirty side without treating her like trash.", "Emotional", 8);
-            Remember("Sleeping over at Ryan's felt safer than it should have.", "Emotional", 7);
-            Remember("Tessa crossed a line at work and it complicated everything.", "Social", 6);
-            Remember("Opening alone at 5:30am is lonely but she likes the quiet.", "Work", 3);
+            Remember("Adam is her twin and best friend — he reads her better than almost anyone, but he does not get everything.", "Family", 9);
+            Remember("She rents a room in Adam's house for $100 a week and helps with food and supplies when she can. House rule: no sex under his roof without telling him first — he does not want to hear it.", "Family", 8);
+            Remember("Lisa is both her mother and her boss at the coffee shop. That double role never fully turns off.", "Work", 7);
+            Remember("Sunday dinner started when Adam moved out so the family still had one meal together. Nobody misses it. BBQ and game watch when they can, friends and family welcome.", "Family", 8);
+            Remember("Town rumor says she and Adam are more than siblings behind closed doors. It is not true and it makes her sick when it surfaces.", "Social", 7);
+            Remember("Art is hers — one of the few places she does not perform for anyone.", "Hobby", 6);
+            Remember("Ohio State, Bengals, Reds — family sports, not a costume.", "Family", 4);
+            Remember("Lately she catches herself looking for someone she has not really met — restless in a way work does not fix.", "Emotional", 5);
+            Remember("Opening alone before the shop gets loud is lonely but she likes the quiet.", "Work", 3);
 
             Appearance = new NPCAppearance
             {
@@ -209,7 +225,6 @@ namespace ProjectEve.Characters.NPCs
                 UniqueFeature = "Warm hazel eyes; confident smile"
             };
 
-            // Mirror common identity fields if SimCharacter still exposes them
             HairColor = Appearance.HairColor;
             HairStyle = Appearance.HairStyle;
             EyeColor = Appearance.EyeColor;
