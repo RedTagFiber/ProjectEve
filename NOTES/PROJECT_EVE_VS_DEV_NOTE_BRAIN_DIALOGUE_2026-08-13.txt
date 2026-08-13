@@ -1,0 +1,620 @@
+PROJECT EVE — DEV NOTE
+Brain / Thought / Dialogue / Body Language
+Checkpoint: August 13, 2026
+
+PURPOSE
+-------
+This note locks down the work completed tonight so it can be added directly to the Visual Studio solution and used as the starting point for the next coding session.
+
+============================================================
+1. BRAIN / THOUGHT / DIALOGUE ARCHITECTURE
+============================================================
+
+Locked direction:
+
+WORLD / PLAYER
+    ↓
+NPC BRAIN
+    ↓
+THOUGHT ENGINE
+    ├─ Private Thought
+    ├─ Fast Trait TAGS
+    └─ Involuntary Body LEAKS
+            ↓
+       TraitEngine
+            ↓
+   Communication Mode
+      /          \
+     /            \
+TEXT DIALOGUE   IN-PERSON DIALOGUE
+     ↓              ↓
+typed words     conscious body presentation
+                + spoken dialogue
+
+Core rule:
+The simulation creates the character state.
+The dialogue model gives that state a voice.
+
+The LLM should not become the source of truth for:
+- personality
+- history
+- relationships
+- traits
+- memory
+- needs
+- world facts
+
+============================================================
+2. THOUGHT ENGINE
+============================================================
+
+ThoughtEngine remains shared for all communication modes.
+
+New structured output:
+
+THOUGHT: <private internal thought>
+LEAKS: <0-3 involuntary physical cues OR none>
+TAGS: <Fast trait changes OR none>
+
+Example:
+
+THOUGHT: Don't let him see how much that hurt.
+LEAKS: eye_break_short; jaw_tight
+TAGS: trait.hurt+3@7; trait.guard+2@6
+
+Responsibilities:
+- interpret current situation
+- react using personality/history/relationship/current state
+- produce small Fast trait changes
+- produce involuntary physical leakage
+- never directly modify Mid traits
+- never directly modify Slow traits
+
+Text mode:
+LEAKS must be none because the player cannot see the NPC physically.
+
+In-person:
+LEAKS can be visible to the player.
+
+============================================================
+3. BODY LANGUAGE SYSTEM
+============================================================
+
+Created:
+Data/World/Ohio/body_language_rules.json
+
+Source artifact:
+project_eve_body_language_rules_v1.json
+
+The JSON covers all 20 Fast traits:
+
+trait.anger
+trait.anxiety
+trait.fear
+trait.shame
+trait.guilt
+trait.hurt
+trait.jealousy
+trait.resentment
+trait.trust
+trait.affection
+trait.desire
+trait.attraction
+trait.tension
+trait.playfulness
+trait.pride
+trait.patience
+trait.guard
+trait.openness
+trait.loneliness
+trait.hope
+
+Rules include:
+- intensity bands
+- common physical cues
+- conscious cover behavior
+- trait combinations
+- ambiguity rules
+- lying/body-control concepts
+- personal tell profile concepts
+
+Important:
+There is NO universal "lying animation."
+
+Body language should come from:
+- personal baseline
+- Fast traits
+- Mid traits
+- current needs/stress
+- relationship
+- stakes
+- lie skill
+- emotional control
+- context
+
+Player should see:
+"Her eyes flick away for a second."
+
+Player should NOT see:
+"She is lying."
+
+============================================================
+4. PERSONAL TELL PROFILE
+============================================================
+
+Future NPC hidden profile should support:
+
+lie_skill
+emotional_control
+expressiveness
+self_monitoring
+
+default_tells
+stress_tells
+hurt_tells
+attraction_tells
+anger_tells
+deception_tells
+
+Goal:
+Every NPC should have different tells and different ability to hide emotion or deception.
+
+Example:
+
+NPC A
+- anxiety 78
+- guilt 72
+- guard 25
+- lie skill 20
+
+Possible behavior:
+- fidgets
+- hesitates
+- overexplains
+- breaks eye contact
+
+NPC B
+- anxiety 78
+- guilt 72
+- guard 84
+- pride 77
+- lie skill 88
+
+Possible behavior:
+- tiny eye break
+- jaw tight
+- recovers immediately
+- deliberate eye contact
+- calm answer
+
+Long-term idea:
+Close friends, partners, family members can learn another NPC's tells through memory/relationship knowledge.
+
+============================================================
+5. IN-PERSON DIALOGUE
+============================================================
+
+New engine:
+DialogueEngineInPerson
+
+ThoughtEngine decides:
+LEAKS = involuntary body behavior
+
+DialogueEngineInPerson decides:
+PRESENTATION = conscious social/body behavior
+SAY = spoken words
+
+Output contract:
+
+PRESENTATION: <0-2 deliberate actions OR none>
+SAY: <spoken dialogue>
+
+Example:
+
+Thought:
+LEAKS: eye_break_short; jaw_tight
+
+Dialogue:
+PRESENTATION: folds her arms and steadies her voice
+SAY: I'm fine.
+
+Player-visible result:
+
+*Her eyes flick away for a second and her jaw tightens.
+She folds her arms and steadies herself.*
+"I'm fine."
+
+Important:
+Unconscious body language and conscious body language can contradict each other.
+
+============================================================
+6. TEXT DIALOGUE
+============================================================
+
+New engine:
+DialogueEngineText
+
+Text and in-person dialogue are now separate.
+
+Text receives:
+- character
+- relationship
+- private thought
+- current traits
+- memory/history
+- recent chat
+- group chat members later
+
+Text should NOT include physical body language.
+
+Text emotion comes through:
+- wording
+- message length
+- fragments
+- punctuation
+- warmth/coldness
+- emoji use
+- avoidance
+- short answers
+- sudden formality
+- message bursts
+- response delay behavior later
+
+Output:
+typed words only
+
+============================================================
+7. HISTORY / MEMORY PROMPT INTEGRATION
+============================================================
+
+Locked architecture:
+
+HistoryEventRow
+= objective-ish world event truth
+
+HistoryRecord
+= personal life-history meaning
+
+MemoryRecord
+= retrievable personal memory
+
+Gossip
+= transmitted belief that may be distorted
+
+Do NOT use:
+HistoryRecord.ToString()
+
+Use actual HistoryRecord fields:
+- Summary
+- Age
+- Category
+- Importance
+
+Memory retrieval:
+MemoryDatabase.GetMemories(owner.Id, ...)
+
+NpcId remains authoritative.
+
+Both Thought and Dialogue should receive:
+- selected important history
+- selected relevant/high memories
+- recent conversation
+
+Do not dump the entire memory database into prompts.
+
+============================================================
+8. LINEBANK CHANGE
+============================================================
+
+OLD:
+LineBank was checked first for every text response.
+
+NEW:
+LLM is primary.
+
+Flow:
+
+Start Dialogue LLM
+    ↓
+If response is fast:
+    use LLM response
+    store successful response in LineBank
+
+If LLM is slow:
+    try LineBank fallback
+    if good cached line exists, send it
+
+If LLM errors:
+    use LineBank fallback if available
+
+Default soft fallback timeout in rebuild:
+3500 ms
+
+Purpose of LineBank:
+- timeout fallback
+- error fallback
+- growing dialogue cache
+- speed improvement over time
+
+LineBank is NOT the NPC's primary brain.
+
+============================================================
+9. NEW CODE CREATED
+============================================================
+
+Rebuild package:
+project_eve_brain_dialogue_rebuild_v1.zip
+
+Files created:
+
+AI/Brain/ThoughtPacket.cs
+AI/Brain/ThoughtEngine.cs
+AI/Brain/BodyLanguageRuleContext.cs
+AI/Brain/DialoguePromptContext.cs
+AI/Brain/DialogueEngineText.cs
+AI/Brain/DialogueEngineInPerson.cs
+AI/Brain/BrainDialogueIntegration.cs
+
+Data/World/Ohio/body_language_rules.json
+
+README_BRAIN_DIALOGUE_REBUILD.txt
+
+============================================================
+10. EXISTING BRAIN.CS — KEEP WORKING FEATURES
+============================================================
+
+Do NOT throw away the current Brain.cs.
+
+Preserve:
+- Owner
+- director commands
+- OOC
+- SCENE
+- TONE
+- FACT
+- REL
+- TRAIT commands
+- session log
+- PsyHierarchy behavior pull
+- ToneInference
+- EmotionSpeechEngine
+- MessageFormatter
+- typing delay
+- relationship handling
+- LineBank speaker
+- recent chat handling
+
+Integrate the rebuilt pieces into Brain incrementally.
+
+============================================================
+11. KNOWN CURRENT ISSUES TO FIX
+============================================================
+
+A. ThoughtEngine static state
+Old ThoughtEngine uses static:
+- _lastSceneSignature
+- _lastAppearanceSignature
+- _lastEmotionSignature
+
+These are shared across all NPCs.
+
+Fix:
+move to per-NPC Brain state or key by NpcId.
+
+B. Brain Energy
+Brain Energy is not currently synchronized from NeedsSystem.
+
+Future:
+use NeedsSystem Energy.
+
+C. Old memory block
+Old Brain BuildRecentMemoryBlock only returned placeholder text.
+
+New rebuild uses real MemoryDatabase records.
+
+D. Old history prompt
+Old ThoughtEngine used h.ToString().
+
+New rebuild uses:
+- Summary
+- Age
+- Category
+- Importance
+
+E. Old DialogueEngine conflict
+Old Brain said:
+spoken words only
+
+Old in-person dialogue said:
+ACTION/SAY
+
+Split Text/InPerson removes this conflict.
+
+F. Relationship context
+Current Brain relationship block is still interim and partly based on Fast traits.
+
+Future:
+use actual directional Relationship edge for the active target.
+
+============================================================
+12. RELATIONSHIP RULE
+============================================================
+
+Fast traits:
+current emotional/reactive state
+
+Relationship:
+per-target social state
+
+Example:
+
+Sarah → Ryan trust 80
+Sarah → John trust 15
+Sarah → Lisa trust 72
+
+Global trait.trust cannot replace per-target relationships.
+
+Dialogue context must eventually use the active relationship edge.
+
+============================================================
+13. FUTURE GROUP CONVERSATION SYSTEM
+============================================================
+
+Future class:
+ConversationManager
+or
+ConversationOrchestrator
+
+It should decide:
+- text / in-person / phone
+- who is present
+- who was addressed
+- who heard the line
+- who can overhear
+- who notices body behavior
+- who responds
+- who stays silent
+- response order
+- interruptions
+
+Important:
+Do NOT let one AI call write multiple NPC minds.
+
+Each NPC gets:
+perception
+→ Thought
+→ response decision
+→ correct Dialogue engine
+
+============================================================
+14. SYSTEM OWNERSHIP — KEEP STRICT
+============================================================
+
+NeedsSystem
+owns body/life pressures
+
+Fast Traits
+own current emotional/reactive state
+
+Relationship
+owns per-target social state
+
+Mid Traits
+own recurring behavioral patterns
+
+Slow Traits
+own identity/preferences
+
+EmotionalProfile
+is display/compatibility projection
+
+HumanEventEngine
+owns event/decision selection
+
+HistoryEventRow
+owns world-event truth
+
+HistoryRecord
+owns personal life-history meaning
+
+MemoryRecord
+owns retrievable memory
+
+Gossip
+owns transmitted belief/distortion
+
+Thought
+owns private interpretation + immediate Fast reaction
+
+Dialogue
+owns outward expression only
+
+Main rule:
+Do not allow multiple systems to own/write the same truth.
+
+============================================================
+15. NEXT VISUAL STUDIO SESSION
+============================================================
+
+START HERE:
+
+1. Add the new files to the Project Eve Visual Studio solution.
+
+2. Copy:
+   Data/World/Ohio/body_language_rules.json
+
+3. Open current Brain.cs.
+
+4. Integrate ThoughtPacket into Brain.Think().
+
+5. Thought flow should become:
+
+   var thought = ThoughtEngine.GeneratePacket(...)
+
+   LastThought = thought.Raw
+
+   Apply Fast tags through TraitEngine
+
+   retain ThoughtPacket for Reply()
+
+6. Replace current single DialogueEngine path with:
+   - DialogueEngineText
+   - DialogueEngineInPerson
+
+7. Keep all existing director commands and session log behavior.
+
+8. Change LineBank flow:
+   LLM first
+   LineBank only on timeout/error
+
+9. Compile.
+
+10. Fix Visual Studio errors ONE AT A TIME using the exact project APIs.
+
+11. Once one-on-one text works:
+    test LineBank fallback and storage.
+
+12. Once one-on-one in-person works:
+    test Thought LEAKS + Dialogue PRESENTATION + SAY.
+
+13. Improve cue renderer so:
+    eye_break_short
+
+    becomes natural player-facing text such as:
+    "Her eyes flick away for a second."
+
+14. Then connect:
+    - real directional Relationship
+    - NeedsSystem Energy
+    - better relevant-memory selection
+
+15. After one-on-one works cleanly:
+    build ConversationManager for group text and multi-NPC in-person scenes.
+
+============================================================
+FINAL LOCKED PRINCIPLE
+============================================================
+
+World state
++ needs
++ traits
++ relationships
++ history
++ memory
++ current situation
+        ↓
+private thought
+        ↓
+Fast emotional change
+        ↓
+involuntary body leakage
+        ↓
+conscious social presentation
+        ↓
+speech / text
+
+The NPC should not explain its internal state.
+
+The player observes behavior and decides what it means.
+
+This is the locked starting direction for Project Eve.
