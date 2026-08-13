@@ -1,0 +1,736 @@
+{
+  "_notes": [
+    "Generated from project_eve_town_workplaces.json. These are real Project Eve workplace/location IDs reused as activity destinations.",
+    "Private homes are added at runtime from NPC HomeAddress and relationship context."
+  ],
+  "venues": [
+    {
+      "locationId": "WP_FACTORY_001",
+      "name": "Belleview Components Plant",
+      "category": "workplace",
+      "sourceType": "manufacturing_plant",
+      "tags": [
+        "manufacturing_plant",
+        "industrial"
+      ],
+      "minimumAge": 0,
+      "costLevel": 0,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_WAREHOUSE_001",
+      "name": "Logan County Distribution Center",
+      "category": "workplace",
+      "sourceType": "warehouse_distribution",
+      "tags": [
+        "warehouse_distribution",
+        "industrial"
+      ],
+      "minimumAge": 0,
+      "costLevel": 0,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_HOSPITAL_001",
+      "name": "Belleview Regional Hospital",
+      "category": "medical",
+      "sourceType": "hospital",
+      "tags": [
+        "hospital",
+        "medical"
+      ],
+      "minimumAge": 0,
+      "costLevel": 0,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_NURSING_001",
+      "name": "Green Meadows Nursing & Rehab",
+      "category": "medical",
+      "sourceType": "nursing_home",
+      "tags": [
+        "nursing_home",
+        "medical"
+      ],
+      "minimumAge": 0,
+      "costLevel": 0,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_SENIOR_001",
+      "name": "Oak Ridge Assisted Living",
+      "category": "medical",
+      "sourceType": "assisted_living",
+      "tags": [
+        "assisted_living",
+        "residential_north"
+      ],
+      "minimumAge": 0,
+      "costLevel": 0,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_POLICE_001",
+      "name": "Belleview Police Department",
+      "category": "government",
+      "sourceType": "police_department",
+      "tags": [
+        "police_department",
+        "civic"
+      ],
+      "minimumAge": 0,
+      "costLevel": 0,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_FIRE_001",
+      "name": "Belleview Fire & EMS",
+      "category": "workplace",
+      "sourceType": "fire_department",
+      "tags": [
+        "fire_department",
+        "civic"
+      ],
+      "minimumAge": 0,
+      "costLevel": 0,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_CITYHALL_001",
+      "name": "Belleview City Hall",
+      "category": "government",
+      "sourceType": "city_government",
+      "tags": [
+        "city_government",
+        "civic"
+      ],
+      "minimumAge": 0,
+      "costLevel": 0,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_PUBLICWORKS_001",
+      "name": "Belleview Public Works",
+      "category": "government",
+      "sourceType": "public_works",
+      "tags": [
+        "public_works",
+        "industrial"
+      ],
+      "minimumAge": 0,
+      "costLevel": 0,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_WATER_001",
+      "name": "Belleview Water & Wastewater Utility",
+      "category": "government",
+      "sourceType": "municipal_utility",
+      "tags": [
+        "municipal_utility",
+        "industrial"
+      ],
+      "minimumAge": 0,
+      "costLevel": 0,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_HIGHSCHOOL_001",
+      "name": "Belleview High School",
+      "category": "school",
+      "sourceType": "high_school",
+      "tags": [
+        "high_school",
+        "school"
+      ],
+      "minimumAge": 0,
+      "costLevel": 0,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_MIDDLESCHOOL_001",
+      "name": "Belleview Middle School",
+      "category": "school",
+      "sourceType": "middle_school",
+      "tags": [
+        "middle_school",
+        "school"
+      ],
+      "minimumAge": 0,
+      "costLevel": 0,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_ELEMENTARY_001",
+      "name": "Northside Elementary",
+      "category": "school",
+      "sourceType": "elementary_school",
+      "tags": [
+        "elementary_school",
+        "residential_north"
+      ],
+      "minimumAge": 0,
+      "costLevel": 0,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_ELEMENTARY_002",
+      "name": "Southview Elementary",
+      "category": "school",
+      "sourceType": "elementary_school",
+      "tags": [
+        "elementary_school",
+        "residential_south"
+      ],
+      "minimumAge": 0,
+      "costLevel": 0,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_SCHOOLDISTRICT_001",
+      "name": "Belleview School District Office & Transportation",
+      "category": "school",
+      "sourceType": "school_district",
+      "tags": [
+        "school_district",
+        "school"
+      ],
+      "minimumAge": 0,
+      "costLevel": 0,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_SUPERCENTER_001",
+      "name": "Belleview Supercenter",
+      "category": "retail",
+      "sourceType": "big_box_retail",
+      "tags": [
+        "big_box_retail",
+        "commercial_north"
+      ],
+      "minimumAge": 0,
+      "costLevel": 2,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_GROCERY_001",
+      "name": "Miller's Market",
+      "category": "grocery",
+      "sourceType": "grocery_store",
+      "tags": [
+        "grocery_store",
+        "commercial_central"
+      ],
+      "minimumAge": 0,
+      "costLevel": 2,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_GROCERY_002",
+      "name": "SaveMore Foods",
+      "category": "grocery",
+      "sourceType": "discount_grocery",
+      "tags": [
+        "discount_grocery",
+        "commercial_south"
+      ],
+      "minimumAge": 0,
+      "costLevel": 2,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_HARDWARE_001",
+      "name": "Henderson Hardware & Home",
+      "category": "retail",
+      "sourceType": "hardware_store",
+      "tags": [
+        "hardware_store",
+        "commercial_central"
+      ],
+      "minimumAge": 0,
+      "costLevel": 2,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_CLOTHING_001",
+      "name": "Main Street Apparel",
+      "category": "retail",
+      "sourceType": "clothing_store",
+      "tags": [
+        "clothing_store",
+        "downtown"
+      ],
+      "minimumAge": 0,
+      "costLevel": 2,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_COFFEE_001",
+      "name": "Sinclair Coffee",
+      "category": "cafe",
+      "sourceType": "coffee_shop",
+      "tags": [
+        "coffee_shop",
+        "downtown"
+      ],
+      "minimumAge": 0,
+      "costLevel": 2,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_DINER_001",
+      "name": "Main Street Diner",
+      "category": "restaurant",
+      "sourceType": "diner",
+      "tags": [
+        "diner",
+        "downtown"
+      ],
+      "minimumAge": 0,
+      "costLevel": 2,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_BARGRILL_001",
+      "name": "Railhouse Bar & Grill",
+      "category": "bar",
+      "sourceType": "bar_grill",
+      "tags": [
+        "bar_grill",
+        "downtown"
+      ],
+      "minimumAge": 21,
+      "costLevel": 3,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_PIZZA_001",
+      "name": "County Line Pizza",
+      "category": "restaurant",
+      "sourceType": "pizza_restaurant",
+      "tags": [
+        "pizza_restaurant",
+        "commercial_central"
+      ],
+      "minimumAge": 0,
+      "costLevel": 2,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_FAMILYREST_001",
+      "name": "Harvest Table Family Restaurant",
+      "category": "restaurant",
+      "sourceType": "family_restaurant",
+      "tags": [
+        "family_restaurant",
+        "commercial_north"
+      ],
+      "minimumAge": 0,
+      "costLevel": 3,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_FASTFOOD_001",
+      "name": "Burger Barn",
+      "category": "fast_food",
+      "sourceType": "fast_food",
+      "tags": [
+        "fast_food",
+        "commercial_south"
+      ],
+      "minimumAge": 0,
+      "costLevel": 0,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_FASTFOOD_002",
+      "name": "Quick Chicken",
+      "category": "fast_food",
+      "sourceType": "fast_food",
+      "tags": [
+        "fast_food",
+        "commercial_south"
+      ],
+      "minimumAge": 0,
+      "costLevel": 0,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_FASTFOOD_003",
+      "name": "Taco Stop",
+      "category": "fast_food",
+      "sourceType": "fast_food",
+      "tags": [
+        "fast_food",
+        "commercial_south"
+      ],
+      "minimumAge": 0,
+      "costLevel": 0,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_AUTO_001",
+      "name": "Belleview Motors",
+      "category": "retail",
+      "sourceType": "auto_dealership",
+      "tags": [
+        "auto_dealership",
+        "commercial_north"
+      ],
+      "minimumAge": 0,
+      "costLevel": 2,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_AUTOSHOP_001",
+      "name": "Turner Auto Repair",
+      "category": "service",
+      "sourceType": "auto_repair_shop",
+      "tags": [
+        "auto_repair_shop",
+        "downtown"
+      ],
+      "minimumAge": 0,
+      "costLevel": 2,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_TIRE_001",
+      "name": "County Tire & Tow",
+      "category": "service",
+      "sourceType": "tire_tow_shop",
+      "tags": [
+        "tire_tow_shop",
+        "commercial_south"
+      ],
+      "minimumAge": 0,
+      "costLevel": 2,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_CONSTRUCTION_001",
+      "name": "Harris Construction",
+      "category": "workplace",
+      "sourceType": "general_contractor",
+      "tags": [
+        "general_contractor",
+        "industrial"
+      ],
+      "minimumAge": 0,
+      "costLevel": 0,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_CONSTRUCTION_002",
+      "name": "Miller Home & Trade Services",
+      "category": "workplace",
+      "sourceType": "small_contractor",
+      "tags": [
+        "small_contractor",
+        "residential_south"
+      ],
+      "minimumAge": 0,
+      "costLevel": 0,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_BANK_001",
+      "name": "First Belleview Bank",
+      "category": "bank",
+      "sourceType": "bank",
+      "tags": [
+        "bank",
+        "downtown"
+      ],
+      "minimumAge": 0,
+      "costLevel": 2,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_BANK_002",
+      "name": "Community Credit Union",
+      "category": "bank",
+      "sourceType": "credit_union",
+      "tags": [
+        "credit_union",
+        "commercial_central"
+      ],
+      "minimumAge": 0,
+      "costLevel": 2,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_INSURANCE_001",
+      "name": "Parker Insurance Agency",
+      "category": "office",
+      "sourceType": "insurance_agency",
+      "tags": [
+        "insurance_agency",
+        "downtown"
+      ],
+      "minimumAge": 0,
+      "costLevel": 0,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_LEGAL_001",
+      "name": "Baker, Hall & Morgan",
+      "category": "office",
+      "sourceType": "law_office",
+      "tags": [
+        "law_office",
+        "downtown"
+      ],
+      "minimumAge": 0,
+      "costLevel": 0,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_REALESTATE_001",
+      "name": "HomeTown Realty",
+      "category": "office",
+      "sourceType": "real_estate_office",
+      "tags": [
+        "real_estate_office",
+        "downtown"
+      ],
+      "minimumAge": 0,
+      "costLevel": 0,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_HOTEL_001",
+      "name": "Belleview Inn",
+      "category": "hotel",
+      "sourceType": "hotel",
+      "tags": [
+        "hotel",
+        "commercial_north"
+      ],
+      "minimumAge": 0,
+      "costLevel": 3,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_MOTEL_001",
+      "name": "Roadside Lodge",
+      "category": "hotel",
+      "sourceType": "motel",
+      "tags": [
+        "motel",
+        "highway"
+      ],
+      "minimumAge": 0,
+      "costLevel": 0,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_SALON_001",
+      "name": "Downtown Salon & Spa",
+      "category": "service",
+      "sourceType": "salon_spa",
+      "tags": [
+        "salon_spa",
+        "downtown"
+      ],
+      "minimumAge": 0,
+      "costLevel": 3,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_PET_001",
+      "name": "Paws & Claws Grooming",
+      "category": "service",
+      "sourceType": "pet_grooming",
+      "tags": [
+        "pet_grooming",
+        "commercial_central"
+      ],
+      "minimumAge": 0,
+      "costLevel": 2,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_SERVICE_001",
+      "name": "Belleview Home Services",
+      "category": "service",
+      "sourceType": "home_services",
+      "tags": [
+        "home_services",
+        "commercial_south"
+      ],
+      "minimumAge": 0,
+      "costLevel": 2,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_FARMCOOP_001",
+      "name": "County Farm Cooperative",
+      "category": "retail",
+      "sourceType": "farm_cooperative",
+      "tags": [
+        "farm_cooperative",
+        "rural"
+      ],
+      "minimumAge": 0,
+      "costLevel": 2,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_FARM_001",
+      "name": "Miller Family Farm",
+      "category": "workplace",
+      "sourceType": "family_farm",
+      "tags": [
+        "family_farm",
+        "rural"
+      ],
+      "minimumAge": 0,
+      "costLevel": 0,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_TRUCKING_001",
+      "name": "Buckeye Freight & Delivery",
+      "category": "workplace",
+      "sourceType": "trucking_company",
+      "tags": [
+        "trucking_company",
+        "industrial"
+      ],
+      "minimumAge": 0,
+      "costLevel": 0,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_TRANSIT_001",
+      "name": "Belleview Transit & Cab",
+      "category": "service",
+      "sourceType": "local_transport",
+      "tags": [
+        "local_transport",
+        "civic"
+      ],
+      "minimumAge": 0,
+      "costLevel": 2,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_POST_001",
+      "name": "Belleview Post Office",
+      "category": "post_office",
+      "sourceType": "post_office",
+      "tags": [
+        "post_office",
+        "downtown"
+      ],
+      "minimumAge": 0,
+      "costLevel": 2,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_PARCEL_001",
+      "name": "County Parcel Depot",
+      "category": "service",
+      "sourceType": "parcel_shipping",
+      "tags": [
+        "parcel_shipping",
+        "industrial"
+      ],
+      "minimumAge": 0,
+      "costLevel": 2,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_LIBRARY_001",
+      "name": "Belleview Public Library",
+      "category": "library",
+      "sourceType": "library",
+      "tags": [
+        "library",
+        "downtown"
+      ],
+      "minimumAge": 0,
+      "costLevel": 0,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_MEDIA_001",
+      "name": "Belleview Times & WBLV Radio",
+      "category": "community",
+      "sourceType": "local_media",
+      "tags": [
+        "local_media",
+        "downtown"
+      ],
+      "minimumAge": 0,
+      "costLevel": 0,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_FUNERAL_001",
+      "name": "Morgan Funeral Home",
+      "category": "service",
+      "sourceType": "funeral_home",
+      "tags": [
+        "funeral_home",
+        "residential_central"
+      ],
+      "minimumAge": 0,
+      "costLevel": 2,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_CHURCH_001",
+      "name": "First Community Church",
+      "category": "church",
+      "sourceType": "church",
+      "tags": [
+        "church",
+        "residential_north"
+      ],
+      "minimumAge": 0,
+      "costLevel": 0,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_CHURCH_002",
+      "name": "St. Matthew Community Parish",
+      "category": "church",
+      "sourceType": "church",
+      "tags": [
+        "church",
+        "residential_south"
+      ],
+      "minimumAge": 0,
+      "costLevel": 0,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_DAYCARE_001",
+      "name": "Little Steps Childcare",
+      "category": "community",
+      "sourceType": "daycare",
+      "tags": [
+        "daycare",
+        "residential_north"
+      ],
+      "minimumAge": 0,
+      "costLevel": 0,
+      "enabled": true
+    },
+    {
+      "locationId": "WP_DAYCARE_002",
+      "name": "Sunshine Preschool & Care",
+      "category": "community",
+      "sourceType": "daycare",
+      "tags": [
+        "daycare",
+        "residential_south"
+      ],
+      "minimumAge": 0,
+      "costLevel": 0,
+      "enabled": true
+    }
+  ]
+}

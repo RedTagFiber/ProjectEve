@@ -1,0 +1,235 @@
+{
+  "_notes": [
+    "PROJECT EVE NEEDS SYSTEM.",
+    "Needs are changing life pressures, not personality traits.",
+    "Traits influence how NPCs respond to needs; they do not replace needs.",
+    "Needs update cheaply from time, activities, work, money, health, relationships and major events.",
+    "ActivityPlanner consumes need tags. HumanEventEngine can also use them as current-state context.",
+    "Tier 1-4 use the same full need model. Tier only changes deep-thinking frequency.",
+    "Tier 5 can keep lightweight/basic need facts if directly relevant, but does not need full routine updates."
+  ],
+  "tick": {
+    "gameMinutesPerTick": 5,
+    "clampMinimum": 0,
+    "clampMaximum": 100
+  },
+  "startingValues": {
+    "hunger": 20,
+    "energy": 75,
+    "social": 55,
+    "fun": 50,
+    "stress": 20,
+    "hygiene": 80,
+    "sleepDebt": 10,
+    "groceries": 70,
+    "comfort": 60
+  },
+  "passiveRatesPerGameHour": {
+    "hunger": 7.0,
+    "energy": -3.5,
+    "social": -2.0,
+    "fun": -1.2,
+    "stress": 0.8,
+    "hygiene": -1.5,
+    "sleepDebt": 2.0,
+    "groceries": -0.5,
+    "comfort": -0.4
+  },
+  "thresholds": {
+    "hungry": 60,
+    "veryHungry": 82,
+    "lowEnergy": 35,
+    "exhausted": 15,
+    "lonely": 30,
+    "veryLonely": 15,
+    "bored": 30,
+    "veryBored": 15,
+    "stressed": 60,
+    "overwhelmed": 82,
+    "needsHygiene": 35,
+    "dirty": 15,
+    "sleepy": 60,
+    "sleepDeprived": 82,
+    "needsGroceries": 30,
+    "outOfGroceries": 10,
+    "uncomfortable": 25
+  },
+  "activityEffectsPerHour": {
+    "sleep": {
+      "energy": 12,
+      "sleepDebt": -14,
+      "stress": -2,
+      "hunger": 2
+    },
+    "home": {
+      "stress": -1,
+      "comfort": 2
+    },
+    "stay_home": {
+      "stress": -1.5,
+      "comfort": 2.5,
+      "fun": 0.5
+    },
+    "meal_home": {
+      "hunger": -70,
+      "groceries": -8,
+      "comfort": 2
+    },
+    "restaurant_meal": {
+      "hunger": -75,
+      "fun": 3,
+      "social": 2
+    },
+    "work": {
+      "energy": -5,
+      "stress": 4,
+      "hunger": 2,
+      "hygiene": -1
+    },
+    "commute": {
+      "energy": -2,
+      "stress": 2,
+      "fun": -1
+    },
+    "grocery_shopping": {
+      "groceries": 50,
+      "stress": 1,
+      "energy": -1
+    },
+    "shopping": {
+      "fun": 6,
+      "energy": -2
+    },
+    "errand": {
+      "stress": 1,
+      "energy": -1
+    },
+    "visit_friend": {
+      "social": 12,
+      "fun": 5,
+      "stress": -2
+    },
+    "visit_family": {
+      "social": 10,
+      "fun": 3
+    },
+    "bar": {
+      "social": 10,
+      "fun": 8,
+      "energy": -4,
+      "hygiene": -2
+    },
+    "church": {
+      "social": 5,
+      "stress": -2
+    },
+    "hobby": {
+      "fun": 10,
+      "stress": -4
+    },
+    "exercise": {
+      "energy": -6,
+      "stress": -5,
+      "hygiene": -5,
+      "fun": 4
+    },
+    "appointment": {
+      "stress": 2,
+      "energy": -2
+    },
+    "date": {
+      "social": 12,
+      "fun": 8,
+      "stress": -1
+    },
+    "movie_entertainment": {
+      "fun": 10,
+      "stress": -3
+    },
+    "coffee_cafe": {
+      "social": 4,
+      "fun": 3,
+      "energy": 2
+    },
+    "walk_around_town": {
+      "fun": 3,
+      "stress": -3,
+      "energy": -2
+    },
+    "spontaneous_trip": {
+      "fun": 12,
+      "stress": -2,
+      "energy": -6
+    },
+    "shower": {
+      "hygiene": 75,
+      "comfort": 4
+    },
+    "clean_home": {
+      "comfort": 8,
+      "stress": -1
+    },
+    "social_encounter_positive": {
+      "social": 6,
+      "fun": 2
+    },
+    "social_encounter_negative": {
+      "social": -2,
+      "stress": 8
+    }
+  },
+  "eventEffects": {
+    "fired": {
+      "stress": 30,
+      "comfort": -10,
+      "fun": -8
+    },
+    "promotion": {
+      "stress": -5,
+      "fun": 8,
+      "comfort": 6
+    },
+    "break_up": {
+      "stress": 30,
+      "social": -20,
+      "fun": -15
+    },
+    "marry": {
+      "stress": -8,
+      "social": 15,
+      "fun": 12
+    },
+    "physical_fight": {
+      "stress": 25,
+      "energy": -15,
+      "comfort": -10
+    },
+    "arrested": {
+      "stress": 35,
+      "comfort": -25,
+      "social": -10
+    },
+    "death_of_close_person": {
+      "stress": 45,
+      "social": -15,
+      "fun": -30
+    },
+    "medical_emergency": {
+      "stress": 35,
+      "energy": -20,
+      "comfort": -20
+    },
+    "receive_paycheck": {
+      "stress": -4,
+      "comfort": 3
+    },
+    "miss_bill": {
+      "stress": 12,
+      "comfort": -8
+    },
+    "eviction_risk": {
+      "stress": 35,
+      "comfort": -30
+    }
+  }
+}

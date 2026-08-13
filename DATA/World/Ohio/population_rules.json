@@ -1,0 +1,204 @@
+{
+  "_notes": [
+    "Project Eve population / Family and Friend Web rules.",
+    "Web tier is directional per relationship. Sarah can hold Tom at Tier 1 while Eve holds the same Tom at Tier 4.",
+    "Characters.Tier remains a useful materialization/loading priority, but FamilyFriendWeb.WebTier is authoritative for each relationship.",
+    "Tier 5 is lore/background history. It does not receive a full brain/traits unless promoted.",
+    "Direct interaction with a Tier 5 person promotes that same person record to Tier 4; never generate a replacement.",
+    "Tier 1-4 all use the same full NPC data structure.",
+    "Tier does NOT control how much data an NPC has.",
+    "Tier controls how often background simulation and AI updates run.",
+    "Tier 1 updates most often, Tier 2 less often, Tier 3 less often, and Tier 4 least often.",
+    "Important world events always update immediately regardless of tier.",
+    "Tier 5 is the only lightweight NPC type and can be promoted to Tier 4 without changing identity."
+  ],
+  "population": {
+    "deepNpcTarget": 200,
+    "employedDeepNpcTarget": 160,
+    "nonWorkingDeepNpcTarget": 40,
+    "allowUnlimitedLightweightPeople": true,
+    "reuseExistingPeopleBeforeCreating": true,
+    "onePermanentPersonId": true
+  },
+  "tierRules": {
+    "tier1": {
+      "min": 10,
+      "max": 20,
+      "nearPlayerAge": true,
+      "playerAgeWindowYears": 8,
+      "olderMentorsMax": 2,
+      "examples": [
+        "spouse",
+        "partner",
+        "sibling",
+        "best_friend",
+        "close_cousin",
+        "mentor"
+      ]
+    },
+    "tier2": {
+      "min": 20,
+      "max": 60,
+      "randomAdultAges": true,
+      "examples": [
+        "good_friend",
+        "extended_family",
+        "in_law",
+        "close_coworker",
+        "former_partner"
+      ]
+    },
+    "tier3": {
+      "min": 60,
+      "max": 100,
+      "randomAdultAges": true,
+      "examples": [
+        "coworker",
+        "neighbor",
+        "classmate",
+        "church_friend",
+        "regular_customer"
+      ]
+    },
+    "tier4": {
+      "min": 100,
+      "max": 200,
+      "randomAdultAges": true,
+      "examples": [
+        "recognizable_townie",
+        "former_classmate",
+        "spouses_coworker",
+        "mechanic",
+        "parent_from_school"
+      ]
+    },
+    "tier5": {
+      "unlimited": true,
+      "historyOnlyByDefault": true,
+      "fullBrain": false,
+      "fullTraits": false,
+      "examples": [
+        "old_teacher",
+        "former_boss",
+        "dead_relative",
+        "childhood_neighbor",
+        "old_coworker",
+        "moved_away_friend"
+      ],
+      "promoteToTier4OnDirectInteraction": true
+    }
+  },
+  "ageRules": {
+    "adultMin": 18,
+    "adultMax": 90,
+    "tier1NearPlayerWeight": 0.82,
+    "mentorAgeMinimumAbovePlayer": 10,
+    "mentorAgeMaximumAbovePlayer": 35,
+    "otherTiersUseTownAgeDistribution": true
+  },
+  "familyRules": {
+    "allowMarriage": true,
+    "allowDivorceHistory": true,
+    "allowWidowhood": true,
+    "allowRemarriage": true,
+    "marriedCouplesMayHaveChildren": true,
+    "childRecordsAreLightweight": true,
+    "childFullBrain": false,
+    "childFullTraits": false,
+    "childCanBecomeFullerIfStoryRelevant": true,
+    "siblingMarriageCreatesCrossFamilyLinks": true,
+    "inLawLinksAreRealEdges": true
+  },
+  "overlapRules": {
+    "samePersonCanAppearInManyWebs": true,
+    "webTierCanDifferByOwner": true,
+    "relationshipTypeCanDifferByOwner": true,
+    "searchExistingBeforeCreate": [
+      "same_household",
+      "same_last_name_family",
+      "spouse_family",
+      "coworkers",
+      "neighbors",
+      "school_connections",
+      "church_connections",
+      "friends_of_friends",
+      "townwide_pool"
+    ],
+    "preferredSmallTownDegreesOfSeparation": [
+      2,
+      3
+    ]
+  },
+  "jobRules": {
+    "useMasterFile": "project_eve_all_jobs_master.json",
+    "useWorkplaceFile": "project_eve_town_workplaces.json",
+    "mustOccupyRealSlot": true,
+    "promotionRequiresOpenSlot": true,
+    "firingFreesSlot": true,
+    "quittingFreesSlot": true,
+    "retirementFreesSlot": true,
+    "deathFreesSlot": true
+  },
+  "attendanceRules": {
+    "useWorkplaceAttendancePolicy": true,
+    "callOffCreatesAbsenceRecord": true,
+    "npcUnavailableAtWorkWhenCalledOff": true,
+    "automaticTerminationAtOrAboveThreshold": true,
+    "noManagerOverrideAtHardLimit": true
+  },
+  "materialization": {
+    "tier1": [
+      "identity",
+      "appearance",
+      "brain",
+      "traits",
+      "money",
+      "job",
+      "relationships",
+      "memory",
+      "history"
+    ],
+    "tier2": [
+      "identity",
+      "appearance",
+      "brain",
+      "traits",
+      "money",
+      "job",
+      "relationships",
+      "memory",
+      "history"
+    ],
+    "tier3": [
+      "identity",
+      "appearance",
+      "brain",
+      "traits",
+      "money",
+      "job",
+      "relationships",
+      "memory",
+      "history"
+    ],
+    "tier4": [
+      "identity",
+      "appearance",
+      "brain",
+      "traits",
+      "money",
+      "job",
+      "relationships",
+      "memory",
+      "history"
+    ],
+    "tier5": [
+      "identity_stub",
+      "appearance",
+      "basic_money",
+      "family_links",
+      "basic_relationships",
+      "job_slot_if_worker",
+      "history_links"
+    ]
+  }
+}

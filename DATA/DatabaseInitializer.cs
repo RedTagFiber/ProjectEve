@@ -342,7 +342,7 @@ public static class DatabaseInitializer
             "ALTER TABLE Memories ADD COLUMN IsLockedPeak INTEGER DEFAULT 0",
 
             // Relationships
-            "ALTER TABLE Relationships ADD COLUMN TargetId INTEGER"
+            "ALTER TABLE Relationships ADD COLUMN TargetId INTEGER",
 
             //JobProfile — required by JobProfile
             "ALTER TABLE JobProfile ADD COLUMN JobName TEXT",

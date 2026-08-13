@@ -1,0 +1,1011 @@
+{
+  "schema": "project_eve.body_language_rules.v1",
+  "purpose": "Player-visible nonverbal behavior derived from Fast traits, personal tell profile, context, and conscious control.",
+  "corePrinciples": [
+    "No single cue proves lying, attraction, fear, guilt, or any other hidden state.",
+    "Interpret clusters and changes from that NPC's normal baseline, not isolated gestures.",
+    "ThoughtEngine selects involuntary LEAKS.",
+    "DialogueEngineInPerson selects conscious PRESENTATION plus SAY.",
+    "The player sees behavior, never hidden-state labels.",
+    "Traits bias cues; they do not force deterministic animations.",
+    "Personal TellProfile modifies which cues are common, rare, suppressed, or exaggerated."
+  ],
+  "intensityBands": {
+    "off": [
+      0,
+      29
+    ],
+    "low": [
+      30,
+      49
+    ],
+    "mid": [
+      50,
+      69
+    ],
+    "high": [
+      70,
+      84
+    ],
+    "extreme": [
+      85,
+      100
+    ]
+  },
+  "traits": {
+    "trait.anger": {
+      "label": "Anger",
+      "low": [
+        "relaxed_jaw",
+        "open_hands",
+        "normal_eye_contact"
+      ],
+      "mid": [
+        "jaw_set",
+        "shorter_movements",
+        "brow_tension",
+        "reduced_smile"
+      ],
+      "high": [
+        "hard_stare",
+        "clenched_jaw",
+        "sharp_gestures",
+        "shoulders_tense",
+        "voice_clipped"
+      ],
+      "extreme": [
+        "body_goes_still",
+        "fists_clench",
+        "visible_tremor",
+        "abrupt_distance_change",
+        "staring_or_refusing_eye_contact"
+      ],
+      "cover": [
+        "force_calm_voice",
+        "fold_arms",
+        "slow_breath",
+        "look_away_to_regain_control"
+      ]
+    },
+    "trait.anxiety": {
+      "label": "Anxiety",
+      "low": [
+        "steady_hands",
+        "easy_breath",
+        "natural_pacing"
+      ],
+      "mid": [
+        "finger_fidget",
+        "lip_press",
+        "short_eye_breaks",
+        "self_touch",
+        "faster_breath"
+      ],
+      "high": [
+        "hand_rubbing",
+        "repeated_swallow",
+        "rapid_eye_scans",
+        "speech_speed_shift",
+        "weight_shift"
+      ],
+      "extreme": [
+        "freeze_then_move",
+        "visible_shaking",
+        "breath_catch",
+        "repeated_reassurance_seek",
+        "escape_glances"
+      ],
+      "cover": [
+        "hold_hands_still",
+        "oversteady_eye_contact",
+        "controlled_smile",
+        "slow_deliberate_speech"
+      ]
+    },
+    "trait.fear": {
+      "label": "Fear",
+      "low": [
+        "normal_distance",
+        "open_posture",
+        "easy_breath"
+      ],
+      "mid": [
+        "step_back_small",
+        "shoulders_raise",
+        "eyes_widen",
+        "voice_quiet"
+      ],
+      "high": [
+        "freeze",
+        "body_angle_to_exit",
+        "hands_protect_torso",
+        "breathing_shallow"
+      ],
+      "extreme": [
+        "full_freeze",
+        "recoil",
+        "protect_head_or_chest",
+        "panic_scan",
+        "voice_break"
+      ],
+      "cover": [
+        "stand_tall",
+        "force_eye_contact",
+        "square_shoulders",
+        "speak_too_firmly"
+      ]
+    },
+    "trait.shame": {
+      "label": "Shame",
+      "low": [
+        "comfortable_visibility",
+        "neutral_gaze"
+      ],
+      "mid": [
+        "look_down",
+        "touch_face_or_neck",
+        "shoulders_in",
+        "small_smile_to_deflect"
+      ],
+      "high": [
+        "avoid_eye_contact",
+        "cover_face",
+        "body_shrinks",
+        "voice_softens",
+        "turn_away"
+      ],
+      "extreme": [
+        "withdraw_physically",
+        "hide_face",
+        "difficulty_speaking",
+        "leave_scene_impulse"
+      ],
+      "cover": [
+        "joke_it_off",
+        "change_subject",
+        "act_indifferent",
+        "overexplain"
+      ]
+    },
+    "trait.guilt": {
+      "label": "Guilt",
+      "low": [
+        "normal_answer_timing",
+        "easy_eye_contact"
+      ],
+      "mid": [
+        "hesitation",
+        "self_correction",
+        "eye_break_near_key_detail",
+        "quiet_exhale"
+      ],
+      "high": [
+        "overexplain",
+        "repeat_reassurance",
+        "answer_too_fast_or_too_slow",
+        "hands_busy"
+      ],
+      "extreme": [
+        "confession_pressure",
+        "voice_crack",
+        "visible_distress",
+        "avoid_specific_detail"
+      ],
+      "cover": [
+        "rehearsed_answer",
+        "controlled_breath",
+        "redirect_question",
+        "minimize_detail"
+      ]
+    },
+    "trait.hurt": {
+      "label": "Hurt",
+      "low": [
+        "normal_warmth",
+        "easy_engagement"
+      ],
+      "mid": [
+        "smile_fades",
+        "look_away",
+        "voice_flattens",
+        "hands_go_still"
+      ],
+      "high": [
+        "glassy_eyes",
+        "jaw_tight",
+        "withdraw_touch",
+        "busy_hands_to_cope",
+        "quiet_voice"
+      ],
+      "extreme": [
+        "fight_tears",
+        "turn_away",
+        "long_silence",
+        "leave_scene",
+        "voice_break"
+      ],
+      "cover": [
+        "say_im_fine",
+        "forced_smile",
+        "change_topic",
+        "become_formal"
+      ]
+    },
+    "trait.jealousy": {
+      "label": "Jealousy",
+      "low": [
+        "neutral_attention_distribution"
+      ],
+      "mid": [
+        "watch_rival",
+        "subtle_comparison_glance",
+        "shorter_answers",
+        "territorial_proximity"
+      ],
+      "high": [
+        "hard_glances",
+        "monitor_partner_attention",
+        "touch_claiming",
+        "interrupt_rival"
+      ],
+      "extreme": [
+        "confrontational_stare",
+        "possessive_positioning",
+        "abrupt_withdrawal",
+        "visible_agitation"
+      ],
+      "cover": [
+        "act_unbothered",
+        "tease",
+        "look_at_phone",
+        "overfriendly_to_rival"
+      ]
+    },
+    "trait.resentment": {
+      "label": "Resentment",
+      "low": [
+        "easy_responsiveness"
+      ],
+      "mid": [
+        "tight_smile",
+        "delayed_response",
+        "small_eye_roll",
+        "less_body_orientation"
+      ],
+      "high": [
+        "cold_stillness",
+        "sarcastic_smile",
+        "minimal_eye_contact",
+        "controlled_distance"
+      ],
+      "extreme": [
+        "refuses_touch",
+        "long_stare",
+        "abrupt_exit",
+        "deliberate_silence"
+      ],
+      "cover": [
+        "polite_formality",
+        "fake_smile",
+        "surface_cooperation",
+        "quiet_scorekeeping"
+      ]
+    },
+    "trait.trust": {
+      "label": "Trust",
+      "low": [
+        "guarded_distance",
+        "limited_eye_contact",
+        "closed_posture"
+      ],
+      "mid": [
+        "normal_distance",
+        "selective_openness",
+        "brief_touch_possible"
+      ],
+      "high": [
+        "relaxed_posture",
+        "easy_eye_contact",
+        "leans_in",
+        "natural_touch",
+        "unguarded_expression"
+      ],
+      "extreme": [
+        "full_body_orientation",
+        "comfortable_silence",
+        "vulnerable_expression",
+        "seeks_proximity"
+      ],
+      "cover": [
+        "none"
+      ]
+    },
+    "trait.affection": {
+      "label": "Affection",
+      "low": [
+        "neutral_distance",
+        "little_touch"
+      ],
+      "mid": [
+        "soft_smile",
+        "warm_eye_contact",
+        "small_check_in_touch",
+        "body_orients_toward"
+      ],
+      "high": [
+        "frequent_warm_glance",
+        "lean_in",
+        "touch_arm_or_hand",
+        "mirroring",
+        "soft_voice"
+      ],
+      "extreme": [
+        "protective_proximity",
+        "lingering_touch",
+        "face_softens_immediately",
+        "seeks_contact"
+      ],
+      "cover": [
+        "tease_instead_of_softness",
+        "acts_of_service",
+        "quiet_presence"
+      ]
+    },
+    "trait.desire": {
+      "label": "Desire",
+      "low": [
+        "neutral_distance",
+        "brief_eye_contact"
+      ],
+      "mid": [
+        "longer_eye_contact",
+        "lip_attention",
+        "body_angle_closer",
+        "voice_softens"
+      ],
+      "high": [
+        "prolonged_gaze",
+        "touch_seeking",
+        "reduced_distance",
+        "breath_change",
+        "attention_to_mouth"
+      ],
+      "extreme": [
+        "obvious_proximity_pull",
+        "repeated_mouth_glance",
+        "voice_drops",
+        "stillness_before_touch"
+      ],
+      "cover": [
+        "look_away_fast",
+        "joke",
+        "increase_distance",
+        "act_busy"
+      ]
+    },
+    "trait.attraction": {
+      "label": "Attraction",
+      "low": [
+        "neutral_visual_attention"
+      ],
+      "mid": [
+        "appearance_scan_brief",
+        "smile_more",
+        "posture_adjust",
+        "face_touch"
+      ],
+      "high": [
+        "frequent_glances",
+        "mirroring",
+        "self_grooming",
+        "open_torso",
+        "closer_positioning"
+      ],
+      "extreme": [
+        "attention_keeps_returning",
+        "visible_fluster",
+        "strong_mirroring",
+        "seeks_one_on_one_space"
+      ],
+      "cover": [
+        "avoid_looking",
+        "act_casual",
+        "focus_on_object",
+        "teasing_deflection"
+      ]
+    },
+    "trait.tension": {
+      "label": "Tension",
+      "low": [
+        "loose_posture",
+        "easy_movement"
+      ],
+      "mid": [
+        "still_hands",
+        "tight_shoulders",
+        "measured_distance",
+        "held_breath"
+      ],
+      "high": [
+        "body_stillness",
+        "micro_flinch",
+        "stiff_posture",
+        "voice_tight",
+        "rapid_shift_between_close_far"
+      ],
+      "extreme": [
+        "freeze_or_burst_motion",
+        "visible_tremor",
+        "long_silence",
+        "charged_eye_contact"
+      ],
+      "cover": [
+        "slow_movements",
+        "controlled_breath",
+        "neutral_face"
+      ]
+    },
+    "trait.playfulness": {
+      "label": "Playfulness",
+      "low": [
+        "serious_face",
+        "literal_delivery"
+      ],
+      "mid": [
+        "half_smile",
+        "light_tease",
+        "eyebrow_raise",
+        "shoulder_bump"
+      ],
+      "high": [
+        "grin",
+        "animated_gestures",
+        "playful_touch",
+        "mock_offense",
+        "laughing_eye_contact"
+      ],
+      "extreme": [
+        "constant_teasing",
+        "big_expressive_reactions",
+        "physical_play",
+        "difficulty_staying_serious"
+      ],
+      "cover": [
+        "bite_back_smile",
+        "pretend_serious"
+      ]
+    },
+    "trait.pride": {
+      "label": "Pride",
+      "low": [
+        "easy_concession",
+        "relaxed_posture"
+      ],
+      "mid": [
+        "chin_raise_small",
+        "correct_posture",
+        "controlled_expression"
+      ],
+      "high": [
+        "holds_eye_contact",
+        "squares_shoulders",
+        "resists_apology",
+        "face_goes_still"
+      ],
+      "extreme": [
+        "rigid_posture",
+        "refuses_visible_weakness",
+        "stares_down",
+        "walks_away_before_cracking"
+      ],
+      "cover": [
+        "formal_tone",
+        "controlled_smile",
+        "dismissive_shrug"
+      ]
+    },
+    "trait.patience": {
+      "label": "Patience",
+      "low": [
+        "foot_tap",
+        "interrupt",
+        "quick_exhale",
+        "frequent_clock_or_exit_glance"
+      ],
+      "mid": [
+        "normal_waiting",
+        "occasional_shift"
+      ],
+      "high": [
+        "still_posture",
+        "allows_silence",
+        "waits_for_answer",
+        "slow_nod"
+      ],
+      "extreme": [
+        "very_long_tolerance",
+        "calm_repetition",
+        "minimal_pressure"
+      ],
+      "cover": [
+        "forced_stillness",
+        "tight_smile"
+      ]
+    },
+    "trait.guard": {
+      "label": "Guard",
+      "low": [
+        "open_posture",
+        "easy_expression",
+        "natural_touch"
+      ],
+      "mid": [
+        "arms_near_torso",
+        "selective_eye_contact",
+        "measured_distance"
+      ],
+      "high": [
+        "folded_arms",
+        "body_angle_away",
+        "minimal_expression",
+        "short_eye_contact"
+      ],
+      "extreme": [
+        "full_closed_posture",
+        "physical_distance",
+        "face_unreadable",
+        "turns_body_away"
+      ],
+      "cover": [
+        "polite_smile",
+        "surface_warmth",
+        "controlled_eye_contact"
+      ]
+    },
+    "trait.openness": {
+      "label": "Openness",
+      "low": [
+        "short_answers",
+        "limited_gesture",
+        "little_self_disclosure"
+      ],
+      "mid": [
+        "normal_expression",
+        "some_gesture",
+        "selective_detail"
+      ],
+      "high": [
+        "animated_expression",
+        "easy_gesture",
+        "leans_in",
+        "shows_reaction_openly"
+      ],
+      "extreme": [
+        "very_expressive",
+        "little_filter",
+        "touches_while_talking",
+        "transparent_face"
+      ],
+      "cover": [
+        "none"
+      ]
+    },
+    "trait.loneliness": {
+      "label": "Loneliness",
+      "low": [
+        "comfortable_solo_posture",
+        "normal_social_distance"
+      ],
+      "mid": [
+        "lingers_near_people",
+        "checks_phone",
+        "longer_goodbyes",
+        "seeks_small_contact"
+      ],
+      "high": [
+        "proximity_seeking",
+        "touch_lingers",
+        "hesitates_to_leave",
+        "watching_others_connect"
+      ],
+      "extreme": [
+        "strong_reassurance_seek",
+        "clings_to_interaction",
+        "visible_drop_when_left_out"
+      ],
+      "cover": [
+        "act_busy",
+        "say_im_fine_alone",
+        "leave_before_rejection"
+      ]
+    },
+    "trait.hope": {
+      "label": "Hope",
+      "low": [
+        "slumped_posture",
+        "reduced_eye_contact",
+        "small_sighs"
+      ],
+      "mid": [
+        "neutral_posture",
+        "some_engagement"
+      ],
+      "high": [
+        "upright_posture",
+        "brighter_expression",
+        "future_oriented_gesture",
+        "more_eye_contact"
+      ],
+      "extreme": [
+        "energized_posture",
+        "animated_planning",
+        "easy_smile",
+        "reaches_out"
+      ],
+      "cover": [
+        "restrained_smile",
+        "cautious_optimism"
+      ]
+    }
+  },
+  "combos": [
+    {
+      "id": "combo.lie_anxious_guilty",
+      "when": {
+        "trait.anxiety": ">=65",
+        "trait.guilt": ">=60"
+      },
+      "bias": [
+        "hesitation",
+        "self_touch",
+        "answer_timing_shift",
+        "overexplain"
+      ],
+      "suppress_if": {
+        "lie_skill": ">=80",
+        "trait.guard": ">=75"
+      },
+      "note": "Not proof of deception. Similar pattern can appear under fear of being disbelieved."
+    },
+    {
+      "id": "combo.lie_guarded_proud",
+      "when": {
+        "trait.guard": ">=70",
+        "trait.pride": ">=65"
+      },
+      "bias": [
+        "controlled_face",
+        "oversteady_eye_contact",
+        "jaw_set",
+        "short_answer"
+      ],
+      "note": "Good at masking obvious leakage; may look unusually controlled."
+    },
+    {
+      "id": "combo.hurt_guarded",
+      "when": {
+        "trait.hurt": ">=65",
+        "trait.guard": ">=65"
+      },
+      "bias": [
+        "smile_fades",
+        "look_away",
+        "hands_go_still",
+        "voice_flat",
+        "distance_increase"
+      ]
+    },
+    {
+      "id": "combo.hurt_affection",
+      "when": {
+        "trait.hurt": ">=60",
+        "trait.affection": ">=65"
+      },
+      "bias": [
+        "conflicted_eye_contact",
+        "reach_then_stop",
+        "soft_voice",
+        "stay_near_despite_withdrawal"
+      ]
+    },
+    {
+      "id": "combo.anger_pride",
+      "when": {
+        "trait.anger": ">=65",
+        "trait.pride": ">=65"
+      },
+      "bias": [
+        "chin_up",
+        "hard_eye_contact",
+        "squared_shoulders",
+        "clipped_voice"
+      ]
+    },
+    {
+      "id": "combo.anger_guard",
+      "when": {
+        "trait.anger": ">=65",
+        "trait.guard": ">=65"
+      },
+      "bias": [
+        "cold_stillness",
+        "folded_arms",
+        "minimal_expression",
+        "short_answers"
+      ]
+    },
+    {
+      "id": "combo.desire_guard",
+      "when": {
+        "trait.desire": ">=65",
+        "trait.guard": ">=65"
+      },
+      "bias": [
+        "glance_then_avoid",
+        "increase_distance_after_closeness",
+        "lip_press",
+        "pretend_busy"
+      ]
+    },
+    {
+      "id": "combo.desire_affection",
+      "when": {
+        "trait.desire": ">=60",
+        "trait.affection": ">=65"
+      },
+      "bias": [
+        "soft_eye_contact",
+        "lean_in",
+        "linger_near",
+        "gentle_touch"
+      ]
+    },
+    {
+      "id": "combo.jealousy_pride",
+      "when": {
+        "trait.jealousy": ">=60",
+        "trait.pride": ">=60"
+      },
+      "bias": [
+        "act_unbothered",
+        "watch_rival_indirectly",
+        "tight_smile",
+        "claiming_proximity"
+      ]
+    },
+    {
+      "id": "combo.fear_pride",
+      "when": {
+        "trait.fear": ">=65",
+        "trait.pride": ">=65"
+      },
+      "bias": [
+        "square_shoulders",
+        "force_eye_contact",
+        "voice_too_firm",
+        "hands_hidden_or_still"
+      ]
+    },
+    {
+      "id": "combo.shame_anger",
+      "when": {
+        "trait.shame": ">=60",
+        "trait.anger": ">=60"
+      },
+      "bias": [
+        "look_away_then_snap_back",
+        "defensive_posture",
+        "sharp_answer",
+        "face_touch"
+      ]
+    },
+    {
+      "id": "combo.trust_affection",
+      "when": {
+        "trait.trust": ">=70",
+        "trait.affection": ">=70"
+      },
+      "bias": [
+        "relaxed_posture",
+        "warm_eye_contact",
+        "natural_touch",
+        "comfortable_silence"
+      ]
+    },
+    {
+      "id": "combo.low_trust_high_guard",
+      "when": {
+        "trait.trust": "<=35",
+        "trait.guard": ">=70"
+      },
+      "bias": [
+        "distance",
+        "minimal_disclosure",
+        "body_angle_away",
+        "controlled_face"
+      ]
+    },
+    {
+      "id": "combo.lonely_affection",
+      "when": {
+        "trait.loneliness": ">=60",
+        "trait.affection": ">=60"
+      },
+      "bias": [
+        "linger_at_goodbye",
+        "seek_touch",
+        "watch_for_reassurance",
+        "hesitate_to_leave"
+      ]
+    },
+    {
+      "id": "combo.anxiety_low_patience",
+      "when": {
+        "trait.anxiety": ">=60",
+        "trait.patience": "<=35"
+      },
+      "bias": [
+        "interrupt",
+        "fidget",
+        "fast_speech",
+        "repeat_question",
+        "exit_glances"
+      ]
+    },
+    {
+      "id": "combo.resentment_affection",
+      "when": {
+        "trait.resentment": ">=60",
+        "trait.affection": ">=60"
+      },
+      "bias": [
+        "warmth_then_withdrawal",
+        "touch_then_stop",
+        "tight_smile",
+        "conflicted_eye_contact"
+      ]
+    },
+    {
+      "id": "combo.playful_guarded",
+      "when": {
+        "trait.playfulness": ">=60",
+        "trait.guard": ">=60"
+      },
+      "bias": [
+        "tease_instead_of_answer",
+        "half_smile",
+        "deflect_with_joke",
+        "avoid_direct_vulnerability"
+      ]
+    }
+  ],
+  "tellProfile": {
+    "fields": {
+      "lie_skill": {
+        "range": [
+          0,
+          100
+        ],
+        "meaning": "Ability to suppress, manage, or redirect leakage during deception."
+      },
+      "emotional_control": {
+        "range": [
+          0,
+          100
+        ],
+        "meaning": "General ability to regulate visible reactions."
+      },
+      "expressiveness": {
+        "range": [
+          0,
+          100
+        ],
+        "meaning": "How visible emotions normally are."
+      },
+      "self_monitoring": {
+        "range": [
+          0,
+          100
+        ],
+        "meaning": "How much the NPC watches and manages their own presentation."
+      },
+      "default_tells": {
+        "type": "string_list"
+      },
+      "stress_tells": {
+        "type": "string_list"
+      },
+      "hurt_tells": {
+        "type": "string_list"
+      },
+      "attraction_tells": {
+        "type": "string_list"
+      },
+      "anger_tells": {
+        "type": "string_list"
+      },
+      "deception_tells": {
+        "type": "string_list"
+      }
+    },
+    "generationHints": {
+      "high_guard": [
+        "higher_self_monitoring",
+        "fewer_large_gestures"
+      ],
+      "high_openness": [
+        "higher_expressiveness"
+      ],
+      "high_anxiety": [
+        "more_micro_leaks",
+        "more_self_touch"
+      ],
+      "high_pride": [
+        "more_controlled_posture",
+        "resists_visible_weakness"
+      ],
+      "high_playfulness": [
+        "more_teasing_and_expressive_face"
+      ],
+      "high_patience": [
+        "slower_response",
+        "less_fidgeting"
+      ]
+    }
+  },
+  "lieModel": {
+    "note": "Deception is inferred only from hidden world truth plus NPC intent. Body cues never reveal truth directly to the player.",
+    "leakStrengthFormulaHint": "pressure + anxiety + guilt + shame - lie_skill - emotional_control + context_modifier",
+    "pressureSources": [
+      "stakes",
+      "relationship_closeness",
+      "fear_of_discovery",
+      "social_audience",
+      "current_stress",
+      "fatigue"
+    ],
+    "goodLiarBehavior": [
+      "fewer_large_leaks",
+      "more_normal_baseline_behavior",
+      "may_overcontrol",
+      "may_redirect"
+    ],
+    "poorLiarBehavior": [
+      "timing_shifts",
+      "self_touch",
+      "inconsistent_eye_contact",
+      "overexplaining",
+      "voice_changes"
+    ],
+    "falsePositiveRule": "Truthful people can show the same cues when anxious, ashamed, afraid, angry, or desperate to be believed."
+  },
+  "rendering": {
+    "thoughtOutputContract": {
+      "thought": "private internal thought, never shown",
+      "tags": "Fast trait deltas",
+      "leaks": "1-3 involuntary cue ids; may be none"
+    },
+    "inPersonOutputContract": {
+      "observed": "1-2 short player-visible body-language beats",
+      "presentation": "0-2 deliberate social actions",
+      "say": "spoken dialogue only"
+    },
+    "example": {
+      "thought": "Don't let him see how much that landed.",
+      "tags": [
+        "trait.hurt+3@7",
+        "trait.guard+2@6"
+      ],
+      "leaks": [
+        "eye_break_short",
+        "jaw_tight"
+      ],
+      "presentation": [
+        "fold_arms",
+        "steady_eye_contact"
+      ],
+      "player_view": "Her eyes flick away for a second before her jaw tightens. She folds her arms and looks back at you.",
+      "say": "I'm fine."
+    }
+  }
+}

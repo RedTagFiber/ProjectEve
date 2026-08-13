@@ -1,0 +1,49 @@
+{
+  "_notes": [
+    "PROJECT EVE HUMAN EVENT SCHEDULER SETTINGS.",
+    "The scheduler controls WHEN Tier 1-4 NPCs get deep HumanEvent deliberation.",
+    "Tier 1-4 all use the same full NPC data. Tier only changes routine update frequency.",
+    "Major events bypass the timer using NpcDeepUpdateRequest.",
+    "The scheduler is NOT the fast physical world loop. Movement, commute, work presence, arrivals, sleep and opportunity detection should update more frequently in the world/activity system.",
+    "The scheduler should be called by the game clock whenever game time advances. It will run only NPCs that are due.",
+    "Tier 5 has no routine deep scheduling."
+  ],
+  "tierCadence": {
+    "tier1": {
+      "minimumGameMinutes": 30,
+      "maximumGameMinutes": 30
+    },
+    "tier2": {
+      "minimumGameMinutes": 60,
+      "maximumGameMinutes": 60
+    },
+    "tier3": {
+      "minimumGameMinutes": 120,
+      "maximumGameMinutes": 120
+    },
+    "tier4": {
+      "minimumGameMinutes": 180,
+      "maximumGameMinutes": 300
+    },
+    "tier5": {
+      "enabled": false
+    }
+  },
+  "processing": {
+    "maximumNpcUpdatesPerSchedulerPass": 50,
+    "maximumImmediateDeepUpdatesPerPass": 50,
+    "minimumRealMillisecondsBetweenSchedulerCalls": 0,
+    "randomizeFirstDueTime": true,
+    "skipNpcIfCharacterCannotLoad": true,
+    "recordNoEventDecision": true
+  },
+  "eventSelection": {
+    "allowNoEvent": true,
+    "onePrimaryEventPerDeepPass": true,
+    "majorEventCanRequestImmediateFollowupDeepPass": true
+  },
+  "debug": {
+    "writeSchedulerAudit": true,
+    "storeTopDecisionReason": true
+  }
+}

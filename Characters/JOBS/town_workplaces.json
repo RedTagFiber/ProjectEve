@@ -1,0 +1,5574 @@
+{
+  "_notes": [
+    "PROJECT EVE SMALL-TOWN WORKPLACE REGISTRY",
+    "References project_eve_all_jobs_master.json.",
+    "Each workplace owns exact job slots; NPC assignment must use one of those slots.",
+    "bakedNpcTarget controls how many of the 200 deep NPCs are initially placed at that workplace.",
+    "Other occupied slots are lightweight/background people and can be promoted into fuller NPCs if they become relevant.",
+    "Family/Friend Web tier is separate from employment detail level.",
+    "Regional employer groups are nearby-county jobs for specialty occupations not naturally present in the immediate town.",
+    "Operating hours are business hours; individual NPC schedules come from the job master shift templates."
+  ],
+  "world": {
+    "id": "ohio_small_town",
+    "townStyle": "Bellefontaine / Sidney area",
+    "state": "Ohio",
+    "targetDeepNpcPopulation": 200
+  },
+  "jobMasterFile": "project_eve_all_jobs_master.json",
+  "generationRules": {
+    "requireExistingJobSlot": true,
+    "oneNpcPerJobSlot": true,
+    "allowVacancies": true,
+    "allowRegionalCommute": true,
+    "regionalCommuteMinutesRange": [
+      15,
+      45
+    ],
+    "localCommuteMinutesRange": [
+      2,
+      25
+    ],
+    "promotionRequiresVacantDestinationSlot": true,
+    "firedOrQuitNpcFreesSlot": true,
+    "retiredNpcFreesSlot": true,
+    "deadNpcFreesSlot": true,
+    "newBusinessCanCreateNewSlots": true,
+    "closedBusinessRemovesSlots": true,
+    "preventUnlimitedPrestigeJobs": true
+  },
+  "deepNpcPopulationTargets": {
+    "employed": 160,
+    "notEmployed": 40,
+    "total": 200,
+    "notEmployedBreakdown": {
+      "retired": 15,
+      "full_time_student": 8,
+      "stay_at_home_parent": 6,
+      "unemployed_job_seeking": 4,
+      "disabled_or_not_currently_working": 3,
+      "between_jobs_or_recently_fired": 2,
+      "homemaker_or_family_caregiver": 2
+    }
+  },
+  "townEmploymentSummary": {
+    "workplaceCount": 56,
+    "localJobSlots": 2561,
+    "regionalSpecialtySlots": 0,
+    "totalModeledJobSlots": 2561,
+    "jobDefinitionsCovered": 240,
+    "jobDefinitionsAvailable": 240,
+    "allMasterJobsHaveAtLeastOneSlot": true,
+    "categorySlotTotals": {
+      "agriculture": 46,
+      "automotive": 64,
+      "banking": 37,
+      "community": 67,
+      "construction": 68,
+      "education": 275,
+      "elderCare": 143,
+      "fastFood": 108,
+      "fireEms": 32,
+      "government": 66,
+      "grocery": 109,
+      "healthcare": 362,
+      "hotel": 42,
+      "insurance": 8,
+      "legal": 12,
+      "manufacturing": 421,
+      "personalServices": 36,
+      "police": 37,
+      "postalShipping": 64,
+      "realEstate": 12,
+      "restaurants": 121,
+      "retail": 191,
+      "transportation": 56,
+      "utilities": 23,
+      "warehouse": 161
+    }
+  },
+  "workplaces": [
+    {
+      "workplaceId": "WP_FACTORY_001",
+      "name": "Belleview Components Plant",
+      "type": "manufacturing_plant",
+      "district": "industrial",
+      "outsideTown": false,
+      "operatingHours": {
+        "type": "24_7"
+      },
+      "defaultBenefitPlan": "factory_good",
+      "attendancePolicy": "strict_factory",
+      "positions": [
+        {
+          "jobId": "manufacturing_production_worker",
+          "jobName": "Production Worker",
+          "category": "manufacturing",
+          "slots": 130,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 130
+        },
+        {
+          "jobId": "manufacturing_assembler",
+          "jobName": "Assembler",
+          "category": "manufacturing",
+          "slots": 80,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 80
+        },
+        {
+          "jobId": "manufacturing_machine_operator",
+          "jobName": "Machine Operator",
+          "category": "manufacturing",
+          "slots": 55,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 55
+        },
+        {
+          "jobId": "manufacturing_cnc_operator",
+          "jobName": "CNC Operator",
+          "category": "manufacturing",
+          "slots": 18,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 18
+        },
+        {
+          "jobId": "manufacturing_material_handler",
+          "jobName": "Material Handler",
+          "category": "manufacturing",
+          "slots": 24,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 24
+        },
+        {
+          "jobId": "manufacturing_forklift_operator",
+          "jobName": "Forklift Operator",
+          "category": "manufacturing",
+          "slots": 18,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 18
+        },
+        {
+          "jobId": "manufacturing_welder",
+          "jobName": "Welder",
+          "category": "manufacturing",
+          "slots": 16,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 16
+        },
+        {
+          "jobId": "manufacturing_quality_inspector",
+          "jobName": "Quality Inspector",
+          "category": "manufacturing",
+          "slots": 18,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 18
+        },
+        {
+          "jobId": "manufacturing_maintenance_technician",
+          "jobName": "Maintenance Technician",
+          "category": "manufacturing",
+          "slots": 20,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 20
+        },
+        {
+          "jobId": "manufacturing_industrial_electrician",
+          "jobName": "Industrial Electrician",
+          "category": "manufacturing",
+          "slots": 7,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 7
+        },
+        {
+          "jobId": "manufacturing_tool_and_die_worker",
+          "jobName": "Tool and Die Worker",
+          "category": "manufacturing",
+          "slots": 8,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 8
+        },
+        {
+          "jobId": "manufacturing_team_leader",
+          "jobName": "Team Leader",
+          "category": "manufacturing",
+          "slots": 15,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 15
+        },
+        {
+          "jobId": "manufacturing_shift_supervisor",
+          "jobName": "Shift Supervisor",
+          "category": "manufacturing",
+          "slots": 6,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 6
+        },
+        {
+          "jobId": "manufacturing_production_manager",
+          "jobName": "Production Manager",
+          "category": "manufacturing",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        },
+        {
+          "jobId": "manufacturing_maintenance_manager",
+          "jobName": "Maintenance Manager",
+          "category": "manufacturing",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "manufacturing_plant_manager",
+          "jobName": "Plant Manager",
+          "category": "manufacturing",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 303,
+        "idealStaff": 387,
+        "maximumStaff": 421,
+        "totalJobSlots": 421
+      },
+      "bakedNpcTarget": 18,
+      "backgroundNpcSlots": 403,
+      "notes": [
+        "Largest private employer in town.",
+        "Three-shift operation.",
+        "Good place for family-web overlap across generations."
+      ]
+    },
+    {
+      "workplaceId": "WP_WAREHOUSE_001",
+      "name": "Logan County Distribution Center",
+      "type": "warehouse_distribution",
+      "district": "industrial",
+      "outsideTown": false,
+      "operatingHours": {
+        "type": "24_7"
+      },
+      "defaultBenefitPlan": "standard_employer",
+      "attendancePolicy": "strict_factory",
+      "positions": [
+        {
+          "jobId": "warehouse_warehouse_worker",
+          "jobName": "Warehouse Worker",
+          "category": "warehouse",
+          "slots": 55,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 55
+        },
+        {
+          "jobId": "warehouse_picker_packer",
+          "jobName": "Picker Packer",
+          "category": "warehouse",
+          "slots": 42,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 42
+        },
+        {
+          "jobId": "warehouse_receiver",
+          "jobName": "Receiver",
+          "category": "warehouse",
+          "slots": 12,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 12
+        },
+        {
+          "jobId": "warehouse_shipping_clerk",
+          "jobName": "Shipping Clerk",
+          "category": "warehouse",
+          "slots": 10,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 10
+        },
+        {
+          "jobId": "warehouse_inventory_clerk",
+          "jobName": "Inventory Clerk",
+          "category": "warehouse",
+          "slots": 8,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 8
+        },
+        {
+          "jobId": "warehouse_forklift_driver",
+          "jobName": "Forklift Driver",
+          "category": "warehouse",
+          "slots": 22,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 22
+        },
+        {
+          "jobId": "warehouse_warehouse_team_lead",
+          "jobName": "Warehouse Team Lead",
+          "category": "warehouse",
+          "slots": 8,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 8
+        },
+        {
+          "jobId": "warehouse_warehouse_supervisor",
+          "jobName": "Warehouse Supervisor",
+          "category": "warehouse",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        },
+        {
+          "jobId": "warehouse_warehouse_manager",
+          "jobName": "Warehouse Manager",
+          "category": "warehouse",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 116,
+        "idealStaff": 148,
+        "maximumStaff": 161,
+        "totalJobSlots": 161
+      },
+      "bakedNpcTarget": 8,
+      "backgroundNpcSlots": 153,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_HOSPITAL_001",
+      "name": "Belleview Regional Hospital",
+      "type": "hospital",
+      "district": "medical",
+      "outsideTown": false,
+      "operatingHours": {
+        "type": "24_7"
+      },
+      "defaultBenefitPlan": "excellent_healthcare",
+      "attendancePolicy": "healthcare",
+      "positions": [
+        {
+          "jobId": "healthcare_hospital_receptionist",
+          "jobName": "Hospital Receptionist",
+          "category": "healthcare",
+          "slots": 12,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 12
+        },
+        {
+          "jobId": "healthcare_medical_assistant",
+          "jobName": "Medical Assistant",
+          "category": "healthcare",
+          "slots": 18,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 18
+        },
+        {
+          "jobId": "healthcare_stna",
+          "jobName": "STNA",
+          "category": "healthcare",
+          "slots": 38,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 38
+        },
+        {
+          "jobId": "healthcare_lpn",
+          "jobName": "LPN",
+          "category": "healthcare",
+          "slots": 22,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 22
+        },
+        {
+          "jobId": "healthcare_registered_nurse",
+          "jobName": "Registered Nurse",
+          "category": "healthcare",
+          "slots": 95,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 95
+        },
+        {
+          "jobId": "healthcare_physician",
+          "jobName": "Physician",
+          "category": "healthcare",
+          "slots": 28,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 28
+        },
+        {
+          "jobId": "healthcare_physician_assistant",
+          "jobName": "Physician Assistant",
+          "category": "healthcare",
+          "slots": 6,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 6
+        },
+        {
+          "jobId": "healthcare_nurse_practitioner",
+          "jobName": "Nurse Practitioner",
+          "category": "healthcare",
+          "slots": 8,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 8
+        },
+        {
+          "jobId": "healthcare_lab_technician",
+          "jobName": "Lab Technician",
+          "category": "healthcare",
+          "slots": 12,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 12
+        },
+        {
+          "jobId": "healthcare_radiology_technician",
+          "jobName": "Radiology Technician",
+          "category": "healthcare",
+          "slots": 11,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 11
+        },
+        {
+          "jobId": "healthcare_respiratory_therapist",
+          "jobName": "Respiratory Therapist",
+          "category": "healthcare",
+          "slots": 9,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 9
+        },
+        {
+          "jobId": "healthcare_physical_therapist",
+          "jobName": "Physical Therapist",
+          "category": "healthcare",
+          "slots": 8,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 8
+        },
+        {
+          "jobId": "healthcare_pharmacist",
+          "jobName": "Pharmacist",
+          "category": "healthcare",
+          "slots": 5,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 5
+        },
+        {
+          "jobId": "healthcare_pharmacy_technician",
+          "jobName": "Pharmacy Technician",
+          "category": "healthcare",
+          "slots": 8,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 8
+        },
+        {
+          "jobId": "healthcare_dietary_worker",
+          "jobName": "Dietary Worker",
+          "category": "healthcare",
+          "slots": 22,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 22
+        },
+        {
+          "jobId": "healthcare_hospital_housekeeper",
+          "jobName": "Hospital Housekeeper",
+          "category": "healthcare",
+          "slots": 30,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 30
+        },
+        {
+          "jobId": "healthcare_hospital_maintenance_worker",
+          "jobName": "Hospital Maintenance Worker",
+          "category": "healthcare",
+          "slots": 10,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 10
+        },
+        {
+          "jobId": "healthcare_hospital_security_officer",
+          "jobName": "Hospital Security Officer",
+          "category": "healthcare",
+          "slots": 8,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 8
+        },
+        {
+          "jobId": "healthcare_department_manager",
+          "jobName": "Department Manager",
+          "category": "healthcare",
+          "slots": 10,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 10
+        },
+        {
+          "jobId": "healthcare_hospital_administrator",
+          "jobName": "Hospital Administrator",
+          "category": "healthcare",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 261,
+        "idealStaff": 333,
+        "maximumStaff": 362,
+        "totalJobSlots": 362
+      },
+      "bakedNpcTarget": 17,
+      "backgroundNpcSlots": 345,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_NURSING_001",
+      "name": "Green Meadows Nursing & Rehab",
+      "type": "nursing_home",
+      "district": "medical",
+      "outsideTown": false,
+      "operatingHours": {
+        "type": "24_7"
+      },
+      "defaultBenefitPlan": "standard_employer",
+      "attendancePolicy": "healthcare",
+      "positions": [
+        {
+          "jobId": "eldercare_nursing_assistant",
+          "jobName": "Nursing Assistant",
+          "category": "elderCare",
+          "slots": 35,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 35
+        },
+        {
+          "jobId": "eldercare_nursing_home_nurse",
+          "jobName": "Nursing Home Nurse",
+          "category": "elderCare",
+          "slots": 18,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 18
+        },
+        {
+          "jobId": "eldercare_dietary_aide",
+          "jobName": "Dietary Aide",
+          "category": "elderCare",
+          "slots": 10,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 10
+        },
+        {
+          "jobId": "eldercare_nursing_home_cook",
+          "jobName": "Nursing Home Cook",
+          "category": "elderCare",
+          "slots": 4,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 4
+        },
+        {
+          "jobId": "eldercare_activities_assistant",
+          "jobName": "Activities Assistant",
+          "category": "elderCare",
+          "slots": 5,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 5
+        },
+        {
+          "jobId": "eldercare_nursing_home_housekeeper",
+          "jobName": "Nursing Home Housekeeper",
+          "category": "elderCare",
+          "slots": 12,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 12
+        },
+        {
+          "jobId": "eldercare_nursing_home_maintenance",
+          "jobName": "Nursing Home Maintenance",
+          "category": "elderCare",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        },
+        {
+          "jobId": "eldercare_social_worker",
+          "jobName": "Social Worker",
+          "category": "elderCare",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        },
+        {
+          "jobId": "eldercare_nursing_home_administrator",
+          "jobName": "Nursing Home Administrator",
+          "category": "elderCare",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 66,
+        "idealStaff": 84,
+        "maximumStaff": 91,
+        "totalJobSlots": 91
+      },
+      "bakedNpcTarget": 5,
+      "backgroundNpcSlots": 86,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_SENIOR_001",
+      "name": "Oak Ridge Assisted Living",
+      "type": "assisted_living",
+      "district": "residential_north",
+      "outsideTown": false,
+      "operatingHours": {
+        "type": "24_7"
+      },
+      "defaultBenefitPlan": "standard_employer",
+      "attendancePolicy": "healthcare",
+      "positions": [
+        {
+          "jobId": "eldercare_nursing_assistant",
+          "jobName": "Nursing Assistant",
+          "category": "elderCare",
+          "slots": 20,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 20
+        },
+        {
+          "jobId": "eldercare_nursing_home_nurse",
+          "jobName": "Nursing Home Nurse",
+          "category": "elderCare",
+          "slots": 8,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 8
+        },
+        {
+          "jobId": "eldercare_dietary_aide",
+          "jobName": "Dietary Aide",
+          "category": "elderCare",
+          "slots": 6,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 6
+        },
+        {
+          "jobId": "eldercare_nursing_home_cook",
+          "jobName": "Nursing Home Cook",
+          "category": "elderCare",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        },
+        {
+          "jobId": "eldercare_activities_assistant",
+          "jobName": "Activities Assistant",
+          "category": "elderCare",
+          "slots": 4,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 4
+        },
+        {
+          "jobId": "eldercare_nursing_home_housekeeper",
+          "jobName": "Nursing Home Housekeeper",
+          "category": "elderCare",
+          "slots": 7,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 7
+        },
+        {
+          "jobId": "eldercare_nursing_home_maintenance",
+          "jobName": "Nursing Home Maintenance",
+          "category": "elderCare",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "eldercare_social_worker",
+          "jobName": "Social Worker",
+          "category": "elderCare",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        },
+        {
+          "jobId": "eldercare_nursing_home_administrator",
+          "jobName": "Nursing Home Administrator",
+          "category": "elderCare",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 37,
+        "idealStaff": 48,
+        "maximumStaff": 52,
+        "totalJobSlots": 52
+      },
+      "bakedNpcTarget": 3,
+      "backgroundNpcSlots": 49,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_POLICE_001",
+      "name": "Belleview Police Department",
+      "type": "police_department",
+      "district": "civic",
+      "outsideTown": false,
+      "operatingHours": {
+        "type": "24_7"
+      },
+      "defaultBenefitPlan": "good_public_sector",
+      "attendancePolicy": "public_sector",
+      "positions": [
+        {
+          "jobId": "police_police_officer",
+          "jobName": "Police Officer",
+          "category": "police",
+          "slots": 18,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 18
+        },
+        {
+          "jobId": "police_detective",
+          "jobName": "Detective",
+          "category": "police",
+          "slots": 4,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 4
+        },
+        {
+          "jobId": "police_police_sergeant",
+          "jobName": "Police Sergeant",
+          "category": "police",
+          "slots": 4,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 4
+        },
+        {
+          "jobId": "police_police_lieutenant",
+          "jobName": "Police Lieutenant",
+          "category": "police",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "police_police_chief",
+          "jobName": "Police Chief",
+          "category": "police",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        },
+        {
+          "jobId": "police_dispatcher",
+          "jobName": "Dispatcher",
+          "category": "police",
+          "slots": 5,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 5
+        },
+        {
+          "jobId": "police_records_clerk",
+          "jobName": "Records Clerk",
+          "category": "police",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 27,
+        "idealStaff": 34,
+        "maximumStaff": 37,
+        "totalJobSlots": 37
+      },
+      "bakedNpcTarget": 4,
+      "backgroundNpcSlots": 33,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_FIRE_001",
+      "name": "Belleview Fire & EMS",
+      "type": "fire_department",
+      "district": "civic",
+      "outsideTown": false,
+      "operatingHours": {
+        "type": "24_7"
+      },
+      "defaultBenefitPlan": "good_public_sector",
+      "attendancePolicy": "public_sector",
+      "positions": [
+        {
+          "jobId": "fireems_firefighter",
+          "jobName": "Firefighter",
+          "category": "fireEms",
+          "slots": 10,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 10
+        },
+        {
+          "jobId": "fireems_firefighter_emt",
+          "jobName": "Firefighter EMT",
+          "category": "fireEms",
+          "slots": 10,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 10
+        },
+        {
+          "jobId": "fireems_paramedic",
+          "jobName": "Paramedic",
+          "category": "fireEms",
+          "slots": 6,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 6
+        },
+        {
+          "jobId": "fireems_fire_lieutenant",
+          "jobName": "Fire Lieutenant",
+          "category": "fireEms",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        },
+        {
+          "jobId": "fireems_fire_captain",
+          "jobName": "Fire Captain",
+          "category": "fireEms",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "fireems_fire_chief",
+          "jobName": "Fire Chief",
+          "category": "fireEms",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 23,
+        "idealStaff": 29,
+        "maximumStaff": 32,
+        "totalJobSlots": 32
+      },
+      "bakedNpcTarget": 3,
+      "backgroundNpcSlots": 29,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_CITYHALL_001",
+      "name": "Belleview City Hall",
+      "type": "city_government",
+      "district": "civic",
+      "outsideTown": false,
+      "operatingHours": {
+        "Mon": [
+          "08:00",
+          "17:00"
+        ],
+        "Tue": [
+          "08:00",
+          "17:00"
+        ],
+        "Wed": [
+          "08:00",
+          "17:00"
+        ],
+        "Thu": [
+          "08:00",
+          "17:00"
+        ],
+        "Fri": [
+          "08:00",
+          "17:00"
+        ],
+        "Sat": null,
+        "Sun": null
+      },
+      "defaultBenefitPlan": "good_public_sector",
+      "attendancePolicy": "public_sector",
+      "positions": [
+        {
+          "jobId": "government_city_clerk",
+          "jobName": "City Clerk",
+          "category": "government",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "government_administrative_assistant",
+          "jobName": "Administrative Assistant",
+          "category": "government",
+          "slots": 5,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 5
+        },
+        {
+          "jobId": "government_building_inspector",
+          "jobName": "Building Inspector",
+          "category": "government",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        },
+        {
+          "jobId": "government_department_supervisor",
+          "jobName": "Department Supervisor",
+          "category": "government",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        },
+        {
+          "jobId": "government_city_manager",
+          "jobName": "City Manager",
+          "category": "government",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 10,
+        "idealStaff": 13,
+        "maximumStaff": 14,
+        "totalJobSlots": 14
+      },
+      "bakedNpcTarget": 2,
+      "backgroundNpcSlots": 12,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_PUBLICWORKS_001",
+      "name": "Belleview Public Works",
+      "type": "public_works",
+      "district": "industrial",
+      "outsideTown": false,
+      "operatingHours": {
+        "Mon": [
+          "07:00",
+          "16:00"
+        ],
+        "Tue": [
+          "07:00",
+          "16:00"
+        ],
+        "Wed": [
+          "07:00",
+          "16:00"
+        ],
+        "Thu": [
+          "07:00",
+          "16:00"
+        ],
+        "Fri": [
+          "07:00",
+          "16:00"
+        ],
+        "Sat": null,
+        "Sun": null
+      },
+      "defaultBenefitPlan": "good_public_sector",
+      "attendancePolicy": "public_sector",
+      "positions": [
+        {
+          "jobId": "government_parks_worker",
+          "jobName": "Parks Worker",
+          "category": "government",
+          "slots": 8,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 8
+        },
+        {
+          "jobId": "government_public_works_worker",
+          "jobName": "Public Works Worker",
+          "category": "government",
+          "slots": 14,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 14
+        },
+        {
+          "jobId": "government_road_worker",
+          "jobName": "Road Worker",
+          "category": "government",
+          "slots": 10,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 10
+        },
+        {
+          "jobId": "government_equipment_operator",
+          "jobName": "Equipment Operator",
+          "category": "government",
+          "slots": 6,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 6
+        },
+        {
+          "jobId": "government_department_supervisor",
+          "jobName": "Department Supervisor",
+          "category": "government",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 29,
+        "idealStaff": 37,
+        "maximumStaff": 40,
+        "totalJobSlots": 40
+      },
+      "bakedNpcTarget": 3,
+      "backgroundNpcSlots": 37,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_WATER_001",
+      "name": "Belleview Water & Wastewater Utility",
+      "type": "municipal_utility",
+      "district": "industrial",
+      "outsideTown": false,
+      "operatingHours": {
+        "type": "24_7"
+      },
+      "defaultBenefitPlan": "good_public_sector",
+      "attendancePolicy": "public_sector",
+      "positions": [
+        {
+          "jobId": "government_water_plant_operator",
+          "jobName": "Water Plant Operator",
+          "category": "government",
+          "slots": 6,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 6
+        },
+        {
+          "jobId": "government_wastewater_operator",
+          "jobName": "Wastewater Operator",
+          "category": "government",
+          "slots": 6,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 6
+        },
+        {
+          "jobId": "utilities_meter_technician",
+          "jobName": "Meter Technician",
+          "category": "utilities",
+          "slots": 4,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 4
+        },
+        {
+          "jobId": "utilities_utility_technician",
+          "jobName": "Utility Technician",
+          "category": "utilities",
+          "slots": 5,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 5
+        },
+        {
+          "jobId": "utilities_utility_line_worker",
+          "jobName": "Utility Line Worker",
+          "category": "utilities",
+          "slots": 6,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 6
+        },
+        {
+          "jobId": "utilities_water_operator",
+          "jobName": "Water Operator",
+          "category": "utilities",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        },
+        {
+          "jobId": "utilities_wastewater_operator",
+          "jobName": "Wastewater Operator",
+          "category": "utilities",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        },
+        {
+          "jobId": "utilities_utility_supervisor",
+          "jobName": "Utility Supervisor",
+          "category": "utilities",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 25,
+        "idealStaff": 32,
+        "maximumStaff": 35,
+        "totalJobSlots": 35
+      },
+      "bakedNpcTarget": 2,
+      "backgroundNpcSlots": 33,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_HIGHSCHOOL_001",
+      "name": "Belleview High School",
+      "type": "high_school",
+      "district": "school",
+      "outsideTown": false,
+      "operatingHours": {
+        "Mon": [
+          "06:30",
+          "17:30"
+        ],
+        "Tue": [
+          "06:30",
+          "17:30"
+        ],
+        "Wed": [
+          "06:30",
+          "17:30"
+        ],
+        "Thu": [
+          "06:30",
+          "17:30"
+        ],
+        "Fri": [
+          "06:30",
+          "17:30"
+        ],
+        "Sat": "events_only",
+        "Sun": null
+      },
+      "defaultBenefitPlan": "good_public_sector",
+      "attendancePolicy": "public_sector",
+      "positions": [
+        {
+          "jobId": "education_high_school_teacher",
+          "jobName": "High School Teacher",
+          "category": "education",
+          "slots": 48,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 48
+        },
+        {
+          "jobId": "education_special_education_teacher",
+          "jobName": "Special Education Teacher",
+          "category": "education",
+          "slots": 6,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 6
+        },
+        {
+          "jobId": "education_teacher_aide",
+          "jobName": "Teacher Aide",
+          "category": "education",
+          "slots": 8,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 8
+        },
+        {
+          "jobId": "education_school_counselor",
+          "jobName": "School Counselor",
+          "category": "education",
+          "slots": 4,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 4
+        },
+        {
+          "jobId": "education_school_secretary",
+          "jobName": "School Secretary",
+          "category": "education",
+          "slots": 4,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 4
+        },
+        {
+          "jobId": "education_school_custodian",
+          "jobName": "School Custodian",
+          "category": "education",
+          "slots": 7,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 7
+        },
+        {
+          "jobId": "education_cafeteria_worker",
+          "jobName": "Cafeteria Worker",
+          "category": "education",
+          "slots": 8,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 8
+        },
+        {
+          "jobId": "education_coach",
+          "jobName": "Coach",
+          "category": "education",
+          "slots": 9,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 9
+        },
+        {
+          "jobId": "education_assistant_principal",
+          "jobName": "Assistant Principal",
+          "category": "education",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "education_principal",
+          "jobName": "Principal",
+          "category": "education",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 70,
+        "idealStaff": 89,
+        "maximumStaff": 97,
+        "totalJobSlots": 97
+      },
+      "bakedNpcTarget": 5,
+      "backgroundNpcSlots": 92,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_MIDDLESCHOOL_001",
+      "name": "Belleview Middle School",
+      "type": "middle_school",
+      "district": "school",
+      "outsideTown": false,
+      "operatingHours": {
+        "Mon": [
+          "06:30",
+          "17:30"
+        ],
+        "Tue": [
+          "06:30",
+          "17:30"
+        ],
+        "Wed": [
+          "06:30",
+          "17:30"
+        ],
+        "Thu": [
+          "06:30",
+          "17:30"
+        ],
+        "Fri": [
+          "06:30",
+          "17:30"
+        ],
+        "Sat": "events_only",
+        "Sun": null
+      },
+      "defaultBenefitPlan": "good_public_sector",
+      "attendancePolicy": "public_sector",
+      "positions": [
+        {
+          "jobId": "education_middle_school_teacher",
+          "jobName": "Middle School Teacher",
+          "category": "education",
+          "slots": 32,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 32
+        },
+        {
+          "jobId": "education_special_education_teacher",
+          "jobName": "Special Education Teacher",
+          "category": "education",
+          "slots": 4,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 4
+        },
+        {
+          "jobId": "education_teacher_aide",
+          "jobName": "Teacher Aide",
+          "category": "education",
+          "slots": 6,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 6
+        },
+        {
+          "jobId": "education_school_counselor",
+          "jobName": "School Counselor",
+          "category": "education",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "education_school_secretary",
+          "jobName": "School Secretary",
+          "category": "education",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        },
+        {
+          "jobId": "education_school_custodian",
+          "jobName": "School Custodian",
+          "category": "education",
+          "slots": 5,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 5
+        },
+        {
+          "jobId": "education_cafeteria_worker",
+          "jobName": "Cafeteria Worker",
+          "category": "education",
+          "slots": 6,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 6
+        },
+        {
+          "jobId": "education_coach",
+          "jobName": "Coach",
+          "category": "education",
+          "slots": 5,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 5
+        },
+        {
+          "jobId": "education_assistant_principal",
+          "jobName": "Assistant Principal",
+          "category": "education",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        },
+        {
+          "jobId": "education_principal",
+          "jobName": "Principal",
+          "category": "education",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 47,
+        "idealStaff": 60,
+        "maximumStaff": 65,
+        "totalJobSlots": 65
+      },
+      "bakedNpcTarget": 3,
+      "backgroundNpcSlots": 62,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_ELEMENTARY_001",
+      "name": "Northside Elementary",
+      "type": "elementary_school",
+      "district": "residential_north",
+      "outsideTown": false,
+      "operatingHours": {
+        "Mon": [
+          "06:30",
+          "17:30"
+        ],
+        "Tue": [
+          "06:30",
+          "17:30"
+        ],
+        "Wed": [
+          "06:30",
+          "17:30"
+        ],
+        "Thu": [
+          "06:30",
+          "17:30"
+        ],
+        "Fri": [
+          "06:30",
+          "17:30"
+        ],
+        "Sat": "events_only",
+        "Sun": null
+      },
+      "defaultBenefitPlan": "good_public_sector",
+      "attendancePolicy": "public_sector",
+      "positions": [
+        {
+          "jobId": "education_elementary_teacher",
+          "jobName": "Elementary Teacher",
+          "category": "education",
+          "slots": 24,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 24
+        },
+        {
+          "jobId": "education_special_education_teacher",
+          "jobName": "Special Education Teacher",
+          "category": "education",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        },
+        {
+          "jobId": "education_teacher_aide",
+          "jobName": "Teacher Aide",
+          "category": "education",
+          "slots": 7,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 7
+        },
+        {
+          "jobId": "education_school_counselor",
+          "jobName": "School Counselor",
+          "category": "education",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        },
+        {
+          "jobId": "education_school_secretary",
+          "jobName": "School Secretary",
+          "category": "education",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "education_school_custodian",
+          "jobName": "School Custodian",
+          "category": "education",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        },
+        {
+          "jobId": "education_cafeteria_worker",
+          "jobName": "Cafeteria Worker",
+          "category": "education",
+          "slots": 4,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 4
+        },
+        {
+          "jobId": "education_principal",
+          "jobName": "Principal",
+          "category": "education",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 32,
+        "idealStaff": 41,
+        "maximumStaff": 45,
+        "totalJobSlots": 45
+      },
+      "bakedNpcTarget": 2,
+      "backgroundNpcSlots": 43,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_ELEMENTARY_002",
+      "name": "Southview Elementary",
+      "type": "elementary_school",
+      "district": "residential_south",
+      "outsideTown": false,
+      "operatingHours": {
+        "Mon": [
+          "06:30",
+          "17:30"
+        ],
+        "Tue": [
+          "06:30",
+          "17:30"
+        ],
+        "Wed": [
+          "06:30",
+          "17:30"
+        ],
+        "Thu": [
+          "06:30",
+          "17:30"
+        ],
+        "Fri": [
+          "06:30",
+          "17:30"
+        ],
+        "Sat": "events_only",
+        "Sun": null
+      },
+      "defaultBenefitPlan": "good_public_sector",
+      "attendancePolicy": "public_sector",
+      "positions": [
+        {
+          "jobId": "education_elementary_teacher",
+          "jobName": "Elementary Teacher",
+          "category": "education",
+          "slots": 22,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 22
+        },
+        {
+          "jobId": "education_special_education_teacher",
+          "jobName": "Special Education Teacher",
+          "category": "education",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        },
+        {
+          "jobId": "education_teacher_aide",
+          "jobName": "Teacher Aide",
+          "category": "education",
+          "slots": 6,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 6
+        },
+        {
+          "jobId": "education_school_counselor",
+          "jobName": "School Counselor",
+          "category": "education",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        },
+        {
+          "jobId": "education_school_secretary",
+          "jobName": "School Secretary",
+          "category": "education",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "education_school_custodian",
+          "jobName": "School Custodian",
+          "category": "education",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        },
+        {
+          "jobId": "education_cafeteria_worker",
+          "jobName": "Cafeteria Worker",
+          "category": "education",
+          "slots": 4,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 4
+        },
+        {
+          "jobId": "education_principal",
+          "jobName": "Principal",
+          "category": "education",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 30,
+        "idealStaff": 39,
+        "maximumStaff": 42,
+        "totalJobSlots": 42
+      },
+      "bakedNpcTarget": 2,
+      "backgroundNpcSlots": 40,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_SCHOOLDISTRICT_001",
+      "name": "Belleview School District Office & Transportation",
+      "type": "school_district",
+      "district": "school",
+      "outsideTown": false,
+      "operatingHours": {
+        "Mon": [
+          "08:00",
+          "17:00"
+        ],
+        "Tue": [
+          "08:00",
+          "17:00"
+        ],
+        "Wed": [
+          "08:00",
+          "17:00"
+        ],
+        "Thu": [
+          "08:00",
+          "17:00"
+        ],
+        "Fri": [
+          "08:00",
+          "17:00"
+        ],
+        "Sat": null,
+        "Sun": null
+      },
+      "defaultBenefitPlan": "good_public_sector",
+      "attendancePolicy": "public_sector",
+      "positions": [
+        {
+          "jobId": "education_school_bus_driver",
+          "jobName": "School Bus Driver",
+          "category": "education",
+          "slots": 18,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 18
+        },
+        {
+          "jobId": "education_school_secretary",
+          "jobName": "School Secretary",
+          "category": "education",
+          "slots": 4,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 4
+        },
+        {
+          "jobId": "education_school_custodian",
+          "jobName": "School Custodian",
+          "category": "education",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        },
+        {
+          "jobId": "education_superintendent",
+          "jobName": "Superintendent",
+          "category": "education",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 19,
+        "idealStaff": 24,
+        "maximumStaff": 26,
+        "totalJobSlots": 26
+      },
+      "bakedNpcTarget": 1,
+      "backgroundNpcSlots": 25,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_SUPERCENTER_001",
+      "name": "Belleview Supercenter",
+      "type": "big_box_retail",
+      "district": "commercial_north",
+      "outsideTown": false,
+      "operatingHours": {
+        "Mon": [
+          "06:00",
+          "23:00"
+        ],
+        "Tue": [
+          "06:00",
+          "23:00"
+        ],
+        "Wed": [
+          "06:00",
+          "23:00"
+        ],
+        "Thu": [
+          "06:00",
+          "23:00"
+        ],
+        "Fri": [
+          "06:00",
+          "23:00"
+        ],
+        "Sat": [
+          "06:00",
+          "23:00"
+        ],
+        "Sun": [
+          "06:00",
+          "23:00"
+        ]
+      },
+      "defaultBenefitPlan": "basic_retail",
+      "attendancePolicy": "standard",
+      "positions": [
+        {
+          "jobId": "retail_cashier",
+          "jobName": "Cashier",
+          "category": "retail",
+          "slots": 28,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 28
+        },
+        {
+          "jobId": "retail_stocker",
+          "jobName": "Stocker",
+          "category": "retail",
+          "slots": 35,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 35
+        },
+        {
+          "jobId": "retail_sales_associate",
+          "jobName": "Sales Associate",
+          "category": "retail",
+          "slots": 42,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 42
+        },
+        {
+          "jobId": "retail_customer_service_associate",
+          "jobName": "Customer Service Associate",
+          "category": "retail",
+          "slots": 8,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 8
+        },
+        {
+          "jobId": "retail_receiving_clerk",
+          "jobName": "Receiving Clerk",
+          "category": "retail",
+          "slots": 8,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 8
+        },
+        {
+          "jobId": "retail_department_lead",
+          "jobName": "Department Lead",
+          "category": "retail",
+          "slots": 10,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 10
+        },
+        {
+          "jobId": "retail_shift_supervisor",
+          "jobName": "Shift Supervisor",
+          "category": "retail",
+          "slots": 5,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 5
+        },
+        {
+          "jobId": "retail_assistant_store_manager",
+          "jobName": "Assistant Store Manager",
+          "category": "retail",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        },
+        {
+          "jobId": "retail_store_manager",
+          "jobName": "Store Manager",
+          "category": "retail",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 101,
+        "idealStaff": 129,
+        "maximumStaff": 140,
+        "totalJobSlots": 140
+      },
+      "bakedNpcTarget": 7,
+      "backgroundNpcSlots": 133,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_GROCERY_001",
+      "name": "Miller's Market",
+      "type": "grocery_store",
+      "district": "commercial_central",
+      "outsideTown": false,
+      "operatingHours": {
+        "Mon": [
+          "06:00",
+          "22:00"
+        ],
+        "Tue": [
+          "06:00",
+          "22:00"
+        ],
+        "Wed": [
+          "06:00",
+          "22:00"
+        ],
+        "Thu": [
+          "06:00",
+          "22:00"
+        ],
+        "Fri": [
+          "06:00",
+          "22:00"
+        ],
+        "Sat": [
+          "06:00",
+          "22:00"
+        ],
+        "Sun": [
+          "06:00",
+          "22:00"
+        ]
+      },
+      "defaultBenefitPlan": "basic_retail",
+      "attendancePolicy": "standard",
+      "positions": [
+        {
+          "jobId": "grocery_grocery_cashier",
+          "jobName": "Grocery Cashier",
+          "category": "grocery",
+          "slots": 14,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 14
+        },
+        {
+          "jobId": "grocery_bagger",
+          "jobName": "Bagger",
+          "category": "grocery",
+          "slots": 8,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 8
+        },
+        {
+          "jobId": "grocery_grocery_stocker",
+          "jobName": "Grocery Stocker",
+          "category": "grocery",
+          "slots": 10,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 10
+        },
+        {
+          "jobId": "grocery_produce_clerk",
+          "jobName": "Produce Clerk",
+          "category": "grocery",
+          "slots": 5,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 5
+        },
+        {
+          "jobId": "grocery_deli_clerk",
+          "jobName": "Deli Clerk",
+          "category": "grocery",
+          "slots": 6,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 6
+        },
+        {
+          "jobId": "grocery_bakery_worker",
+          "jobName": "Bakery Worker",
+          "category": "grocery",
+          "slots": 4,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 4
+        },
+        {
+          "jobId": "grocery_baker",
+          "jobName": "Baker",
+          "category": "grocery",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "grocery_meat_clerk",
+          "jobName": "Meat Clerk",
+          "category": "grocery",
+          "slots": 4,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 4
+        },
+        {
+          "jobId": "grocery_butcher",
+          "jobName": "Butcher",
+          "category": "grocery",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "grocery_dairy_clerk",
+          "jobName": "Dairy Clerk",
+          "category": "grocery",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        },
+        {
+          "jobId": "grocery_frozen_foods_clerk",
+          "jobName": "Frozen Foods Clerk",
+          "category": "grocery",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "grocery_receiving_clerk",
+          "jobName": "Receiving Clerk",
+          "category": "grocery",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "grocery_department_manager",
+          "jobName": "Department Manager",
+          "category": "grocery",
+          "slots": 5,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 5
+        },
+        {
+          "jobId": "grocery_assistant_grocery_manager",
+          "jobName": "Assistant Grocery Manager",
+          "category": "grocery",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "grocery_grocery_store_manager",
+          "jobName": "Grocery Store Manager",
+          "category": "grocery",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 50,
+        "idealStaff": 64,
+        "maximumStaff": 70,
+        "totalJobSlots": 70
+      },
+      "bakedNpcTarget": 5,
+      "backgroundNpcSlots": 65,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_GROCERY_002",
+      "name": "SaveMore Foods",
+      "type": "discount_grocery",
+      "district": "commercial_south",
+      "outsideTown": false,
+      "operatingHours": {
+        "Mon": [
+          "07:00",
+          "21:00"
+        ],
+        "Tue": [
+          "07:00",
+          "21:00"
+        ],
+        "Wed": [
+          "07:00",
+          "21:00"
+        ],
+        "Thu": [
+          "07:00",
+          "21:00"
+        ],
+        "Fri": [
+          "07:00",
+          "21:00"
+        ],
+        "Sat": [
+          "07:00",
+          "21:00"
+        ],
+        "Sun": [
+          "07:00",
+          "21:00"
+        ]
+      },
+      "defaultBenefitPlan": "basic_retail",
+      "attendancePolicy": "standard",
+      "positions": [
+        {
+          "jobId": "grocery_grocery_cashier",
+          "jobName": "Grocery Cashier",
+          "category": "grocery",
+          "slots": 8,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 8
+        },
+        {
+          "jobId": "grocery_bagger",
+          "jobName": "Bagger",
+          "category": "grocery",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        },
+        {
+          "jobId": "grocery_grocery_stocker",
+          "jobName": "Grocery Stocker",
+          "category": "grocery",
+          "slots": 8,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 8
+        },
+        {
+          "jobId": "grocery_produce_clerk",
+          "jobName": "Produce Clerk",
+          "category": "grocery",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        },
+        {
+          "jobId": "grocery_deli_clerk",
+          "jobName": "Deli Clerk",
+          "category": "grocery",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        },
+        {
+          "jobId": "grocery_bakery_worker",
+          "jobName": "Bakery Worker",
+          "category": "grocery",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "grocery_meat_clerk",
+          "jobName": "Meat Clerk",
+          "category": "grocery",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "grocery_dairy_clerk",
+          "jobName": "Dairy Clerk",
+          "category": "grocery",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "grocery_receiving_clerk",
+          "jobName": "Receiving Clerk",
+          "category": "grocery",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        },
+        {
+          "jobId": "grocery_department_manager",
+          "jobName": "Department Manager",
+          "category": "grocery",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        },
+        {
+          "jobId": "grocery_assistant_grocery_manager",
+          "jobName": "Assistant Grocery Manager",
+          "category": "grocery",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        },
+        {
+          "jobId": "grocery_grocery_store_manager",
+          "jobName": "Grocery Store Manager",
+          "category": "grocery",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 27,
+        "idealStaff": 34,
+        "maximumStaff": 37,
+        "totalJobSlots": 37
+      },
+      "bakedNpcTarget": 2,
+      "backgroundNpcSlots": 35,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_HARDWARE_001",
+      "name": "Henderson Hardware & Home",
+      "type": "hardware_store",
+      "district": "commercial_central",
+      "outsideTown": false,
+      "operatingHours": {
+        "Mon": [
+          "07:00",
+          "20:00"
+        ],
+        "Tue": [
+          "07:00",
+          "20:00"
+        ],
+        "Wed": [
+          "07:00",
+          "20:00"
+        ],
+        "Thu": [
+          "07:00",
+          "20:00"
+        ],
+        "Fri": [
+          "07:00",
+          "20:00"
+        ],
+        "Sat": [
+          "07:00",
+          "20:00"
+        ],
+        "Sun": [
+          "07:00",
+          "20:00"
+        ]
+      },
+      "defaultBenefitPlan": "basic_retail",
+      "attendancePolicy": "standard",
+      "positions": [
+        {
+          "jobId": "retail_cashier",
+          "jobName": "Cashier",
+          "category": "retail",
+          "slots": 6,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 6
+        },
+        {
+          "jobId": "retail_stocker",
+          "jobName": "Stocker",
+          "category": "retail",
+          "slots": 8,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 8
+        },
+        {
+          "jobId": "retail_sales_associate",
+          "jobName": "Sales Associate",
+          "category": "retail",
+          "slots": 12,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 12
+        },
+        {
+          "jobId": "retail_customer_service_associate",
+          "jobName": "Customer Service Associate",
+          "category": "retail",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "retail_receiving_clerk",
+          "jobName": "Receiving Clerk",
+          "category": "retail",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        },
+        {
+          "jobId": "retail_department_lead",
+          "jobName": "Department Lead",
+          "category": "retail",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        },
+        {
+          "jobId": "retail_shift_supervisor",
+          "jobName": "Shift Supervisor",
+          "category": "retail",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        },
+        {
+          "jobId": "retail_assistant_store_manager",
+          "jobName": "Assistant Store Manager",
+          "category": "retail",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        },
+        {
+          "jobId": "retail_store_manager",
+          "jobName": "Store Manager",
+          "category": "retail",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 27,
+        "idealStaff": 34,
+        "maximumStaff": 37,
+        "totalJobSlots": 37
+      },
+      "bakedNpcTarget": 2,
+      "backgroundNpcSlots": 35,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_CLOTHING_001",
+      "name": "Main Street Apparel",
+      "type": "clothing_store",
+      "district": "downtown",
+      "outsideTown": false,
+      "operatingHours": {
+        "Mon": [
+          "10:00",
+          "19:00"
+        ],
+        "Tue": [
+          "10:00",
+          "19:00"
+        ],
+        "Wed": [
+          "10:00",
+          "19:00"
+        ],
+        "Thu": [
+          "10:00",
+          "19:00"
+        ],
+        "Fri": [
+          "10:00",
+          "19:00"
+        ],
+        "Sat": [
+          "10:00",
+          "19:00"
+        ],
+        "Sun": [
+          "10:00",
+          "19:00"
+        ]
+      },
+      "defaultBenefitPlan": "none",
+      "attendancePolicy": "small_business_flexible",
+      "positions": [
+        {
+          "jobId": "retail_cashier",
+          "jobName": "Cashier",
+          "category": "retail",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        },
+        {
+          "jobId": "retail_stocker",
+          "jobName": "Stocker",
+          "category": "retail",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "retail_sales_associate",
+          "jobName": "Sales Associate",
+          "category": "retail",
+          "slots": 6,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 6
+        },
+        {
+          "jobId": "retail_customer_service_associate",
+          "jobName": "Customer Service Associate",
+          "category": "retail",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        },
+        {
+          "jobId": "retail_department_lead",
+          "jobName": "Department Lead",
+          "category": "retail",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        },
+        {
+          "jobId": "retail_store_manager",
+          "jobName": "Store Manager",
+          "category": "retail",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 10,
+        "idealStaff": 13,
+        "maximumStaff": 14,
+        "totalJobSlots": 14
+      },
+      "bakedNpcTarget": 1,
+      "backgroundNpcSlots": 13,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_COFFEE_001",
+      "name": "Sinclair Coffee",
+      "type": "coffee_shop",
+      "district": "downtown",
+      "outsideTown": false,
+      "operatingHours": {
+        "Mon": [
+          "05:30",
+          "20:00"
+        ],
+        "Tue": [
+          "05:30",
+          "20:00"
+        ],
+        "Wed": [
+          "05:30",
+          "20:00"
+        ],
+        "Thu": [
+          "05:30",
+          "20:00"
+        ],
+        "Fri": [
+          "05:30",
+          "20:00"
+        ],
+        "Sat": [
+          "05:30",
+          "20:00"
+        ],
+        "Sun": [
+          "05:30",
+          "20:00"
+        ]
+      },
+      "defaultBenefitPlan": "basic_small_business",
+      "attendancePolicy": "small_business_flexible",
+      "positions": [
+        {
+          "jobId": "restaurants_barista",
+          "jobName": "Barista",
+          "category": "restaurants",
+          "slots": 7,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 7
+        },
+        {
+          "jobId": "restaurants_prep_cook",
+          "jobName": "Prep Cook",
+          "category": "restaurants",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        },
+        {
+          "jobId": "grocery_baker",
+          "jobName": "Baker",
+          "category": "grocery",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "restaurants_shift_leader",
+          "jobName": "Shift Leader",
+          "category": "restaurants",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "restaurants_assistant_restaurant_manager",
+          "jobName": "Assistant Restaurant Manager",
+          "category": "restaurants",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        },
+        {
+          "jobId": "restaurants_restaurant_manager",
+          "jobName": "Restaurant Manager",
+          "category": "restaurants",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 10,
+        "idealStaff": 13,
+        "maximumStaff": 14,
+        "totalJobSlots": 14
+      },
+      "bakedNpcTarget": 4,
+      "backgroundNpcSlots": 10,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_DINER_001",
+      "name": "Main Street Diner",
+      "type": "diner",
+      "district": "downtown",
+      "outsideTown": false,
+      "operatingHours": {
+        "Mon": [
+          "06:00",
+          "22:00"
+        ],
+        "Tue": [
+          "06:00",
+          "22:00"
+        ],
+        "Wed": [
+          "06:00",
+          "22:00"
+        ],
+        "Thu": [
+          "06:00",
+          "22:00"
+        ],
+        "Fri": [
+          "06:00",
+          "22:00"
+        ],
+        "Sat": [
+          "06:00",
+          "22:00"
+        ],
+        "Sun": [
+          "06:00",
+          "22:00"
+        ]
+      },
+      "defaultBenefitPlan": "basic_small_business",
+      "attendancePolicy": "small_business_flexible",
+      "positions": [
+        {
+          "jobId": "restaurants_dishwasher",
+          "jobName": "Dishwasher",
+          "category": "restaurants",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "restaurants_busser",
+          "jobName": "Busser",
+          "category": "restaurants",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "restaurants_host",
+          "jobName": "Host",
+          "category": "restaurants",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "restaurants_server",
+          "jobName": "Server",
+          "category": "restaurants",
+          "slots": 7,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 7
+        },
+        {
+          "jobId": "restaurants_prep_cook",
+          "jobName": "Prep Cook",
+          "category": "restaurants",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "restaurants_line_cook",
+          "jobName": "Line Cook",
+          "category": "restaurants",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        },
+        {
+          "jobId": "restaurants_cook",
+          "jobName": "Cook",
+          "category": "restaurants",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "restaurants_shift_leader",
+          "jobName": "Shift Leader",
+          "category": "restaurants",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "restaurants_assistant_restaurant_manager",
+          "jobName": "Assistant Restaurant Manager",
+          "category": "restaurants",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        },
+        {
+          "jobId": "restaurants_restaurant_manager",
+          "jobName": "Restaurant Manager",
+          "category": "restaurants",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        },
+        {
+          "jobId": "restaurants_restaurant_owner",
+          "jobName": "Restaurant Owner",
+          "category": "restaurants",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 18,
+        "idealStaff": 23,
+        "maximumStaff": 25,
+        "totalJobSlots": 25
+      },
+      "bakedNpcTarget": 4,
+      "backgroundNpcSlots": 21,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_BARGRILL_001",
+      "name": "Railhouse Bar & Grill",
+      "type": "bar_grill",
+      "district": "downtown",
+      "outsideTown": false,
+      "operatingHours": {
+        "Mon": [
+          "11:00",
+          "02:00"
+        ],
+        "Tue": [
+          "11:00",
+          "02:00"
+        ],
+        "Wed": [
+          "11:00",
+          "02:00"
+        ],
+        "Thu": [
+          "11:00",
+          "02:00"
+        ],
+        "Fri": [
+          "11:00",
+          "02:00"
+        ],
+        "Sat": [
+          "11:00",
+          "02:00"
+        ],
+        "Sun": [
+          "11:00",
+          "02:00"
+        ]
+      },
+      "defaultBenefitPlan": "basic_small_business",
+      "attendancePolicy": "small_business_flexible",
+      "positions": [
+        {
+          "jobId": "restaurants_dishwasher",
+          "jobName": "Dishwasher",
+          "category": "restaurants",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "restaurants_busser",
+          "jobName": "Busser",
+          "category": "restaurants",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "restaurants_host",
+          "jobName": "Host",
+          "category": "restaurants",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "restaurants_server",
+          "jobName": "Server",
+          "category": "restaurants",
+          "slots": 8,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 8
+        },
+        {
+          "jobId": "restaurants_bartender",
+          "jobName": "Bartender",
+          "category": "restaurants",
+          "slots": 5,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 5
+        },
+        {
+          "jobId": "restaurants_prep_cook",
+          "jobName": "Prep Cook",
+          "category": "restaurants",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "restaurants_line_cook",
+          "jobName": "Line Cook",
+          "category": "restaurants",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        },
+        {
+          "jobId": "restaurants_cook",
+          "jobName": "Cook",
+          "category": "restaurants",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "restaurants_shift_leader",
+          "jobName": "Shift Leader",
+          "category": "restaurants",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "restaurants_assistant_restaurant_manager",
+          "jobName": "Assistant Restaurant Manager",
+          "category": "restaurants",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        },
+        {
+          "jobId": "restaurants_restaurant_manager",
+          "jobName": "Restaurant Manager",
+          "category": "restaurants",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        },
+        {
+          "jobId": "restaurants_restaurant_owner",
+          "jobName": "Restaurant Owner",
+          "category": "restaurants",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 22,
+        "idealStaff": 29,
+        "maximumStaff": 31,
+        "totalJobSlots": 31
+      },
+      "bakedNpcTarget": 3,
+      "backgroundNpcSlots": 28,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_PIZZA_001",
+      "name": "County Line Pizza",
+      "type": "pizza_restaurant",
+      "district": "commercial_central",
+      "outsideTown": false,
+      "operatingHours": {
+        "Mon": [
+          "10:30",
+          "23:30"
+        ],
+        "Tue": [
+          "10:30",
+          "23:30"
+        ],
+        "Wed": [
+          "10:30",
+          "23:30"
+        ],
+        "Thu": [
+          "10:30",
+          "23:30"
+        ],
+        "Fri": [
+          "10:30",
+          "23:30"
+        ],
+        "Sat": [
+          "10:30",
+          "23:30"
+        ],
+        "Sun": [
+          "10:30",
+          "23:30"
+        ]
+      },
+      "defaultBenefitPlan": "basic_small_business",
+      "attendancePolicy": "small_business_flexible",
+      "positions": [
+        {
+          "jobId": "restaurants_dishwasher",
+          "jobName": "Dishwasher",
+          "category": "restaurants",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "restaurants_host",
+          "jobName": "Host",
+          "category": "restaurants",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        },
+        {
+          "jobId": "restaurants_server",
+          "jobName": "Server",
+          "category": "restaurants",
+          "slots": 4,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 4
+        },
+        {
+          "jobId": "restaurants_prep_cook",
+          "jobName": "Prep Cook",
+          "category": "restaurants",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "restaurants_line_cook",
+          "jobName": "Line Cook",
+          "category": "restaurants",
+          "slots": 4,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 4
+        },
+        {
+          "jobId": "restaurants_cook",
+          "jobName": "Cook",
+          "category": "restaurants",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "restaurants_food_delivery_driver",
+          "jobName": "Food Delivery Driver",
+          "category": "restaurants",
+          "slots": 6,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 6
+        },
+        {
+          "jobId": "restaurants_shift_leader",
+          "jobName": "Shift Leader",
+          "category": "restaurants",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "restaurants_assistant_restaurant_manager",
+          "jobName": "Assistant Restaurant Manager",
+          "category": "restaurants",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        },
+        {
+          "jobId": "restaurants_restaurant_manager",
+          "jobName": "Restaurant Manager",
+          "category": "restaurants",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 18,
+        "idealStaff": 23,
+        "maximumStaff": 25,
+        "totalJobSlots": 25
+      },
+      "bakedNpcTarget": 2,
+      "backgroundNpcSlots": 23,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_FAMILYREST_001",
+      "name": "Harvest Table Family Restaurant",
+      "type": "family_restaurant",
+      "district": "commercial_north",
+      "outsideTown": false,
+      "operatingHours": {
+        "Mon": [
+          "07:00",
+          "22:00"
+        ],
+        "Tue": [
+          "07:00",
+          "22:00"
+        ],
+        "Wed": [
+          "07:00",
+          "22:00"
+        ],
+        "Thu": [
+          "07:00",
+          "22:00"
+        ],
+        "Fri": [
+          "07:00",
+          "22:00"
+        ],
+        "Sat": [
+          "07:00",
+          "22:00"
+        ],
+        "Sun": [
+          "07:00",
+          "22:00"
+        ]
+      },
+      "defaultBenefitPlan": "basic_small_business",
+      "attendancePolicy": "small_business_flexible",
+      "positions": [
+        {
+          "jobId": "restaurants_dishwasher",
+          "jobName": "Dishwasher",
+          "category": "restaurants",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "restaurants_busser",
+          "jobName": "Busser",
+          "category": "restaurants",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "restaurants_host",
+          "jobName": "Host",
+          "category": "restaurants",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "restaurants_server",
+          "jobName": "Server",
+          "category": "restaurants",
+          "slots": 8,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 8
+        },
+        {
+          "jobId": "restaurants_bartender",
+          "jobName": "Bartender",
+          "category": "restaurants",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "restaurants_prep_cook",
+          "jobName": "Prep Cook",
+          "category": "restaurants",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "restaurants_line_cook",
+          "jobName": "Line Cook",
+          "category": "restaurants",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        },
+        {
+          "jobId": "restaurants_cook",
+          "jobName": "Cook",
+          "category": "restaurants",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        },
+        {
+          "jobId": "restaurants_shift_leader",
+          "jobName": "Shift Leader",
+          "category": "restaurants",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "restaurants_assistant_restaurant_manager",
+          "jobName": "Assistant Restaurant Manager",
+          "category": "restaurants",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        },
+        {
+          "jobId": "restaurants_restaurant_manager",
+          "jobName": "Restaurant Manager",
+          "category": "restaurants",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 20,
+        "idealStaff": 26,
+        "maximumStaff": 28,
+        "totalJobSlots": 28
+      },
+      "bakedNpcTarget": 2,
+      "backgroundNpcSlots": 26,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_FASTFOOD_001",
+      "name": "Burger Barn",
+      "type": "fast_food",
+      "district": "commercial_south",
+      "outsideTown": false,
+      "operatingHours": {
+        "Mon": [
+          "06:00",
+          "23:00"
+        ],
+        "Tue": [
+          "06:00",
+          "23:00"
+        ],
+        "Wed": [
+          "06:00",
+          "23:00"
+        ],
+        "Thu": [
+          "06:00",
+          "23:00"
+        ],
+        "Fri": [
+          "06:00",
+          "23:00"
+        ],
+        "Sat": [
+          "06:00",
+          "23:00"
+        ],
+        "Sun": [
+          "06:00",
+          "23:00"
+        ]
+      },
+      "defaultBenefitPlan": "basic_small_business",
+      "attendancePolicy": "standard",
+      "positions": [
+        {
+          "jobId": "fastfood_crew_member",
+          "jobName": "Crew Member",
+          "category": "fastFood",
+          "slots": 15,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 15
+        },
+        {
+          "jobId": "fastfood_fast_food_cashier",
+          "jobName": "Fast Food Cashier",
+          "category": "fastFood",
+          "slots": 5,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 5
+        },
+        {
+          "jobId": "fastfood_drive_thru_worker",
+          "jobName": "Drive-Thru Worker",
+          "category": "fastFood",
+          "slots": 5,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 5
+        },
+        {
+          "jobId": "fastfood_fast_food_cook",
+          "jobName": "Fast Food Cook",
+          "category": "fastFood",
+          "slots": 6,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 6
+        },
+        {
+          "jobId": "fastfood_shift_manager",
+          "jobName": "Shift Manager",
+          "category": "fastFood",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        },
+        {
+          "jobId": "fastfood_assistant_general_manager",
+          "jobName": "Assistant General Manager",
+          "category": "fastFood",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        },
+        {
+          "jobId": "fastfood_general_manager",
+          "jobName": "General Manager",
+          "category": "fastFood",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 26,
+        "idealStaff": 33,
+        "maximumStaff": 36,
+        "totalJobSlots": 36
+      },
+      "bakedNpcTarget": 1,
+      "backgroundNpcSlots": 35,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_FASTFOOD_002",
+      "name": "Quick Chicken",
+      "type": "fast_food",
+      "district": "commercial_south",
+      "outsideTown": false,
+      "operatingHours": {
+        "Mon": [
+          "06:00",
+          "23:00"
+        ],
+        "Tue": [
+          "06:00",
+          "23:00"
+        ],
+        "Wed": [
+          "06:00",
+          "23:00"
+        ],
+        "Thu": [
+          "06:00",
+          "23:00"
+        ],
+        "Fri": [
+          "06:00",
+          "23:00"
+        ],
+        "Sat": [
+          "06:00",
+          "23:00"
+        ],
+        "Sun": [
+          "06:00",
+          "23:00"
+        ]
+      },
+      "defaultBenefitPlan": "basic_small_business",
+      "attendancePolicy": "standard",
+      "positions": [
+        {
+          "jobId": "fastfood_crew_member",
+          "jobName": "Crew Member",
+          "category": "fastFood",
+          "slots": 15,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 15
+        },
+        {
+          "jobId": "fastfood_fast_food_cashier",
+          "jobName": "Fast Food Cashier",
+          "category": "fastFood",
+          "slots": 5,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 5
+        },
+        {
+          "jobId": "fastfood_drive_thru_worker",
+          "jobName": "Drive-Thru Worker",
+          "category": "fastFood",
+          "slots": 5,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 5
+        },
+        {
+          "jobId": "fastfood_fast_food_cook",
+          "jobName": "Fast Food Cook",
+          "category": "fastFood",
+          "slots": 6,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 6
+        },
+        {
+          "jobId": "fastfood_shift_manager",
+          "jobName": "Shift Manager",
+          "category": "fastFood",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        },
+        {
+          "jobId": "fastfood_assistant_general_manager",
+          "jobName": "Assistant General Manager",
+          "category": "fastFood",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        },
+        {
+          "jobId": "fastfood_general_manager",
+          "jobName": "General Manager",
+          "category": "fastFood",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 26,
+        "idealStaff": 33,
+        "maximumStaff": 36,
+        "totalJobSlots": 36
+      },
+      "bakedNpcTarget": 1,
+      "backgroundNpcSlots": 35,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_FASTFOOD_003",
+      "name": "Taco Stop",
+      "type": "fast_food",
+      "district": "commercial_south",
+      "outsideTown": false,
+      "operatingHours": {
+        "Mon": [
+          "06:00",
+          "23:00"
+        ],
+        "Tue": [
+          "06:00",
+          "23:00"
+        ],
+        "Wed": [
+          "06:00",
+          "23:00"
+        ],
+        "Thu": [
+          "06:00",
+          "23:00"
+        ],
+        "Fri": [
+          "06:00",
+          "23:00"
+        ],
+        "Sat": [
+          "06:00",
+          "23:00"
+        ],
+        "Sun": [
+          "06:00",
+          "23:00"
+        ]
+      },
+      "defaultBenefitPlan": "basic_small_business",
+      "attendancePolicy": "standard",
+      "positions": [
+        {
+          "jobId": "fastfood_crew_member",
+          "jobName": "Crew Member",
+          "category": "fastFood",
+          "slots": 15,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 15
+        },
+        {
+          "jobId": "fastfood_fast_food_cashier",
+          "jobName": "Fast Food Cashier",
+          "category": "fastFood",
+          "slots": 5,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 5
+        },
+        {
+          "jobId": "fastfood_drive_thru_worker",
+          "jobName": "Drive-Thru Worker",
+          "category": "fastFood",
+          "slots": 5,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 5
+        },
+        {
+          "jobId": "fastfood_fast_food_cook",
+          "jobName": "Fast Food Cook",
+          "category": "fastFood",
+          "slots": 6,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 6
+        },
+        {
+          "jobId": "fastfood_shift_manager",
+          "jobName": "Shift Manager",
+          "category": "fastFood",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        },
+        {
+          "jobId": "fastfood_assistant_general_manager",
+          "jobName": "Assistant General Manager",
+          "category": "fastFood",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        },
+        {
+          "jobId": "fastfood_general_manager",
+          "jobName": "General Manager",
+          "category": "fastFood",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 26,
+        "idealStaff": 33,
+        "maximumStaff": 36,
+        "totalJobSlots": 36
+      },
+      "bakedNpcTarget": 1,
+      "backgroundNpcSlots": 35,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_AUTO_001",
+      "name": "Belleview Motors",
+      "type": "auto_dealership",
+      "district": "commercial_north",
+      "outsideTown": false,
+      "operatingHours": {
+        "Mon": [
+          "08:00",
+          "17:00"
+        ],
+        "Tue": [
+          "08:00",
+          "17:00"
+        ],
+        "Wed": [
+          "08:00",
+          "17:00"
+        ],
+        "Thu": [
+          "08:00",
+          "17:00"
+        ],
+        "Fri": [
+          "08:00",
+          "17:00"
+        ],
+        "Sat": null,
+        "Sun": null
+      },
+      "defaultBenefitPlan": "standard_employer",
+      "attendancePolicy": "standard",
+      "positions": [
+        {
+          "jobId": "automotive_lube_technician",
+          "jobName": "Lube Technician",
+          "category": "automotive",
+          "slots": 5,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 5
+        },
+        {
+          "jobId": "automotive_tire_technician",
+          "jobName": "Tire Technician",
+          "category": "automotive",
+          "slots": 4,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 4
+        },
+        {
+          "jobId": "automotive_auto_mechanic",
+          "jobName": "Auto Mechanic",
+          "category": "automotive",
+          "slots": 8,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 8
+        },
+        {
+          "jobId": "automotive_master_mechanic",
+          "jobName": "Master Mechanic",
+          "category": "automotive",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "automotive_service_advisor",
+          "jobName": "Service Advisor",
+          "category": "automotive",
+          "slots": 4,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 4
+        },
+        {
+          "jobId": "automotive_parts_clerk",
+          "jobName": "Parts Clerk",
+          "category": "automotive",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        },
+        {
+          "jobId": "automotive_car_salesperson",
+          "jobName": "Car Salesperson",
+          "category": "automotive",
+          "slots": 10,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 10
+        },
+        {
+          "jobId": "automotive_auto_body_technician",
+          "jobName": "Auto Body Technician",
+          "category": "automotive",
+          "slots": 4,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 4
+        },
+        {
+          "jobId": "automotive_tow_truck_driver",
+          "jobName": "Tow Truck Driver",
+          "category": "automotive",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "automotive_shop_manager",
+          "jobName": "Shop Manager",
+          "category": "automotive",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        },
+        {
+          "jobId": "automotive_dealership_manager",
+          "jobName": "Dealership Manager",
+          "category": "automotive",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 32,
+        "idealStaff": 40,
+        "maximumStaff": 44,
+        "totalJobSlots": 44
+      },
+      "bakedNpcTarget": 3,
+      "backgroundNpcSlots": 41,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_AUTOSHOP_001",
+      "name": "Turner Auto Repair",
+      "type": "auto_repair_shop",
+      "district": "downtown",
+      "outsideTown": false,
+      "operatingHours": {
+        "Mon": [
+          "08:00",
+          "17:00"
+        ],
+        "Tue": [
+          "08:00",
+          "17:00"
+        ],
+        "Wed": [
+          "08:00",
+          "17:00"
+        ],
+        "Thu": [
+          "08:00",
+          "17:00"
+        ],
+        "Fri": [
+          "08:00",
+          "17:00"
+        ],
+        "Sat": null,
+        "Sun": null
+      },
+      "defaultBenefitPlan": "none",
+      "attendancePolicy": "small_business_flexible",
+      "positions": [
+        {
+          "jobId": "automotive_lube_technician",
+          "jobName": "Lube Technician",
+          "category": "automotive",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        },
+        {
+          "jobId": "automotive_tire_technician",
+          "jobName": "Tire Technician",
+          "category": "automotive",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        },
+        {
+          "jobId": "automotive_auto_mechanic",
+          "jobName": "Auto Mechanic",
+          "category": "automotive",
+          "slots": 4,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 4
+        },
+        {
+          "jobId": "automotive_master_mechanic",
+          "jobName": "Master Mechanic",
+          "category": "automotive",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        },
+        {
+          "jobId": "automotive_service_advisor",
+          "jobName": "Service Advisor",
+          "category": "automotive",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        },
+        {
+          "jobId": "automotive_shop_manager",
+          "jobName": "Shop Manager",
+          "category": "automotive",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 6,
+        "idealStaff": 8,
+        "maximumStaff": 9,
+        "totalJobSlots": 9
+      },
+      "bakedNpcTarget": 1,
+      "backgroundNpcSlots": 8,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_TIRE_001",
+      "name": "County Tire & Tow",
+      "type": "tire_tow_shop",
+      "district": "commercial_south",
+      "outsideTown": false,
+      "operatingHours": {
+        "Mon": [
+          "08:00",
+          "17:00"
+        ],
+        "Tue": [
+          "08:00",
+          "17:00"
+        ],
+        "Wed": [
+          "08:00",
+          "17:00"
+        ],
+        "Thu": [
+          "08:00",
+          "17:00"
+        ],
+        "Fri": [
+          "08:00",
+          "17:00"
+        ],
+        "Sat": null,
+        "Sun": null
+      },
+      "defaultBenefitPlan": "basic_small_business",
+      "attendancePolicy": "small_business_flexible",
+      "positions": [
+        {
+          "jobId": "automotive_tire_technician",
+          "jobName": "Tire Technician",
+          "category": "automotive",
+          "slots": 4,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 4
+        },
+        {
+          "jobId": "automotive_auto_mechanic",
+          "jobName": "Auto Mechanic",
+          "category": "automotive",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "automotive_tow_truck_driver",
+          "jobName": "Tow Truck Driver",
+          "category": "automotive",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        },
+        {
+          "jobId": "automotive_service_advisor",
+          "jobName": "Service Advisor",
+          "category": "automotive",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        },
+        {
+          "jobId": "automotive_shop_manager",
+          "jobName": "Shop Manager",
+          "category": "automotive",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 8,
+        "idealStaff": 10,
+        "maximumStaff": 11,
+        "totalJobSlots": 11
+      },
+      "bakedNpcTarget": 2,
+      "backgroundNpcSlots": 9,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_CONSTRUCTION_001",
+      "name": "Harris Construction",
+      "type": "general_contractor",
+      "district": "industrial",
+      "outsideTown": false,
+      "operatingHours": {
+        "Mon": [
+          "07:00",
+          "16:00"
+        ],
+        "Tue": [
+          "07:00",
+          "16:00"
+        ],
+        "Wed": [
+          "07:00",
+          "16:00"
+        ],
+        "Thu": [
+          "07:00",
+          "16:00"
+        ],
+        "Fri": [
+          "07:00",
+          "16:00"
+        ],
+        "Sat": null,
+        "Sun": null
+      },
+      "defaultBenefitPlan": "standard_employer",
+      "attendancePolicy": "standard",
+      "positions": [
+        {
+          "jobId": "construction_construction_laborer",
+          "jobName": "Construction Laborer",
+          "category": "construction",
+          "slots": 10,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 10
+        },
+        {
+          "jobId": "construction_carpenter",
+          "jobName": "Carpenter",
+          "category": "construction",
+          "slots": 7,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 7
+        },
+        {
+          "jobId": "construction_electrician",
+          "jobName": "Electrician",
+          "category": "construction",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        },
+        {
+          "jobId": "construction_plumber",
+          "jobName": "Plumber",
+          "category": "construction",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        },
+        {
+          "jobId": "construction_hvac_technician",
+          "jobName": "HVAC Technician",
+          "category": "construction",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        },
+        {
+          "jobId": "construction_roofer",
+          "jobName": "Roofer",
+          "category": "construction",
+          "slots": 5,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 5
+        },
+        {
+          "jobId": "construction_painter",
+          "jobName": "Painter",
+          "category": "construction",
+          "slots": 4,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 4
+        },
+        {
+          "jobId": "construction_concrete_worker",
+          "jobName": "Concrete Worker",
+          "category": "construction",
+          "slots": 5,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 5
+        },
+        {
+          "jobId": "construction_heavy_equipment_operator",
+          "jobName": "Heavy Equipment Operator",
+          "category": "construction",
+          "slots": 4,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 4
+        },
+        {
+          "jobId": "construction_construction_foreman",
+          "jobName": "Construction Foreman",
+          "category": "construction",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        },
+        {
+          "jobId": "construction_estimator",
+          "jobName": "Estimator",
+          "category": "construction",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "construction_general_contractor",
+          "jobName": "General Contractor",
+          "category": "construction",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 36,
+        "idealStaff": 46,
+        "maximumStaff": 50,
+        "totalJobSlots": 50
+      },
+      "bakedNpcTarget": 3,
+      "backgroundNpcSlots": 47,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_CONSTRUCTION_002",
+      "name": "Miller Home & Trade Services",
+      "type": "small_contractor",
+      "district": "residential_south",
+      "outsideTown": false,
+      "operatingHours": {
+        "Mon": [
+          "07:00",
+          "16:00"
+        ],
+        "Tue": [
+          "07:00",
+          "16:00"
+        ],
+        "Wed": [
+          "07:00",
+          "16:00"
+        ],
+        "Thu": [
+          "07:00",
+          "16:00"
+        ],
+        "Fri": [
+          "07:00",
+          "16:00"
+        ],
+        "Sat": null,
+        "Sun": null
+      },
+      "defaultBenefitPlan": "basic_small_business",
+      "attendancePolicy": "small_business_flexible",
+      "positions": [
+        {
+          "jobId": "construction_construction_laborer",
+          "jobName": "Construction Laborer",
+          "category": "construction",
+          "slots": 4,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 4
+        },
+        {
+          "jobId": "construction_carpenter",
+          "jobName": "Carpenter",
+          "category": "construction",
+          "slots": 4,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 4
+        },
+        {
+          "jobId": "construction_electrician",
+          "jobName": "Electrician",
+          "category": "construction",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "construction_plumber",
+          "jobName": "Plumber",
+          "category": "construction",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "construction_hvac_technician",
+          "jobName": "HVAC Technician",
+          "category": "construction",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "construction_painter",
+          "jobName": "Painter",
+          "category": "construction",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "construction_construction_foreman",
+          "jobName": "Construction Foreman",
+          "category": "construction",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        },
+        {
+          "jobId": "construction_general_contractor",
+          "jobName": "General Contractor",
+          "category": "construction",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 13,
+        "idealStaff": 17,
+        "maximumStaff": 18,
+        "totalJobSlots": 18
+      },
+      "bakedNpcTarget": 1,
+      "backgroundNpcSlots": 17,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_BANK_001",
+      "name": "First Belleview Bank",
+      "type": "bank",
+      "district": "downtown",
+      "outsideTown": false,
+      "operatingHours": {
+        "Mon": [
+          "08:00",
+          "17:00"
+        ],
+        "Tue": [
+          "08:00",
+          "17:00"
+        ],
+        "Wed": [
+          "08:00",
+          "17:00"
+        ],
+        "Thu": [
+          "08:00",
+          "17:00"
+        ],
+        "Fri": [
+          "08:00",
+          "17:00"
+        ],
+        "Sat": null,
+        "Sun": null
+      },
+      "defaultBenefitPlan": "professional_office",
+      "attendancePolicy": "standard",
+      "positions": [
+        {
+          "jobId": "banking_bank_teller",
+          "jobName": "Bank Teller",
+          "category": "banking",
+          "slots": 8,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 8
+        },
+        {
+          "jobId": "banking_personal_banker",
+          "jobName": "Personal Banker",
+          "category": "banking",
+          "slots": 4,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 4
+        },
+        {
+          "jobId": "banking_loan_officer",
+          "jobName": "Loan Officer",
+          "category": "banking",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        },
+        {
+          "jobId": "banking_mortgage_officer",
+          "jobName": "Mortgage Officer",
+          "category": "banking",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "banking_branch_manager",
+          "jobName": "Branch Manager",
+          "category": "banking",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        },
+        {
+          "jobId": "banking_bookkeeper",
+          "jobName": "Bookkeeper",
+          "category": "banking",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "banking_accountant",
+          "jobName": "Accountant",
+          "category": "banking",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "banking_tax_preparer",
+          "jobName": "Tax Preparer",
+          "category": "banking",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 17,
+        "idealStaff": 22,
+        "maximumStaff": 24,
+        "totalJobSlots": 24
+      },
+      "bakedNpcTarget": 2,
+      "backgroundNpcSlots": 22,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_BANK_002",
+      "name": "Community Credit Union",
+      "type": "credit_union",
+      "district": "commercial_central",
+      "outsideTown": false,
+      "operatingHours": {
+        "Mon": [
+          "08:00",
+          "17:00"
+        ],
+        "Tue": [
+          "08:00",
+          "17:00"
+        ],
+        "Wed": [
+          "08:00",
+          "17:00"
+        ],
+        "Thu": [
+          "08:00",
+          "17:00"
+        ],
+        "Fri": [
+          "08:00",
+          "17:00"
+        ],
+        "Sat": null,
+        "Sun": null
+      },
+      "defaultBenefitPlan": "professional_office",
+      "attendancePolicy": "standard",
+      "positions": [
+        {
+          "jobId": "banking_bank_teller",
+          "jobName": "Bank Teller",
+          "category": "banking",
+          "slots": 5,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 5
+        },
+        {
+          "jobId": "banking_personal_banker",
+          "jobName": "Personal Banker",
+          "category": "banking",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        },
+        {
+          "jobId": "banking_loan_officer",
+          "jobName": "Loan Officer",
+          "category": "banking",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "banking_mortgage_officer",
+          "jobName": "Mortgage Officer",
+          "category": "banking",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        },
+        {
+          "jobId": "banking_branch_manager",
+          "jobName": "Branch Manager",
+          "category": "banking",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        },
+        {
+          "jobId": "banking_bookkeeper",
+          "jobName": "Bookkeeper",
+          "category": "banking",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 9,
+        "idealStaff": 12,
+        "maximumStaff": 13,
+        "totalJobSlots": 13
+      },
+      "bakedNpcTarget": 1,
+      "backgroundNpcSlots": 12,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_INSURANCE_001",
+      "name": "Parker Insurance Agency",
+      "type": "insurance_agency",
+      "district": "downtown",
+      "outsideTown": false,
+      "operatingHours": {
+        "Mon": [
+          "08:00",
+          "17:00"
+        ],
+        "Tue": [
+          "08:00",
+          "17:00"
+        ],
+        "Wed": [
+          "08:00",
+          "17:00"
+        ],
+        "Thu": [
+          "08:00",
+          "17:00"
+        ],
+        "Fri": [
+          "08:00",
+          "17:00"
+        ],
+        "Sat": null,
+        "Sun": null
+      },
+      "defaultBenefitPlan": "professional_office",
+      "attendancePolicy": "small_business_flexible",
+      "positions": [
+        {
+          "jobId": "insurance_insurance_receptionist",
+          "jobName": "Insurance Receptionist",
+          "category": "insurance",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        },
+        {
+          "jobId": "insurance_claims_representative",
+          "jobName": "Claims Representative",
+          "category": "insurance",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "insurance_insurance_agent",
+          "jobName": "Insurance Agent",
+          "category": "insurance",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        },
+        {
+          "jobId": "insurance_insurance_office_manager",
+          "jobName": "Insurance Office Manager",
+          "category": "insurance",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        },
+        {
+          "jobId": "insurance_agency_owner",
+          "jobName": "Agency Owner",
+          "category": "insurance",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 6,
+        "idealStaff": 7,
+        "maximumStaff": 8,
+        "totalJobSlots": 8
+      },
+      "bakedNpcTarget": 1,
+      "backgroundNpcSlots": 7,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_LEGAL_001",
+      "name": "Baker, Hall & Morgan",
+      "type": "law_office",
+      "district": "downtown",
+      "outsideTown": false,
+      "operatingHours": {
+        "Mon": [
+          "08:00",
+          "17:00"
+        ],
+        "Tue": [
+          "08:00",
+          "17:00"
+        ],
+        "Wed": [
+          "08:00",
+          "17:00"
+        ],
+        "Thu": [
+          "08:00",
+          "17:00"
+        ],
+        "Fri": [
+          "08:00",
+          "17:00"
+        ],
+        "Sat": null,
+        "Sun": null
+      },
+      "defaultBenefitPlan": "professional_office",
+      "attendancePolicy": "standard",
+      "positions": [
+        {
+          "jobId": "legal_legal_receptionist",
+          "jobName": "Legal Receptionist",
+          "category": "legal",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        },
+        {
+          "jobId": "legal_legal_secretary",
+          "jobName": "Legal Secretary",
+          "category": "legal",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "legal_paralegal",
+          "jobName": "Paralegal",
+          "category": "legal",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        },
+        {
+          "jobId": "legal_attorney",
+          "jobName": "Attorney",
+          "category": "legal",
+          "slots": 4,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 4
+        },
+        {
+          "jobId": "legal_law_firm_partner",
+          "jobName": "Law Firm Partner",
+          "category": "legal",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 9,
+        "idealStaff": 11,
+        "maximumStaff": 12,
+        "totalJobSlots": 12
+      },
+      "bakedNpcTarget": 1,
+      "backgroundNpcSlots": 11,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_REALESTATE_001",
+      "name": "HomeTown Realty",
+      "type": "real_estate_office",
+      "district": "downtown",
+      "outsideTown": false,
+      "operatingHours": {
+        "Mon": [
+          "08:00",
+          "17:00"
+        ],
+        "Tue": [
+          "08:00",
+          "17:00"
+        ],
+        "Wed": [
+          "08:00",
+          "17:00"
+        ],
+        "Thu": [
+          "08:00",
+          "17:00"
+        ],
+        "Fri": [
+          "08:00",
+          "17:00"
+        ],
+        "Sat": null,
+        "Sun": null
+      },
+      "defaultBenefitPlan": "none",
+      "attendancePolicy": "small_business_flexible",
+      "positions": [
+        {
+          "jobId": "realestate_real_estate_receptionist",
+          "jobName": "Real Estate Receptionist",
+          "category": "realEstate",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        },
+        {
+          "jobId": "realestate_property_manager",
+          "jobName": "Property Manager",
+          "category": "realEstate",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "realestate_leasing_agent",
+          "jobName": "Leasing Agent",
+          "category": "realEstate",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "realestate_real_estate_agent",
+          "jobName": "Real Estate Agent",
+          "category": "realEstate",
+          "slots": 6,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 6
+        },
+        {
+          "jobId": "realestate_broker",
+          "jobName": "Broker",
+          "category": "realEstate",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 9,
+        "idealStaff": 11,
+        "maximumStaff": 12,
+        "totalJobSlots": 12
+      },
+      "bakedNpcTarget": 1,
+      "backgroundNpcSlots": 11,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_HOTEL_001",
+      "name": "Belleview Inn",
+      "type": "hotel",
+      "district": "commercial_north",
+      "outsideTown": false,
+      "operatingHours": {
+        "type": "24_7"
+      },
+      "defaultBenefitPlan": "basic_retail",
+      "attendancePolicy": "standard",
+      "positions": [
+        {
+          "jobId": "hotel_hotel_housekeeper",
+          "jobName": "Hotel Housekeeper",
+          "category": "hotel",
+          "slots": 12,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 12
+        },
+        {
+          "jobId": "hotel_front_desk_clerk",
+          "jobName": "Front Desk Clerk",
+          "category": "hotel",
+          "slots": 5,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 5
+        },
+        {
+          "jobId": "hotel_hotel_maintenance_worker",
+          "jobName": "Hotel Maintenance Worker",
+          "category": "hotel",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        },
+        {
+          "jobId": "hotel_breakfast_attendant",
+          "jobName": "Breakfast Attendant",
+          "category": "hotel",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        },
+        {
+          "jobId": "hotel_night_auditor",
+          "jobName": "Night Auditor",
+          "category": "hotel",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "hotel_assistant_hotel_manager",
+          "jobName": "Assistant Hotel Manager",
+          "category": "hotel",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        },
+        {
+          "jobId": "hotel_hotel_manager",
+          "jobName": "Hotel Manager",
+          "category": "hotel",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 19,
+        "idealStaff": 25,
+        "maximumStaff": 27,
+        "totalJobSlots": 27
+      },
+      "bakedNpcTarget": 2,
+      "backgroundNpcSlots": 25,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_MOTEL_001",
+      "name": "Roadside Lodge",
+      "type": "motel",
+      "district": "highway",
+      "outsideTown": false,
+      "operatingHours": {
+        "type": "24_7"
+      },
+      "defaultBenefitPlan": "none",
+      "attendancePolicy": "small_business_flexible",
+      "positions": [
+        {
+          "jobId": "hotel_hotel_housekeeper",
+          "jobName": "Hotel Housekeeper",
+          "category": "hotel",
+          "slots": 7,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 7
+        },
+        {
+          "jobId": "hotel_front_desk_clerk",
+          "jobName": "Front Desk Clerk",
+          "category": "hotel",
+          "slots": 4,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 4
+        },
+        {
+          "jobId": "hotel_hotel_maintenance_worker",
+          "jobName": "Hotel Maintenance Worker",
+          "category": "hotel",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        },
+        {
+          "jobId": "hotel_breakfast_attendant",
+          "jobName": "Breakfast Attendant",
+          "category": "hotel",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        },
+        {
+          "jobId": "hotel_night_auditor",
+          "jobName": "Night Auditor",
+          "category": "hotel",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        },
+        {
+          "jobId": "hotel_hotel_manager",
+          "jobName": "Hotel Manager",
+          "category": "hotel",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 11,
+        "idealStaff": 14,
+        "maximumStaff": 15,
+        "totalJobSlots": 15
+      },
+      "bakedNpcTarget": 2,
+      "backgroundNpcSlots": 13,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_SALON_001",
+      "name": "Downtown Salon & Spa",
+      "type": "salon_spa",
+      "district": "downtown",
+      "outsideTown": false,
+      "operatingHours": {
+        "Mon": [
+          "09:00",
+          "19:00"
+        ],
+        "Tue": [
+          "09:00",
+          "19:00"
+        ],
+        "Wed": [
+          "09:00",
+          "19:00"
+        ],
+        "Thu": [
+          "09:00",
+          "19:00"
+        ],
+        "Fri": [
+          "09:00",
+          "19:00"
+        ],
+        "Sat": [
+          "09:00",
+          "19:00"
+        ],
+        "Sun": [
+          "09:00",
+          "19:00"
+        ]
+      },
+      "defaultBenefitPlan": "none",
+      "attendancePolicy": "small_business_flexible",
+      "positions": [
+        {
+          "jobId": "personalservices_barber",
+          "jobName": "Barber",
+          "category": "personalServices",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "personalservices_hair_stylist",
+          "jobName": "Hair Stylist",
+          "category": "personalServices",
+          "slots": 6,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 6
+        },
+        {
+          "jobId": "personalservices_nail_technician",
+          "jobName": "Nail Technician",
+          "category": "personalServices",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        },
+        {
+          "jobId": "personalservices_massage_therapist",
+          "jobName": "Massage Therapist",
+          "category": "personalServices",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "personalservices_salon_receptionist",
+          "jobName": "Salon Receptionist",
+          "category": "personalServices",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "personalservices_salon_manager",
+          "jobName": "Salon Manager",
+          "category": "personalServices",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 12,
+        "idealStaff": 15,
+        "maximumStaff": 16,
+        "totalJobSlots": 16
+      },
+      "bakedNpcTarget": 2,
+      "backgroundNpcSlots": 14,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_PET_001",
+      "name": "Paws & Claws Grooming",
+      "type": "pet_grooming",
+      "district": "commercial_central",
+      "outsideTown": false,
+      "operatingHours": {
+        "Mon": [
+          "08:00",
+          "17:00"
+        ],
+        "Tue": [
+          "08:00",
+          "17:00"
+        ],
+        "Wed": [
+          "08:00",
+          "17:00"
+        ],
+        "Thu": [
+          "08:00",
+          "17:00"
+        ],
+        "Fri": [
+          "08:00",
+          "17:00"
+        ],
+        "Sat": null,
+        "Sun": null
+      },
+      "defaultBenefitPlan": "none",
+      "attendancePolicy": "small_business_flexible",
+      "positions": [
+        {
+          "jobId": "personalservices_pet_groomer",
+          "jobName": "Pet Groomer",
+          "category": "personalServices",
+          "slots": 4,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 4
+        },
+        {
+          "jobId": "personalservices_salon_receptionist",
+          "jobName": "Salon Receptionist",
+          "category": "personalServices",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        },
+        {
+          "jobId": "personalservices_salon_manager",
+          "jobName": "Salon Manager",
+          "category": "personalServices",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 4,
+        "idealStaff": 6,
+        "maximumStaff": 6,
+        "totalJobSlots": 6
+      },
+      "bakedNpcTarget": 2,
+      "backgroundNpcSlots": 4,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_SERVICE_001",
+      "name": "Belleview Home Services",
+      "type": "home_services",
+      "district": "commercial_south",
+      "outsideTown": false,
+      "operatingHours": {
+        "Mon": [
+          "08:00",
+          "17:00"
+        ],
+        "Tue": [
+          "08:00",
+          "17:00"
+        ],
+        "Wed": [
+          "08:00",
+          "17:00"
+        ],
+        "Thu": [
+          "08:00",
+          "17:00"
+        ],
+        "Fri": [
+          "08:00",
+          "17:00"
+        ],
+        "Sat": null,
+        "Sun": null
+      },
+      "defaultBenefitPlan": "basic_small_business",
+      "attendancePolicy": "small_business_flexible",
+      "positions": [
+        {
+          "jobId": "personalservices_cleaner",
+          "jobName": "Cleaner",
+          "category": "personalServices",
+          "slots": 8,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 8
+        },
+        {
+          "jobId": "personalservices_handyman",
+          "jobName": "Handyman",
+          "category": "personalServices",
+          "slots": 5,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 5
+        },
+        {
+          "jobId": "personalservices_salon_manager",
+          "jobName": "Salon Manager",
+          "category": "personalServices",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 10,
+        "idealStaff": 13,
+        "maximumStaff": 14,
+        "totalJobSlots": 14
+      },
+      "bakedNpcTarget": 2,
+      "backgroundNpcSlots": 12,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_FARMCOOP_001",
+      "name": "County Farm Cooperative",
+      "type": "farm_cooperative",
+      "district": "rural",
+      "outsideTown": false,
+      "operatingHours": {
+        "Mon": [
+          "07:00",
+          "16:00"
+        ],
+        "Tue": [
+          "07:00",
+          "16:00"
+        ],
+        "Wed": [
+          "07:00",
+          "16:00"
+        ],
+        "Thu": [
+          "07:00",
+          "16:00"
+        ],
+        "Fri": [
+          "07:00",
+          "16:00"
+        ],
+        "Sat": null,
+        "Sun": null
+      },
+      "defaultBenefitPlan": "standard_employer",
+      "attendancePolicy": "small_business_flexible",
+      "positions": [
+        {
+          "jobId": "agriculture_farmhand",
+          "jobName": "Farmhand",
+          "category": "agriculture",
+          "slots": 12,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 12
+        },
+        {
+          "jobId": "agriculture_farm_equipment_operator",
+          "jobName": "Farm Equipment Operator",
+          "category": "agriculture",
+          "slots": 5,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 5
+        },
+        {
+          "jobId": "agriculture_farm_mechanic",
+          "jobName": "Farm Mechanic",
+          "category": "agriculture",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        },
+        {
+          "jobId": "agriculture_livestock_worker",
+          "jobName": "Livestock Worker",
+          "category": "agriculture",
+          "slots": 6,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 6
+        },
+        {
+          "jobId": "agriculture_farm_manager",
+          "jobName": "Farm Manager",
+          "category": "agriculture",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "agriculture_farmer",
+          "jobName": "Farmer",
+          "category": "agriculture",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 22,
+        "idealStaff": 29,
+        "maximumStaff": 31,
+        "totalJobSlots": 31
+      },
+      "bakedNpcTarget": 1,
+      "backgroundNpcSlots": 30,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_FARM_001",
+      "name": "Miller Family Farm",
+      "type": "family_farm",
+      "district": "rural",
+      "outsideTown": false,
+      "operatingHours": {
+        "type": "seasonal_variable"
+      },
+      "defaultBenefitPlan": "none",
+      "attendancePolicy": "small_business_flexible",
+      "positions": [
+        {
+          "jobId": "agriculture_farmhand",
+          "jobName": "Farmhand",
+          "category": "agriculture",
+          "slots": 5,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 5
+        },
+        {
+          "jobId": "agriculture_farm_equipment_operator",
+          "jobName": "Farm Equipment Operator",
+          "category": "agriculture",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "agriculture_farm_mechanic",
+          "jobName": "Farm Mechanic",
+          "category": "agriculture",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        },
+        {
+          "jobId": "agriculture_livestock_worker",
+          "jobName": "Livestock Worker",
+          "category": "agriculture",
+          "slots": 4,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 4
+        },
+        {
+          "jobId": "agriculture_farm_manager",
+          "jobName": "Farm Manager",
+          "category": "agriculture",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        },
+        {
+          "jobId": "agriculture_farmer",
+          "jobName": "Farmer",
+          "category": "agriculture",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 11,
+        "idealStaff": 14,
+        "maximumStaff": 15,
+        "totalJobSlots": 15
+      },
+      "bakedNpcTarget": 2,
+      "backgroundNpcSlots": 13,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_TRUCKING_001",
+      "name": "Buckeye Freight & Delivery",
+      "type": "trucking_company",
+      "district": "industrial",
+      "outsideTown": false,
+      "operatingHours": {
+        "type": "24_7"
+      },
+      "defaultBenefitPlan": "standard_employer",
+      "attendancePolicy": "standard",
+      "positions": [
+        {
+          "jobId": "transportation_truck_driver",
+          "jobName": "Truck Driver",
+          "category": "transportation",
+          "slots": 26,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 26
+        },
+        {
+          "jobId": "transportation_delivery_driver",
+          "jobName": "Delivery Driver",
+          "category": "transportation",
+          "slots": 10,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 10
+        },
+        {
+          "jobId": "transportation_taxi_driver",
+          "jobName": "Taxi Driver",
+          "category": "transportation",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "transportation_bus_driver",
+          "jobName": "Bus Driver",
+          "category": "transportation",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 29,
+        "idealStaff": 37,
+        "maximumStaff": 40,
+        "totalJobSlots": 40
+      },
+      "bakedNpcTarget": 2,
+      "backgroundNpcSlots": 38,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_TRANSIT_001",
+      "name": "Belleview Transit & Cab",
+      "type": "local_transport",
+      "district": "civic",
+      "outsideTown": false,
+      "operatingHours": {
+        "Mon": [
+          "05:30",
+          "23:00"
+        ],
+        "Tue": [
+          "05:30",
+          "23:00"
+        ],
+        "Wed": [
+          "05:30",
+          "23:00"
+        ],
+        "Thu": [
+          "05:30",
+          "23:00"
+        ],
+        "Fri": [
+          "05:30",
+          "23:00"
+        ],
+        "Sat": [
+          "05:30",
+          "23:00"
+        ],
+        "Sun": [
+          "05:30",
+          "23:00"
+        ]
+      },
+      "defaultBenefitPlan": "basic_small_business",
+      "attendancePolicy": "standard",
+      "positions": [
+        {
+          "jobId": "transportation_taxi_driver",
+          "jobName": "Taxi Driver",
+          "category": "transportation",
+          "slots": 7,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 7
+        },
+        {
+          "jobId": "transportation_bus_driver",
+          "jobName": "Bus Driver",
+          "category": "transportation",
+          "slots": 6,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 6
+        },
+        {
+          "jobId": "transportation_delivery_driver",
+          "jobName": "Delivery Driver",
+          "category": "transportation",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 12,
+        "idealStaff": 15,
+        "maximumStaff": 16,
+        "totalJobSlots": 16
+      },
+      "bakedNpcTarget": 2,
+      "backgroundNpcSlots": 14,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_POST_001",
+      "name": "Belleview Post Office",
+      "type": "post_office",
+      "district": "downtown",
+      "outsideTown": false,
+      "operatingHours": {
+        "Mon": [
+          "08:00",
+          "17:00"
+        ],
+        "Tue": [
+          "08:00",
+          "17:00"
+        ],
+        "Wed": [
+          "08:00",
+          "17:00"
+        ],
+        "Thu": [
+          "08:00",
+          "17:00"
+        ],
+        "Fri": [
+          "08:00",
+          "17:00"
+        ],
+        "Sat": null,
+        "Sun": null
+      },
+      "defaultBenefitPlan": "good_public_sector",
+      "attendancePolicy": "public_sector",
+      "positions": [
+        {
+          "jobId": "postalshipping_mail_carrier",
+          "jobName": "Mail Carrier",
+          "category": "postalShipping",
+          "slots": 16,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 16
+        },
+        {
+          "jobId": "postalshipping_postal_clerk",
+          "jobName": "Postal Clerk",
+          "category": "postalShipping",
+          "slots": 8,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 8
+        },
+        {
+          "jobId": "postalshipping_package_handler",
+          "jobName": "Package Handler",
+          "category": "postalShipping",
+          "slots": 7,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 7
+        },
+        {
+          "jobId": "postalshipping_package_delivery_driver",
+          "jobName": "Package Delivery Driver",
+          "category": "postalShipping",
+          "slots": 6,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 6
+        },
+        {
+          "jobId": "postalshipping_postal_supervisor",
+          "jobName": "Postal Supervisor",
+          "category": "postalShipping",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "postalshipping_postmaster",
+          "jobName": "Postmaster",
+          "category": "postalShipping",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 29,
+        "idealStaff": 37,
+        "maximumStaff": 40,
+        "totalJobSlots": 40
+      },
+      "bakedNpcTarget": 2,
+      "backgroundNpcSlots": 38,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_PARCEL_001",
+      "name": "County Parcel Depot",
+      "type": "parcel_shipping",
+      "district": "industrial",
+      "outsideTown": false,
+      "operatingHours": {
+        "Mon": [
+          "07:00",
+          "16:00"
+        ],
+        "Tue": [
+          "07:00",
+          "16:00"
+        ],
+        "Wed": [
+          "07:00",
+          "16:00"
+        ],
+        "Thu": [
+          "07:00",
+          "16:00"
+        ],
+        "Fri": [
+          "07:00",
+          "16:00"
+        ],
+        "Sat": null,
+        "Sun": null
+      },
+      "defaultBenefitPlan": "standard_employer",
+      "attendancePolicy": "standard",
+      "positions": [
+        {
+          "jobId": "postalshipping_package_handler",
+          "jobName": "Package Handler",
+          "category": "postalShipping",
+          "slots": 12,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 12
+        },
+        {
+          "jobId": "postalshipping_package_delivery_driver",
+          "jobName": "Package Delivery Driver",
+          "category": "postalShipping",
+          "slots": 10,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 10
+        },
+        {
+          "jobId": "postalshipping_postal_supervisor",
+          "jobName": "Postal Supervisor",
+          "category": "postalShipping",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 17,
+        "idealStaff": 22,
+        "maximumStaff": 24,
+        "totalJobSlots": 24
+      },
+      "bakedNpcTarget": 2,
+      "backgroundNpcSlots": 22,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_LIBRARY_001",
+      "name": "Belleview Public Library",
+      "type": "library",
+      "district": "downtown",
+      "outsideTown": false,
+      "operatingHours": {
+        "Mon": [
+          "09:00",
+          "20:00"
+        ],
+        "Tue": [
+          "09:00",
+          "20:00"
+        ],
+        "Wed": [
+          "09:00",
+          "20:00"
+        ],
+        "Thu": [
+          "09:00",
+          "20:00"
+        ],
+        "Fri": [
+          "09:00",
+          "20:00"
+        ],
+        "Sat": [
+          "09:00",
+          "20:00"
+        ],
+        "Sun": [
+          "09:00",
+          "20:00"
+        ]
+      },
+      "defaultBenefitPlan": "good_public_sector",
+      "attendancePolicy": "public_sector",
+      "positions": [
+        {
+          "jobId": "community_library_assistant",
+          "jobName": "Library Assistant",
+          "category": "community",
+          "slots": 6,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 6
+        },
+        {
+          "jobId": "community_librarian",
+          "jobName": "Librarian",
+          "category": "community",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        },
+        {
+          "jobId": "community_library_director",
+          "jobName": "Library Director",
+          "category": "community",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 7,
+        "idealStaff": 9,
+        "maximumStaff": 10,
+        "totalJobSlots": 10
+      },
+      "bakedNpcTarget": 1,
+      "backgroundNpcSlots": 9,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_MEDIA_001",
+      "name": "Belleview Times & WBLV Radio",
+      "type": "local_media",
+      "district": "downtown",
+      "outsideTown": false,
+      "operatingHours": {
+        "type": "mixed_media_hours"
+      },
+      "defaultBenefitPlan": "basic_small_business",
+      "attendancePolicy": "small_business_flexible",
+      "positions": [
+        {
+          "jobId": "community_reporter",
+          "jobName": "Reporter",
+          "category": "community",
+          "slots": 4,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 4
+        },
+        {
+          "jobId": "community_photographer",
+          "jobName": "Photographer",
+          "category": "community",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "community_newspaper_editor",
+          "jobName": "Newspaper Editor",
+          "category": "community",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        },
+        {
+          "jobId": "community_radio_host",
+          "jobName": "Radio Host",
+          "category": "community",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        },
+        {
+          "jobId": "community_radio_technician",
+          "jobName": "Radio Technician",
+          "category": "community",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "community_advertising_salesperson",
+          "jobName": "Advertising Salesperson",
+          "category": "community",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 11,
+        "idealStaff": 14,
+        "maximumStaff": 15,
+        "totalJobSlots": 15
+      },
+      "bakedNpcTarget": 1,
+      "backgroundNpcSlots": 14,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_FUNERAL_001",
+      "name": "Morgan Funeral Home",
+      "type": "funeral_home",
+      "district": "residential_central",
+      "outsideTown": false,
+      "operatingHours": {
+        "type": "office_plus_on_call"
+      },
+      "defaultBenefitPlan": "basic_small_business",
+      "attendancePolicy": "small_business_flexible",
+      "positions": [
+        {
+          "jobId": "community_funeral_assistant",
+          "jobName": "Funeral Assistant",
+          "category": "community",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        },
+        {
+          "jobId": "community_embalmer",
+          "jobName": "Embalmer",
+          "category": "community",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        },
+        {
+          "jobId": "community_funeral_director",
+          "jobName": "Funeral Director",
+          "category": "community",
+          "slots": 2,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 2
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 5,
+        "idealStaff": 6,
+        "maximumStaff": 7,
+        "totalJobSlots": 7
+      },
+      "bakedNpcTarget": 1,
+      "backgroundNpcSlots": 6,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_CHURCH_001",
+      "name": "First Community Church",
+      "type": "church",
+      "district": "residential_north",
+      "outsideTown": false,
+      "operatingHours": {
+        "type": "church_schedule"
+      },
+      "defaultBenefitPlan": "basic_small_business",
+      "attendancePolicy": "small_business_flexible",
+      "positions": [
+        {
+          "jobId": "community_church_secretary",
+          "jobName": "Church Secretary",
+          "category": "community",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        },
+        {
+          "jobId": "community_church_custodian",
+          "jobName": "Church Custodian",
+          "category": "community",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        },
+        {
+          "jobId": "community_youth_director",
+          "jobName": "Youth Director",
+          "category": "community",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        },
+        {
+          "jobId": "community_pastor",
+          "jobName": "Pastor",
+          "category": "community",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 3,
+        "idealStaff": 4,
+        "maximumStaff": 4,
+        "totalJobSlots": 4
+      },
+      "bakedNpcTarget": 2,
+      "backgroundNpcSlots": 2,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_CHURCH_002",
+      "name": "St. Matthew Community Parish",
+      "type": "church",
+      "district": "residential_south",
+      "outsideTown": false,
+      "operatingHours": {
+        "type": "church_schedule"
+      },
+      "defaultBenefitPlan": "basic_small_business",
+      "attendancePolicy": "small_business_flexible",
+      "positions": [
+        {
+          "jobId": "community_church_secretary",
+          "jobName": "Church Secretary",
+          "category": "community",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        },
+        {
+          "jobId": "community_church_custodian",
+          "jobName": "Church Custodian",
+          "category": "community",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        },
+        {
+          "jobId": "community_youth_director",
+          "jobName": "Youth Director",
+          "category": "community",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        },
+        {
+          "jobId": "community_pastor",
+          "jobName": "Pastor",
+          "category": "community",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 3,
+        "idealStaff": 4,
+        "maximumStaff": 4,
+        "totalJobSlots": 4
+      },
+      "bakedNpcTarget": 2,
+      "backgroundNpcSlots": 2,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_DAYCARE_001",
+      "name": "Little Steps Childcare",
+      "type": "daycare",
+      "district": "residential_north",
+      "outsideTown": false,
+      "operatingHours": {
+        "Mon": [
+          "06:00",
+          "18:00"
+        ],
+        "Tue": [
+          "06:00",
+          "18:00"
+        ],
+        "Wed": [
+          "06:00",
+          "18:00"
+        ],
+        "Thu": [
+          "06:00",
+          "18:00"
+        ],
+        "Fri": [
+          "06:00",
+          "18:00"
+        ],
+        "Sat": null,
+        "Sun": null
+      },
+      "defaultBenefitPlan": "basic_small_business",
+      "attendancePolicy": "standard",
+      "positions": [
+        {
+          "jobId": "community_daycare_worker",
+          "jobName": "Daycare Worker",
+          "category": "community",
+          "slots": 10,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 10
+        },
+        {
+          "jobId": "community_preschool_teacher",
+          "jobName": "Preschool Teacher",
+          "category": "community",
+          "slots": 4,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 4
+        },
+        {
+          "jobId": "community_daycare_director",
+          "jobName": "Daycare Director",
+          "category": "community",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 11,
+        "idealStaff": 14,
+        "maximumStaff": 15,
+        "totalJobSlots": 15
+      },
+      "bakedNpcTarget": 1,
+      "backgroundNpcSlots": 14,
+      "notes": []
+    },
+    {
+      "workplaceId": "WP_DAYCARE_002",
+      "name": "Sunshine Preschool & Care",
+      "type": "daycare",
+      "district": "residential_south",
+      "outsideTown": false,
+      "operatingHours": {
+        "Mon": [
+          "06:30",
+          "18:00"
+        ],
+        "Tue": [
+          "06:30",
+          "18:00"
+        ],
+        "Wed": [
+          "06:30",
+          "18:00"
+        ],
+        "Thu": [
+          "06:30",
+          "18:00"
+        ],
+        "Fri": [
+          "06:30",
+          "18:00"
+        ],
+        "Sat": null,
+        "Sun": null
+      },
+      "defaultBenefitPlan": "basic_small_business",
+      "attendancePolicy": "standard",
+      "positions": [
+        {
+          "jobId": "community_daycare_worker",
+          "jobName": "Daycare Worker",
+          "category": "community",
+          "slots": 8,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 8
+        },
+        {
+          "jobId": "community_preschool_teacher",
+          "jobName": "Preschool Teacher",
+          "category": "community",
+          "slots": 3,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 3
+        },
+        {
+          "jobId": "community_daycare_director",
+          "jobName": "Daycare Director",
+          "category": "community",
+          "slots": 1,
+          "filledAtWorldBake": 0,
+          "vacantAtWorldBake": 1
+        }
+      ],
+      "staffing": {
+        "minimumStaff": 9,
+        "idealStaff": 11,
+        "maximumStaff": 12,
+        "totalJobSlots": 12
+      },
+      "bakedNpcTarget": 2,
+      "backgroundNpcSlots": 10,
+      "notes": []
+    }
+  ],
+  "validation": {
+    "missingMasterJobIds": [],
+    "invalidJobReferences": [],
+    "all240JobsCovered": true,
+    "bakedNpcPopulationEquals200": true
+  }
+}

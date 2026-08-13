@@ -1,0 +1,684 @@
+{
+  "_notes": [
+    "PROJECT EVE HUMAN EVENT ENGINE RULES.",
+    "Human Event Domains.json is the vocabulary: what a human could experience or do.",
+    "This file is the behavior grammar: who is allowed to consider each event, which traits align with it, which world conditions are required, and how strongly it should compete.",
+    "NO EVENT is selected merely because it exists in Human Event Domains.json.",
+    "Selection order: HARD GATES -> OPPORTUNITY -> JOB/ROLE -> TRAIT FIT -> NEED/EMOTION -> RELATIONSHIP -> HISTORY -> COOLDOWN/RARITY -> SCORE.",
+    "Hard-gate failure means impossible, not just unlikely.",
+    "Tier 1-4 use the same full NPC data. Tier only changes how often deep deliberation runs. Important events can force immediate deep update.",
+    "Tier 5 does not run routine deliberation unless directly involved."
+  ],
+  "engine": {
+    "minimumScoreToSelect": 28.0,
+    "noEventBaseWeight": 32.0,
+    "maxCandidatesPerDecision": 40,
+    "defaultCooldownGameMinutes": 30,
+    "majorEventCooldownGameMinutes": 180,
+    "repeatPenalty": 0.45,
+    "sameTargetRepeatPenalty": 0.6,
+    "randomJitterMin": -4.0,
+    "randomJitterMax": 4.0
+  },
+  "traitAliases": {
+    "empathy": [
+      "empathy",
+      "social.empathy",
+      "slow.empathy"
+    ],
+    "conscientiousness": [
+      "conscientiousness",
+      "slow.conscientiousness",
+      "work.conscientiousness"
+    ],
+    "impulsivity": [
+      "impulsivity",
+      "slow.impulsivity",
+      "risk.impulsivity"
+    ],
+    "aggression": [
+      "aggression",
+      "slow.aggression",
+      "conflict.aggression"
+    ],
+    "honesty": [
+      "honesty",
+      "slow.honesty",
+      "social.honesty"
+    ],
+    "loyalty": [
+      "loyalty",
+      "slow.loyalty",
+      "relationship.loyalty"
+    ],
+    "jealousy": [
+      "jealousy",
+      "slow.jealousy",
+      "relationship.jealousy"
+    ],
+    "possessiveness": [
+      "possessiveness",
+      "slow.possessiveness"
+    ],
+    "romance": [
+      "romance",
+      "slow.romance",
+      "relationship.romance"
+    ],
+    "sociability": [
+      "sociability",
+      "slow.sociability",
+      "social.sociability"
+    ],
+    "courage": [
+      "courage",
+      "slow.courage"
+    ],
+    "caution": [
+      "caution",
+      "slow.caution",
+      "risk.caution"
+    ],
+    "rule_following": [
+      "rule_following",
+      "slow.rule_following",
+      "authority.rule_following"
+    ],
+    "criminal_tendency": [
+      "criminal_tendency",
+      "slow.criminal_tendency",
+      "crime.tendency"
+    ],
+    "greed": [
+      "greed",
+      "slow.greed",
+      "money.greed"
+    ],
+    "generosity": [
+      "generosity",
+      "slow.generosity",
+      "money.generosity"
+    ],
+    "work_ethic": [
+      "work_ethic",
+      "slow.work_ethic",
+      "work.ethic"
+    ],
+    "ambition": [
+      "ambition",
+      "slow.ambition",
+      "goal.ambition"
+    ],
+    "patience": [
+      "patience",
+      "slow.patience"
+    ],
+    "forgiveness": [
+      "forgiveness",
+      "slow.forgiveness",
+      "relationship.forgiveness"
+    ],
+    "vindictiveness": [
+      "vindictiveness",
+      "slow.vindictiveness",
+      "conflict.vindictiveness"
+    ],
+    "secrecy": [
+      "secrecy",
+      "slow.secrecy",
+      "social.secrecy"
+    ],
+    "manipulativeness": [
+      "manipulativeness",
+      "slow.manipulativeness",
+      "social.manipulativeness"
+    ],
+    "anxiety": [
+      "anxiety",
+      "slow.anxiety",
+      "emotion.anxiety"
+    ],
+    "risk_taking": [
+      "risk_taking",
+      "slow.risk_taking",
+      "risk.taking"
+    ],
+    "authority_respect": [
+      "authority_respect",
+      "slow.authority_respect"
+    ],
+    "caregiving": [
+      "caregiving",
+      "slow.caregiving",
+      "family.caregiving"
+    ]
+  },
+  "domainProfiles": {
+    "daily_life": {
+      "baseScore": 28,
+      "severity": "mundane",
+      "traitWeights": {
+        "conscientiousness": 0.08,
+        "patience": 0.05
+      }
+    },
+    "movement_and_presence": {
+      "baseScore": 24,
+      "severity": "mundane",
+      "traitWeights": {}
+    },
+    "work": {
+      "baseScore": 25,
+      "severity": "routine",
+      "traitWeights": {
+        "work_ethic": 0.18,
+        "conscientiousness": 0.12,
+        "ambition": 0.06
+      },
+      "mustHaveJobForMostEvents": true
+    },
+    "money": {
+      "baseScore": 20,
+      "severity": "routine",
+      "traitWeights": {
+        "conscientiousness": 0.08,
+        "greed": 0.08,
+        "generosity": 0.04
+      }
+    },
+    "friendship": {
+      "baseScore": 22,
+      "severity": "social",
+      "traitWeights": {
+        "sociability": 0.16,
+        "empathy": 0.1,
+        "loyalty": 0.1
+      },
+      "requiresTargetForMostEvents": true
+    },
+    "family": {
+      "baseScore": 23,
+      "severity": "social",
+      "traitWeights": {
+        "caregiving": 0.14,
+        "loyalty": 0.1,
+        "empathy": 0.08
+      },
+      "requiresFamilyTargetForMostEvents": true
+    },
+    "romance": {
+      "baseScore": 17,
+      "severity": "social",
+      "traitWeights": {
+        "romance": 0.18,
+        "sociability": 0.06,
+        "impulsivity": 0.04
+      },
+      "requiresAdultActor": true,
+      "requiresTargetForMostEvents": true
+    },
+    "parenthood": {
+      "baseScore": 18,
+      "severity": "major",
+      "traitWeights": {
+        "caregiving": 0.14,
+        "conscientiousness": 0.07
+      },
+      "requiresFamilyContext": true
+    },
+    "social_behavior": {
+      "baseScore": 22,
+      "severity": "social",
+      "traitWeights": {
+        "sociability": 0.12,
+        "empathy": 0.06
+      },
+      "requiresTargetForMostEvents": true
+    },
+    "conflict": {
+      "baseScore": 10,
+      "severity": "major",
+      "traitWeights": {
+        "aggression": 0.24,
+        "impulsivity": 0.12,
+        "patience": -0.14,
+        "empathy": -0.1
+      },
+      "requiresTargetForMostEvents": true,
+      "requiresConflictOpportunity": true
+    },
+    "crime": {
+      "baseScore": 2,
+      "severity": "major",
+      "traitWeights": {
+        "criminal_tendency": 0.34,
+        "impulsivity": 0.16,
+        "greed": 0.1,
+        "risk_taking": 0.1,
+        "conscientiousness": -0.18,
+        "rule_following": -0.2,
+        "empathy": -0.08
+      },
+      "requiresCrimeOpportunity": true
+    },
+    "health": {
+      "baseScore": 8,
+      "severity": "major",
+      "traitWeights": {},
+      "stateDriven": true
+    },
+    "addiction_and_compulsion": {
+      "baseScore": 4,
+      "severity": "major",
+      "traitWeights": {
+        "impulsivity": 0.16,
+        "conscientiousness": -0.08
+      }
+    },
+    "morality_and_character": {
+      "baseScore": 18,
+      "severity": "social",
+      "traitWeights": {
+        "empathy": 0.1,
+        "conscientiousness": 0.08,
+        "honesty": 0.07
+      }
+    },
+    "reputation_and_gossip": {
+      "baseScore": 15,
+      "severity": "social",
+      "traitWeights": {
+        "sociability": 0.1,
+        "secrecy": -0.06,
+        "empathy": -0.04
+      },
+      "requiresInformation": true
+    },
+    "law_and_authority": {
+      "baseScore": 3,
+      "severity": "major",
+      "traitWeights": {
+        "rule_following": 0.08,
+        "authority_respect": 0.04
+      },
+      "roleSensitive": true
+    },
+    "life_changes": {
+      "baseScore": 4,
+      "severity": "major",
+      "traitWeights": {
+        "ambition": 0.05
+      },
+      "stateDriven": true
+    },
+    "bland_human_moments": {
+      "baseScore": 34,
+      "severity": "mundane",
+      "traitWeights": {}
+    }
+  },
+  "eventOverrides": {
+    "arrest": {
+      "allowedJobCategoriesAny": [
+        "police"
+      ],
+      "requireOnDuty": true,
+      "requiredContextTags": [
+        "lawful_arrest_basis",
+        "suspect_present"
+      ],
+      "requiresTarget": true,
+      "severity": "major"
+    },
+    "police_search": {
+      "allowedJobCategoriesAny": [
+        "police"
+      ],
+      "requireOnDuty": true,
+      "requiredContextTags": [
+        "lawful_search_basis",
+        "search_target_present"
+      ],
+      "severity": "major"
+    },
+    "traffic_stop": {
+      "allowedJobCategoriesAny": [
+        "police"
+      ],
+      "requireOnDuty": true,
+      "requiredContextTags": [
+        "traffic_violation_or_reasonable_basis",
+        "vehicle_present"
+      ],
+      "requiresTarget": true
+    },
+    "teach_class": {
+      "allowedJobCategoriesAny": [
+        "education"
+      ],
+      "allowedJobTitlesAny": [
+        "Elementary Teacher",
+        "Middle School Teacher",
+        "High School Teacher",
+        "Special Education Teacher",
+        "Preschool Teacher"
+      ],
+      "requireOnDuty": true,
+      "requiredContextTags": [
+        "class_in_session"
+      ]
+    },
+    "perform_medical_treatment": {
+      "allowedJobCategoriesAny": [
+        "healthcare",
+        "elderCare",
+        "fireEms"
+      ],
+      "allowedJobTitlesAny": [
+        "Physician",
+        "Physician Assistant",
+        "Nurse Practitioner",
+        "Registered Nurse",
+        "LPN",
+        "Paramedic",
+        "Firefighter EMT"
+      ],
+      "requireOnDuty": true,
+      "requiredContextTags": [
+        "patient_present",
+        "medical_need"
+      ],
+      "requiresTarget": true,
+      "severity": "major"
+    },
+    "issue_prescription": {
+      "allowedJobTitlesAny": [
+        "Physician",
+        "Physician Assistant",
+        "Nurse Practitioner"
+      ],
+      "requireOnDuty": true,
+      "requiredContextTags": [
+        "patient_present",
+        "prescription_indicated"
+      ],
+      "requiresTarget": true,
+      "severity": "major"
+    },
+    "fire_employee": {
+      "minimumCareerLevel": 3,
+      "requireOnDuty": true,
+      "requiredContextTags": [
+        "subordinate_present",
+        "termination_reason_exists"
+      ],
+      "requiresTarget": true,
+      "severity": "major"
+    },
+    "clock_in": {
+      "allowedAnyJob": true,
+      "requiredContextTags": [
+        "scheduled_shift_start"
+      ],
+      "baseScore": 90
+    },
+    "clock_out": {
+      "allowedAnyJob": true,
+      "requiredContextTags": [
+        "scheduled_shift_end"
+      ],
+      "baseScore": 90
+    },
+    "work_normal_shift": {
+      "allowedAnyJob": true,
+      "requiredContextTags": [
+        "scheduled_to_work"
+      ],
+      "baseScore": 88
+    },
+    "call_off": {
+      "allowedAnyJob": true,
+      "requiredContextAny": [
+        "illness",
+        "childcare_problem",
+        "family_emergency",
+        "high_burnout",
+        "transportation_failure",
+        "wants_to_skip_work"
+      ],
+      "traitWeights": {
+        "work_ethic": -0.12,
+        "conscientiousness": -0.08,
+        "impulsivity": 0.05
+      },
+      "severity": "major"
+    },
+    "no_call_no_show": {
+      "allowedAnyJob": true,
+      "requiredContextAny": [
+        "extreme_disorganization",
+        "intoxicated",
+        "emergency",
+        "wants_to_skip_work"
+      ],
+      "traitWeights": {
+        "work_ethic": -0.3,
+        "conscientiousness": -0.24,
+        "impulsivity": 0.18,
+        "rule_following": -0.14
+      },
+      "baseScore": 1,
+      "severity": "major"
+    },
+    "shoplifting": {
+      "requiredContextTags": [
+        "in_store",
+        "merchandise_accessible"
+      ],
+      "traitWeights": {
+        "criminal_tendency": 0.4,
+        "impulsivity": 0.18,
+        "greed": 0.14,
+        "rule_following": -0.22
+      },
+      "baseScore": 0,
+      "severity": "major"
+    },
+    "steal_from_work": {
+      "allowedAnyJob": true,
+      "requireOnDuty": true,
+      "requiredContextTags": [
+        "workplace_property_accessible",
+        "low_observation"
+      ],
+      "traitWeights": {
+        "criminal_tendency": 0.42,
+        "greed": 0.18,
+        "honesty": -0.26,
+        "work_ethic": -0.12
+      },
+      "baseScore": 0,
+      "severity": "major"
+    },
+    "robbery": {
+      "requiredContextTags": [
+        "robbery_opportunity",
+        "target_or_business_present"
+      ],
+      "traitThresholds": {
+        "criminal_tendency": 35
+      },
+      "traitWeights": {
+        "criminal_tendency": 0.48,
+        "aggression": 0.24,
+        "risk_taking": 0.16,
+        "empathy": -0.18,
+        "rule_following": -0.18
+      },
+      "baseScore": -8,
+      "severity": "major"
+    },
+    "physical_fight": {
+      "requiresTarget": true,
+      "requiredContextTags": [
+        "active_conflict"
+      ],
+      "traitWeights": {
+        "aggression": 0.34,
+        "impulsivity": 0.16,
+        "patience": -0.18,
+        "caution": -0.1
+      },
+      "baseScore": 0,
+      "severity": "major"
+    },
+    "cheat": {
+      "requiresTarget": true,
+      "requiredContextTags": [
+        "romantic_opportunity"
+      ],
+      "requiredContextAny": [
+        "relationship_dissatisfaction",
+        "high_attraction_to_target",
+        "impulsive_moment"
+      ],
+      "traitWeights": {
+        "loyalty": -0.32,
+        "impulsivity": 0.18,
+        "secrecy": 0.12,
+        "romance": 0.05
+      },
+      "baseScore": -2,
+      "severity": "major"
+    },
+    "break_up": {
+      "requiresTarget": true,
+      "requiredRelationshipTypesAny": [
+        "partner",
+        "romantic_partner",
+        "boyfriend",
+        "girlfriend",
+        "fiance"
+      ],
+      "requiredContextAny": [
+        "relationship_dissatisfaction",
+        "betrayal_discovered",
+        "repeated_conflict",
+        "love_lost",
+        "unsafe_relationship"
+      ],
+      "severity": "major"
+    },
+    "spread_rumor": {
+      "requiresTarget": true,
+      "requiredContextTags": [
+        "knows_shareable_information"
+      ],
+      "traitWeights": {
+        "sociability": 0.14,
+        "secrecy": -0.18,
+        "empathy": -0.08,
+        "manipulativeness": 0.12
+      }
+    },
+    "lie": {
+      "requiresTarget": true,
+      "traitWeights": {
+        "honesty": -0.25,
+        "secrecy": 0.12,
+        "manipulativeness": 0.14
+      }
+    },
+    "tell_truth": {
+      "requiresTarget": true,
+      "traitWeights": {
+        "honesty": 0.24,
+        "conscientiousness": 0.08
+      }
+    },
+    "help_stranger": {
+      "requiredContextTags": [
+        "stranger_needs_help"
+      ],
+      "traitWeights": {
+        "empathy": 0.24,
+        "generosity": 0.1,
+        "courage": 0.08
+      }
+    },
+    "give_charity": {
+      "requiredContextTags": [
+        "charity_opportunity"
+      ],
+      "traitWeights": {
+        "generosity": 0.28,
+        "empathy": 0.12,
+        "greed": -0.12
+      }
+    }
+  },
+  "keywordRoleGates": {
+    "policeKeywords": [
+      "arrest",
+      "police_search",
+      "traffic_stop",
+      "detain",
+      "issue_citation"
+    ],
+    "policeCategories": [
+      "police"
+    ],
+    "medicalKeywords": [
+      "perform_medical",
+      "prescribe",
+      "medical_treatment"
+    ],
+    "medicalCategories": [
+      "healthcare",
+      "elderCare",
+      "fireEms"
+    ],
+    "teacherKeywords": [
+      "teach_class",
+      "grade_student",
+      "parent_teacher"
+    ],
+    "teacherCategories": [
+      "education"
+    ],
+    "managerKeywords": [
+      "fire_employee",
+      "write_up_employee",
+      "approve_vacation",
+      "schedule_employee"
+    ],
+    "managerCareerLevelMinimum": 3
+  },
+  "deepUpdateEventPatterns": [
+    "major_argument",
+    "physical_fight",
+    "relationship_started",
+    "break_up",
+    "divorce",
+    "marry",
+    "pregnancy",
+    "birth",
+    "death",
+    "serious_illness",
+    "serious_injury",
+    "arrest",
+    "robbery",
+    "burglary",
+    "assault",
+    "domestic_violence",
+    "fired",
+    "quit",
+    "promotion",
+    "eviction",
+    "foreclosure",
+    "family_emergency",
+    "secret_revealed",
+    "discover_cheating",
+    "medical_emergency"
+  ]
+}

@@ -1,0 +1,238 @@
+{
+  "_notes": [
+    "PROJECT EVE ACTIVITY PLANNER.",
+    "This system plans believable free-time activity between hard obligations such as sleep, school and work.",
+    "It does NOT override a real work shift, medical emergency, arrest, active fight, or other hard event.",
+    "The planner is mostly deterministic/rule-based so hundreds of NPCs can live in the town without constant LLM calls.",
+    "Traits, needs, money, relationships, time of day, recent activity, weather/world facts and available town locations shape choices.",
+    "The planner creates opportunities; HumanEventEngine still decides deeper behavior such as flirt, gossip, steal, argue, help, break up, etc.",
+    "NPCs are allowed to do nothing interesting. Staying home, watching TV, leftovers, scrolling a phone, and routine errands are valid life."
+  ],
+  "planning": {
+    "planningHorizonGameHours": 6,
+    "replanEveryGameMinutes": 30,
+    "minimumActivityDurationMinutes": 20,
+    "maximumActivityDurationMinutes": 240,
+    "avoidSameOptionalActivityWithinGameHours": 8,
+    "allowSpontaneousChange": true,
+    "spontaneousChangeBaseChance": 0.08
+  },
+  "timeWindows": {
+    "breakfast": {
+      "startHour": 5,
+      "endHour": 10
+    },
+    "lunch": {
+      "startHour": 11,
+      "endHour": 15
+    },
+    "dinner": {
+      "startHour": 17,
+      "endHour": 21
+    },
+    "lateNight": {
+      "startHour": 21,
+      "endHour": 2
+    }
+  },
+  "activityProfiles": {
+    "stay_home": {
+      "baseWeight": 30,
+      "costLevel": 0,
+      "durationMin": 30,
+      "durationMax": 240,
+      "traitWeights": {
+        "sociability": -0.1,
+        "conscientiousness": 0.02
+      }
+    },
+    "meal_home": {
+      "baseWeight": 28,
+      "costLevel": 1,
+      "durationMin": 20,
+      "durationMax": 60,
+      "needTags": [
+        "hungry"
+      ]
+    },
+    "restaurant_meal": {
+      "baseWeight": 12,
+      "costLevel": 3,
+      "durationMin": 45,
+      "durationMax": 120,
+      "needTags": [
+        "hungry"
+      ],
+      "traitWeights": {
+        "sociability": 0.05,
+        "impulsivity": 0.03
+      }
+    },
+    "grocery_shopping": {
+      "baseWeight": 12,
+      "costLevel": 2,
+      "durationMin": 30,
+      "durationMax": 90,
+      "needTags": [
+        "needs_groceries"
+      ],
+      "traitWeights": {
+        "conscientiousness": 0.1
+      }
+    },
+    "shopping": {
+      "baseWeight": 8,
+      "costLevel": 3,
+      "durationMin": 30,
+      "durationMax": 120,
+      "traitWeights": {
+        "impulsivity": 0.08,
+        "greed": 0.03
+      }
+    },
+    "errand": {
+      "baseWeight": 18,
+      "costLevel": 1,
+      "durationMin": 20,
+      "durationMax": 90,
+      "needTags": [
+        "has_errand"
+      ],
+      "traitWeights": {
+        "conscientiousness": 0.12
+      }
+    },
+    "visit_friend": {
+      "baseWeight": 11,
+      "costLevel": 1,
+      "durationMin": 45,
+      "durationMax": 180,
+      "traitWeights": {
+        "sociability": 0.15,
+        "loyalty": 0.06
+      }
+    },
+    "visit_family": {
+      "baseWeight": 10,
+      "costLevel": 1,
+      "durationMin": 45,
+      "durationMax": 240,
+      "traitWeights": {
+        "caregiving": 0.12,
+        "loyalty": 0.08
+      }
+    },
+    "bar": {
+      "baseWeight": 6,
+      "costLevel": 3,
+      "durationMin": 60,
+      "durationMax": 240,
+      "minimumAge": 21,
+      "timeTags": [
+        "evening",
+        "late_night"
+      ],
+      "traitWeights": {
+        "sociability": 0.1,
+        "risk_taking": 0.05
+      }
+    },
+    "church": {
+      "baseWeight": 4,
+      "costLevel": 0,
+      "durationMin": 60,
+      "durationMax": 150,
+      "timeTags": [
+        "sunday_morning"
+      ],
+      "traitWeights": {
+        "conscientiousness": 0.03
+      }
+    },
+    "hobby": {
+      "baseWeight": 13,
+      "costLevel": 1,
+      "durationMin": 45,
+      "durationMax": 180
+    },
+    "exercise": {
+      "baseWeight": 9,
+      "costLevel": 1,
+      "durationMin": 30,
+      "durationMax": 120,
+      "traitWeights": {
+        "conscientiousness": 0.05
+      }
+    },
+    "appointment": {
+      "baseWeight": 25,
+      "costLevel": 2,
+      "durationMin": 30,
+      "durationMax": 120,
+      "needTags": [
+        "has_appointment"
+      ],
+      "hardWhenNeedPresent": true
+    },
+    "date": {
+      "baseWeight": 8,
+      "costLevel": 3,
+      "durationMin": 60,
+      "durationMax": 240,
+      "minimumAge": 18,
+      "needTags": [
+        "date_available"
+      ],
+      "traitWeights": {
+        "romance": 0.14,
+        "sociability": 0.05
+      }
+    },
+    "movie_entertainment": {
+      "baseWeight": 8,
+      "costLevel": 2,
+      "durationMin": 90,
+      "durationMax": 210
+    },
+    "coffee_cafe": {
+      "baseWeight": 8,
+      "costLevel": 2,
+      "durationMin": 20,
+      "durationMax": 90,
+      "traitWeights": {
+        "sociability": 0.05
+      }
+    },
+    "walk_around_town": {
+      "baseWeight": 7,
+      "costLevel": 0,
+      "durationMin": 30,
+      "durationMax": 120
+    },
+    "spontaneous_trip": {
+      "baseWeight": 2,
+      "costLevel": 4,
+      "durationMin": 120,
+      "durationMax": 480,
+      "traitWeights": {
+        "impulsivity": 0.15,
+        "risk_taking": 0.08,
+        "conscientiousness": -0.05
+      }
+    }
+  },
+  "moneyBands": {
+    "very_low": {
+      "maximumSpendLevel": 1
+    },
+    "low": {
+      "maximumSpendLevel": 2
+    },
+    "comfortable": {
+      "maximumSpendLevel": 3
+    },
+    "high": {
+      "maximumSpendLevel": 4
+    }
+  }
+}

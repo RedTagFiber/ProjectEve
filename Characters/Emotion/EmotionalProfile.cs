@@ -1,4 +1,4 @@
-﻿using ProjectEve.Traits;
+using ProjectEve.Traits;
 using System;
 
 namespace ProjectEve.Characters.Emotion
@@ -81,6 +81,12 @@ namespace ProjectEve.Characters.Emotion
         /// <summary>Old name kept.</summary>
         public void Recalculate() => RecalculateFromMeters();
 
+        /// <summary>
+        /// Recalculate the NPC's dominant outward/current mood.
+        ///
+        /// State/Mood is only the dominant presentation. The other meters remain
+        /// active at the same time and can still influence behavior/prompts.
+        /// </summary>
         public void RecalculateFromMeters()
         {
             if (Anger >= 80) { SetState(EmotionState.Angry, Anger / 100f); return; }
@@ -104,8 +110,10 @@ namespace ProjectEve.Characters.Emotion
             if (Restlessness >= 70 && Happiness < 40) { SetState(EmotionState.Hollow, 0.55f); return; }
             if (Restlessness >= 60) { SetState(EmotionState.Restless, Restlessness / 100f); return; }
 
-            if (Energy <= 20) { SetState(EmotionState.Tired, 0.7f); return; }
+            // Check the more specific severe-fatigue state first.
+            // Otherwise Energy <= 20 would make Numb unreachable.
             if (Energy <= 10 && Sadness >= 40) { SetState(EmotionState.Numb, 0.6f); return; }
+            if (Energy <= 20) { SetState(EmotionState.Tired, 0.7f); return; }
 
             if (Sadness >= 70) { SetState(EmotionState.Sad, Sadness / 100f); return; }
             if (Sadness >= 50 && Affection >= 40) { SetState(EmotionState.Lonely, 0.55f); return; }

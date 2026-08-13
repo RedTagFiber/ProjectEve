@@ -1,0 +1,95 @@
+{
+  "_notes": [
+    "PROJECT EVE LIVING TOWN PACK.",
+    "This pack supplies the real-world facts that HumanEventEngine needs.",
+    "Fast world ticks are cheap deterministic/rule-based updates. Deep AI thinking remains controlled by HumanEventScheduler.",
+    "Gossip is never omniscient. Facts move person-to-person through actual social encounters and Family/Friend Web links.",
+    "Telephone-game distortion is intentional: people can omit, exaggerate, soften, misremember, or reinterpret details.",
+    "Crime and health systems consume serious consequences; they do not decide whether the NPC wanted to commit the act."
+  ],
+  "worldActivity": {
+    "tickGameMinutes": 5,
+    "processTiers": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "allowTier5PhysicalPresence": true,
+    "activities": [
+      "sleep",
+      "wake",
+      "home",
+      "commute",
+      "work",
+      "meal",
+      "errand",
+      "shopping",
+      "visit_family",
+      "visit_friend",
+      "leisure",
+      "bar",
+      "church",
+      "school",
+      "medical_visit",
+      "police_contact",
+      "travel",
+      "idle"
+    ]
+  },
+  "socialEncounter": {
+    "minimumMinutesBetweenRoutineEncountersSamePair": 30,
+    "maximumNewEncountersPerLocationPerTick": 8,
+    "relationshipBoost": {
+      "tier1": 24,
+      "tier2": 16,
+      "tier3": 8,
+      "tier4": 3
+    }
+  },
+  "gossip": {
+    "telephoneGameEnabled": true,
+    "baseRetellChance": 0.28,
+    "maxRetellDepthBeforeStrongDecay": 8,
+    "sourceConfidenceDecayPerRetell": 0.06,
+    "detailLossChance": 0.18,
+    "exaggerationChance": 0.1,
+    "softeningChance": 0.07,
+    "misrememberChance": 0.06,
+    "speakerBiasChance": 0.1,
+    "neverGrantKnowledgeWithoutTransmission": true,
+    "secretRelationshipPenalty": 0.55,
+    "closeFriendRetellBonus": 0.15
+  },
+  "crimePolice": {
+    "createCaseForEvents": [
+      "robbery",
+      "burglary",
+      "assault",
+      "domestic_violence",
+      "stalking",
+      "fraud",
+      "vandalism",
+      "drunk_driving",
+      "reckless_driving"
+    ],
+    "witnessCanReport": true,
+    "noAutomaticArrestWithoutPoliceBasis": true
+  },
+  "health": {
+    "injuryEvents": [
+      "shove",
+      "slap",
+      "punch",
+      "physical_fight",
+      "assault",
+      "robbery"
+    ],
+    "majorHealthEvents": [
+      "serious_injury",
+      "medical_emergency",
+      "serious_illness"
+    ],
+    "neverInventDiagnosis": true
+  }
+}

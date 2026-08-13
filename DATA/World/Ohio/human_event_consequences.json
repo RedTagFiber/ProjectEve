@@ -1,0 +1,636 @@
+{
+  "_notes": [
+    "PROJECT EVE HUMAN EVENT CONSEQUENCE RULES.",
+    "HumanEventEngine decides what the NPC does. HumanEventConsequenceRouter decides which Project Eve systems must change because it happened.",
+    "The router does NOT invent missing facts such as stolen amount, medical diagnosis, pregnancy outcome, legal charge, or job termination reason.",
+    "If a consequence needs information the world has not supplied, it is queued for the owning system instead of guessed.",
+    "All Human Event Domains are covered through domainDefaults. eventOverrides only add special handling.",
+    "Relationship changes happen immediately only when the target is aware of the event. Hidden acts such as cheating or secret betrayal use deferred consequences until discovery.",
+    "Major events request memory/history and force a deep update, regardless of Tier 1-4 background timer."
+  ],
+  "domainDefaults": {
+    "daily_life": {
+      "routes": [
+        "activity"
+      ],
+      "memoryImportance": 0
+    },
+    "movement_and_presence": {
+      "routes": [
+        "location"
+      ],
+      "memoryImportance": 0
+    },
+    "work": {
+      "routes": [
+        "employment"
+      ],
+      "memoryImportance": 2
+    },
+    "money": {
+      "routes": [
+        "money"
+      ],
+      "memoryImportance": 2
+    },
+    "friendship": {
+      "routes": [
+        "relationship"
+      ],
+      "memoryImportance": 3
+    },
+    "family": {
+      "routes": [
+        "relationship",
+        "family"
+      ],
+      "memoryImportance": 4
+    },
+    "romance": {
+      "routes": [
+        "relationship"
+      ],
+      "memoryImportance": 4
+    },
+    "parenthood": {
+      "routes": [
+        "family",
+        "health",
+        "history"
+      ],
+      "memoryImportance": 7
+    },
+    "social_behavior": {
+      "routes": [
+        "relationship"
+      ],
+      "memoryImportance": 2
+    },
+    "conflict": {
+      "routes": [
+        "relationship"
+      ],
+      "memoryImportance": 5
+    },
+    "crime": {
+      "routes": [
+        "law",
+        "reputation",
+        "memory"
+      ],
+      "memoryImportance": 7
+    },
+    "health": {
+      "routes": [
+        "health"
+      ],
+      "memoryImportance": 5
+    },
+    "addiction_and_compulsion": {
+      "routes": [
+        "health",
+        "relationship"
+      ],
+      "memoryImportance": 5
+    },
+    "morality_and_character": {
+      "routes": [
+        "relationship",
+        "reputation"
+      ],
+      "memoryImportance": 3
+    },
+    "reputation_and_gossip": {
+      "routes": [
+        "gossip",
+        "reputation"
+      ],
+      "memoryImportance": 3
+    },
+    "law_and_authority": {
+      "routes": [
+        "law"
+      ],
+      "memoryImportance": 6
+    },
+    "life_changes": {
+      "routes": [
+        "history",
+        "memory"
+      ],
+      "memoryImportance": 8
+    },
+    "bland_human_moments": {
+      "routes": [
+        "activity"
+      ],
+      "memoryImportance": 0
+    }
+  },
+  "eventOverrides": {
+    "compliment": {
+      "relationshipDelta": {
+        "trust": 1,
+        "respect": 2,
+        "affection": 2,
+        "attraction": 0,
+        "tension": -1
+      },
+      "targetMustBeAware": true
+    },
+    "insult": {
+      "relationshipDelta": {
+        "trust": -2,
+        "respect": -5,
+        "affection": -3,
+        "attraction": 0,
+        "tension": 8
+      },
+      "targetMustBeAware": true,
+      "memoryImportance": 4
+    },
+    "mock": {
+      "relationshipDelta": {
+        "trust": -2,
+        "respect": -4,
+        "affection": -3,
+        "attraction": 0,
+        "tension": 6
+      },
+      "targetMustBeAware": true
+    },
+    "humiliate": {
+      "relationshipDelta": {
+        "trust": -7,
+        "respect": -8,
+        "affection": -6,
+        "attraction": -2,
+        "tension": 14
+      },
+      "targetMustBeAware": true,
+      "memoryImportance": 7,
+      "forceDeepUpdate": true
+    },
+    "apologize": {
+      "relationshipDelta": {
+        "trust": 3,
+        "respect": 2,
+        "affection": 2,
+        "attraction": 0,
+        "tension": -8
+      },
+      "targetMustBeAware": true,
+      "memoryImportance": 3
+    },
+    "heated_argument": {
+      "relationshipDelta": {
+        "trust": -2,
+        "respect": -2,
+        "affection": -2,
+        "attraction": 0,
+        "tension": 10
+      },
+      "targetMustBeAware": true,
+      "memoryImportance": 5
+    },
+    "yelling": {
+      "relationshipDelta": {
+        "trust": -2,
+        "respect": -3,
+        "affection": -2,
+        "attraction": 0,
+        "tension": 8
+      },
+      "targetMustBeAware": true
+    },
+    "shove": {
+      "relationshipDelta": {
+        "trust": -7,
+        "respect": -5,
+        "affection": -6,
+        "attraction": -3,
+        "tension": 14
+      },
+      "routes": [
+        "relationship",
+        "health",
+        "law"
+      ],
+      "targetMustBeAware": true,
+      "memoryImportance": 7,
+      "forceDeepUpdate": true
+    },
+    "slap": {
+      "relationshipDelta": {
+        "trust": -10,
+        "respect": -7,
+        "affection": -9,
+        "attraction": -5,
+        "tension": 18
+      },
+      "routes": [
+        "relationship",
+        "health",
+        "law"
+      ],
+      "targetMustBeAware": true,
+      "memoryImportance": 8,
+      "forceDeepUpdate": true
+    },
+    "punch": {
+      "relationshipDelta": {
+        "trust": -12,
+        "respect": -8,
+        "affection": -10,
+        "attraction": -5,
+        "tension": 20
+      },
+      "routes": [
+        "relationship",
+        "health",
+        "law"
+      ],
+      "targetMustBeAware": true,
+      "memoryImportance": 8,
+      "forceDeepUpdate": true
+    },
+    "physical_fight": {
+      "relationshipDelta": {
+        "trust": -14,
+        "respect": -8,
+        "affection": -12,
+        "attraction": -6,
+        "tension": 22
+      },
+      "routes": [
+        "relationship",
+        "health",
+        "law"
+      ],
+      "targetMustBeAware": true,
+      "memoryImportance": 9,
+      "forceDeepUpdate": true
+    },
+    "help_stranger": {
+      "relationshipDelta": {
+        "trust": 4,
+        "respect": 4,
+        "affection": 2,
+        "attraction": 0,
+        "tension": -1
+      },
+      "targetMustBeAware": true,
+      "memoryImportance": 3
+    },
+    "defend_friend": {
+      "relationshipDelta": {
+        "trust": 8,
+        "respect": 6,
+        "affection": 5,
+        "attraction": 0,
+        "tension": -2
+      },
+      "targetMustBeAware": true,
+      "memoryImportance": 5
+    },
+    "keep_promise": {
+      "relationshipDelta": {
+        "trust": 4,
+        "respect": 2,
+        "affection": 1,
+        "attraction": 0,
+        "tension": -1
+      },
+      "targetMustBeAware": true
+    },
+    "break_promise": {
+      "relationshipDelta": {
+        "trust": -7,
+        "respect": -3,
+        "affection": -2,
+        "attraction": 0,
+        "tension": 4
+      },
+      "targetMustBeAware": true,
+      "memoryImportance": 4
+    },
+    "lie": {
+      "deferredConsequences": [
+        "relationship_damage_if_discovered"
+      ],
+      "memoryImportance": 2
+    },
+    "half_truth": {
+      "deferredConsequences": [
+        "relationship_damage_if_discovered"
+      ],
+      "memoryImportance": 1
+    },
+    "betray_secret": {
+      "routes": [
+        "relationship",
+        "gossip",
+        "reputation"
+      ],
+      "deferredConsequences": [
+        "major_trust_damage_if_discovered",
+        "gossip_propagation"
+      ],
+      "memoryImportance": 6,
+      "forceDeepUpdate": true
+    },
+    "spread_rumor": {
+      "routes": [
+        "gossip",
+        "reputation"
+      ],
+      "deferredConsequences": [
+        "relationship_damage_if_source_discovered"
+      ],
+      "memoryImportance": 3
+    },
+    "relationship_started": {
+      "relationshipTypeSet": "partner",
+      "relationshipDelta": {
+        "trust": 5,
+        "respect": 2,
+        "affection": 12,
+        "attraction": 8,
+        "tension": 0
+      },
+      "targetMustBeAware": true,
+      "memoryImportance": 8,
+      "forceDeepUpdate": true,
+      "routes": [
+        "relationship",
+        "history"
+      ]
+    },
+    "break_up": {
+      "relationshipTypeSet": "ex",
+      "relationshipDelta": {
+        "trust": -5,
+        "respect": -2,
+        "affection": -12,
+        "attraction": -5,
+        "tension": 12
+      },
+      "targetMustBeAware": true,
+      "memoryImportance": 9,
+      "forceDeepUpdate": true,
+      "routes": [
+        "relationship",
+        "history"
+      ]
+    },
+    "marry": {
+      "relationshipTypeSet": "spouse",
+      "relationshipDelta": {
+        "trust": 8,
+        "respect": 5,
+        "affection": 12,
+        "attraction": 4,
+        "tension": -3
+      },
+      "targetMustBeAware": true,
+      "memoryImportance": 10,
+      "forceDeepUpdate": true,
+      "routes": [
+        "relationship",
+        "family",
+        "history"
+      ]
+    },
+    "divorce": {
+      "relationshipTypeSet": "ex_spouse",
+      "relationshipDelta": {
+        "trust": -8,
+        "respect": -4,
+        "affection": -14,
+        "attraction": -8,
+        "tension": 15
+      },
+      "targetMustBeAware": true,
+      "memoryImportance": 10,
+      "forceDeepUpdate": true,
+      "routes": [
+        "relationship",
+        "family",
+        "history"
+      ]
+    },
+    "cheat": {
+      "routes": [
+        "relationship",
+        "reputation"
+      ],
+      "deferredConsequences": [
+        "partner_damage_if_discovered",
+        "reputation_damage_if_discovered"
+      ],
+      "memoryImportance": 7,
+      "forceDeepUpdate": true
+    },
+    "discover_cheating": {
+      "relationshipDelta": {
+        "trust": -25,
+        "respect": -12,
+        "affection": -18,
+        "attraction": -10,
+        "tension": 25
+      },
+      "targetMustBeAware": true,
+      "memoryImportance": 10,
+      "forceDeepUpdate": true,
+      "routes": [
+        "relationship",
+        "history"
+      ]
+    },
+    "call_off": {
+      "routes": [
+        "employment"
+      ],
+      "memoryImportance": 2
+    },
+    "no_call_no_show": {
+      "routes": [
+        "employment"
+      ],
+      "memoryImportance": 4,
+      "forceDeepUpdate": true
+    },
+    "get_fired": {
+      "routes": [
+        "employment",
+        "money",
+        "history"
+      ],
+      "memoryImportance": 9,
+      "forceDeepUpdate": true
+    },
+    "fired": {
+      "routes": [
+        "employment",
+        "money",
+        "history"
+      ],
+      "memoryImportance": 9,
+      "forceDeepUpdate": true
+    },
+    "quit": {
+      "routes": [
+        "employment",
+        "money",
+        "history"
+      ],
+      "memoryImportance": 7,
+      "forceDeepUpdate": true
+    },
+    "get_promotion": {
+      "routes": [
+        "employment",
+        "money",
+        "history"
+      ],
+      "memoryImportance": 7,
+      "forceDeepUpdate": true
+    },
+    "promotion": {
+      "routes": [
+        "employment",
+        "money",
+        "history"
+      ],
+      "memoryImportance": 7,
+      "forceDeepUpdate": true
+    },
+    "receive_paycheck": {
+      "routes": [
+        "money",
+        "employment"
+      ],
+      "requiresAmountFromWorld": true,
+      "memoryImportance": 0
+    },
+    "pay_bill": {
+      "routes": [
+        "money"
+      ],
+      "requiresAmountFromWorld": true,
+      "memoryImportance": 0
+    },
+    "borrow_money": {
+      "routes": [
+        "money",
+        "relationship"
+      ],
+      "requiresAmountFromWorld": true
+    },
+    "lend_money": {
+      "routes": [
+        "money",
+        "relationship"
+      ],
+      "requiresAmountFromWorld": true
+    },
+    "give_charity": {
+      "routes": [
+        "money",
+        "reputation"
+      ],
+      "requiresAmountFromWorld": true
+    },
+    "steal_money": {
+      "routes": [
+        "money",
+        "law",
+        "reputation"
+      ],
+      "requiresAmountFromWorld": true,
+      "memoryImportance": 7,
+      "forceDeepUpdate": true
+    },
+    "shoplifting": {
+      "routes": [
+        "law",
+        "reputation",
+        "money"
+      ],
+      "memoryImportance": 6,
+      "forceDeepUpdate": true
+    },
+    "robbery": {
+      "routes": [
+        "law",
+        "reputation",
+        "money",
+        "health"
+      ],
+      "memoryImportance": 10,
+      "forceDeepUpdate": true
+    },
+    "arrest": {
+      "routes": [
+        "law"
+      ],
+      "memoryImportance": 7,
+      "forceDeepUpdate": true
+    },
+    "arrested": {
+      "routes": [
+        "law",
+        "employment",
+        "family",
+        "history"
+      ],
+      "memoryImportance": 10,
+      "forceDeepUpdate": true
+    },
+    "pregnancy": {
+      "routes": [
+        "family",
+        "health",
+        "history"
+      ],
+      "memoryImportance": 10,
+      "forceDeepUpdate": true
+    },
+    "birth": {
+      "routes": [
+        "family",
+        "health",
+        "history"
+      ],
+      "memoryImportance": 10,
+      "forceDeepUpdate": true
+    },
+    "death": {
+      "routes": [
+        "family",
+        "health",
+        "history",
+        "relationship"
+      ],
+      "memoryImportance": 10,
+      "forceDeepUpdate": true
+    },
+    "medical_emergency": {
+      "routes": [
+        "health",
+        "family"
+      ],
+      "memoryImportance": 9,
+      "forceDeepUpdate": true
+    },
+    "clock_in": {
+      "memoryImportance": 0
+    },
+    "clock_out": {
+      "memoryImportance": 0
+    },
+    "work_normal_shift": {
+      "memoryImportance": 0
+    }
+  }
+}
