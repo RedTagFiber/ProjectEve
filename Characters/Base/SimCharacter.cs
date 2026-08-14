@@ -1,5 +1,5 @@
-﻿using ProjectEve.AI.Brain;
-using ProjectEve.Characters.Emotion;
+﻿using ProjectEve.Characters.Emotion;
+using ProjectEve.Characters.Cognition;
 using ProjectEve.Characters.NPCs;
 using ProjectEve.History;
 using ProjectEve.Memory;
@@ -8,6 +8,8 @@ using ProjectEve.Relationships;
 using ProjectEve.Traits;
 using System;
 using System.Collections.Generic;
+using ProjectEve.AI.Brain;
+using ProjectEve.AI;
 
 namespace ProjectEve.Characters.Base
 {
@@ -57,11 +59,17 @@ namespace ProjectEve.Characters.Base
         public string ScarNotes { get; set; } = "";
 
         // ============================================================
-        // BRAIN / MONEY / JOB
+        // BRAIN / MONEY / JOB / COGNITION
         // ============================================================
         public Brain Brain { get; set; } = new();
         public MoneyProfile Money { get; set; } = new();
         public JobProfile Job { get; set; } = new();
+
+        /// <summary>
+        /// Stable cognitive / education / speech-capability profile.
+        /// IQ is only one reasoning baseline; education and learned knowledge are separate.
+        /// </summary>
+        public CognitiveProfile Cognition { get; set; } = new();
 
         // ============================================================
         // DRIVES
@@ -132,6 +140,7 @@ namespace ProjectEve.Characters.Base
             Name = name ?? "";
             Age = age;
             Appearance = new NPCAppearance();
+            Cognition = new CognitiveProfile();
             Schedule = new();
             ConversationTopics = new();
             TravelPlan = null;

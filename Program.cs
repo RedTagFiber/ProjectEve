@@ -1,4 +1,3 @@
-﻿using ProjectEve.AI.Brain;
 using ProjectEve.AI.Training;
 using ProjectEve.Characters.Base;
 using ProjectEve.Characters.Emotion;
@@ -17,6 +16,8 @@ using System.Threading.Tasks;
 
 // CharacterFactory lives here in your tree — if build fails, see note at bottom
 using ProjectEve.Characters.Characters;
+using ProjectEve.AI;
+using ProjectEve.AI.Brain;
 
 class Program
 {
@@ -210,7 +211,15 @@ class Program
         Console.WriteLine("DB → " + DbPath);
 
         if (freshDb)
-            ResetDatabaseFiles(DbPath);
+        {
+            if (!ResetDatabaseFiles(DbPath))
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("FRESH FAILED — database was not deleted. Close the app and try again.");
+                Console.ResetColor();
+                return;
+            }
+        }
 
         var eve = BootWorld();
 
@@ -271,14 +280,20 @@ class Program
             if (lower == "fresh" || lower == "reset-db" || lower == "--fresh")
             {
                 Console.WriteLine("  Refreshing project_eve.db…");
-                try
-                {
-                    if (eve.Traits != null)
-                        CharacterRepository.SaveTraits(eve.Id, eve.Traits);
-                }
-                catch { }
+                Console.WriteLine("  NOTE: current live state is intentionally NOT saved.");
 
-                ResetDatabaseFiles(DbPath);
+                // Drop references to session-only state before clearing SQLite pools.
+                try { eve.Brain?.ClearSessionLog(); } catch { }
+
+                if (!ResetDatabaseFiles(DbPath))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("  FRESH ABORTED — old DB is still in use.");
+                    Console.WriteLine("  Nothing was reloaded. Exit ProjectEve and run once with --fresh.");
+                    Console.ResetColor();
+                    continue;
+                }
+
                 eve = BootWorld();
                 PrintReady(eve);
                 continue;
@@ -310,6 +325,12 @@ class Program
             float beforeAff = Get(eve, "trait.affection");
             float beforeHurt = Get(eve, "trait.hurt");
             float beforeTrust = Get(eve, "trait.trust");
+            float beforeGuard = Get(eve, "trait.guard");
+            float beforeAnx = Get(eve, "trait.anxiety");
+            float beforeTen = Get(eve, "trait.tension");
+            float beforeOpen = Get(eve, "trait.openness");
+            float beforeHope = Get(eve, "trait.hope");
+            float beforeAttr = Get(eve, "trait.attraction");
 
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("  Eve is thinking...");
@@ -326,7 +347,7 @@ class Program
                     eve.Brain.Owner = eve;
                 }
                 eve.Brain.Think(input);
-                PrintTagLine(eve.Brain.LastThought);
+                PrintThoughtDebug(eve.Brain.LastThought);
                 reply = eve.Brain.Reply(input);
             }
             catch (Exception ex)
@@ -352,7 +373,14 @@ class Program
                 "  Δ ang=" + (Get(eve, "trait.anger") - beforeAng).ToString("+0;-0;0") +
                 " aff=" + (Get(eve, "trait.affection") - beforeAff).ToString("+0;-0;0") +
                 " hurt=" + (Get(eve, "trait.hurt") - beforeHurt).ToString("+0;-0;0") +
-                " trust=" + (Get(eve, "trait.trust") - beforeTrust).ToString("+0;-0;0") + "\n");
+                " trust=" + (Get(eve, "trait.trust") - beforeTrust).ToString("+0;-0;0"));
+            Console.WriteLine(
+                "  Δ guard=" + (Get(eve, "trait.guard") - beforeGuard).ToString("+0;-0;0") +
+                " anx=" + (Get(eve, "trait.anxiety") - beforeAnx).ToString("+0;-0;0") +
+                " ten=" + (Get(eve, "trait.tension") - beforeTen).ToString("+0;-0;0") +
+                " open=" + (Get(eve, "trait.openness") - beforeOpen).ToString("+0;-0;0") +
+                " hope=" + (Get(eve, "trait.hope") - beforeHope).ToString("+0;-0;0") +
+                " attr=" + (Get(eve, "trait.attraction") - beforeAttr).ToString("+0;-0;0") + "\n");
             Console.ResetColor();
 
             if (tts != null && !string.IsNullOrWhiteSpace(reply))
@@ -740,23 +768,54 @@ class Program
         Console.WriteLine("Ready: " + eve.Name + " | age " + eve.Age + " | " + eve.Occupation);
         Console.WriteLine("Location: " + eve.Location);
         Console.WriteLine("Commands: sheet | traits | reroll | stress | comfort | matrix | baseline | bank-import | fresh | clearlog | npcgen | exit");
+        Console.WriteLine("AI test display: each normal turn now prints THOUGHT / LEAKS / TAGS before the outward reply.");
         Console.WriteLine("Args: train | build-thought-data | bank-import | --fresh");
         Console.WriteLine("npcgen → how many + contact Eve/Adam/Lisa/Edward/none + lane\n");
     }
 
     static void PrintReplyMeta(Brain brain)
     {
-        string src = string.IsNullOrWhiteSpace(brain.LastReplySource) ? "(unknown)" : brain.LastReplySource;
+        string src = string.IsNullOrWhiteSpace(brain.LastReplySource)
+            ? "(unknown)"
+            : brain.LastReplySource;
+
         Console.ForegroundColor = ConsoleColor.DarkCyan;
-        if (src == "bank_hit")
+
+        if (src == "ai_with_bank_seed")
         {
-            Console.WriteLine("  source : LINEBANK  (existing catalog line)");
-            Console.WriteLine("  store  : no  (already in bank)");
+            Console.WriteLine(
+                "  source : AI + LINEBANK SEED  (Qwen adapted/ignored a cached candidate)");
+            Console.WriteLine(
+                "  store  : yes — final AI line tried to grow linebank.db");
+        }
+        else if (src == "ai_new")
+        {
+            Console.WriteLine(
+                "  source : AI NEW  (no useful LineBank seed)");
+            Console.WriteLine(
+                "  store  : yes — final AI line tried to grow linebank.db");
+        }
+        else if (src == "ai_retry_no_seed")
+        {
+            Console.WriteLine(
+                "  source : AI RETRY / NO SEED  (first draft repeated the previous reply)");
+            Console.WriteLine(
+                "  store  : yes — retry line tried to grow linebank.db");
+        }
+        else if (src == "bank_error_fallback")
+        {
+            Console.WriteLine(
+                "  source : LINEBANK ERROR FALLBACK  (Qwen call failed)");
+            Console.WriteLine(
+                "  store  : no");
         }
         else if (src == "llm")
         {
-            Console.WriteLine("  source : AI / DialogueEngine  (new line)");
-            Console.WriteLine("  store  : yes — tried StoreLiveLine into linebank.db");
+            // Compatibility with any older path still returning "llm".
+            Console.WriteLine(
+                "  source : AI / DialogueEngine");
+            Console.WriteLine(
+                "  store  : yes");
         }
         else if (src == "director")
         {
@@ -768,6 +827,7 @@ class Program
             Console.WriteLine("  source : " + src);
             Console.WriteLine("  store  : ?");
         }
+
         Console.ResetColor();
     }
 
@@ -775,6 +835,37 @@ class Program
     {
         try { return eve.Traits != null ? eve.Traits.Get(id) : 0f; }
         catch { return 0f; }
+    }
+
+    static void PrintThoughtDebug(string? raw)
+    {
+        if (string.IsNullOrWhiteSpace(raw))
+        {
+            Console.WriteLine("  THOUGHT: (none)");
+            Console.WriteLine("  LEAKS: (none)");
+            Console.WriteLine("  TAGS: (none)");
+            return;
+        }
+
+        try
+        {
+            var packet = ThoughtPacket.Parse(raw);
+
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine("  THOUGHT: " +
+                (string.IsNullOrWhiteSpace(packet.Thought) ? "(none)" : packet.Thought));
+            Console.ResetColor();
+
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine("  LEAKS: " + packet.LeakLine);
+            Console.ResetColor();
+
+            PrintTagLine(raw);
+        }
+        catch
+        {
+            PrintTagLine(raw);
+        }
     }
 
     static void PrintTagLine(string? thought)
@@ -837,28 +928,102 @@ class Program
         }
     }
 
-    static void ResetDatabaseFiles(string mainDb)
+    static bool ResetDatabaseFiles(string mainDb)
     {
         Step("Reset DB (--fresh / fresh)");
-        foreach (var path in new[]
+
+        // Microsoft.Data.Sqlite uses connection pooling. A disposed SqliteConnection
+        // can leave an underlying SQLite handle pooled, which keeps the DB file locked
+        // on Windows. Clear those pooled handles before deleting the database.
+        try
         {
-            mainDb, mainDb + "-wal", mainDb + "-shm",
-            Path.Combine(DataDir, "eve_memory.db")
-        })
+            SqliteConnection.ClearAllPools();
+        }
+        catch (Exception ex)
         {
-            try
+            Console.WriteLine("  pool clear warning: " + ex.Message);
+        }
+
+        // Give finalizers a chance to release any short-lived wrappers that just went
+        // out of scope. This is a reset/debug command, so a brief forced collection is OK.
+        try
+        {
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            GC.Collect();
+        }
+        catch { }
+
+        string[] paths =
+        {
+            mainDb,
+            mainDb + "-wal",
+            mainDb + "-shm",
+            Path.Combine(DataDir, "eve_memory.db"),
+            Path.Combine(DataDir, "eve_memory.db-wal"),
+            Path.Combine(DataDir, "eve_memory.db-shm")
+        };
+
+        bool ok = true;
+
+        foreach (var path in paths)
+        {
+            if (!File.Exists(path))
+                continue;
+
+            bool deleted = false;
+            Exception? lastError = null;
+
+            // Windows can take a moment to release SQLite handles after pool clearing.
+            for (int attempt = 1; attempt <= 5; attempt++)
             {
-                if (File.Exists(path))
+                try
                 {
                     File.Delete(path);
-                    Console.WriteLine("  deleted " + Path.GetFileName(path));
+                    deleted = !File.Exists(path);
+
+                    if (deleted)
+                    {
+                        Console.WriteLine("  deleted " + Path.GetFileName(path));
+                        break;
+                    }
                 }
+                catch (Exception ex)
+                {
+                    lastError = ex;
+                }
+
+                try
+                {
+                    SqliteConnection.ClearAllPools();
+                    System.Threading.Thread.Sleep(150);
+                }
+                catch { }
             }
-            catch (Exception ex)
+
+            if (!deleted)
             {
-                Console.WriteLine("  " + ex.Message);
+                ok = false;
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(
+                    "  FAILED " + Path.GetFileName(path) +
+                    (lastError != null ? " — " + lastError.Message : ""));
+                Console.ResetColor();
             }
         }
+
+        // project_eve.db is the critical file. If it still exists, this was not fresh.
+        if (File.Exists(mainDb))
+            ok = false;
+
+        if (ok)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("  reset complete — next boot will create a genuinely new DB");
+            Console.ResetColor();
+        }
+
+        return ok;
     }
 
     static SimCharacter LoadEveOrFallback()

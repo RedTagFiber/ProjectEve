@@ -203,7 +203,8 @@ public sealed class LineBankService
         IEnumerable<string>? hotTraits,
         int intensity = 5,
         string channel = "text",
-        string maxRating = "plus18")
+        string maxRating = "plus18",
+        int? excludeRowId = null)
     {
         if (!DbExists) return null;
         speaker = NormSpeaker(speaker);
@@ -211,7 +212,7 @@ public sealed class LineBankService
         using var conn = Open();
         if (!string.IsNullOrWhiteSpace(intentId))
         {
-            var hit = PullByIntent(conn, speaker, intentId!, intensity, channel);
+            var hit = PullByIntent(conn, speaker, intentId!, intensity, channel, excludeRowId);
             if (hit != null) return hit;
         }
 
@@ -224,7 +225,7 @@ public sealed class LineBankService
 
         var intent = BestIntentForTraits(conn, traits);
         if (intent == null) return null;
-        return PullByIntent(conn, speaker, intent, intensity, channel);
+        return PullByIntent(conn, speaker, intent, intensity, channel, excludeRowId);
     }
 
     public ComboHit? TryPullCombo(
@@ -483,7 +484,8 @@ public sealed class LineBankService
         string speaker,
         string intentId,
         int intensity,
-        string channel)
+        string channel,
+        int? excludeRowId = null)
     {
         using var cmd = conn.CreateCommand();
         cmd.CommandText = """
@@ -494,6 +496,7 @@ public sealed class LineBankService
               AND intent_id = $i
               AND active = 1
               AND quality != 'hide'
+              AND ($exclude IS NULL OR id != $exclude)
               AND channel IN ($ch, 'either', 'text')
               AND (intensity IS NULL OR ABS(intensity - $inten) <= 3)
             ORDER BY success_score DESC, use_count DESC, RANDOM()
@@ -503,6 +506,7 @@ public sealed class LineBankService
         cmd.Parameters.AddWithValue("$i", NormIntent(intentId));
         cmd.Parameters.AddWithValue("$ch", channel);
         cmd.Parameters.AddWithValue("$inten", intensity);
+        cmd.Parameters.AddWithValue("$exclude", (object?)excludeRowId ?? DBNull.Value);
 
         using var r = cmd.ExecuteReader();
         if (!r.Read()) return null;

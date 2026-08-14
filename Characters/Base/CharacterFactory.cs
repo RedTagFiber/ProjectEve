@@ -1,5 +1,6 @@
-﻿using ProjectEve.AI.Brain;
+using ProjectEve.AI.Brain;
 using ProjectEve.Characters.Base;
+using ProjectEve.Characters.Cognition;
 using ProjectEve.Money;
 using ProjectEve.Traits;
 using System;
@@ -7,7 +8,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
-
 namespace ProjectEve.Characters.Characters
 {
     /// <summary>
@@ -40,6 +40,7 @@ namespace ProjectEve.Characters.Characters
 
             EnsureCore(npc);
             EnsureTraits(npc);
+            EnsureCognition(npc, finalizeFromCurrentLife: true);
             return npc;
         }
 
@@ -62,6 +63,13 @@ namespace ProjectEve.Characters.Characters
 
             EnsureCore(npc);
             EnsureTraits(npc);
+
+            // Generate the stable IQ/cognitive baseline now.
+            // If CreateWithJob is used, job/education context is finalized after ApplyJob.
+            EnsureCognition(
+                npc,
+                finalizeFromCurrentLife: !string.IsNullOrWhiteSpace(occupation));
+
             return npc;
         }
 
@@ -100,6 +108,7 @@ namespace ProjectEve.Characters.Characters
             npc.Brain.Owner = npc;
             npc.Money ??= new MoneyProfile();
             npc.Job ??= new JobProfile();
+            npc.Cognition ??= new CognitiveProfile();
             npc.Traits ??= new NpcTraits();
             npc.Relationships ??= new List<ProjectEve.Relationships.Relationship>();
         }
@@ -123,6 +132,44 @@ namespace ProjectEve.Characters.Characters
             }
         }
 
+        /// <summary>
+        /// Ensure a character has a stable cognitive profile.
+        /// Existing loaded profiles are never rerolled.
+        /// </summary>
+        public static void EnsureCognition(
+            SimCharacter npc,
+            Random? rng = null,
+            bool finalizeFromCurrentLife = false)
+        {
+            if (npc == null) return;
+            rng ??= Random.Shared;
+
+            npc.Cognition ??= new CognitiveProfile();
+            bool wasMissing = !npc.Cognition.IsGenerated;
+
+            CognitiveProfileGenerator.EnsureGenerated(npc, rng);
+
+            if (finalizeFromCurrentLife &&
+                (wasMissing || !npc.Cognition.LifeContextFinalized))
+            {
+                CognitiveProfileGenerator.FinalizeLifeContext(
+                    npc,
+                    rng,
+                    allowEducationUpgrade: true);
+            }
+            else
+            {
+                CognitiveProfileGenerator.RefreshForCurrentLife(npc, rng);
+            }
+
+            // Only persisted NPCs can be saved here.
+            if (npc.Id > 0 && wasMissing)
+            {
+                try { CharacterRepository.SaveCognition(npc); }
+                catch { }
+            }
+        }
+
         public static void RerollTraits(SimCharacter npc)
         {
             if (npc == null) return;
@@ -137,6 +184,10 @@ namespace ProjectEve.Characters.Characters
                 try { TraitJsonLoader.ApplyRolledLayers(npc.Traits); }
                 catch { npc.Traits.InitializeFastDefaults(); }
             }
+
+            // Traits can change speech tendencies, but never reroll IQ/education.
+            try { CognitiveProfileGenerator.RefreshForCurrentLife(npc); }
+            catch { }
         }
 
         // ============================================================
@@ -301,6 +352,21 @@ namespace ProjectEve.Characters.Characters
                 npc.Money.Bank = RandBetween(rng, d.MoneyBank, 400, 4000);
                 npc.Money.Debt = RandBetween(rng, d.MoneyDebt, 0, 5000);
             }
+
+            // New NPCs use job education hints to finalize education/speech/domain knowledge.
+            // Existing finalized NPCs do NOT magically gain a degree when jobs change.
+            try
+            {
+                bool canFinalizeEducation = !npc.Cognition.LifeContextFinalized;
+                CognitiveProfileGenerator.FinalizeLifeContext(
+                    npc,
+                    rng,
+                    j.MinimumEducation,
+                    j.TypicalEducation,
+                    j.FieldOfStudy,
+                    allowEducationUpgrade: canFinalizeEducation);
+            }
+            catch { }
         }
 
         static decimal RandBetween(Random rng, int[]? range, int fallbackMin, int fallbackMax)
@@ -339,6 +405,12 @@ namespace ProjectEve.Characters.Characters
         public string IndustryPath { get; set; } = "";
         public string Department { get; set; } = "";
         public string TitleLevel { get; set; } = "";
+
+        // Optional cognition/education hints from town_jobs.json.
+        // Existing JSON remains compatible when these are omitted.
+        public string? MinimumEducation { get; set; }
+        public string? TypicalEducation { get; set; }
+        public string? FieldOfStudy { get; set; }
 
         public int StartHour { get; set; } = 9;
         public int EndHour { get; set; } = 17;

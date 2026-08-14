@@ -1,0 +1,51 @@
+{
+  "npc_id": 1,
+  "name": "Eve Sinclair",
+  "age": 25,
+  "__note": "Illustrative shape only. Values are examples, not intended to overwrite existing Eve canon.",
+  "body_profile": {
+    "identity": {
+      "gender_identity": "Female",
+      "age_years": 25
+    },
+    "dimensions": {
+      "height_cm": null,
+      "weight_kg": null
+    },
+    "eyes": {
+      "color": "USE_EXISTING_CANON"
+    },
+    "hair": {
+      "natural_color": "USE_EXISTING_CANON",
+      "current_color": "USE_EXISTING_CANON"
+    },
+    "hygiene": {
+      "normal_cleanliness": 82,
+      "preferred_cleanliness": 88,
+      "shower_trigger": 65,
+      "typical_showers_per_day": 1.0
+    },
+    "presentation": {
+      "home_alone": {
+        "appearance_effort": 18
+      },
+      "work": {
+        "appearance_effort": 80
+      },
+      "date": {
+        "appearance_effort": 90
+      }
+    },
+    "state": {
+      "cleanliness": 85,
+      "sweat": 0,
+      "body_odor": 0,
+      "hair_mess": 10
+    },
+    "adult_private": {
+      "enabled": true,
+      "privacy": "partner_private",
+      "values": "GENERATE_OR_AUTHOR_SEPARATELY"
+    }
+  }
+}

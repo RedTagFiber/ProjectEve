@@ -1,0 +1,85 @@
+PROJECT EVE — HUMAN BODY SYSTEM v1
+
+WHY THIS IS SPLIT
+-----------------
+The old NPCAppearance class already generated basic visible facts: race/skin, eyes, hair,
+face shape, body type, height/weight, style, glasses, scars. The replacement facade keeps
+those property names so existing code can compile while the new HumanBodyProfile becomes
+the full source of body truth.
+
+DO NOT MAKE THE LLM THE DATABASE
+--------------------------------
+ProjectEve owns:
+- physical truth
+- current body state
+- hygiene/grooming baseline
+- wardrobe
+- private adult anatomy/preferences
+- health/injury state
+- observer knowledge
+
+The LLM may:
+- choose wording
+- form private thoughts
+- react to discomfort
+- decide what to say/show within personality, relationship and context
+
+The LLM may NOT:
+- change eye/hair color because it forgot
+- invent measurements
+- infer breast augmentation from clothing as a fact
+- infer exact penis size from a visible clothing contour
+- expose partner-private fields during normal chat
+- create clothing the NPC does not own
+- assume poor grooming means depression or high grooming means openness
+
+BASELINE / STATE / TREND
+------------------------
+Each NPC has:
+1. Personal baseline: what is normal for this person.
+2. Current state: how the body is right now.
+3. Recent trend: whether care/appearance has changed from their normal.
+
+Example:
+A clean-freak can cross their shower threshold after a run and want a shower immediately.
+A low-hygiene NPC can have the same physical state and feel fine.
+
+PRIVACY
+-------
+public          ordinary visible facts
+personal        sensitive but commonly self-known
+private         hidden body/grooming facts
+partner_private adult intimate facts/preferences
+medical_private health/anatomy facts
+world_truth_only simulation truth not automatically known by anyone
+
+ADULT GATE
+----------
+All partner-private intimate anatomy/preferences are age >= 18 only.
+For minors the body system is limited to non-sexual health/development/appearance.
+
+NEXT INTEGRATION STEPS
+----------------------
+1. Add HumanBodyProfile Body to the persistent NPC model or serialize it alongside Appearance.
+2. Load body_system_v1.json as configuration.
+3. Make a BodyGenerator that rolls stable profile values from JSON.
+4. Make BodyStateService.ApplyActivity / Tick / ApplyCareAction.
+5. Make BodyNeedService compute shower/groom/change-clothes needs from PERSONAL thresholds.
+6. Make WardrobeService choose only owned, clean, available clothing.
+7. Make BodyPromptContext with self/public/in-person/adult-private gates.
+8. Feed ToSelfKnowledgeFragment to Thought/Dialogue when player asks a factual self-body question.
+9. Persist body history and relationship knowledge separately.
+10. Never pass the entire body JSON to the LLM every turn. Select only relevant context.
+
+IMPORTANT
+---------
+NpcTraitInitializer remains the personality owner. Body/grooming profiles can be influenced
+by traits but should not duplicate Fast/Mid/Slow trait storage.
+
+
+V2 ADDED
+--------
+- BodyGenerator correlated stable generation
+- BodyStateService activity/tick/shower need
+- BodyPromptContext privacy-aware prompt slices
+- NPCAppearance preserves original GenerateRandom API and bridges into HumanBodyProfile

@@ -1,10 +1,12 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using ProjectEve.Characters.Base;
 using ProjectEve.Characters.Emotion;
 using ProjectEve.Money;
 using ProjectEve.Relationships;
 using ProjectEve.Traits;
+
+using ProjectEve.Characters.NPCs.Body;
 
 namespace ProjectEve.Characters.NPCs
 {
@@ -19,7 +21,7 @@ namespace ProjectEve.Characters.NPCs
             Id = 1;
             Gender = "Female";
             Occupation = "Coffee shop manager";
-            Location = "Bellefontaine / Sidney, Ohio area";
+            Location = "Bellefontaine , Ohio area";
             Hometown = "Bellefontaine, OH";
             HomeAddress = "Adam's house — rents a room (in town)";
 
@@ -286,6 +288,9 @@ Remember("Adam is her twin and best friend — he reads her better than almost a
             SkinTone = Appearance.SkinTone;
             BodyShape = Appearance.BodyType;
             HeightCm = 165;
-        }
+        
+            SinclairBodyCanon.ApplyEve(Appearance);
+            WeightKg = Appearance.WeightKg;
+}
     }
 }

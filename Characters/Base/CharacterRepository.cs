@@ -1,4 +1,4 @@
-﻿using Microsoft.Data.Sqlite;
+using Microsoft.Data.Sqlite;
 using ProjectEve.AI.Brain;
 using ProjectEve.Money;
 using ProjectEve.Relationships;
@@ -6,6 +6,10 @@ using ProjectEve.Traits;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using ProjectEve.Characters.NPCs;
+using ProjectEve.Characters.NPCs.Body;
+using System.Text.Json;
+using ProjectEve.Characters.Cognition;
 
 namespace ProjectEve.Characters.Base
 {
@@ -35,6 +39,8 @@ namespace ProjectEve.Characters.Base
             using var conn = new SqliteConnection(ConnStr);
             conn.Open();
             EnsureJobProfileColumns(conn);
+            EnsureBodyProfileTable(conn);
+            EnsureCognitionTable(conn);
 
             SimCharacter? npc = TryLoadCharacterWide(conn, id)
                              ?? TryLoadCharacterNarrow(conn, id);
@@ -49,7 +55,9 @@ namespace ProjectEve.Characters.Base
             LoadBrainState(conn, npc);
             LoadMoney(conn, npc);
             LoadJob(conn, npc);
+            LoadCognition(conn, npc);
             LoadRelationships(conn, npc);
+            LoadOrCreateBodyProfile(conn, npc);
 
             npc.Brain ??= new Brain();
             npc.Brain.Owner = npc;
@@ -592,6 +600,269 @@ namespace ProjectEve.Characters.Base
         }
 
         // ============================================================
+        // COGNITION — stable profile persisted as JSON by NpcId
+        // ============================================================
+        private static void EnsureCognitionTable(SqliteConnection conn)
+        {
+            using var cmd = conn.CreateCommand();
+            cmd.CommandText = """
+                CREATE TABLE IF NOT EXISTS NpcCognitionProfile (
+                    NpcId INTEGER PRIMARY KEY,
+                    ProfileJson TEXT NOT NULL,
+                    UpdatedUtc TEXT NOT NULL
+                );
+                """;
+            cmd.ExecuteNonQuery();
+        }
+
+        private static void LoadCognition(SqliteConnection conn, SimCharacter npc)
+        {
+            if (npc == null) return;
+            EnsureCognitionTable(conn);
+
+            try
+            {
+                using var cmd = conn.CreateCommand();
+                cmd.CommandText = """
+                    SELECT ProfileJson
+                    FROM NpcCognitionProfile
+                    WHERE NpcId = $id
+                    """;
+                cmd.Parameters.AddWithValue("$id", npc.Id);
+
+                object? value = cmd.ExecuteScalar();
+                if (value is not string json || string.IsNullOrWhiteSpace(json))
+                    return;
+
+                var loaded = JsonSerializer.Deserialize<CognitiveProfile>(json);
+                if (loaded != null)
+                    npc.Cognition = loaded;
+            }
+            catch
+            {
+                // Leave empty/default profile; CharacterFactory.EnsureCognition
+                // will generate it once and SaveCognition will persist it.
+            }
+        }
+
+        public static void SaveCognition(SimCharacter npc)
+        {
+            if (npc?.Cognition == null || npc.Id <= 0) return;
+
+            EnsureDataDir();
+            using var conn = new SqliteConnection(ConnStr);
+            conn.Open();
+            EnsureCognitionTable(conn);
+
+            string json = JsonSerializer.Serialize(npc.Cognition);
+
+            using var cmd = conn.CreateCommand();
+            cmd.CommandText = """
+                INSERT INTO NpcCognitionProfile
+                    (NpcId, ProfileJson, UpdatedUtc)
+                VALUES
+                    ($id, $json, $utc)
+                ON CONFLICT(NpcId) DO UPDATE SET
+                    ProfileJson=$json,
+                    UpdatedUtc=$utc
+                """;
+            cmd.Parameters.AddWithValue("$id", npc.Id);
+            cmd.Parameters.AddWithValue("$json", json);
+            cmd.Parameters.AddWithValue("$utc", DateTime.UtcNow.ToString("O"));
+            cmd.ExecuteNonQuery();
+        }
+
+        // ============================================================
+        // BODY / APPEARANCE — persistent JSON snapshot by NpcId
+        // ============================================================
+        private static readonly JsonSerializerOptions BodyJsonOptions = new()
+        {
+            PropertyNameCaseInsensitive = true,
+            WriteIndented = false
+        };
+
+        private static void EnsureBodyProfileTable(SqliteConnection conn)
+        {
+            using var cmd = conn.CreateCommand();
+            cmd.CommandText = """
+                CREATE TABLE IF NOT EXISTS NpcBodyProfile (
+                    NpcId INTEGER PRIMARY KEY,
+                    SchemaVersion TEXT NOT NULL DEFAULT '1.0',
+                    AppearanceJson TEXT NOT NULL,
+                    UpdatedUtc TEXT NOT NULL
+                );
+                """;
+            cmd.ExecuteNonQuery();
+        }
+
+        private static void LoadOrCreateBodyProfile(SqliteConnection conn, SimCharacter npc)
+        {
+            if (npc == null) return;
+            EnsureBodyProfileTable(conn);
+
+            try
+            {
+                using var cmd = conn.CreateCommand();
+                cmd.CommandText = """
+                    SELECT AppearanceJson
+                    FROM NpcBodyProfile
+                    WHERE NpcId = $id
+                    """;
+                cmd.Parameters.AddWithValue("$id", npc.Id);
+
+                var jsonObj = cmd.ExecuteScalar();
+                if (jsonObj is string json && !string.IsNullOrWhiteSpace(json))
+                {
+                    var loaded = JsonSerializer.Deserialize<NPCAppearance>(json, BodyJsonOptions);
+                    if (loaded != null)
+                    {
+                        npc.Appearance = loaded;
+                        npc.Appearance.Body ??= new HumanBodyProfile();
+
+                        npc.Appearance.Age = npc.Age;
+                        if (string.IsNullOrWhiteSpace(npc.Appearance.Gender) ||
+                            npc.Appearance.Gender.Equals("Unknown", StringComparison.OrdinalIgnoreCase))
+                            npc.Appearance.Gender = npc.Gender;
+
+                        SyncAppearanceFacadeToCharacter(npc);
+                        npc.Appearance.SyncLegacyToBody();
+                        return;
+                    }
+                }
+            }
+            catch
+            {
+                // Fall through to one-time migration.
+            }
+
+            npc.Appearance ??= new NPCAppearance();
+            var a = npc.Appearance;
+
+            a.Age = npc.Age;
+            a.Gender = string.IsNullOrWhiteSpace(npc.Gender) ? "Unknown" : npc.Gender;
+
+            if (string.IsNullOrWhiteSpace(a.HairColor) || a.HairColor == "Unknown")
+                a.HairColor = EmptyToUnknown(npc.HairColor);
+            if (string.IsNullOrWhiteSpace(a.HairStyle) || a.HairStyle == "Unknown")
+                a.HairStyle = EmptyToUnknown(npc.HairStyle);
+            if (string.IsNullOrWhiteSpace(a.EyeColor) || a.EyeColor == "Unknown")
+                a.EyeColor = EmptyToUnknown(npc.EyeColor);
+            if (string.IsNullOrWhiteSpace(a.EyeStyle) || a.EyeStyle == "Unknown")
+                a.EyeStyle = EmptyToUnknown(npc.EyeStyle);
+            if (string.IsNullOrWhiteSpace(a.SkinTone) || a.SkinTone == "Unknown")
+                a.SkinTone = EmptyToUnknown(npc.SkinTone);
+            if (string.IsNullOrWhiteSpace(a.BodyType) || a.BodyType == "Unknown")
+                a.BodyType = EmptyToUnknown(npc.BodyShape);
+
+            if (a.HeightCm <= 0 && npc.HeightCm.HasValue)
+                a.HeightCm = npc.HeightCm.Value;
+            if (a.WeightKg <= 0 && npc.WeightKg.HasValue)
+                a.WeightKg = npc.WeightKg.Value;
+
+            if (string.IsNullOrWhiteSpace(a.Glasses) || a.Glasses == "none")
+            {
+                if (!string.IsNullOrWhiteSpace(npc.Glasses))
+                    a.Glasses = npc.Glasses;
+            }
+
+            if (string.IsNullOrWhiteSpace(a.ScarNotes) && !string.IsNullOrWhiteSpace(npc.ScarNotes))
+                a.ScarNotes = npc.ScarNotes;
+
+            a.Body ??= new HumanBodyProfile();
+            a.SyncLegacyToBody();
+
+            // Generate deeper body values ONCE for legacy NPCs.
+            BodyGenerator.FillMissing(a.Body, npc.Gender, npc.Age, a.Race);
+
+            SaveBodyProfile(conn, npc);
+            SyncAppearanceFacadeToCharacter(npc);
+        }
+
+        public static void SaveBodyProfile(SimCharacter npc)
+        {
+            if (npc == null) return;
+            EnsureDataDir();
+
+            using var conn = new SqliteConnection(ConnStr);
+            conn.Open();
+            EnsureBodyProfileTable(conn);
+            SaveBodyProfile(conn, npc);
+        }
+
+        private static void SaveBodyProfile(SqliteConnection conn, SimCharacter npc)
+        {
+            if (npc == null) return;
+
+            npc.Appearance ??= new NPCAppearance
+            {
+                Age = npc.Age,
+                Gender = npc.Gender
+            };
+
+            npc.Appearance.Body ??= new HumanBodyProfile();
+            npc.Appearance.Age = npc.Age;
+
+            if (string.IsNullOrWhiteSpace(npc.Appearance.Gender) ||
+                npc.Appearance.Gender.Equals("Unknown", StringComparison.OrdinalIgnoreCase))
+                npc.Appearance.Gender = npc.Gender;
+
+            npc.Appearance.SyncLegacyToBody();
+
+            string json = JsonSerializer.Serialize(npc.Appearance, BodyJsonOptions);
+            string schema = string.IsNullOrWhiteSpace(npc.Appearance.Body.SchemaVersion)
+                ? "1.0"
+                : npc.Appearance.Body.SchemaVersion;
+
+            using var cmd = conn.CreateCommand();
+            cmd.CommandText = """
+                INSERT INTO NpcBodyProfile
+                    (NpcId, SchemaVersion, AppearanceJson, UpdatedUtc)
+                VALUES
+                    ($id, $schema, $json, $utc)
+                ON CONFLICT(NpcId) DO UPDATE SET
+                    SchemaVersion=$schema,
+                    AppearanceJson=$json,
+                    UpdatedUtc=$utc
+                """;
+            cmd.Parameters.AddWithValue("$id", npc.Id);
+            cmd.Parameters.AddWithValue("$schema", schema);
+            cmd.Parameters.AddWithValue("$json", json);
+            cmd.Parameters.AddWithValue("$utc", DateTime.UtcNow.ToString("O"));
+            cmd.ExecuteNonQuery();
+
+            SyncAppearanceFacadeToCharacter(npc);
+        }
+
+        private static void SyncAppearanceFacadeToCharacter(SimCharacter npc)
+        {
+            if (npc?.Appearance == null) return;
+            var a = npc.Appearance;
+
+            if (a.HeightCm > 0) npc.HeightCm = a.HeightCm;
+            if (a.WeightKg > 0) npc.WeightKg = a.WeightKg;
+
+            if (!string.IsNullOrWhiteSpace(a.BodyType) && a.BodyType != "Unknown")
+                npc.BodyShape = a.BodyType;
+            if (!string.IsNullOrWhiteSpace(a.HairColor) && a.HairColor != "Unknown")
+                npc.HairColor = a.HairColor;
+            if (!string.IsNullOrWhiteSpace(a.HairStyle) && a.HairStyle != "Unknown")
+                npc.HairStyle = a.HairStyle;
+            if (!string.IsNullOrWhiteSpace(a.EyeColor) && a.EyeColor != "Unknown")
+                npc.EyeColor = a.EyeColor;
+            if (!string.IsNullOrWhiteSpace(a.EyeStyle) && a.EyeStyle != "Unknown")
+                npc.EyeStyle = a.EyeStyle;
+            if (!string.IsNullOrWhiteSpace(a.SkinTone) && a.SkinTone != "Unknown")
+                npc.SkinTone = a.SkinTone;
+            if (!string.IsNullOrWhiteSpace(a.Glasses))
+                npc.Glasses = a.Glasses;
+            if (!string.IsNullOrWhiteSpace(a.ScarNotes))
+                npc.ScarNotes = a.ScarNotes;
+        }
+
+        private static string EmptyToUnknown(string? value)
+            => string.IsNullOrWhiteSpace(value) ? "Unknown" : value;
+
+        // ============================================================
         // RELATIONSHIPS
         // ============================================================
         private static void LoadRelationships(SqliteConnection conn, SimCharacter npc)
@@ -631,6 +902,8 @@ namespace ProjectEve.Characters.Base
             SaveBrainState(npc);
             SaveMoney(npc);
             SaveJob(npc);
+            SaveCognition(npc);
+            SaveBodyProfile(npc);
         }
 
         private static SimCharacter CreateFallbackEve()

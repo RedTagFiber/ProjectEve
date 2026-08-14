@@ -68,6 +68,8 @@ namespace ProjectEve.AI.Brain
             string relationshipContext,
             string sceneContext)
         {
+            string selfBodyFact = SelfBodyFactContext.Build(owner, playerMessage);
+
             return $"""
 SYSTEM ROLE
 You write {owner.Name}'s CONSCIOUS in-person social response.
@@ -98,6 +100,9 @@ BODY LANGUAGE RULES
 MEMORY / HISTORY
 {DialoguePromptContext.BuildHistoryMemoryContext(owner)}
 
+SELF BODY FACT QUERY
+{selfBodyFact}
+
 REALISM RULES
 - The body can leak one thing while the person consciously presents another.
 - A guarded person may recover quickly, fold arms, go still, change distance, or control eye contact.
@@ -108,9 +113,18 @@ REALISM RULES
 - Describe observable movement only.
 - Small cues are usually better than theatrical acting.
 - Do not invent history/canon.
+- SELF BODY FACT QUERY is authoritative ProjectEve body truth for this exact question.
+- If it says ORDINARY SELF FACT, never invent or substitute another value.
+- If it says PRIVATE ADULT SELF FACT, the NPC knows it but disclosure depends on boundaries, relationship, privacy, and context.
+- If the fact is UNKNOWN, do not guess.
+- Do not simply copy the player's latest sentence as the NPC's spoken reply.
 - Do not speak for the player.
 - Do not output private thought.
 - Spoken words may disagree with private thought.
+- The character may be kind, truthful, loving, deceptive, cruel, manipulative, profane, sexually direct, frightened, cold, or remorseful when supported by character state and context.
+- Do not sanitize ugly human behavior into polite assistant language, but do not force darkness when it is not supported.
+- Do not confess hidden truth merely because PRIVATE THOUGHT contains it.
+- Keep the person psychologically coherent rather than turning them into a cartoon villain.
 
 RECENT CONVERSATION
 {recentChat}
@@ -118,8 +132,8 @@ RECENT CONVERSATION
 LATEST PLAYER LINE / EVENT
 {playerMessage}
 
-OUTPUT EXACTLY TWO LINES:
-PRESENTATION: <0-2 deliberate physical/social actions, or none>
+OUTPUT EXACTLY TWO LINES. No analysis, no speaker-name prefix, no quotation marks:
+PRESENTATION: <0-2 deliberate observable physical/social actions, or none>
 SAY: <spoken words only>
 """;
         }
@@ -132,14 +146,16 @@ SAY: <spoken words only>
             {
                 model = Model,
                 stream = false,
+                think = false, // Qwen3 dialogue must not expose reasoning
                 messages = new[]
                 {
                     new
                     {
                         role = "system",
                         content =
-                            "You write naturalistic in-person character behavior. " +
-                            "Output exactly PRESENTATION and SAY."
+                            "You write naturalistic human in-person character behavior. " +
+                            "People can be kind or ugly, honest or deceptive, tender or profane when their state supports it. " +
+                            "Never become an assistant or moral lecturer. Output exactly PRESENTATION and SAY."
                     },
                     new { role = "user", content = prompt }
                 },

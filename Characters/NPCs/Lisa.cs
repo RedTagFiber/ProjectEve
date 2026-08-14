@@ -1,10 +1,12 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using ProjectEve.Characters.Base;
 using ProjectEve.Characters.Emotion;
 using ProjectEve.Money;
 using ProjectEve.Relationships;
 using ProjectEve.Traits;
+
+using ProjectEve.Characters.NPCs.Body;
 
 namespace ProjectEve.Characters.NPCs
 {
@@ -237,6 +239,9 @@ namespace ProjectEve.Characters.NPCs
             SkinTone = Appearance.SkinTone;
             BodyShape = Appearance.BodyType;
             HeightCm = 165;
-        }
+        
+            SinclairBodyCanon.ApplyLisa(Appearance);
+            WeightKg = Appearance.WeightKg;
+}
     }
 }

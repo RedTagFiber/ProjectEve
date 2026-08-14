@@ -1,4 +1,6 @@
 using ProjectEve.Characters.Base;
+using ProjectEve.Characters.Cognition;
+using ProjectEve.Characters.NPCs.Body;
 using System;
 using System.Linq;
 using System.Text;
@@ -28,6 +30,22 @@ namespace ProjectEve.AI.Brain
             {
                 sb.AppendLine("Traits:");
                 sb.AppendLine(owner.Traits.BuildLlmSummary(14));
+            }
+
+            if (owner.Cognition != null && owner.Cognition.IsGenerated)
+            {
+                sb.AppendLine("Cognition / education / speech:");
+                sb.AppendLine(CognitionPromptContext.BuildForNpc(owner));
+            }
+
+            if (owner.Appearance != null)
+            {
+                sb.AppendLine("Established ordinary self-body facts:");
+                sb.AppendLine(owner.Appearance.ToSelfKnowledgeFragment());
+
+                string bodyNeed = BodyPromptContext.BuildCurrentNeed(owner.Appearance.Body);
+                if (!string.IsNullOrWhiteSpace(bodyNeed))
+                    sb.AppendLine(bodyNeed);
             }
 
             return sb.ToString();

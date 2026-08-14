@@ -1,4 +1,5 @@
-﻿using System;
+using ProjectEve.Characters.NPCs.Body;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -28,6 +29,69 @@ namespace ProjectEve.Characters.NPCs
         public string Glasses { get; set; } = "none";
         /// <summary>Detailed scar text for prompts.</summary>
         public string ScarNotes { get; set; } = "";
+
+        /// <summary>
+        /// Full stable/semi-stable human body model.
+        /// Legacy appearance fields remain for compatibility.
+        /// </summary>
+        public HumanBodyProfile Body { get; set; } = new();
+
+        /// <summary>
+        /// Copy the established legacy appearance facts into Body.
+        /// Call after generation/load while older code still uses the legacy facade.
+        /// </summary>
+        public void SyncLegacyToBody()
+        {
+            Body.Identity.AgeYears = Age;
+            Body.Identity.GenderIdentity = Gender;
+            Body.Identity.SkinTone = SkinTone;
+
+            Body.Dimensions.HeightCm = HeightCm;
+            Body.Dimensions.WeightKg = WeightKg;
+
+            Body.Composition.BodyType = BodyType;
+            Body.Face.Shape = FaceShape;
+
+            Body.Eyes.Color = EyeColor;
+            Body.Eyes.Shape = EyeStyle;
+            Body.Eyes.CorrectiveLenses = Glasses;
+
+            Body.Hair.NaturalColor = HairColor;
+            Body.Hair.CurrentColor = HairColor;
+            Body.Hair.Style = HairStyle;
+
+            Body.Skin.Tone = SkinTone;
+            Body.AdultPrivate.Enabled = Age >= 18;
+        }
+
+        /// <summary>
+        /// Fixed self facts for Thought/Dialogue when the player asks about the NPC's own appearance.
+        /// No partner-private anatomy is exposed here.
+        /// </summary>
+        public string ToSelfKnowledgeFragment()
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine("SELF BODY FACTS — established ProjectEve truth:");
+            if (!string.IsNullOrWhiteSpace(EyeColor) && EyeColor != "Unknown")
+                sb.AppendLine($"- Eye color: {EyeColor}");
+            if (!string.IsNullOrWhiteSpace(HairColor) && HairColor != "Unknown")
+                sb.AppendLine($"- Natural/current hair color: {HairColor}");
+            if (!string.IsNullOrWhiteSpace(HairStyle) && HairStyle != "Unknown")
+                sb.AppendLine($"- Hair style: {HairStyle}");
+            if (!string.IsNullOrWhiteSpace(SkinTone) && SkinTone != "Unknown")
+                sb.AppendLine($"- Skin tone: {SkinTone}");
+            if (!string.IsNullOrWhiteSpace(BodyType) && BodyType != "Unknown")
+                sb.AppendLine($"- Build: {BodyType}");
+            if (HeightCm > 0)
+                sb.AppendLine($"- Height: {HeightCm} cm");
+            if (!string.IsNullOrWhiteSpace(FaceShape) && FaceShape != "Unknown")
+                sb.AppendLine($"- Face shape: {FaceShape}");
+            if (!string.IsNullOrWhiteSpace(ScarNotes))
+                sb.AppendLine($"- Scar: {ScarNotes}");
+            sb.AppendLine("- The NPC knows these ordinary self facts. Never ask the player to confirm them.");
+            sb.AppendLine("- If a body fact is absent, do not invent it.");
+            return sb.ToString().Trim();
+        }
 
         private static readonly Random rng = new();
 
@@ -61,6 +125,9 @@ namespace ProjectEve.Characters.NPCs
 
             if (npc.UniqueFeature == "Scar" && !string.IsNullOrWhiteSpace(npc.ScarNotes))
                 npc.UniqueFeature = npc.ScarNotes;
+
+            npc.SyncLegacyToBody();
+            BodyGenerator.FillMissing(npc.Body, npc.Gender, npc.Age, npc.Race);
 
             return npc;
         }

@@ -1,0 +1,2341 @@
+{
+  "schema_version": "1.0",
+  "system_name": "Project Eve Human Body System",
+  "__notes": [
+    "ProjectEve owns body truth. The LLM may describe or react to body truth but must not invent fixed facts.",
+    "Separate PHYSICAL_TRUTH, SELF_KNOWLEDGE, OBSERVABLE_TRUTH, and PERCEIVED_TRUTH.",
+    "Private and adult-intimacy fields are context-gated and never included in ordinary public/chat prompts.",
+    "Adult-intimacy generation is disabled for NPCs under 18.",
+    "Body state changes over time; stable profile fields do not change unless a world event explicitly changes them."
+  ],
+  "privacy_scopes": {
+    "public": "Normally visible or socially shareable.",
+    "personal": "Known to self; may be shared with friends/family.",
+    "private": "Sensitive body/health/grooming information.",
+    "partner_private": "Sensitive adult intimate information normally exposed only in appropriate adult partner context.",
+    "medical_private": "Health/anatomy information exposed only when medically relevant or explicitly known.",
+    "world_truth_only": "Simulation truth not automatically known by observers."
+  },
+  "knowledge_model": {
+    "physical_truth": "What is objectively true in the simulation.",
+    "self_knowledge": "What the NPC knows or believes about their own body.",
+    "observable_truth": "What an observer could actually see, hear, smell, or otherwise perceive in context.",
+    "perceived_truth": "Observer interpretation; may be wrong.",
+    "relationship_knowledge": "Facts learned through conversation, observation, intimacy, medical access, history, or gossip.",
+    "rules": [
+      "Never convert perceived truth into physical truth.",
+      "Never reveal hidden measurements from clothing alone.",
+      "A partner does not automatically know partner-private facts until learned.",
+      "Basic self facts such as eye color, natural hair color, height, tattoos, scars, and ordinary grooming habits are available to the NPC's own cognition.",
+      "Unknown world-truth fields remain unknown; the LLM must not guess."
+    ]
+  },
+  "age_gates": {
+    "child_max_age": 12,
+    "teen_min_age": 13,
+    "adult_min_age": 18,
+    "adult_intimacy_allowed": "age >= 18 only",
+    "minor_rules": [
+      "Do not generate adult intimate anatomy/presentation/preferences for NPCs under 18.",
+      "Puberty/development may be represented only as non-sexual health/development state.",
+      "Intimate context gate must return false for minors."
+    ]
+  },
+  "profile": {
+    "identity_biology": {
+      "sex_at_birth": {
+        "type": "enum",
+        "values": [
+          "female",
+          "male",
+          "intersex",
+          "unknown"
+        ],
+        "privacy": "personal"
+      },
+      "gender_identity": {
+        "type": "string",
+        "privacy": "personal"
+      },
+      "age_years": {
+        "type": "integer",
+        "min": 0,
+        "max": 120,
+        "privacy": "public"
+      },
+      "development_stage": {
+        "type": "enum",
+        "values": [
+          "infant",
+          "child",
+          "teen",
+          "adult",
+          "older_adult",
+          "elder"
+        ],
+        "privacy": "public"
+      },
+      "ancestry_background": {
+        "type": "list<string>",
+        "privacy": "personal"
+      },
+      "skin_tone": {
+        "type": "string",
+        "privacy": "public"
+      }
+    },
+    "dimensions": {
+      "height_cm": {
+        "type": "number",
+        "min": 40,
+        "max": 240,
+        "privacy": "public"
+      },
+      "weight_kg": {
+        "type": "number",
+        "min": 3,
+        "max": 350,
+        "privacy": "personal"
+      },
+      "frame_size": {
+        "type": "enum",
+        "values": [
+          "very_small",
+          "small",
+          "medium",
+          "large",
+          "very_large"
+        ],
+        "privacy": "public"
+      },
+      "shoulder_width": {
+        "type": "enum",
+        "values": [
+          "narrow",
+          "average",
+          "broad",
+          "very_broad"
+        ],
+        "privacy": "public"
+      },
+      "torso_length": {
+        "type": "enum",
+        "values": [
+          "short",
+          "average",
+          "long"
+        ],
+        "privacy": "public"
+      },
+      "leg_length": {
+        "type": "enum",
+        "values": [
+          "short",
+          "average",
+          "long"
+        ],
+        "privacy": "public"
+      },
+      "arm_length": {
+        "type": "enum",
+        "values": [
+          "short",
+          "average",
+          "long"
+        ],
+        "privacy": "public"
+      },
+      "chest_cm": {
+        "type": "number",
+        "min": 40,
+        "max": 180,
+        "privacy": "private"
+      },
+      "bust_cm": {
+        "type": "number",
+        "min": 40,
+        "max": 200,
+        "privacy": "private",
+        "applies_when": "adult && anatomy_has_breasts"
+      },
+      "underbust_cm": {
+        "type": "number",
+        "min": 40,
+        "max": 180,
+        "privacy": "private",
+        "applies_when": "adult && anatomy_has_breasts"
+      },
+      "waist_cm": {
+        "type": "number",
+        "min": 35,
+        "max": 200,
+        "privacy": "private"
+      },
+      "hips_cm": {
+        "type": "number",
+        "min": 40,
+        "max": 220,
+        "privacy": "private"
+      },
+      "inseam_cm": {
+        "type": "number",
+        "min": 25,
+        "max": 120,
+        "privacy": "private"
+      },
+      "hand_size": {
+        "type": "enum",
+        "values": [
+          "small",
+          "average",
+          "large"
+        ],
+        "privacy": "public"
+      },
+      "shoe_size_us": {
+        "type": "number",
+        "min": 1,
+        "max": 20,
+        "privacy": "personal"
+      }
+    },
+    "composition": {
+      "body_type": {
+        "type": "string",
+        "privacy": "public"
+      },
+      "body_fat_percent": {
+        "type": "number",
+        "min": 2,
+        "max": 65,
+        "privacy": "private"
+      },
+      "muscle_mass": {
+        "type": "number",
+        "min": 0,
+        "max": 100,
+        "privacy": "world_truth_only"
+      },
+      "muscle_definition": {
+        "type": "number",
+        "min": 0,
+        "max": 100,
+        "privacy": "public"
+      },
+      "softness": {
+        "type": "number",
+        "min": 0,
+        "max": 100,
+        "privacy": "public"
+      },
+      "fitness_appearance": {
+        "type": "enum",
+        "values": [
+          "frail",
+          "soft",
+          "average",
+          "fit",
+          "athletic",
+          "muscular",
+          "powerful"
+        ],
+        "privacy": "public"
+      },
+      "body_shape": {
+        "type": "enum",
+        "values": [
+          "straight",
+          "rectangle",
+          "triangle",
+          "inverted_triangle",
+          "pear",
+          "hourglass",
+          "round",
+          "stocky",
+          "athletic",
+          "custom"
+        ],
+        "privacy": "public"
+      }
+    },
+    "face": {
+      "face_shape": {
+        "type": "string",
+        "privacy": "public"
+      },
+      "symmetry": {
+        "type": "number",
+        "min": 0,
+        "max": 100,
+        "privacy": "world_truth_only"
+      },
+      "jaw": {
+        "type": "enum",
+        "values": [
+          "soft",
+          "average",
+          "defined",
+          "square",
+          "narrow",
+          "strong"
+        ],
+        "privacy": "public"
+      },
+      "chin": {
+        "type": "enum",
+        "values": [
+          "small",
+          "average",
+          "prominent",
+          "cleft",
+          "rounded",
+          "pointed"
+        ],
+        "privacy": "public"
+      },
+      "cheekbones": {
+        "type": "enum",
+        "values": [
+          "low",
+          "average",
+          "high",
+          "prominent"
+        ],
+        "privacy": "public"
+      },
+      "nose_shape": {
+        "type": "string",
+        "privacy": "public"
+      },
+      "lip_shape": {
+        "type": "string",
+        "privacy": "public"
+      },
+      "lip_fullness": {
+        "type": "enum",
+        "values": [
+          "thin",
+          "average",
+          "full",
+          "very_full"
+        ],
+        "privacy": "public"
+      },
+      "natural_lip_color": {
+        "type": "string",
+        "privacy": "public"
+      },
+      "smile_style": {
+        "type": "string",
+        "privacy": "public"
+      },
+      "resting_expression": {
+        "type": "string",
+        "privacy": "public"
+      }
+    },
+    "eyes": {
+      "color": {
+        "type": "string",
+        "privacy": "public"
+      },
+      "shape": {
+        "type": "string",
+        "privacy": "public"
+      },
+      "size": {
+        "type": "enum",
+        "values": [
+          "small",
+          "average",
+          "large"
+        ],
+        "privacy": "public"
+      },
+      "spacing": {
+        "type": "enum",
+        "values": [
+          "close",
+          "average",
+          "wide"
+        ],
+        "privacy": "public"
+      },
+      "lashes": {
+        "type": "enum",
+        "values": [
+          "short",
+          "average",
+          "long",
+          "very_long"
+        ],
+        "privacy": "public"
+      },
+      "vision": {
+        "type": "enum",
+        "values": [
+          "normal",
+          "nearsighted",
+          "farsighted",
+          "astigmatism",
+          "low_vision",
+          "blind"
+        ],
+        "privacy": "medical_private"
+      },
+      "corrective_lenses": {
+        "type": "enum",
+        "values": [
+          "none",
+          "reading_glasses",
+          "glasses",
+          "contacts"
+        ],
+        "privacy": "public"
+      }
+    },
+    "eyebrows": {
+      "shape": {
+        "type": "string",
+        "privacy": "public"
+      },
+      "thickness": {
+        "type": "enum",
+        "values": [
+          "thin",
+          "average",
+          "thick",
+          "very_thick"
+        ],
+        "privacy": "public"
+      },
+      "grooming": {
+        "type": "enum",
+        "values": [
+          "natural",
+          "trimmed",
+          "shaped",
+          "waxed",
+          "threaded",
+          "drawn",
+          "mixed"
+        ],
+        "privacy": "public"
+      }
+    },
+    "skin": {
+      "tone": {
+        "type": "string",
+        "privacy": "public"
+      },
+      "undertone": {
+        "type": "enum",
+        "values": [
+          "cool",
+          "neutral",
+          "warm",
+          "olive",
+          "unknown"
+        ],
+        "privacy": "public"
+      },
+      "complexion": {
+        "type": "enum",
+        "values": [
+          "clear",
+          "freckled",
+          "acne_prone",
+          "textured",
+          "weathered",
+          "mature",
+          "mixed"
+        ],
+        "privacy": "public"
+      },
+      "oiliness": {
+        "type": "number",
+        "min": 0,
+        "max": 100,
+        "privacy": "personal"
+      },
+      "dryness": {
+        "type": "number",
+        "min": 0,
+        "max": 100,
+        "privacy": "personal"
+      },
+      "freckles": {
+        "type": "string",
+        "privacy": "public"
+      },
+      "moles": {
+        "type": "list<object>",
+        "privacy": "public"
+      },
+      "birthmarks": {
+        "type": "list<object>",
+        "privacy": "public"
+      },
+      "stretch_marks": {
+        "type": "list<object>",
+        "privacy": "private"
+      },
+      "age_spots": {
+        "type": "list<object>",
+        "privacy": "public"
+      }
+    },
+    "hair": {
+      "natural_color": {
+        "type": "string",
+        "privacy": "public"
+      },
+      "current_color": {
+        "type": "string",
+        "privacy": "public"
+      },
+      "texture": {
+        "type": "enum",
+        "values": [
+          "straight",
+          "wavy",
+          "curly",
+          "coily",
+          "mixed"
+        ],
+        "privacy": "public"
+      },
+      "length": {
+        "type": "enum",
+        "values": [
+          "shaved",
+          "buzzed",
+          "very_short",
+          "short",
+          "medium",
+          "shoulder",
+          "long",
+          "very_long"
+        ],
+        "privacy": "public"
+      },
+      "density": {
+        "type": "enum",
+        "values": [
+          "thin",
+          "average",
+          "thick",
+          "very_thick"
+        ],
+        "privacy": "public"
+      },
+      "strand_thickness": {
+        "type": "enum",
+        "values": [
+          "fine",
+          "medium",
+          "coarse"
+        ],
+        "privacy": "personal"
+      },
+      "style": {
+        "type": "string",
+        "privacy": "public"
+      },
+      "hairline": {
+        "type": "string",
+        "privacy": "public"
+      },
+      "gray_percent": {
+        "type": "number",
+        "min": 0,
+        "max": 100,
+        "privacy": "public"
+      },
+      "balding_pattern": {
+        "type": "string",
+        "privacy": "public"
+      }
+    },
+    "facial_hair": {
+      "growth_level": {
+        "type": "number",
+        "min": 0,
+        "max": 100,
+        "privacy": "public"
+      },
+      "color": {
+        "type": "string",
+        "privacy": "public"
+      },
+      "style": {
+        "type": "string",
+        "privacy": "public"
+      },
+      "density": {
+        "type": "string",
+        "privacy": "public"
+      },
+      "usual_grooming": {
+        "type": "string",
+        "privacy": "personal"
+      }
+    },
+    "body_hair": {
+      "overall_density": {
+        "type": "number",
+        "min": 0,
+        "max": 100,
+        "privacy": "private"
+      },
+      "color": {
+        "type": "string",
+        "privacy": "private"
+      },
+      "chest": {
+        "type": "string",
+        "privacy": "private"
+      },
+      "arms": {
+        "type": "string",
+        "privacy": "public"
+      },
+      "legs": {
+        "type": "string",
+        "privacy": "public"
+      },
+      "back": {
+        "type": "string",
+        "privacy": "private"
+      },
+      "abdomen": {
+        "type": "string",
+        "privacy": "private"
+      },
+      "grooming_preference": {
+        "type": "string",
+        "privacy": "private"
+      }
+    },
+    "mouth_teeth": {
+      "teeth_alignment": {
+        "type": "string",
+        "privacy": "public"
+      },
+      "teeth_color": {
+        "type": "string",
+        "privacy": "public"
+      },
+      "missing_teeth": {
+        "type": "list<int>",
+        "privacy": "medical_private"
+      },
+      "dental_work": {
+        "type": "list<string>",
+        "privacy": "medical_private"
+      },
+      "braces_or_retainer": {
+        "type": "string",
+        "privacy": "public"
+      },
+      "baseline_breath": {
+        "type": "number",
+        "min": 0,
+        "max": 100,
+        "privacy": "personal"
+      }
+    },
+    "hands_feet": {
+      "dominant_hand": {
+        "type": "enum",
+        "values": [
+          "left",
+          "right",
+          "ambidextrous"
+        ],
+        "privacy": "public"
+      },
+      "hand_condition": {
+        "type": "string",
+        "privacy": "public"
+      },
+      "calluses": {
+        "type": "list<object>",
+        "privacy": "public"
+      },
+      "nail_shape": {
+        "type": "string",
+        "privacy": "public"
+      },
+      "foot_condition": {
+        "type": "string",
+        "privacy": "private"
+      }
+    },
+    "posture_gait": {
+      "baseline_posture": {
+        "type": "string",
+        "privacy": "public"
+      },
+      "baseline_gait": {
+        "type": "string",
+        "privacy": "public"
+      },
+      "stride": {
+        "type": "string",
+        "privacy": "public"
+      },
+      "limp": {
+        "type": "string",
+        "privacy": "public"
+      },
+      "movement_energy": {
+        "type": "number",
+        "min": 0,
+        "max": 100,
+        "privacy": "public"
+      }
+    },
+    "voice_sensory": {
+      "voice_pitch": {
+        "type": "string",
+        "privacy": "public"
+      },
+      "voice_texture": {
+        "type": "string",
+        "privacy": "public"
+      },
+      "natural_volume": {
+        "type": "number",
+        "min": 0,
+        "max": 100,
+        "privacy": "public"
+      },
+      "laugh_style": {
+        "type": "string",
+        "privacy": "public"
+      },
+      "natural_scent": {
+        "type": "string",
+        "privacy": "private"
+      },
+      "usual_fragrance": {
+        "type": "string",
+        "privacy": "public"
+      }
+    },
+    "breasts_chest": {
+      "enabled_when": "adult && anatomy_has_breasts",
+      "size_category": {
+        "type": "enum",
+        "values": [
+          "very_small",
+          "small",
+          "medium",
+          "full",
+          "large",
+          "very_large"
+        ],
+        "privacy": "private"
+      },
+      "bra_band_us": {
+        "type": "integer",
+        "min": 26,
+        "max": 60,
+        "privacy": "private"
+      },
+      "bra_cup_us": {
+        "type": "string",
+        "privacy": "private"
+      },
+      "shape": {
+        "type": "string",
+        "privacy": "private"
+      },
+      "fullness": {
+        "type": "string",
+        "privacy": "private"
+      },
+      "firmness": {
+        "type": "number",
+        "min": 0,
+        "max": 100,
+        "privacy": "private"
+      },
+      "symmetry": {
+        "type": "number",
+        "min": 0,
+        "max": 100,
+        "privacy": "private"
+      },
+      "natural_movement": {
+        "type": "number",
+        "min": 0,
+        "max": 100,
+        "privacy": "private"
+      },
+      "augmentation_status": {
+        "type": "enum",
+        "values": [
+          "natural",
+          "augmented",
+          "reduced",
+          "reconstructed",
+          "unknown"
+        ],
+        "privacy": "medical_private"
+      },
+      "implant_details": {
+        "type": "object",
+        "privacy": "medical_private"
+      },
+      "appearance_naturalness": {
+        "type": "number",
+        "min": 0,
+        "max": 100,
+        "privacy": "world_truth_only"
+      },
+      "nipple": {
+        "color": {
+          "type": "string",
+          "privacy": "partner_private"
+        },
+        "size": {
+          "type": "enum",
+          "values": [
+            "small",
+            "average",
+            "large"
+          ],
+          "privacy": "partner_private"
+        },
+        "projection": {
+          "type": "enum",
+          "values": [
+            "flat",
+            "slight",
+            "moderate",
+            "prominent",
+            "inverted"
+          ],
+          "privacy": "partner_private"
+        },
+        "left_piercing": {
+          "type": "object",
+          "privacy": "partner_private"
+        },
+        "right_piercing": {
+          "type": "object",
+          "privacy": "partner_private"
+        }
+      },
+      "areola": {
+        "color": {
+          "type": "string",
+          "privacy": "partner_private"
+        },
+        "size": {
+          "type": "enum",
+          "values": [
+            "small",
+            "medium",
+            "large"
+          ],
+          "privacy": "partner_private"
+        },
+        "shape": {
+          "type": "enum",
+          "values": [
+            "round",
+            "oval",
+            "irregular"
+          ],
+          "privacy": "partner_private"
+        }
+      }
+    },
+    "male_intimate_anatomy": {
+      "enabled_when": "adult && anatomy_has_penis",
+      "erect_length_cm": {
+        "type": "number",
+        "min": 5,
+        "max": 30,
+        "privacy": "partner_private"
+      },
+      "erect_girth_cm": {
+        "type": "number",
+        "min": 5,
+        "max": 20,
+        "privacy": "partner_private"
+      },
+      "flaccid_length_cm": {
+        "type": "number",
+        "min": 2,
+        "max": 20,
+        "privacy": "partner_private"
+      },
+      "flaccid_visibility": {
+        "type": "enum",
+        "values": [
+          "low",
+          "average",
+          "noticeable"
+        ],
+        "privacy": "world_truth_only"
+      },
+      "circumcision_status": {
+        "type": "enum",
+        "values": [
+          "circumcised",
+          "uncircumcised",
+          "unknown"
+        ],
+        "privacy": "partner_private"
+      },
+      "grooming": {
+        "type": "string",
+        "privacy": "partner_private"
+      },
+      "piercings": {
+        "type": "list<object>",
+        "privacy": "partner_private"
+      }
+    },
+    "pelvis_butt_legs": {
+      "hip_width": {
+        "type": "string",
+        "privacy": "public"
+      },
+      "butt_shape": {
+        "type": "string",
+        "privacy": "public"
+      },
+      "butt_projection": {
+        "type": "number",
+        "min": 0,
+        "max": 100,
+        "privacy": "public"
+      },
+      "butt_firmness": {
+        "type": "number",
+        "min": 0,
+        "max": 100,
+        "privacy": "private"
+      },
+      "thigh_build": {
+        "type": "string",
+        "privacy": "public"
+      },
+      "calf_definition": {
+        "type": "number",
+        "min": 0,
+        "max": 100,
+        "privacy": "public"
+      }
+    },
+    "arms_torso": {
+      "arm_build": {
+        "type": "string",
+        "privacy": "public"
+      },
+      "bicep_definition": {
+        "type": "number",
+        "min": 0,
+        "max": 100,
+        "privacy": "public"
+      },
+      "forearm_definition": {
+        "type": "number",
+        "min": 0,
+        "max": 100,
+        "privacy": "public"
+      },
+      "abdomen_shape": {
+        "type": "string",
+        "privacy": "public"
+      },
+      "ab_definition": {
+        "type": "number",
+        "min": 0,
+        "max": 100,
+        "privacy": "public"
+      },
+      "back_build": {
+        "type": "string",
+        "privacy": "public"
+      }
+    },
+    "marks_modifications": {
+      "scars": {
+        "type": "list<object>",
+        "privacy": "public"
+      },
+      "tattoos": {
+        "type": "list<object>",
+        "privacy": "public"
+      },
+      "piercings": {
+        "type": "list<object>",
+        "privacy": "public"
+      },
+      "cosmetic_procedures": {
+        "type": "list<object>",
+        "privacy": "medical_private"
+      },
+      "prosthetics": {
+        "type": "list<object>",
+        "privacy": "public"
+      }
+    }
+  },
+  "health_profile": {
+    "vision": {
+      "baseline": 100,
+      "conditions": []
+    },
+    "hearing": {
+      "baseline": 100,
+      "conditions": []
+    },
+    "mobility": {
+      "baseline": 100,
+      "conditions": []
+    },
+    "chronic_conditions": [],
+    "allergies": [],
+    "medications": [],
+    "pain_baseline": 0,
+    "old_injuries": [],
+    "disabilities": [],
+    "immune_resilience": 50,
+    "injury_recovery_rate": 50,
+    "illness_recovery_rate": 50,
+    "reproductive_health": {
+      "privacy": "medical_private",
+      "menstrual_cycle_enabled_when": "adult && reproductive_system_has_cycle",
+      "cycle_length_days": 28,
+      "cycle_variability": 5,
+      "pregnancy_state": "not_pregnant",
+      "fertility_state": "unknown",
+      "reproductive_history": []
+    }
+  },
+  "physical_ability": {
+    "strength": 50,
+    "endurance": 50,
+    "speed": 50,
+    "agility": 50,
+    "balance": 50,
+    "flexibility": 50,
+    "coordination": 50,
+    "grip_strength": 50,
+    "pain_tolerance": 50,
+    "heat_tolerance": 50,
+    "cold_tolerance": 50,
+    "fitness_background": [],
+    "training_frequency_per_week": 0,
+    "job_physicality": 0,
+    "sedentary_hours_per_day": 8
+  },
+  "hygiene_profile": {
+    "__note": "Baselines determine meaning. Same current cleanliness can feel fine to one NPC and intolerable to another.",
+    "normal_cleanliness": 70,
+    "preferred_cleanliness": 75,
+    "shower_trigger": 45,
+    "odor_tolerance": 45,
+    "sweat_tolerance": 55,
+    "dirty_clothes_tolerance": 45,
+    "hair_mess_tolerance": 55,
+    "oily_hair_tolerance": 45,
+    "bad_breath_tolerance": 35,
+    "typical_showers_per_day": 1.0,
+    "typical_hair_washes_per_week": 4,
+    "typical_teeth_brushes_per_day": 2,
+    "deodorant_use": 80,
+    "handwashing_concern": 60,
+    "clean_bedding_concern": 55,
+    "clean_home_concern": 55,
+    "public_cleanliness_concern": 70,
+    "partner_cleanliness_concern": 65,
+    "post_activity_shower_preference": 60
+  },
+  "grooming_profile": {
+    "overall_effort_baseline": 55,
+    "hair_care": 55,
+    "skin_care": 40,
+    "facial_hair_care": 50,
+    "body_hair_grooming": 40,
+    "nail_care": 35,
+    "dental_care": 70,
+    "makeup_use": 0,
+    "fragrance_use": 35,
+    "clothing_fit_awareness": 55,
+    "style_effort": 50,
+    "appearance_check_frequency": 40,
+    "mirror_use": 45,
+    "grooming_motives": [
+      "comfort",
+      "social_acceptance"
+    ],
+    "baseline_deviation_sensitivity": 50
+  },
+  "self_image": {
+    "body_confidence": 50,
+    "face_confidence": 50,
+    "sexual_confidence": 50,
+    "appearance_awareness": 50,
+    "body_awareness": 50,
+    "knows_which_features_get_attention": 40,
+    "comfort_using_appearance_socially": 35,
+    "modesty": 50,
+    "nudity_comfort": 50,
+    "attention_seeking": 35,
+    "favorite_features": [],
+    "disliked_features": [],
+    "insecurities": [],
+    "self_description_bias": 0,
+    "body_image_distortion": 0
+  },
+  "presentation_profile": {
+    "__note": "Presentation is what the NPC chooses to emphasize/hide; it is not physical truth.",
+    "feature_emphasis": [],
+    "feature_hiding": [],
+    "uses_appearance_as_social_tool": 35,
+    "flirt_through_appearance": 30,
+    "intimidate_through_appearance": 20,
+    "professional_status_display": 35,
+    "wealth_status_display": 25,
+    "fit_in_with_group": 50,
+    "stand_out_from_group": 30,
+    "contexts": {
+      "home_alone": {
+        "appearance_effort": 15,
+        "grooming_effort": 20,
+        "comfort_priority": 90,
+        "sexual_signal": 0
+      },
+      "home_with_family": {
+        "appearance_effort": 25,
+        "grooming_effort": 30,
+        "comfort_priority": 80,
+        "sexual_signal": 0
+      },
+      "home_with_partner": {
+        "appearance_effort": 30,
+        "grooming_effort": 35,
+        "comfort_priority": 80,
+        "sexual_signal": 15
+      },
+      "casual_public": {
+        "appearance_effort": 55,
+        "grooming_effort": 60,
+        "comfort_priority": 55,
+        "sexual_signal": 15
+      },
+      "work": {
+        "appearance_effort": 65,
+        "grooming_effort": 70,
+        "comfort_priority": 45,
+        "professionalism": 80,
+        "sexual_signal": 5
+      },
+      "date": {
+        "appearance_effort": 85,
+        "grooming_effort": 85,
+        "comfort_priority": 35,
+        "sexual_signal": 45
+      },
+      "formal_event": {
+        "appearance_effort": 90,
+        "grooming_effort": 90,
+        "comfort_priority": 25,
+        "status_display": 65
+      },
+      "exercise": {
+        "appearance_effort": 30,
+        "grooming_effort": 25,
+        "comfort_priority": 90,
+        "functional_priority": 95
+      },
+      "sleep": {
+        "appearance_effort": 5,
+        "grooming_effort": 10,
+        "comfort_priority": 100,
+        "sexual_signal": 0
+      },
+      "adult_intimate": {
+        "age_gate": 18,
+        "appearance_effort": 55,
+        "grooming_effort": 65,
+        "comfort_priority": 60,
+        "sexual_signal": 75
+      }
+    }
+  },
+  "adult_private_preferences": {
+    "enabled_when": "age >= 18",
+    "privacy": "partner_private",
+    "intimate_presentation": {
+      "likes_dressing_for_partner": 50,
+      "uses_clothing_as_signal": 45,
+      "lingerie_or_underwear_interest": 40,
+      "fragrance_for_intimacy": 35,
+      "body_grooming_effort": 50,
+      "prefers_subtle_signals": 50,
+      "prefers_obvious_signals": 35,
+      "confidence_when_dressed_up": 50
+    },
+    "aftercare": {
+      "post_sex_cleanliness_preference": 50,
+      "fluid_tolerance": 50,
+      "sweat_tolerance_intimate": 55,
+      "immediate_shower_preference": 40,
+      "likes_cuddling_before_cleanup": 60,
+      "likes_lingering_body_contact": 60,
+      "needs_personal_space_after": 30,
+      "cleanup_timing_preference": "personal",
+      "preferred_aftercare_actions": []
+    },
+    "boundaries": {
+      "privacy_need": 60,
+      "body_comment_comfort": 50,
+      "explicit_body_question_comfort": 35,
+      "nudity_with_partner_comfort": 50,
+      "public_sexual_attention_comfort": 25
+    }
+  },
+  "body_state": {
+    "__note": "0 is none/clean/rested where appropriate; 100 is severe/high.",
+    "cleanliness": 80,
+    "sweat": 0,
+    "sweat_wetness": 0,
+    "body_odor": 0,
+    "dirt": 0,
+    "grime": 0,
+    "oiliness": 10,
+    "hair_mess": 10,
+    "hair_oiliness": 10,
+    "skin_wetness": 0,
+    "body_heat": 50,
+    "breathlessness": 0,
+    "fatigue": 10,
+    "sleep_debt": 0,
+    "muscle_soreness": 0,
+    "pain": 0,
+    "hunger": 20,
+    "thirst": 20,
+    "bladder_need": 10,
+    "bowel_need": 5,
+    "sexual_aftercare_cleanup_need": 0,
+    "clothing_cleanliness": 90,
+    "clothing_dampness": 0,
+    "current_injuries": [],
+    "current_illness": [],
+    "temporary_marks": [],
+    "current_fragrance_strength": 0,
+    "current_makeup_state": "none",
+    "current_hair_state": "normal"
+  },
+  "state_decay": {
+    "per_hour": {
+      "body_heat_toward_baseline": 30,
+      "breathlessness_down": 70,
+      "sweat_wetness_down": 35,
+      "fatigue_down_when_resting": 8,
+      "muscle_soreness_down": 2,
+      "fragrance_strength_down": 8
+    },
+    "does_not_self_clean": [
+      "dirt",
+      "grime",
+      "body_odor",
+      "hair_oiliness",
+      "clothing_dirt",
+      "stains"
+    ],
+    "notes": [
+      "Sweat can dry while odor remains.",
+      "Dirt and grime normally require washing.",
+      "Clothing remains dirty until changed or laundered.",
+      "Soreness and injury recover on much slower timescales than body heat or breathlessness."
+    ]
+  },
+  "activities": {
+    "sleep_8h": {
+      "fatigue": -55,
+      "sleep_debt": -65,
+      "hair_mess": 15,
+      "oiliness": 8,
+      "body_odor": 5,
+      "hunger": 18,
+      "bladder_need": 25
+    },
+    "walking_30m": {
+      "sweat": 8,
+      "body_heat": 8,
+      "fatigue": 3,
+      "thirst": 5,
+      "clothing_cleanliness": -1
+    },
+    "brisk_walk_30m": {
+      "sweat": 18,
+      "body_heat": 15,
+      "fatigue": 7,
+      "thirst": 10,
+      "hair_mess": 4
+    },
+    "running_30m": {
+      "sweat": 55,
+      "sweat_wetness": 55,
+      "body_heat": 35,
+      "breathlessness": 55,
+      "fatigue": 22,
+      "thirst": 25,
+      "hair_mess": 20,
+      "body_odor": 12,
+      "clothing_cleanliness": -18,
+      "clothing_dampness": 45
+    },
+    "weight_training_60m": {
+      "sweat": 40,
+      "body_heat": 25,
+      "fatigue": 25,
+      "muscle_soreness": 15,
+      "thirst": 20,
+      "body_odor": 10,
+      "clothing_cleanliness": -15
+    },
+    "physical_labor_4h": {
+      "sweat": 65,
+      "dirt": 25,
+      "grime": 30,
+      "body_heat": 25,
+      "fatigue": 40,
+      "thirst": 40,
+      "body_odor": 30,
+      "hair_mess": 25,
+      "clothing_cleanliness": -50
+    },
+    "office_work_4h": {
+      "fatigue": 8,
+      "hunger": 8,
+      "thirst": 8,
+      "oiliness": 4
+    },
+    "yard_work_2h": {
+      "sweat": 55,
+      "dirt": 35,
+      "grime": 20,
+      "body_heat": 30,
+      "fatigue": 25,
+      "thirst": 30,
+      "hair_mess": 25,
+      "clothing_cleanliness": -40
+    },
+    "dancing_2h": {
+      "sweat": 45,
+      "body_heat": 25,
+      "fatigue": 20,
+      "thirst": 25,
+      "hair_mess": 15,
+      "body_odor": 15,
+      "clothing_cleanliness": -20
+    },
+    "adult_sexual_activity": {
+      "age_gate": 18,
+      "privacy": "partner_private",
+      "sweat": 25,
+      "body_heat": 20,
+      "fatigue": 12,
+      "hair_mess": 12,
+      "body_odor": 5,
+      "sexual_aftercare_cleanup_need": "preference_scaled",
+      "notes": [
+        "Body-state effects only; behavior/consent/relationship logic is handled elsewhere."
+      ]
+    },
+    "hot_weather_1h": {
+      "sweat": 20,
+      "body_heat": 20,
+      "thirst": 15,
+      "body_odor": 5
+    },
+    "rain_15m": {
+      "skin_wetness": 45,
+      "hair_mess": 25,
+      "clothing_dampness": 50
+    },
+    "swimming_30m": {
+      "skin_wetness": 80,
+      "hair_mess": 35,
+      "sweat": -20,
+      "body_heat": -10
+    },
+    "smoking_exposure_1h": {
+      "odor_external": 20,
+      "clothing_odor": 25,
+      "hair_odor": 15
+    },
+    "cooking_greasy_1h": {
+      "clothing_odor": 12,
+      "hair_odor": 8,
+      "skin_oiliness": 4
+    }
+  },
+  "care_actions": {
+    "quick_shower": {
+      "cleanliness": 35,
+      "sweat": -70,
+      "body_odor": -65,
+      "dirt": -40,
+      "grime": -30,
+      "body_heat": -10
+    },
+    "full_shower": {
+      "cleanliness": 80,
+      "sweat": -100,
+      "body_odor": -90,
+      "dirt": -90,
+      "grime": -85,
+      "oiliness": -70,
+      "hair_mess": -20
+    },
+    "wash_hair": {
+      "hair_oiliness": -90,
+      "hair_mess": -40,
+      "hair_state": "wet_clean"
+    },
+    "brush_teeth": {
+      "breath_odor": -80
+    },
+    "use_deodorant": {
+      "body_odor": -35,
+      "odor_suppression_hours": 6
+    },
+    "change_clothes": {
+      "clothing_cleanliness": "from_inventory_item",
+      "clothing_dampness": 0
+    },
+    "wash_face": {
+      "skin_oiliness": -35,
+      "cleanliness": 10
+    },
+    "shave_or_trim": {
+      "grooming_deviation": "toward_baseline"
+    },
+    "apply_makeup": {
+      "current_makeup_state": "context_selected"
+    },
+    "remove_makeup": {
+      "current_makeup_state": "none"
+    },
+    "apply_fragrance": {
+      "current_fragrance_strength": 65
+    },
+    "rest_30m": {
+      "breathlessness": -70,
+      "body_heat": "toward_baseline",
+      "fatigue": -5
+    },
+    "sleep": {
+      "delegates_to": "sleep_system"
+    }
+  },
+  "need_generation": {
+    "shower_need": {
+      "formula": "weighted_deficit(current.cleanliness, profile.shower_trigger) + sweat/profile.sweat_tolerance + odor/profile.odor_tolerance + grime",
+      "levels": {
+        "0-24": "none",
+        "25-44": "noticeable",
+        "45-64": "wants_cleanup",
+        "65-84": "strong",
+        "85-100": "urgent"
+      },
+      "example_thoughts": {
+        "noticeable": "I could use a shower later.",
+        "strong": "I feel gross. I need a shower.",
+        "urgent": "I need to get cleaned up as soon as I can."
+      }
+    },
+    "grooming_need": {
+      "inputs": [
+        "hair_mess",
+        "hair_oiliness",
+        "facial_hair_deviation",
+        "makeup_state",
+        "nails",
+        "context_expected_effort"
+      ],
+      "baseline_relative": true
+    },
+    "clothing_change_need": {
+      "inputs": [
+        "clothing_cleanliness",
+        "clothing_dampness",
+        "odor",
+        "stains",
+        "context"
+      ],
+      "baseline_relative": true
+    }
+  },
+  "baseline_and_trend": {
+    "tracked_windows": [
+      "today",
+      "3_days",
+      "7_days",
+      "30_days"
+    ],
+    "metrics": [
+      "cleanliness",
+      "shower_frequency",
+      "hair_effort",
+      "makeup_effort",
+      "facial_hair_effort",
+      "outfit_effort",
+      "laundry_state",
+      "sleep",
+      "exercise"
+    ],
+    "deviation_rules": [
+      {
+        "pattern": "normally_high_grooming -> sustained_low",
+        "possible_causes": [
+          "illness",
+          "depression",
+          "grief",
+          "overwork",
+          "injury",
+          "poverty",
+          "sleep_loss",
+          "substance_use",
+          "situational_neglect"
+        ]
+      },
+      {
+        "pattern": "normally_low_grooming -> sudden_high",
+        "possible_causes": [
+          "improved_mood",
+          "new_job",
+          "date",
+          "attraction",
+          "formal_event",
+          "reconciliation",
+          "new_routine",
+          "status_goal"
+        ]
+      },
+      {
+        "rule": "Never infer the cause from grooming change alone. It is a cue, not proof."
+      }
+    ]
+  },
+  "wardrobe_system": {
+    "inventory_item_fields": [
+      "item_id",
+      "category",
+      "subtype",
+      "brand",
+      "material",
+      "color",
+      "pattern",
+      "size",
+      "fit",
+      "condition",
+      "cleanliness",
+      "odor",
+      "dampness",
+      "stains",
+      "damage",
+      "warmth",
+      "formality",
+      "professionalism",
+      "comfort",
+      "mobility",
+      "body_visibility",
+      "feature_emphasis",
+      "feature_concealment",
+      "favorite",
+      "sentimental_value",
+      "purchase_price",
+      "acquired_date",
+      "storage_location",
+      "privacy_scope"
+    ],
+    "categories": [
+      "shirt",
+      "tshirt",
+      "blouse",
+      "sweater",
+      "hoodie",
+      "jacket",
+      "coat",
+      "dress",
+      "skirt",
+      "jeans",
+      "pants",
+      "shorts",
+      "work_uniform",
+      "sportswear",
+      "sleepwear",
+      "underwear",
+      "bra",
+      "lingerie",
+      "suit",
+      "tie",
+      "shoes",
+      "boots",
+      "heels",
+      "sneakers",
+      "hat",
+      "gloves",
+      "jewelry",
+      "watch",
+      "glasses",
+      "accessory"
+    ],
+    "fit_values": [
+      "very_tight",
+      "tight",
+      "fitted",
+      "regular",
+      "relaxed",
+      "loose",
+      "oversized"
+    ],
+    "body_visibility": {
+      "cleavage": 0,
+      "chest_shape": 0,
+      "shoulders": 0,
+      "arms": 0,
+      "waist": 0,
+      "hips": 0,
+      "butt": 0,
+      "legs": 0,
+      "muscle_definition": 0,
+      "genital_contour": 0
+    },
+    "rules": [
+      "An NPC may only wear an owned/available item unless a world event provides it.",
+      "Dirty laundry removes items from clean availability until washed.",
+      "Visibility is a product of garment, fit, material, body, posture, lighting, and movement.",
+      "Visible contour never reveals hidden exact anatomy measurements."
+    ]
+  },
+  "laundry_system": {
+    "states": [
+      "clean",
+      "worn",
+      "dirty",
+      "stained",
+      "wet",
+      "drying",
+      "in_washer",
+      "in_dryer",
+      "needs_repair"
+    ],
+    "hamper_capacity": 100,
+    "laundry_concern": 50,
+    "rewear_tolerance": 50,
+    "uniform_priority": 75,
+    "underwear_rewear_tolerance": 5
+  },
+  "observer_perception": {
+    "notice_inputs": [
+      "distance",
+      "lighting",
+      "attention",
+      "line_of_sight",
+      "observer_vision",
+      "movement",
+      "contrast",
+      "relationship_focus",
+      "attraction_focus"
+    ],
+    "senses": {
+      "visual": [
+        "body_shape",
+        "clothing",
+        "hair",
+        "grooming",
+        "makeup",
+        "posture",
+        "gait",
+        "visible_marks",
+        "sweat",
+        "dirt",
+        "injury"
+      ],
+      "smell": [
+        "fragrance",
+        "body_odor",
+        "smoke",
+        "work_odor",
+        "alcohol_odor",
+        "environmental_odor"
+      ],
+      "auditory": [
+        "voice",
+        "breathing",
+        "coughing",
+        "movement_sounds"
+      ],
+      "touch": [
+        "temperature",
+        "sweat",
+        "muscle_tension",
+        "skin_condition",
+        "only_if_contact_occurs"
+      ]
+    },
+    "attraction_preferences": {
+      "face": 50,
+      "eyes": 50,
+      "hair": 50,
+      "lips": 50,
+      "height": 50,
+      "build": 50,
+      "muscle": 50,
+      "curves": 50,
+      "chest": 50,
+      "butt": 50,
+      "legs": 50,
+      "hands": 50,
+      "facial_hair": 50,
+      "grooming": 50,
+      "style": 50,
+      "voice": 50,
+      "scent": 50,
+      "confidence": 50
+    },
+    "rules": [
+      "Attractiveness is observer-specific, not an objective body property.",
+      "Observers can disagree strongly about the same person.",
+      "Good grooming can improve an observer's impression but does not prove openness, morality, wealth, or mental health.",
+      "Poor grooming can be caused by work, illness, poverty, depression, exhaustion, culture, preference, or context."
+    ]
+  },
+  "context_visibility": {
+    "public_street": [
+      "public"
+    ],
+    "work": [
+      "public"
+    ],
+    "friend_private": [
+      "public",
+      "personal_if_known"
+    ],
+    "home_alone": [
+      "self"
+    ],
+    "home_partner": [
+      "public",
+      "personal",
+      "known_private"
+    ],
+    "medical": [
+      "public",
+      "personal",
+      "medical_private_if_relevant"
+    ],
+    "adult_intimate": [
+      "public",
+      "personal",
+      "known_private",
+      "partner_private_if_age18_and_context"
+    ],
+    "text_chat": [
+      "known_facts_only_no_physical_observation"
+    ]
+  },
+  "genetics": {
+    "__note": "Use family linkage when available; do not generate children as unrelated random bodies.",
+    "inheritable_tendencies": [
+      "height",
+      "frame",
+      "skin_tone",
+      "eye_color",
+      "hair_color",
+      "hair_texture",
+      "balding_tendency",
+      "face_shape",
+      "nose_shape",
+      "lip_shape",
+      "body_build_tendency",
+      "freckling",
+      "some_health_risks"
+    ],
+    "environmental_modifiers": [
+      "nutrition",
+      "exercise",
+      "illness",
+      "injury",
+      "sun_exposure",
+      "occupation",
+      "pregnancy",
+      "medication",
+      "aging"
+    ],
+    "child_generation_rule": "blend parental tendencies + population variation + development stage"
+  },
+  "development_and_aging": {
+    "life_stages": {
+      "child": {
+        "adult_intimacy": false
+      },
+      "teen": {
+        "adult_intimacy": false
+      },
+      "adult": {
+        "adult_intimacy": true
+      },
+      "older_adult": {
+        "adult_intimacy": true
+      },
+      "elder": {
+        "adult_intimacy": true
+      }
+    },
+    "slow_changes": [
+      "height_until_maturity",
+      "weight",
+      "body_composition",
+      "muscle",
+      "hair_length",
+      "hair_gray",
+      "hair_loss",
+      "skin_texture",
+      "wrinkles",
+      "mobility",
+      "strength",
+      "endurance",
+      "healing_rate",
+      "vision",
+      "hearing",
+      "dental_state"
+    ],
+    "event_changes": [
+      "scar_from_injury",
+      "tattoo",
+      "piercing",
+      "surgery",
+      "pregnancy",
+      "amputation",
+      "prosthetic",
+      "major_weight_change",
+      "haircut",
+      "hair_dye",
+      "cosmetic_procedure"
+    ]
+  },
+  "environment_effects": {
+    "heat": {
+      "sweat": 25,
+      "thirst": 20,
+      "body_heat": 20
+    },
+    "cold": {
+      "body_heat": -20,
+      "comfort": -15
+    },
+    "humidity": {
+      "sweat_drying_rate": -40
+    },
+    "sun": {
+      "sunburn_risk": "skin_scaled",
+      "tanning": "skin_scaled"
+    },
+    "rain": {
+      "wetness": 50,
+      "hair_mess": 25,
+      "clothing_dampness": 55
+    },
+    "mud": {
+      "dirt": 45,
+      "clothing_cleanliness": -50
+    },
+    "dust": {
+      "dirt": 20,
+      "hair_dirt": 15
+    },
+    "smoke": {
+      "hair_odor": 20,
+      "clothing_odor": 30
+    },
+    "grease_work": {
+      "grime": 45,
+      "hand_dirt": 60,
+      "clothing_cleanliness": -45
+    }
+  },
+  "substance_medication_effect_hooks": {
+    "alcohol": [
+      "coordination",
+      "balance",
+      "speech",
+      "body_heat_perception",
+      "odor",
+      "sleep_quality"
+    ],
+    "caffeine": [
+      "alertness",
+      "sleep",
+      "anxiety",
+      "urination"
+    ],
+    "nicotine": [
+      "odor",
+      "heart_rate",
+      "appetite"
+    ],
+    "medications": [
+      "weight",
+      "appetite",
+      "sweat",
+      "dryness",
+      "tremor",
+      "fatigue",
+      "sexual_function",
+      "sleep"
+    ],
+    "rule": "Substance logic lives in its own system; Body receives physical effects."
+  },
+  "body_history": {
+    "event_fields": [
+      "event_id",
+      "age",
+      "date",
+      "category",
+      "cause",
+      "body_region",
+      "change",
+      "permanent",
+      "visibility",
+      "pain",
+      "medical_treatment",
+      "scar_result",
+      "self_image_effect",
+      "known_by"
+    ],
+    "categories": [
+      "injury",
+      "illness",
+      "surgery",
+      "pregnancy",
+      "birth",
+      "weight_change",
+      "fitness_change",
+      "tattoo",
+      "piercing",
+      "cosmetic_change",
+      "hair_change",
+      "disability",
+      "prosthetic",
+      "dental",
+      "other"
+    ]
+  },
+  "prompt_gating": {
+    "self_fact_block": {
+      "always_include_when_relevant": [
+        "name",
+        "age",
+        "eye_color",
+        "natural/current_hair_color",
+        "height",
+        "visible_marks",
+        "basic_body_build",
+        "current_clothes",
+        "current_grooming_state"
+      ],
+      "rule": "The NPC speaks with certainty about normal self facts unless their cognition/medical condition specifically impairs that knowledge."
+    },
+    "ordinary_text_chat": {
+      "include": [
+        "identity",
+        "relevant_self_facts",
+        "relationship_known_facts",
+        "relevant_body_state_needs"
+      ],
+      "exclude": [
+        "partner_private",
+        "medical_private_unless_topic",
+        "hidden_anatomy",
+        "raw_measurements_not_relevant"
+      ]
+    },
+    "in_person": {
+      "include": [
+        "observable_current_appearance",
+        "current_clothes",
+        "grooming",
+        "visible_injury",
+        "odor_if_noticeable",
+        "body_language_hooks"
+      ],
+      "exclude": [
+        "hidden_exact_measurements",
+        "unknown_private_facts"
+      ]
+    },
+    "adult_intimate": {
+      "requirements": [
+        "all_involved_age>=18",
+        "appropriate_context",
+        "privacy_gate"
+      ],
+      "include": [
+        "relevant_partner_private_facts",
+        "relevant_body_state",
+        "known_preferences",
+        "relationship_knowledge"
+      ],
+      "exclude": [
+        "facts not known to viewpoint character unless the engine needs them for simulation-only state"
+      ]
+    }
+  },
+  "generation": {
+    "__note": "These are broad default pools. Region/family/occupation/age modules can override weights.",
+    "height_cm": {
+      "adult_male": {
+        "mean": 176,
+        "sd": 8,
+        "min": 150,
+        "max": 205
+      },
+      "adult_female": {
+        "mean": 163,
+        "sd": 7,
+        "min": 140,
+        "max": 190
+      }
+    },
+    "body_types": {
+      "male": [
+        "slim",
+        "average",
+        "athletic",
+        "muscular",
+        "stocky",
+        "heavy"
+      ],
+      "female": [
+        "slim",
+        "average",
+        "athletic",
+        "curvy",
+        "soft",
+        "heavy"
+      ],
+      "neutral": [
+        "slim",
+        "average",
+        "athletic",
+        "soft",
+        "stocky",
+        "heavy"
+      ]
+    },
+    "face_shapes": [
+      "oval",
+      "round",
+      "square",
+      "heart",
+      "diamond",
+      "long",
+      "soft_square"
+    ],
+    "eye_shapes": [
+      "almond",
+      "round",
+      "hooded",
+      "deep_set",
+      "upturned",
+      "downturned",
+      "monolid",
+      "wide_set"
+    ],
+    "hair_textures": [
+      "straight",
+      "wavy",
+      "curly",
+      "coily",
+      "mixed"
+    ],
+    "postures": [
+      "upright",
+      "relaxed",
+      "slouched",
+      "forward_head",
+      "guarded",
+      "military",
+      "loose"
+    ],
+    "gaits": [
+      "steady",
+      "quick",
+      "slow",
+      "long_stride",
+      "short_stride",
+      "bouncy",
+      "heavy",
+      "careful"
+    ],
+    "grooming_archetypes": {
+      "low_maintenance": {
+        "weight": 20,
+        "overall_effort": [
+          15,
+          40
+        ],
+        "shower_trigger": [
+          20,
+          45
+        ],
+        "style_effort": [
+          10,
+          35
+        ]
+      },
+      "average": {
+        "weight": 55,
+        "overall_effort": [
+          40,
+          70
+        ],
+        "shower_trigger": [
+          35,
+          60
+        ],
+        "style_effort": [
+          35,
+          65
+        ]
+      },
+      "well_groomed": {
+        "weight": 20,
+        "overall_effort": [
+          70,
+          90
+        ],
+        "shower_trigger": [
+          55,
+          75
+        ],
+        "style_effort": [
+          65,
+          90
+        ]
+      },
+      "meticulous_clean": {
+        "weight": 5,
+        "overall_effort": [
+          85,
+          100
+        ],
+        "shower_trigger": [
+          70,
+          90
+        ],
+        "style_effort": [
+          70,
+          100
+        ],
+        "typical_showers_per_day": [
+          1.5,
+          3.0
+        ]
+      }
+    },
+    "presentation_archetypes": {
+      "comfort_first": {
+        "weight": 30
+      },
+      "blend_in": {
+        "weight": 25
+      },
+      "professional": {
+        "weight": 15
+      },
+      "fashion_aware": {
+        "weight": 12
+      },
+      "attention_seeking": {
+        "weight": 7
+      },
+      "appearance_strategic": {
+        "weight": 6
+      },
+      "low_awareness": {
+        "weight": 5
+      }
+    },
+    "adult_private_generation": {
+      "age_gate": 18,
+      "independent_of_morality": true,
+      "independent_of_iq": true,
+      "independent_of_public_style": true,
+      "rule": "Private adult preferences are generated as individual variation and then modified by life history, relationship experience, culture, and traits."
+    }
+  },
+  "integration_rules": {
+    "trait_links": [
+      {
+        "trait": "trait.guard",
+        "may_influence": [
+          "privacy_need",
+          "feature_hiding",
+          "body_question_comfort"
+        ],
+        "not_deterministic": true
+      },
+      {
+        "trait": "trait.openness",
+        "may_influence": [
+          "sharing_body_facts",
+          "appearance_experimentation"
+        ],
+        "not_deterministic": true
+      },
+      {
+        "trait": "trait.pride",
+        "may_influence": [
+          "appearance_effort",
+          "feature_emphasis"
+        ],
+        "not_deterministic": true
+      },
+      {
+        "trait": "trait.shame",
+        "may_influence": [
+          "body_insecurity",
+          "feature_hiding"
+        ],
+        "not_deterministic": true
+      },
+      {
+        "trait": "trait.desire",
+        "may_influence": [
+          "intimate_presentation_in_context"
+        ],
+        "not_deterministic": true
+      },
+      {
+        "trait": "trait.attraction",
+        "may_influence": [
+          "notice_partner_features",
+          "presentation_effort_for_target"
+        ],
+        "not_deterministic": true
+      },
+      {
+        "trait": "trait.anxiety",
+        "may_influence": [
+          "appearance_checking",
+          "self_consciousness"
+        ],
+        "not_deterministic": true
+      }
+    ],
+    "needs_links": [
+      "shower",
+      "groom",
+      "change_clothes",
+      "rest",
+      "sleep",
+      "hydrate",
+      "eat",
+      "bathroom",
+      "medical_attention"
+    ],
+    "job_links": [
+      "uniform",
+      "physicality",
+      "work_dirt",
+      "calluses",
+      "safety_gear",
+      "grooming_code",
+      "odor_exposure"
+    ],
+    "relationship_links": [
+      "known_private_facts",
+      "comfort_at_home",
+      "intimate_presentation",
+      "aftercare",
+      "observer_attraction"
+    ],
+    "memory_links": [
+      "body_history",
+      "learned_partner_preferences",
+      "appearance_change_events",
+      "injury_history"
+    ],
+    "world_links": [
+      "weather",
+      "temperature",
+      "water_access",
+      "laundry_access",
+      "medical_access",
+      "clothing_inventory"
+    ]
+  },
+  "sample_profiles": {
+    "meticulous_public_relaxed_home": {
+      "hygiene_profile": {
+        "preferred_cleanliness": 92,
+        "shower_trigger": 78,
+        "typical_showers_per_day": 2.0
+      },
+      "grooming_profile": {
+        "overall_effort_baseline": 88,
+        "makeup_use": 75,
+        "hair_care": 90,
+        "style_effort": 90
+      },
+      "presentation_profile": {
+        "contexts": {
+          "casual_public": {
+            "appearance_effort": 92
+          },
+          "work": {
+            "appearance_effort": 95
+          },
+          "home_alone": {
+            "appearance_effort": 12
+          },
+          "home_with_partner": {
+            "appearance_effort": 22
+          }
+        }
+      }
+    },
+    "low_hygiene_baseline": {
+      "hygiene_profile": {
+        "preferred_cleanliness": 45,
+        "shower_trigger": 22,
+        "typical_showers_per_day": 0.5,
+        "odor_tolerance": 75,
+        "sweat_tolerance": 80
+      },
+      "grooming_profile": {
+        "overall_effort_baseline": 25,
+        "style_effort": 20
+      }
+    },
+    "clean_freak_after_run": {
+      "before": {
+        "cleanliness": 95,
+        "sweat": 0
+      },
+      "activity": "running_30m",
+      "after": {
+        "cleanliness": 70,
+        "sweat": 55,
+        "body_odor": 12
+      },
+      "interpretation": "Shower need becomes strong because current state crossed this NPC's personal threshold, even though another NPC might consider the same state acceptable."
+    }
+  }
+}

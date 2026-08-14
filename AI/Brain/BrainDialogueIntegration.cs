@@ -9,80 +9,49 @@ using System.Threading.Tasks;
 namespace ProjectEve.AI.Brain
 {
     /// <summary>
-    /// Example integration bridge for Brain.cs.
+    /// Bridge between Brain, LineBank, and the split dialogue engines.
     ///
-    /// This intentionally keeps LineBank outside DialogueEngineText:
-    /// Brain owns speaker/intent/bank policy.
-    /// DialogueEngineText only asks for fallback when its LLM is slow or fails.
+    /// TEXT FLOW:
+    /// ThoughtPacket -> LineBank candidate seed -> Qwen final reply -> grow LineBank.
+    ///
+    /// A LineBank hit is NOT sent directly to the player.
+    /// It is only a candidate for Qwen to adapt/ignore.
+    /// Direct bank output is reserved for a genuine dialogue-model failure.
     /// </summary>
     public static class BrainDialogueIntegration
     {
         private static readonly LineBankService LineBank = new();
 
-        public static async Task<string> ReplyTextAsync(
+        public static async Task<TextDialogueResult> ReplyTextAsync(
             Brain brain,
             SimCharacter owner,
             string playerMessage,
             ThoughtPacket thought,
             string recentChat,
             string relationshipContext,
-            string lineBankSpeaker = "eve2",
-            int fallbackAfterMs = 3500)
+            string lineBankSpeaker = "eve2")
         {
-            string? PullFallback()
+            LineHit? seedHit = PullSeed(
+                brain,
+                owner,
+                playerMessage,
+                thought,
+                lineBankSpeaker);
+
+            string? seed = seedHit?.Text;
+
+            if (seedHit != null)
+                brain.RecordLineBankSeed(seedHit);
+            else
+                brain.RecordNoLineBankSeed();
+
+            void StoreFinal(string finalText)
             {
                 try
                 {
-                    if (!LineBank.DbExists)
-                        return null;
-
-                    var traits = thought.Tags
-                        .Select(t => t.TraitId)
-                        .Distinct(StringComparer.OrdinalIgnoreCase)
-                        .Take(4)
-                        .ToList();
-
-                    int intensity = thought.Tags.Count == 0
-                        ? 5
-                        : Math.Clamp(
-                            (int)Math.Round(thought.Tags.Average(t => t.Intensity)),
-                            1,
-                            10);
-
-                    if (traits.Count == 0 && owner.Traits != null)
-                    {
-                        traits = owner.Traits.GetAll()
-                            .Where(kv =>
-                                TraitEngine.FastIds.Contains(kv.Key) &&
-                                kv.Value >= 65)
-                            .OrderByDescending(kv => kv.Value)
-                            .Take(4)
-                            .Select(kv => kv.Key)
-                            .ToList();
-                    }
-
-                    string? intent = LineBankService.GuessIntent(playerMessage);
-
-                    var hit = LineBank.TryPull(
-                        lineBankSpeaker,
-                        intent,
-                        traits,
-                        intensity,
-                        channel: "text");
-
-                    return hit?.Text;
-                }
-                catch
-                {
-                    return null;
-                }
-            }
-
-            void StoreFresh(string fresh)
-            {
-                try
-                {
-                    if (string.IsNullOrWhiteSpace(fresh) || fresh == "...")
+                    if (string.IsNullOrWhiteSpace(finalText) ||
+                        finalText == "..." ||
+                        finalText.StartsWith('('))
                         return;
 
                     string intent =
@@ -101,34 +70,55 @@ namespace ProjectEve.AI.Brain
                             1,
                             10);
 
+                    // Keep useful multi-bubble text together when appropriate.
+                    var parts = finalText
+                        .Split(new[] { '\r', '\n' },
+                            StringSplitOptions.RemoveEmptyEntries)
+                        .Select(x => x.Trim())
+                        .Where(x => x.Length > 0)
+                        .ToList();
+
+                    if (parts.Count is >= 2 and <= 5 &&
+                        parts.All(x => x.Length < 120))
+                    {
+                        LineBank.StoreLiveCombo(
+                            lineBankSpeaker,
+                            intent,
+                            parts,
+                            "text");
+                        return;
+                    }
+
                     LineBank.StoreLiveLine(
                         lineBankSpeaker,
                         intent,
-                        fresh,
-                        intensity,
-                        "text",
-                        traitWeights.Count == 0 ? null : traitWeights);
+                        finalText,
+                        style: null,
+                        intensity: intensity,
+                        channel: "text",
+                        traitWeights:
+                            traitWeights.Count == 0
+                                ? null
+                                : traitWeights);
                 }
                 catch
                 {
-                    // Bank enrichment must never break dialogue.
+                    // Bank growth must never break dialogue.
                 }
             }
 
-            var result = await DialogueEngineText.GenerateAsync(
+            return await DialogueEngineText.GenerateAsync(
                 owner,
                 playerMessage,
                 thought,
                 recentChat,
                 relationshipContext,
-                pullFallbackLine: PullFallback,
-                storeLlmLine: StoreFresh,
-                softTimeoutMs: fallbackAfterMs);
-
-            return result.Text;
+                lineBankSeed: seed,
+                previousNpcReply: brain.LastNpcReply,
+                storeFinalLine: StoreFinal);
         }
 
-        public static async Task<string> ReplyInPersonAsync(
+        public static async Task<InPersonDialogueResult> ReplyInPersonAsync(
             SimCharacter owner,
             string playerMessage,
             ThoughtPacket thought,
@@ -136,15 +126,87 @@ namespace ProjectEve.AI.Brain
             string relationshipContext,
             string sceneContext)
         {
-            var result = await DialogueEngineInPerson.GenerateAsync(
+            return await DialogueEngineInPerson.GenerateAsync(
                 owner,
                 playerMessage,
                 thought,
                 recentChat,
                 relationshipContext,
                 sceneContext);
+        }
 
-            return result.ToPlayerText();
+        private static LineHit? PullSeed(
+            Brain brain,
+            SimCharacter owner,
+            string playerMessage,
+            ThoughtPacket thought,
+            string lineBankSpeaker)
+        {
+            try
+            {
+                if (!LineBank.DbExists)
+                    return null;
+
+                // Cooldown rule #2:
+                // after two LineBank-assisted replies in a row, force one AI_NEW turn.
+                if (!brain.CanUseLineBankSeed)
+                    return null;
+
+                // Strong-match gate:
+                // no recognized message intent = no seed.
+                // This prevents generic trait-based lines from hijacking ordinary chat.
+                string? intent = LineBankService.GuessIntent(playerMessage);
+                if (string.IsNullOrWhiteSpace(intent))
+                    return null;
+
+                var traits = thought.Tags
+                    .Select(t => t.TraitId)
+                    .Distinct(StringComparer.OrdinalIgnoreCase)
+                    .Take(4)
+                    .ToList();
+
+                int intensity = thought.Tags.Count == 0
+                    ? 5
+                    : Math.Clamp(
+                        (int)Math.Round(
+                            thought.Tags.Average(t => t.Intensity)),
+                        1,
+                        10);
+
+                var hit = LineBank.TryPull(
+                    lineBankSpeaker,
+                    intent,
+                    traits,
+                    intensity,
+                    channel: "text",
+                    excludeRowId: brain.LastLineBankSeedRowId);
+
+                if (hit == null)
+                    return null;
+
+                // TryPull may fall back to a trait-derived intent if the requested
+                // intent had no row. For seed mode, that is too weak a match.
+                string expectedIntent = intent.StartsWith("intent.", StringComparison.OrdinalIgnoreCase)
+                    ? intent
+                    : "intent." + intent;
+
+                if (!hit.IntentId.Equals(
+                        expectedIntent,
+                        StringComparison.OrdinalIgnoreCase))
+                    return null;
+
+                // Cooldown rule #1:
+                // never use the same wording on back-to-back LineBank turns,
+                // even if duplicate rows exist in the DB.
+                if (brain.IsSameAsLastSeed(hit.Text))
+                    return null;
+
+                return hit;
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }

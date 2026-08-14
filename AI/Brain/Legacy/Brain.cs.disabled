@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 
-namespace ProjectEve.AI.Brain
+namespace ProjectEve.AI.Brain.Legacy
 {
     /// <summary>
     /// Shared brain for every NPC.
@@ -47,76 +47,9 @@ namespace ProjectEve.AI.Brain
         /// <summary>Speaker key for LineBank (eve2 / adam / later npc).</summary>
         public string LineBankSpeaker { get; set; } = "eve2";
 
-        /// <summary>
-        /// Server-provided durable conversation context.
-        /// When present, Thought and Dialogue use the complete active section
-        /// plus prior event/fact/plan continuity instead of only the rolling log.
-        /// </summary>
-        public string ConversationContextOverride { get; set; } = "";
-
         // Rolling chat window so Dialogue/Thought stay on-thread
         readonly List<string> _sessionLog = new();
         const int SessionLogMaxTurns = 8; // 8 You+Eve pairs
-
-        // LineBank seed cooldown is per Brain/NPC, never global.
-        private int? _lastLineBankSeedRowId;
-        private string _lastLineBankSeedText = "";
-        private int _lineBankSeedStreak = 0;
-        private string _lastNpcReply = "";
-
-        internal int? LastLineBankSeedRowId => _lastLineBankSeedRowId;
-        internal string LastLineBankSeedText => _lastLineBankSeedText;
-        internal int LineBankSeedStreak => _lineBankSeedStreak;
-        internal string LastNpcReply => _lastNpcReply;
-
-        internal bool CanUseLineBankSeed => _lineBankSeedStreak < 2;
-
-        internal void RecordLineBankSeed(LineHit hit)
-        {
-            _lastLineBankSeedRowId = hit.RowId;
-            _lastLineBankSeedText = hit.Text ?? "";
-            _lineBankSeedStreak++;
-        }
-
-        internal void RecordNoLineBankSeed()
-        {
-            _lineBankSeedStreak = 0;
-        }
-
-        internal void RecordFinalNpcReply(string reply)
-        {
-            _lastNpcReply = NormalizeDialogueForCompare(reply);
-        }
-
-        internal bool IsSameAsLastSeed(string? text)
-        {
-            string now = NormalizeDialogueForCompare(text);
-            return now.Length > 0 &&
-                   now == NormalizeDialogueForCompare(_lastLineBankSeedText);
-        }
-
-        internal bool IsSameAsLastReply(string? text)
-        {
-            string now = NormalizeDialogueForCompare(text);
-            return now.Length > 0 && now == _lastNpcReply;
-        }
-
-        private static string NormalizeDialogueForCompare(string? text)
-        {
-            if (string.IsNullOrWhiteSpace(text))
-                return "";
-
-            var chars = text
-                .Trim()
-                .ToLowerInvariant()
-                .Where(c => char.IsLetterOrDigit(c) || char.IsWhiteSpace(c))
-                .ToArray();
-
-            return string.Join(
-                " ",
-                new string(chars)
-                    .Split(' ', StringSplitOptions.RemoveEmptyEntries));
-        }
 
         static readonly LineBankService LineBank = new();
 
@@ -136,12 +69,10 @@ namespace ProjectEve.AI.Brain
             if (!string.IsNullOrWhiteSpace(aboutBlock))
                 thoughtInput += "\n" + aboutBlock;
 
-            // Keep Thought on the complete active conversation section when
-            // the server supplied one. Legacy callers still fall back to the
-            // rolling 8-turn session log.
-            string conversation = BuildConversationContextBlock();
-            if (conversation != "(no recent chat)")
-                thoughtInput += "\nCONVERSATION CONTEXT:\n" + conversation;
+            // keep Thought on the same thread as chat
+            string session = BuildSessionLogBlock();
+            if (session != "(no recent chat)")
+                thoughtInput += "\nRECENT CHAT:\n" + session;
 
             LastThought = ThoughtEngine.GenerateThought(thoughtInput, Owner);
 
@@ -263,7 +194,7 @@ namespace ProjectEve.AI.Brain
             // If Reply() is called without Think(), parse what we have.
             ThoughtPacket thoughtPacket = ThoughtPacket.Parse(LastThought);
 
-            string recentChat = BuildConversationContextBlock();
+            string recentChat = BuildSessionLogBlock();
             string relationshipContext = BuildRelationshipBlock(Owner);
 
             if (!inPerson)
@@ -285,7 +216,6 @@ namespace ProjectEve.AI.Brain
 
                 string formatted = FormatTextReply(result.Text);
                 LastReplySource = result.Source;
-                RecordFinalNpcReply(formatted);
 
                 RememberTurn(playerMessage, formatted);
                 return formatted;
@@ -341,26 +271,7 @@ namespace ProjectEve.AI.Brain
             return string.Join("\n", _sessionLog);
         }
 
-        string BuildConversationContextBlock()
-        {
-            if (!string.IsNullOrWhiteSpace(ConversationContextOverride))
-                return ConversationContextOverride.Trim();
-
-            return BuildSessionLogBlock();
-        }
-
-        public void ClearSessionLog()
-        {
-            _sessionLog.Clear();
-            ConversationContextOverride = "";
-            _lastLineBankSeedRowId = null;
-            _lastLineBankSeedText = "";
-            _lineBankSeedStreak = 0;
-            _lastNpcReply = "";
-        }
-
-        public void ClearConversationContext()
-            => ConversationContextOverride = "";
+        public void ClearSessionLog() => _sessionLog.Clear();
 
         // =====================================================
         // TEXT PRESENTATION

@@ -12,6 +12,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="AI\Brain\Legacy\Brain.cs.disabled" />
+    <None Remove="AI\Brain\Legacy\DialogueEngine.cs.disabled" />
+    <None Remove="AI\Brain\Legacy\ThoughtEngine.cs.disabled" />
     <None Remove="AI\Training\Packs\aftercare.json" />
     <None Remove="AI\Training\Packs\anger_reaction.json" />
     <None Remove="AI\Training\Packs\anti_patterns.json" />
@@ -57,6 +60,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="AI\Brain\Legacy\" />
     <Folder Include="Characters\Traits\TraitJson\Matrix\" />
     <Folder Include="Characters\Traits\TraitJson\SubSlowTraits\" />
     <Folder Include="Characters\Traits\TraitJson\MidTraits\" />

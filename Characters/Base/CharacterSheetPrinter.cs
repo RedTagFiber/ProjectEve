@@ -1,4 +1,5 @@
 ﻿using ProjectEve.Characters.Base;
+using ProjectEve.Characters.Cognition;
 using System;
 using System.Linq;
 
@@ -144,6 +145,60 @@ namespace ProjectEve.Characters.Base
                 try { Line("Boss", $"{c.Job.BossName} ({c.Job.BossRelationship})"); } catch { }
                 try { Line("Team", c.Job.TeamClimate); } catch { }
                 try { Line("Summary", c.Job.SummaryLine()); } catch { }
+            }
+
+            // ----------------------------------------------------------
+            Section("COGNITION / EDUCATION");
+            if (c.Cognition == null || !c.Cognition.IsGenerated)
+            {
+                Line("Cognition", "not generated");
+            }
+            else
+            {
+                var cp = c.Cognition;
+                Line("IQ baseline", cp.IqScore.ToString());
+                Line("Education", cp.EducationLabel());
+                if (!string.IsNullOrWhiteSpace(cp.FieldOfStudy))
+                    Line("FieldOfStudy", cp.FieldOfStudy);
+
+                Line("VerbalReasoning", cp.VerbalReasoning.ToString());
+                Line("WorkingMemory", cp.WorkingMemory.ToString());
+                Line("ProcessingSpeed", cp.ProcessingSpeed.ToString());
+                Line("PracticalReason", cp.PracticalReasoning.ToString());
+                Line("Vocabulary", cp.Vocabulary.ToString());
+                Line("ReadingExposure", cp.ReadingExposure.ToString());
+                Line("Maturity", cp.CognitiveMaturity.ToString());
+
+                if (cp.Speech != null)
+                {
+                    Console.WriteLine();
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                    Console.WriteLine("Speech:");
+                    Console.ResetColor();
+                    Line("Complexity", cp.Speech.SentenceComplexity.ToString());
+                    Line("VocabularyUse", cp.Speech.VocabularyUse.ToString());
+                    Line("Slang", cp.Speech.SlangUse.ToString());
+                    Line("Formality", cp.Speech.Formality.ToString());
+                    Line("Verbosity", cp.Speech.Verbosity.ToString());
+                    Line("Profanity", cp.Speech.ProfanityUse.ToString());
+                    Line("CodeSwitching", cp.Speech.CodeSwitching.ToString());
+                    Line("RegionalStyle", cp.Speech.RegionalStyle);
+                }
+
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("Domain knowledge:");
+                Console.ResetColor();
+
+                if (cp.DomainKnowledge.Count == 0)
+                {
+                    Console.WriteLine("  (none)");
+                }
+                else
+                {
+                    foreach (var kv in cp.DomainKnowledge.OrderByDescending(x => x.Value))
+                        Console.WriteLine($"  {kv.Key,-30} {kv.Value,5}");
+                }
             }
 
             // ----------------------------------------------------------

@@ -1,4 +1,5 @@
-﻿using ProjectEve.Characters.Base;
+using ProjectEve.Characters.Base;
+using ProjectEve.Characters.Cognition;
 using ProjectEve.Traits;
 using System.Text;
 
@@ -40,6 +41,17 @@ namespace ProjectEve.Characters.Base
                 }
                 catch { }
             }
+
+            // Prompt-safe cognition: behavioral bands rather than raw IQ.
+            try
+            {
+                if (npc.Cognition != null && npc.Cognition.IsGenerated)
+                {
+                    sb.AppendLine();
+                    sb.AppendLine(CognitionPromptContext.BuildForNpc(npc));
+                }
+            }
+            catch { }
 
             try
             {

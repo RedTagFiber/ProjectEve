@@ -1,0 +1,66 @@
+PROJECT EVE — BODY GENERATOR v2 INTEGRATION
+
+This package deliberately does NOT overwrite CharacterFactory.cs because your CharacterFactory has
+recently changed during the Brain/Cognition work. Apply the exact small edits below to the current file.
+
+1) At the top of CharacterFactory.cs add:
+
+using ProjectEve.Characters.NPCs;
+using ProjectEve.Characters.NPCs.Body;
+
+2) In EnsureCore(SimCharacter npc), after the existing core objects are ensured, add:
+
+npc.Appearance ??= new NPCAppearance();
+
+if (npc.Appearance.Age <= 0)
+    npc.Appearance.Age = npc.Age;
+
+if (string.IsNullOrWhiteSpace(npc.Appearance.Gender) || npc.Appearance.Gender == "Unknown")
+    npc.Appearance.Gender = npc.Gender;
+
+if (npc.Appearance.Body == null)
+    npc.Appearance.Body = BodyGenerator.Generate(npc.Gender, npc.Age, npc.Appearance.Race);
+else
+    BodyGenerator.FillMissing(npc.Appearance.Body, npc.Gender, npc.Age, npc.Appearance.Race);
+
+npc.Appearance.SyncLegacyToBody();
+
+IMPORTANT:
+- Do not regenerate Body every load once persistence is connected.
+- During the transition FillMissing is safe for absent fields; final persistence should load the saved Body.
+- NPCAppearance.GenerateRandom now calls SyncLegacyToBody + BodyGenerator.FillMissing automatically.
+
+3) For a NEW NPC, if the factory currently does not generate Appearance at all, add after basic identity is known:
+
+npc.Appearance = NPCAppearance.GenerateRandom(npc.Gender, npc.Age);
+
+That creates the old visible appearance AND the new HumanBodyProfile together.
+
+4) DO NOT yet pass the full Body object into ThoughtEngine or DialogueEngine.
+For self-body factual questions, later use:
+
+BodyPromptContext.BuildSelfFacts(owner.Appearance)
+
+For current physical pressure:
+BodyPromptContext.BuildCurrentNeed(owner.Appearance.Body)
+
+For in-person visible appearance:
+BodyPromptContext.BuildPublicObservable(owner.Appearance)
+
+Only in an age-18+ appropriate private context:
+BodyPromptContext.BuildAdultPrivate(owner.Appearance.Body)
+
+5) Quick console test after integration:
+
+var a = NPCAppearance.GenerateRandom("Female", 25);
+Console.WriteLine(a.ToPromptFragment());
+Console.WriteLine(a.ToSelfKnowledgeFragment());
+Console.WriteLine($"clean={a.Body.State.Cleanliness:0} showerTrigger={a.Body.Hygiene.ShowerTrigger:0}");
+BodyStateService.ApplyActivity(a.Body, "running");
+Console.WriteLine($"after run clean={a.Body.State.Cleanliness:0} showerNeed={BodyStateService.CalculateShowerNeed(a.Body):0} band={BodyStateService.ShowerNeedBand(a.Body)}");
+Console.WriteLine(BodyStateService.BuildNeedPrompt(a.Body));
+
+A meticulous NPC should cross the shower threshold much sooner than a low-hygiene NPC.
+
+6) Persistence comes NEXT.
+Do not rely on random regeneration after restart. HumanBodyProfile must be serialized by NpcId.

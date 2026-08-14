@@ -1,0 +1,23 @@
+{
+  "_note": "Example only. Merge optional education fields into matching jobs; do not replace your full town_jobs.json with this file.",
+  "examples": [
+    {
+      "id": "registered_nurse",
+      "minimumEducation": "associate_degree",
+      "typicalEducation": "bachelor_degree",
+      "fieldOfStudy": "nursing"
+    },
+    {
+      "id": "electrician",
+      "minimumEducation": "high_school",
+      "typicalEducation": "trade_certificate",
+      "fieldOfStudy": "electrical trade"
+    },
+    {
+      "id": "barista",
+      "minimumEducation": "none",
+      "typicalEducation": "high_school",
+      "fieldOfStudy": ""
+    }
+  ]
+}
