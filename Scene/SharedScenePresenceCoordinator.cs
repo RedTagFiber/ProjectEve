@@ -20,14 +20,18 @@ namespace ProjectEve.Scene;
 public sealed class SharedScenePresenceCoordinator : ISharedScenePresenceCoordinator
 {
     private readonly IScenePerceptionService _perception;
+    private readonly ISceneSpatialInteractionService _spatial;
     private readonly SemaphoreSlim _gate = new(1, 1);
     private readonly string _dbPath;
 
     private static readonly TimeSpan StalePlayerAfter = TimeSpan.FromMinutes(3);
 
-    public SharedScenePresenceCoordinator(IScenePerceptionService perception)
+    public SharedScenePresenceCoordinator(
+        IScenePerceptionService perception,
+        ISceneSpatialInteractionService spatial)
     {
         _perception = perception;
+        _spatial = spatial;
         _dbPath = Environment.GetEnvironmentVariable("EVE_DB_PATH")
             ?? Path.Combine(AppContext.BaseDirectory, "Data", "project_eve.db");
 
@@ -163,21 +167,28 @@ WHERE SceneId=$scene AND PlayerId=$player;";
             update.Parameters.AddWithValue("$player", playerId.Trim());
             update.ExecuteNonQuery();
 
-            var (x, y, facing) = PlayerPosition(slot);
-            await _perception.UpsertPresenceAsync(new ScenePresenceUpdate
+            // Phase 14: heartbeat must NEVER reset spatial movement.
+            // Phase 11 can move a player from 4 ft -> 2 ft -> contact range.
+            // Reapplying PlayerPosition(slot) here would silently teleport the
+            // player back every heartbeat.
+            if (!PlayerPresenceExistsLocked(sceneId.Trim(), playerId.Trim()))
             {
-                SceneId = sceneId.Trim(),
-                CharacterKey = "player:" + playerId.Trim(),
-                PlayerId = playerId.Trim(),
-                DisplayName = Clean(name, "Player"),
-                IsPlayer = true,
-                XFeet = x,
-                YFeet = y,
-                FacingDegrees = facing,
-                Attention = 0.90,
-                Activity = "conversation",
-                IsActive = true
-            }, cancellationToken);
+                var (x, y, facing) = PlayerPosition(slot);
+                await _perception.UpsertPresenceAsync(new ScenePresenceUpdate
+                {
+                    SceneId = sceneId.Trim(),
+                    CharacterKey = "player:" + playerId.Trim(),
+                    PlayerId = playerId.Trim(),
+                    DisplayName = Clean(name, "Player"),
+                    IsPlayer = true,
+                    XFeet = x,
+                    YFeet = y,
+                    FacingDegrees = facing,
+                    Attention = 0.90,
+                    Activity = "conversation",
+                    IsActive = true
+                }, cancellationToken);
+            }
         }
         finally
         {
@@ -227,19 +238,28 @@ WHERE SceneId=$scene AND PlayerId=$player;";
         }
     }
 
-    public Task<IReadOnlyList<ScenePerceivedPresence>> GetPlayerPerceivedPresenceAsync(
+    public async Task<IReadOnlyList<ScenePerceivedPresence>> GetPlayerPerceivedPresenceAsync(
         string sceneId,
         string playerId,
         CancellationToken cancellationToken = default)
     {
         if (string.IsNullOrWhiteSpace(sceneId) || string.IsNullOrWhiteSpace(playerId))
-            return Task.FromResult<IReadOnlyList<ScenePerceivedPresence>>(
-                Array.Empty<ScenePerceivedPresence>());
+            return Array.Empty<ScenePerceivedPresence>();
 
-        return _perception.GetPerceivedPresenceAsync(
-            sceneId.Trim(),
-            "player:" + playerId.Trim(),
-            cancellationToken);
+        sceneId = sceneId.Trim();
+        string observerKey = "player:" + playerId.Trim();
+        var rows = await _perception.GetPerceivedPresenceAsync(
+            sceneId, observerKey, cancellationToken);
+
+        // Phase 11 UI rule: active physical contact displays as 0 ft even
+        // though the coordinate engine keeps a small nonzero body separation.
+        foreach (var row in rows)
+        {
+            row.DistanceFeet = await _spatial.GetDisplayDistanceAsync(
+                sceneId, observerKey, row.CharacterKey, row.DistanceFeet, cancellationToken);
+        }
+
+        return rows;
     }
 
     public async Task UpsertNpcAsync(
@@ -385,6 +405,33 @@ ON CONFLICT(SceneId,PlayerId) DO UPDATE SET
         cmd.Parameters.AddWithValue("$slot", slot);
         cmd.Parameters.AddWithValue("$real", DateTimeOffset.UtcNow.ToString("O"));
         cmd.ExecuteNonQuery();
+    }
+
+    private bool PlayerPresenceExistsLocked(
+        string sceneId,
+        string playerId)
+    {
+        using var conn = Open();
+        using var cmd = conn.CreateCommand();
+        cmd.CommandText = @"
+SELECT 1
+FROM ScenePresence
+WHERE SceneId=$scene
+  AND PlayerId=$player
+  AND IsPlayer=1
+  AND IsActive=1
+LIMIT 1;";
+        cmd.Parameters.AddWithValue("$scene", sceneId);
+        cmd.Parameters.AddWithValue("$player", playerId);
+
+        try
+        {
+            return cmd.ExecuteScalar() != null;
+        }
+        catch
+        {
+            return false;
+        }
     }
 
     private int CountActivePlayersLocked(string sceneId)

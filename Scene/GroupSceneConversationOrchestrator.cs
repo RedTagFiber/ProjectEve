@@ -42,16 +42,19 @@ public sealed class GroupSceneConversationOrchestrator : IGroupSceneConversation
     private static readonly ConcurrentDictionary<int, SemaphoreSlim> NpcLocks = new();
 
     private readonly IScenePerceptionService _perception;
+    private readonly ISceneSpatialInteractionService _spatial;
     private readonly INpcKnowledgeService _knowledge;
     private readonly IGameTimeService _clock;
     private readonly string _dbPath;
 
     public GroupSceneConversationOrchestrator(
         IScenePerceptionService perception,
+        ISceneSpatialInteractionService spatial,
         INpcKnowledgeService knowledge,
         IGameTimeService clock)
     {
         _perception = perception;
+        _spatial = spatial;
         _knowledge = knowledge;
         _clock = clock;
 
@@ -174,6 +177,7 @@ public sealed class GroupSceneConversationOrchestrator : IGroupSceneConversation
         string action = (request.ActionText ?? "").Trim();
         string speech = (request.SpeechText ?? "").Trim();
         string voice = NormalizeVoice(request.VoiceLevel);
+        IReadOnlyList<int> addressedNpcIds = request.AddressedNpcIds;
         int maxReplies = Math.Clamp(request.MaxNpcReplies, 1, 4);
 
         var sceneGate = SceneLocks.GetOrAdd(sceneId, static _ => new SemaphoreSlim(1, 1));
@@ -184,6 +188,27 @@ public sealed class GroupSceneConversationOrchestrator : IGroupSceneConversation
             long sessionId = GetOrStartSession(sceneId);
             long startSequence = GetLastSequence(sessionId);
             string turnKey = $"group:{sessionId}:{_clock.Now.Ticks}:{Guid.NewGuid():N}";
+
+            // Phase 11: convert player physical intent into world-state movement
+            // before perception/Brain calls. The original text is preserved in
+            // SceneSpatialInteractionEvent; GroupScene stores resolved world truth.
+            var preparedSpatialTurn = await _spatial.PrepareActorTurnAsync(
+                new SceneSpatialTurnRequest
+                {
+                    SceneId = sceneId,
+                    ActorCharacterKey = playerKey,
+                    ActorName = playerName,
+                    ActionText = action,
+                    SpeechText = speech,
+                    VoiceLevel = voice,
+                    AddressedNpcIds = addressedNpcIds
+                },
+                cancellationToken);
+
+            action = preparedSpatialTurn.ActionText;
+            speech = preparedSpatialTurn.SpeechText;
+            voice = NormalizeVoice(preparedSpatialTurn.VoiceLevel);
+            addressedNpcIds = preparedSpatialTurn.AddressedNpcIds;
 
             ScenePerceptionResult? actionPerception = null;
             ScenePerceptionResult? speechPerception = null;
@@ -237,7 +262,7 @@ public sealed class GroupSceneConversationOrchestrator : IGroupSceneConversation
                         SpeakerCharacterKey = playerKey,
                         Text = speech,
                         VoiceLevel = voice,
-                        IntendedListenerKeys = request.AddressedNpcIds
+                        IntendedListenerKeys = addressedNpcIds
                             .Where(x => x > 0)
                             .Distinct()
                             .Select(NpcKey)
@@ -249,6 +274,8 @@ public sealed class GroupSceneConversationOrchestrator : IGroupSceneConversation
                 SavePerceptions(entryId, speechPerception);
                 await ImportNpcPerceptionsAsync(speechPerception, cancellationToken);
             }
+
+            request.AddressedNpcIds = addressedNpcIds;
 
             var candidates = BuildCandidates(
                 request,
@@ -445,6 +472,17 @@ WHERE SceneId = $scene AND Status = 'open';";
                 sessionId,
                 turnKey);
 
+            string spatialContext;
+            try
+            {
+                spatialContext = await _spatial.BuildActorSpatialContextAsync(
+                    sceneId, NpcKey(npc.Id), cancellationToken);
+            }
+            catch
+            {
+                spatialContext = "(spatial context unavailable)";
+            }
+
             string durableContext =
                 "[MULTI-PERSON IN-PERSON SCENE]\n" +
                 $"Scene: {sceneId}\n" +
@@ -454,7 +492,13 @@ WHERE SceneId = $scene AND Status = 'open';";
                 "Do not answer for another NPC. Do not narrate another NPC's private thoughts.\n" +
                 "The orchestrator already decided you are interested enough to respond now.\n\n" +
                 "RECENT SCENE FROM YOUR POV:\n" + observerContext + "\n\n" +
-                "PERSONAL KNOWLEDGE / BELIEFS:\n" + knowledgeContext;
+                "PERSONAL KNOWLEDGE / BELIEFS:\n" + knowledgeContext + "\n\n" +
+                "CURRENT PHYSICAL / DISTANCE STATE:\n" + spatialContext + "\n\n" +
+                "PHYSICAL RULES:\n" +
+                "Distance is world truth. You may approach, hold position, create distance, freeze, or leave space.\n" +
+                "Do not explain the hidden reason for your body movement to the player unless you naturally choose to say it.\n" +
+                "For a new hug/kiss/grab/strike/sexual-contact action, describe YOUR initiation/attempt only; do not declare the other person's response.\n" +
+                "If a contact attempt is directed at you, you may clearly reciprocate, reject/avoid, hesitate, or freeze. Freeze/hesitation is not acceptance.";
 
             npc.Brain.ConversationContextOverride = durableContext;
 
@@ -481,12 +525,26 @@ WHERE SceneId = $scene AND Status = 'open';";
 
             if (!string.IsNullOrWhiteSpace(parsed.BodyLanguage))
             {
+                var spatialBody = await _spatial.ApplyNpcCueAsync(
+                    new SceneSpatialCueRequest
+                    {
+                        SceneId = sceneId,
+                        ActorCharacterKey = NpcKey(npc.Id),
+                        ActorName = npc.Name,
+                        CueText = parsed.BodyLanguage,
+                        CueKind = "body_language"
+                    },
+                    cancellationToken);
+                string bodyText = spatialBody.ChangedWorldState
+                    ? spatialBody.ResolvedText
+                    : parsed.BodyLanguage;
+
                 var item = await RecordNpcVisualAsync(
                     sessionId,
                     sceneId,
                     npc,
                     "body_language",
-                    parsed.BodyLanguage,
+                    bodyText,
                     0.48,
                     turnKey + $":npc-{npc.Id}-body",
                     cancellationToken);
@@ -495,12 +553,26 @@ WHERE SceneId = $scene AND Status = 'open';";
 
             if (!string.IsNullOrWhiteSpace(parsed.Action))
             {
+                var spatialAction = await _spatial.ApplyNpcCueAsync(
+                    new SceneSpatialCueRequest
+                    {
+                        SceneId = sceneId,
+                        ActorCharacterKey = NpcKey(npc.Id),
+                        ActorName = npc.Name,
+                        CueText = parsed.Action,
+                        CueKind = "action"
+                    },
+                    cancellationToken);
+                string actionText = spatialAction.ChangedWorldState
+                    ? spatialAction.ResolvedText
+                    : parsed.Action;
+
                 var item = await RecordNpcVisualAsync(
                     sessionId,
                     sceneId,
                     npc,
                     "action",
-                    parsed.Action,
+                    actionText,
                     0.82,
                     turnKey + $":npc-{npc.Id}-action",
                     cancellationToken);
