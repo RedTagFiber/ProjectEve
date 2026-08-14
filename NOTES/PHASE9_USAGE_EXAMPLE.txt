@@ -1,0 +1,35 @@
+PHASE 9 USAGE EXAMPLE — MULTI-NPC IN-PERSON TURN
+
+Assume the Phase 6 scene already contains:
+- player:ryan
+- npc:1 Eve
+- npc:2 Adam
+- npc:3 Lisa
+
+var result = await groups.SubmitPlayerTurnAsync(new GroupScenePlayerTurnRequest
+{
+    SceneId = "sinclair-coffee-main",
+    PlayerId = "ryan",
+    PlayerName = "Ryan Slayback",
+    ActionText = "I set my phone on the table and look between Eve and Adam.",
+    SpeechText = "So which one of you was going to tell me?",
+    VoiceLevel = "normal",
+    AddressedNpcIds = new[] { 1, 2 },
+    MaxNpcReplies = 3
+});
+
+WHAT HAPPENS
+1. Exact player action/speech is stored once as world transcript evidence.
+2. Phase 6 independently resolves what Eve, Adam, Lisa, and any hidden nearby NPC heard/saw.
+3. Cheap scoring ranks up to 10 NPCs. No AI call is used for ranking.
+4. Only the top few responders get full Brain calls.
+5. Eve's Brain sees only Eve's perception + Eve's knowledge.
+6. Adam's Brain sees only Adam's perception + Adam's knowledge.
+7. If Eve answers before Adam, Adam can hear Eve before his own Brain turn runs.
+8. Player view returns only what Ryan himself produced or perceived.
+
+IMPORTANT
+- A hidden NPC can overhear without appearing in player UI.
+- One AI call never writes dialogue/thought for multiple NPCs.
+- MaxNpcReplies defaults to 3 even if 10 NPCs are present.
+- Exact transcript and observer perception are different database records.

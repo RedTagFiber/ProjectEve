@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.Data.Sqlite;
 using ProjectEve.Characters.Base;
 using ProjectEve.Core.Phone;
+using ProjectEve.Core.Time;
 
 namespace ProjectEve.Phone;
 
@@ -25,6 +26,17 @@ namespace ProjectEve.Phone;
 /// </summary>
 public sealed class NpcPhoneResponseScheduler : IPhoneResponseScheduler
 {
+    private readonly IGameTimeService _gameTime;
+    private readonly IGamePacingService _pacing;
+
+    public NpcPhoneResponseScheduler(
+        IGameTimeService gameTime,
+        IGamePacingService pacing)
+    {
+        _gameTime = gameTime;
+        _pacing = pacing;
+    }
+
     private readonly object _rngLock = new();
     private readonly Random _rng = new();
 
@@ -38,33 +50,6 @@ public sealed class NpcPhoneResponseScheduler : IPhoneResponseScheduler
     private static string ConnStr =>
         "Data Source=" + DbPath;
 
-    /// <summary>
-    /// Development time compression.
-    /// 1.0 = real minutes.
-    /// 0.04 = 10 simulated minutes -> 24 real seconds.
-    ///
-    /// Set EVE_PHONE_TIME_SCALE=1 later when the game clock/server
-    /// owns full real-time scheduling.
-    /// </summary>
-    private static double TimeScale
-    {
-        get
-        {
-            string? raw =
-                Environment.GetEnvironmentVariable(
-                    "EVE_PHONE_TIME_SCALE");
-
-            if (double.TryParse(
-                    raw,
-                    System.Globalization.NumberStyles.Float,
-                    System.Globalization.CultureInfo.InvariantCulture,
-                    out var value))
-                return Math.Clamp(value, 0.005, 10.0);
-
-            return 0.04;
-        }
-    }
-
     public Task<PhoneResponseDecision> PlanInitialAsync(
         PhoneResponseRequest request,
         CancellationToken cancellationToken = default)
@@ -75,7 +60,8 @@ public sealed class NpcPhoneResponseScheduler : IPhoneResponseScheduler
         var profile = GetOrCreateProfile(npc, request.NpcId);
 
         var nowUtc = DateTime.UtcNow;
-        var nowLocal = DateTime.Now;
+        var nowGame = _gameTime.Now;
+        var nowLocal = nowGame.LocalDateTime;
 
         var runtime =
             NpcPhoneRuntimeStateService.GetActive(
@@ -96,17 +82,13 @@ public sealed class NpcPhoneResponseScheduler : IPhoneResponseScheduler
                 situation);
 
         return Task.FromResult(
-            new PhoneResponseDecision
-            {
-                Action = "retry_later",
-                NoticeState = "unseen",
-                NextCheckUtc =
-                    AddSimulationMinutes(
-                        nowUtc,
-                        firstCheckMinutes),
-                DecisionCode =
-                    situation.InitialCode
-            });
+            Retry(
+                "unseen",
+                nowUtc,
+                nowGame,
+                firstCheckMinutes,
+                situation.InitialCode,
+                request.PlayerActivelyViewingThread));
     }
 
     public Task<PhoneResponseDecision> ReconsiderAsync(
@@ -119,7 +101,8 @@ public sealed class NpcPhoneResponseScheduler : IPhoneResponseScheduler
         var profile = GetOrCreateProfile(npc, request.NpcId);
 
         var nowUtc = DateTime.UtcNow;
-        var nowLocal = DateTime.Now;
+        var nowGame = _gameTime.Now;
+        var nowLocal = nowGame.LocalDateTime;
 
         var runtime =
             NpcPhoneRuntimeStateService.GetActive(
@@ -154,8 +137,10 @@ public sealed class NpcPhoneResponseScheduler : IPhoneResponseScheduler
                 Retry(
                     noticeState,
                     nowUtc,
+                    nowGame,
                     RandomBetween(3, 10),
-                    "driving"));
+                    "driving",
+                    request.PlayerActivelyViewingThread));
         }
 
         // Emergency: strongest blocker. This is especially relevant
@@ -166,8 +151,10 @@ public sealed class NpcPhoneResponseScheduler : IPhoneResponseScheduler
                 Retry(
                     noticeState,
                     nowUtc,
+                    nowGame,
                     RandomBetween(8, 25),
-                    "emergency"));
+                    "emergency",
+                    request.PlayerActivelyViewingThread));
         }
 
         // Sleeping normally blocks notice/reply. An urgent text is
@@ -189,8 +176,10 @@ public sealed class NpcPhoneResponseScheduler : IPhoneResponseScheduler
                     Retry(
                         noticeState,
                         nowUtc,
+                        nowGame,
                         RandomBetween(15, 45),
-                        "sleeping"));
+                        "sleeping",
+                    request.PlayerActivelyViewingThread));
             }
         }
 
@@ -236,11 +225,13 @@ public sealed class NpcPhoneResponseScheduler : IPhoneResponseScheduler
                     Retry(
                         "unseen",
                         nowUtc,
+                        nowGame,
                         EstimateRecheckMinutes(
                             profile,
                             situation,
                             noticed: false),
-                        "not_noticed"));
+                        "not_noticed",
+                    request.PlayerActivelyViewingThread));
             }
 
             noticeState = "seen";
@@ -287,13 +278,15 @@ public sealed class NpcPhoneResponseScheduler : IPhoneResponseScheduler
                 Retry(
                     noticeState,
                     nowUtc,
+                    nowGame,
                     EstimateRecheckMinutes(
                         profile,
                         situation,
                         noticed: true),
                     situation.IsWorking
                         ? "busy_working"
-                        : "cannot_answer_now"));
+                        : "cannot_answer_now",
+                    request.PlayerActivelyViewingThread));
         }
 
         // --------------------------------------------------------
@@ -393,6 +386,8 @@ public sealed class NpcPhoneResponseScheduler : IPhoneResponseScheduler
                     Action = "reply_now",
                     NoticeState = noticeState,
                     NextCheckUtc = nowUtc,
+                    NextCheckGameTime = nowGame,
+                    SimulatedDelayMinutes = 0,
                     DecisionCode =
                         situation.IsWorking
                             ? "reply_while_working"
@@ -426,6 +421,8 @@ public sealed class NpcPhoneResponseScheduler : IPhoneResponseScheduler
                     Action = "leave_unanswered",
                     NoticeState = noticeState,
                     NextCheckUtc = nowUtc,
+                    NextCheckGameTime = nowGame,
+                    SimulatedDelayMinutes = 0,
                     DecisionCode = "chose_not_to_reply"
                 });
         }
@@ -434,11 +431,13 @@ public sealed class NpcPhoneResponseScheduler : IPhoneResponseScheduler
             Retry(
                 noticeState,
                 nowUtc,
+                nowGame,
                 EstimateRecheckMinutes(
                     profile,
                     situation,
                     noticed: true),
-                "seen_waiting"));
+                "seen_waiting",
+                    request.PlayerActivelyViewingThread));
     }
 
     // ============================================================
@@ -776,39 +775,39 @@ public sealed class NpcPhoneResponseScheduler : IPhoneResponseScheduler
             45);
     }
 
-    private static DateTime AddSimulationMinutes(
-        DateTime utcNow,
-        double simulationMinutes)
-    {
-        double realMinutes =
-            simulationMinutes
-            * TimeScale;
-
-        // Avoid zero-delay hot loops.
-        realMinutes =
-            Math.Max(
-                realMinutes,
-                0.025); // ~1.5 sec
-
-        return utcNow.AddMinutes(
-            realMinutes);
-    }
-
     private PhoneResponseDecision Retry(
         string noticeState,
         DateTime nowUtc,
+        DateTimeOffset gameNow,
         double simulationMinutes,
-        string code)
-        => new()
+        string code,
+        bool activeInteraction)
+    {
+        simulationMinutes = Math.Max(0.1, simulationMinutes);
+
+        var realDelay = _pacing.ToRealDelay(
+            TimeSpan.FromMinutes(simulationMinutes),
+            new GamePacingContext
+            {
+                ActiveInteraction = activeInteraction,
+                Urgent = false,
+                Channel = "text"
+            });
+
+        // Never create a zero-delay worker hot loop.
+        if (realDelay < TimeSpan.FromSeconds(1))
+            realDelay = TimeSpan.FromSeconds(1);
+
+        return new PhoneResponseDecision
         {
             Action = "retry_later",
             NoticeState = noticeState,
-            NextCheckUtc =
-                AddSimulationMinutes(
-                    nowUtc,
-                    simulationMinutes),
+            NextCheckUtc = nowUtc.Add(realDelay),
+            NextCheckGameTime = gameNow.AddMinutes(simulationMinutes),
+            SimulatedDelayMinutes = simulationMinutes,
             DecisionCode = code
         };
+    }
 
     // ============================================================
     // PROFILE

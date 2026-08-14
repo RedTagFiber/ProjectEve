@@ -469,7 +469,14 @@ namespace ProjectEve.Conversations
                 return GetCloseResult(sessionId);
 
             var rows = GetTranscript(sessionId);
-            string transcript = BuildExactTranscriptText(rows);
+
+            // ConversationMessage remains the exact evidence transcript.
+            // The NPC's event summary/facts/plans must be based on what THAT NPC
+            // actually perceived, otherwise missed/partial speech becomes telepathy.
+            string npcPerceptionTranscript = ConversationPerceptionStore.BuildTranscriptTextForNpc(
+                rows,
+                sessionId,
+                session.NpcId);
 
             ConversationSummaryResult summary =
                 rows.Count == 0
@@ -477,7 +484,7 @@ namespace ProjectEve.Conversations
                         "Conversation ended without messages.")
                     : await ConversationSummaryEngine.SummarizeAsync(
                         session,
-                        transcript,
+                        npcPerceptionTranscript,
                         cancellationToken);
 
             endedGameTime ??= DateTime.Now;

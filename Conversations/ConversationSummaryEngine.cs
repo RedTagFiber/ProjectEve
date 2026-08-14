@@ -16,15 +16,15 @@ namespace ProjectEve.Conversations
 
         public static async Task<ConversationSummaryResult> SummarizeAsync(
             ConversationSessionRow session,
-            string exactTranscript,
+            string perceptionTranscript,
             CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrWhiteSpace(exactTranscript))
+            if (string.IsNullOrWhiteSpace(perceptionTranscript))
                 return ConversationSummaryResult.Empty("Conversation ended without messages.");
 
             string prompt = $$"""
 SYSTEM ROLE
-You convert a FINISHED ProjectEve conversation transcript into a factual event summary.
+You convert a FINISHED ProjectEve NPC-PERCEPTION transcript into that NPC's factual continuity summary.
 
 This is archival processing, not roleplay.
 Do not continue the conversation.
@@ -36,20 +36,24 @@ CHANNEL: {{session.Channel}}
 LOCATION: {{session.Location}}
 STARTED: {{session.StartedGameTime:O}}
 
-STRICT TRUTH RULES
-- Exact transcript is authoritative for what was actually said.
-- Speakers may lie or be mistaken; a statement is not automatically world truth.
-- Direct player self-disclosure may become a learned player fact.
+STRICT TRUTH / PERCEPTION RULES
+- This transcript represents what THIS NPC perceived, not omniscient world truth.
+- Exact physical transcript evidence is stored separately by Project Eve.
+- Text such as [inaudible], [not clearly seen], ellipses, or HEARING: partial/fragment means information was missing.
+- NEVER reconstruct missing words from context.
+- Do not create a learned fact or agreed plan from a partial/fragment/inaudible player line unless a clear perceived line elsewhere supports it.
+- Speakers may lie or be mistaken; a perceived statement is not automatically world truth.
+- Direct clear player self-disclosure may become a learned player fact.
 - Direct NPC self-disclosure may become a learned NPC fact.
 - Never invent age, biography, romance history, family facts, crimes, medical facts, or sexual history.
-- Plans require actual stated intent/agreement.
+- Plans require actually perceived stated intent/agreement.
 - If no supported facts/plans exist, return empty arrays.
 - EmotionalOutcome describes how the conversation ended, not hidden truth.
 - RelationshipOutcome must be modest; one section does not automatically create love/trust.
 - Summary must be 2-5 sentences.
 
-EXACT TRANSCRIPT
-{{exactTranscript}}
+NPC PERCEPTION TRANSCRIPT
+{{perceptionTranscript}}
 
 OUTPUT ONLY VALID JSON:
 {
@@ -112,7 +116,7 @@ OUTPUT ONLY VALID JSON:
                     new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
                 if (parsed == null || string.IsNullOrWhiteSpace(parsed.Summary))
-                    return Fallback(exactTranscript);
+                    return Fallback(perceptionTranscript);
 
                 parsed.Facts ??= new();
                 parsed.Plans ??= new();
@@ -124,7 +128,7 @@ OUTPUT ONLY VALID JSON:
             }
             catch
             {
-                return Fallback(exactTranscript);
+                return Fallback(perceptionTranscript);
             }
         }
 
@@ -135,7 +139,7 @@ OUTPUT ONLY VALID JSON:
 
             return new ConversationSummaryResult
             {
-                Summary = "Conversation archived, but automatic summarization failed. Use exact transcript for authoritative details. Preview: " + preview,
+                Summary = "Conversation archived, but automatic summarization failed. Use stored perception evidence for NPC knowledge and the exact transcript only as world evidence. Perception preview: " + preview,
                 EmotionalOutcome = "unknown",
                 RelationshipOutcome = "unknown"
             };

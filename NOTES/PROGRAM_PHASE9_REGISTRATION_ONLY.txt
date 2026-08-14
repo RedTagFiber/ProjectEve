@@ -1,0 +1,6 @@
+Add this to ProjectEve.PhoneOS/Program.cs AFTER the Phase 6/7/8 scene + knowledge registrations:
+
+builder.Services.AddSingleton<ProjectEve.Core.Scene.IGroupSceneConversationOrchestrator,
+    ProjectEve.Scene.GroupSceneConversationOrchestrator>();
+
+Do NOT replace your whole Program.cs if it already contains newer local edits.

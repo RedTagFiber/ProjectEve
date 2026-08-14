@@ -1,0 +1,41 @@
+PHASE 9 SQLITE DIAGNOSTICS
+These are SQLite queries. The file intentionally ends in .txt so Visual Studio
+will not run the SQL Server/SSDT parser over it.
+
+-- Open/closed group scene sessions
+SELECT Id, SceneId, Status, StartedGameTime, LastGameTime, EndedGameTime, EndReason
+FROM GroupSceneSession
+ORDER BY Id DESC;
+
+-- Exact server transcript. This is evidence/world event history, NOT an NPC view.
+SELECT SessionId, Sequence, ActorName, EntryType, ExactText, GameTime, EventKey
+FROM GroupSceneEntry
+ORDER BY SessionId DESC, Sequence;
+
+-- What each observer actually perceived.
+SELECT
+    e.SessionId,
+    e.Sequence,
+    e.ActorName,
+    e.EntryType,
+    p.ObserverCharacterKey,
+    p.Quality,
+    p.PerceivedText,
+    p.Confidence,
+    p.DistanceFeet
+FROM GroupSceneEntry e
+JOIN GroupScenePerception p ON p.EntryId = e.Id
+ORDER BY e.SessionId DESC, e.Sequence, p.ObserverCharacterKey;
+
+-- Compare Eve / Adam / Lisa views of the same entries.
+SELECT
+    e.Sequence,
+    e.ActorName,
+    e.EntryType,
+    p.ObserverCharacterKey,
+    p.Quality,
+    p.PerceivedText
+FROM GroupSceneEntry e
+JOIN GroupScenePerception p ON p.EntryId = e.Id
+WHERE p.ObserverCharacterKey IN ('npc:1', 'npc:2', 'npc:3')
+ORDER BY e.Sequence, p.ObserverCharacterKey;

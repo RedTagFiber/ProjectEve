@@ -1,0 +1,22 @@
+PHASE 9 INSTALL ORDER
+
+1) ProjectEve.Core
+   ADD:
+   ProjectEve.Core/Scene/IGroupSceneConversationOrchestrator.cs
+
+2) ProjectEve main project
+   ADD:
+   Scene/GroupSceneConversationOrchestrator.cs
+
+3) ProjectEve.PhoneOS Program.cs
+   Add the single DI registration from:
+   PROGRAM_PHASE9_REGISTRATION_ONLY.txt
+
+4) Clean Solution
+5) Build ProjectEve.Core
+6) Build ProjectEve
+7) Build ProjectEve.PhoneOS
+8) Rebuild Solution
+
+Do NOT copy TEST_PHASE9_GROUP_ORCHESTRATOR_SQLITE.txt as a .sql file.
+It is intentionally .txt to avoid Visual Studio SQL Server parser errors.

@@ -2,6 +2,7 @@ using ProjectEve.AI.Brain;
 using ProjectEve.Characters.Base;
 using ProjectEve.Conversations;
 using ProjectEve.Core.Chat;
+using ProjectEve.Core.Knowledge;
 using ProjectEve.Traits;
 using System.Collections.Concurrent;
 
@@ -20,6 +21,12 @@ namespace ProjectEve.Chat;
 public sealed class ProjectEveConversationService : IConversationChatService
 {
     private static readonly ConcurrentDictionary<int, SemaphoreSlim> NpcLocks = new();
+    private readonly INpcKnowledgeService _knowledge;
+
+    public ProjectEveConversationService(INpcKnowledgeService knowledge)
+    {
+        _knowledge = knowledge;
+    }
 
     public async Task<ConversationAcceptResult> AcceptPlayerMessageAsync(
         ConversationPlayerMessageRequest request,
@@ -45,7 +52,7 @@ public sealed class ProjectEveConversationService : IConversationChatService
         // A different channel or meaningful location is a new section.
         // Close/summarize the old section BEFORE creating the new one so its
         // event/facts/plans are immediately available as continuity.
-        await ConversationManager.EndOpenSectionsExceptAsync(
+        var closedSections = await ConversationManager.EndOpenSectionsExceptAsync(
             playerId,
             npc.Id,
             playerName,
@@ -53,6 +60,24 @@ public sealed class ProjectEveConversationService : IConversationChatService
             location,
             reason: $"conversation changed to {channel} @ {location}",
             cancellationToken);
+
+        foreach (var closedSection in closedSections)
+        {
+            if (closedSection.EventId <= 0)
+                continue;
+
+            try
+            {
+                await _knowledge.ImportConversationEventAsync(
+                    closedSection.EventId,
+                    cancellationToken);
+            }
+            catch
+            {
+                // The closed conversation event remains authoritative even if the
+                // personal-knowledge import needs to retry later.
+            }
+        }
 
         long sessionId = ConversationManager.StartOrResume(
             playerId,
@@ -143,13 +168,31 @@ public sealed class ProjectEveConversationService : IConversationChatService
             npc.Brain.Owner = npc;
             npc.Brain.LineBankSpeaker = SpeakerFor(npc.Id);
 
+            if (!string.IsNullOrWhiteSpace(request.PerceivedPlayerMessage))
+            {
+                ConversationPerceptionStore.UpsertLatestPlayerPerception(
+                    session.Id,
+                    session.NpcId,
+                    request.PerceivedPlayerMessage,
+                    request.PerceptionSourceKey);
+            }
+
+            // Pull in only THIS NPC's personal knowledge. Scene evidence is lazily
+            // imported by the knowledge service and remains observer-specific.
+            string personalKnowledge = await _knowledge.BuildPromptContextAsync(
+                npc.Id,
+                session.PlayerId,
+                session.PlayerName,
+                cancellationToken: cancellationToken);
+
             string context = ConversationPromptContext.Build(
                 npc,
                 session.PlayerId,
                 session.PlayerName,
                 session.Id,
                 session.Channel,
-                session.Location);
+                session.Location,
+                personalKnowledgeContext: personalKnowledge);
 
             npc.Brain.ConversationContextOverride = context;
 
@@ -242,6 +285,24 @@ public sealed class ProjectEveConversationService : IConversationChatService
             {
                 SessionId = sessionId.Value
             };
+
+        // ConversationFact rows are already NPC-perception-scoped by Phase 6.
+        // Import them into the unified personal knowledge ledger only after the
+        // section closes, preserving the exact transcript separately as evidence.
+        if (closed.EventId > 0)
+        {
+            try
+            {
+                await _knowledge.ImportConversationEventAsync(
+                    closed.EventId,
+                    cancellationToken);
+            }
+            catch
+            {
+                // Knowledge persistence must not erase/alter a successfully
+                // archived conversation event.
+            }
+        }
 
         return new ConversationEndResult
         {
