@@ -104,7 +104,6 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
         }
 
         long triggerId;
-        long? existingEventId = null;
 
         await _gate.WaitAsync(cancellationToken);
         try
@@ -135,8 +134,6 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
                 channel,
                 validated,
                 score);
-
-            existingEventId = null;
         }
         finally
         {
@@ -225,12 +222,11 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
 
         var dayKey = now.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
 
-        // Idempotent daily marker: do not reroll a different social day because
-        // the player pressed +15 minutes twice.
         await _gate.WaitAsync(cancellationToken);
         try
         {
             using var conn = Open();
+
             if (HasDailySeed(conn, playerId, dayKey))
                 return 0;
 
@@ -255,14 +251,18 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
                 continue;
 
             var profile = LoadPhoneProfile(c.NpcId);
-            double score = SpontaneousScore(npc, profile, c.ContactTier);
+            double score = SpontaneousScore(
+                npc,
+                profile,
+                c.ContactTier);
 
             double roll = StablePercent(
                 $"spontaneous-roll|{playerId}|{c.NpcId}|{dayKey}");
 
-            // Deliberately conservative. A score around 50 means roughly a
-            // 17-18% daily chance before the max-per-day cap.
-            double chance = Math.Clamp(score * 0.35, 2, 48);
+            double chance = Math.Clamp(
+                score * 0.35,
+                2,
+                48);
 
             if (roll > chance)
                 continue;
@@ -335,9 +335,6 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
         try
         {
             using var conn = Open();
-
-            // Generated-but-not-delivered rows are intentionally included.
-            // Delivery can retry without another Qwen call.
             due = LoadDue(conn, gameTime);
         }
         finally
@@ -351,23 +348,26 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            if (row.Status.Equals("generated", StringComparison.OrdinalIgnoreCase))
+            if (row.Status.Equals(
+                    "generated",
+                    StringComparison.OrdinalIgnoreCase))
             {
                 outbound.Add(ToOutbound(row));
                 continue;
             }
 
-            if (!row.Channel.Equals("text", StringComparison.OrdinalIgnoreCase))
+            if (!row.Channel.Equals(
+                    "text",
+                    StringComparison.OrdinalIgnoreCase))
             {
                 await MarkSkippedAsync(
                     row.Id,
                     "channel_not_implemented",
                     cancellationToken);
+
                 continue;
             }
 
-            // Do not make a person text the player while the same pair is
-            // actively talking face-to-face. Postpone instead.
             var activeId = ConversationManager.GetActiveSessionId(
                 row.PlayerId,
                 row.NpcId,
@@ -376,15 +376,21 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
             if (activeId.HasValue)
             {
                 var active = ConversationManager.GetSession(activeId.Value);
+
                 if (active != null &&
-                    active.Status.Equals("open", StringComparison.OrdinalIgnoreCase) &&
-                    !active.Channel.Equals("text", StringComparison.OrdinalIgnoreCase))
+                    active.Status.Equals(
+                        "open",
+                        StringComparison.OrdinalIgnoreCase) &&
+                    !active.Channel.Equals(
+                        "text",
+                        StringComparison.OrdinalIgnoreCase))
                 {
                     await PostponeAsync(
                         row,
                         gameTime.AddMinutes(10),
                         "same_pair_active_in_person",
                         cancellationToken);
+
                     continue;
                 }
             }
@@ -400,7 +406,6 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
             }
             catch
             {
-                // Infrastructure/model failure is not an NPC choice.
                 await PostponeAsync(
                     row,
                     gameTime.AddMinutes(5),
@@ -440,10 +445,12 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
                     UpdatedRealUtc=$real
                 WHERE Id=$id;
                 """;
+
             cmd.Parameters.AddWithValue("$phone", phoneMessageId);
             cmd.Parameters.AddWithValue("$game", _clock.Now.ToString("O"));
             cmd.Parameters.AddWithValue("$real", DateTime.UtcNow.ToString("O"));
             cmd.Parameters.AddWithValue("$id", triggerId);
+
             cmd.ExecuteNonQuery();
         }
         finally
@@ -459,7 +466,9 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
                     eventId.Value,
                     cancellationToken);
             }
-            catch { }
+            catch
+            {
+            }
         }
     }
 
@@ -474,6 +483,7 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
         try
         {
             using var conn = Open();
+
             var row = LoadById(conn, triggerId);
             if (row == null)
                 return;
@@ -488,9 +498,17 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
                     UpdatedRealUtc=$real
                 WHERE Id=$id;
                 """;
-            cmd.Parameters.AddWithValue("$reason", Clean(reason, "skipped"));
-            cmd.Parameters.AddWithValue("$real", DateTime.UtcNow.ToString("O"));
+
+            cmd.Parameters.AddWithValue(
+                "$reason",
+                Clean(reason, "skipped"));
+
+            cmd.Parameters.AddWithValue(
+                "$real",
+                DateTime.UtcNow.ToString("O"));
+
             cmd.Parameters.AddWithValue("$id", triggerId);
+
             cmd.ExecuteNonQuery();
         }
         finally
@@ -506,7 +524,9 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
                     eventId.Value,
                     cancellationToken);
             }
-            catch { }
+            catch
+            {
+            }
         }
     }
 
@@ -520,6 +540,7 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
         {
             using var conn = Open();
             using var cmd = conn.CreateCommand();
+
             cmd.CommandText = """
                 SELECT Id,PlayerId,NpcId,NpcName,Kind,Channel,
                        DueGameTime,Status,DecisionCode,
@@ -530,10 +551,17 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
                 ORDER BY DueGameTime,Id
                 LIMIT $limit;
                 """;
-            cmd.Parameters.AddWithValue("$player", Clean(playerId, ""));
-            cmd.Parameters.AddWithValue("$limit", Math.Clamp(limit, 1, 500));
+
+            cmd.Parameters.AddWithValue(
+                "$player",
+                Clean(playerId, ""));
+
+            cmd.Parameters.AddWithValue(
+                "$limit",
+                Math.Clamp(limit, 1, 500));
 
             var rows = new List<NpcInitiatedContactAudit>();
+
             using var r = cmd.ExecuteReader();
 
             while (r.Read())
@@ -549,8 +577,12 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
                     DueGameTime = ParseTime(r.GetString(6)),
                     Status = r.GetString(7),
                     DecisionCode = r.GetString(8),
-                    GameEventId = r.IsDBNull(9) ? null : r.GetInt64(9),
-                    PhoneMessageId = r.IsDBNull(10) ? null : r.GetInt64(10),
+                    GameEventId = r.IsDBNull(9)
+                        ? null
+                        : r.GetInt64(9),
+                    PhoneMessageId = r.IsDBNull(10)
+                        ? null
+                        : r.GetInt64(10),
                     GeneratedText = r.GetString(11)
                 });
             }
@@ -592,7 +624,9 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
                     x.EventId,
                     cancellationToken);
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         long sessionId = ConversationManager.StartOrResume(
@@ -604,11 +638,12 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
             "phone",
             gameTime.LocalDateTime);
 
-        string personalKnowledge = await _knowledge.BuildPromptContextAsync(
-            npc.Id,
-            row.PlayerId,
-            row.PlayerName,
-            cancellationToken: cancellationToken);
+        string personalKnowledge =
+            await _knowledge.BuildPromptContextAsync(
+                npc.Id,
+                row.PlayerId,
+                row.PlayerName,
+                cancellationToken: cancellationToken);
 
         string conversationContext = ConversationPromptContext.Build(
             npc,
@@ -621,7 +656,9 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
 
         string previousNpcText = ConversationManager
             .GetTranscript(sessionId)
-            .Where(x => x.Role.Equals("npc", StringComparison.OrdinalIgnoreCase))
+            .Where(x => x.Role.Equals(
+                "npc",
+                StringComparison.OrdinalIgnoreCase))
             .Select(x => x.MessageText)
             .LastOrDefault() ?? "";
 
@@ -641,14 +678,16 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
             row.MaxMessageCharacters,
             cancellationToken);
 
-        if (!generated.Source.Equals("ai_initiated", StringComparison.OrdinalIgnoreCase) ||
+        if (!generated.Source.Equals(
+                "ai_initiated",
+                StringComparison.OrdinalIgnoreCase) ||
             string.IsNullOrWhiteSpace(generated.Text))
         {
             throw new InvalidOperationException(
-                generated.Error ?? "Outbound message generation failed.");
+                generated.Error ??
+                "Outbound message generation failed.");
         }
 
-        // Exact world evidence: store exactly what the NPC sends.
         ConversationManager.AppendNpc(
             sessionId,
             npc.Id,
@@ -661,6 +700,7 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
         {
             using var conn = Open();
             using var cmd = conn.CreateCommand();
+
             cmd.CommandText = """
                 UPDATE NpcInitiatedContactTrigger
                 SET Status='generated',
@@ -672,15 +712,32 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
                 WHERE Id=$id
                   AND Status='scheduled';
                 """;
-            cmd.Parameters.AddWithValue("$text", generated.Text);
-            cmd.Parameters.AddWithValue("$session", sessionId);
-            cmd.Parameters.AddWithValue("$game", gameTime.ToString("O"));
-            cmd.Parameters.AddWithValue("$real", DateTime.UtcNow.ToString("O"));
-            cmd.Parameters.AddWithValue("$id", row.Id);
+
+            cmd.Parameters.AddWithValue(
+                "$text",
+                generated.Text);
+
+            cmd.Parameters.AddWithValue(
+                "$session",
+                sessionId);
+
+            cmd.Parameters.AddWithValue(
+                "$game",
+                gameTime.ToString("O"));
+
+            cmd.Parameters.AddWithValue(
+                "$real",
+                DateTime.UtcNow.ToString("O"));
+
+            cmd.Parameters.AddWithValue(
+                "$id",
+                row.Id);
+
             cmd.ExecuteNonQuery();
 
             var refreshed = LoadById(conn, row.Id)
-                ?? throw new InvalidOperationException("Staged trigger disappeared.");
+                ?? throw new InvalidOperationException(
+                    "Staged trigger disappeared.");
 
             return ToOutbound(refreshed);
         }
@@ -711,9 +768,11 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
                 500,
                 cancellationToken);
 
-            var claim = claims.FirstOrDefault(x => x.Id == request.ClaimId.Value);
+            var claim = claims.FirstOrDefault(
+                x => x.Id == request.ClaimId.Value);
 
-            if (claim == null || claim.HolderNpcId != request.NpcId)
+            if (claim == null ||
+                claim.HolderNpcId != request.NpcId)
             {
                 throw new InvalidOperationException(
                     $"NPC {request.NpcId} does not own knowledge claim {request.ClaimId.Value}.");
@@ -772,15 +831,27 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
 
         float Trait(string id, float fallback = 50)
         {
-            try { return npc.Traits?.Get(id) ?? fallback; }
-            catch { return fallback; }
+            try
+            {
+                return npc.Traits?.Get(id) ?? fallback;
+            }
+            catch
+            {
+                return fallback;
+            }
         }
 
         score += (Trait("trait.affection") - 50) * 0.10;
         score += (Trait("trait.trust") - 50) * 0.07;
         score += (Trait("trait.playfulness") - 50) * 0.04;
-        score -= Math.Max(0, Trait("trait.guard") - 50) * 0.06;
-        score -= Math.Max(0, Trait("trait.resentment") - 50) * 0.08;
+
+        score -= Math.Max(
+            0,
+            Trait("trait.guard") - 50) * 0.06;
+
+        score -= Math.Max(
+            0,
+            Trait("trait.resentment") - 50) * 0.08;
 
         string kind = NormalizeKind(request.Kind);
 
@@ -801,11 +872,20 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
     {
         float Trait(string id, float fallback = 50)
         {
-            try { return npc.Traits?.Get(id) ?? fallback; }
-            catch { return fallback; }
+            try
+            {
+                return npc.Traits?.Get(id) ?? fallback;
+            }
+            catch
+            {
+                return fallback;
+            }
         }
 
-        double tierBoost = Math.Clamp(contactTier, 1, 5) switch
+        double tierBoost = Math.Clamp(
+            contactTier,
+            1,
+            5) switch
         {
             1 => 16,
             2 => 9,
@@ -834,14 +914,23 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
         int npcId,
         string dayKey)
     {
-        double wake = Math.Clamp(profile.WakeHour, 4, 11);
+        double wake = Math.Clamp(
+            profile.WakeHour,
+            4,
+            11);
+
         double sleep = profile.SleepStartHour;
 
         if (sleep < 12)
             sleep += 24;
 
-        double start = Math.Max(wake + 1.0, 8.0);
-        double end = Math.Min(sleep - 1.0, 22.0);
+        double start = Math.Max(
+            wake + 1.0,
+            8.0);
+
+        double end = Math.Min(
+            sleep - 1.0,
+            22.0);
 
         if (end <= start + 1)
             end = start + 3;
@@ -852,7 +941,8 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
         double hour = start + ((end - start) * p);
 
         int h = ((int)Math.Floor(hour)) % 24;
-        int m = (int)Math.Round((hour - Math.Floor(hour)) * 60.0);
+        int m = (int)Math.Round(
+            (hour - Math.Floor(hour)) * 60.0);
 
         if (m >= 60)
         {
@@ -873,9 +963,10 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
         {
             int delay = 20 + (int)Math.Round(
                 StablePercent(
-                    $"spontaneous-late|{playerId}|{npcId}|{dayKey}") * 1.0);
+                    $"spontaneous-late|{playerId}|{npcId}|{dayKey}"));
 
-            candidate = now.AddMinutes(Math.Clamp(delay, 20, 120));
+            candidate = now.AddMinutes(
+                Math.Clamp(delay, 20, 120));
         }
 
         return candidate;
@@ -887,6 +978,7 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
         {
             using var conn = Open();
             using var cmd = conn.CreateCommand();
+
             cmd.CommandText = """
                 SELECT InitiatesContact,EmojiUse,DoubleTextTendency,
                        TypicalMessageLength,SleepStartHour,WakeHour
@@ -894,9 +986,11 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
                 WHERE NpcId=$npc
                 LIMIT 1;
                 """;
+
             cmd.Parameters.AddWithValue("$npc", npcId);
 
             using var r = cmd.ExecuteReader();
+
             if (r.Read())
             {
                 return new PhoneProfileSnapshot
@@ -910,12 +1004,15 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
                 };
             }
         }
-        catch { }
+        catch
+        {
+        }
 
         return new PhoneProfileSnapshot();
     }
 
-    private static string PhoneStyle(PhoneProfileSnapshot p)
+    private static string PhoneStyle(
+        PhoneProfileSnapshot p)
     {
         string emoji = p.EmojiUse switch
         {
@@ -948,6 +1045,7 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
     {
         using var conn = Open();
         using var cmd = conn.CreateCommand();
+
         cmd.CommandText = """
             SELECT Description,TimeText,Location,Status
             FROM ConversationPlan
@@ -956,6 +1054,7 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
               AND NpcId=$npc
             LIMIT 1;
             """;
+
         cmd.Parameters.AddWithValue("$id", planId);
         cmd.Parameters.AddWithValue("$player", playerId);
         cmd.Parameters.AddWithValue("$npc", npcId);
@@ -963,13 +1062,16 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
         try
         {
             using var r = cmd.ExecuteReader();
+
             if (!r.Read())
                 return null;
 
             if (!r.GetString(3).Equals(
                     "planned",
                     StringComparison.OrdinalIgnoreCase))
+            {
                 return null;
+            }
 
             return new ConversationPlanSnapshot
             {
@@ -990,18 +1092,21 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
         string reason,
         CancellationToken cancellationToken)
     {
-        long retryEventId = await _clock.SchedulePlayerEventAsync(
-            new GameEventScheduleRequest
-            {
-                PlayerId = row.PlayerId,
-                EventType = "npc_initiated_contact_due",
-                Title = "Phone notification",
-                GameTime = newDue,
-                InterruptFastForward = true,
-                SourceKey = $"npc-init-contact:{row.Id}:{row.RetryCount + 1}",
-                DataJson = $"{{\"triggerId\":{row.Id}}}"
-            },
-            cancellationToken);
+        long retryEventId =
+            await _clock.SchedulePlayerEventAsync(
+                new GameEventScheduleRequest
+                {
+                    PlayerId = row.PlayerId,
+                    EventType = "npc_initiated_contact_due",
+                    Title = "Phone notification",
+                    GameTime = newDue,
+                    InterruptFastForward = true,
+                    SourceKey =
+                        $"npc-init-contact:{row.Id}:{row.RetryCount + 1}",
+                    DataJson =
+                        $"{{\"triggerId\":{row.Id}}}"
+                },
+                cancellationToken);
 
         if (row.GameEventId.HasValue)
         {
@@ -1011,7 +1116,9 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
                     row.GameEventId.Value,
                     cancellationToken);
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         await _gate.WaitAsync(cancellationToken);
@@ -1019,6 +1126,7 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
         {
             using var conn = Open();
             using var cmd = conn.CreateCommand();
+
             cmd.CommandText = """
                 UPDATE NpcInitiatedContactTrigger
                 SET DueGameTime=$due,
@@ -1029,11 +1137,27 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
                 WHERE Id=$id
                   AND Status='scheduled';
                 """;
-            cmd.Parameters.AddWithValue("$due", newDue.ToString("O"));
-            cmd.Parameters.AddWithValue("$event", retryEventId);
-            cmd.Parameters.AddWithValue("$reason", reason);
-            cmd.Parameters.AddWithValue("$real", DateTime.UtcNow.ToString("O"));
-            cmd.Parameters.AddWithValue("$id", row.Id);
+
+            cmd.Parameters.AddWithValue(
+                "$due",
+                newDue.ToString("O"));
+
+            cmd.Parameters.AddWithValue(
+                "$event",
+                retryEventId);
+
+            cmd.Parameters.AddWithValue(
+                "$reason",
+                reason);
+
+            cmd.Parameters.AddWithValue(
+                "$real",
+                DateTime.UtcNow.ToString("O"));
+
+            cmd.Parameters.AddWithValue(
+                "$id",
+                row.Id);
+
             cmd.ExecuteNonQuery();
         }
         finally
@@ -1051,6 +1175,7 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
         double score)
     {
         using var cmd = conn.CreateCommand();
+
         cmd.CommandText = """
             INSERT INTO NpcInitiatedContactTrigger
             (PlayerId,PlayerName,NpcId,NpcName,Channel,Kind,Motive,
@@ -1073,26 +1198,94 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
             SELECT last_insert_rowid();
             """;
 
-        cmd.Parameters.AddWithValue("$player", request.PlayerId);
-        cmd.Parameters.AddWithValue("$playerName", request.PlayerName);
-        cmd.Parameters.AddWithValue("$npc", request.NpcId);
-        cmd.Parameters.AddWithValue("$npcName", npcName);
-        cmd.Parameters.AddWithValue("$channel", channel);
-        cmd.Parameters.AddWithValue("$kind", NormalizeKind(request.Kind));
-        cmd.Parameters.AddWithValue("$motive", Clean(request.Motive, "follow_up"));
-        cmd.Parameters.AddWithValue("$due", request.DueGameTime.ToString("O"));
-        cmd.Parameters.AddWithValue("$urgency", Math.Clamp(request.Urgency, 0, 100));
-        cmd.Parameters.AddWithValue("$commitment", Math.Clamp(request.Commitment, 0, 100));
-        cmd.Parameters.AddWithValue("$score", score);
-        cmd.Parameters.AddWithValue("$context", Clean(request.ContextText, ""));
-        cmd.Parameters.AddWithValue("$validated", validatedContext);
-        cmd.Parameters.AddWithValue("$claim", request.ClaimId.HasValue ? request.ClaimId.Value : (object)DBNull.Value);
-        cmd.Parameters.AddWithValue("$plan", request.ConversationPlanId.HasValue ? request.ConversationPlanId.Value : (object)DBNull.Value);
-        cmd.Parameters.AddWithValue("$unknown", request.AllowUnknownNumber ? 1 : 0);
-        cmd.Parameters.AddWithValue("$maxChars", Math.Clamp(request.MaxMessageCharacters, 40, 1200));
-        cmd.Parameters.AddWithValue("$source", string.IsNullOrWhiteSpace(request.SourceKey) ? DBNull.Value : request.SourceKey.Trim());
-        cmd.Parameters.AddWithValue("$createdGame", _clock.Now.ToString("O"));
-        cmd.Parameters.AddWithValue("$real", DateTime.UtcNow.ToString("O"));
+        cmd.Parameters.AddWithValue(
+            "$player",
+            request.PlayerId);
+
+        cmd.Parameters.AddWithValue(
+            "$playerName",
+            request.PlayerName);
+
+        cmd.Parameters.AddWithValue(
+            "$npc",
+            request.NpcId);
+
+        cmd.Parameters.AddWithValue(
+            "$npcName",
+            npcName);
+
+        cmd.Parameters.AddWithValue(
+            "$channel",
+            channel);
+
+        cmd.Parameters.AddWithValue(
+            "$kind",
+            NormalizeKind(request.Kind));
+
+        cmd.Parameters.AddWithValue(
+            "$motive",
+            Clean(request.Motive, "follow_up"));
+
+        cmd.Parameters.AddWithValue(
+            "$due",
+            request.DueGameTime.ToString("O"));
+
+        cmd.Parameters.AddWithValue(
+            "$urgency",
+            Math.Clamp(request.Urgency, 0, 100));
+
+        cmd.Parameters.AddWithValue(
+            "$commitment",
+            Math.Clamp(request.Commitment, 0, 100));
+
+        cmd.Parameters.AddWithValue(
+            "$score",
+            score);
+
+        cmd.Parameters.AddWithValue(
+            "$context",
+            Clean(request.ContextText, ""));
+
+        cmd.Parameters.AddWithValue(
+            "$validated",
+            validatedContext);
+
+        cmd.Parameters.AddWithValue(
+            "$claim",
+            request.ClaimId.HasValue
+                ? request.ClaimId.Value
+                : (object)DBNull.Value);
+
+        cmd.Parameters.AddWithValue(
+            "$plan",
+            request.ConversationPlanId.HasValue
+                ? request.ConversationPlanId.Value
+                : (object)DBNull.Value);
+
+        cmd.Parameters.AddWithValue(
+            "$unknown",
+            request.AllowUnknownNumber ? 1 : 0);
+
+        cmd.Parameters.AddWithValue(
+            "$maxChars",
+            Math.Clamp(
+                request.MaxMessageCharacters,
+                40,
+                1200));
+
+        cmd.Parameters.AddWithValue(
+            "$source",
+            string.IsNullOrWhiteSpace(request.SourceKey)
+                ? DBNull.Value
+                : request.SourceKey.Trim());
+
+        cmd.Parameters.AddWithValue(
+            "$createdGame",
+            _clock.Now.ToString("O"));
+
+        cmd.Parameters.AddWithValue(
+            "$real",
+            DateTime.UtcNow.ToString("O"));
 
         return Convert.ToInt64(
             cmd.ExecuteScalar(),
@@ -1104,6 +1297,7 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
         DateTimeOffset gameTime)
     {
         using var cmd = conn.CreateCommand();
+
         cmd.CommandText = """
             SELECT Id,PlayerId,PlayerName,NpcId,NpcName,Channel,Kind,Motive,
                    DueGameTime,Urgency,Commitment,ContactScore,
@@ -1121,9 +1315,13 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
                   )
             ORDER BY DueGameTime,Id;
             """;
-        cmd.Parameters.AddWithValue("$game", gameTime.ToString("O"));
+
+        cmd.Parameters.AddWithValue(
+            "$game",
+            gameTime.ToString("O"));
 
         var rows = new List<TriggerRow>();
+
         using var r = cmd.ExecuteReader();
 
         while (r.Read())
@@ -1137,11 +1335,18 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
         long id)
     {
         using var cmd = conn.CreateCommand();
-        cmd.CommandText = TriggerSelect + " WHERE Id=$id LIMIT 1;";
+
+        cmd.CommandText =
+            TriggerSelect +
+            " WHERE Id=$id LIMIT 1;";
+
         cmd.Parameters.AddWithValue("$id", id);
 
         using var r = cmd.ExecuteReader();
-        return r.Read() ? ReadTrigger(r) : null;
+
+        return r.Read()
+            ? ReadTrigger(r)
+            : null;
     }
 
     private TriggerRow? LoadBySourceKey(
@@ -1149,11 +1354,20 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
         string sourceKey)
     {
         using var cmd = conn.CreateCommand();
-        cmd.CommandText = TriggerSelect + " WHERE SourceKey=$source LIMIT 1;";
-        cmd.Parameters.AddWithValue("$source", sourceKey);
+
+        cmd.CommandText =
+            TriggerSelect +
+            " WHERE SourceKey=$source LIMIT 1;";
+
+        cmd.Parameters.AddWithValue(
+            "$source",
+            sourceKey);
 
         using var r = cmd.ExecuteReader();
-        return r.Read() ? ReadTrigger(r) : null;
+
+        return r.Read()
+            ? ReadTrigger(r)
+            : null;
     }
 
     private const string TriggerSelect = """
@@ -1166,7 +1380,8 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
         FROM NpcInitiatedContactTrigger
         """;
 
-    private static TriggerRow ReadTrigger(SqliteDataReader r)
+    private static TriggerRow ReadTrigger(
+        SqliteDataReader r)
         => new()
         {
             Id = r.GetInt64(0),
@@ -1182,18 +1397,30 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
             Commitment = r.GetInt32(10),
             ContactScore = r.GetDouble(11),
             ValidatedContext = r.GetString(12),
-            ClaimId = r.IsDBNull(13) ? null : r.GetInt64(13),
-            ConversationPlanId = r.IsDBNull(14) ? null : r.GetInt64(14),
+            ClaimId = r.IsDBNull(13)
+                ? null
+                : r.GetInt64(13),
+            ConversationPlanId = r.IsDBNull(14)
+                ? null
+                : r.GetInt64(14),
             AllowUnknownNumber = r.GetInt32(15) != 0,
             MaxMessageCharacters = r.GetInt32(16),
-            SourceKey = r.IsDBNull(17) ? "" : r.GetString(17),
+            SourceKey = r.IsDBNull(17)
+                ? ""
+                : r.GetString(17),
             Status = r.GetString(18),
             DecisionCode = r.GetString(19),
             RetryCount = r.GetInt32(20),
             GeneratedText = r.GetString(21),
-            ConversationSessionId = r.IsDBNull(22) ? null : r.GetInt64(22),
-            GameEventId = r.IsDBNull(23) ? null : r.GetInt64(23),
-            PhoneMessageId = r.IsDBNull(24) ? null : r.GetInt64(24)
+            ConversationSessionId = r.IsDBNull(22)
+                ? null
+                : r.GetInt64(22),
+            GameEventId = r.IsDBNull(23)
+                ? null
+                : r.GetInt64(23),
+            PhoneMessageId = r.IsDBNull(24)
+                ? null
+                : r.GetInt64(24)
         };
 
     private static NpcInitiatedOutboundMessage ToOutbound(
@@ -1210,26 +1437,42 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
             Kind = row.Kind,
             Motive = row.Motive,
             Text = row.GeneratedText,
-            ConversationSessionId = row.ConversationSessionId ?? 0,
+            ConversationSessionId =
+                row.ConversationSessionId ?? 0,
             GameTime = row.DueGameTime,
-            AllowUnknownNumber = row.AllowUnknownNumber,
+            AllowUnknownNumber =
+                row.AllowUnknownNumber,
             SourceClaimId = row.ClaimId,
-            ConversationPlanId = row.ConversationPlanId
+            ConversationPlanId =
+                row.ConversationPlanId
         };
 
-    private void SetGameEventId(long triggerId, long eventId)
+    private void SetGameEventId(
+        long triggerId,
+        long eventId)
     {
         using var conn = Open();
         using var cmd = conn.CreateCommand();
+
         cmd.CommandText = """
             UPDATE NpcInitiatedContactTrigger
             SET GameEventId=$event,
                 UpdatedRealUtc=$real
             WHERE Id=$id;
             """;
-        cmd.Parameters.AddWithValue("$event", eventId);
-        cmd.Parameters.AddWithValue("$real", DateTime.UtcNow.ToString("O"));
-        cmd.Parameters.AddWithValue("$id", triggerId);
+
+        cmd.Parameters.AddWithValue(
+            "$event",
+            eventId);
+
+        cmd.Parameters.AddWithValue(
+            "$real",
+            DateTime.UtcNow.ToString("O"));
+
+        cmd.Parameters.AddWithValue(
+            "$id",
+            triggerId);
+
         cmd.ExecuteNonQuery();
     }
 
@@ -1240,6 +1483,7 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
     {
         using var conn = Open();
         using var cmd = conn.CreateCommand();
+
         cmd.CommandText = """
             UPDATE NpcInitiatedContactTrigger
             SET Status=$status,
@@ -1247,10 +1491,23 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
                 UpdatedRealUtc=$real
             WHERE Id=$id;
             """;
-        cmd.Parameters.AddWithValue("$status", status);
-        cmd.Parameters.AddWithValue("$decision", decision);
-        cmd.Parameters.AddWithValue("$real", DateTime.UtcNow.ToString("O"));
-        cmd.Parameters.AddWithValue("$id", triggerId);
+
+        cmd.Parameters.AddWithValue(
+            "$status",
+            status);
+
+        cmd.Parameters.AddWithValue(
+            "$decision",
+            decision);
+
+        cmd.Parameters.AddWithValue(
+            "$real",
+            DateTime.UtcNow.ToString("O"));
+
+        cmd.Parameters.AddWithValue(
+            "$id",
+            triggerId);
+
         cmd.ExecuteNonQuery();
     }
 
@@ -1260,14 +1517,23 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
         string dayKey)
     {
         using var cmd = conn.CreateCommand();
+
         cmd.CommandText = """
             SELECT 1
             FROM NpcSpontaneousContactDay
-            WHERE PlayerId=$player AND GameDay=$day
+            WHERE PlayerId=$player
+              AND GameDay=$day
             LIMIT 1;
             """;
-        cmd.Parameters.AddWithValue("$player", playerId);
-        cmd.Parameters.AddWithValue("$day", dayKey);
+
+        cmd.Parameters.AddWithValue(
+            "$player",
+            playerId);
+
+        cmd.Parameters.AddWithValue(
+            "$day",
+            dayKey);
+
         return cmd.ExecuteScalar() != null;
     }
 
@@ -1277,14 +1543,25 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
         string dayKey)
     {
         using var cmd = conn.CreateCommand();
+
         cmd.CommandText = """
             INSERT OR IGNORE INTO NpcSpontaneousContactDay
             (PlayerId,GameDay,CreatedRealUtc)
             VALUES($player,$day,$real);
             """;
-        cmd.Parameters.AddWithValue("$player", playerId);
-        cmd.Parameters.AddWithValue("$day", dayKey);
-        cmd.Parameters.AddWithValue("$real", DateTime.UtcNow.ToString("O"));
+
+        cmd.Parameters.AddWithValue(
+            "$player",
+            playerId);
+
+        cmd.Parameters.AddWithValue(
+            "$day",
+            dayKey);
+
+        cmd.Parameters.AddWithValue(
+            "$real",
+            DateTime.UtcNow.ToString("O"));
+
         cmd.ExecuteNonQuery();
     }
 
@@ -1300,24 +1577,29 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
         return StablePercent(key);
     }
 
-    private static double StablePercent(string value)
+    private static double StablePercent(
+        string value)
     {
         byte[] bytes = SHA256.HashData(
             Encoding.UTF8.GetBytes(value ?? ""));
 
-        uint x = BitConverter.ToUInt32(bytes, 0);
+        uint x = BitConverter.ToUInt32(
+            bytes,
+            0);
 
         return (x / (double)uint.MaxValue) * 100.0;
     }
 
-    private static string NormalizeChannel(string? channel)
+    private static string NormalizeChannel(
+        string? channel)
         => channel?.Trim().ToLowerInvariant() switch
         {
             "call" => "call",
             _ => "text"
         };
 
-    private static string NormalizeKind(string? kind)
+    private static string NormalizeKind(
+        string? kind)
         => kind?.Trim().ToLowerInvariant() switch
         {
             "spontaneous_check_in" => "spontaneous_check_in",
@@ -1336,7 +1618,8 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
             _ => "follow_up"
         };
 
-    private static DateTimeOffset ParseTime(string value)
+    private static DateTimeOffset ParseTime(
+        string value)
         => DateTimeOffset.TryParse(
             value,
             CultureInfo.InvariantCulture,
@@ -1345,31 +1628,59 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
                 ? parsed
                 : DateTimeOffset.Now;
 
-    private static string Clean(string? value, string fallback)
+    private static string Clean(
+        string? value,
+        string fallback)
         => string.IsNullOrWhiteSpace(value)
             ? fallback
             : value.Trim();
 
-    private void ValidateScheduleRequest(NpcInitiatedContactRequest request)
+    private void ValidateScheduleRequest(
+        NpcInitiatedContactRequest request)
     {
         if (request == null)
-            throw new ArgumentNullException(nameof(request));
+            throw new ArgumentNullException(
+                nameof(request));
 
         if (string.IsNullOrWhiteSpace(request.PlayerId))
-            throw new ArgumentException("PlayerId is required.", nameof(request));
+        {
+            throw new ArgumentException(
+                "PlayerId is required.",
+                nameof(request));
+        }
 
         if (request.NpcId <= 0)
-            throw new ArgumentOutOfRangeException(nameof(request.NpcId));
+        {
+            throw new ArgumentOutOfRangeException(
+                nameof(request.NpcId));
+        }
 
         if (request.DueGameTime == default)
             request.DueGameTime = _clock.Now;
 
-        request.PlayerId = request.PlayerId.Trim();
-        request.PlayerName = Clean(request.PlayerName, "Player");
-        request.Urgency = Math.Clamp(request.Urgency, 0, 100);
-        request.Commitment = Math.Clamp(request.Commitment, 0, 100);
+        request.PlayerId =
+            request.PlayerId.Trim();
+
+        request.PlayerName =
+            Clean(request.PlayerName, "Player");
+
+        request.Urgency =
+            Math.Clamp(
+                request.Urgency,
+                0,
+                100);
+
+        request.Commitment =
+            Math.Clamp(
+                request.Commitment,
+                0,
+                100);
+
         request.MaxMessageCharacters =
-            Math.Clamp(request.MaxMessageCharacters, 40, 1200);
+            Math.Clamp(
+                request.MaxMessageCharacters,
+                40,
+                1200);
     }
 
     private void EnsureSchema()
@@ -1432,11 +1743,16 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
 
     private SqliteConnection Open()
     {
-        var conn = new SqliteConnection("Data Source=" + _dbPath);
+        var conn = new SqliteConnection(
+            "Data Source=" + _dbPath);
+
         conn.Open();
 
         using var pragma = conn.CreateCommand();
-        pragma.CommandText = "PRAGMA busy_timeout=5000;";
+
+        pragma.CommandText =
+            "PRAGMA busy_timeout=5000;";
+
         pragma.ExecuteNonQuery();
 
         return conn;
@@ -1445,54 +1761,88 @@ public sealed class NpcInitiatedContactService : INpcInitiatedContactService
     private sealed class TriggerRow
     {
         public long Id { get; set; }
+
         public string PlayerId { get; set; } = "";
+
         public string PlayerName { get; set; } = "";
+
         public int NpcId { get; set; }
+
         public string NpcName { get; set; } = "";
+
         public string Channel { get; set; } = "";
+
         public string Kind { get; set; } = "";
+
         public string Motive { get; set; } = "";
+
         public DateTimeOffset DueGameTime { get; set; }
+
         public int Urgency { get; set; }
+
         public int Commitment { get; set; }
+
         public double ContactScore { get; set; }
+
         public string ValidatedContext { get; set; } = "";
+
         public long? ClaimId { get; set; }
+
         public long? ConversationPlanId { get; set; }
+
         public bool AllowUnknownNumber { get; set; }
+
         public int MaxMessageCharacters { get; set; }
+
         public string SourceKey { get; set; } = "";
+
         public string Status { get; set; } = "";
+
         public string DecisionCode { get; set; } = "";
+
         public int RetryCount { get; set; }
+
         public string GeneratedText { get; set; } = "";
+
         public long? ConversationSessionId { get; set; }
+
         public long? GameEventId { get; set; }
+
         public long? PhoneMessageId { get; set; }
     }
 
     private sealed class PhoneProfileSnapshot
     {
         public int InitiatesContact { get; set; } = 40;
+
         public int EmojiUse { get; set; } = 30;
+
         public int DoubleTextTendency { get; set; } = 30;
+
         public int TypicalMessageLength { get; set; } = 45;
+
         public double SleepStartHour { get; set; } = 23.0;
+
         public double WakeHour { get; set; } = 7.0;
     }
 
     private sealed class ConversationPlanSnapshot
     {
         public string Description { get; set; } = "";
+
         public string TimeText { get; set; } = "";
+
         public string Location { get; set; } = "";
     }
 
     private sealed class SpontaneousCandidateScore
     {
         public NpcSpontaneousContactCandidate Candidate { get; set; } = new();
+
         public double Score { get; set; }
+
         public double TieBreak { get; set; }
+
         public PhoneProfileSnapshot Profile { get; set; } = new();
     }
 }
