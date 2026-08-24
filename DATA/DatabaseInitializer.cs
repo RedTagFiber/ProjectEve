@@ -11,7 +11,7 @@ public static class DatabaseInitializer
             var env = Environment.GetEnvironmentVariable("EVE_DB_PATH");
             if (!string.IsNullOrWhiteSpace(env))
                 return env;
-            return Path.Combine(AppContext.BaseDirectory, "Data", "project_eve.db");
+            return Path.Combine(@"D:\ProjectEveData", "Database", "project_eve.db");
         }
     }
 
