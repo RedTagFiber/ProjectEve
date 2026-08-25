@@ -1,4 +1,4 @@
-using Microsoft.Data.Sqlite;
+﻿using Microsoft.Data.Sqlite;
 using ProjectEve.Characters.Base;
 using ProjectEve.Core.Scene;
 using ProjectEve.Core.World;
@@ -43,14 +43,11 @@ public sealed class WorldOccupancyService : IWorldOccupancyService
         _groupScenes = groupScenes;
         _perception = perception;
 
-        _dbPath = Environment.GetEnvironmentVariable("EVE_DB_PATH")
-            ?? Path.Combine(AppContext.BaseDirectory, "Data", "project_eve.db");
-
-        var parent = Path.GetDirectoryName(_dbPath);
-        if (!string.IsNullOrWhiteSpace(parent))
-            Directory.CreateDirectory(parent);
+        ProjectEve.Data.ProjectEveDatabaseSetup.EnsureAll();
+        _dbPath = ProjectEve.Data.ProjectEveDatabaseSetup.LocationDatabasePath;
 
         EnsureSchema();
+        MigrateLegacyMainOccupancyDataIfNeeded();
     }
 
     public async Task<WorldOccupancySyncResult> SynchronizeAsync(
@@ -1146,7 +1143,7 @@ ON CONFLICT(NpcId) DO NOTHING;";
 
     private List<int> LoadCharacterIds()
     {
-        using var conn = Open();
+        using var conn = OpenMain();
         using var cmd = conn.CreateCommand();
         cmd.CommandText = "SELECT Id FROM Characters WHERE Id > 0 ORDER BY Id;";
 
@@ -1264,26 +1261,16 @@ VALUES($npc,$name,$fromStatus,$toStatus,$fromLocation,$toLocation,
         string characterKey,
         DateTimeOffset gameTime)
     {
-        using var conn = Open();
-        using var cmd = conn.CreateCommand();
-        cmd.CommandText = @"
-UPDATE ScenePhysicalContact
-SET State='broken',
-    ReactionState='interrupted',
-    UpdatedGameTime=$game,
-    UpdatedRealUtc=$real
-WHERE SceneId=$scene
-  AND State IN ('pending','active','hesitant','frozen')
-  AND (CharacterAKey=$character OR CharacterBKey=$character);";
-        cmd.Parameters.AddWithValue("$game", gameTime.ToString("O"));
-        cmd.Parameters.AddWithValue("$real", DateTime.UtcNow.ToString("O"));
-        cmd.Parameters.AddWithValue("$scene", sceneId);
-        cmd.Parameters.AddWithValue("$character", characterKey);
-
-        try { cmd.ExecuteNonQuery(); }
+        try
+        {
+            ProjectEve.Scene.SceneSpatialInteractionService.BreakContactsForCharacter(
+                sceneId,
+                characterKey,
+                gameTime);
+        }
         catch
         {
-            // Phase 12 may be copied before Phase 11 on a development DB.
+            // Scene contact state is best-effort during development/migration.
         }
     }
 
@@ -1413,6 +1400,127 @@ WHERE SceneId=$scene;";
         return conn;
     }
 
+
+    private static SqliteConnection OpenMain()
+    {
+        var conn = new SqliteConnection(
+            "Data Source=" + ProjectEve.Data.ProjectEveDatabaseSetup.MainDatabasePath);
+        conn.Open();
+
+        using var pragma = conn.CreateCommand();
+        pragma.CommandText = "PRAGMA busy_timeout=5000;";
+        pragma.ExecuteNonQuery();
+        return conn;
+    }
+
+    /// <summary>
+    /// One-time compatibility migration:
+    /// when canonical occupancy tables are empty, copy existing legacy rows
+    /// from project_eve.db into project_eve_locations.db.
+    /// Legacy rows are never deleted.
+    /// </summary>
+    private void MigrateLegacyMainOccupancyDataIfNeeded()
+    {
+        using var conn = Open();
+
+        using (var count = conn.CreateCommand())
+        {
+            count.CommandText = "SELECT COUNT(*) FROM NpcScheduleBinding;";
+            long existing = Convert.ToInt64(count.ExecuteScalar() ?? 0);
+            if (existing > 0)
+                return;
+        }
+
+        string legacyMainPath =
+            ProjectEve.Data.ProjectEveDatabaseSetup.MainDatabasePath;
+
+        if (!File.Exists(legacyMainPath) ||
+            string.Equals(
+                legacyMainPath,
+                _dbPath,
+                StringComparison.OrdinalIgnoreCase))
+            return;
+
+        string escaped = legacyMainPath.Replace("'", "''");
+
+        try
+        {
+            using (var attach = conn.CreateCommand())
+            {
+                attach.CommandText =
+                    $"ATTACH DATABASE '{escaped}' AS legacy_main;";
+                attach.ExecuteNonQuery();
+            }
+
+            CopyLegacyOccupancyTable(
+                conn,
+                "NpcScheduleBinding",
+                "NpcId,HomeLocationId,HomeDisplayName,WorkLocationId," +
+                "WorkDisplayName,ScheduleMode,UpdatedRealUtc");
+
+            CopyLegacyOccupancyTable(
+                conn,
+                "NpcShiftAssignment",
+                "Id,NpcId,StartGameTime,EndGameTime,LocationId,Status," +
+                "Note,Source,CreatedRealUtc");
+
+            CopyLegacyOccupancyTable(
+                conn,
+                "NpcScheduleOverride",
+                "Id,NpcId,Kind,StartGameTime,EndGameTime,LocationId," +
+                "Activity,Note,Status,CreatedRealUtc");
+
+            CopyLegacyOccupancyTable(
+                conn,
+                "NpcWorldLocationState",
+                "NpcId,NpcName,Status,CurrentLocationId,OriginLocationId," +
+                "DestinationLocationId,DepartGameTime,ExpectedArrivalGameTime," +
+                "Activity,Source,UpdatedGameTime,UpdatedRealUtc");
+
+            CopyLegacyOccupancyTable(
+                conn,
+                "NpcWorldMovementEvent",
+                "Id,NpcId,NpcName,FromStatus,ToStatus,FromLocationId," +
+                "ToLocationId,OriginLocationId,DestinationLocationId," +
+                "GameTime,Source,CreatedRealUtc");
+
+            using (var detach = conn.CreateCommand())
+            {
+                detach.CommandText = "DETACH DATABASE legacy_main;";
+                detach.ExecuteNonQuery();
+            }
+        }
+        catch
+        {
+            // Compatibility migration only.
+            // Never block startup and never delete legacy data.
+        }
+    }
+
+    private static void CopyLegacyOccupancyTable(
+        SqliteConnection conn,
+        string tableName,
+        string columns)
+    {
+        using (var exists = conn.CreateCommand())
+        {
+            exists.CommandText = """
+                SELECT COUNT(*)
+                FROM legacy_main.sqlite_master
+                WHERE type='table' AND name=$name;
+                """;
+            exists.Parameters.AddWithValue("$name", tableName);
+
+            if (Convert.ToInt32(exists.ExecuteScalar() ?? 0) == 0)
+                return;
+        }
+
+        using var copy = conn.CreateCommand();
+        copy.CommandText =
+            $"INSERT OR IGNORE INTO {tableName} ({columns}) " +
+            $"SELECT {columns} FROM legacy_main.{tableName};";
+        copy.ExecuteNonQuery();
+    }
     private void EnsureSchema()
     {
         using var conn = Open();
@@ -1536,3 +1644,5 @@ ON NpcWorldMovementEvent(NpcId,GameTime);
         public string Status { get; set; } = "";
     }
 }
+
+

@@ -1,0 +1,166 @@
+﻿{
+  "id": "resentment",
+  "layer": "fast",
+  "label": "Resentment",
+  "version": 1,
+  "description": "Stored unfairness. Longer burn than Anger; keeps score. Bridges toward Mid character (grudge, bitterness) when funded high.",
+  "priorIntensity": {
+    "min": 2,
+    "max": 6,
+    "mean": 3
+  },
+  "spawn": {
+    "currentFromIntensity": true,
+    "noise": 3
+  },
+  "bands": {
+    "off": [ 0, 29 ],
+    "low": [ 30, 49 ],
+    "mid": [ 50, 69 ],
+    "high": [ 70, 84 ],
+    "break": [ 85, 94 ],
+    "extreme": [ 95, 100 ]
+  },
+  "styles": {
+    "scorekeep": {
+      "means": "Remembers every slight; brings up the ledger.",
+      "speechHints": [ "you_always", "ledger" ],
+      "bodyHints": [ "tight", "point" ],
+      "riskTags": [ "rehash" ]
+    },
+    "dig": {
+      "means": "Needles old wounds in conversation.",
+      "speechHints": [ "barb", "reminder" ],
+      "bodyHints": [ "side_eye" ],
+      "riskTags": [ "provoke" ]
+    },
+    "ice": {
+      "means": "Long cold; politeness without warmth.",
+      "speechHints": [ "formal", "minimal" ],
+      "bodyHints": [ "distance" ],
+      "riskTags": [ "freeze_out" ]
+    },
+    "sabotage_light": {
+      "means": "Small blocks, forgotten favors, quiet payback.",
+      "speechHints": [ "vague", "unavailable" ],
+      "bodyHints": [ "delay" ],
+      "riskTags": [ "passive_payback" ]
+    },
+    "brood": {
+      "means": "Silent replay; inward bitterness.",
+      "speechHints": [ "distracted", "flat" ],
+      "bodyHints": [ "withdraw" ],
+      "riskTags": [ "isolate" ]
+    }
+  },
+  "defaultStyleWeights": {
+    "scorekeep": 0.9,
+    "dig": 0.7,
+    "ice": 1.0,
+    "sabotage_light": 0.45,
+    "brood": 0.95
+  },
+  "flavors": {
+    "family": "Old household unfairness.",
+    "work": "Credit, promotion, boss.",
+    "romance": "Ex or ongoing imbalance.",
+    "friend": "Loyalty failure.",
+    "system": "Town, school, institution."
+  },
+  "pull": {
+    "belowHomeDamageMult": 0.5,
+    "recoverMult": 1.1,
+    "aboveHomeSettleMult": 0.9
+  },
+  "funding": {
+    "required": true,
+    "budgetPerIntensityPoint": 1.0
+  },
+  "links": [
+    {
+      "trait": "anger",
+      "op": "+",
+      "weight": 0.35,
+      "when": "rise"
+    },
+    {
+      "trait": "trust",
+      "op": "-",
+      "weight": 0.45,
+      "when": "rise"
+    },
+    {
+      "trait": "affection",
+      "op": "-",
+      "weight": 0.3,
+      "when": "rise"
+    },
+    {
+      "trait": "hope",
+      "op": "-",
+      "weight": 0.35,
+      "when": "rise"
+    },
+    {
+      "trait": "guard",
+      "op": "+",
+      "weight": 0.35,
+      "when": "rise"
+    },
+    {
+      "trait": "hurt",
+      "op": "+",
+      "weight": 0.25,
+      "when": "rise"
+    }
+  ],
+  "opposePairs": [
+    {
+      "with": "hope",
+      "policyHints": [ "bitter_hope", "cannot_forgive_yet" ]
+    },
+    {
+      "with": "affection",
+      "policyHints": [ "love_with_ledger" ]
+    }
+  ],
+  "tagTriggers": [
+    {
+      "tag": "conflict.unfair",
+      "direction": "+",
+      "baseWeight": 0.9
+    },
+    {
+      "tag": "conflict.betrayal",
+      "direction": "+",
+      "baseWeight": 0.95
+    },
+    {
+      "tag": "conflict.old_wound",
+      "direction": "+",
+      "baseWeight": 0.85
+    },
+    {
+      "tag": "status.credit_stolen",
+      "direction": "+",
+      "baseWeight": 0.9
+    },
+    {
+      "tag": "repair.amends_done",
+      "direction": "-",
+      "baseWeight": 0.55
+    },
+    {
+      "tag": "bond.forgiveness",
+      "direction": "-",
+      "baseWeight": 0.6
+    },
+    {
+      "tag": "repair.apology",
+      "direction": "-",
+      "baseWeight": 0.35
+    }
+  ],
+  "relationScoped": true,
+  "historyHooks": {
+    "catalog": "Characters/Traits/TraitJson/TraitHistory

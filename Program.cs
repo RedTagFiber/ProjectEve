@@ -1,4 +1,4 @@
-using Microsoft.Data.Sqlite;
+﻿using Microsoft.Data.Sqlite;
 using ProjectEve.AI.Brain;
 using ProjectEve.Characters.Base;
 using ProjectEve.Characters.Characters;
@@ -17,6 +17,8 @@ internal static class Program
     static string DataDir => ProjectEveDatabaseSetup.DatabaseRoot;
     static string DbPath => ProjectEveDatabaseSetup.MainDatabasePath;
     static string HistoryDbPath => ProjectEveDatabaseSetup.HistoryDatabasePath;
+    static string RelationshipDbPath => ProjectEveDatabaseSetup.RelationshipDatabasePath;
+    static string LocationDbPath => ProjectEveDatabaseSetup.LocationDatabasePath;
     static string NpcRoot => ProjectEveDatabaseSetup.NpcRoot;
 
     static readonly string TraitJsonRoot =
@@ -247,6 +249,11 @@ internal static class Program
     }
     static void VerifyTownDatabase()
     {
+        // Canonical DBs are now written directly by their owning repositories; legacy SyncAll disabled.
+        ProjectEveDatabaseVerifier.PrintToConsole();
+        ProjectEveFinanceVerifier.PrintToConsole();
+        ProjectEveOwnershipVerifier.PrintToConsole();
+        Console.WriteLine();
         Console.WriteLine();
         Console.WriteLine("ProjectEve Database Verification");
         Console.WriteLine("--------------------------------");
@@ -302,9 +309,11 @@ internal static class Program
     {
         ProjectEveDatabaseSetup.EnsureAll();
 
-        Console.WriteLine("DB → " + DbPath);
-        Console.WriteLine("History DB → " + HistoryDbPath);
-        Console.WriteLine("NPC Root → " + NpcRoot);
+        Console.WriteLine("DB â†’ " + DbPath);
+        Console.WriteLine("History DB â†’ " + HistoryDbPath);
+        Console.WriteLine("Relationship DB -> " + RelationshipDbPath);
+        Console.WriteLine("Location DB -> " + LocationDbPath);
+        Console.WriteLine("NPC Root â†’ " + NpcRoot);
         Console.WriteLine();
 
         // Build/patch the minimum schema first.
@@ -314,6 +323,7 @@ internal static class Program
         try
         {
             DatabaseInitializer.Initialize();
+            // Canonical DBs are now written directly by their owning repositories; legacy SyncAll disabled.
         }
         catch (Exception ex)
         {
@@ -652,7 +662,9 @@ internal static class Program
             "Created",
             batchLabel == "history" ? "History NPC generated" : "Town NPC generated",
             $"Seeder created {npc.Name}. Batch={batchLabel}. Tier={npc.Tier}. Occupation={npc.Occupation}.");
-    }
+    
+        // Canonical DBs are now written directly by their owning repositories; legacy SyncAll disabled.
+}
 
     static void LinkTownNpcsToHistory(List<SimCharacter> townNpcs, List<SimCharacter> historyNpcs)
     {
@@ -896,131 +908,11 @@ internal static class Program
 
     static void EnsureCoreTables()     ///// Must run BEFORE DatabaseInitializer.Initialize() /////////
     {
+        // Canonical Characters schema is owned by ProjectEveDatabaseSetup.
+        ProjectEveDatabaseSetup.EnsureAll();
+
         using var conn = new SqliteConnection("Data Source=" + DbPath);
         conn.Open();
-
-        Execute(conn, """
-                    CREATE TABLE IF NOT EXISTS Characters
-                    (
-                        Id INTEGER PRIMARY KEY,
-
-                        NpcKey TEXT,
-                        FolderName TEXT,
-                        FolderPath TEXT,
-
-                        Name TEXT NOT NULL DEFAULT '',
-                        Nickname TEXT,
-                        DirtyName TEXT,
-                        DarkName TEXT,
-                        DisplayName TEXT,
-                        FirstName TEXT,
-                        LastName TEXT,
-
-                        Age INTEGER NOT NULL DEFAULT 0,
-                        Gender TEXT,
-                        Occupation TEXT,
-                        Location TEXT,
-                        Status TEXT,
-
-                        Goal TEXT,
-                        Need TEXT,
-                        Fear TEXT,
-                        Want TEXT,
-                        PersonalityContext TEXT,
-                        Hometown TEXT,
-                        Address TEXT,
-
-                        Tier INTEGER NOT NULL DEFAULT 5,
-                        UpdatedRealAt TEXT
-                    );
-                    """);
-        EnsureColumn(conn, "Characters", "NpcKey", "TEXT");
-        EnsureColumn(conn, "Characters", "Name", "TEXT NOT NULL DEFAULT ''");
-        EnsureColumn(conn, "Characters", "Nickname", "TEXT");
-        EnsureColumn(conn, "Characters", "DirtyName", "TEXT");
-        EnsureColumn(conn, "Characters", "DarkName", "TEXT");
-        EnsureColumn(conn, "Characters", "DisplayName", "TEXT");
-        EnsureColumn(conn, "Characters", "FirstName", "TEXT");
-        EnsureColumn(conn, "Characters", "LastName", "TEXT");
-        EnsureColumn(conn, "Characters", "FolderName", "TEXT");
-        EnsureColumn(conn, "Characters", "FolderPath", "TEXT");
-        EnsureColumn(conn, "Characters", "Age", "INTEGER NOT NULL DEFAULT 0");
-        EnsureColumn(conn, "Characters", "Gender", "TEXT");
-        EnsureColumn(conn, "Characters", "Occupation", "TEXT");
-        EnsureColumn(conn, "Characters", "Location", "TEXT");
-        EnsureColumn(conn, "Characters", "Status", "TEXT");
-        EnsureColumn(conn, "Characters", "Goal", "TEXT");
-        EnsureColumn(conn, "Characters", "Need", "TEXT");
-        EnsureColumn(conn, "Characters", "Fear", "TEXT");
-        EnsureColumn(conn, "Characters", "Want", "TEXT");
-        EnsureColumn(conn, "Characters", "PersonalityContext", "TEXT");
-        EnsureColumn(conn, "Characters", "Hometown", "TEXT");
-        EnsureColumn(conn, "Characters", "Address", "TEXT");
-        EnsureColumn(conn, "Characters", "Tier", "INTEGER NOT NULL DEFAULT 5");
-        EnsureColumn(conn, "Characters", "UpdatedRealAt", "TEXT");
-        Execute(conn, """
-        CREATE TABLE IF NOT EXISTS NpcRelationships
-        (
-            Id TEXT PRIMARY KEY,
-            NpcId INTEGER NOT NULL,
-            TargetName TEXT NOT NULL,
-            RelationshipType TEXT,
-            Trust INTEGER NOT NULL DEFAULT 0,
-            Respect INTEGER NOT NULL DEFAULT 0,
-            Affection INTEGER NOT NULL DEFAULT 0,
-            Attraction INTEGER NOT NULL DEFAULT 0,
-            Tension INTEGER NOT NULL DEFAULT 0,
-            Notes TEXT
-        );
-        """);
-
-        Execute(conn, """
-        CREATE TABLE IF NOT EXISTS NpcAppearanceProfiles
-        (
-            NpcId INTEGER PRIMARY KEY,
-            Notes TEXT
-        );
-        """);
-
-        Execute(conn, """
-        CREATE TABLE IF NOT EXISTS NpcVoiceProfiles
-        (
-            NpcId INTEGER PRIMARY KEY,
-            VoiceStatus TEXT,
-            Notes TEXT
-        );
-        """);
-
-        Execute(conn, """
-        CREATE TABLE IF NOT EXISTS NpcTraitValues
-        (
-            Id TEXT PRIMARY KEY,
-            NpcId INTEGER NOT NULL,
-            MainGroup TEXT,
-            SubGroup TEXT,
-            SubSubGroup TEXT,
-            TraitId TEXT,
-            TraitName TEXT,
-            IsEnabled INTEGER NOT NULL DEFAULT 1,
-            StartingValue INTEGER NOT NULL DEFAULT 50,
-            CurrentValue INTEGER NOT NULL DEFAULT 50,
-            Notes TEXT
-        );
-        """);
-
-        Execute(conn, """
-        CREATE TABLE IF NOT EXISTS NpcBuildRevisions
-        (
-            Id TEXT PRIMARY KEY,
-            NpcId INTEGER NOT NULL,
-            RevisionType TEXT,
-            Title TEXT,
-            Details TEXT,
-            OldValue TEXT,
-            NewValue TEXT,
-            CreatedRealAt TEXT
-        );
-        """);
     }
 
     static void Execute(SqliteConnection conn, string sql)
@@ -1054,134 +946,12 @@ internal static class Program
 
     static void SaveNpcIdentityStub(SimCharacter npc, string batchLabel)
     {
-        using var conn = new SqliteConnection("Data Source=" + DbPath);
-        conn.Open();
-
-        using var cmd = conn.CreateCommand();
-
-        cmd.CommandText = """
-            INSERT INTO Characters
-            (
-                Id,
-                NpcKey,
-                FolderName,
-                FolderPath,
-                Name,
-                Age,
-                Gender,
-                Occupation,
-                Location,
-                Status,
-                Goal,
-                Need,
-                Fear,
-                Want,
-                PersonalityContext,
-                Hometown,
-                Address,
-                Tier,
-                UpdatedRealAt
-            )
-            VALUES
-            (
-                $id,
-                $npcKey,
-                $folderName,
-                $folderPath,
-                $name,
-                $age,
-                $gender,
-                $occ,
-                $loc,
-                $status,
-                $goal,
-                $need,
-                $fear,
-                $want,
-                $ctx,
-                $home,
-                $addr,
-                $tier,
-                CURRENT_TIMESTAMP
-            )
-            ON CONFLICT(Id) DO UPDATE SET
-                NpcKey = $npcKey,
-                FolderName = $folderName,
-                FolderPath = $folderPath,
-                Name = $name,
-                Age = $age,
-                Gender = $gender,
-                Occupation = $occ,
-                Location = $loc,
-                Status = $status,
-                Goal = $goal,
-                Need = $need,
-                Fear = $fear,
-                Want = $want,
-                PersonalityContext = $ctx,
-                Hometown = $home,
-                Address = $addr,
-                Tier = $tier,
-                UpdatedRealAt = CURRENT_TIMESTAMP;
-            """;
-
-        var folderName = ProjectEveDatabaseSetup.GetNpcFolderName(npc.Id, npc.Name ?? "");
-        var folderPath = ProjectEveDatabaseSetup.GetNpcFolderPath(npc.Id, npc.Name ?? "");
-        var npcKey = $"npc_{npc.Id:D6}";
-
-        string status = npc.Tier >= 5
-            ? "HistoryOnly"
-            : "Draft";
-
-        cmd.Parameters.AddWithValue("$id", npc.Id);
-        cmd.Parameters.AddWithValue("$npcKey", npcKey);
-        cmd.Parameters.AddWithValue("$folderName", folderName);
-        cmd.Parameters.AddWithValue("$folderPath", folderPath);
-        cmd.Parameters.AddWithValue("$name", npc.Name ?? "");
-        cmd.Parameters.AddWithValue("$age", npc.Age);
-        cmd.Parameters.AddWithValue("$gender", npc.Gender ?? "");
-        cmd.Parameters.AddWithValue("$occ", npc.Occupation ?? "");
-        cmd.Parameters.AddWithValue("$loc", npc.Location ?? "");
-        cmd.Parameters.AddWithValue("$status", status);
-        cmd.Parameters.AddWithValue("$goal", npc.Goal ?? "");
-        cmd.Parameters.AddWithValue("$need", npc.Need ?? "");
-        cmd.Parameters.AddWithValue("$fear", npc.Fear ?? "");
-        cmd.Parameters.AddWithValue("$want", npc.Want ?? "");
-        cmd.Parameters.AddWithValue("$ctx", npc.PersonalityContext ?? "");
-        cmd.Parameters.AddWithValue("$home", npc.Hometown ?? "");
-        cmd.Parameters.AddWithValue("$addr", npc.HomeAddress ?? "");
-        cmd.Parameters.AddWithValue("$tier", npc.Tier);
-
-        cmd.ExecuteNonQuery();
+        CharacterRepository.SaveIdentityStub(npc, batchLabel);
     }
 
     static void UpdateNpcFolderInfo(int npcId, string npcName)
     {
-        var folderName = ProjectEveDatabaseSetup.GetNpcFolderName(npcId, npcName);
-        var folderPath = ProjectEveDatabaseSetup.GetNpcFolderPath(npcId, npcName);
-        var npcKey = $"npc_{npcId:D6}";
-
-        using var conn = new SqliteConnection("Data Source=" + DbPath);
-        conn.Open();
-
-        using var cmd = conn.CreateCommand();
-
-        cmd.CommandText = """
-            UPDATE Characters
-            SET
-                NpcKey = $npcKey,
-                FolderName = $folderName,
-                FolderPath = $folderPath,
-                UpdatedRealAt = CURRENT_TIMESTAMP
-            WHERE Id = $id;
-            """;
-
-        cmd.Parameters.AddWithValue("$id", npcId);
-        cmd.Parameters.AddWithValue("$npcKey", npcKey);
-        cmd.Parameters.AddWithValue("$folderName", folderName);
-        cmd.Parameters.AddWithValue("$folderPath", folderPath);
-
-        cmd.ExecuteNonQuery();
+        CharacterRepository.UpdateFolderInfo(npcId, npcName);
     }
 
     static void EnsureNpcStudioRows(SimCharacter npc)
@@ -1231,73 +1001,15 @@ internal static class Program
         }
     }
 
-    static void SaveNpcTraitsToStudioTable(SimCharacter npc)
-    {
-        if (npc.Traits == null)
+    static void SaveNpcTraitsToStudioTable(SimCharacter npc){
+        if (npc == null || npc.Id <= 0 || npc.Traits == null)
             return;
 
-        var allTraits = npc.Traits.GetAll();
-
-        if (allTraits == null || allTraits.Count == 0)
-            return;
-
-        using var conn = new SqliteConnection("Data Source=" + DbPath);
-        conn.Open();
-
-        foreach (var pair in allTraits)
-        {
-            var traitId = pair.Key ?? "";
-
-            if (string.IsNullOrWhiteSpace(traitId))
-                continue;
-
-            var value = ClampTraitValue(pair.Value);
-
-            using var cmd = conn.CreateCommand();
-
-            cmd.CommandText = """
-                INSERT OR IGNORE INTO NpcTraitValues
-                (
-                    Id,
-                    NpcId,
-                    MainGroup,
-                    SubGroup,
-                    SubSubGroup,
-                    TraitId,
-                    TraitName,
-                    IsEnabled,
-                    StartingValue,
-                    CurrentValue,
-                    Notes
-                )
-                VALUES
-                (
-                    $rowId,
-                    $npcId,
-                    $mainGroup,
-                    $subGroup,
-                    $subSubGroup,
-                    $traitId,
-                    $traitName,
-                    1,
-                    $startingValue,
-                    $currentValue,
-                    ''
-                );
-                """;
-
-            cmd.Parameters.AddWithValue("$rowId", $"{npc.Id}_{traitId}");
-            cmd.Parameters.AddWithValue("$npcId", npc.Id);
-            cmd.Parameters.AddWithValue("$mainGroup", GuessTraitMainGroup(traitId));
-            cmd.Parameters.AddWithValue("$subGroup", GuessTraitSubGroup(traitId));
-            cmd.Parameters.AddWithValue("$subSubGroup", "");
-            cmd.Parameters.AddWithValue("$traitId", traitId);
-            cmd.Parameters.AddWithValue("$traitName", PrettyTraitName(traitId));
-            cmd.Parameters.AddWithValue("$startingValue", value);
-            cmd.Parameters.AddWithValue("$currentValue", value);
-
-            cmd.ExecuteNonQuery();
-        }
+        // Canonical NpcTraitValues runtime write ownership belongs to
+        // NpcTraitRepository. Program.cs is seeder/bootstrap orchestration only.
+        ProjectEve.Characters.Traits.NpcTraitRepository.SaveAll(
+            npc.Id,
+            npc.Traits);
     }
 
     static int ClampTraitValue(float value)
@@ -1419,52 +1131,17 @@ internal static class Program
         int tension,
         string notes)
     {
-        using var conn = new SqliteConnection("Data Source=" + DbPath);
-        conn.Open();
-
-        using var cmd = conn.CreateCommand();
-
-        cmd.CommandText = """
-            INSERT INTO NpcRelationships
-            (
-                Id,
-                NpcId,
-                TargetName,
-                RelationshipType,
-                Trust,
-                Respect,
-                Affection,
-                Attraction,
-                Tension,
-                Notes
-            )
-            VALUES
-            (
-                $id,
-                $npcId,
-                $targetName,
-                $relationshipType,
-                $trust,
-                $respect,
-                $affection,
-                $attraction,
-                $tension,
-                $notes
-            );
-            """;
-
-        cmd.Parameters.AddWithValue("$id", Guid.NewGuid().ToString("N"));
-        cmd.Parameters.AddWithValue("$npcId", npcId);
-        cmd.Parameters.AddWithValue("$targetName", targetName);
-        cmd.Parameters.AddWithValue("$relationshipType", relationshipType);
-        cmd.Parameters.AddWithValue("$trust", trust);
-        cmd.Parameters.AddWithValue("$respect", respect);
-        cmd.Parameters.AddWithValue("$affection", affection);
-        cmd.Parameters.AddWithValue("$attraction", attraction);
-        cmd.Parameters.AddWithValue("$tension", tension);
-        cmd.Parameters.AddWithValue("$notes", notes);
-
-        cmd.ExecuteNonQuery();
+        RelationshipRepository.Upsert(
+            npcId,
+            targetCharacterId: null,
+            targetName,
+            relationshipType,
+            trust,
+            respect,
+            affection,
+            attraction,
+            tension,
+            notes);
     }
 
     // Inserts a relationship only if the same NPC already does not have the same
@@ -1497,25 +1174,7 @@ internal static class Program
 
     static bool RelationshipExists(int npcId, string targetName, string relationshipType)
     {
-        using var conn = new SqliteConnection("Data Source=" + DbPath);
-        conn.Open();
-
-        using var cmd = conn.CreateCommand();
-
-        cmd.CommandText = """
-            SELECT COUNT(1)
-            FROM NpcRelationships
-            WHERE NpcId = $npcId
-              AND TargetName = $targetName
-              AND RelationshipType = $relationshipType;
-            """;
-
-        cmd.Parameters.AddWithValue("$npcId", npcId);
-        cmd.Parameters.AddWithValue("$targetName", targetName);
-        cmd.Parameters.AddWithValue("$relationshipType", relationshipType);
-
-        var count = Convert.ToInt32(cmd.ExecuteScalar());
-        return count > 0;
+        return RelationshipRepository.Exists(npcId, targetName, relationshipType);
     }
 
     static void EnsureCoreNpcRows()
@@ -1601,102 +1260,21 @@ internal static class Program
         string address,
         int tier)
     {
-        using var conn = new SqliteConnection("Data Source=" + DbPath);
-        conn.Open();
-
-        var folderName = ProjectEveDatabaseSetup.GetNpcFolderName(id, name);
-        var folderPath = ProjectEveDatabaseSetup.GetNpcFolderPath(id, name);
-        var npcKey = $"npc_{id:D6}";
-
-        using var cmd = conn.CreateCommand();
-
-        cmd.CommandText = """
-            INSERT INTO Characters
-            (
-                Id,
-                NpcKey,
-                FolderName,
-                FolderPath,
-                Name,
-                Age,
-                Gender,
-                Occupation,
-                Location,
-                Status,
-                Goal,
-                Need,
-                Fear,
-                Want,
-                PersonalityContext,
-                Hometown,
-                Address,
-                Tier,
-                UpdatedRealAt
-            )
-            VALUES
-            (
-                $id,
-                $npcKey,
-                $folderName,
-                $folderPath,
-                $name,
-                $age,
-                $gender,
-                $occupation,
-                $location,
-                'Core',
-                $goal,
-                $need,
-                $fear,
-                $want,
-                $context,
-                $hometown,
-                $address,
-                $tier,
-                CURRENT_TIMESTAMP
-            )
-            ON CONFLICT(Id) DO UPDATE SET
-                NpcKey = $npcKey,
-                FolderName = $folderName,
-                FolderPath = $folderPath,
-                Name = $name,
-                Age = $age,
-                Gender = $gender,
-                Occupation = $occupation,
-                Location = $location,
-                Status = 'Core',
-                Goal = $goal,
-                Need = $need,
-                Fear = $fear,
-                Want = $want,
-                PersonalityContext = $context,
-                Hometown = $hometown,
-                Address = $address,
-                Tier = $tier,
-                UpdatedRealAt = CURRENT_TIMESTAMP;
-            """;
-
-        cmd.Parameters.AddWithValue("$id", id);
-        cmd.Parameters.AddWithValue("$npcKey", npcKey);
-        cmd.Parameters.AddWithValue("$folderName", folderName);
-        cmd.Parameters.AddWithValue("$folderPath", folderPath);
-        cmd.Parameters.AddWithValue("$name", name);
-        cmd.Parameters.AddWithValue("$age", age);
-        cmd.Parameters.AddWithValue("$gender", gender);
-        cmd.Parameters.AddWithValue("$occupation", occupation);
-        cmd.Parameters.AddWithValue("$location", location);
-        cmd.Parameters.AddWithValue("$goal", goal);
-        cmd.Parameters.AddWithValue("$need", need);
-        cmd.Parameters.AddWithValue("$fear", fear);
-        cmd.Parameters.AddWithValue("$want", want);
-        cmd.Parameters.AddWithValue("$context", context);
-        cmd.Parameters.AddWithValue("$hometown", hometown);
-        cmd.Parameters.AddWithValue("$address", address);
-        cmd.Parameters.AddWithValue("$tier", tier);
-
-        cmd.ExecuteNonQuery();
-
-        ProjectEveDatabaseSetup.EnsureNpcFolders(id, name);
+        CharacterRepository.EnsureCoreRow(
+            id,
+            name,
+            age,
+            gender,
+            occupation,
+            location,
+            goal,
+            need,
+            fear,
+            want,
+            context,
+            hometown,
+            address,
+            tier);
     }
 
     static void EnsureNpcCore(SimCharacter npc)
@@ -2025,10 +1603,17 @@ internal static class Program
             if (!deleted)
             {
                 ok = false;
-                Console.WriteLine("FAILED to delete " + path + (lastError != null ? " — " + lastError.Message : ""));
+                Console.WriteLine("FAILED to delete " + path + (lastError != null ? " â€” " + lastError.Message : ""));
             }
         }
 
         return ok;
     }
 }
+
+
+
+
+
+
+

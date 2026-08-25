@@ -1,6 +1,8 @@
+﻿using ProjectEve.Characters.Traits;
 using Microsoft.Data.Sqlite;
 using ProjectEve.AI.Brain;
 using ProjectEve.Money;
+using ProjectEve.Data;
 using ProjectEve.Relationships;
 using ProjectEve.Traits;
 using System;
@@ -167,84 +169,37 @@ namespace ProjectEve.Characters.Base
         private static void LoadTraits(SqliteConnection conn, SimCharacter npc)
         {
             npc.Traits ??= new NpcTraits();
-            try
+
+            var loaded = NpcTraitRepository.LoadAll(npc.Id);
+            if (loaded.Count == 0)
+                return;
+
+            var fast = new Dictionary<string, float>(StringComparer.OrdinalIgnoreCase);
+            var mid = new Dictionary<string, float>(StringComparer.OrdinalIgnoreCase);
+            var slow = new Dictionary<string, float>(StringComparer.OrdinalIgnoreCase);
+
+            foreach (var pair in loaded)
             {
-                using var cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT TraitId, Value FROM Traits WHERE NpcId = $id";
-                cmd.Parameters.AddWithValue("$id", npc.Id);
-
-                var loaded = new Dictionary<string, float>(StringComparer.OrdinalIgnoreCase);
-                using (var reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
-                        loaded[reader.GetString(0)] = (float)reader.GetDouble(1);
-                }
-
-                if (loaded.Count == 0) return;
-
-                var fast = new Dictionary<string, float>(StringComparer.OrdinalIgnoreCase);
-                var mid = new Dictionary<string, float>(StringComparer.OrdinalIgnoreCase);
-                var slow = new Dictionary<string, float>(StringComparer.OrdinalIgnoreCase);
-
-                foreach (var kv in loaded)
-                {
-                    if (kv.Key.StartsWith("mid.", StringComparison.OrdinalIgnoreCase))
-                        mid[kv.Key] = kv.Value;
-                    else if (kv.Key.StartsWith("slow.", StringComparison.OrdinalIgnoreCase))
-                        slow[kv.Key] = kv.Value;
-                    else
-                        fast[kv.Key] = kv.Value;
-                }
-
-                if (fast.Count == 0)
-                    fast = TraitJsonLoader.BuildFastDefaults(45f);
-
-                npc.Traits.InitializeFromLayers(fast, mid, slow);
+                if (pair.Key.StartsWith("mid.", StringComparison.OrdinalIgnoreCase))
+                    mid[pair.Key] = pair.Value;
+                else if (pair.Key.StartsWith("slow.", StringComparison.OrdinalIgnoreCase))
+                    slow[pair.Key] = pair.Value;
+                else
+                    fast[pair.Key] = pair.Value;
             }
-            catch { }
+
+            if (fast.Count == 0)
+                fast = TraitJsonLoader.BuildFastDefaults(45f);
+
+            npc.Traits.InitializeFromLayers(fast, mid, slow);
         }
 
         public static void SaveTraits(int npcId, NpcTraits traits)
         {
-            if (traits == null) return;
-            EnsureDataDir();
+            if (traits == null)
+                return;
 
-            using var conn = new SqliteConnection(ConnStr);
-            conn.Open();
-
-            using (var create = conn.CreateCommand())
-            {
-                create.CommandText = """
-                    CREATE TABLE IF NOT EXISTS Traits (
-                        NpcId INTEGER NOT NULL,
-                        TraitId TEXT NOT NULL,
-                        Value REAL NOT NULL DEFAULT 50,
-                        PRIMARY KEY (NpcId, TraitId)
-                    );
-                    """;
-                create.ExecuteNonQuery();
-            }
-
-            using var tx = conn.BeginTransaction();
-            using (var del = conn.CreateCommand())
-            {
-                del.Transaction = tx;
-                del.CommandText = "DELETE FROM Traits WHERE NpcId = $id";
-                del.Parameters.AddWithValue("$id", npcId);
-                del.ExecuteNonQuery();
-            }
-
-            foreach (var kv in traits.GetAll())
-            {
-                using var ins = conn.CreateCommand();
-                ins.Transaction = tx;
-                ins.CommandText = "INSERT INTO Traits (NpcId, TraitId, Value) VALUES ($id, $tid, $val)";
-                ins.Parameters.AddWithValue("$id", npcId);
-                ins.Parameters.AddWithValue("$tid", kv.Key);
-                ins.Parameters.AddWithValue("$val", kv.Value);
-                ins.ExecuteNonQuery();
-            }
-            tx.Commit();
+            NpcTraitRepository.SaveAll(npcId, traits);
         }
 
         // ============================================================
@@ -316,59 +271,74 @@ namespace ProjectEve.Characters.Base
             cmd.ExecuteNonQuery();
         }
 
-        // ============================================================
-        // MONEY
+                // ============================================================
+        // MONEY / BANKING
+        // Canonical account definitions: project_eve.db
+        // Canonical transaction ledger: project_eve_history.db
+        // MoneyProfile remains a runtime compatibility object only.
         // ============================================================
         private static void LoadMoney(SqliteConnection conn, SimCharacter npc)
         {
             npc.Money ??= new MoneyProfile();
+
+            // One-time migration from the old MoneyProfile snapshot when no
+            // canonical finance transactions exist for this NPC.
             try
             {
-                using var cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT Cash, Bank, Debt FROM MoneyProfile WHERE NpcId = $id";
-                cmd.Parameters.AddWithValue("$id", npc.Id);
-                using var reader = cmd.ExecuteReader();
-                if (!reader.Read()) return;
-                npc.Money.Cash = reader.IsDBNull(0) ? 0m : (decimal)reader.GetDouble(0);
-                npc.Money.Bank = reader.IsDBNull(1) ? 0m : (decimal)reader.GetDouble(1);
-                npc.Money.Debt = reader.IsDBNull(2) ? 0m : (decimal)reader.GetDouble(2);
+                decimal legacyCash = 0m;
+                decimal legacyBank = 0m;
+                decimal legacyDebt = 0m;
+                bool hasLegacy = false;
+
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = """
+                        SELECT Cash, Bank, Debt
+                        FROM MoneyProfile
+                        WHERE NpcId = $id
+                        LIMIT 1;
+                        """;
+                    cmd.Parameters.AddWithValue("$id", npc.Id);
+
+                    using var reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        legacyCash = reader.IsDBNull(0) ? 0m : Convert.ToDecimal(reader.GetValue(0));
+                        legacyBank = reader.IsDBNull(1) ? 0m : Convert.ToDecimal(reader.GetValue(1));
+                        legacyDebt = reader.IsDBNull(2) ? 0m : Convert.ToDecimal(reader.GetValue(2));
+                        hasLegacy = true;
+                    }
+                }
+
+                if (hasLegacy)
+                    FinancialLedgerService.TryMigrateLegacyMoney(
+                        npc.Id, legacyCash, legacyBank, legacyDebt);
             }
-            catch { }
+            catch
+            {
+                // Legacy table may not exist in a future clean database.
+            }
+
+            var snapshot = FinancialLedgerService.GetNpcSnapshot(npc.Id);
+            npc.Money.Cash = snapshot.Cash;
+            npc.Money.Bank = snapshot.Bank;
+            npc.Money.Debt = snapshot.Debt;
         }
 
         public static void SaveMoney(SimCharacter npc)
         {
-            if (npc?.Money == null) return;
-            EnsureDataDir();
-            using var conn = new SqliteConnection(ConnStr);
-            conn.Open();
+            if (npc?.Money == null)
+                return;
 
-            using (var create = conn.CreateCommand())
-            {
-                create.CommandText = """
-                    CREATE TABLE IF NOT EXISTS MoneyProfile (
-                        NpcId INTEGER PRIMARY KEY,
-                        Cash REAL, Bank REAL, Debt REAL
-                    );
-                    """;
-                create.ExecuteNonQuery();
-            }
-
-            using var cmd = conn.CreateCommand();
-            cmd.CommandText = """
-                INSERT INTO MoneyProfile (NpcId, Cash, Bank, Debt)
-                VALUES ($id, $cash, $bank, $debt)
-                ON CONFLICT(NpcId) DO UPDATE SET Cash=$cash, Bank=$bank, Debt=$debt
-                """;
-            cmd.Parameters.AddWithValue("$id", npc.Id);
-            cmd.Parameters.AddWithValue("$cash", (double)npc.Money.Cash);
-            cmd.Parameters.AddWithValue("$bank", (double)npc.Money.Bank);
-            cmd.Parameters.AddWithValue("$debt", (double)npc.Money.Debt);
-            cmd.ExecuteNonQuery();
+            FinancialLedgerService.ReconcileNpcSnapshot(
+                npc.Id,
+                npc.Money.Cash,
+                npc.Money.Bank,
+                npc.Money.Debt,
+                "CharacterRepository.SaveMoney compatibility reconciliation");
         }
-
-        // ============================================================
-        // JOB — full schema + migrate legacy Title/Shift/PayRate
+// ============================================================
+        // JOB â€” full schema + migrate legacy Title/Shift/PayRate
         // ============================================================
         private static void EnsureJobProfileColumns(SqliteConnection conn)
         {
@@ -448,7 +418,7 @@ namespace ProjectEve.Characters.Base
                 catch { /* already exists */ }
             }
 
-            // One-time bridge: legacy Title/Shift/PayRate → modern fields
+            // One-time bridge: legacy Title/Shift/PayRate â†’ modern fields
             try
             {
                 using var cmd = conn.CreateCommand();
@@ -600,7 +570,7 @@ namespace ProjectEve.Characters.Base
         }
 
         // ============================================================
-        // COGNITION — stable profile persisted as JSON by NpcId
+        // COGNITION â€” stable profile persisted as JSON by NpcId
         // ============================================================
         private static void EnsureCognitionTable(SqliteConnection conn)
         {
@@ -673,7 +643,7 @@ namespace ProjectEve.Characters.Base
         }
 
         // ============================================================
-        // BODY / APPEARANCE — persistent JSON snapshot by NpcId
+        // BODY / APPEARANCE â€” persistent JSON snapshot by NpcId
         // ============================================================
         private static readonly JsonSerializerOptions BodyJsonOptions = new()
         {
@@ -867,32 +837,7 @@ namespace ProjectEve.Characters.Base
         // ============================================================
         private static void LoadRelationships(SqliteConnection conn, SimCharacter npc)
         {
-            npc.Relationships ??= new List<Relationship>();
-            try
-            {
-                using var cmd = conn.CreateCommand();
-                cmd.CommandText = """
-                    SELECT TargetName, Trust, Respect, Affection, Attraction, Tension, RelationshipType
-                    FROM Relationships WHERE NpcId = $id
-                    """;
-                cmd.Parameters.AddWithValue("$id", npc.Id);
-                using var reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    var rel = new Relationship
-                    {
-                        TargetName = reader.GetString(0),
-                        Trust = (int)reader.GetDouble(1),
-                        Respect = (int)reader.GetDouble(2),
-                        Affection = (int)reader.GetDouble(3),
-                        Attraction = (int)reader.GetDouble(4)
-                    };
-                    if (reader.FieldCount > 5 && !reader.IsDBNull(5))
-                        rel.Tension = (int)reader.GetDouble(5);
-                    npc.Relationships.Add(rel);
-                }
-            }
-            catch { }
+            npc.Relationships = RelationshipRepository.LoadForSource(npc.Id);
         }
 
         public static void SaveCharacterState(SimCharacter npc)
@@ -916,6 +861,252 @@ namespace ProjectEve.Characters.Base
             return eve;
         }
 
+        /// <summary>
+        /// Canonical runtime gateway for lowering Characters.Tier.
+        /// Lower numeric tiers represent more materialized / important NPCs.
+        /// Relationship systems may request a lower tier, but they do not write
+        /// the Characters table directly.
+        /// </summary>
+        /// <summary>
+        /// Canonical gateway used by the world seeder to create or refresh a
+        /// generated NPC identity row in Characters.
+        /// </summary>
+        public static void SaveIdentityStub(SimCharacter npc, string batchLabel)
+        {
+            if (npc == null || npc.Id <= 0)
+                return;
+
+            _ = batchLabel; // retained for seeder call compatibility
+
+            EnsureDataDir();
+            ProjectEve.Data.ProjectEveDatabaseSetup.EnsureAll();
+
+            var folderName = ProjectEve.Data.ProjectEveDatabaseSetup.GetNpcFolderName(
+                npc.Id,
+                npc.Name ?? "");
+            var folderPath = ProjectEve.Data.ProjectEveDatabaseSetup.GetNpcFolderPath(
+                npc.Id,
+                npc.Name ?? "");
+            var npcKey = $"npc_{npc.Id:D6}";
+            var status = npc.Tier >= 5 ? "HistoryOnly" : "Draft";
+
+            using var conn = new SqliteConnection(ConnStr);
+            conn.Open();
+
+            using var cmd = conn.CreateCommand();
+            cmd.CommandText = """
+                INSERT INTO Characters
+                (
+                    Id, NpcKey, FolderName, FolderPath, Name, Age, Gender,
+                    Occupation, Location, Status, Goal, Need, Fear, Want,
+                    PersonalityContext, Hometown, Address, Tier, UpdatedRealAt
+                )
+                VALUES
+                (
+                    $id, $npcKey, $folderName, $folderPath, $name, $age, $gender,
+                    $occ, $loc, $status, $goal, $need, $fear, $want,
+                    $ctx, $home, $addr, $tier, CURRENT_TIMESTAMP
+                )
+                ON CONFLICT(Id) DO UPDATE SET
+                    NpcKey = $npcKey,
+                    FolderName = $folderName,
+                    FolderPath = $folderPath,
+                    Name = $name,
+                    Age = $age,
+                    Gender = $gender,
+                    Occupation = $occ,
+                    Location = $loc,
+                    Status = $status,
+                    Goal = $goal,
+                    Need = $need,
+                    Fear = $fear,
+                    Want = $want,
+                    PersonalityContext = $ctx,
+                    Hometown = $home,
+                    Address = $addr,
+                    Tier = $tier,
+                    UpdatedRealAt = CURRENT_TIMESTAMP;
+                """;
+
+            cmd.Parameters.AddWithValue("$id", npc.Id);
+            cmd.Parameters.AddWithValue("$npcKey", npcKey);
+            cmd.Parameters.AddWithValue("$folderName", folderName);
+            cmd.Parameters.AddWithValue("$folderPath", folderPath);
+            cmd.Parameters.AddWithValue("$name", npc.Name ?? "");
+            cmd.Parameters.AddWithValue("$age", npc.Age);
+            cmd.Parameters.AddWithValue("$gender", npc.Gender ?? "");
+            cmd.Parameters.AddWithValue("$occ", npc.Occupation ?? "");
+            cmd.Parameters.AddWithValue("$loc", npc.Location ?? "");
+            cmd.Parameters.AddWithValue("$status", status);
+            cmd.Parameters.AddWithValue("$goal", npc.Goal ?? "");
+            cmd.Parameters.AddWithValue("$need", npc.Need ?? "");
+            cmd.Parameters.AddWithValue("$fear", npc.Fear ?? "");
+            cmd.Parameters.AddWithValue("$want", npc.Want ?? "");
+            cmd.Parameters.AddWithValue("$ctx", npc.PersonalityContext ?? "");
+            cmd.Parameters.AddWithValue("$home", npc.Hometown ?? "");
+            cmd.Parameters.AddWithValue("$addr", npc.HomeAddress ?? "");
+            cmd.Parameters.AddWithValue("$tier", npc.Tier);
+            cmd.ExecuteNonQuery();
+        }
+
+        /// <summary>
+        /// Canonical gateway for refreshing the stable NPC key and filesystem
+        /// folder metadata stored on Characters.
+        /// </summary>
+        public static void UpdateFolderInfo(int npcId, string npcName)
+        {
+            if (npcId <= 0)
+                return;
+
+            EnsureDataDir();
+            ProjectEve.Data.ProjectEveDatabaseSetup.EnsureAll();
+
+            var folderName = ProjectEve.Data.ProjectEveDatabaseSetup.GetNpcFolderName(
+                npcId,
+                npcName);
+            var folderPath = ProjectEve.Data.ProjectEveDatabaseSetup.GetNpcFolderPath(
+                npcId,
+                npcName);
+            var npcKey = $"npc_{npcId:D6}";
+
+            using var conn = new SqliteConnection(ConnStr);
+            conn.Open();
+
+            using var cmd = conn.CreateCommand();
+            cmd.CommandText = """
+                UPDATE Characters
+                SET
+                    NpcKey = $npcKey,
+                    FolderName = $folderName,
+                    FolderPath = $folderPath,
+                    UpdatedRealAt = CURRENT_TIMESTAMP
+                WHERE Id = $id;
+                """;
+
+            cmd.Parameters.AddWithValue("$id", npcId);
+            cmd.Parameters.AddWithValue("$npcKey", npcKey);
+            cmd.Parameters.AddWithValue("$folderName", folderName);
+            cmd.Parameters.AddWithValue("$folderPath", folderPath);
+            cmd.ExecuteNonQuery();
+        }
+
+        /// <summary>
+        /// Canonical gateway used by bootstrap code for the four core NPC rows.
+        /// </summary>
+        public static void EnsureCoreRow(
+            int id,
+            string name,
+            int age,
+            string gender,
+            string occupation,
+            string location,
+            string goal,
+            string need,
+            string fear,
+            string want,
+            string context,
+            string hometown,
+            string address,
+            int tier)
+        {
+            if (id <= 0)
+                return;
+
+            EnsureDataDir();
+            ProjectEve.Data.ProjectEveDatabaseSetup.EnsureAll();
+
+            var folderName = ProjectEve.Data.ProjectEveDatabaseSetup.GetNpcFolderName(id, name);
+            var folderPath = ProjectEve.Data.ProjectEveDatabaseSetup.GetNpcFolderPath(id, name);
+            var npcKey = $"npc_{id:D6}";
+
+            using var conn = new SqliteConnection(ConnStr);
+            conn.Open();
+
+            using var cmd = conn.CreateCommand();
+            cmd.CommandText = """
+                INSERT INTO Characters
+                (
+                    Id, NpcKey, FolderName, FolderPath, Name, Age, Gender,
+                    Occupation, Location, Status, Goal, Need, Fear, Want,
+                    PersonalityContext, Hometown, Address, Tier, UpdatedRealAt
+                )
+                VALUES
+                (
+                    $id, $npcKey, $folderName, $folderPath, $name, $age, $gender,
+                    $occupation, $location, 'Core', $goal, $need, $fear, $want,
+                    $context, $hometown, $address, $tier, CURRENT_TIMESTAMP
+                )
+                ON CONFLICT(Id) DO UPDATE SET
+                    NpcKey = $npcKey,
+                    FolderName = $folderName,
+                    FolderPath = $folderPath,
+                    Name = $name,
+                    Age = $age,
+                    Gender = $gender,
+                    Occupation = $occupation,
+                    Location = $location,
+                    Status = 'Core',
+                    Goal = $goal,
+                    Need = $need,
+                    Fear = $fear,
+                    Want = $want,
+                    PersonalityContext = $context,
+                    Hometown = $hometown,
+                    Address = $address,
+                    Tier = $tier,
+                    UpdatedRealAt = CURRENT_TIMESTAMP;
+                """;
+
+            cmd.Parameters.AddWithValue("$id", id);
+            cmd.Parameters.AddWithValue("$npcKey", npcKey);
+            cmd.Parameters.AddWithValue("$folderName", folderName);
+            cmd.Parameters.AddWithValue("$folderPath", folderPath);
+            cmd.Parameters.AddWithValue("$name", name);
+            cmd.Parameters.AddWithValue("$age", age);
+            cmd.Parameters.AddWithValue("$gender", gender);
+            cmd.Parameters.AddWithValue("$occupation", occupation);
+            cmd.Parameters.AddWithValue("$location", location);
+            cmd.Parameters.AddWithValue("$goal", goal);
+            cmd.Parameters.AddWithValue("$need", need);
+            cmd.Parameters.AddWithValue("$fear", fear);
+            cmd.Parameters.AddWithValue("$want", want);
+            cmd.Parameters.AddWithValue("$context", context);
+            cmd.Parameters.AddWithValue("$hometown", hometown);
+            cmd.Parameters.AddWithValue("$address", address);
+            cmd.Parameters.AddWithValue("$tier", tier);
+            cmd.ExecuteNonQuery();
+
+            ProjectEve.Data.ProjectEveDatabaseSetup.EnsureNpcFolders(id, name);
+        }
+        public static void LowerMaterializationTier(int npcId, int requestedTier)
+        {
+            if (npcId <= 0)
+                return;
+
+            requestedTier = Math.Clamp(requestedTier, 1, 5);
+
+            EnsureDataDir();
+            ProjectEve.Data.ProjectEveDatabaseSetup.EnsureAll();
+
+            using var conn = new SqliteConnection(ConnStr);
+            conn.Open();
+
+            using var cmd = conn.CreateCommand();
+            cmd.CommandText = """
+                UPDATE Characters
+                SET Tier = CASE
+                    WHEN Tier IS NULL THEN $tier
+                    WHEN $tier < Tier THEN $tier
+                    ELSE Tier
+                END,
+                UpdatedRealAt = CURRENT_TIMESTAMP
+                WHERE Id = $id;
+                """;
+
+            cmd.Parameters.AddWithValue("$tier", requestedTier);
+            cmd.Parameters.AddWithValue("$id", npcId);
+            cmd.ExecuteNonQuery();
+        }
         public static void PrintCharacterSheet(SimCharacter eve)
             => CharacterSheetPrinter.Print(eve);
 
@@ -984,3 +1175,7 @@ namespace ProjectEve.Characters.Base
         }
     }
 }
+
+
+
+

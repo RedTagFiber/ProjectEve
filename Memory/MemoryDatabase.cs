@@ -1,198 +1,185 @@
 ﻿using Microsoft.Data.Sqlite;
 using ProjectEve.Characters.Base;
+using ProjectEve.Data;
 using System;
 using System.Collections.Generic;
-using System.IO;
 
-namespace ProjectEve.Memory
+namespace ProjectEve.Memory;
+
+/// <summary>
+/// NPC subjective memory store.
+///
+/// Canonical ownership:
+///   project_eve_relationships.db
+///
+/// Objective events belong in project_eve_history.db.
+/// This class stores what an NPC remembers/believes, not God's-eye truth.
+/// </summary>
+public class MemoryDatabase
 {
-    public class MemoryDatabase
+    private readonly string _dbPath;
+
+    public MemoryDatabase(string? dbPath = null)
     {
-        private readonly string _dbPath;
+        _dbPath = dbPath
+            ?? Environment.GetEnvironmentVariable("EVE_RELATIONSHIP_DB_PATH")
+            ?? ProjectEveDatabaseSetup.RelationshipDatabasePath;
 
-        public MemoryDatabase(string? dbPath = null)
+        ProjectEveDatabaseSetup.EnsureAll();
+        EnsureSchema();
+    }
+
+    private string ConnStr => $"Data Source={_dbPath}";
+
+    private void EnsureSchema()
         {
-            _dbPath = dbPath
-                ?? Environment.GetEnvironmentVariable("EVE_DB_PATH")
-                ?? Path.Combine(AppContext.BaseDirectory, "Data", "project_eve.db");
-
-            EnsureSchema();
+            // Canonical schema ownership belongs only to ProjectEveDatabaseSetup.
+            // MemoryDatabase remains the runtime read/write gateway for personal
+            // memories, but it no longer creates or alters the table itself.
+            ProjectEve.Data.ProjectEveDatabaseSetup.EnsureAll();
         }
 
-        private string ConnStr => $"Data Source={_dbPath}";
+    public void AddMemory(MemoryRecord memory)
+    {
+        if (memory == null || string.IsNullOrWhiteSpace(memory.Summary))
+            return;
 
-        private void EnsureSchema()
-        {
-            var dir = Path.GetDirectoryName(_dbPath);
-            if (!string.IsNullOrEmpty(dir))
-                Directory.CreateDirectory(dir);
+        if (memory.Strength <= 0)
+            memory.Strength = Math.Clamp(40f + memory.Importance * 0.5f, 20f, 100f);
 
-            using var conn = new SqliteConnection(ConnStr);
-            conn.Open();
+        var id = $"memory:{memory.NpcId}:{Guid.NewGuid():N}";
+        var time = memory.Timestamp == default ? DateTime.UtcNow : memory.Timestamp;
 
-            using (var cmd = conn.CreateCommand())
-            {
-                cmd.CommandText = """
-                    CREATE TABLE IF NOT EXISTS Memories (
-                        Id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        NpcId INTEGER NOT NULL DEFAULT 0,
-                        CharacterName TEXT,
-                        Summary TEXT NOT NULL,
-                        Category TEXT,
-                        Importance INTEGER DEFAULT 1,
-                        Strength REAL DEFAULT 70,
-                        IsLockedPeak INTEGER DEFAULT 0,
-                        RelatedPerson TEXT,
-                        EventId TEXT,
-                        Timestamp TEXT
-                    );
-                    """;
-                cmd.ExecuteNonQuery();
-            }
+        using var conn = new SqliteConnection(ConnStr);
+        conn.Open();
 
-            // Existing DBs may have been created by DatabaseInitializer without these columns.
-            // CREATE TABLE IF NOT EXISTS will not upgrade them — ALTER does.
-            string[] alters =
-            {
-                "ALTER TABLE Memories ADD COLUMN CharacterName TEXT",
-                "ALTER TABLE Memories ADD COLUMN Strength REAL DEFAULT 70",
-                "ALTER TABLE Memories ADD COLUMN IsLockedPeak INTEGER DEFAULT 0",
-                "ALTER TABLE Memories ADD COLUMN RelatedPerson TEXT",
-                "ALTER TABLE Memories ADD COLUMN EventId TEXT",
-                "ALTER TABLE Memories ADD COLUMN NpcId INTEGER NOT NULL DEFAULT 0",
-                "ALTER TABLE Memories ADD COLUMN Category TEXT",
-                "ALTER TABLE Memories ADD COLUMN Importance INTEGER DEFAULT 1",
-                "ALTER TABLE Memories ADD COLUMN Timestamp TEXT"
-            };
+        using var cmd = conn.CreateCommand();
+        cmd.CommandText = """
+            INSERT INTO PersonalMemories
+            (Id, KnowerCharacterId, SubjectCharacterId, EventId, MemoryType, MemoryText,
+             Interpretation, EmotionalMeaning, Importance, Strength, Confidence,
+             IsLockedPeak, LearnedGameTime, LastUpdatedGameTime)
+            VALUES
+            ($id, $npc, NULL, $eventId, $type, $text,
+             '', '', $importance, $strength, 70,
+             $locked, $gameTime, $gameTime);
+            """;
 
-            foreach (var sql in alters)
-            {
-                try
-                {
-                    using var cmd = conn.CreateCommand();
-                    cmd.CommandText = sql;
-                    cmd.ExecuteNonQuery();
-                }
-                catch
-                {
-                    // column already exists
-                }
-            }
-        }
+        cmd.Parameters.AddWithValue("$id", id);
+        cmd.Parameters.AddWithValue("$npc", memory.NpcId);
+        cmd.Parameters.AddWithValue("$eventId", memory.EventId ?? "");
+        cmd.Parameters.AddWithValue("$type", memory.Category ?? "General");
+        cmd.Parameters.AddWithValue("$text", memory.Summary);
+        cmd.Parameters.AddWithValue("$importance", Math.Clamp(memory.Importance, 1, 100));
+        cmd.Parameters.AddWithValue("$strength", Math.Clamp((int)Math.Round(memory.Strength), 0, 100));
+        cmd.Parameters.AddWithValue("$locked", memory.IsLockedPeak ? 1 : 0);
+        cmd.Parameters.AddWithValue("$gameTime", time.ToString("o"));
+        cmd.ExecuteNonQuery();
+    }
 
-        public void AddMemory(MemoryRecord memory)
-        {
-            if (memory == null || string.IsNullOrWhiteSpace(memory.Summary))
-                return;
+    public List<MemoryRecord> GetMemories(string characterName)
+    {
+        int npcId = ResolveNpcId(characterName);
+        return npcId <= 0 ? new List<MemoryRecord>() : GetMemories(npcId, 80);
+    }
 
-            if (memory.Strength <= 0)
-                memory.Strength = Math.Clamp(40f + memory.Importance * 0.5f, 20f, 100f);
+    public List<MemoryRecord> GetMemories(int npcId, int limit = 40)
+    {
+        var list = new List<MemoryRecord>();
 
-            using var conn = new SqliteConnection(ConnStr);
-            conn.Open();
-            using var cmd = conn.CreateCommand();
-            cmd.CommandText = """
-                INSERT INTO Memories
-                (NpcId, CharacterName, Summary, Category, Importance, Strength, IsLockedPeak, RelatedPerson, EventId, Timestamp)
-                VALUES ($npc, $name, $summary, $cat, $imp, $str, $lock, $rel, $eid, $ts)
-                """;
-            cmd.Parameters.AddWithValue("$npc", memory.NpcId);
-            cmd.Parameters.AddWithValue("$name", memory.CharacterName ?? "");
-            cmd.Parameters.AddWithValue("$summary", memory.Summary);
-            cmd.Parameters.AddWithValue("$cat", memory.Category ?? "General");
-            cmd.Parameters.AddWithValue("$imp", Math.Clamp(memory.Importance, 1, 100));
-            cmd.Parameters.AddWithValue("$str", memory.Strength);
-            cmd.Parameters.AddWithValue("$lock", memory.IsLockedPeak ? 1 : 0);
-            cmd.Parameters.AddWithValue("$rel", (object?)memory.RelatedPerson ?? DBNull.Value);
-            cmd.Parameters.AddWithValue("$eid", (object?)memory.EventId ?? DBNull.Value);
-            cmd.Parameters.AddWithValue("$ts", memory.Timestamp.ToString("o"));
-            cmd.ExecuteNonQuery();
-        }
+        using var conn = new SqliteConnection(ConnStr);
+        conn.Open();
 
-        public List<MemoryRecord> GetMemories(string characterName)
-        {
-            var list = new List<MemoryRecord>();
-            using var conn = new SqliteConnection(ConnStr);
-            conn.Open();
-            using var cmd = conn.CreateCommand();
-            cmd.CommandText = """
-                SELECT Id, NpcId, CharacterName, Summary, Category, Importance,
-                       Strength, IsLockedPeak, RelatedPerson, EventId, Timestamp
-                FROM Memories WHERE CharacterName = $name
-                ORDER BY Importance DESC, Id DESC LIMIT 80
-                """;
-            cmd.Parameters.AddWithValue("$name", characterName);
-            using var reader = cmd.ExecuteReader();
-            while (reader.Read())
-                list.Add(ReadRow(reader));
-            return list;
-        }
+        using var cmd = conn.CreateCommand();
+        cmd.CommandText = """
+            SELECT Id, KnowerCharacterId, MemoryText, MemoryType, Importance,
+                   Strength, IsLockedPeak, EventId, LearnedGameTime
+            FROM PersonalMemories
+            WHERE KnowerCharacterId = $id
+            ORDER BY Importance DESC, CreatedRealAt DESC
+            LIMIT $limit;
+            """;
+        cmd.Parameters.AddWithValue("$id", npcId);
+        cmd.Parameters.AddWithValue("$limit", Math.Max(1, limit));
 
-        public List<MemoryRecord> GetMemories(int npcId, int limit = 40)
-        {
-            var list = new List<MemoryRecord>();
-            using var conn = new SqliteConnection(ConnStr);
-            conn.Open();
-            using var cmd = conn.CreateCommand();
-            cmd.CommandText = """
-                SELECT Id, NpcId, CharacterName, Summary, Category, Importance,
-                       Strength, IsLockedPeak, RelatedPerson, EventId, Timestamp
-                FROM Memories WHERE NpcId = $id
-                ORDER BY Importance DESC, Id DESC LIMIT $lim
-                """;
-            cmd.Parameters.AddWithValue("$id", npcId);
-            cmd.Parameters.AddWithValue("$lim", limit);
-            using var reader = cmd.ExecuteReader();
-            while (reader.Read())
-                list.Add(ReadRow(reader));
-            return list;
-        }
-
-        public static int AutoImportance(SimCharacter npc, string summary, string category)
-        {
-            int importance = category.ToLowerInvariant() switch
-            {
-                "trauma" => 85,
-                "peak" => 90,
-                "romance" or "emotional" => 45,
-                "negative" => 50,
-                "positive" => 30,
-                "social" => 20,
-                "work" => 15,
-                _ => 10
-            };
-
-            string s = (summary ?? "").ToLowerInvariant();
-            if (s.Contains("love") || s.Contains("kiss")) importance += 20;
-            if (s.Contains("fight") || s.Contains("hurt")) importance += 25;
-
-            if (npc?.Traits != null)
-            {
-                if (npc.Traits.Get("trait.affection") >= 70) importance += 10;
-                if (npc.Traits.Get("trait.hurt") >= 60) importance += 10;
-            }
-
-            return Math.Clamp(importance, 1, 100);
-        }
-
-        private static MemoryRecord ReadRow(SqliteDataReader reader)
+        using var reader = cmd.ExecuteReader();
+        while (reader.Read())
         {
             var m = new MemoryRecord
             {
-                Id = reader.GetInt32(0),
-                NpcId = reader.IsDBNull(1) ? 0 : Convert.ToInt32(reader.GetValue(1)),
-                CharacterName = reader.IsDBNull(2) ? "" : reader.GetString(2),
-                Summary = reader.IsDBNull(3) ? "" : reader.GetString(3),
-                Category = reader.IsDBNull(4) ? "General" : reader.GetString(4),
-                Importance = reader.IsDBNull(5) ? 1 : reader.GetInt32(5),
-                Strength = reader.IsDBNull(6) ? 70f : Convert.ToSingle(reader.GetValue(6)),
-                IsLockedPeak = !reader.IsDBNull(7) && Convert.ToInt32(reader.GetValue(7)) != 0,
-                RelatedPerson = reader.IsDBNull(8) ? null : reader.GetString(8),
-                EventId = reader.IsDBNull(9) ? null : reader.GetString(9)
+                NpcId = reader.IsDBNull(1) ? 0 : reader.GetInt32(1),
+                CharacterName = ResolveNpcName(npcId),
+                Summary = reader.IsDBNull(2) ? "" : reader.GetString(2),
+                Category = reader.IsDBNull(3) ? "General" : reader.GetString(3),
+                Importance = reader.IsDBNull(4) ? 1 : reader.GetInt32(4),
+                Strength = reader.IsDBNull(5) ? 50f : Convert.ToSingle(reader.GetValue(5)),
+                IsLockedPeak = !reader.IsDBNull(6) && reader.GetInt32(6) != 0,
+                EventId = reader.IsDBNull(7) ? null : reader.GetString(7)
             };
-            if (!reader.IsDBNull(10) && DateTime.TryParse(reader.GetString(10), out var ts))
+
+            if (!reader.IsDBNull(8) && DateTime.TryParse(reader.GetString(8), out var ts))
                 m.Timestamp = ts;
-            return m;
+
+            list.Add(m);
         }
+
+        return list;
+    }
+
+    public static int AutoImportance(SimCharacter npc, string summary, string category)
+    {
+        int importance = category.ToLowerInvariant() switch
+        {
+            "trauma" => 85,
+            "peak" => 90,
+            "romance" or "emotional" => 45,
+            "negative" => 50,
+            "positive" => 30,
+            "social" => 20,
+            "work" => 15,
+            _ => 10
+        };
+
+        string s = (summary ?? "").ToLowerInvariant();
+        if (s.Contains("love") || s.Contains("kiss")) importance += 20;
+        if (s.Contains("fight") || s.Contains("hurt")) importance += 25;
+
+        if (npc?.Traits != null)
+        {
+            if (npc.Traits.Get("trait.affection") >= 70) importance += 10;
+            if (npc.Traits.Get("trait.hurt") >= 60) importance += 10;
+        }
+
+        return Math.Clamp(importance, 1, 100);
+    }
+
+    private static int ResolveNpcId(string characterName)
+    {
+        if (string.IsNullOrWhiteSpace(characterName))
+            return 0;
+
+        using var conn = ProjectEveDatabaseConnections.OpenMain();
+        using var cmd = conn.CreateCommand();
+        cmd.CommandText = """
+            SELECT Id
+            FROM Characters
+            WHERE Name = $name OR Nickname = $name
+            ORDER BY CASE WHEN Name = $name THEN 0 ELSE 1 END
+            LIMIT 1;
+            """;
+        cmd.Parameters.AddWithValue("$name", characterName);
+
+        var value = cmd.ExecuteScalar();
+        return value == null || value == DBNull.Value ? 0 : Convert.ToInt32(value);
+    }
+
+    private static string ResolveNpcName(int npcId)
+    {
+        using var conn = ProjectEveDatabaseConnections.OpenMain();
+        using var cmd = conn.CreateCommand();
+        cmd.CommandText = "SELECT Name FROM Characters WHERE Id = $id LIMIT 1;";
+        cmd.Parameters.AddWithValue("$id", npcId);
+        return cmd.ExecuteScalar()?.ToString() ?? "";
     }
 }
+

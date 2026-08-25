@@ -1,0 +1,181 @@
+﻿{
+  {
+    "id": "openness",
+    "layer": "fast",
+    "label": "Openness",
+    "version": 1,
+    "description": "Willing to show / say more. Inverse pressure with Guard. High Openness shares history, feeling, body language.",
+    "priorIntensity": {
+      "min": 2,
+      "max": 7,
+      "mean": 4
+    },
+    "spawn": {
+      "currentFromIntensity": true,
+      "noise": 3
+    },
+    "bands": {
+      "off": [ 0, 29 ],
+      "low": [ 30, 49 ],
+      "mid": [ 50, 69 ],
+      "high": [ 70, 84 ],
+      "break": [ 85, 94 ],
+      "extreme": [ 95, 100 ]
+    },
+    "styles": {
+      "share": {
+        "means": "Offers personal detail and story without heavy push.",
+        "speechHints": [ "disclosure", "story", "honest" ],
+        "bodyHints": [ "open_posture" ],
+        "riskTags": [ "overshare" ]
+      },
+      "question": {
+        "means": "Opens by inviting the other in; curious.",
+        "speechHints": [ "ask", "curious" ],
+        "bodyHints": [ "lean_in" ],
+        "riskTags": []
+      },
+      "body": {
+        "means": "Open in posture and touch; less armor.",
+        "speechHints": [ "relaxed" ],
+        "bodyHints": [ "uncrossed", "closer" ],
+        "riskTags": [ "boundary_sensitive" ]
+      },
+      "risk": {
+        "means": "Says the hard true thing; gambles on being received.",
+        "speechHints": [ "hard_truth", "vulnerable" ],
+        "bodyHints": [ "steady_eye" ],
+        "riskTags": [ "rejection_risk" ]
+      },
+      "selective": {
+        "means": "Open on some topics only; clear gates.",
+        "speechHints": [ "this_yes_that_no" ],
+        "bodyHints": [ "controlled" ],
+        "riskTags": []
+      }
+    },
+    "defaultStyleWeights": {
+      "share": 1.0,
+      "question": 0.9,
+      "body": 0.7,
+      "risk": 0.55,
+      "selective": 0.95
+    },
+    "flavors": {
+      "emotional": "Feelings on the table.",
+      "factual": "Facts of the past, less feeling words.",
+      "physical": "Comfort with closeness.",
+      "opinion": "Says what they really think.",
+      "need": "Admits what they need."
+    },
+    "pull": {
+      "belowHomeDamageMult": 0.6,
+      "recoverMult": 1.2,
+      "aboveHomeSettleMult": 1.1
+    },
+    "funding": {
+      "required": true,
+      "budgetPerIntensityPoint": 1.0
+    },
+    "links": [
+      {
+        "trait": "guard",
+        "op": "-",
+        "weight": 0.65,
+        "when": "rise"
+      },
+      {
+        "trait": "trust",
+        "op": "+",
+        "weight": 0.35,
+        "when": "rise"
+      },
+      {
+        "trait": "affection",
+        "op": "+",
+        "weight": 0.2,
+        "when": "rise"
+      },
+      {
+        "trait": "anxiety",
+        "op": "-",
+        "weight": 0.15,
+        "when": "rise"
+      },
+      {
+        "trait": "shame",
+        "op": "-",
+        "weight": 0.15,
+        "when": "rise"
+      }
+    ],
+    "opposePairs": [
+      {
+        "with": "guard",
+        "policyHints": [ "door_ajar", "one_topic_only" ]
+      },
+      {
+        "with": "shame",
+        "policyHints": [ "want_to_tell_cannot" ]
+      }
+    ],
+    "tagTriggers": [
+      {
+        "tag": "bond.safe_presence",
+        "direction": "+",
+        "baseWeight": 0.75
+      },
+      {
+        "tag": "bond.reassurance",
+        "direction": "+",
+        "baseWeight": 0.65
+      },
+      {
+        "tag": "bond.vulnerability_met_well",
+        "direction": "+",
+        "baseWeight": 0.9
+      },
+      {
+        "tag": "bond.invite_deeper",
+        "direction": "+",
+        "baseWeight": 0.7
+      },
+      {
+        "tag": "conflict.insult",
+        "direction": "-",
+        "baseWeight": 0.7
+      },
+      {
+        "tag": "shame.expose",
+        "direction": "-",
+        "baseWeight": 0.8
+      },
+      {
+        "tag": "bond.rejection",
+        "direction": "-",
+        "baseWeight": 0.75
+      },
+      {
+        "tag": "conflict.probe_deep",
+        "direction": "-",
+        "baseWeight": 0.4,
+        "note": "If felt as push, not invite."
+      }
+    ],
+    "relationScoped": true,
+    "historyHooks": {
+      "catalog": "Characters/Traits/TraitJson/TraitHistory/openness_patterns.json",
+      "filters": [ "style", "flavor", "sourceBucket" ],
+      "tellFraming": {
+        "prideHigh": "HeroSelf",
+        "prideLow": "VictimSelf",
+        "shameHigh": "VictimSelf",
+        "telephone": true
+      }
+    },
+    "debug": {
+      "showInDash": true,
+      "color": "#6bcb9a",
+      "sortPriority": 17
+    }
+  }

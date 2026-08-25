@@ -113,3 +113,73 @@
       "weight": 0.2,
       "when": "rise"
     }
+  ],
+  "opposePairs": [
+    {
+      "with": "guard",
+      "policyHints": [ "trust_but_guarded", "lane_specific_trust" ]
+    },
+    {
+      "with": "hurt",
+      "policyHints": [ "trust_damaged_not_erased", "proof_required" ]
+    }
+  ],
+  "tagTriggers": [
+    {
+      "tag": "bond.reliable",
+      "direction": "+",
+      "baseWeight": 0.65
+    },
+    {
+      "tag": "bond.kept_secret",
+      "direction": "+",
+      "baseWeight": 0.85
+    },
+    {
+      "tag": "bond.showed_up",
+      "direction": "+",
+      "baseWeight": 0.7
+    },
+    {
+      "tag": "repair.own_it",
+      "direction": "+",
+      "baseWeight": 0.45
+    },
+    {
+      "tag": "conflict.lie",
+      "direction": "-",
+      "baseWeight": 0.9
+    },
+    {
+      "tag": "conflict.betrayal",
+      "direction": "-",
+      "baseWeight": 1.0
+    },
+    {
+      "tag": "conflict.broke_confidence",
+      "direction": "-",
+      "baseWeight": 0.95
+    },
+    {
+      "tag": "conflict.no_show",
+      "direction": "-",
+      "baseWeight": 0.65
+    }
+  ],
+  "relationScoped": true,
+  "historyHooks": {
+    "catalog": "Characters/Traits/TraitJson/TraitHistory/trust_patterns.json",
+    "filters": [ "style", "flavor", "sourceBucket" ],
+    "tellFraming": {
+      "prideHigh": "HeroSelf",
+      "prideLow": "VictimSelf",
+      "shameHigh": "VictimSelf",
+      "telephone": true
+    }
+  },
+  "debug": {
+    "showInDash": true,
+    "color": "#5a8fb8",
+    "sortPriority": 9
+  }
+}

@@ -1,0 +1,171 @@
+﻿{
+  "id": "tension",
+  "layer": "fast",
+  "label": "Tension",
+  "version": 1,
+  "description": "Charged air — fight or sexual or awkward. Not a moral; it's pressure in the scene between people.",
+  "priorIntensity": {
+    "min": 2,
+    "max": 6,
+    "mean": 3
+  },
+  "spawn": {
+    "currentFromIntensity": true,
+    "noise": 3
+  },
+  "bands": {
+    "off": [ 0, 29 ],
+    "low": [ 30, 49 ],
+    "mid": [ 50, 69 ],
+    "high": [ 70, 84 ],
+    "break": [ 85, 94 ],
+    "extreme": [ 95, 100 ]
+  },
+  "styles": {
+    "sexual": {
+      "means": "Charge is want / chemistry.",
+      "speechHints": [ "low", "slow" ],
+      "bodyHints": [ "proximity", "hold_eye" ],
+      "riskTags": [ "read_as_come_on" ]
+    },
+    "hostile": {
+      "means": "Charge is conflict about to break.",
+      "speechHints": [ "clipped", "loaded" ],
+      "bodyHints": [ "braced", "still" ],
+      "riskTags": [ "fight_start" ]
+    },
+    "awkward": {
+      "means": "Social mismatch; nobody knows the move.",
+      "speechHints": [ "filler", "nervous" ],
+      "bodyHints": [ "fidget", "look_away" ],
+      "riskTags": [ "cringe" ]
+    },
+    "electric": {
+      "means": "High energy mixed signal — fun and danger.",
+      "speechHints": [ "bright", "dare" ],
+      "bodyHints": [ "animated", "close" ],
+      "riskTags": [ "escalate" ]
+    },
+    "held": {
+      "means": "Both feel it; neither names it.",
+      "speechHints": [ "careful", "subtext" ],
+      "bodyHints": [ "still_near" ],
+      "riskTags": [ "unspoken" ]
+    }
+  },
+  "defaultStyleWeights": {
+    "sexual": 0.75,
+    "hostile": 0.8,
+    "awkward": 1.0,
+    "electric": 0.65,
+    "held": 0.9
+  },
+  "flavors": {
+    "unfinished_fight": "Argument not closed.",
+    "almost_kiss": "Near intimacy.",
+    "secret_in_room": "Someone knows.",
+    "status": "Power imbalance in the air.",
+    "crowd": "Witnesses raise the stakes."
+  },
+  "pull": {
+    "belowHomeDamageMult": 0.7,
+    "recoverMult": 1.35,
+    "aboveHomeSettleMult": 1.25
+  },
+  "funding": {
+    "required": false,
+    "budgetPerIntensityPoint": 0.7
+  },
+  "links": [
+    {
+      "trait": "desire",
+      "op": "+",
+      "weight": 0.35,
+      "when": "rise",
+      "styleGate": [ "sexual", "electric", "held" ]
+    },
+    {
+      "trait": "anger",
+      "op": "+",
+      "weight": 0.35,
+      "when": "rise",
+      "styleGate": [ "hostile" ]
+    },
+    {
+      "trait": "anxiety",
+      "op": "+",
+      "weight": 0.3,
+      "when": "rise",
+      "styleGate": [ "awkward" ]
+    },
+    {
+      "trait": "attraction",
+      "op": "+",
+      "weight": 0.25,
+      "when": "rise"
+    },
+    {
+      "trait": "playfulness",
+      "op": "-",
+      "weight": 0.15,
+      "when": "rise",
+      "styleGate": [ "hostile" ]
+    }
+  ],
+  "opposePairs": [
+    {
+      "with": "playfulness",
+      "policyHints": [ "defuse", "cannot_joke_yet" ]
+    },
+    {
+      "with": "guard",
+      "policyHints": [ "name_it_or_leave" ]
+    }
+  ],
+  "tagTriggers": [
+    {
+      "tag": "bond.proximity_close",
+      "direction": "+",
+      "baseWeight": 0.6
+    },
+    {
+      "tag": "desire.flirt_heavy",
+      "direction": "+",
+      "baseWeight": 0.75
+    },
+    {
+      "tag": "conflict.unfinished",
+      "direction": "+",
+      "baseWeight": 0.85
+    },
+    {
+      "tag": "conflict.stare_down",
+      "direction": "+",
+      "baseWeight": 0.8
+    },
+    {
+      "tag": "play.joke_landed",
+      "direction": "-",
+      "baseWeight": 0.55
+    },
+    {
+      "tag": "repair.apology",
+      "direction": "-",
+      "baseWeight": 0.5
+    },
+    {
+      "tag": "bond.soft_return",
+      "direction": "-",
+      "baseWeight": 0.45
+    },
+    {
+      "tag": "scene.clear_air",
+      "direction": "-",
+      "baseWeight": 0.7
+    }
+  ],
+  "relationScoped": true,
+  "historyHooks": {
+    "catalog": "Characters/Traits/TraitJson/TraitHistory/tension_patterns.json",
+    "filters": [ "style", "flavor", "sourceBucket" ],
+    "tellFraming": { "prideHigh":

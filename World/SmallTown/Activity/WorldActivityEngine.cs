@@ -1,4 +1,4 @@
-using Microsoft.Data.Sqlite;
+﻿using Microsoft.Data.Sqlite;
 using ProjectEve.Characters.Base;
 using System;
 using System.Collections.Generic;
@@ -18,24 +18,7 @@ namespace ProjectEve.Worlds.SmallTownSystems
 
         public static void Initialize()
         {
-            using var conn = new SqliteConnection(ConnStr);
-            conn.Open();
-            using var cmd = conn.CreateCommand();
-            cmd.CommandText = """
-                CREATE TABLE IF NOT EXISTS NpcWorldActivity (
-                    NpcId INTEGER PRIMARY KEY,
-                    LocationId TEXT,
-                    Activity TEXT,
-                    ActivityStartGameTime TEXT,
-                    LastWorldTickGameTime TEXT,
-                    IsBusy INTEGER NOT NULL DEFAULT 0,
-                    FOREIGN KEY (NpcId) REFERENCES Characters(Id)
-                );
-
-                CREATE INDEX IF NOT EXISTS ix_world_activity_location
-                    ON NpcWorldActivity(LocationId, Activity);
-                """;
-            cmd.ExecuteNonQuery();
+            ProjectEve.Data.ProjectEveDatabaseSetup.EnsureAll();
         }
 
         public static WorldTickResult Tick(DateTime gameTime, IEnumerable<SimCharacter> npcs)
@@ -156,24 +139,68 @@ namespace ProjectEve.Worlds.SmallTownSystems
 
         private static void Save(int npcId, string location, string activity, DateTime gameTime, bool busy)
         {
+            UpsertActivityState(
+                npcId,
+                location,
+                activity,
+                gameTime,
+                gameTime,
+                busy,
+                preserveExistingStart: true);
+        }
+
+        /// <summary>
+        /// Canonical runtime write gateway for NpcWorldActivity.
+        /// ActivityPlanner and world-tick code both route physical activity state here.
+        /// </summary>
+        public static void UpsertActivityState(
+            int npcId,
+            string locationId,
+            string activity,
+            DateTime activityStartGameTime,
+            DateTime lastWorldTickGameTime,
+            bool isBusy,
+            bool preserveExistingStart = false)
+        {
+            if (npcId <= 0)
+                return;
+
+            Initialize();
+
             using var conn = new SqliteConnection(ConnStr);
             conn.Open();
+
             using var cmd = conn.CreateCommand();
-            cmd.CommandText = """
-                INSERT INTO NpcWorldActivity
-                (NpcId, LocationId, Activity, ActivityStartGameTime, LastWorldTickGameTime, IsBusy)
-                VALUES ($npc,$loc,$act,$time,$time,$busy)
-                ON CONFLICT(NpcId) DO UPDATE SET
-                    LocationId=$loc,
-                    Activity=$act,
-                    LastWorldTickGameTime=$time,
-                    IsBusy=$busy;
-                """;
+
+            cmd.CommandText = preserveExistingStart
+                ? """
+                    INSERT INTO NpcWorldActivity
+                    (NpcId, LocationId, Activity, ActivityStartGameTime, LastWorldTickGameTime, IsBusy)
+                    VALUES ($npc,$loc,$act,$start,$tick,$busy)
+                    ON CONFLICT(NpcId) DO UPDATE SET
+                        LocationId=$loc,
+                        Activity=$act,
+                        LastWorldTickGameTime=$tick,
+                        IsBusy=$busy;
+                    """
+                : """
+                    INSERT INTO NpcWorldActivity
+                    (NpcId, LocationId, Activity, ActivityStartGameTime, LastWorldTickGameTime, IsBusy)
+                    VALUES ($npc,$loc,$act,$start,$tick,$busy)
+                    ON CONFLICT(NpcId) DO UPDATE SET
+                        LocationId=$loc,
+                        Activity=$act,
+                        ActivityStartGameTime=$start,
+                        LastWorldTickGameTime=$tick,
+                        IsBusy=$busy;
+                    """;
+
             cmd.Parameters.AddWithValue("$npc", npcId);
-            cmd.Parameters.AddWithValue("$loc", location);
-            cmd.Parameters.AddWithValue("$act", activity);
-            cmd.Parameters.AddWithValue("$time", gameTime.ToString("o"));
-            cmd.Parameters.AddWithValue("$busy", busy ? 1 : 0);
+            cmd.Parameters.AddWithValue("$loc", locationId ?? "");
+            cmd.Parameters.AddWithValue("$act", activity ?? "idle");
+            cmd.Parameters.AddWithValue("$start", activityStartGameTime.ToString("o"));
+            cmd.Parameters.AddWithValue("$tick", lastWorldTickGameTime.ToString("o"));
+            cmd.Parameters.AddWithValue("$busy", isBusy ? 1 : 0);
             cmd.ExecuteNonQuery();
         }
 
@@ -194,3 +221,4 @@ namespace ProjectEve.Worlds.SmallTownSystems
         }
     }
 }
+

@@ -1,8 +1,10 @@
-using ProjectEve.Characters.Base;
+﻿using ProjectEve.Characters.Base;
 using ProjectEve.Characters.Emotion;
+using ProjectEve.Characters.Traits;
 using ProjectEve.Traits;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ProjectEve.Worlds.SmallTownSystems
 {
@@ -22,12 +24,14 @@ namespace ProjectEve.Worlds.SmallTownSystems
         public static EmotionBridgeResult Sync(
             SimCharacter npc,
             EmotionalProfile? emotionalProfile,
-            DateTime gameTime)
+            DateTime gameTime,
+            string sourceEventId = "")
         {
             var result = new EmotionBridgeResult
             {
                 NpcId = npc.Id,
-                GameTime = gameTime
+                GameTime = gameTime,
+                SourceEventId = sourceEventId ?? ""
             };
 
             if (npc.Traits == null)
@@ -105,7 +109,8 @@ namespace ProjectEve.Worlds.SmallTownSystems
             return Sync(
                 npc,
                 emotionalProfile,
-                gameTime);
+                gameTime,
+                decision.EventId);
         }
 
         /// <summary>
@@ -127,6 +132,8 @@ namespace ProjectEve.Worlds.SmallTownSystems
             // --------------------------------------------------------
             if (needs.Stress >= 60)
             {
+                result.CurrentReasonType = "Need.Stress.High";
+                result.CurrentReason = "Stress is above the high-pressure threshold.";
                 double pressure =
                     (needs.Stress - 60.0) / 40.0;
 
@@ -160,6 +167,8 @@ namespace ProjectEve.Worlds.SmallTownSystems
             }
             else if (needs.Stress <= 30)
             {
+                result.CurrentReasonType = "Need.Stress.Low";
+                result.CurrentReason = "Stress is in the calm/recovery range.";
                 double calm =
                     (30.0 - needs.Stress) / 30.0;
 
@@ -183,6 +192,8 @@ namespace ProjectEve.Worlds.SmallTownSystems
             // --------------------------------------------------------
             if (needs.Energy <= 35)
             {
+                result.CurrentReasonType = "Need.Energy.Low";
+                result.CurrentReason = "Low physical energy is applying fatigue pressure.";
                 double fatigue =
                     (35.0 - needs.Energy) / 35.0;
 
@@ -213,6 +224,8 @@ namespace ProjectEve.Worlds.SmallTownSystems
             // --------------------------------------------------------
             if (needs.SleepDebt >= 60)
             {
+                result.CurrentReasonType = "Need.SleepDebt.High";
+                result.CurrentReason = "High sleep debt is applying emotional pressure.";
                 double debt =
                     (needs.SleepDebt - 60.0) / 40.0;
 
@@ -243,6 +256,8 @@ namespace ProjectEve.Worlds.SmallTownSystems
             // --------------------------------------------------------
             if (needs.Social <= 30)
             {
+                result.CurrentReasonType = "Need.Social.Low";
+                result.CurrentReason = "Low social satisfaction is increasing isolation pressure.";
                 double lonely =
                     (30.0 - needs.Social) / 30.0;
 
@@ -262,6 +277,8 @@ namespace ProjectEve.Worlds.SmallTownSystems
             }
             else if (needs.Social >= 70)
             {
+                result.CurrentReasonType = "Need.Social.High";
+                result.CurrentReason = "Strong social satisfaction is reducing isolation pressure.";
                 double connected =
                     (needs.Social - 70.0) / 30.0;
 
@@ -285,6 +302,8 @@ namespace ProjectEve.Worlds.SmallTownSystems
             // --------------------------------------------------------
             if (needs.Fun <= 30)
             {
+                result.CurrentReasonType = "Need.Fun.Low";
+                result.CurrentReason = "Low fun satisfaction is creating boredom pressure.";
                 double bored =
                     (30.0 - needs.Fun) / 30.0;
 
@@ -304,6 +323,8 @@ namespace ProjectEve.Worlds.SmallTownSystems
             }
             else if (needs.Fun >= 70)
             {
+                result.CurrentReasonType = "Need.Fun.High";
+                result.CurrentReason = "High fun satisfaction is supporting playfulness and hope.";
                 double fulfilled =
                     (needs.Fun - 70.0) / 30.0;
 
@@ -327,6 +348,8 @@ namespace ProjectEve.Worlds.SmallTownSystems
             // --------------------------------------------------------
             if (needs.Comfort <= 25)
             {
+                result.CurrentReasonType = "Need.Comfort.Low";
+                result.CurrentReason = "Low physical comfort is increasing emotional pressure.";
                 double discomfort =
                     (25.0 - needs.Comfort) / 25.0;
 
@@ -346,6 +369,8 @@ namespace ProjectEve.Worlds.SmallTownSystems
             }
             else if (needs.Comfort >= 75)
             {
+                result.CurrentReasonType = "Need.Comfort.High";
+                result.CurrentReason = "High physical comfort is reducing tension.";
                 double comfortable =
                     (needs.Comfort - 75.0) / 25.0;
 
@@ -362,6 +387,8 @@ namespace ProjectEve.Worlds.SmallTownSystems
             // --------------------------------------------------------
             if (needs.Hunger >= 60)
             {
+                result.CurrentReasonType = "Need.Hunger.High";
+                result.CurrentReason = "High hunger is reducing patience and increasing tension.";
                 double hunger =
                     (needs.Hunger - 60.0) / 40.0;
 
@@ -385,6 +412,8 @@ namespace ProjectEve.Worlds.SmallTownSystems
             // --------------------------------------------------------
             if (needs.Hygiene <= 25)
             {
+                result.CurrentReasonType = "Need.Hygiene.Low";
+                result.CurrentReason = "Low hygiene is increasing self-conscious defensive pressure.";
                 double hygienePressure =
                     (25.0 - needs.Hygiene) / 25.0;
 
@@ -446,12 +475,51 @@ namespace ProjectEve.Worlds.SmallTownSystems
 
             if (Math.Abs(after - before) >= 0.001f)
             {
-                result.TraitChanges[traitId] =
-                    new TraitChange
+                // MAIN keeps the canonical current intensity.
+                NpcTraitRepository.SaveOne(
+                    npc.Id,
+                    traitId,
+                    after);
+
+                // RELATIONSHIPS keeps the subjective reason/evidence trail.
+                NpcTraitRepository.RecordCausalChange(
+                    npc.Id,
+                    traitId,
+                    before,
+                    after,
+                    result.GameTime,
+                    result.CurrentReasonType,
+                    result.CurrentReason,
+                    sourceType: string.IsNullOrWhiteSpace(result.SourceEventId)
+                        ? "NeedsSystem"
+                        : "HumanEvent+Needs",
+                    sourceEventId: result.SourceEventId);
+
+                if (result.TraitChanges.TryGetValue(traitId, out var existing))
+                {
+                    existing.After = after;
+
+                    if (!string.IsNullOrWhiteSpace(result.CurrentReason) &&
+                        !existing.Reasons.Contains(
+                            result.CurrentReason,
+                            StringComparer.OrdinalIgnoreCase))
+                    {
+                        existing.Reasons.Add(result.CurrentReason);
+                    }
+                }
+                else
+                {
+                    var change = new TraitChange
                     {
                         Before = before,
                         After = after
                     };
+
+                    if (!string.IsNullOrWhiteSpace(result.CurrentReason))
+                        change.Reasons.Add(result.CurrentReason);
+
+                    result.TraitChanges[traitId] = change;
+                }
             }
         }
 
@@ -460,6 +528,10 @@ namespace ProjectEve.Worlds.SmallTownSystems
             public bool Success { get; set; }
             public int NpcId { get; set; }
             public DateTime GameTime { get; set; }
+            public string SourceEventId { get; set; } = "";
+
+            internal string CurrentReasonType { get; set; } = "";
+            internal string CurrentReason { get; set; } = "";
 
             public bool ProfileUpdated { get; set; }
             public string DominantMood { get; set; } = "";
@@ -475,9 +547,12 @@ namespace ProjectEve.Worlds.SmallTownSystems
         {
             public float Before { get; set; }
             public float After { get; set; }
+            public float Delta => After - Before;
+
+            public List<string> Reasons { get; } = new();
 
             public override string ToString()
-                => $"{Before:0.0} -> {After:0.0}";
+                => $"{Before:0.0} -> {After:0.0} ({Delta:+0.0;-0.0;0.0})";
         }
     }
 }

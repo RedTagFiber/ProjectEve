@@ -1,0 +1,115 @@
+﻿{
+  "id": "trust",
+  "layer": "fast",
+  "label": "Trust",
+  "version": 1,
+  "description": "Safety with this person. Relation-scoped core. Gates history disclosure. Slow to build, faster to break.",
+  "priorIntensity": {
+    "min": 2,
+    "max": 6,
+    "mean": 4
+  },
+  "spawn": {
+    "currentFromIntensity": true,
+    "noise": 3
+  },
+  "bands": {
+    "off": [ 0, 29 ],
+    "low": [ 30, 49 ],
+    "mid": [ 50, 69 ],
+    "high": [ 70, 84 ],
+    "break": [ 85, 94 ],
+    "extreme": [ 95, 100 ]
+  },
+  "styles": {
+    "open": {
+      "means": "Assumes good faith; gives benefit of the doubt.",
+      "speechHints": [ "easy", "direct" ],
+      "bodyHints": [ "relaxed", "open" ],
+      "riskTags": [ "naive_read" ]
+    },
+    "tentative": {
+      "means": "Willing but testing; small grants of trust.",
+      "speechHints": [ "careful", "one_step" ],
+      "bodyHints": [ "measured" ],
+      "riskTags": []
+    },
+    "test": {
+      "means": "Probes consistency; watches for proof.",
+      "speechHints": [ "check", "verify" ],
+      "bodyHints": [ "watch" ],
+      "riskTags": [ "testy" ]
+    },
+    "blind": {
+      "means": "Over-trust; skips evidence (rare; dangerous).",
+      "speechHints": [ "absolute" ],
+      "bodyHints": [ "un guarded" ],
+      "riskTags": [ "exploitable" ]
+    },
+    "guarded_trust": {
+      "means": "Trusts in a lane only (task yes, heart no).",
+      "speechHints": [ "this_yes_that_no" ],
+      "bodyHints": [ "selective" ],
+      "riskTags": []
+    }
+  },
+  "defaultStyleWeights": {
+    "open": 0.7,
+    "tentative": 1.0,
+    "test": 0.9,
+    "blind": 0.25,
+    "guarded_trust": 0.95
+  },
+  "flavors": {
+    "safety": "Won't hurt me.",
+    "honesty": "Tells the truth.",
+    "competence": "Can handle this.",
+    "loyalty": "Won't switch sides.",
+    "care": "Has my interests in mind."
+  },
+  "pull": {
+    "belowHomeDamageMult": 0.45,
+    "recoverMult": 1.1,
+    "aboveHomeSettleMult": 1.0
+  },
+  "funding": {
+    "required": true,
+    "budgetPerIntensityPoint": 1.0
+  },
+  "links": [
+    {
+      "trait": "guard",
+      "op": "-",
+      "weight": 0.45,
+      "when": "rise"
+    },
+    {
+      "trait": "openness",
+      "op": "+",
+      "weight": 0.4,
+      "when": "rise"
+    },
+    {
+      "trait": "anxiety",
+      "op": "-",
+      "weight": 0.25,
+      "when": "rise"
+    },
+    {
+      "trait": "fear",
+      "op": "-",
+      "weight": 0.25,
+      "when": "rise"
+    },
+    {
+      "trait": "affection",
+      "op": "+",
+      "weight": 0.2,
+      "when": "rise"
+    },
+    {
+      "trait": "hope",
+      "op": "+",
+      "weight": 0.2,
+      "when": "rise"
+    }

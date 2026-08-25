@@ -1,4 +1,5 @@
-using Microsoft.Data.Sqlite;
+﻿using Microsoft.Data.Sqlite;
+using ProjectEve.Data;
 using ProjectEve.Core.Time;
 using ProjectEve.Core.World;
 
@@ -17,14 +18,11 @@ public sealed class KnownLocationService : IKnownLocationService
     public KnownLocationService(IGameTimeService clock)
     {
         _clock = clock;
-        _dbPath = Environment.GetEnvironmentVariable("EVE_DB_PATH")
-            ?? Path.Combine(AppContext.BaseDirectory, "Data", "project_eve.db");
-
-        var parent = Path.GetDirectoryName(_dbPath);
-        if (!string.IsNullOrWhiteSpace(parent))
-            Directory.CreateDirectory(parent);
+        ProjectEveDatabaseSetup.EnsureAll();
+        _dbPath = ProjectEveDatabaseSetup.LocationDatabasePath;
 
         EnsureSchema();
+        MigrateLegacyMainLocationDirectoryIfNeeded();
     }
 
     public Task RegisterWorldLocationAsync(
@@ -144,6 +142,95 @@ public sealed class KnownLocationService : IKnownLocationService
         return Task.FromResult<IReadOnlyList<KnownLocationResult>>(rows);
     }
 
+
+    /// <summary>
+    /// One-time compatibility migration for the travel directory.
+    /// If the canonical location DB has no directory rows yet, copy any
+    /// existing legacy rows from project_eve.db. Legacy rows are preserved.
+    /// </summary>
+    private void MigrateLegacyMainLocationDirectoryIfNeeded()
+    {
+        using var conn = Open();
+
+        using (var count = conn.CreateCommand())
+        {
+            count.CommandText = "SELECT COUNT(*) FROM TravelLocationIndex;";
+            long existing = Convert.ToInt64(count.ExecuteScalar() ?? 0);
+            if (existing > 0)
+                return;
+        }
+
+        string legacyMainPath = ProjectEveDatabaseSetup.MainDatabasePath;
+
+        if (!File.Exists(legacyMainPath) ||
+            string.Equals(
+                legacyMainPath,
+                _dbPath,
+                StringComparison.OrdinalIgnoreCase))
+            return;
+
+        string escaped = legacyMainPath.Replace("'", "''");
+
+        try
+        {
+            using (var attach = conn.CreateCommand())
+            {
+                attach.CommandText = $"ATTACH DATABASE '{escaped}' AS legacy_main;";
+                attach.ExecuteNonQuery();
+            }
+
+            if (LegacyTableExists(conn, "TravelLocationIndex"))
+            {
+                using var copy = conn.CreateCommand();
+                copy.CommandText = """
+                    INSERT OR IGNORE INTO TravelLocationIndex
+                    (LocationId,Name,Aliases,LocationType,AddressText,UpdatedRealUtc)
+                    SELECT LocationId,Name,Aliases,LocationType,AddressText,UpdatedRealUtc
+                    FROM legacy_main.TravelLocationIndex;
+                    """;
+                copy.ExecuteNonQuery();
+            }
+
+            if (LegacyTableExists(conn, "PlayerKnownLocation"))
+            {
+                using var copy = conn.CreateCommand();
+                copy.CommandText = """
+                    INSERT OR IGNORE INTO PlayerKnownLocation
+                    (PlayerId,LocationId,LearnedFrom,FirstKnownGameTime,
+                     CanTravelDirectly,UpdatedRealUtc)
+                    SELECT PlayerId,LocationId,LearnedFrom,FirstKnownGameTime,
+                           CanTravelDirectly,UpdatedRealUtc
+                    FROM legacy_main.PlayerKnownLocation;
+                    """;
+                copy.ExecuteNonQuery();
+            }
+
+            using (var detach = conn.CreateCommand())
+            {
+                detach.CommandText = "DETACH DATABASE legacy_main;";
+                detach.ExecuteNonQuery();
+            }
+        }
+        catch
+        {
+            // Compatibility migration only.
+            // Never block startup and never delete legacy data.
+        }
+    }
+
+    private static bool LegacyTableExists(
+        SqliteConnection conn,
+        string tableName)
+    {
+        using var cmd = conn.CreateCommand();
+        cmd.CommandText = """
+            SELECT COUNT(*)
+            FROM legacy_main.sqlite_master
+            WHERE type='table' AND name=$name;
+            """;
+        cmd.Parameters.AddWithValue("$name", tableName);
+        return Convert.ToInt32(cmd.ExecuteScalar() ?? 0) > 0;
+    }
     private void EnsureSchema()
     {
         using var conn = Open();
@@ -185,3 +272,4 @@ public sealed class KnownLocationService : IKnownLocationService
     private static string Clean(string? value, string fallback)
         => string.IsNullOrWhiteSpace(value) ? fallback : value.Trim();
 }
+

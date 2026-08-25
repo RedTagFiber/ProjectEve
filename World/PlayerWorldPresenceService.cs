@@ -1,4 +1,4 @@
-using Microsoft.Data.Sqlite;
+﻿using Microsoft.Data.Sqlite;
 using ProjectEve.Core.Scene;
 using ProjectEve.Core.Time;
 using ProjectEve.Core.World;
@@ -671,26 +671,16 @@ WHERE SceneId=$scene;";
         if (string.IsNullOrWhiteSpace(sceneId))
             return;
 
-        using var conn = Open();
-        using var cmd = conn.CreateCommand();
-        cmd.CommandText = @"
-UPDATE ScenePhysicalContact
-SET State='broken',
-    ReactionState='interrupted',
-    UpdatedGameTime=$game,
-    UpdatedRealUtc=$real
-WHERE SceneId=$scene
-  AND State IN ('pending','active','hesitant','frozen')
-  AND (CharacterAKey=$character OR CharacterBKey=$character);";
-        cmd.Parameters.AddWithValue("$game", _clock.Now.ToString("O"));
-        cmd.Parameters.AddWithValue("$real", DateTime.UtcNow.ToString("O"));
-        cmd.Parameters.AddWithValue("$scene", sceneId);
-        cmd.Parameters.AddWithValue("$character", "player:" + playerId);
-
-        try { cmd.ExecuteNonQuery(); }
+        try
+        {
+            ProjectEve.Scene.SceneSpatialInteractionService.BreakContactsForCharacter(
+                sceneId,
+                "player:" + playerId,
+                _clock.Now);
+        }
         catch
         {
-            // Safe when Phase 11 table is not present yet on a development DB.
+            // Scene contact state is best-effort during development/migration.
         }
     }
 
@@ -1030,3 +1020,4 @@ ON PlayerWorldMovementEvent(PlayerId,GameTime);
         public double Concealment { get; set; }
     }
 }
+

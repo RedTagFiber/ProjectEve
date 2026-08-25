@@ -168,4 +168,16 @@
   "historyHooks": {
     "catalog": "Characters/Traits/TraitJson/TraitHistory/tension_patterns.json",
     "filters": [ "style", "flavor", "sourceBucket" ],
-    "tellFraming": { "prideHigh":
+    "tellFraming": {
+      "prideHigh": "HeroSelf",
+      "prideLow": "VictimSelf",
+      "shameHigh": "VictimSelf",
+      "telephone": true
+    }
+  },
+  "debug": {
+    "showInDash": true,
+    "color": "#b06090",
+    "sortPriority": 14
+  }
+}

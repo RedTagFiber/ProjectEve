@@ -1,4 +1,4 @@
-using Microsoft.Data.Sqlite;
+﻿using Microsoft.Data.Sqlite;
 using ProjectEve.Characters.Base;
 using ProjectEve.Relationships;
 using System;
@@ -350,32 +350,16 @@ namespace ProjectEve.Worlds.SmallTownSystems
             if (plan == null)
                 return;
 
-            using var conn = new SqliteConnection(ConnStr);
-            conn.Open();
-
-            using var cmd = conn.CreateCommand();
-            cmd.CommandText = """
-                INSERT INTO NpcWorldActivity
-                (NpcId, LocationId, Activity, ActivityStartGameTime,
-                 LastWorldTickGameTime, IsBusy)
-                VALUES
-                ($npc,$loc,$act,$start,$now,$busy)
-                ON CONFLICT(NpcId) DO UPDATE SET
-                    LocationId=$loc,
-                    Activity=$act,
-                    ActivityStartGameTime=$start,
-                    LastWorldTickGameTime=$now,
-                    IsBusy=$busy;
-                """;
-
-            cmd.Parameters.AddWithValue("$npc", npcId);
-            cmd.Parameters.AddWithValue("$loc", plan.LocationId ?? "");
-            cmd.Parameters.AddWithValue("$act", plan.ActivityId ?? "idle");
-            cmd.Parameters.AddWithValue("$start", plan.StartGameTime.ToString("o"));
-            cmd.Parameters.AddWithValue("$now", gameTime.ToString("o"));
-            cmd.Parameters.AddWithValue("$busy", plan.IsBusy ? 1 : 0);
-
-            cmd.ExecuteNonQuery();
+            // Planner owns intent/plan selection only.
+            // WorldActivityEngine owns canonical physical activity state persistence.
+            WorldActivityEngine.UpsertActivityState(
+                npcId,
+                plan.LocationId ?? "",
+                plan.ActivityId ?? "idle",
+                plan.StartGameTime,
+                gameTime,
+                plan.IsBusy,
+                preserveExistingStart: false);
         }
 
         public static PlannedActivity? GetCurrentPlan(
@@ -1588,3 +1572,4 @@ namespace ProjectEve.Worlds.SmallTownSystems
         }
     }
 }
+

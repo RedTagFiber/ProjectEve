@@ -163,4 +163,18 @@
   ],
   "relationScoped": true,
   "historyHooks": {
-    "catalog": "Characters/Traits/TraitJson/TraitHistory
+    "catalog": "Characters/Traits/TraitJson/TraitHistory/resentment_patterns.json",
+    "filters": [ "style", "flavor", "sourceBucket" ],
+    "tellFraming": {
+      "prideHigh": "HeroSelf",
+      "prideLow": "VictimSelf",
+      "shameHigh": "VictimSelf",
+      "telephone": true
+    }
+  },
+  "debug": {
+    "showInDash": true,
+    "color": "#9a6a5a",
+    "sortPriority": 8
+  }
+}

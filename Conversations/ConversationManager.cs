@@ -1,4 +1,5 @@
-using Microsoft.Data.Sqlite;
+﻿using Microsoft.Data.Sqlite;
+using ProjectEve.Data;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -23,19 +24,20 @@ namespace ProjectEve.Conversations
     public static class ConversationManager
     {
         public const string LegacyPlayerId = "legacy-player";
-
         private static string DbPath =>
-            Environment.GetEnvironmentVariable("EVE_DB_PATH")
-            ?? System.IO.Path.Combine(AppContext.BaseDirectory, "Data", "project_eve.db");
+            ProjectEveDatabaseSetup.HistoryDatabasePath;
 
         private static string ConnStr => "Data Source=" + DbPath;
 
         public static void Initialize()
         {
+            ProjectEveDatabaseSetup.EnsureAll();
+
             using var conn = new SqliteConnection(ConnStr);
             conn.Open();
             EnsureSchema(conn);
             EnsurePlayerIdMigration(conn);
+            MigrateLegacyMainConversationDataIfNeeded(conn);
         }
 
         // -----------------------------------------------------------------
@@ -387,7 +389,7 @@ namespace ProjectEve.Conversations
             cmd.Parameters.AddWithValue("$session", sessionId);
 
             var sb = new StringBuilder();
-            sb.AppendLine("ACTIVE CONVERSATION SECTION — EXACT TRANSCRIPT");
+            sb.AppendLine("ACTIVE CONVERSATION SECTION â€” EXACT TRANSCRIPT");
             sb.AppendLine("This is authoritative for what was actually said.");
 
             using var r = cmd.ExecuteReader();
@@ -602,7 +604,7 @@ namespace ProjectEve.Conversations
             conn.Open();
 
             var sb = new StringBuilder();
-            sb.AppendLine("CROSS-SECTION CONTINUITY — ESTABLISHED PAST");
+            sb.AppendLine("CROSS-SECTION CONTINUITY â€” ESTABLISHED PAST");
 
             using (var plans = conn.CreateCommand())
             {
@@ -927,6 +929,126 @@ namespace ProjectEve.Conversations
             cmd.ExecuteNonQuery();
         }
 
+
+        /// <summary>
+        /// One-time compatibility migration:
+        /// if canonical history conversation tables are empty, copy any existing
+        /// conversation rows from the legacy main DB. Legacy rows are never deleted.
+        /// </summary>
+        private static void MigrateLegacyMainConversationDataIfNeeded(
+            SqliteConnection conn)
+        {
+            using (var count = conn.CreateCommand())
+            {
+                count.CommandText = "SELECT COUNT(*) FROM ConversationSession;";
+                long existing = Convert.ToInt64(count.ExecuteScalar() ?? 0);
+                if (existing > 0)
+                    return;
+            }
+
+            string legacyMainPath = ProjectEveDatabaseSetup.MainDatabasePath;
+
+            if (!System.IO.File.Exists(legacyMainPath) ||
+                string.Equals(
+                    legacyMainPath,
+                    DbPath,
+                    StringComparison.OrdinalIgnoreCase))
+                return;
+
+            string escaped = legacyMainPath.Replace("'", "''");
+
+            using var tx = conn.BeginTransaction();
+
+            try
+            {
+                using (var attach = conn.CreateCommand())
+                {
+                    attach.Transaction = tx;
+                    attach.CommandText = $"ATTACH DATABASE '{escaped}' AS legacy_main;";
+                    attach.ExecuteNonQuery();
+                }
+
+                if (!LegacyTableExists(conn, tx, "ConversationSession"))
+                {
+                    tx.Rollback();
+                    return;
+                }
+
+                CopyLegacyTable(
+                    conn, tx, "ConversationSession",
+                    "Id,PlayerId,NpcId,NpcName,PlayerName,Channel,Location," +
+                    "StartedGameTime,EndedGameTime,StartedUtc,EndedUtc," +
+                    "LastMessageUtc,Status,EndReason");
+
+                CopyLegacyTable(
+                    conn, tx, "ConversationMessage",
+                    "Id,SessionId,Sequence,Role,Speaker,SpeakerNpcId," +
+                    "MessageText,GameTime,CreatedUtc");
+
+                CopyLegacyTable(
+                    conn, tx, "ConversationEvent",
+                    "Id,SessionId,PlayerId,NpcId,NpcName,PlayerName,Channel," +
+                    "Location,StartedGameTime,EndedGameTime,Summary," +
+                    "EmotionalOutcome,RelationshipOutcome,EndReason,CreatedUtc");
+
+                CopyLegacyTable(
+                    conn, tx, "ConversationFact",
+                    "Id,EventId,PlayerId,NpcId,PlayerName,Subject,FactKey," +
+                    "FactValue,Confidence,SourceType,CreatedUtc");
+
+                CopyLegacyTable(
+                    conn, tx, "ConversationPlan",
+                    "Id,EventId,PlayerId,NpcId,PlayerName,Description,TimeText," +
+                    "Location,Status,CreatedUtc,UpdatedUtc");
+
+                using (var detach = conn.CreateCommand())
+                {
+                    detach.Transaction = tx;
+                    detach.CommandText = "DETACH DATABASE legacy_main;";
+                    detach.ExecuteNonQuery();
+                }
+
+                tx.Commit();
+            }
+            catch
+            {
+                try { tx.Rollback(); } catch { }
+                // Migration is compatibility-only. Never block startup or delete legacy data.
+            }
+        }
+
+        private static bool LegacyTableExists(
+            SqliteConnection conn,
+            SqliteTransaction tx,
+            string tableName)
+        {
+            using var cmd = conn.CreateCommand();
+            cmd.Transaction = tx;
+            cmd.CommandText = """
+                SELECT COUNT(*)
+                FROM legacy_main.sqlite_master
+                WHERE type='table' AND name=$name;
+                """;
+            cmd.Parameters.AddWithValue("$name", tableName);
+            return Convert.ToInt32(cmd.ExecuteScalar() ?? 0) > 0;
+        }
+
+        private static void CopyLegacyTable(
+            SqliteConnection conn,
+            SqliteTransaction tx,
+            string tableName,
+            string columns)
+        {
+            if (!LegacyTableExists(conn, tx, tableName))
+                return;
+
+            using var cmd = conn.CreateCommand();
+            cmd.Transaction = tx;
+            cmd.CommandText =
+                $"INSERT OR IGNORE INTO {tableName} ({columns}) " +
+                $"SELECT {columns} FROM legacy_main.{tableName};";
+            cmd.ExecuteNonQuery();
+        }
         private static void EnsureSchema(SqliteConnection conn)
         {
             using var cmd = conn.CreateCommand();
@@ -1169,3 +1291,4 @@ namespace ProjectEve.Conversations
         public int PlansStored { get; set; }
     }
 }
+

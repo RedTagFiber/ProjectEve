@@ -1,4 +1,4 @@
-using Microsoft.Data.Sqlite;
+﻿using Microsoft.Data.Sqlite;
 using ProjectEve.Core.Scene;
 using ProjectEve.Core.Time;
 using System;
@@ -760,6 +760,42 @@ public sealed class SceneSpatialInteractionService : ISceneSpatialInteractionSer
         return 0;
     }
 
+    /// <summary>
+    /// Canonical runtime gateway for interrupting physical contact when a player
+    /// or NPC leaves a shared scene.
+    /// </summary>
+    public static void BreakContactsForCharacter(
+        string sceneId,
+        string characterKey,
+        DateTimeOffset gameTime)
+    {
+        if (string.IsNullOrWhiteSpace(sceneId) ||
+            string.IsNullOrWhiteSpace(characterKey))
+            return;
+
+        ProjectEve.Data.ProjectEveDatabaseSetup.EnsureAll();
+
+        using var conn = new SqliteConnection(
+            "Data Source=" + ProjectEve.Data.ProjectEveDatabaseSetup.MainDatabasePath);
+        conn.Open();
+
+        using var cmd = conn.CreateCommand();
+        cmd.CommandText = @"
+UPDATE ScenePhysicalContact
+SET State='broken',
+    ReactionState='interrupted',
+    UpdatedGameTime=$game,
+    UpdatedRealUtc=$real
+WHERE SceneId=$scene
+  AND State IN ('pending','active','hesitant','frozen')
+  AND (CharacterAKey=$character OR CharacterBKey=$character);";
+
+        cmd.Parameters.AddWithValue("$game", gameTime.ToString("O"));
+        cmd.Parameters.AddWithValue("$real", DateTimeOffset.UtcNow.ToString("O"));
+        cmd.Parameters.AddWithValue("$scene", sceneId);
+        cmd.Parameters.AddWithValue("$character", characterKey);
+        cmd.ExecuteNonQuery();
+    }
     private PairRow UpsertPendingContact(
         string sceneId,
         string one,
@@ -970,26 +1006,7 @@ CREATE TABLE IF NOT EXISTS SceneSpatialInteractionEvent
 );
 
 CREATE INDEX IF NOT EXISTS IX_SceneSpatialInteractionEvent_Scene
-ON SceneSpatialInteractionEvent(SceneId,Id DESC);
-
-CREATE TABLE IF NOT EXISTS ScenePhysicalContact
-(
-    SceneId TEXT NOT NULL,
-    CharacterAKey TEXT NOT NULL,
-    CharacterBKey TEXT NOT NULL,
-    InitiatorCharacterKey TEXT NOT NULL,
-    ContactKind TEXT NOT NULL DEFAULT 'none',
-    State TEXT NOT NULL DEFAULT 'none',
-    ReactionState TEXT NOT NULL DEFAULT 'unknown',
-    StartedGameTime TEXT NOT NULL,
-    UpdatedGameTime TEXT NOT NULL,
-    UpdatedRealUtc TEXT NOT NULL,
-    PRIMARY KEY(SceneId,CharacterAKey,CharacterBKey)
-);
-
-CREATE INDEX IF NOT EXISTS IX_ScenePhysicalContact_Active
-ON ScenePhysicalContact(SceneId,State,CharacterAKey,CharacterBKey);
-";
+ON SceneSpatialInteractionEvent(SceneId,Id DESC);";
         cmd.ExecuteNonQuery();
     }
 
@@ -1107,3 +1124,4 @@ ON ScenePhysicalContact(SceneId,State,CharacterAKey,CharacterBKey);
 
     private sealed record SpeechDelivery(string CleanSpeech, string? VoiceLevel, PresenceRow? Target);
 }
+
