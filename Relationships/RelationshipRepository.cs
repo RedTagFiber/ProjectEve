@@ -59,8 +59,8 @@ public static class RelationshipRepository
             SELECT COUNT(1)
             FROM RelationshipStates
             WHERE SourceCharacterId = $source
-              AND TargetName = $target
-              AND RelationshipType = $type;
+              AND lower(trim(TargetName)) = lower(trim($target))
+              AND lower(trim(RelationshipType)) = lower(trim($type));
             """;
         cmd.Parameters.AddWithValue("$source", sourceCharacterId);
         cmd.Parameters.AddWithValue("$target", targetName ?? "");
@@ -91,11 +91,21 @@ public static class RelationshipRepository
     {
         ProjectEveDatabaseSetup.EnsureAll();
 
-        string id = BuildId(
-            sourceCharacterId,
-            targetCharacterId,
-            targetName,
-            relationshipType);
+        // Preserve an existing canonical/legacy row when one already represents
+        // this directed person+type bond. This prevents rerunning seed/build logic
+        // from creating a second row just because the historical RelationshipId
+        // format differs from the current rel:{source}:{target}:{type} format.
+        string id =
+            FindExistingRelationshipId(
+                sourceCharacterId,
+                targetCharacterId,
+                targetName,
+                relationshipType)
+            ?? BuildId(
+                sourceCharacterId,
+                targetCharacterId,
+                targetName,
+                relationshipType);
 
         using var conn = ProjectEveDatabaseConnections.OpenRelationships();
         using var cmd = conn.CreateCommand();
@@ -195,6 +205,60 @@ public static class RelationshipRepository
             relationship.Tension,
             relationship.Notes,
             updatedGameTime: updatedGameTime);
+    }
+
+    private static string? FindExistingRelationshipId(
+        int sourceCharacterId,
+        int? targetCharacterId,
+        string targetName,
+        string relationshipType)
+    {
+        using var conn = ProjectEveDatabaseConnections.OpenRelationships();
+        using var cmd = conn.CreateCommand();
+
+        if (targetCharacterId.HasValue)
+        {
+            cmd.CommandText = """
+                SELECT RelationshipId
+                FROM RelationshipStates
+                WHERE SourceCharacterId = $source
+                  AND lower(trim(RelationshipType)) = lower(trim($type))
+                  AND
+                  (
+                      TargetCharacterId = $targetId
+                      OR
+                      (
+                          TargetCharacterId IS NULL
+                          AND lower(trim(TargetName)) = lower(trim($targetName))
+                      )
+                  )
+                ORDER BY
+                    CASE WHEN TargetCharacterId = $targetId THEN 0 ELSE 1 END,
+                    UpdatedRealAt DESC,
+                    rowid DESC
+                LIMIT 1;
+                """;
+            cmd.Parameters.AddWithValue("$targetId", targetCharacterId.Value);
+        }
+        else
+        {
+            cmd.CommandText = """
+                SELECT RelationshipId
+                FROM RelationshipStates
+                WHERE SourceCharacterId = $source
+                  AND TargetCharacterId IS NULL
+                  AND lower(trim(TargetName)) = lower(trim($targetName))
+                  AND lower(trim(RelationshipType)) = lower(trim($type))
+                ORDER BY UpdatedRealAt DESC, rowid DESC
+                LIMIT 1;
+                """;
+        }
+
+        cmd.Parameters.AddWithValue("$source", sourceCharacterId);
+        cmd.Parameters.AddWithValue("$targetName", targetName ?? "");
+        cmd.Parameters.AddWithValue("$type", relationshipType ?? "");
+
+        return cmd.ExecuteScalar()?.ToString();
     }
 
     private static string BuildId(

@@ -1,0 +1,1050 @@
+﻿@page "/npc-studio/npc/{NpcId:int}"
+@rendermode InteractiveServer
+@using ProjectEve.NpcStudio.Models
+@using ProjectEve.Characters.Traits
+@inject ProjectEve.NpcStudio.Services.NpcStudioService Studio
+@inject ProjectEve.NpcStudio.Services.OllamaPromptEngineerService PromptEngineer
+
+<PageTitle>@(_sheet?.Name ?? "NPC") — Dossier</PageTitle>
+
+<section class="dossier-page">
+@if (_sheet is null)
+{
+    <div class="dossier-loading">Loading NPC dossier...</div>
+}
+else
+{
+    <header class="dossier-topbar">
+        <div>
+            <div class="dossier-kicker">PROJECT EVE · NPC DOSSIER</div>
+            <div class="dossier-world">World: <strong>Small Town / Contemporary</strong></div>
+        </div>
+        <div class="dossier-top-actions">
+            <a class="dossier-button secondary" href="/npc-studio/browser">NPC Index</a>
+            <button class="dossier-button primary" @onclick="SaveOverview">Save Dossier</button>
+        </div>
+    </header>
+
+    @if (_tab != "overview")
+    {
+    <section class="dossier-identity">
+        <div class="dossier-photo-frame">
+            @if (HasImagePath(CurrentPortraitPath))
+            {
+                <img src="@BuildImagePreviewUrl(CurrentPortraitPath)" alt="@_sheet.Name" />
+            }
+            else
+            {
+                <div class="dossier-initials">@Initials(_sheet.Name)</div>
+            }
+            <span class="completion-dot @CompletionClass(PhotoReady)"></span>
+        </div>
+
+        <div class="dossier-id-copy">
+            <div class="dossier-rowline">
+                <h1>@_sheet.Name</h1>
+                <span class="dossier-status-badge">@Safe(_sheet.Status, "ACTIVE")</span>
+            </div>
+            <p>@Safe(_sheet.Occupation, "Occupation missing") · @Safe(_sheet.Location, "Location missing")</p>
+            <div class="dossier-chips">
+                <span>ID @_sheet.Id</span>
+                <span>Tier @_sheet.Tier</span>
+                @foreach (var archetype in Archetypes)
+                {
+                    <span class="accent">@archetype</span>
+                }
+            </div>
+        </div>
+
+        <aside class="dossier-completion">
+            <div class="completion-number">@CompletionPercent%</div>
+            <div class="completion-label">Dossier Complete</div>
+            <div class="completion-track"><span style="width:@CompletionPercent%"></span></div>
+            <div class="completion-key"><i class="green"></i> done <i class="yellow"></i> partial <i class="red"></i> missing</div>
+        </aside>
+    </section>
+
+    }
+
+    @if (!string.IsNullOrWhiteSpace(_statusMessage))
+    {
+        <div class="dossier-message">@_statusMessage</div>
+    }
+
+    <nav class="dossier-tabs" aria-label="NPC dossier tabs">
+        @foreach (var item in _tabs)
+        {
+            <button class="@(_tab == item.Key ? "active" : "")" @onclick="@(() => _tab = item.Key)">@item.Label</button>
+        }
+    </nav>
+
+    @if (_tab == "overview")
+    {
+        <div class="overview-actionbar overview-actionbar-top">
+            <button @onclick="@(() => _overviewEdit = !_overviewEdit)">✎ Edit Overview</button>
+            <button @onclick="GenerateAiSummary" disabled="@_aiWorking">✦ @(_aiWorking ? "Reviewing..." : "Generate with AI")</button>
+            <button @onclick="@(() => _tab = "history")">▣ View Full Timeline</button>
+            <button @onclick="@(() => _tab = "relationships")">⌁ Open Relationships</button>
+            <button @onclick="@(() => _tab = "voice")">◉ Open Voice</button>
+            <button @onclick="@(() => _tab = "media")">▧ Open Media</button>
+        </div>
+    }
+
+    @if (_tab == "overview")
+    {
+        <div class="overview-shell">
+            <aside class="overview-profile-rail">
+                <div class="overview-hero-photo">
+                    @if (HasImagePath(CurrentPortraitPath))
+                    {
+                        <img src="@BuildImagePreviewUrl(CurrentPortraitPath)" alt="@_sheet.Name" />
+                    }
+                    else
+                    {
+                        <div class="dossier-initials">@Initials(_sheet.Name)</div>
+                    }
+                    <span class="overview-active-badge">@Safe(_sheet.Status, "ACTIVE")</span>
+                </div>
+
+                <h1>@_sheet.Name</h1>
+                <p class="overview-location">@Safe(_sheet.Location, "Location missing")</p>
+
+                <div class="overview-quick-title">Quick Summary</div>
+                <dl class="overview-quick-list">
+                    <div><dt>Age</dt><dd>@(_sheet.Age > 0 ? _sheet.Age.ToString() : "Missing")</dd></div>
+                    <div><dt>Occupation</dt><dd>@Safe(_sheet.Occupation, "Missing")</dd></div>
+                    <div><dt>Location</dt><dd>@Safe(_sheet.Location, "Missing")</dd></div>
+                    <div><dt>Archetype</dt><dd>@Safe(_sheet.Archetype1, "Missing")</dd></div>
+                    <div><dt>Dossier Status</dt><dd><span class="mini-status">@Safe(_sheet.Status, "ACTIVE")</span></dd></div>
+                </dl>
+
+                <div class="overview-completion-block">
+                    <div class="overview-quick-title">Dossier Completion</div>
+                    <div class="overview-completion-number">@CompletionPercent%</div>
+                    <div class="overview-completion-bar"><span style="width:@CompletionPercent%"></span></div>
+                    <div class="overview-section-status"><span>Overview</span><b class="@CompletionClass(IdentityReady && WorldReady)">@((IdentityReady && WorldReady) ? "✓" : "!")</b></div>
+                    <div class="overview-section-status"><span>Traits</span><b class="@CompletionClass(_sheet.Traits.Count > 0)">@(_sheet.Traits.Count > 0 ? "✓" : "!")</b></div>
+                    <div class="overview-section-status"><span>History</span><b class="@CompletionClass(_sheet.HistoryEvents.Count > 0)">@(_sheet.HistoryEvents.Count > 0 ? "✓" : "!")</b></div>
+                    <div class="overview-section-status"><span>Relationships</span><b class="@CompletionClass(_sheet.Relationships.Count > 0)">@(_sheet.Relationships.Count > 0 ? "✓" : "!")</b></div>
+                    <div class="overview-section-status"><span>Voice</span><b class="@CompletionClass(VoiceReady)">@(VoiceReady ? "✓" : "!")</b></div>
+                    <div class="overview-section-status"><span>Media</span><b class="@CompletionClass(PhotoReady)">@(PhotoReady ? "✓" : "!")</b></div>
+                </div>
+            </aside>
+
+            <div class="overview-dashboard">
+                <div class="overview-grid overview-grid-top">
+                    <section class="overview-card identity-card">
+                        <div class="overview-card-title"><span>◎</span><h2>Identity</h2></div>
+                        <div class="overview-facts two-col">
+                            <div><span>Full Name</span><strong>@Safe(_sheet.Name, "Missing")</strong></div>
+                            <div><span>Known As / Nickname</span><strong>@Safe(string.IsNullOrWhiteSpace(_sheet.Nickname) ? _sheet.DisplayName : _sheet.Nickname, "Missing")</strong></div>
+                            <div><span>Age</span><strong>@(_sheet.Age > 0 ? _sheet.Age.ToString() : "Missing")</strong></div>
+                            <div><span>Gender</span><strong>@Safe(_sheet.Gender, "Missing")</strong></div>
+                            <div><span>Hometown</span><strong>@Safe(_sheet.Hometown, "Missing")</strong></div>
+                            <div><span>Current Location</span><strong>@Safe(_sheet.Location, "Missing")</strong></div>
+                            <div><span>Home / Address</span><strong>@Safe(_sheet.Address, "Missing")</strong></div>
+                            <div><span>IQ / Intelligence</span><strong>@(_sheet.IQ > 0 ? _sheet.IQ.ToString() : "Missing")</strong></div>
+                        </div>
+                        <button class="overview-edit-button" @onclick="@(() => _overviewEdit = !_overviewEdit)">@(_overviewEdit ? "Close Editor" : "Edit Identity")</button>
+                    </section>
+
+                    <section class="overview-card appearance-card">
+                        <div class="overview-card-title"><span>♙</span><h2>Appearance</h2></div>
+                        <div class="appearance-content">
+                            <div class="overview-facts appearance-facts">
+                                <div><span>Height</span><strong>@(_sheet.HeightCm > 0 ? $"{_heightFeet}' {_heightInches}\"" : "Missing")</strong></div>
+                                <div><span>Weight</span><strong>@(_sheet.WeightKg > 0 ? $"{_weightPounds:0.#} lb" : "Missing")</strong></div>
+                                <div><span>Eye Color</span><strong>@Safe(_sheet.Appearance.EyeColor, "Missing")</strong></div>
+                                <div><span>Hair Color</span><strong>@Safe(_sheet.Appearance.HairColor, "Missing")</strong></div>
+                                <div><span>Hair Style</span><strong>@Safe(_sheet.Appearance.HairStyle, "Missing")</strong></div>
+                                <div><span>Skin Tone</span><strong>@Safe(_sheet.Appearance.SkinTone, "Missing")</strong></div>
+                                <div><span>Build / Body Type</span><strong>@Safe(_sheet.Appearance.BodyType, "Missing")</strong></div>
+                                <div><span>Distinguishing Features</span><strong>@Safe(_sheet.Appearance.DistinguishingFeatures, "None recorded")</strong></div>
+                            </div>
+                            <div class="overview-photo-grid">
+                                @PhotoThumb("Face Front", _sheet.Appearance.ReferenceImagePath)
+                                @PhotoThumb("Profile Picture", _sheet.Appearance.ProfileImagePath)
+                                @PhotoThumb("Contact Picture", _sheet.Appearance.ContactImagePath)
+                                @foreach (var image in AdditionalPhotoImages.Take(3))
+                                {
+                                    @PhotoThumb(string.IsNullOrWhiteSpace(image.ImageType) ? "Reference" : image.ImageType, image.ImagePath)
+                                }
+                            </div>
+                        </div>
+                        <button class="overview-edit-button" @onclick="@(() => _tab = "media")">Open in Media →</button>
+                    </section>
+
+                    <section class="overview-card personality-card">
+                        <div class="overview-card-title"><span>☆</span><h2>Personality Snapshot</h2></div>
+                        <div class="personality-chips">
+                            @foreach (var archetype in Archetypes)
+                            {
+                                <span>@archetype</span>
+                            }
+                            @foreach (var trait in _sheet.Traits.Where(t => t.IsEnabled).OrderByDescending(t => t.CurrentValue).Take(8))
+                            {
+                                <span>@trait.TraitName</span>
+                            }
+                            @if (!Archetypes.Any() && _sheet.Traits.Count == 0)
+                            {
+                                <span class="missing-chip">Needs Traits</span>
+                            }
+                        </div>
+                        <p class="personality-copy">@Safe(_sheet.PersonalityContext, Safe(_sheet.AiSummary, "No personality summary yet. Use AI Review or add traits and history."))</p>
+                        <div class="personality-meta">
+                            <div><span>Core Vibe</span><strong>@Safe(_sheet.Archetype1, "Missing")</strong></div>
+                            <div><span>Energy</span><strong>@Safe(_sheet.Voice.Energy, "Not set")</strong></div>
+                            <div><span>Public Persona</span><strong>@Safe(_sheet.PublicPersona, "Missing")</strong></div>
+                            <div><span>Private Persona</span><strong>@Safe(_sheet.PrivatePersona, "Missing")</strong></div>
+                        </div>
+                        <button class="overview-edit-button" @onclick="OpenPersonalityEditor">Edit Personality</button>
+                    </section>
+                </div>
+
+                <div class="overview-grid overview-grid-bottom">
+                    <section class="overview-card background-card">
+                        <div class="overview-card-title"><span>▣</span><h2>Background</h2></div>
+                        <div class="overview-facts">
+                            <div><span>Occupation</span><strong>@Safe(_sheet.Occupation, "Missing")</strong></div>
+                            <div><span>Hometown</span><strong>@Safe(_sheet.Hometown, "Missing")</strong></div>
+                            <div><span>Home / Address</span><strong>@Safe(_sheet.Address, "Missing")</strong></div>
+                            <div><span>Family Links</span><strong>@(_sheet.Relationships.Count(r => r.RelationshipCategory.Equals("Family", StringComparison.OrdinalIgnoreCase))) recorded</strong></div>
+                            <div><span>Relationship Links</span><strong>@_sheet.Relationships.Count total</strong></div>
+                            <div><span>History</span><strong>@_sheet.HistoryEvents.Count authored events</strong></div>
+                        </div>
+                        <button class="overview-edit-button" @onclick="@(() => _tab = "history")">Open History →</button>
+                    </section>
+
+                    <section class="overview-card vibe-card">
+                        <div class="overview-card-title"><span>◉</span><h2>Vibe & Core Identity</h2></div>
+                        <div class="overview-facts">
+                            <div><span>Primary Archetype</span><strong>@Safe(_sheet.Archetype1, "Missing")</strong></div>
+                            <div><span>Secondary</span><strong>@Safe(_sheet.Archetype2, "Not set")</strong></div>
+                            <div><span>Third Type</span><strong>@Safe(_sheet.Archetype3, "Not set")</strong></div>
+                            <div><span>Goal</span><strong>@Safe(_sheet.Goal, "Missing")</strong></div>
+                            <div><span>Need</span><strong>@Safe(_sheet.Need, "Missing")</strong></div>
+                            <div><span>Hidden Fear</span><strong>@Safe(_sheet.Fear, "Missing")</strong></div>
+                            <div><span>What Drives Them</span><strong>@Safe(_sheet.Want, "Missing")</strong></div>
+                        </div>
+                        <button class="overview-edit-button" @onclick="@(() => _overviewEdit = !_overviewEdit)">Edit Core Identity</button>
+                    </section>
+
+                    <section class="overview-card status-card">
+                        <div class="overview-card-title status-heading"><span>⚑</span><h2>Status & Notes</h2><span class="mini-status">@Safe(_sheet.Status, "ACTIVE")</span></div>
+                        <div class="ai-dossier-read">
+                            <div class="ai-label">AI Dossier Summary</div>
+                            <p>@Safe(_sheet.AiSummary, "AI summary has not been generated yet. Review the dossier to create one from the current canon data.")</p>
+                        </div>
+                        <div class="insight-grid">
+                            <div><h3>AI Insights</h3><p>@(ArchetypeReady ? $"Primary social/story identity: {_sheet.Archetype1}." : "Choose a primary NPC type to give AI a stronger behavioral anchor.")</p></div>
+                            <div><h3>Current Gaps</h3><p>@MissingOverviewSummary</p></div>
+                            <div class="attention"><h3>Needs Attention</h3><p>@NeedsAttentionSummary</p></div>
+                        </div>
+                        <div class="integrity-row"><span>Data Integrity</span><strong>@(CompletionPercent >= 80 ? "Verified / Strong" : "In Progress")</strong><span>AI Confidence</span><strong>@CompletionPercent%</strong></div>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        @if (_overviewEdit)
+        {
+            <div class="overview-editor-zone">
+                <div class="overview-editor-head"><div><span>EDIT MODE</span><h2>Update Canon Dossier Data</h2></div><button class="dossier-button secondary" @onclick="@(() => _overviewEdit = false)">Close Editor</button></div>
+
+        <div class="dossier-layout">
+            <main class="dossier-main">
+                <details class="dossier-panel editor-collapsible" open>
+                    <summary class="panel-title collapsible-title"><div><span>01</span><h2>Identity & Physical Profile</h2></div><div class="collapsible-meta"><span class="field-state @CompletionClass(IdentityReady)">@CompletionText(IdentityReady)</span><span class="collapse-chevron">⌄</span></div></summary>
+                    <div class="dossier-grid four">
+                        <DossierField Label="Full Name" Missing="@IsMissing(_sheet.Name)"><input @bind="_sheet.Name" /></DossierField>
+                        <DossierField Label="Display Name"><input @bind="_sheet.DisplayName" /></DossierField>
+                        <DossierField Label="Age" Missing="@(_sheet.Age <= 0)"><input type="number" min="0" @bind="_sheet.Age" /></DossierField>
+                        <DossierField Label="Gender" Missing="@IsMissing(_sheet.Gender)"><input @bind="_sheet.Gender" /></DossierField>
+                        <DossierField Label="Height" Missing="@(_sheet.HeightCm <= 0)">
+                            <div class="unit-row"><input type="number" min="0" max="9" aria-label="feet" @bind="_heightFeet" /><span>ft</span><input type="number" min="0" max="11" aria-label="inches" @bind="_heightInches" /><span>in</span></div>
+                        </DossierField>
+                        <DossierField Label="Weight" Missing="@(_sheet.WeightKg <= 0)"><div class="unit-row single"><input type="number" min="0" step="0.1" @bind="_weightPounds" /><span>lb</span></div></DossierField>
+                        <DossierField Label="IQ / Intelligence" Missing="@(_sheet.IQ <= 0)"><input type="number" min="0" max="200" @bind="_sheet.IQ" /></DossierField>
+                        <DossierField Label="Body / Build" Missing="@IsMissing(_sheet.Appearance.BodyType)"><input @bind="_sheet.Appearance.BodyType" /></DossierField>
+                        <DossierField Label="Eye Color" Missing="@IsMissing(_sheet.Appearance.EyeColor)"><input @bind="_sheet.Appearance.EyeColor" /></DossierField>
+                        <DossierField Label="Hair Color" Missing="@IsMissing(_sheet.Appearance.HairColor)"><input @bind="_sheet.Appearance.HairColor" /></DossierField>
+                        <DossierField Label="Hair Style" Missing="@IsMissing(_sheet.Appearance.HairStyle)"><input @bind="_sheet.Appearance.HairStyle" /></DossierField>
+                        <DossierField Label="Skin Tone" Missing="@IsMissing(_sheet.Appearance.SkinTone)"><input @bind="_sheet.Appearance.SkinTone" /></DossierField>
+                    </div>
+                </details>
+
+                <details class="dossier-panel editor-collapsible" open>
+                    <summary class="panel-title collapsible-title"><div><span>02</span><h2>Life & World Placement</h2></div><div class="collapsible-meta"><span class="field-state @CompletionClass(WorldReady)">@CompletionText(WorldReady)</span><span class="collapse-chevron">⌄</span></div></summary>
+                    <div class="dossier-grid three">
+                        <DossierField Label="Occupation" Missing="@IsMissing(_sheet.Occupation)"><input @bind="_sheet.Occupation" /></DossierField>
+                        <DossierField Label="Current Location" Missing="@IsMissing(_sheet.Location)"><input @bind="_sheet.Location" /></DossierField>
+                        <DossierField Label="Hometown" Missing="@IsMissing(_sheet.Hometown)"><input @bind="_sheet.Hometown" /></DossierField>
+                        <DossierField Label="Home / Address"><input @bind="_sheet.Address" /></DossierField>
+                        <DossierField Label="Status"><input @bind="_sheet.Status" /></DossierField>
+                        <DossierField Label="Tier"><input type="number" min="1" max="9" @bind="_sheet.Tier" /></DossierField>
+                    </div>
+                </details>
+
+                <details class="dossier-panel editor-collapsible" open>
+                    <summary class="panel-title collapsible-title"><div><span>03</span><h2>NPC Type / Archetype Seed</h2></div><div class="collapsible-meta"><span class="field-state @CompletionClass(ArchetypeReady)">@CompletionText(ArchetypeReady)</span><span class="collapse-chevron">⌄</span></div></summary>
+                    <p class="panel-help">Choose up to three. Primary carries the most weight; secondary and third add contradiction and texture. These guide AI drafts but never lock the character.</p>
+                    <div class="dossier-grid three">
+                        <DossierField Label="Primary Type" Missing="@IsMissing(_sheet.Archetype1)"><select @bind="_sheet.Archetype1">@ArchetypeOptions(_sheet.Archetype1)</select></DossierField>
+                        <DossierField Label="Secondary Type"><select @bind="_sheet.Archetype2">@ArchetypeOptions(_sheet.Archetype2, true)</select></DossierField>
+                        <DossierField Label="Third Type"><select @bind="_sheet.Archetype3">@ArchetypeOptions(_sheet.Archetype3, true)</select></DossierField>
+                    </div>
+                </details>
+
+                <details class="dossier-panel editor-collapsible" open>
+                    <summary class="panel-title collapsible-title"><div><span>04</span><h2>Public vs Private Person</h2></div><div class="collapsible-meta"><span class="field-state @CompletionClass(PersonaReady)">@CompletionText(PersonaReady)</span><span class="collapse-chevron">⌄</span></div></summary>
+                    <div class="dossier-grid three">
+                        <DossierField Label="Public Persona" Missing="@IsMissing(_sheet.PublicPersona)"><textarea rows="5" @bind="_sheet.PublicPersona"></textarea></DossierField>
+                        <DossierField Label="Private Persona"><textarea rows="5" @bind="_sheet.PrivatePersona"></textarea></DossierField>
+                        <DossierField Label="Hidden Traits / Behavior"><textarea rows="5" @bind="_sheet.HiddenBehavior"></textarea></DossierField>
+                    </div>
+                </details>
+
+                <details class="dossier-panel editor-collapsible" open>
+                    <summary class="panel-title collapsible-title"><div><span>05</span><h2>Inner Life</h2></div><div class="collapsible-meta"><span class="field-state @CompletionClass(InnerLifeReady)">@CompletionText(InnerLifeReady)</span><span class="collapse-chevron">⌄</span></div></summary>
+                    <div class="dossier-grid two">
+                        <DossierField Label="Goal" Missing="@IsMissing(_sheet.Goal)"><textarea rows="3" @bind="_sheet.Goal"></textarea></DossierField>
+                        <DossierField Label="Need" Missing="@IsMissing(_sheet.Need)"><textarea rows="3" @bind="_sheet.Need"></textarea></DossierField>
+                        <DossierField Label="Fear" Missing="@IsMissing(_sheet.Fear)"><textarea rows="3" @bind="_sheet.Fear"></textarea></DossierField>
+                        <DossierField Label="Want" Missing="@IsMissing(_sheet.Want)"><textarea rows="3" @bind="_sheet.Want"></textarea></DossierField>
+                    </div>
+                </details>
+
+                <div class="save-strip">
+                    <button class="dossier-button primary" @onclick="SaveOverview">Save Overview</button>
+                    <button class="dossier-button secondary" @onclick="SaveAppearance">Save Physical / Appearance</button>
+                </div>
+            </main>
+
+            <aside class="dossier-side">
+                <section class="dossier-panel personality-snapshot">
+                    <div class="panel-title compact"><div><h2>Personality Snapshot</h2></div></div>
+                    @if (_sheet.Traits.Count == 0)
+                    {
+                        <p class="empty-copy">No trait values yet. Add them under Traits.</p>
+                    }
+                    else
+                    {
+                        @foreach (var trait in _sheet.Traits.Where(t => t.IsEnabled).OrderByDescending(t => t.CurrentValue).Take(6))
+                        {
+                            <div class="trait-meter">
+                                <div><span>@trait.TraitName</span><strong>@trait.CurrentValue</strong></div>
+                                <div class="meter"><span style="width:@ClampPercent(trait.CurrentValue)%"></span></div>
+                            </div>
+                        }
+                    }
+                    <button class="text-button" @onclick="@(() => _tab = "traits")">Open full Traits →</button>
+                </section>
+
+                <section class="dossier-panel ai-summary">
+                    <div class="panel-title compact"><div><h2>AI Dossier Summary</h2></div><span class="ai-mark">AI</span></div>
+                    <textarea rows="9" placeholder="AI can summarize the complete dossier here. You can edit or override every word." @bind="_sheet.AiSummary"></textarea>
+                    <button class="dossier-button primary full" @onclick="GenerateAiSummary" disabled="@_aiWorking">@(_aiWorking ? "Reviewing dossier..." : "Review Everything & Refresh Summary")</button>
+                    <p class="panel-help">AI draft only. You remain the final authority on canon.</p>
+                </section>
+
+                <section class="dossier-panel quick-status">
+                    <div class="panel-title compact"><div><h2>Status & Notes</h2></div></div>
+                    <textarea rows="6" placeholder="Current build notes, missing work, author notes..." @bind="_sheet.StatusNotes"></textarea>
+                    <div class="status-list">
+                        <span><i class="@CompletionClass(PhotoReady)"></i> Photo identity</span>
+                        <span><i class="@CompletionClass(VoiceReady)"></i> Voice identity</span>
+                        <span><i class="@CompletionClass(_sheet.HistoryEvents.Count > 0)"></i> Life history</span>
+                        <span><i class="@CompletionClass(_sheet.Relationships.Count > 0)"></i> Relationships</span>
+                    </div>
+                </section>
+            </aside>
+        </div>
+
+            </div>
+        }
+    }
+
+    else if (_tab == "traits")
+    {
+        <section class="dossier-panel wide-panel personality-editor-panel">
+            <div class="panel-title">
+                <div><span>P</span><h2>Personality & Presentation</h2></div>
+                <span class="field-state @CompletionClass(PersonaReady)">@CompletionText(PersonaReady)</span>
+            </div>
+            <p class="panel-help">This is the editable source behind the Personality Snapshot. Public image, private reality and hidden behavior can all be different.</p>
+            <div class="dossier-grid four personality-editor-grid">
+                <DossierField Label="Primary NPC Type" Missing="@IsMissing(_sheet.Archetype1)"><select @bind="_sheet.Archetype1">@ArchetypeOptions(_sheet.Archetype1)</select></DossierField>
+                <DossierField Label="Secondary Type"><select @bind="_sheet.Archetype2">@ArchetypeOptions(_sheet.Archetype2, true)</select></DossierField>
+                <DossierField Label="Third Type"><select @bind="_sheet.Archetype3">@ArchetypeOptions(_sheet.Archetype3, true)</select></DossierField>
+                <DossierField Label="Energy" Missing="@IsMissing(_sheet.Voice.Energy)"><input placeholder="Warm & steady, intense, low-key..." @bind="_sheet.Voice.Energy" /></DossierField>
+            </div>
+            <div class="dossier-grid three personality-text-grid">
+                <DossierField Label="Public Persona" Missing="@IsMissing(_sheet.PublicPersona)"><textarea rows="5" placeholder="How the world usually sees this person..." @bind="_sheet.PublicPersona"></textarea></DossierField>
+                <DossierField Label="Private Persona"><textarea rows="5" placeholder="Who they are behind closed doors..." @bind="_sheet.PrivatePersona"></textarea></DossierField>
+                <DossierField Label="Hidden Traits / Behavior"><textarea rows="5" placeholder="Secrets, contradictions, habits or behavior most people do not see..." @bind="_sheet.HiddenBehavior"></textarea></DossierField>
+            </div>
+            <DossierField Label="Personality Snapshot / Author Context"><textarea rows="4" placeholder="Short author-facing summary of how this person tends to think, feel and behave..." @bind="_sheet.PersonalityContext"></textarea></DossierField>
+            <div class="personality-editor-footer">
+                <span>Changes update the same canon data used by In-Person and Message behavior tests.</span>
+                <button class="dossier-button primary" @onclick="SavePersonality">Save Personality</button>
+            </div>
+        </section>
+
+        <section class="dossier-panel wide-panel fast20-dossier-panel">
+            <div class="panel-title">
+                <div><span>20</span><h2>Fast20 Emotional State</h2></div>
+                <span class="field-state @CompletionClass(_fast20Dossier.Count == 20)">@_fast20Dossier.Count / 20</span>
+            </div>
+            <p class="panel-help">Live Fast20 state assembled from canonical trait values plus causal reason/history records. Stage and Wildcard are derived from CurrentValue; they are not duplicated in SQL.</p>
+
+            @if (_fast20Dossier.Count == 0)
+            {
+                <div class="empty-state">
+                    <strong>No Fast20 dossier rows loaded.</strong>
+                    <span>Persisted trait values may not exist for this NPC yet.</span>
+                </div>
+            }
+            else
+            {
+                <div class="fast20-grid">
+                    @foreach (var item in _fast20Dossier.OrderByDescending(x => x.IsWildcard).ThenByDescending(x => Math.Abs(x.DeviationFromBaseline)).ThenBy(x => x.TraitName))
+                    {
+                        <article class="fast20-card @(item.IsWildcard ? "wildcard" : "")">
+                            <header>
+                                <div>
+                                    <h3>@item.TraitName</h3>
+                                    <span class="fast20-id">@item.TraitId</span>
+                                </div>
+                                <div class="fast20-score">@item.CurrentValue.ToString("0")</div>
+                            </header>
+
+                            <div class="fast20-stage-row">
+                                <span class="fast20-stage">@item.StageLabel · @item.StageMin–@item.StageMax</span>
+                                @if (item.IsWildcard)
+                                {
+                                    <span class="wildcard-badge">WILDCARD</span>
+                                }
+                            </div>
+
+                            <div class="fast20-meter">
+                                <span style="width:@ClampFastPercent(item.CurrentValue)%"></span>
+                                <i style="left:@ClampFastPercent(item.Baseline)%"></i>
+                            </div>
+
+                            <div class="fast20-edit-grid">
+                                <label>
+                                    <span>Current</span>
+                                    <input type="number" min="0" max="100" step="1" @bind="item.CurrentValue" />
+                                </label>
+                                <label>
+                                    <span>Baseline</span>
+                                    <input type="number" min="0" max="100" step="1" @bind="item.Baseline" />
+                                </label>
+                                <label>
+                                    <span>Deviation</span>
+                                    <strong class="@DeviationClass(item.DeviationFromBaseline)">@Signed(item.DeviationFromBaseline)</strong>
+                                </label>
+                                <label class="style-editor">
+                                    <span>Style</span>
+                                    <select @bind="item.Style">
+                                        <option value="">— default —</option>
+                                        @foreach (var styleOption in item.StyleOptions)
+                                        {
+                                            <option value="@styleOption">@StyleLabel(styleOption)</option>
+                                        }
+                                    </select>
+                                </label>
+                                <button class="dossier-button tiny fast20-save" @onclick="@(() => SaveFastTrait(item))">Save Trait</button>
+                            </div>
+
+                            <div class="fast20-why">
+                                <span class="fast20-mini-label">Why now</span>
+                                @if (item.ActiveReasons.Count == 0)
+                                {
+                                    <p class="muted">No active causal reason recorded yet.</p>
+                                }
+                                else
+                                {
+                                    @foreach (var reason in item.ActiveReasons.Take(3))
+                                    {
+                                        <div class="reason-line">
+                                            <b class="@ImpactClass(reason.Impact)">@Signed(reason.Impact)</b>
+                                            <span>@FastValue(reason.Reason, reason.ReasonType)</span>
+                                        </div>
+                                    }
+                                }
+                            </div>
+
+                            <div class="fast20-last">
+                                <span class="fast20-mini-label">Last meaningful change</span>
+                                @if (item.LastChange is null)
+                                {
+                                    <p class="muted">No change history recorded.</p>
+                                }
+                                else
+                                {
+                                    <div class="last-change-line">
+                                        <strong>@item.LastChange.BeforeValue.ToString("0.#") → @item.LastChange.AfterValue.ToString("0.#")</strong>
+                                        <span>@FastValue(item.LastChange.Reason, item.LastChange.ReasonType)</span>
+                                    </div>
+                                    <small>@FastValue(item.LastChange.GameTime, item.LastChange.CreatedRealAt)</small>
+                                }
+                            </div>
+                        </article>
+                    }
+                </div>
+            }
+        </section>
+
+        <section class="dossier-panel wide-panel">
+            <div class="panel-title"><div><span>T</span><h2>Traits / Fast 20 / Behavior Inputs</h2></div><span class="field-state @CompletionClass(_sheet.Traits.Count > 0)">@(_sheet.Traits.Count) values</span></div>
+            <p class="panel-help">Every value is editable. These are inputs to the Human Behavior Engine, not labels the NPC is forced to perform every turn.</p>
+            <div class="trait-table-wrap">
+                <table class="dossier-table">
+                    <thead><tr><th>Group</th><th>Trait</th><th>Start</th><th>Current</th><th>Enabled</th><th>Notes</th><th></th></tr></thead>
+                    <tbody>
+                    @foreach (var trait in _sheet.Traits)
+                    {
+                        <tr>
+                            <td><input @bind="trait.MainGroup" /></td>
+                            <td><input @bind="trait.TraitName" /></td>
+                            <td><input type="number" min="0" max="100" @bind="trait.StartingValue" /></td>
+                            <td><input type="number" min="0" max="100" @bind="trait.CurrentValue" /></td>
+                            <td><input class="check" type="checkbox" @bind="trait.IsEnabled" /></td>
+                            <td><input @bind="trait.Notes" /></td>
+                            <td><button class="dossier-button tiny" @onclick="@(() => SaveTrait(trait))">Save</button></td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+            <details class="add-box">
+                <summary>Add Trait</summary>
+                <div class="dossier-grid three">
+                    <DossierField Label="Group"><input @bind="_newTrait.MainGroup" /></DossierField>
+                    <DossierField Label="Trait Name"><input @bind="_newTrait.TraitName" /></DossierField>
+                    <DossierField Label="Value"><input type="number" min="0" max="100" @bind="_newTrait.CurrentValue" /></DossierField>
+                </div>
+                <button class="dossier-button primary" @onclick="AddTrait">Add Trait</button>
+            </details>
+        </section>
+
+        <section class="dossier-panel wide-panel">
+            <NpcBehaviorLab Sheet="_sheet" />
+        </section>
+    }
+    else if (_tab == "history")
+    {
+        <div class="dossier-layout history-layout">
+            <main class="dossier-main">
+                <section class="dossier-panel">
+                    <div class="panel-title"><div><span>H</span><h2>Life History Timeline</h2></div><span class="field-state @CompletionClass(_sheet.HistoryEvents.Count > 0)">@_sheet.HistoryEvents.Count events</span></div>
+                    @if (_sheet.HistoryEvents.Count == 0)
+                    {
+                        <div class="empty-state"><strong>No authored life history yet.</strong><span>Add the events that explain why this person became who they are.</span></div>
+                    }
+                    else
+                    {
+                        <div class="timeline">
+                        @foreach (var item in _sheet.HistoryEvents)
+                        {
+                            <article class="timeline-item">
+                                <div class="timeline-marker"></div>
+                                <div class="timeline-card">
+                                    <div class="timeline-head"><div><span>@Safe(item.EventDate, item.AgeAtEvent > 0 ? $"Age {item.AgeAtEvent}" : "Undated")</span><h3>@item.Title</h3></div><button class="danger-link" @onclick="@(() => DeleteHistory(item.Id))">Delete</button></div>
+                                    <span class="event-type">@item.EventType</span>
+                                    <p>@item.Details</p>
+                                    @if (!string.IsNullOrWhiteSpace(item.Meaning)) { <div class="meaning"><strong>Why it matters:</strong> @item.Meaning</div> }
+                                </div>
+                            </article>
+                        }
+                        </div>
+                    }
+                </section>
+            </main>
+            <aside class="dossier-side">
+                <section class="dossier-panel">
+                    <div class="panel-title compact"><div><h2>Add History</h2></div></div>
+                    <DossierField Label="Date / Period"><input placeholder="2018, High school, age 13..." @bind="_newHistory.EventDate" /></DossierField>
+                    <DossierField Label="Age at Event"><input type="number" min="0" @bind="_newHistory.AgeAtEvent" /></DossierField>
+                    <DossierField Label="Type"><input placeholder="Family, Work, Relationship..." @bind="_newHistory.EventType" /></DossierField>
+                    <DossierField Label="Title" Missing="@IsMissing(_newHistory.Title)"><input @bind="_newHistory.Title" /></DossierField>
+                    <DossierField Label="What Happened"><textarea rows="5" @bind="_newHistory.Details"></textarea></DossierField>
+                    <DossierField Label="What It Means to This NPC"><textarea rows="5" @bind="_newHistory.Meaning"></textarea></DossierField>
+                    <button class="dossier-button primary full" @onclick="AddHistory">Add Canon Event</button>
+                </section>
+            </aside>
+        </div>
+    }
+    else if (_tab == "relationships")
+    {
+        <section class="wide-panel">
+            <NpcRelationshipWeb Sheet="_sheet" OnChanged="ReloadRelationships" />
+        </section>
+    }
+    else if (_tab == "voice")
+    {
+        <div class="voice-dossier">
+            <section class="dossier-panel voice-identity">
+                <div class="panel-title"><div><span>V</span><h2>Voice Identity</h2></div><span class="field-state @CompletionClass(VoiceReady)">@CompletionText(VoiceReady)</span></div>
+                <div class="dossier-grid three">
+                    <DossierField Label="Voice Name"><input @bind="_sheet.Voice.VoiceName" /></DossierField>
+                    <DossierField Label="Accent"><input @bind="_sheet.Voice.Accent" /></DossierField>
+                    <DossierField Label="Status" Missing="@IsMissing(_sheet.Voice.VoiceStatus)"><input @bind="_sheet.Voice.VoiceStatus" /></DossierField>
+                    <DossierField Label="Energy"><input @bind="_sheet.Voice.Energy" /></DossierField>
+                    <DossierField Label="Warmth"><input @bind="_sheet.Voice.Warmth" /></DossierField>
+                    <DossierField Label="Pace"><input @bind="_sheet.Voice.Pace" /></DossierField>
+                    <DossierField Label="Pitch"><input @bind="_sheet.Voice.Pitch" /></DossierField>
+                    <DossierField Label="Roughness"><input @bind="_sheet.Voice.Roughness" /></DossierField>
+                    <DossierField Label="Age Tone"><input @bind="_sheet.Voice.AgeTone" /></DossierField>
+                </div>
+                <DossierField Label="Speaking Style"><textarea rows="4" @bind="_sheet.Voice.VoiceStyle"></textarea></DossierField>
+                <DossierField Label="Voice Notes"><textarea rows="4" @bind="_sheet.Voice.Notes"></textarea></DossierField>
+            </section>
+
+            <section class="dossier-panel engine-panel">
+                <div class="panel-title compact"><div><h2>Engine Assignments</h2></div></div>
+                <div class="engine-grid">
+                    <div><span>In-Person / Live</span><strong>Chatterbox Turbo</strong><small>low-latency conversation</small></div>
+                    <div><span>Phone Call</span><strong>Chatterbox Turbo</strong><small>low-latency conversation</small></div>
+                    <div><span>Voice Message</span><strong>Chatterbox</strong><small>recorded / quality path</small></div>
+                    <div><span>Recorded Story</span><strong>Chatterbox</strong><small>non-live audio</small></div>
+                </div>
+            </section>
+
+            <section class="dossier-panel reference-panel">
+                <div class="panel-title compact"><div><h2>Approved Reference</h2></div></div>
+                <DossierField Label="Master Voice Reference" Missing="@IsMissing(_sheet.Voice.ReferenceAudioPath)"><input @bind="_sheet.Voice.ReferenceAudioPath" /></DossierField>
+                @if (!string.IsNullOrWhiteSpace(_sheet.Voice.ReferenceAudioPath))
+                {
+                    <audio controls src="@BuildImagePreviewUrl(_sheet.Voice.ReferenceAudioPath)"></audio>
+                }
+                <DossierField Label="Test Phrase"><textarea rows="3" @bind="_sheet.Voice.SampleText"></textarea></DossierField>
+                <label class="approval-check"><input type="checkbox" @bind="_sheet.Voice.Approved" /> Approved canonical voice</label>
+                <button class="dossier-button primary full" @onclick="SaveVoice">Save Voice Dossier</button>
+            </section>
+        </div>
+    }
+    else if (_tab == "media")
+    {
+        <section class="dossier-panel wide-panel">
+            <div class="panel-title"><div><span>M</span><h2>Media</h2></div></div>
+            <nav class="media-subtabs">
+                <button class="@(_mediaTab == "photos" ? "active" : "")" @onclick="@(() => _mediaTab = "photos")">Photos</button>
+                <button class="@(_mediaTab == "video" ? "active" : "")" @onclick="@(() => _mediaTab = "video")">Video</button>
+                <button class="@(_mediaTab == "posts" ? "active" : "")" @onclick="@(() => _mediaTab = "posts")">Posts</button>
+                <button class="@(_mediaTab == "clothing" ? "active" : "")" @onclick="@(() => _mediaTab = "clothing")">Clothing</button>
+            </nav>
+            @if (_mediaTab == "photos")
+            {
+                <div class="photo-board">
+                    @PhotoCard("Face / Master", _sheet.Appearance.ReferenceImagePath, "Canonical identity")
+                    @PhotoCard("Profile Picture", _sheet.Appearance.ProfileImagePath, "Game-facing portrait")
+                    @PhotoCard("Contact Picture", _sheet.Appearance.ContactImagePath, "Phone / contact identity")
+                    @foreach (var image in AdditionalPhotoImages)
+                    {
+                        @PhotoCard(image.ImageType, image.ImagePath, image.Approved ? "Approved" : "Current")
+                    }
+                </div>
+                <div class="save-strip"><a class="dossier-button secondary" href="/npc-studio/comfy">Open Comfy Room</a><a class="dossier-button secondary" href="/npc-studio/image-approval">Open Image Approval</a></div>
+            }
+            else if (_mediaTab == "video")
+            {
+                <div class="future-module"><strong>Profile Video</strong><span>Neutral breathing/blink loop is the first canonical video asset. Mood loops build from the same identity later.</span></div>
+            }
+            else if (_mediaTab == "posts")
+            {
+                <div class="future-module"><strong>Posts</strong><span>Social images, captions, selfies, story posts, drafts, and approved social content live here.</span></div>
+            }
+            else
+            {
+                <div class="future-module"><strong>Clothing</strong><span>Everyday, work, casual, formal, date night, workout, seasonal, and special-event wardrobe references live here.</span></div>
+            }
+        </section>
+    }
+    else if (_tab == "notes")
+    {
+        <div class="dossier-layout">
+            <main class="dossier-main">
+                <section class="dossier-panel">
+                    <div class="panel-title"><div><span>N</span><h2>Author Notes / Personality Context</h2></div></div>
+                    <textarea class="large-notes" rows="18" @bind="_sheet.PersonalityContext"></textarea>
+                    <div class="save-strip"><button class="dossier-button primary" @onclick="SaveOverview">Save Notes</button></div>
+                </section>
+            </main>
+            <aside class="dossier-side">
+                <section class="dossier-panel">
+                    <div class="panel-title compact"><div><h2>Revision Trail</h2></div></div>
+                    @foreach (var rev in _sheet.Revisions.Take(12))
+                    {
+                        <div class="revision-row"><strong>@rev.Title</strong><span>@rev.CreatedRealAt</span><p>@rev.Details</p></div>
+                    }
+                </section>
+            </aside>
+        </div>
+    }
+}
+</section>
+
+@code {
+    [Parameter] public int NpcId { get; set; }
+
+    private NpcCharacterSheet? _sheet;
+    private string _tab = "overview";
+    private string _mediaTab = "photos";
+    private string _statusMessage = "";
+    private bool _aiWorking;
+    private bool _overviewEdit;
+    private int _heightFeet;
+    private int _heightInches;
+    private double _weightPounds;
+    private NpcTraitRow _newTrait = new() { IsEnabled = true, StartingValue = 50, CurrentValue = 50, MainGroup = "Personality" };
+    private IReadOnlyList<FastTraitDossierItem> _fast20Dossier = Array.Empty<FastTraitDossierItem>();
+    private NpcHistoryEvent _newHistory = new() { EventType = "Life", IsCanon = true };
+
+    private readonly (string Key, string Label)[] _tabs =
+    [
+        ("overview", "Overview"),
+        ("traits", "Traits"),
+        ("history", "History"),
+        ("relationships", "Relationships"),
+        ("voice", "Voice"),
+        ("media", "Media"),
+        ("notes", "Notes")
+    ];
+
+    private static readonly string[] _archetypes =
+    [
+        "Heart", "Connector", "Outsider", "Protector", "Rival", "Instigator", "Caregiver", "Authority",
+        "Wildcard", "Mentor", "Drifter", "Social Hub", "Troublemaker", "Survivor", "Observer", "Hothead",
+        "Control Freak", "Manipulator", "Gossip", "Opportunist", "Bitter", "Jealous", "Arrogant", "Cold",
+        "Cruel", "Unreliable", "Reckless", "Vindictive", "Bully"
+    ];
+
+    protected override async Task OnParametersSetAsync() => await LoadAsync();
+
+    private async Task LoadAsync()
+    {
+        _sheet = await Studio.GetCharacterSheetAsync(NpcId);
+        if (_sheet is null) return;
+        var totalInches = (int)Math.Round(_sheet.HeightCm / 2.54);
+        _heightFeet = totalInches / 12;
+        _heightInches = totalInches % 12;
+        _weightPounds = _sheet.WeightKg > 0 ? Math.Round(_sheet.WeightKg / 0.45359237, 1) : 0;
+        _newTrait.NpcId = _sheet.Id;
+        _newHistory.NpcId = _sheet.Id;
+        _fast20Dossier = FastTraitDossierService.Load(_sheet.Id);
+    }
+
+    private void OpenPersonalityEditor()
+    {
+        _tab = "traits";
+        _statusMessage = "Personality editor opened. Public, private, hidden behavior and Energy are editable above the behavior test.";
+    }
+
+    private async Task SavePersonality()
+    {
+        if (_sheet is null) return;
+        await Studio.SaveCharacterCoreAsync(_sheet);
+        await Studio.SaveVoiceAsync(_sheet.Voice);
+        _statusMessage = "Personality, public/private persona and Energy saved to the canonical NPC dossier.";
+    }
+
+    private async Task SaveOverview()
+    {
+        if (_sheet is null) return;
+        _heightFeet = Math.Max(0, _heightFeet);
+        _heightInches = Math.Clamp(_heightInches, 0, 11);
+        _sheet.HeightCm = (_heightFeet * 12 + _heightInches) * 2.54;
+        _sheet.WeightKg = Math.Max(0, _weightPounds) * 0.45359237;
+        await Studio.SaveCharacterCoreAsync(_sheet);
+        _statusMessage = "NPC dossier saved to project_eve.db.";
+    }
+
+    private async Task SaveAppearance()
+    {
+        if (_sheet is null) return;
+        await SaveOverview();
+        await Studio.SaveAppearanceAsync(_sheet.Appearance);
+        _statusMessage = "Physical profile and appearance saved.";
+    }
+
+    private async Task SaveVoice()
+    {
+        if (_sheet is null) return;
+        await Studio.SaveVoiceAsync(_sheet.Voice);
+        _statusMessage = "Voice dossier saved.";
+    }
+
+    private Task SaveFastTrait(FastTraitDossierItem item)
+    {
+        if (_sheet is null)
+            return Task.CompletedTask;
+
+        item.CurrentValue = Math.Clamp(item.CurrentValue, 0f, 100f);
+        item.Baseline = Math.Clamp(item.Baseline, 0f, 100f);
+
+        NpcTraitRepository.SaveFastDossierState(
+            _sheet.Id,
+            item.TraitId,
+            item.CurrentValue,
+            item.Baseline,
+            item.Style);
+
+        var existing = _sheet.Traits.FirstOrDefault(
+            x => string.Equals(
+                x.TraitId,
+                item.TraitId,
+                StringComparison.OrdinalIgnoreCase));
+
+        if (existing is not null)
+        {
+            existing.CurrentValue =
+                (int)Math.Round(item.CurrentValue);
+
+            // The older table's "Start" field is historical seed data.
+            // Do not overwrite it when changing the live set-point.
+        }
+
+        _fast20Dossier =
+            FastTraitDossierService.Load(_sheet.Id);
+
+        _statusMessage =
+            $"Saved Fast20 trait: {item.TraitName}.";
+
+        return Task.CompletedTask;
+    }
+
+    private async Task SaveTrait(NpcTraitRow trait)
+    {
+        await Studio.SaveTraitAsync(trait);
+        if (_sheet is not null)
+            _fast20Dossier = FastTraitDossierService.Load(_sheet.Id);
+        _statusMessage = $"Saved trait: {trait.TraitName}.";
+    }
+
+    private async Task AddTrait()
+    {
+        if (_sheet is null || string.IsNullOrWhiteSpace(_newTrait.TraitName)) return;
+        _newTrait.NpcId = _sheet.Id;
+        _newTrait.StartingValue = _newTrait.CurrentValue;
+        await Studio.SaveTraitAsync(_newTrait);
+        _newTrait = new NpcTraitRow { NpcId = _sheet.Id, IsEnabled = true, StartingValue = 50, CurrentValue = 50, MainGroup = "Personality" };
+        await LoadAsync();
+        _tab = "traits";
+        _statusMessage = "Trait added.";
+    }
+
+    private async Task AddHistory()
+    {
+        if (_sheet is null || string.IsNullOrWhiteSpace(_newHistory.Title)) return;
+        _newHistory.NpcId = _sheet.Id;
+        await Studio.AddHistoryEventAsync(_newHistory);
+        _newHistory = new NpcHistoryEvent { NpcId = _sheet.Id, EventType = "Life", IsCanon = true };
+        await LoadAsync();
+        _tab = "history";
+        _statusMessage = "Canon history event added.";
+    }
+
+    private async Task DeleteHistory(string id)
+    {
+        await Studio.DeleteHistoryEventAsync(id);
+        await LoadAsync();
+        _tab = "history";
+        _statusMessage = "History event deleted.";
+    }
+
+    private async Task ReloadRelationships()
+    {
+        await LoadAsync();
+        _tab = "relationships";
+        _statusMessage = "Relationship web updated.";
+    }
+
+    private async Task GenerateAiSummary()
+    {
+        if (_sheet is null) return;
+        _aiWorking = true;
+        try
+        {
+            var idea = await PromptEngineer.AnalyzeCharacterAsync(_sheet,
+                "Dossier Summary. Review all supplied identity, traits, history, relationships, public/private persona, appearance and voice information. Write one concise professional character summary explaining who this person is, their contradictions, what matters to them, and what is still missing. Do not invent unsupported facts.");
+            if (idea is not null)
+            {
+                _sheet.AiSummary = idea.IdeaText;
+                await Studio.AddIdeaAsync(idea);
+                await SaveOverview();
+                _statusMessage = "AI reviewed the dossier. Summary saved and remains fully editable.";
+            }
+        }
+        finally { _aiWorking = false; }
+    }
+
+    private string CurrentPortraitPath => !string.IsNullOrWhiteSpace(_sheet?.Appearance.ProfileImagePath)
+        ? _sheet.Appearance.ProfileImagePath
+        : _sheet?.Appearance.ReferenceImagePath ?? "";
+
+    private IEnumerable<string> Archetypes => new[] { _sheet?.Archetype1, _sheet?.Archetype2, _sheet?.Archetype3 }.Where(x => !string.IsNullOrWhiteSpace(x)).Select(x => x!);
+    private bool PhotoReady => !string.IsNullOrWhiteSpace(CurrentPortraitPath);
+    private bool VoiceReady => _sheet?.Voice.Approved == true && !string.IsNullOrWhiteSpace(_sheet.Voice.ReferenceAudioPath);
+    private bool IdentityReady => _sheet is not null && !IsMissing(_sheet.Name) && _sheet.Age > 0 && !IsMissing(_sheet.Gender) && _sheet.HeightCm > 0 && _sheet.WeightKg > 0 && !IsMissing(_sheet.Appearance.EyeColor) && !IsMissing(_sheet.Appearance.HairColor);
+    private bool WorldReady => _sheet is not null && !IsMissing(_sheet.Occupation) && !IsMissing(_sheet.Location);
+    private bool ArchetypeReady => _sheet is not null && !IsMissing(_sheet.Archetype1);
+    private bool PersonaReady => _sheet is not null && !IsMissing(_sheet.PublicPersona);
+    private bool InnerLifeReady => _sheet is not null && !IsMissing(_sheet.Goal) && !IsMissing(_sheet.Need) && !IsMissing(_sheet.Fear);
+
+    private int CompletionPercent
+    {
+        get
+        {
+            if (_sheet is null) return 0;
+            var checks = new[] { IdentityReady, WorldReady, ArchetypeReady, PersonaReady, InnerLifeReady, PhotoReady, VoiceReady, _sheet.Traits.Count > 0, _sheet.HistoryEvents.Count > 0, _sheet.Relationships.Count > 0 };
+            return (int)Math.Round(checks.Count(x => x) * 100d / checks.Length);
+        }
+    }
+
+    private static bool IsMissing(string? value) => string.IsNullOrWhiteSpace(value) || value.Equals("Not found", StringComparison.OrdinalIgnoreCase);
+    private static string Safe(string? value, string fallback) => IsMissing(value) ? fallback : value!;
+    private static string CompletionClass(bool ready) => ready ? "green" : "red";
+    private static string CompletionText(bool ready) => ready ? "Complete" : "Needs work";
+    private static int ClampFastPercent(float value) => (int)Math.Round(Math.Clamp(value, 0f, 100f));
+    private static string FastValue(string? value, string fallback) => string.IsNullOrWhiteSpace(value) ? fallback : value;
+    private static string StyleLabel(string value)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+            return "Default";
+
+        string cleaned = value
+            .Replace("_", " ")
+            .Replace(".", " ")
+            .Trim();
+
+        if (string.IsNullOrWhiteSpace(cleaned))
+            return value;
+
+        return char.ToUpperInvariant(cleaned[0]) + cleaned[1..];
+    }
+    private static string Signed(float value) => value.ToString("+0.#;-0.#;0");
+    private static string DeviationClass(float value) => value > 0.05f ? "up" : value < -0.05f ? "down" : "flat";
+    private static string ImpactClass(float value) => value > 0.05f ? "positive" : value < -0.05f ? "negative" : "neutral";
+    private static int ClampPercent(int value) => Math.Clamp(value, 0, 100);
+
+    private static RenderFragment ArchetypeOptions(string? selected, bool allowBlank = false) => builder =>
+    {
+        var seq = 0;
+        if (allowBlank)
+        {
+            builder.OpenElement(seq++, "option"); builder.AddAttribute(seq++, "value", ""); builder.AddContent(seq++, "— None —"); builder.CloseElement();
+        }
+        foreach (var option in _archetypes)
+        {
+            builder.OpenElement(seq++, "option");
+            builder.AddAttribute(seq++, "value", option);
+            builder.AddContent(seq++, option);
+            builder.CloseElement();
+        }
+    };
+
+
+    private IEnumerable<NpcImageGeneration> AdditionalPhotoImages
+    {
+        get
+        {
+            if (_sheet is null) return Enumerable.Empty<NpcImageGeneration>();
+            var canonical = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            foreach (var path in new[] { _sheet.Appearance.ReferenceImagePath, _sheet.Appearance.ProfileImagePath, _sheet.Appearance.ContactImagePath })
+            {
+                if (!string.IsNullOrWhiteSpace(path)) canonical.Add(NormalizeMediaPath(path));
+            }
+
+            return _sheet.Images
+                .Where(i => (i.Approved || i.IsCurrent) && !string.IsNullOrWhiteSpace(i.ImagePath))
+                .Where(i => !canonical.Contains(NormalizeMediaPath(i.ImagePath)))
+                .GroupBy(i => NormalizeMediaPath(i.ImagePath), StringComparer.OrdinalIgnoreCase)
+                .Select(g => g.OrderByDescending(x => x.Approved).ThenByDescending(x => x.IsCurrent).ThenByDescending(x => x.CreatedRealAt).First())
+                .OrderByDescending(i => i.CreatedRealAt)
+                .Take(5);
+        }
+    }
+
+    private static string NormalizeMediaPath(string? path) => (path ?? "").Trim().Replace('/', '\\');
+
+    private RenderFragment PhotoCard(string title, string? path, string note) => builder =>
+    {
+        var seq = 0;
+        builder.OpenElement(seq++, "article"); builder.AddAttribute(seq++, "class", "photo-card");
+        builder.OpenElement(seq++, "div"); builder.AddAttribute(seq++, "class", "photo-preview");
+        if (!string.IsNullOrWhiteSpace(path))
+        {
+            builder.OpenElement(seq++, "img"); builder.AddAttribute(seq++, "src", BuildImagePreviewUrl(path)); builder.AddAttribute(seq++, "alt", title); builder.CloseElement();
+        }
+        else { builder.OpenElement(seq++, "span"); builder.AddContent(seq++, "MISSING"); builder.CloseElement(); }
+        builder.CloseElement();
+        builder.OpenElement(seq++, "div"); builder.AddAttribute(seq++, "class", "photo-meta");
+        builder.OpenElement(seq++, "strong"); builder.AddContent(seq++, title); builder.CloseElement();
+        builder.OpenElement(seq++, "span"); builder.AddContent(seq++, note); builder.CloseElement();
+        builder.CloseElement(); builder.CloseElement();
+    };
+
+
+    private string MissingOverviewSummary
+    {
+        get
+        {
+            if (_sheet is null) return "No dossier loaded.";
+            var gaps = new List<string>();
+            if (!IdentityReady) gaps.Add("identity / physical details");
+            if (_sheet.Traits.Count == 0) gaps.Add("traits");
+            if (_sheet.HistoryEvents.Count == 0) gaps.Add("life history");
+            if (_sheet.Relationships.Count == 0) gaps.Add("relationships");
+            if (!VoiceReady) gaps.Add("voice");
+            return gaps.Count == 0 ? "No major dossier gaps detected." : string.Join(", ", gaps.Take(4));
+        }
+    }
+
+    private string NeedsAttentionSummary
+    {
+        get
+        {
+            if (_sheet is null) return "No dossier loaded.";
+            var needs = new List<string>();
+            if (!ArchetypeReady) needs.Add("Choose at least one NPC type");
+            if (!PersonaReady) needs.Add("Define public/private persona");
+            if (!InnerLifeReady) needs.Add("Complete goals, needs and fears");
+            if (IsMissing(_sheet.AiSummary)) needs.Add("Generate AI dossier summary");
+            return needs.Count == 0 ? "Dossier is coherent and ready for deeper behavior testing." : string.Join(" · ", needs.Take(3));
+        }
+    }
+
+    private RenderFragment PhotoThumb(string title, string? path) => builder =>
+    {
+        var seq = 0;
+        builder.OpenElement(seq++, "div"); builder.AddAttribute(seq++, "class", "overview-photo-thumb");
+        if (!string.IsNullOrWhiteSpace(path))
+        {
+            builder.OpenElement(seq++, "img"); builder.AddAttribute(seq++, "src", BuildImagePreviewUrl(path)); builder.AddAttribute(seq++, "alt", title); builder.CloseElement();
+        }
+        else
+        {
+            builder.OpenElement(seq++, "div"); builder.AddAttribute(seq++, "class", "overview-photo-missing"); builder.AddContent(seq++, "MISSING"); builder.CloseElement();
+        }
+        builder.OpenElement(seq++, "span"); builder.AddContent(seq++, title); builder.CloseElement();
+        builder.CloseElement();
+    };
+
+    private static string Initials(string name)
+    {
+        var parts = (name ?? "?").Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        return parts.Length == 0 ? "?" : parts.Length == 1 ? parts[0][0].ToString().ToUpperInvariant() : $"{parts[0][0]}{parts[^1][0]}".ToUpperInvariant();
+    }
+
+    private static bool HasImagePath(string? path) => !string.IsNullOrWhiteSpace(path);
+    private static string BuildImagePreviewUrl(string? path)
+    {
+        if (string.IsNullOrWhiteSpace(path)) return "";
+        if (path.StartsWith("http", StringComparison.OrdinalIgnoreCase) || path.StartsWith("/", StringComparison.OrdinalIgnoreCase)) return path;
+        return "/npc-media?path=" + Uri.EscapeDataString(path) + "&v=" + DateTime.UtcNow.Ticks;
+    }
+
+
+}

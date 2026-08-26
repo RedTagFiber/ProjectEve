@@ -29,6 +29,7 @@ public static class ProjectEveDatabaseSetup
     {
         EnsureFolders();
         EnsureMainDatabase();
+        EnsureMainCompatibilityColumns();
         EnsureHistoryDatabase();
         EnsureRelationshipDatabase();
         EnsureLocationDatabase();
@@ -279,10 +280,29 @@ Environment.SetEnvironmentVariable("EVE_DB_PATH", MainDatabasePath);
             TraitName TEXT NOT NULL DEFAULT '',
             IsEnabled INTEGER NOT NULL DEFAULT 1,
             StartingValue INTEGER NOT NULL DEFAULT 50,
+            SetPointValue INTEGER NOT NULL DEFAULT 50,
             CurrentValue INTEGER NOT NULL DEFAULT 50,
+            ExpressionStyle TEXT NOT NULL DEFAULT '',
             Notes TEXT NOT NULL DEFAULT '',
             UpdatedRealAt TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
             FOREIGN KEY (NpcId) REFERENCES Characters(Id) ON DELETE CASCADE
+        );
+
+
+        CREATE TABLE IF NOT EXISTS NpcSubSlowValues
+        (
+            Id TEXT PRIMARY KEY,
+            NpcId INTEGER NOT NULL,
+            ParentTraitId TEXT NOT NULL DEFAULT '',
+            SubTraitId TEXT NOT NULL DEFAULT '',
+            SubTraitName TEXT NOT NULL DEFAULT '',
+            ValueType TEXT NOT NULL DEFAULT '',
+            ValueText TEXT NOT NULL DEFAULT '',
+            IsEnabled INTEGER NOT NULL DEFAULT 1,
+            Notes TEXT NOT NULL DEFAULT '',
+            UpdatedRealAt TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (NpcId) REFERENCES Characters(Id) ON DELETE CASCADE,
+            UNIQUE (NpcId, ParentTraitId, SubTraitId)
         );
 
         CREATE TABLE IF NOT EXISTS NpcTraitControl
@@ -438,11 +458,87 @@ Environment.SetEnvironmentVariable("EVE_DB_PATH", MainDatabasePath);
         CREATE INDEX IF NOT EXISTS IX_NpcSocialBehavior_Scores
             ON NpcSocialBehavior(BookPostScore, GramPostScore, CommentScore, TrollScore);
         CREATE INDEX IF NOT EXISTS IX_NpcTraitValues_NpcId ON NpcTraitValues(NpcId);
+        CREATE INDEX IF NOT EXISTS IX_NpcSubSlowValues_NpcParent
+            ON NpcSubSlowValues(NpcId, ParentTraitId, IsEnabled);
         CREATE INDEX IF NOT EXISTS IX_NpcEmotionTriggers_NpcId ON NpcEmotionTriggers(NpcId);
         CREATE INDEX IF NOT EXISTS IX_NpcMediaAssets_NpcId ON NpcMediaAssets(NpcId);
         CREATE INDEX IF NOT EXISTS IX_NpcMediaAssets_Current ON NpcMediaAssets(NpcId, Purpose, IsCurrent);
         CREATE INDEX IF NOT EXISTS IX_NpcVoicePresets_NpcId ON NpcVoicePresets(NpcId);
         """);
+    }
+
+
+    /// <summary>
+    /// Adds canonical columns that older Project Eve databases may not have.
+    /// CREATE TABLE IF NOT EXISTS does not retrofit columns into an existing table.
+    /// </summary>
+    private static void EnsureMainCompatibilityColumns()
+    {
+        using var connection = Open(MainDatabasePath);
+
+        bool addedSetPoint = AddColumnIfMissing(
+            connection,
+            "NpcTraitValues",
+            "SetPointValue",
+            "INTEGER NOT NULL DEFAULT 50");
+
+        AddColumnIfMissing(
+            connection,
+            "NpcTraitValues",
+            "ExpressionStyle",
+            "TEXT NOT NULL DEFAULT ''");
+
+        // Legacy SQLite tables may also predate this timestamp column.
+        AddColumnIfMissing(
+            connection,
+            "NpcTraitValues",
+            "UpdatedRealAt",
+            "TEXT NOT NULL DEFAULT ''");
+
+        // The new set-point starts from the original persisted starting value.
+        // Only do this on the migration run that actually added the column.
+        if (addedSetPoint)
+        {
+            Execute(connection, """
+                UPDATE NpcTraitValues
+                SET SetPointValue = StartingValue;
+                """);
+        }
+    }
+
+    private static bool AddColumnIfMissing(
+        SqliteConnection connection,
+        string tableName,
+        string columnName,
+        string sqlDefinition)
+    {
+        using (var check = connection.CreateCommand())
+        {
+            check.CommandText = $"PRAGMA table_info({tableName});";
+
+            using var reader = check.ExecuteReader();
+            while (reader.Read())
+            {
+                string existing = reader.IsDBNull(1)
+                    ? ""
+                    : reader.GetString(1);
+
+                if (string.Equals(
+                    existing,
+                    columnName,
+                    StringComparison.OrdinalIgnoreCase))
+                {
+                    return false;
+                }
+            }
+        }
+
+        using var alter = connection.CreateCommand();
+        alter.CommandText =
+            $"ALTER TABLE {tableName} ADD COLUMN {columnName} {sqlDefinition};";
+        alter.ExecuteNonQuery();
+
+        return true;
     }
 
     private static void EnsureHistoryDatabase()

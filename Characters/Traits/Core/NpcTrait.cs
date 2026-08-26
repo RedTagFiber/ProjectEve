@@ -162,6 +162,23 @@ namespace ProjectEve.Traits
         }
 
         /// <summary>
+        /// Derived Fast20 stage for the current value.
+        /// Stage and Wildcard are intentionally NOT persisted in SQL.
+        /// </summary>
+        public FastTraitStage GetFastStage(string traitId)
+        {
+            return FastTraitStageRules.Get(Get(traitId));
+        }
+
+        /// <summary>
+        /// True only for the locked 95-100 Fast20 wildcard range.
+        /// </summary>
+        public bool IsFastWildcard(string traitId)
+        {
+            return FastTraitStageRules.IsWildcard(Get(traitId));
+        }
+
+        /// <summary>
         /// Drift Fast traits a step toward set-point (call on day tick / scene end).
         /// Mid/Slow should not be passed here often.
         /// </summary>

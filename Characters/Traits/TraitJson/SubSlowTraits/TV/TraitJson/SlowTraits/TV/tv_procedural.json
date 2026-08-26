@@ -1,0 +1,116 @@
+{
+  "id": "slow.tv.procedural",
+  "layer": "slow",
+  "domain": "tv",
+  "label": "Procedural TV",
+  "version": 1,
+  "description": "Case-of-the-week and problem-of-the-week television: police, legal, medical, rescue, investigation, and similar repeatable formats.",
+  "priorIntensity": 5,
+  "moveSpeed": "very_slow",
+  "fillThreshold": 50,
+  "bands": {
+    "off": "0-29",
+    "low": "30-49",
+    "mid": "50-69",
+    "high": "70-84",
+    "break": "85-94",
+    "extreme": "95-100"
+  },
+  "talkTriggers": [
+    "case of the week",
+    "procedural",
+    "detective",
+    "hospital",
+    "courtroom",
+    "episode",
+    "comfort show"
+  ],
+  "rivalBias": false,
+  "catalog": "TV/Shows/Procedural",
+  "subTraits": [
+    {
+      "id": "slow.tv.procedural.police",
+      "label": "Police / detective procedural",
+      "kind": "style",
+      "defaultRange": [
+        30,
+        95
+      ],
+      "tags": [
+        "case-of-the-week"
+      ]
+    },
+    {
+      "id": "slow.tv.procedural.legal",
+      "label": "Legal / courtroom procedural",
+      "kind": "style",
+      "defaultRange": [
+        25,
+        90
+      ],
+      "tags": [
+        "courtroom"
+      ]
+    },
+    {
+      "id": "slow.tv.procedural.medical",
+      "label": "Medical procedural",
+      "kind": "style",
+      "defaultRange": [
+        25,
+        90
+      ],
+      "tags": [
+        "hospital"
+      ]
+    },
+    {
+      "id": "slow.tv.procedural.rescue",
+      "label": "Fire / rescue / emergency procedural",
+      "kind": "style",
+      "defaultRange": [
+        25,
+        90
+      ],
+      "tags": [
+        "first-responders"
+      ]
+    },
+    {
+      "id": "slow.tv.procedural.forensics",
+      "label": "Forensics / investigation procedural",
+      "kind": "style",
+      "defaultRange": [
+        30,
+        95
+      ],
+      "tags": [
+        "evidence"
+      ]
+    },
+    {
+      "id": "slow.tv.procedural.comfort_rewatch",
+      "label": "Comfort rewatch",
+      "kind": "habit",
+      "defaultRange": [
+        30,
+        95
+      ],
+      "tags": [
+        "familiar"
+      ]
+    },
+    {
+      "id": "slow.tv.procedural.weekly",
+      "label": "Likes episodic weekly structure",
+      "kind": "habit",
+      "defaultRange": [
+        30,
+        95
+      ],
+      "tags": [
+        "episodic"
+      ]
+    }
+  ]
+}

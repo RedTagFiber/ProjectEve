@@ -14,13 +14,13 @@
     "noise": 3
   },
   "bands": {
-    "off": [ 0, 29 ],
-    "low": [ 30, 49 ],
-    "mid": [ 50, 69 ],
-    "high": [ 70, 84 ],
-    "break": [ 85, 94 ],
-    "extreme": [ 95, 100 ]
-  },
+      "stage1": [ 0, 20 ],
+      "stage2": [ 21, 40 ],
+      "stage3": [ 41, 60 ],
+      "stage4": [ 61, 80 ],
+      "stage5": [ 81, 94 ],
+      "wildcard": [ 95, 100 ]
+    },
   "styles": {
     "scorekeep": {
       "means": "Remembers every slight; brings up the ledger.",
@@ -178,3 +178,4 @@
     "sortPriority": 8
   }
 }
+

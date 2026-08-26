@@ -32,12 +32,12 @@ public class MemoryDatabase
     private string ConnStr => $"Data Source={_dbPath}";
 
     private void EnsureSchema()
-        {
-            // Canonical schema ownership belongs only to ProjectEveDatabaseSetup.
-            // MemoryDatabase remains the runtime read/write gateway for personal
-            // memories, but it no longer creates or alters the table itself.
-            ProjectEve.Data.ProjectEveDatabaseSetup.EnsureAll();
-        }
+    {
+        // Canonical schema ownership belongs only to ProjectEveDatabaseSetup.
+        // MemoryDatabase remains the runtime read/write gateway for personal
+        // memories, but it no longer creates or alters the table itself.
+        ProjectEve.Data.ProjectEveDatabaseSetup.EnsureAll();
+    }
 
     public void AddMemory(MemoryRecord memory)
     {
@@ -50,8 +50,56 @@ public class MemoryDatabase
         var id = $"memory:{memory.NpcId}:{Guid.NewGuid():N}";
         var time = memory.Timestamp == default ? DateTime.UtcNow : memory.Timestamp;
 
+        string category = memory.Category ?? "General";
+        string eventId = memory.EventId ?? "";
+
         using var conn = new SqliteConnection(ConnStr);
         conn.Open();
+
+        // Exact-memory idempotency:
+        // rerunning a seed/build step must not create five copies of the same
+        // subjective memory. A different EventId is still allowed to represent
+        // a genuinely separate occurrence.
+        using (var find = conn.CreateCommand())
+        {
+            find.CommandText = """
+                SELECT Id
+                FROM PersonalMemories
+                WHERE KnowerCharacterId = $npc
+                  AND SubjectCharacterId IS NULL
+                  AND lower(trim(MemoryType)) = lower(trim($type))
+                  AND trim(MemoryText) = trim($text)
+                  AND COALESCE(EventId, '') = $eventId
+                ORDER BY CreatedRealAt DESC, rowid DESC
+                LIMIT 1;
+                """;
+            find.Parameters.AddWithValue("$npc", memory.NpcId);
+            find.Parameters.AddWithValue("$type", category);
+            find.Parameters.AddWithValue("$text", memory.Summary);
+            find.Parameters.AddWithValue("$eventId", eventId);
+
+            string? existingId = find.ExecuteScalar()?.ToString();
+
+            if (!string.IsNullOrWhiteSpace(existingId))
+            {
+                using var update = conn.CreateCommand();
+                update.CommandText = """
+                    UPDATE PersonalMemories
+                    SET Importance = MAX(Importance, $importance),
+                        Strength = MAX(Strength, $strength),
+                        IsLockedPeak = MAX(IsLockedPeak, $locked),
+                        LastUpdatedGameTime = $gameTime
+                    WHERE Id = $id;
+                    """;
+                update.Parameters.AddWithValue("$importance", Math.Clamp(memory.Importance, 1, 100));
+                update.Parameters.AddWithValue("$strength", Math.Clamp((int)Math.Round(memory.Strength), 0, 100));
+                update.Parameters.AddWithValue("$locked", memory.IsLockedPeak ? 1 : 0);
+                update.Parameters.AddWithValue("$gameTime", time.ToString("o"));
+                update.Parameters.AddWithValue("$id", existingId);
+                update.ExecuteNonQuery();
+                return;
+            }
+        }
 
         using var cmd = conn.CreateCommand();
         cmd.CommandText = """
@@ -67,8 +115,8 @@ public class MemoryDatabase
 
         cmd.Parameters.AddWithValue("$id", id);
         cmd.Parameters.AddWithValue("$npc", memory.NpcId);
-        cmd.Parameters.AddWithValue("$eventId", memory.EventId ?? "");
-        cmd.Parameters.AddWithValue("$type", memory.Category ?? "General");
+        cmd.Parameters.AddWithValue("$eventId", eventId);
+        cmd.Parameters.AddWithValue("$type", category);
         cmd.Parameters.AddWithValue("$text", memory.Summary);
         cmd.Parameters.AddWithValue("$importance", Math.Clamp(memory.Importance, 1, 100));
         cmd.Parameters.AddWithValue("$strength", Math.Clamp((int)Math.Round(memory.Strength), 0, 100));
@@ -182,4 +230,3 @@ public class MemoryDatabase
         return cmd.ExecuteScalar()?.ToString() ?? "";
     }
 }
-

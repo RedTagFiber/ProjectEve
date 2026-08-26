@@ -76,6 +76,87 @@ namespace ProjectEve.Traits
             return map;
         }
 
+
+        /// <summary>
+        /// Loads allowed Fast20 expression style ids from the canonical Fast JSON
+        /// definitions. Keys are returned as runtime ids (trait.anger, etc.).
+        /// </summary>
+        public static Dictionary<string, IReadOnlyList<string>> LoadFastStyleOptions(
+            string? root = null)
+        {
+            root ??= ResolveDefaultRoot();
+
+            var result =
+                new Dictionary<string, IReadOnlyList<string>>(
+                    StringComparer.OrdinalIgnoreCase);
+
+            string fastRoot = Path.Combine(
+                root,
+                "FastTraits",
+                "Subs");
+
+            if (!Directory.Exists(fastRoot))
+                return result;
+
+            foreach (var file in Directory.EnumerateFiles(
+                fastRoot,
+                "*.json",
+                SearchOption.AllDirectories))
+            {
+                try
+                {
+                    using var doc = JsonDocument.Parse(
+                        File.ReadAllText(file),
+                        new JsonDocumentOptions
+                        {
+                            CommentHandling = JsonCommentHandling.Skip,
+                            AllowTrailingCommas = true
+                        });
+
+                    var json = doc.RootElement;
+
+                    if (!json.TryGetProperty("layer", out var layerProp) ||
+                        !string.Equals(
+                            layerProp.GetString(),
+                            "fast",
+                            StringComparison.OrdinalIgnoreCase))
+                    {
+                        continue;
+                    }
+
+                    if (!json.TryGetProperty("id", out var idProp))
+                        continue;
+
+                    string rawId = idProp.GetString() ?? "";
+                    if (string.IsNullOrWhiteSpace(rawId))
+                        continue;
+
+                    string traitId = rawId.StartsWith(
+                        "trait.",
+                        StringComparison.OrdinalIgnoreCase)
+                        ? rawId
+                        : $"trait.{rawId}";
+
+                    var styles = new List<string>();
+
+                    if (json.TryGetProperty("styles", out var stylesProp) &&
+                        stylesProp.ValueKind == JsonValueKind.Object)
+                    {
+                        foreach (var style in stylesProp.EnumerateObject())
+                            styles.Add(style.Name);
+                    }
+
+                    result[traitId] = styles;
+                }
+                catch
+                {
+                    // Invalid definitions are handled by the existing Fast20 validator.
+                }
+            }
+
+            return result;
+        }
+
         /// <summary>
         /// Load all Mid parent JSON under MidTraits\**\*.json
         /// Returns id → priorIntensity (or default 50).
