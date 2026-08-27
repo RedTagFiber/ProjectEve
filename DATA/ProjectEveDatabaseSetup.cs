@@ -34,6 +34,7 @@ public static class ProjectEveDatabaseSetup
         EnsureRelationshipDatabase();
         ProjectEvePersonFoundationSchema.Ensure();
         ProjectEveEducationProfessionalSchema.Ensure();
+        ProjectEvePhoneVehicleSchema.Ensure();
         EnsureLocationDatabase();
 
                 EnsureFinanceSchema();
@@ -1140,6 +1141,7 @@ Environment.SetEnvironmentVariable("EVE_DB_PATH", MainDatabasePath);
             cmd.ExecuteNonQuery();
         }
 }
+
 
 
 
