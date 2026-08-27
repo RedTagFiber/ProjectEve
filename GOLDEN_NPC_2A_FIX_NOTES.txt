@@ -1,0 +1,11 @@
+Golden NPC 2A installer fix
+
+The original installer used an exact multiline string match.
+On Windows, Program.cs uses CRLF line endings, so the exact LF-only match failed even though
+the verify/verify-db block was present.
+
+This replacement installer uses CRLF/LF-tolerant regular expressions and does not alter the
+Golden NPC audit class itself.
+
+The failed original installer reported 'Program.cs was not changed', so this fix is safe to
+apply directly over the current working tree.

@@ -1,0 +1,42 @@
+﻿GOLDEN NPC 2B-3 — EVE FORMATION & PROFESSIONAL
+
+Goal
+----
+Turn these audit rows from EMPTY to PRESENT:
+- Education records
+- Professional profile
+- Qualifications
+- Professional competencies
+
+Current job profile is already PRESENT and is not replaced.
+
+Conservative canon policy
+-------------------------
+The patch does NOT invent:
+- college degree
+- school name
+- graduation year
+- GPA
+- honors
+- license number
+- external certification
+- exact years of experience
+
+It DOES create:
+- a generic completed education/formation baseline
+- an active coffee-shop-manager professional profile
+- an experience-based qualification
+- six role-relevant professional competencies
+
+Install
+-------
+Extract into:
+D:\ProjectEve\code\ProjectEve_Clean\ProjectEve_Clean
+
+Run:
+powershell -ExecutionPolicy Bypass -File ".\apply_golden_npc_2B3.ps1"
+dotnet build
+dotnet run -- golden-populate-professional
+dotnet run -- golden-audit 1
+
+Do not commit until the audit result is reviewed.

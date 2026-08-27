@@ -1,0 +1,30 @@
+Project Eve Golden NPC 2A
+=========================
+
+Purpose:
+Do not create any new canon yet.
+
+This patch adds a read-only command:
+  dotnet run -- golden-audit 1
+
+It reports representation coverage for Eve (NPC 1) across:
+- identity/current state
+- physical/cognition/personality/traits
+- education
+- professional profile/qualifications/competencies/current job
+- objective family links
+- household
+- relationship web/current directed relationship state
+- phones
+- vehicles
+- finance
+- objective history
+- subjective memories and knowledge
+- locations/visits
+
+The audit opens the four canonical databases in SQLite read-only mode.
+
+Why:
+Before rewriting Character Factory, we need to see exactly where Eve is already represented
+and where the canonical schema is empty. The next step should fill only real gaps revealed by
+this report rather than guessing and adding more schema.

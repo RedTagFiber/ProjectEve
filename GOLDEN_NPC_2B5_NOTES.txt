@@ -1,0 +1,46 @@
+﻿GOLDEN NPC 2B-5 — EVE CANONICAL LIFE HISTORY
+
+Architecture
+------------
+TRUE HISTORY remains WorldEvents in project_eve_history.db.
+
+This patch adds:
+1. Birth of Eve and Adam Sinclair
+2. Eve rents a room at Adam's house
+3. Eve becomes manager at Sinclair Coffee
+4. Eve chooses to remain in Bellefontaine after nearly taking an out-of-town job
+
+Also adds:
+- EventParticipants
+- locked EventFacts
+- causal/influence links
+
+It does NOT create:
+- PersonalMemories
+- KnowledgeItems
+- RelationshipReasons
+
+Those subjective records belong in 2B-6 and should point back to these EventIds.
+
+Date policy
+-----------
+Only Eve's birth date/time is exact.
+Other event dates remain blank with DatePrecision='Unknown'.
+No fake year/age is invented.
+
+Install
+-------
+Extract into:
+D:\ProjectEve\code\ProjectEve_Clean\ProjectEve_Clean
+
+Run:
+powershell -ExecutionPolicy Bypass -File ".\apply_golden_npc_2B5.ps1"
+dotnet build
+dotnet run -- golden-populate-life-history
+dotnet run -- golden-audit 1
+
+Expected audit change:
+World event participation should increase from its current count because
+four additional canonical Eve life events are added.
+
+Do not commit until the output is reviewed.

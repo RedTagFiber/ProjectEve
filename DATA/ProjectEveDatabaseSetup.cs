@@ -498,6 +498,31 @@ Environment.SetEnvironmentVariable("EVE_DB_PATH", MainDatabasePath);
             "NpcTraitValues",
             "UpdatedRealAt",
             "TEXT NOT NULL DEFAULT ''");
+        // Existing live databases may predate these canonical Characters columns.
+        // CREATE TABLE IF NOT EXISTS does not retrofit them.
+        AddColumnIfMissing(
+            connection,
+            "Characters",
+            "Employer",
+            "TEXT NOT NULL DEFAULT ''");
+
+        AddColumnIfMissing(
+            connection,
+            "Characters",
+            "CurrentLocationId",
+            "TEXT NOT NULL DEFAULT ''");
+
+        AddColumnIfMissing(
+            connection,
+            "Characters",
+            "HomeLocationId",
+            "TEXT NOT NULL DEFAULT ''");
+
+        AddColumnIfMissing(
+            connection,
+            "Characters",
+            "WorkLocationId",
+            "TEXT NOT NULL DEFAULT ''");
 
         // The new set-point starts from the original persisted starting value.
         // Only do this on the migration run that actually added the column.
@@ -1142,6 +1167,7 @@ Environment.SetEnvironmentVariable("EVE_DB_PATH", MainDatabasePath);
             cmd.ExecuteNonQuery();
         }
 }
+
 
 
 

@@ -1,0 +1,14 @@
+Golden NPC 2A Robust Audit Fix
+
+Reason for this fix:
+The live Characters table does not currently expose Employer, even though newer setup code contains it.
+The first audit hard-coded that column and crashed.
+
+This replacement audit:
+- checks every table/column before using it,
+- reports missing columns as N/A or '(column not present)',
+- tolerates legacy/current schema differences,
+- remains completely read-only,
+- prevents one missing compatibility column from killing the entire audit.
+
+Do not commit until the full audit output has been reviewed.

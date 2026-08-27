@@ -1,0 +1,49 @@
+﻿GOLDEN NPC 2B-2 — EVE FAMILY & HOUSEHOLD
+
+Canon
+-----
+Eve Sinclair    = 1
+Adam Sinclair   = 2, brother
+Lisa Sinclair   = 3, mother
+Edward Sinclair = 4, father
+
+What this populates
+-------------------
+MAIN:
+- FamilyLinks for Eve <-> Edward
+- FamilyLinks for Eve <-> Lisa
+- FamilyLinks for Eve <-> Adam
+
+RELATIONSHIPS:
+- HouseholdMembers for Edward, Lisa, Adam, Eve
+- FamilyFriendWeb for Eve -> Edward/Lisa/Adam
+
+What this DOES NOT change
+-------------------------
+- Existing directed RelationshipStates
+- Memories
+- Knowledge
+- History events
+- Education/professional
+- Phone/vehicle/finance
+- Location state
+
+Safety
+------
+- Validates NPC IDs/names before writing
+- Uses stable keys
+- Uses UPSERT
+- Running the command twice should not create duplicate family rows
+
+Install
+-------
+Extract into:
+D:\ProjectEve\code\ProjectEve_Clean\ProjectEve_Clean
+
+Run:
+powershell -ExecutionPolicy Bypass -File ".\apply_golden_npc_2B2.ps1"
+dotnet build
+dotnet run -- golden-populate-family
+dotnet run -- golden-audit 1
+
+Do not commit until the audit output is reviewed.

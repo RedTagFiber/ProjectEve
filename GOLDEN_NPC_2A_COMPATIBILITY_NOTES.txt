@@ -1,0 +1,21 @@
+Golden NPC 2A Compatibility Correction
+
+The full read-only audit revealed two different issues:
+
+1. REAL LIVE-SCHEMA COMPATIBILITY GAP
+   The existing Characters table is missing:
+   - Employer
+   - CurrentLocationId
+   - HomeLocationId
+   - WorkLocationId
+
+   These columns already exist in the canonical CREATE TABLE definition, so this patch does
+   not invent new architecture. It adds them to EnsureMainCompatibilityColumns so existing
+   databases are migrated safely with ALTER TABLE only when missing.
+
+2. AUDIT BUG
+   HouseholdMembers is canonical in project_eve_relationships.db, not MAIN.
+   The audit was looking in the wrong database. This patch corrects only the read-only audit.
+
+No NPC content is populated by this patch.
+No canon is deleted or reset.

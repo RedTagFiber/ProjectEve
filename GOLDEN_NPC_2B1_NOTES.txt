@@ -1,0 +1,35 @@
+﻿GOLDEN NPC 2B-1 — EVE CORE PERSON CANON
+
+Purpose
+-------
+Populate only Eve Sinclair's core-person canon into the existing canonical tables.
+
+This patch does NOT:
+- reset/delete databases
+- add new schema
+- populate family, education, phone, vehicle, finance, or history
+- invent unknown height, weight, IQ, eye color, tattoos, scars, etc.
+- replace Eve's existing five trait values
+
+It DOES populate/update:
+- Characters narrative/personality fields when currently blank
+- NpcPhysicalProfiles
+- NpcCognitionProfiles
+- NpcPersonas
+- NpcArchetypes
+- NpcTraitControl for Eve's already-existing trait rows
+- NpcHabitsAndInterests
+- NpcSocialBehavior
+
+Install
+-------
+Extract into:
+D:\ProjectEve\code\ProjectEve_Clean\ProjectEve_Clean
+
+Run:
+powershell -ExecutionPolicy Bypass -File ".\apply_golden_npc_2B1.ps1"
+dotnet build
+dotnet run -- golden-populate-core
+dotnet run -- golden-audit 1
+
+Do not commit until the new audit output is reviewed.

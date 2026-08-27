@@ -83,10 +83,54 @@ internal static class Program
                     break;
                 }
 
+            case "golden-populate-core":
+            case "golden-populate-eve-core":
+                {
+                    ProjectEveGoldenNpcCorePopulation.PopulateEve();
+                    break;
+                }
+            case "golden-populate-family":
+            case "golden-populate-eve-family":
+                {
+                    ProjectEveGoldenNpcFamilyPopulation.PopulateEveFamily();
+                    break;
+                }
+            case "golden-populate-professional":
+            case "golden-populate-eve-professional":
+                {
+                    ProjectEveGoldenNpcProfessionalPopulation.PopulateEveProfessional();
+                    break;
+                }
+            case "golden-populate-adult-life":
+            case "golden-populate-eve-adult-life":
+                {
+                    ProjectEveGoldenNpcAdultLifePopulation.PopulateEveAdultLife();
+                    break;
+                }
+            case "golden-populate-life-history":
+            case "golden-populate-eve-life-history":
+                {
+                    ProjectEveGoldenNpcLifeHistoryPopulation.PopulateEveLifeHistory();
+                    break;
+                }
+            case "golden-populate-subjective":
+            case "golden-populate-eve-subjective":
+                {
+                    ProjectEveGoldenNpcSubjectivePopulation.PopulateEveSubjectiveLayer();
+                    break;
+                }
             case "repair-relationships":
             case "repair-relations":
                 {
                     RepairRelationshipsFromExistingCharacters();
+                    break;
+                }
+
+            case "golden-audit":
+            case "audit-npc":
+                {
+                    int npcId = ParseIntArg(args, 1, 1);
+                    ProjectEveGoldenNpcAudit.PrintToConsole(npcId);
                     break;
                 }
 
@@ -216,7 +260,8 @@ internal static class Program
         Console.WriteLine("  dotnet run -- seed-world [townCount] [historyCount]");
         Console.WriteLine("  dotnet run -- seed-town [townCount]");
         Console.WriteLine("  dotnet run -- seed-history [historyCount]");
-        Console.WriteLine("  dotnet run -- ensure-core");
+        Console.WriteLine("  dotnet run -- ensure-core");
+        Console.WriteLine("  dotnet run -- golden-audit [npcId]");
         Console.WriteLine("  dotnet run -- repair-relationships");
         Console.WriteLine("  dotnet run -- verify");
         Console.WriteLine("  dotnet run -- reset-db");
@@ -1610,6 +1655,7 @@ internal static class Program
         return ok;
     }
 }
+
 
 
 

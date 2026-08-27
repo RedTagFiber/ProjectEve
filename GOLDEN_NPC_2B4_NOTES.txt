@@ -1,0 +1,57 @@
+﻿GOLDEN NPC 2B-4 — EVE CURRENT ADULT LIFE
+
+Verified canon used
+-------------------
+- Eve rents a room at Adam's house (in town).
+- Eve is Manager at Sinclair Coffee.
+- Lisa Sinclair owns the shop.
+- Sinclair Coffee workplaceId = WP_COFFEE_001.
+- Eve cash = $95.
+- Eve bank = $1,840.
+- Eve debt = $420.
+- MonthlyBillsHint = $1,800.
+- SavingsRateHint = 8%.
+
+What this populates
+-------------------
+Characters:
+- Employer
+- Address/home description
+- WorkLocationId
+
+Finance:
+- FinancialAccounts baseline
+- FinancialObligations: $420 existing debt
+- FinancialObligations: $1,800 monthly bills estimate
+- Optional build-revision note preserving exact legacy money canon
+
+Locations:
+- LocationVisits baseline for Sinclair Coffee
+
+What intentionally stays EMPTY
+------------------------------
+Phones:
+- no exact number, carrier, make, or model is established
+
+Vehicles:
+- no exact make/model/year/color/VIN/plate is established
+
+CurrentLocationId:
+- intentionally remains dynamic/blank; "current location" is runtime state,
+  not a permanent identity fact.
+
+HomeLocationId:
+- left blank until Adam's house has a canonical LocationId in the location database.
+
+Install
+-------
+Extract into:
+D:\ProjectEve\code\ProjectEve_Clean\ProjectEve_Clean
+
+Run:
+powershell -ExecutionPolicy Bypass -File ".\apply_golden_npc_2B4.ps1"
+dotnet build
+dotnet run -- golden-populate-adult-life
+dotnet run -- golden-audit 1
+
+Do not commit until the audit result is reviewed.

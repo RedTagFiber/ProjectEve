@@ -1,0 +1,56 @@
+﻿GOLDEN NPC 2B-6 — EVE SUBJECTIVE LAYER
+
+Purpose
+-------
+Connect Eve's subjective memories and knowledge to the four canonical
+TRUE HISTORY EventIds created in 2B-5.
+
+Rules
+-----
+- TRUE HISTORY remains objective.
+- PersonalMemories and KnowledgeItems live in RELATIONSHIPS.
+- Eve does NOT automatically receive every objective fact.
+- Adam and Lisa do NOT automatically receive copied records.
+- Eve gets no impossible first-person memory of her own birth.
+
+Records created
+---------------
+Birth:
+- 1 Eve knowledge item
+- 0 Eve memories
+
+Move into Adam's house:
+- 1 Eve memory
+- 1 Eve knowledge item
+
+Manager at Sinclair Coffee:
+- 1 Eve memory
+- 1 Eve knowledge item
+
+Stay in Bellefontaine:
+- 1 Eve memory
+- 1 Eve knowledge item
+
+Expected audit movement
+-----------------------
+Personal memories as knower:
+  12 -> 15
+
+Knowledge items as knower:
+  5 -> 9
+
+"as subject" counts may also increase because some new records explicitly
+identify Eve/Adam/Lisa as the subject of a memory or knowledge item.
+
+Install
+-------
+Extract into:
+D:\ProjectEve\code\ProjectEve_Clean\ProjectEve_Clean
+
+Run:
+powershell -ExecutionPolicy Bypass -File ".\apply_golden_npc_2B6.ps1"
+dotnet build
+dotnet run -- golden-populate-subjective
+dotnet run -- golden-audit 1
+
+Do not commit until the output is reviewed.
