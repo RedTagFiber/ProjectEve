@@ -32,6 +32,7 @@ public static class ProjectEveDatabaseSetup
         EnsureMainCompatibilityColumns();
         EnsureHistoryDatabase();
         EnsureRelationshipDatabase();
+        ProjectEvePersonFoundationSchema.Ensure();
         EnsureLocationDatabase();
 
                 EnsureFinanceSchema();
@@ -1138,6 +1139,7 @@ Environment.SetEnvironmentVariable("EVE_DB_PATH", MainDatabasePath);
             cmd.ExecuteNonQuery();
         }
 }
+
 
 
 
