@@ -1,0 +1,40 @@
+﻿NPC STUDIO WRITE BRIDGE 2 — INTERACTIVE SERVER FIX
+
+Root cause
+----------
+CanonicalProfessional.razor was missing:
+
+@rendermode InteractiveServer
+
+NPC Studio is a Blazor Web App where interactive pages explicitly declare
+InteractiveServer. Without it, the canonical page rendered as static HTML.
+
+That caused:
+- inputs to appear editable in the browser,
+- @onclick handlers to never run,
+- Reload to do nothing,
+- Save Profile to do nothing,
+- Save & Verify Profile to do nothing,
+- @bind never to update the server-side model,
+- browser refresh to restore the original database values.
+
+This was NOT a SQLite failure.
+
+This patch only adds @rendermode InteractiveServer to:
+- Components\Pages\CanonicalProfessional.razor
+- Components\Pages\CanonicalFoundation.razor (if present)
+
+No database, model, or repository logic is changed.
+
+Test
+----
+1. Stop NPC Studio.
+2. Build.
+3. Run.
+4. Ctrl+F5 browser.
+5. Open /canonical-professional/1.
+6. Add "Studio write bridge test" to Professional Notes.
+7. Click Save & Verify Profile.
+
+Expected:
+SAVE VERIFIED: SQLite stored the Professional Notes and the page reloaded the exact same value.

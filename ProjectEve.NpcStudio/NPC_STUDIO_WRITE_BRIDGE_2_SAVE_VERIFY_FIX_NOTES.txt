@@ -1,0 +1,38 @@
+﻿NPC STUDIO WRITE BRIDGE 2 — SAVE VERIFY FIX
+
+Problem
+-------
+The page reads canonical Professional data correctly, but the user's
+Professional Notes edit did not persist.
+
+This patch adds an explicit diagnostic write path.
+
+Changes
+-------
+1. Professional Notes uses @bind:event="oninput"
+   so the model updates while typing.
+
+2. Adds "Save & Verify Profile" directly under Professional Notes.
+
+3. SaveAndVerifyCanonicalProfessionalProfileAsync:
+   - saves through the existing canonical save method,
+   - immediately SELECTs Notes from NpcProfessionalProfiles,
+   - compares SQLite read-back to the exact value typed,
+   - throws a detailed error if they differ.
+
+4. Page then reloads the full professional bundle and compares again.
+
+Test
+----
+Type:
+  Studio write bridge test
+
+Click:
+  Save & Verify Profile
+
+Expected:
+  SAVE VERIFIED: SQLite stored the Professional Notes and the page
+  reloaded the exact same value.
+
+If it fails, the page will now show the exact mismatch/error instead of
+silently appearing not to save.

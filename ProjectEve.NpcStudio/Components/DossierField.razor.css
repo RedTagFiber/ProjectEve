@@ -1,0 +1,7 @@
+.dossier-field{display:block;min-width:0}
+.dossier-field>span{display:flex;justify-content:space-between;gap:6px;margin-bottom:3px;font-size:8px;letter-spacing:.055em;text-transform:uppercase;color:#7f8da5;font-weight:850}
+.dossier-field>span b{font-size:7px;color:#ff6d7f}
+.dossier-field ::deep input,.dossier-field ::deep textarea,.dossier-field ::deep select{width:100%;box-sizing:border-box;background:#0c121e!important;color:#e8edf7!important;border:1px solid #2a3650!important;border-radius:4px!important;padding:6px 8px!important;font-size:10px!important;line-height:1.25!important;min-height:30px!important}
+.dossier-field ::deep textarea{resize:vertical;min-height:54px!important;line-height:1.35!important}
+.dossier-field ::deep select{padding-right:24px!important}
+.dossier-field.missing ::deep input,.dossier-field.missing ::deep textarea,.dossier-field.missing ::deep select{border-color:#7b2d3b!important;background:#161018!important}

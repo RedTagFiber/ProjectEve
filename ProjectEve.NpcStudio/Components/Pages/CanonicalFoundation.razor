@@ -1,0 +1,106 @@
+﻿@page "/canonical-foundation/{NpcId:int}"
+@rendermode InteractiveServer
+@using ProjectEve.NpcStudio.Models
+@inject ProjectEve.NpcStudio.Services.NpcStudioService Studio
+
+<PageTitle>Canonical Foundation</PageTitle>
+
+<div style="max-width:1100px;margin:2rem auto;padding:0 1rem;">
+    <h1>Golden NPC Canonical Foundation</h1>
+    <p>This is a read-only verification page. It reads the same NPC character sheet used by NPC Studio.</p>
+
+    @if (_loading)
+    {
+        <p>Loading NPC @NpcId...</p>
+    }
+    else if (!string.IsNullOrWhiteSpace(_error))
+    {
+        <div style="padding:1rem;border:1px solid #a33;border-radius:10px;">
+            <strong>Load failed:</strong> @_error
+        </div>
+    }
+    else if (_sheet is null)
+    {
+        <p>NPC @NpcId was not found.</p>
+    }
+    else
+    {
+        <div style="padding:1rem;border:1px solid #666;border-radius:12px;margin-top:1rem;">
+            <h2>@_sheet.Id - @_sheet.Name</h2>
+
+            <table style="width:100%;border-collapse:collapse;">
+                <tbody>
+                    <tr><td><strong>Occupation</strong></td><td>@Value(_sheet.Occupation)</td></tr>
+                    <tr><td><strong>Employer</strong></td><td>@Value(_sheet.Employer)</td></tr>
+                    <tr><td><strong>Current Location ID</strong></td><td>@Value(_sheet.CurrentLocationId, "(dynamic / blank)")</td></tr>
+                    <tr><td><strong>Home Location ID</strong></td><td>@Value(_sheet.HomeLocationId)</td></tr>
+                    <tr><td><strong>Work Location ID</strong></td><td>@Value(_sheet.WorkLocationId)</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin-top:1rem;">
+            <div style="padding:1rem;border:1px solid #666;border-radius:12px;">
+                <h3>Formation / Professional</h3>
+                <p>Education: <strong>@_sheet.CanonicalFoundation.EducationRecords</strong></p>
+                <p>Professional Profile: <strong>@_sheet.CanonicalFoundation.ProfessionalProfiles</strong></p>
+                <p>Qualifications: <strong>@_sheet.CanonicalFoundation.Qualifications</strong></p>
+                <p>Competencies: <strong>@_sheet.CanonicalFoundation.ProfessionalCompetencies</strong></p>
+            </div>
+
+            <div style="padding:1rem;border:1px solid #666;border-radius:12px;">
+                <h3>Property / Finance</h3>
+                <p>Phones: <strong>@_sheet.CanonicalFoundation.Phones</strong></p>
+                <p>Vehicles: <strong>@_sheet.CanonicalFoundation.VehiclesOwnedOrDriven</strong></p>
+                <p>Financial Accounts: <strong>@_sheet.CanonicalFoundation.FinancialAccounts</strong></p>
+                <p>Financial Obligations: <strong>@_sheet.CanonicalFoundation.FinancialObligations</strong></p>
+            </div>
+        </div>
+
+        <div style="margin-top:1rem;padding:1rem;border:1px solid #666;border-radius:12px;">
+            <h3>Expected Eve baseline</h3>
+            <pre>Employer: Sinclair Coffee (Lisa Sinclair, owner)
+Work Location ID: WP_COFFEE_001
+Education: 1
+Professional Profile: 1
+Qualifications: 1
+Competencies: 6
+Phones: 0
+Vehicles: 0
+Financial Accounts: 1
+Financial Obligations: 2</pre>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public int NpcId { get; set; }
+
+    private NpcCharacterSheet? _sheet;
+    private bool _loading = true;
+    private string _error = "";
+
+    protected override async Task OnParametersSetAsync()
+    {
+        _loading = true;
+        _error = "";
+        _sheet = null;
+
+        try
+        {
+            _sheet = await Studio.GetCharacterSheetAsync(NpcId);
+        }
+        catch (Exception ex)
+        {
+            _error = ex.ToString();
+        }
+        finally
+        {
+            _loading = false;
+        }
+    }
+
+    private static string Value(string? value, string blank = "(blank)")
+        => string.IsNullOrWhiteSpace(value) ? blank : value;
+}

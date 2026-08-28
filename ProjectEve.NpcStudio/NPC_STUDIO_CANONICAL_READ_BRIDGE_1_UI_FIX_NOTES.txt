@@ -1,0 +1,27 @@
+﻿NPC STUDIO CANONICAL READ BRIDGE 1 — UI FIX
+
+The original Bridge 1 already updated:
+- Models\NpcStudioModels.cs
+- Data\NpcStudioRepository.cs
+
+Those changes compiled successfully.
+
+The original installer failed only while locating the correct insertion point
+inside Components\Pages\NpcProfile.razor.
+
+This fix:
+- changes ONLY Components\Pages\NpcProfile.razor
+- anchors on the stable "Official NPC Case File" hero
+- inserts the read-only Golden NPC Canonical Foundation panel immediately after it
+- is idempotent
+
+Run from:
+D:\ProjectEve\code\ProjectEve.NpcStudio\ProjectEve.NpcStudio
+
+powershell -ExecutionPolicy Bypass -File ".\apply_npc_studio_canonical_read_bridge_1_ui_fix.ps1"
+
+Get-Process ProjectEve.NpcStudio -ErrorAction SilentlyContinue |
+    Stop-Process -Force
+
+dotnet build
+dotnet run

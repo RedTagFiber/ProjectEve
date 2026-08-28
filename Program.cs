@@ -119,6 +119,47 @@ internal static class Program
                     ProjectEveGoldenNpcSubjectivePopulation.PopulateEveSubjectiveLayer();
                     break;
                 }
+            case "scaffold-plan":
+            case "plan-support-npcs":
+                {
+                    int count = ParseIntArg(args, 1, 400);
+                    ProjectEveSupportNpcScaffoldPlanner.CreateOrRefreshPlan(count);
+                    break;
+                }
+
+            case "fix-characters-schema":
+                {
+                    ProjectEveCharactersCompatibilityFix.Ensure();
+                    break;
+                }
+            case "populate-support-npcs":
+            case "build-support-npcs":
+                {
+                    int count = ParseIntArg(args, 1, 400);
+                    ProjectEveSupportNpcPopulationBuilder.Populate(count);
+                    break;
+                }
+
+            case "support-npc-status":
+                {
+                    ProjectEveSupportNpcPopulationBuilder.PrintStatus();
+                    break;
+                }
+            case "scaffold-summary":
+                {
+                    ProjectEveSupportNpcScaffoldPlanner.PrintSummary();
+                    break;
+                }
+
+            case "eve-family-plan":
+                {
+                    int motherSiblings = ParseIntArg(args, 1, 0);
+                    int fatherSiblings = ParseIntArg(args, 2, 0);
+                    int brothers = ParseIntArg(args, 3, 0);
+                    int sisters = ParseIntArg(args, 4, 0);
+                    ProjectEveFamilyBuildPlanService.SetEveStarterPlan(motherSiblings,fatherSiblings,brothers,sisters,"Auto");
+                    break;
+                }
             case "repair-relationships":
             case "repair-relations":
                 {
@@ -1655,6 +1696,9 @@ internal static class Program
         return ok;
     }
 }
+
+
+
 
 
 

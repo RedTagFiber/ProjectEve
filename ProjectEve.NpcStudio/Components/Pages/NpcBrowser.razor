@@ -1,0 +1,106 @@
+@page "/npc-studio/browser"
+@rendermode InteractiveServer
+@using ProjectEve.NpcStudio.Models
+@inject ProjectEve.NpcStudio.Services.NpcStudioService Studio
+@inject NavigationManager Nav
+
+<PageTitle>NPC Dossiers</PageTitle>
+
+<div class="npc-dossier-index">
+    <aside class="npc-index-rail">
+        <div class="rail-title"><div><small>NPC FILES</small><h2>People</h2></div><span>@_rows.Count</span></div>
+        <input class="rail-search" placeholder="Search NPCs..." @bind="_search" @bind:event="oninput" />
+        <div class="rail-buttons"><button class="@FilterClass("")" @onclick="ShowAllAsync">All</button><button class="@FilterClass("Core")" @onclick="ShowCoreAsync">Core</button><button class="@FilterClass("Draft")" @onclick="ShowDraftAsync">Draft</button></div>
+        <div class="npc-scroll">
+            @foreach (var row in FilteredRows)
+            {
+                <div class="npc-row @SelectedClass(row.Id)">
+                    <button class="thumb thumb-action" title="Open full dossier" @onclick="() => OpenDossier(row.Id)">
+                        @if (!string.IsNullOrWhiteSpace(row.PortraitPath))
+                        {
+                            <img src="@Media(row.PortraitPath)" alt="@row.Name" />
+                        }
+                        else
+                        {
+                            <b>@Initials(row.Name)</b>
+                        }
+                    </button>
+                    <button class="row-select" @onclick="() => SelectAsync(row.Id)">
+                        <div class="row-copy"><strong>@row.Name</strong><small>@Safe(row.Occupation,"Unassigned")</small><small>@Safe(row.Location,"Location missing")</small></div>
+                        <i class="@DotClass(row)"></i>
+                    </button>
+                </div>
+            }
+        </div>
+    </aside>
+
+    <main class="npc-file">
+        @if (_sheet is null)
+        {
+            <div class="empty"><h1>Select an NPC</h1><p>Open a dossier from the list.</p></div>
+        }
+        else
+        {
+            <section class="hero card">
+                <div class="portrait">@if (!string.IsNullOrWhiteSpace(Portrait)){<img src="@Media(Portrait)" alt="@_sheet.Name" />}else{<span>@Initials(_sheet.Name)</span>}</div>
+                <div class="hero-main"><small class="eyebrow">NPC DOSSIER · FILE #@_sheet.Id.ToString("D4")</small><h1>@_sheet.Name</h1><div class="meta"><span>@_sheet.Age years</span><span>@Safe(_sheet.Occupation,"Unassigned")</span><span>@Safe(_sheet.Location,"Missing location")</span><span>Tier @_sheet.Tier</span></div><p>@Summary</p><div class="chips">@foreach(var a in Archetypes){<span>@a</span>}@if(!Archetypes.Any()){<span class="bad">Archetype missing</span>}</div></div>
+                <div class="complete"><div class="ring"><b>@Completion%</b></div><strong>Dossier Complete</strong><small>@MissingCount areas need work</small><a href="/npc-studio/npc/@_sheet.Id">Open Full Dossier</a></div>
+            </section>
+
+            <nav class="tabs"><a href="/npc-studio/npc/@_sheet.Id">Overview</a><a href="/npc-studio/npc/@_sheet.Id?tab=traits">Traits</a><a href="/npc-studio/npc/@_sheet.Id?tab=history">History</a><a href="/npc-studio/npc/@_sheet.Id?tab=relationships">Relationships</a><a href="/npc-studio/npc/@_sheet.Id?tab=voice">Voice</a><a href="/npc-studio/npc/@_sheet.Id?tab=media">Media</a><a href="/npc-studio/npc/@_sheet.Id?tab=notes">Notes</a></nav>
+
+            <section class="dashboard-grid">
+                <article class="card"><header>IDENTITY & APPEARANCE</header><div class="facts">@Fact("Full Name",_sheet.Name,true)@Fact("Gender",Safe(_sheet.Gender,"Missing"),!Missing(_sheet.Gender))@Fact("Height",Height,_sheet.HeightCm>0)@Fact("Weight",Weight,_sheet.WeightKg>0)@Fact("Eye Color",Safe(_sheet.Appearance.EyeColor,"Missing"),!Missing(_sheet.Appearance.EyeColor))@Fact("Hair",Hair,!Missing(_sheet.Appearance.HairColor))@Fact("Build",Safe(_sheet.Appearance.BodyType,"Missing"),!Missing(_sheet.Appearance.BodyType))@Fact("IQ",_sheet.IQ>0?_sheet.IQ.ToString():"Missing",_sheet.IQ>0)</div></article>
+                <article class="card"><header>PERSONALITY SNAPSHOT</header><div class="chips traits">@foreach(var t in _sheet.Traits.Take(10)){<span>@t.TraitName</span>}@if(_sheet.Traits.Count==0){<span class="bad">Traits missing</span>}</div><p>@Safe(_sheet.PersonalityContext,"Personality context needs work.")</p><div class="mini"><div><small>PUBLIC</small><b>@Safe(_sheet.PublicPersona,"Missing")</b></div><div><small>PRIVATE</small><b>@Safe(_sheet.PrivatePersona,"Missing")</b></div><div><small>HIDDEN</small><b>@Safe(_sheet.HiddenBehavior,"Not defined")</b></div></div></article>
+                <article class="card"><header>STORY DRIVERS</header>@Story("Goal",_sheet.Goal)@Story("Need",_sheet.Need)@Story("Fear",_sheet.Fear)@Story("Want",_sheet.Want)</article>
+                <article class="card"><header>RECENT HISTORY <a href="/npc-studio/npc/@_sheet.Id?tab=history">Timeline</a></header>@foreach(var h in _sheet.HistoryEvents.OrderByDescending(x=>x.EventDate).Take(5)){<div class="history"><i></i><div><b>@Safe(h.Title,"Event")</b><small>@Safe(h.Details,"No description")</small></div></div>}@if(_sheet.HistoryEvents.Count==0){<div class="missing-box">No authored history yet.</div>}</article>
+                <article class="card"><header>RELATIONSHIP INTELLIGENCE <a href="/npc-studio/relationship-map">Web</a></header><div class="kpis"><div><b>@_sheet.Relationships.Count</b><small>Total</small></div><div><b>@FamilyCount</b><small>Family</small></div><div><b>@FriendCount</b><small>Friends</small></div><div><b>@ConflictCount</b><small>Rivals</small></div></div>@foreach(var r in _sheet.Relationships.OrderByDescending(x=>x.Importance).Take(4)){<div class="rel"><b>@RelationshipName(r)</b><span>@Safe(r.RelationshipCategory,r.RelationshipType)</span><strong>@r.Importance</strong></div>}</article>
+                <article class="card"><header>STATUS & NEEDS</header>@Ready("Identity",IdentityReady)@Ready("Personality",PersonaReady)@Ready("History",_sheet.HistoryEvents.Count>0)@Ready("Relationships",_sheet.Relationships.Count>0)@Ready("Voice",VoiceReady)@Ready("Media",PhotoReady)<div class="ai"><small>AI DOSSIER SUMMARY</small><p>@Summary</p></div></article>
+            </section>
+        }
+    </main>
+</div>
+
+<style>
+.npc-dossier-index{display:grid;grid-template-columns:285px minmax(0,1fr);min-height:calc(100vh - 1rem);background:#070d18;color:#edf2fb;border:1px solid #1d2a42;border-radius:15px;overflow:hidden}.npc-index-rail{background:#091221;border-right:1px solid #20304b;padding:14px;display:flex;flex-direction:column;min-width:0}.rail-title{display:flex;justify-content:space-between;align-items:center;padding:5px 3px 13px}.rail-title small,.eyebrow{color:#a98cff;letter-spacing:.15em;font-weight:800}.rail-title h2{margin:2px 0}.rail-title>span{background:#111d31;border:1px solid #283a5a;border-radius:999px;padding:5px 9px}.rail-search{background:#0b1525!important;color:#eaf0fb!important;border:1px solid #283a58!important;border-radius:9px!important;padding:10px!important}.rail-buttons{display:flex;gap:6px;margin:9px 0}.rail-buttons button{background:#0c1626;color:#96a8c4;border:1px solid #263752;border-radius:7px;padding:6px 10px}.rail-buttons .active{background:#2b2250;color:#d9ceff;border-color:#7657dd}.npc-scroll{overflow:auto;max-height:calc(100vh - 190px)}.npc-row{width:100%;display:grid;grid-template-columns:52px minmax(0,1fr);gap:9px;align-items:center;background:transparent;color:inherit;border:1px solid transparent;border-radius:9px;padding:8px;text-align:left;margin-bottom:4px}.npc-row:hover{background:#0f1a2c}.npc-row.selected{background:#111f35;border-color:#7053dd;box-shadow:inset 3px 0 #8b6cff}.thumb{width:52px;height:52px;border-radius:7px;background:#182640;overflow:hidden;display:grid;place-items:center}.thumb-action{padding:0;border:1px solid #304463;color:#fff;cursor:pointer}.thumb-action:hover{border-color:#8b6cff;box-shadow:0 0 0 2px rgba(139,108,255,.15)}.thumb img{width:100%;height:100%;object-fit:cover}.row-select{min-width:0;display:grid;grid-template-columns:minmax(0,1fr) 8px;gap:8px;align-items:center;background:transparent;border:0;color:inherit;text-align:left;padding:0;cursor:pointer}.row-copy{min-width:0}.row-copy strong,.row-copy small{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.row-copy small{font-size:11px;color:#8698b5}.npc-row i{width:8px;height:8px;border-radius:50%}.npc-row i.green{background:#55d170}.npc-row i.yellow{background:#e7b94a}.npc-row i.red{background:#ef6161}.npc-file{padding:18px;min-width:0;background:radial-gradient(circle at 20% 0,#111a2b,#080e18 40%)}.card{background:#0d1625;border:1px solid #22314b;border-radius:11px;padding:14px}.hero{display:grid;grid-template-columns:145px 1fr 175px;gap:18px}.portrait{height:170px;border-radius:9px;background:#18263c;overflow:hidden;display:grid;place-items:center;font-size:38px;font-weight:900}.portrait img{width:100%;height:100%;object-fit:cover}.hero h1{font-size:32px;margin:3px 0 9px}.meta{display:flex;gap:15px;flex-wrap:wrap;color:#9bacC7;font-size:12px}.hero-main p{color:#b9c5d8;line-height:1.45;margin:12px 0}.chips{display:flex;gap:6px;flex-wrap:wrap}.chips span{border:1px solid #34445f;background:#111d31;border-radius:6px;padding:4px 8px;font-size:11px}.chips .bad,.bad{color:#ff8b8b;border-color:#63323e;background:#27151c}.complete{border-left:1px solid #22314b;padding-left:15px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center}.ring{width:82px;height:82px;border-radius:50%;border:8px solid #27364f;border-top-color:#70d05f;display:grid;place-items:center}.complete a{width:100%;background:#7048e4;color:white;text-decoration:none;border-radius:7px;padding:8px;margin-top:5px}.tabs{display:flex;gap:3px;border-bottom:1px solid #22314b;margin:12px 0}.tabs a{color:#9fb0c9;text-decoration:none;padding:9px 13px}.tabs a:first-child{color:#cfc3ff;border-bottom:2px solid #8c69ff}.dashboard-grid{display:grid;grid-template-columns:1.05fr 1.05fr .9fr;gap:11px}.card header{font-size:11px;letter-spacing:.1em;color:#b9a9ff;font-weight:800;border-bottom:1px solid #1b2940;padding-bottom:9px;margin-bottom:9px}.card header a{float:right;color:#9d86ff;text-decoration:none}.facts{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}.fact{display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px solid #17243a;font-size:11px}.fact span{color:#8495b1}.fact.missing b{color:#ff7777}.traits{margin-bottom:9px}.card p{font-size:11px;color:#aebbd0}.mini{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}.mini div{background:#0a1320;border:1px solid #1c2a42;border-radius:7px;padding:7px}.mini small{display:block;color:#7386a4;font-size:9px}.mini b{font-size:11px}.story{border-left:2px solid #6f4be0;padding-left:9px;margin:9px 0}.story.missing{border-color:#cf4c58}.story small,.ai small{color:#8d7ae9;font-size:9px;font-weight:800;letter-spacing:.08em}.story p{margin:2px 0}.history{display:grid;grid-template-columns:10px 1fr;gap:7px;margin:8px 0}.history i{width:7px;height:7px;border-radius:50%;background:#7958e7;margin-top:4px}.history b,.history small{display:block;font-size:11px}.history small{color:#8394af}.missing-box{border:1px dashed #5c3340;background:#21141a;color:#ef8888;border-radius:7px;padding:9px;font-size:11px}.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}.kpis div{background:#0a1320;border:1px solid #1d2a42;border-radius:7px;text-align:center;padding:7px}.kpis b{display:block;color:#c9bdff}.kpis small{font-size:9px;color:#7d8eaa}.rel{display:grid;grid-template-columns:1fr auto 28px;gap:7px;padding:6px 0;border-top:1px solid #17243a;font-size:10px}.rel span{color:#7f90aa}.ready{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #17243a;font-size:10px}.ready b{padding:2px 5px;border-radius:4px}.ready .good{background:#173b24;color:#76d98b}.ready .bad{background:#3a1b22;color:#ff8383}.ai{margin-top:9px;background:#0a1320;border:1px solid #20304a;border-radius:7px;padding:8px}.ai p{margin:4px 0}.empty{text-align:center;padding:80px;color:#8fa0ba}@@media(max-width:1150px){.npc-dossier-index{grid-template-columns:240px 1fr}.dashboard-grid{grid-template-columns:1fr 1fr}.hero{grid-template-columns:115px 1fr}.portrait{height:145px}.complete{grid-column:1/-1;border-left:0;border-top:1px solid #22314b;padding:10px 0;flex-direction:row}.ring{width:55px;height:55px}}@@media(max-width:780px){.npc-dossier-index{grid-template-columns:1fr}.npc-scroll{max-height:300px}.dashboard-grid,.hero{grid-template-columns:1fr}.portrait{height:250px}.facts{grid-template-columns:1fr}.tabs{overflow:auto}}
+</style>
+
+@code {
+    string _search="", _status=""; List<NpcBrowserRow> _rows=new(); NpcCharacterSheet? _sheet;
+    protected override async Task OnInitializedAsync(){_rows=await Studio.SearchNpcsAsync("","",null); if(_rows.Count>0) await SelectAsync(_rows[0].Id);}
+    IEnumerable<NpcBrowserRow> FilteredRows => _rows.Where(r => string.IsNullOrWhiteSpace(_search) || r.Name.Contains(_search,StringComparison.OrdinalIgnoreCase) || r.Occupation.Contains(_search,StringComparison.OrdinalIgnoreCase));
+    Task ShowAllAsync() => ApplyFilterAsync("");
+    Task ShowCoreAsync() => ApplyFilterAsync("Core");
+    Task ShowDraftAsync() => ApplyFilterAsync("Draft");
+    async Task ApplyFilterAsync(string status)
+    {
+        _status = status;
+        _rows = await Studio.SearchNpcsAsync("", status, null);
+        if (_rows.Count > 0) await SelectAsync(_rows[0].Id);
+        else _sheet = null;
+    }
+    void OpenDossier(int id) => Nav.NavigateTo($"/npc-studio/npc/{id}");
+    async Task SelectAsync(int id)=>_sheet=await Studio.GetCharacterSheetAsync(id);
+    string FilterClass(string s)=>_status==s?"active":""; string SelectedClass(int id)=>_sheet?.Id==id?"selected":"";
+    static string DotClass(NpcBrowserRow r)=>string.Equals(r.ImageStatus,"Approved",StringComparison.OrdinalIgnoreCase)&&!string.Equals(r.VoiceStatus,"Missing",StringComparison.OrdinalIgnoreCase)?"green":r.RelationshipCount>0?"yellow":"red";
+    string Portrait=>!string.IsNullOrWhiteSpace(_sheet?.Appearance.ProfileImagePath)?_sheet.Appearance.ProfileImagePath:_sheet?.Appearance.ReferenceImagePath??"";
+    IEnumerable<string> Archetypes=>new[]{_sheet?.Archetype1,_sheet?.Archetype2,_sheet?.Archetype3}.Where(x=>!string.IsNullOrWhiteSpace(x)).Select(x=>x!);
+    string Summary=>!Missing(_sheet?.AiSummary)?_sheet!.AiSummary:!Missing(_sheet?.PersonalityContext)?_sheet!.PersonalityContext:"AI dossier summary has not been generated yet.";
+    string Height=>_sheet is null||_sheet.HeightCm<=0?"Missing":$"{(int)Math.Floor(_sheet.HeightCm/2.54/12)}' {(int)Math.Round((_sheet.HeightCm/2.54)%12)}\"";
+    string Weight=>_sheet is null||_sheet.WeightKg<=0?"Missing":$"{Math.Round(_sheet.WeightKg*2.2046226218):0} lb";
+    string Hair=>_sheet is null?"Missing":string.Join(", ",new[]{_sheet.Appearance.HairColor,_sheet.Appearance.HairStyle}.Where(x=>!Missing(x)));
+    bool PhotoReady=>!string.IsNullOrWhiteSpace(Portrait); bool VoiceReady=>_sheet?.Voice.Approved==true&&!string.IsNullOrWhiteSpace(_sheet.Voice.ReferenceAudioPath);
+    bool IdentityReady=>_sheet is not null&&!Missing(_sheet.Name)&&_sheet.Age>0&&!Missing(_sheet.Gender)&&_sheet.HeightCm>0&&_sheet.WeightKg>0; bool PersonaReady=>_sheet is not null&&!Missing(_sheet.Archetype1)&&!Missing(_sheet.PublicPersona)&&_sheet.Traits.Count>0;
+    int FamilyCount => _sheet?.Relationships.Count(r => (r.RelationshipCategory ?? "").Contains("Family", StringComparison.OrdinalIgnoreCase) || !string.IsNullOrWhiteSpace(r.FamilyRole)) ?? 0;
+    int FriendCount => _sheet?.Relationships.Count(r => (r.RelationshipCategory ?? "").Contains("Friend", StringComparison.OrdinalIgnoreCase)) ?? 0;
+    int ConflictCount => _sheet?.Relationships.Count(r => (r.RelationshipCategory ?? "").Contains("Rival", StringComparison.OrdinalIgnoreCase) || (r.RelationshipCategory ?? "").Contains("Enemy", StringComparison.OrdinalIgnoreCase) || (r.RelationshipType ?? "").Contains("rival", StringComparison.OrdinalIgnoreCase) || (r.RelationshipType ?? "").Contains("enemy", StringComparison.OrdinalIgnoreCase)) ?? 0;
+    static string RelationshipName(NpcRelationshipRow r) => !string.IsNullOrWhiteSpace(r.TargetName) ? r.TargetName : !string.IsNullOrWhiteSpace(r.TargetNameSnapshot) ? r.TargetNameSnapshot : "Unknown";
+    int Completion { get { if(_sheet is null)return 0;var c=new[]{IdentityReady,PersonaReady,!Missing(_sheet.Occupation),!Missing(_sheet.Location),_sheet.HistoryEvents.Count>0,_sheet.Relationships.Count>0,VoiceReady,PhotoReady,!Missing(_sheet.Goal),!Missing(_sheet.Fear)};return (int)Math.Round(c.Count(x=>x)*100d/c.Length);}}
+    int MissingCount=>10-(int)Math.Round(Completion/10d);
+    static bool Missing(string? v)=>string.IsNullOrWhiteSpace(v)||v.Equals("Not found",StringComparison.OrdinalIgnoreCase); static string Safe(string? v,string f)=>Missing(v)?f:v!;
+    static string Initials(string n){var p=(n??"?").Split(' ',StringSplitOptions.RemoveEmptyEntries);return p.Length==0?"?":p.Length==1?p[0][0].ToString().ToUpperInvariant():$"{p[0][0]}{p[^1][0]}".ToUpperInvariant();}
+    static string Media(string? p)=>string.IsNullOrWhiteSpace(p)?"":p.StartsWith("http",StringComparison.OrdinalIgnoreCase)||p.StartsWith("/",StringComparison.OrdinalIgnoreCase)?p:"/npc-media?path="+Uri.EscapeDataString(p)+"&v="+DateTime.UtcNow.Ticks;
+    RenderFragment Fact(string l,string v,bool ok)=>b=>{var i=0;b.OpenElement(i++,"div");b.AddAttribute(i++,"class","fact"+(ok?"":" missing"));b.OpenElement(i++,"span");b.AddContent(i++,l);b.CloseElement();b.OpenElement(i++,"b");b.AddContent(i++,v);b.CloseElement();b.CloseElement();};
+    RenderFragment Story(string l,string? v)=>b=>{var ok=!Missing(v);var i=0;b.OpenElement(i++,"div");b.AddAttribute(i++,"class","story"+(ok?"":" missing"));b.OpenElement(i++,"small");b.AddContent(i++,l);b.CloseElement();b.OpenElement(i++,"p");b.AddContent(i++,ok?v:"Missing — needs authoring");b.CloseElement();b.CloseElement();};
+    RenderFragment Ready(string l,bool ok)=>b=>{var i=0;b.OpenElement(i++,"div");b.AddAttribute(i++,"class","ready");b.OpenElement(i++,"span");b.AddContent(i++,l);b.CloseElement();b.OpenElement(i++,"b");b.AddAttribute(i++,"class",ok?"good":"bad");b.AddContent(i++,ok?"READY":"MISSING");b.CloseElement();b.CloseElement();};
+}

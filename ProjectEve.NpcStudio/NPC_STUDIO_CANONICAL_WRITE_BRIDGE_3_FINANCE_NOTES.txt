@@ -1,0 +1,30 @@
+﻿NPC STUDIO — CANONICAL WRITE BRIDGE 3 — FINANCE
+
+This bridge edits canonical MAIN finance structure:
+- FinancialAccounts
+- FinancialObligations
+
+FinancialTransactions remains objective HISTORY and is intentionally
+not edited in this phase.
+
+Important architecture:
+- Accounts / obligations = current structural state in MAIN.
+- Transactions = objective historical money movement in HISTORY.
+
+This page is schema-aware:
+- Reads the actual table columns with PRAGMA table_info.
+- Does not guess unknown finance field names.
+- Only allows the two approved finance tables.
+- Owner fields are forced to the selected NPC.
+- Primary keys are generated for new rows when blank.
+- Every save is read back and verified.
+- Every successful save writes a NpcBuildRevisions entry.
+- Page uses @rendermode InteractiveServer from the start.
+
+Eve expected baseline:
+- Accounts: 1
+- Obligations: 2
+
+Do not change Eve's actual monetary canon for the first test.
+Use a Notes or similar descriptive field if the live schema exposes one,
+save, verify, then remove the test text and save again.

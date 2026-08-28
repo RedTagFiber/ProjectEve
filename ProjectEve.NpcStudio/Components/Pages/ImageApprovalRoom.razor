@@ -1,0 +1,814 @@
+@page "/npc-studio/image-approval"
+@rendermode InteractiveServer
+@using ProjectEve.NpcStudio.Models
+@using System.IO
+@using System.Linq
+@inject ProjectEve.NpcStudio.Services.NpcStudioService Studio
+@inject ProjectEve.NpcStudio.Services.NpcFileSystemService FileSystem
+
+<PageTitle>Image Approval Room</PageTitle>
+
+<section class="studio-page studio-page-dark phase14-page">
+    <div class="studio-page-header">
+        <div>
+            <p class="studio-eyebrow">Evidence Review · Phase 15</p>
+            <h1>Image Approval Room</h1>
+            <p class="studio-muted">
+                Build a better photo prompt, find Comfy output, copy the approved image into the NPC case-file folder,
+                and set it as the reference photo.
+            </p>
+        </div>
+
+        <div class="studio-actions-row">
+            <a class="studio-btn" href="/npc-studio/comfy">Comfy Room</a>
+
+            @if (_sheet is not null)
+            {
+                <a class="studio-btn studio-btn-primary" href="/npc-studio/npc/@_sheet.Id">Open Profile</a>
+            }
+        </div>
+    </div>
+
+    <div class="studio-card phase14-status-card">
+        <div class="phase14-status-row @StatusCss(_loadStatus)">
+            <strong>@StatusIcon(_loadStatus) NPC file</strong>
+            <span>@_loadMessage</span>
+        </div>
+
+        <div class="phase14-status-row @StatusCss(_folderStatus)">
+            <strong>@StatusIcon(_folderStatus) NPC folder</strong>
+            <span>@_folderMessage</span>
+        </div>
+
+        <div class="phase14-status-row @StatusCss(_promptStatus)">
+            <strong>@StatusIcon(_promptStatus) Photo prompt</strong>
+            <span>@_promptMessage</span>
+        </div>
+
+        <div class="phase14-status-row @StatusCss(_pathStatus)">
+            <strong>@StatusIcon(_pathStatus) Comfy output path</strong>
+            <span>@_pathMessage</span>
+        </div>
+
+        <div class="phase14-status-row @StatusCss(_previewStatus)">
+            <strong>@StatusIcon(_previewStatus) Preview</strong>
+            <span>@_previewMessage</span>
+        </div>
+
+        <div class="phase14-status-row @StatusCss(_approvalStatus)">
+            <strong>@StatusIcon(_approvalStatus) Approval</strong>
+            <span>@_approvalMessage</span>
+        </div>
+    </div>
+
+    <div class="studio-two-column phase14-two-column">
+        <div class="studio-card case-section">
+            <div class="studio-card-head">
+                <h2>1. Load NPC</h2>
+                <span class="studio-pill">case file</span>
+            </div>
+
+            <label>NPC Id</label>
+
+            <div class="phase14-inline-row">
+                <input class="form-control" type="number" @bind="_npcId" />
+
+                <button class="studio-btn studio-btn-primary"
+                        disabled="@_isBusy"
+                        @onclick="@(async () => await LoadAsync())">
+                    Load NPC
+                </button>
+
+                <button class="studio-btn"
+                        disabled="@(_isBusy || _sheet is null)"
+                        @onclick="@(async () => await CreateOrRepairNpcFoldersAsync())">
+                    Create/Repair NPC Folders
+                </button>
+            </div>
+
+            @if (_sheet is not null)
+            {
+                <div class="phase14-mini-case">
+                    <div class="phase14-mini-photo">
+                        @if (IsRenderablePath(_sheet.Appearance.ReferenceImagePath))
+                        {
+                            <img src="@BuildImagePreviewUrl(_sheet.Appearance.ReferenceImagePath)" alt="@_sheet.Name reference image" />
+                        }
+                        else
+                        {
+                            <span>@Initials(_sheet.Name)</span>
+                        }
+                    </div>
+
+                    <div>
+                        <p class="studio-eyebrow">Active NPC</p>
+                        <h3>@_sheet.Name</h3>
+                        <p>
+                            <strong>Age:</strong> @_sheet.Age ·
+                            <strong>Sex:</strong> @_sheet.Gender ·
+                            <strong>Job:</strong> @_sheet.Occupation
+                        </p>
+                        <p>
+                            <strong>Status:</strong> @_sheet.Status ·
+                            <strong>Tier:</strong> @_sheet.Tier ·
+                            <strong>Image:</strong> @_sheet.Appearance.AppearanceStatus
+                        </p>
+                        <p><strong>Location:</strong> @_sheet.Location</p>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <p class="studio-muted">Load an NPC first so the room knows whose photo you are approving.</p>
+            }
+        </div>
+
+        <div class="studio-card case-section">
+            <div class="studio-card-head">
+                <h2>2. Where Comfy saves it</h2>
+                <span class="studio-pill">output folder</span>
+            </div>
+
+            <p class="studio-muted">Your Comfy shared output root is:</p>
+            <code class="phase14-path-code">@ComfyOutputRoot</code>
+
+            <p class="studio-muted mt-2">
+                NPC Studio expects this subfolder when the SaveImage prefix is
+                <code>ProjectEve/NPC_000001/ReferencePortrait</code>:
+            </p>
+            <code class="phase14-path-code">@ExpectedNpcComfyFolder</code>
+
+            <div class="studio-actions-row">
+                <button class="studio-btn"
+                        disabled="@(_sheet is null)"
+                        @onclick="@(() => FindNewestComfyOutput())">
+                    Use Newest Comfy Output
+                </button>
+
+                <button class="studio-btn"
+                        disabled="@(_sheet is null)"
+                        @onclick="@(() => UseSuggestedNpcReferencePath())">
+                    Use NPC Reference Folder Path
+                </button>
+            </div>
+
+            @if (!string.IsNullOrWhiteSpace(_detectedComfyPath))
+            {
+                <p class="small-text">
+                    <strong>Newest detected output:</strong> @_detectedComfyPath
+                </p>
+            }
+        </div>
+    </div>
+
+    @if (_sheet is not null)
+    {
+        <section class="studio-profile-hero casefile compact-casefile phase14-casefile">
+            <div class="studio-photo-wrap">
+                @if (IsRenderablePath(_sheet.Appearance.ReferenceImagePath))
+                {
+                    <img class="studio-case-img" src="@BuildImagePreviewUrl(_sheet.Appearance.ReferenceImagePath)" alt="@_sheet.Name reference image" />
+                }
+                else
+                {
+                    <div class="studio-case-photo">@Initials(_sheet.Name)</div>
+                }
+
+                <div class="studio-photo-label">Current Reference</div>
+            </div>
+
+            <div class="studio-profile-title">
+                <p class="studio-eyebrow">Official NPC Case File</p>
+                <h1>@_sheet.Name</h1>
+                <p class="studio-muted">
+                    <strong>Id:</strong> @_sheet.Id ·
+                    <strong>Age:</strong> @_sheet.Age ·
+                    <strong>Sex:</strong> @_sheet.Gender ·
+                    <strong>Job:</strong> @_sheet.Occupation
+                </p>
+                <p><strong>Current Reference Path:</strong> @_sheet.Appearance.ReferenceImagePath</p>
+                <p>
+                    <strong>Appearance Status:</strong> @_sheet.Appearance.AppearanceStatus ·
+                    <strong>Approved:</strong> @(_sheet.Appearance.Approved ? "yes" : "no")
+                </p>
+            </div>
+        </section>
+
+        <div class="studio-card case-section">
+            <div class="studio-card-head">
+                <h2>3. Photo Prompt Generator</h2>
+                <span class="studio-pill">for this NPC only</span>
+            </div>
+
+            <p class="studio-muted">
+                This prompt is built from the loaded NPC file. Use it for the next Comfy run.
+            </p>
+
+            <div class="phase14-inline-row wrap">
+                <button class="studio-btn studio-btn-primary"
+                        @onclick="@(() => BuildPhotoPromptFromNpc())">
+                    Build Better Photo Prompt
+                </button>
+
+                <button class="studio-btn"
+                        disabled="@_isBusy"
+                        @onclick="@(async () => await SavePromptToAppearanceAsync())">
+                    Save Prompt to Appearance
+                </button>
+            </div>
+
+            <label>Positive Prompt</label>
+            <textarea class="form-control phase14-prompt-box" rows="8" @bind="_positivePrompt"></textarea>
+
+            <label>Negative Prompt</label>
+            <textarea class="form-control" rows="4" @bind="_negativePrompt"></textarea>
+        </div>
+
+        <div class="studio-two-column phase14-two-column">
+            <div class="studio-card case-section">
+                <div class="studio-card-head">
+                    <h2>4. Approve Photo</h2>
+                    <span class="studio-pill">final image path</span>
+                </div>
+
+                <p class="studio-muted">
+                    Select an image generation record, use the newest Comfy output path, or paste the final local image path manually.
+                </p>
+
+                <label>Selected Image Generation Id</label>
+                <input class="form-control" @bind="_selectedImageId" />
+
+                <label>Final Image Path</label>
+                <input class="form-control"
+                       @bind="_finalImagePath"
+                       placeholder="D:\ProjectEveData\Comfy\Temp\ProjectEve\NPC_000001\ReferencePortrait_00001_.png" />
+
+                <div class="studio-check-row stacked-checks">
+                    <label>
+                        <input type="checkbox" @bind="_setAsReference" />
+                        Set as current reference image
+                    </label>
+
+                    <label>
+                        <input type="checkbox" @bind="_copyToNpcFolder" />
+                        Copy approved image into NPC case-file folder
+                    </label>
+                </div>
+
+                @if (!string.IsNullOrWhiteSpace(_copiedImagePath))
+                {
+                    <p class="small-text">
+                        <strong>Copied approved file:</strong> @_copiedImagePath
+                    </p>
+                }
+
+                <div class="studio-actions-row">
+                    <button class="studio-btn"
+                            @onclick="@(async () => await CheckPreviewPathAsync())">
+                        Check Preview
+                    </button>
+
+                    <button class="studio-btn studio-btn-success"
+                            disabled="@_isBusy"
+                            @onclick="@(async () => await ApproveAsync())">
+                        Approve Image
+                    </button>
+                </div>
+            </div>
+
+            <div class="studio-card case-section preview-card">
+                <div class="studio-card-head">
+                    <h2>Preview</h2>
+                    <span class="studio-pill">local file check</span>
+                </div>
+
+                @if (!string.IsNullOrWhiteSpace(_validatedPreviewUrl))
+                {
+                    <div class="phase14-preview-frame">
+                        <img class="studio-image-preview" src="@_validatedPreviewUrl" alt="Selected generated image preview" />
+                        <p class="small-text">
+                            <strong>Preview path:</strong> @_validatedPreviewPath
+                        </p>
+                    </div>
+                }
+                else
+                {
+                    <div class="studio-empty-preview">
+                        <strong>PHOTO</strong>
+                        <p>Paste a real file path or click Use Newest Comfy Output, then Check Preview.</p>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="studio-card case-section">
+            <div class="studio-card-head">
+                <h2>Image Generation History (@_sheet.Images.Count)</h2>
+                <span class="studio-pill">queued + approved records</span>
+            </div>
+
+            @if (_sheet.Images.Count == 0)
+            {
+                <p>No image generation records for this NPC yet. Use Comfy Room first.</p>
+            }
+            else
+            {
+                <div class="studio-image-history-grid">
+                    @foreach (var img in _sheet.Images.OrderByDescending(x => x.CreatedRealAt))
+                    {
+                        <article class="studio-image-record phase14-image-record">
+                            <div class="studio-thumb-box">
+                                @if (IsRenderablePath(img.ImagePath))
+                                {
+                                    <img src="@BuildImagePreviewUrl(img.ImagePath)" alt="Generated image preview" />
+                                }
+                                else
+                                {
+                                    <span>No saved path yet</span>
+                                }
+                            </div>
+
+                            <div>
+                                <div class="studio-card-head small-head">
+                                    <h3>@img.ImageType</h3>
+
+                                    <button class="studio-mini-btn"
+                                            @onclick="@(() => SelectImage(img))">
+                                        Select
+                                    </button>
+                                </div>
+
+                                <p>
+                                    <span class="studio-badge @(img.Approved ? "green" : "blue")">
+                                        Approved: @(img.Approved ? "yes" : "no")
+                                    </span>
+
+                                    <span class="studio-badge @(img.IsCurrent ? "gold" : "ghost")">
+                                        Current: @(img.IsCurrent ? "yes" : "no")
+                                    </span>
+                                </p>
+
+                                <p class="small-text">
+                                    <strong>Path:</strong> @(string.IsNullOrWhiteSpace(img.ImagePath) ? "No path saved yet" : img.ImagePath)
+                                </p>
+
+                                <p class="small-text">
+                                    <strong>Seed:</strong> @img.Seed ·
+                                    <strong>Workflow:</strong> @img.WorkflowName
+                                </p>
+
+                                <details>
+                                    <summary>prompt</summary>
+                                    <pre>@img.PositivePrompt</pre>
+                                </details>
+                            </div>
+                        </article>
+                    }
+                </div>
+            }
+        </div>
+    }
+</section>
+
+@code {
+    private const string AllowedMediaRoot = @"D:\ProjectEveData";
+    private const string ComfyOutputRoot = @"D:\ProjectEveData\Comfy\Temp";
+
+    private int _npcId = 1;
+    private NpcCharacterSheet? _sheet;
+
+    private string _selectedImageId = "";
+    private string _finalImagePath = "";
+    private string _validatedPreviewPath = "";
+    private string _validatedPreviewUrl = "";
+    private string _detectedComfyPath = "";
+    private string _copiedImagePath = "";
+
+    private bool _setAsReference = true;
+    private bool _copyToNpcFolder = true;
+    private bool _isBusy;
+
+    private string _positivePrompt = "";
+    private string _negativePrompt = DefaultNegativePrompt;
+
+    private string _loadStatus = "idle";
+    private string _promptStatus = "idle";
+    private string _pathStatus = "idle";
+    private string _previewStatus = "idle";
+    private string _approvalStatus = "idle";
+    private string _folderStatus = "idle";
+
+    private string _loadMessage = "Load an NPC first.";
+    private string _promptMessage = "No photo prompt built yet.";
+    private string _pathMessage = "No Comfy output detected yet.";
+    private string _previewMessage = "No preview checked yet.";
+    private string _approvalMessage = "No image approved yet.";
+    private string _folderMessage = "NPC case-file folders have not been checked yet.";
+
+    private string ExpectedNpcComfyFolder => _sheet is null
+        ? Path.Combine(ComfyOutputRoot, "ProjectEve", $"NPC_{_npcId:D6}")
+        : Path.Combine(ComfyOutputRoot, "ProjectEve", $"NPC_{_sheet.Id:D6}");
+
+    private async Task LoadAsync()
+    {
+        _isBusy = true;
+        SetStep(ref _loadStatus, ref _loadMessage, "working", "Loading NPC image history...");
+
+        try
+        {
+            _sheet = await Studio.GetCharacterSheetAsync(_npcId);
+
+            if (_sheet is null)
+            {
+                SetStep(ref _loadStatus, ref _loadMessage, "fail", "NPC not found.");
+                return;
+            }
+
+            _finalImagePath = _sheet.Appearance.ReferenceImagePath;
+            _positivePrompt = string.IsNullOrWhiteSpace(_sheet.Appearance.ImagePrompt) ? "" : _sheet.Appearance.ImagePrompt;
+            _negativePrompt = string.IsNullOrWhiteSpace(_sheet.Appearance.NegativePrompt) ? DefaultNegativePrompt : _sheet.Appearance.NegativePrompt;
+
+            SetStep(ref _loadStatus, ref _loadMessage, "ok", $"Loaded {_sheet.Name}. Image records: {_sheet.Images.Count}.");
+
+            await EnsureFolderLayoutAsync(silent: true);
+
+            FindNewestComfyOutput();
+
+            if (string.IsNullOrWhiteSpace(_positivePrompt))
+                BuildPhotoPromptFromNpc();
+
+            if (!string.IsNullOrWhiteSpace(_finalImagePath))
+                await CheckPreviewPathAsync();
+        }
+        catch (Exception ex)
+        {
+            SetStep(ref _loadStatus, ref _loadMessage, "fail", "Load failed: " + ex.Message);
+        }
+        finally
+        {
+            _isBusy = false;
+        }
+    }
+
+    private async Task CreateOrRepairNpcFoldersAsync()
+    {
+        await EnsureFolderLayoutAsync(silent: false);
+    }
+
+    private async Task EnsureFolderLayoutAsync(bool silent = false)
+    {
+        if (_sheet is null)
+            return;
+
+        if (!silent)
+            SetStep(ref _folderStatus, ref _folderMessage, "working", "Creating/repairing NPC folder layout...");
+
+        try
+        {
+            await FileSystem.EnsureNpcFolderLayoutAsync(_sheet);
+            SetStep(ref _folderStatus, ref _folderMessage, "ok", "NPC folder layout is ready: " + FileSystem.GetNpcFolderPath(_sheet));
+        }
+        catch (Exception ex)
+        {
+            SetStep(ref _folderStatus, ref _folderMessage, "fail", "Folder layout failed: " + ex.Message);
+        }
+    }
+
+    private void SelectImage(NpcImageGeneration image)
+    {
+        _selectedImageId = image.Id;
+        _finalImagePath = image.ImagePath;
+        _positivePrompt = string.IsNullOrWhiteSpace(image.PositivePrompt) ? _positivePrompt : image.PositivePrompt;
+        _negativePrompt = string.IsNullOrWhiteSpace(image.NegativePrompt) ? _negativePrompt : image.NegativePrompt;
+
+        if (string.IsNullOrWhiteSpace(_finalImagePath))
+            _finalImagePath = !string.IsNullOrWhiteSpace(_detectedComfyPath) ? _detectedComfyPath : BuildSuggestedReferencePath(_sheet, image);
+
+        SetStep(ref _pathStatus, ref _pathMessage, "ok", "Selected image record. Confirm the path, then approve.");
+
+        _validatedPreviewPath = "";
+        _validatedPreviewUrl = "";
+    }
+
+    private async Task ApproveAsync()
+    {
+        if (_sheet is null)
+            return;
+
+        if (string.IsNullOrWhiteSpace(_selectedImageId))
+        {
+            SetStep(ref _approvalStatus, ref _approvalMessage, "fail", "Select an image generation record first.");
+            return;
+        }
+
+        var validation = ValidatePreviewPath(_finalImagePath);
+
+        if (!validation.IsValid)
+        {
+            SetStep(ref _approvalStatus, ref _approvalMessage, "fail", validation.Message);
+            return;
+        }
+
+        _isBusy = true;
+        SetStep(ref _approvalStatus, ref _approvalMessage, "working", "Approving image...");
+
+        try
+        {
+            var finalApprovedPath = validation.FullPath;
+            _copiedImagePath = "";
+
+            if (_copyToNpcFolder)
+            {
+                SetStep(ref _folderStatus, ref _folderMessage, "working", "Copying image into NPC case-file folder...");
+                finalApprovedPath = await FileSystem.CopyImageToNpcReferenceAsync(_sheet, validation.FullPath);
+                _copiedImagePath = finalApprovedPath;
+                SetStep(ref _folderStatus, ref _folderMessage, "ok", "Copied into NPC folder: " + finalApprovedPath);
+            }
+
+            await Studio.ApproveImageGenerationAsync(_selectedImageId, _sheet.Id, finalApprovedPath, _setAsReference);
+
+            _sheet = await Studio.GetCharacterSheetAsync(_sheet.Id);
+            _finalImagePath = finalApprovedPath;
+
+            await CheckPreviewPathAsync();
+
+            SetStep(ref _approvalStatus, ref _approvalMessage, "ok", _setAsReference
+                ? "Image approved, copied, and set as current reference image."
+                : "Image approved and copied.");
+        }
+        catch (Exception ex)
+        {
+            SetStep(ref _approvalStatus, ref _approvalMessage, "fail", "Approve failed: " + ex.Message);
+        }
+        finally
+        {
+            _isBusy = false;
+        }
+    }
+
+    private void BuildPhotoPromptFromNpc()
+    {
+        if (_sheet is null)
+            return;
+
+        _positivePrompt = BuildReferencePrompt(_sheet);
+        _negativePrompt = DefaultNegativePrompt;
+
+        SetStep(ref _promptStatus, ref _promptMessage, "ok", "Photo prompt rebuilt from the loaded NPC case file.");
+    }
+
+    private async Task SavePromptToAppearanceAsync()
+    {
+        if (_sheet is null)
+            return;
+
+        _isBusy = true;
+        SetStep(ref _promptStatus, ref _promptMessage, "working", "Saving prompt into Appearance tab...");
+
+        try
+        {
+            await Studio.SaveAppearancePromptAsync(_sheet.Id, _positivePrompt, _negativePrompt);
+            _sheet = await Studio.GetCharacterSheetAsync(_sheet.Id);
+            SetStep(ref _promptStatus, ref _promptMessage, "ok", "Saved photo prompt to this NPC's Appearance record.");
+        }
+        catch (Exception ex)
+        {
+            SetStep(ref _promptStatus, ref _promptMessage, "fail", "Save prompt failed: " + ex.Message);
+        }
+        finally
+        {
+            _isBusy = false;
+        }
+    }
+
+    private void FindNewestComfyOutput()
+    {
+        if (_sheet is null)
+            return;
+
+        var folder = ExpectedNpcComfyFolder;
+        var newest = FileSystem.FindNewestComfyOutput(_sheet.Id);
+
+        if (string.IsNullOrWhiteSpace(newest))
+        {
+            SetStep(ref _pathStatus, ref _pathMessage, "fail", "No image found yet under the Comfy temp output. Generate in Comfy first. Expected folder: " + folder);
+            return;
+        }
+
+        _detectedComfyPath = newest;
+        _finalImagePath = newest;
+
+        SetStep(ref _pathStatus, ref _pathMessage, "ok", "Newest Comfy output detected: " + newest);
+
+        _ = CheckPreviewPathAsync();
+    }
+
+    private void UseSuggestedNpcReferencePath()
+    {
+        if (_sheet is null)
+            return;
+
+        _finalImagePath = BuildSuggestedReferencePath(_sheet, new NpcImageGeneration { ImageType = "ReferencePortrait" });
+        _validatedPreviewPath = "";
+        _validatedPreviewUrl = "";
+
+        SetStep(ref _pathStatus, ref _pathMessage, "idle", "Suggested NPC reference folder path inserted. Copy the Comfy image there first, then preview.");
+    }
+
+    private Task CheckPreviewPathAsync()
+    {
+        _validatedPreviewPath = "";
+        _validatedPreviewUrl = "";
+
+        SetStep(ref _previewStatus, ref _previewMessage, "working", "Checking local image file...");
+
+        var validation = ValidatePreviewPath(_finalImagePath);
+
+        if (!validation.IsValid)
+        {
+            SetStep(ref _previewStatus, ref _previewMessage, "fail", validation.Message);
+            return Task.CompletedTask;
+        }
+
+        _validatedPreviewPath = validation.FullPath;
+        _validatedPreviewUrl = BuildImagePreviewUrl(validation.FullPath);
+
+        SetStep(ref _previewStatus, ref _previewMessage, "ok", "Preview is working.");
+
+        return Task.CompletedTask;
+    }
+
+    private static string BuildReferencePrompt(NpcCharacterSheet sheet)
+    {
+        var name = Clean(sheet.Name);
+        var gender = Clean(sheet.Gender).ToLowerInvariant();
+        var job = Clean(sheet.Occupation).ToLowerInvariant();
+        var location = Clean(sheet.Location);
+
+        if (name.Equals("Eve Sinclair", StringComparison.OrdinalIgnoreCase))
+        {
+            return "sharp realistic studio reference portrait of Eve Sinclair, 25-year-old woman from Bellefontaine Ohio, small-town coffee shop manager, front-facing, centered, upper body visible from waist up, clear face, warm expressive hazel eyes, medium-length wavy brown hair with a natural slightly messy style, approachable genuine smile with quiet emotional depth, soft light warm skin tone, realistic skin texture, natural pores, modest cozy sweater, black coffee shop apron, practical small-town style, minimal jewelry, white or pale gray background, soft natural studio lighting, high detail, grounded believable real person, official NPC case-file reference photo, consistent identity, not a celebrity";
+        }
+
+        return $"sharp realistic studio reference portrait of {name}, {sheet.Age}-year-old {gender} {job} from {location}, front-facing, centered, upper body visible from waist up, clear face, natural expressive eyes, believable small-town Ohio realism, appearance should match their job and life situation, personality cues: goal {Clean(sheet.Goal)}, need {Clean(sheet.Need)}, fear {Clean(sheet.Fear)}, want {Clean(sheet.Want)}, practical everyday clothing, natural skin texture, realistic proportions, soft natural studio lighting, white or pale gray background, official NPC case-file reference photo, unique grounded person, not a celebrity";
+    }
+
+    private static string BuildSuggestedReferencePath(NpcCharacterSheet? sheet, NpcImageGeneration image)
+    {
+        if (sheet is null)
+            return "";
+
+        var safeName = SafeFileName(sheet.Name);
+
+        var folder = string.IsNullOrWhiteSpace(sheet.FolderPath)
+            ? $@"D:\ProjectEveData\NPC\{sheet.Id:D6}_{safeName}"
+            : sheet.FolderPath;
+
+        var type = string.IsNullOrWhiteSpace(image.ImageType)
+            ? "reference"
+            : SafeFileName(image.ImageType).ToLowerInvariant();
+
+        return $@"{folder}\images\reference\{safeName}_{type}_{DateTime.Now:yyyyMMdd_HHmmss}.png";
+    }
+
+    private static PreviewValidationResult ValidatePreviewPath(string? path)
+    {
+        if (string.IsNullOrWhiteSpace(path))
+            return PreviewValidationResult.Fail("Paste a full image file path first.");
+
+        if (path.StartsWith("http", StringComparison.OrdinalIgnoreCase))
+            return PreviewValidationResult.Fail("Paste the local saved file path, not a web URL.");
+
+        string fullPath;
+        string allowedRoot;
+
+        try
+        {
+            fullPath = Path.GetFullPath(path.Trim().Trim('"'));
+            allowedRoot = Path.GetFullPath(AllowedMediaRoot);
+        }
+        catch (Exception ex)
+        {
+            return PreviewValidationResult.Fail("Invalid path: " + ex.Message);
+        }
+
+        if (!fullPath.StartsWith(allowedRoot, StringComparison.OrdinalIgnoreCase))
+            return PreviewValidationResult.Fail("Blocked path. Images must be under " + AllowedMediaRoot + ".");
+
+        var ext = Path.GetExtension(fullPath).ToLowerInvariant();
+        var okExt = ext is ".png" or ".jpg" or ".jpeg" or ".webp" or ".gif";
+
+        if (!okExt)
+            return PreviewValidationResult.Fail("Unsupported image extension. Use .png, .jpg, .jpeg, .webp, or .gif.");
+
+        if (!File.Exists(fullPath))
+            return PreviewValidationResult.Fail("File not found yet: " + fullPath);
+
+        return PreviewValidationResult.Ok(fullPath);
+    }
+
+    private static bool IsRenderablePath(string? path)
+    {
+        if (string.IsNullOrWhiteSpace(path))
+            return false;
+
+        try
+        {
+            var full = Path.GetFullPath(path.Trim().Trim('"'));
+            var allowed = Path.GetFullPath(AllowedMediaRoot);
+
+            return full.StartsWith(allowed, StringComparison.OrdinalIgnoreCase) && File.Exists(full);
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    private void SetStep(ref string status, ref string message, string value, string text)
+    {
+        status = value;
+        message = text;
+        StateHasChanged();
+    }
+
+    private static string StatusIcon(string status) => status switch
+    {
+        "working" => "⏳",
+        "ok" => "✅",
+        "fail" => "❌",
+        _ => "⚪"
+    };
+
+    private static string StatusCss(string status) => status switch
+    {
+        "working" => "studio-status-working",
+        "ok" => "studio-status-ok",
+        "fail" => "studio-status-fail",
+        _ => "studio-status-idle"
+    };
+
+    private static string BuildImagePreviewUrl(string? path)
+    {
+        if (string.IsNullOrWhiteSpace(path))
+            return "";
+
+        if (path.StartsWith("http", StringComparison.OrdinalIgnoreCase) ||
+            path.StartsWith("/", StringComparison.OrdinalIgnoreCase))
+            return path;
+
+        return "/npc-media?path=" + Uri.EscapeDataString(path);
+    }
+
+    private static string Initials(string name)
+    {
+        var parts = (name ?? "?").Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+        return parts.Length == 0
+            ? "?"
+            : parts.Length == 1
+                ? parts[0][0].ToString().ToUpperInvariant()
+                : (parts[0][0].ToString() + parts[^1][0].ToString()).ToUpperInvariant();
+    }
+
+    private static string SafeFileName(string? value)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+            return "npc";
+
+        var invalid = Path.GetInvalidFileNameChars();
+        var cleaned = new string(value.Select(ch => invalid.Contains(ch) ? '_' : ch).ToArray());
+
+        return cleaned.Replace(' ', '_');
+    }
+
+    private static string Clean(string? value)
+    {
+        return string.IsNullOrWhiteSpace(value)
+            ? "unknown"
+            : value.Trim().Replace("\r", " ").Replace("\n", " ");
+    }
+
+    private const string DefaultNegativePrompt =
+        "blurry, soft focus, low quality, orange lighting, distorted face, bad anatomy, extra fingers, missing fingers, cross-eyed, lazy eye, duplicate person, second person, cartoon, anime, painting, CGI, plastic skin, over-smoothed skin, bad teeth, harsh shadows, text, watermark, logo, cropped face, cut off head, deformed body, unrealistic proportions, celebrity likeness, nudity, topless";
+
+    private sealed class PreviewValidationResult
+    {
+        public bool IsValid { get; init; }
+        public string FullPath { get; init; } = "";
+        public string Message { get; init; } = "";
+
+        public static PreviewValidationResult Ok(string fullPath) => new()
+        {
+            IsValid = true,
+            FullPath = fullPath,
+            Message = "OK"
+        };
+
+        public static PreviewValidationResult Fail(string message) => new()
+        {
+            IsValid = false,
+            Message = message
+        };
+    }
+}

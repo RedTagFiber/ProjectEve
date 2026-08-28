@@ -1,0 +1,387 @@
+﻿@page "/canonical-professional/{NpcId:int}"
+@rendermode InteractiveServer
+@using ProjectEve.NpcStudio.Models
+@inject ProjectEve.NpcStudio.Data.NpcStudioRepository Repo
+
+<PageTitle>Canonical Education & Professional</PageTitle>
+
+<div class="canonical-shell">
+    <div class="canonical-head">
+        <div>
+            <div class="eyebrow">PROJECT EVE · CANONICAL WRITE BRIDGE 2</div>
+            <h1>Education & Professional</h1>
+            @if (_bundle is not null)
+            {
+                <p>@_bundle.NpcId — @_bundle.NpcName</p>
+            }
+        </div>
+
+        <button class="btn secondary" @onclick="ReloadAsync" disabled="@_busy">Reload</button>
+    </div>
+
+    @if (_loading)
+    {
+        <div class="panel">Loading NPC @NpcId...</div>
+    }
+    else if (!string.IsNullOrWhiteSpace(_error))
+    {
+        <div class="panel error">
+            <strong>Load failed</strong>
+            <pre>@_error</pre>
+        </div>
+    }
+    else if (_bundle is null)
+    {
+        <div class="panel">NPC @NpcId was not found.</div>
+    }
+    else
+    {
+        @if (!string.IsNullOrWhiteSpace(_message))
+        {
+            <div class="panel notice">@_message</div>
+        }
+
+        <section class="panel">
+            <div class="section-head">
+                <div>
+                    <div class="eyebrow">CURRENT STRUCTURAL TRUTH</div>
+                    <h2>Professional Profile</h2>
+                </div>
+                <button class="btn primary" @onclick="SaveProfileAsync" disabled="@_busy">Save Profile</button>
+            </div>
+
+            <div class="grid three">
+                <CanonicalField Label="Primary Role ID"><input @bind="_bundle.ProfessionalProfile.PrimaryRoleId" /></CanonicalField>
+                <CanonicalField Label="Career Field"><input @bind="_bundle.ProfessionalProfile.CareerField" /></CanonicalField>
+                <CanonicalField Label="Training Level"><input @bind="_bundle.ProfessionalProfile.TrainingLevel" /></CanonicalField>
+
+                <CanonicalField Label="Years Experience"><input type="number" step="0.1" @bind="_bundle.ProfessionalProfile.YearsExperience" /></CanonicalField>
+                <CanonicalField Label="License Standing"><input @bind="_bundle.ProfessionalProfile.LicenseStanding" /></CanonicalField>
+                <CanonicalField Label="Active">
+                    <label class="check"><input type="checkbox" @bind="_bundle.ProfessionalProfile.IsActive" /> Active profile</label>
+                </CanonicalField>
+            </div>
+
+            <div class="metric-row">
+                <div><span>Burnout</span><input type="number" min="0" max="100" @bind="_bundle.ProfessionalProfile.Burnout" /></div>
+                <div><span>Motivation</span><input type="number" min="0" max="100" @bind="_bundle.ProfessionalProfile.Motivation" /></div>
+                <div><span>Performance</span><input type="number" min="0" max="100" @bind="_bundle.ProfessionalProfile.CurrentPerformance" /></div>
+                <div><span>Reputation</span><input type="number" min="0" max="100" @bind="_bundle.ProfessionalProfile.ProfessionalReputation" /></div>
+            </div>
+
+            <CanonicalField Label="Professional Notes">
+                <textarea rows="3" @bind="_bundle.ProfessionalProfile.Notes" @bind:event="oninput"></textarea>
+            </CanonicalField>
+
+            <div class="save-verify-row">
+                <button class="btn primary" @onclick="SaveAndVerifyProfileAsync" disabled="@_busy">
+                    Save & Verify Profile
+                </button>
+            </div>
+        </section>
+
+        <section class="panel">
+            <div class="section-head">
+                <div>
+                    <div class="eyebrow">FORMATION</div>
+                    <h2>Education (@_bundle.Education.Count)</h2>
+                </div>
+                <button class="btn secondary" @onclick="AddEducation">+ Education</button>
+            </div>
+
+            @foreach (var item in _bundle.Education)
+            {
+                <details class="compact-record" open>
+                    <summary>
+                        <strong>@LabelOr(item.EducationType, "Education")</strong>
+                        <span>@LabelOr(item.DegreeOrCredential, item.Status)</span>
+                    </summary>
+
+                    <div class="grid three">
+                        <CanonicalField Label="Type"><input @bind="item.EducationType" /></CanonicalField>
+                        <CanonicalField Label="Institution"><input @bind="item.InstitutionName" /></CanonicalField>
+                        <CanonicalField Label="Credential"><input @bind="item.DegreeOrCredential" /></CanonicalField>
+
+                        <CanonicalField Label="Program"><input @bind="item.ProgramName" /></CanonicalField>
+                        <CanonicalField Label="Field"><input @bind="item.FieldOfStudy" /></CanonicalField>
+                        <CanonicalField Label="Status"><input @bind="item.Status" /></CanonicalField>
+                    </div>
+
+                    <div class="mini-grid">
+                        <CanonicalField Label="Start Age"><input type="number" @bind="item.StartAge" /></CanonicalField>
+                        <CanonicalField Label="End Age"><input type="number" @bind="item.EndAge" /></CanonicalField>
+                        <CanonicalField Label="GPA"><input type="number" step="0.01" @bind="item.Gpa" /></CanonicalField>
+                    </div>
+
+                    <CanonicalField Label="Notes"><textarea rows="2" @bind="item.Notes"></textarea></CanonicalField>
+
+                    <details class="advanced">
+                        <summary>Advanced / Event Links</summary>
+                        <div class="grid three">
+                            <CanonicalField Label="Institution ID"><input @bind="item.InstitutionId" /></CanonicalField>
+                            <CanonicalField Label="Start Time"><input @bind="item.StartGameTime" /></CanonicalField>
+                            <CanonicalField Label="End Time"><input @bind="item.EndGameTime" /></CanonicalField>
+                            <CanonicalField Label="Start Event ID"><input @bind="item.StartEventId" /></CanonicalField>
+                            <CanonicalField Label="Completion Event ID"><input @bind="item.CompletionEventId" /></CanonicalField>
+                            <CanonicalField Label="Withdrawal Event ID"><input @bind="item.WithdrawalEventId" /></CanonicalField>
+                        </div>
+                        <CanonicalField Label="Honors"><input @bind="item.Honors" /></CanonicalField>
+                    </details>
+
+                    <button class="btn primary" @onclick="() => SaveEducationAsync(item)" disabled="@_busy">Save Education</button>
+                </details>
+            }
+        </section>
+
+        <section class="panel">
+            <div class="section-head">
+                <div>
+                    <div class="eyebrow">CERTIFICATION / EXPERIENCE</div>
+                    <h2>Qualifications (@_bundle.Qualifications.Count)</h2>
+                </div>
+                <button class="btn secondary" @onclick="AddQualification">+ Qualification</button>
+            </div>
+
+            @foreach (var item in _bundle.Qualifications)
+            {
+                <details class="compact-record" open>
+                    <summary>
+                        <strong>@LabelOr(item.Name, "Qualification")</strong>
+                        <span>@item.QualificationType · @item.Status</span>
+                    </summary>
+
+                    <div class="grid three">
+                        <CanonicalField Label="Role ID"><input @bind="item.RoleId" /></CanonicalField>
+                        <CanonicalField Label="Type"><input @bind="item.QualificationType" /></CanonicalField>
+                        <CanonicalField Label="Name"><input @bind="item.Name" /></CanonicalField>
+
+                        <CanonicalField Label="Issuer"><input @bind="item.IssuerName" /></CanonicalField>
+                        <CanonicalField Label="Status"><input @bind="item.Status" /></CanonicalField>
+                        <CanonicalField Label="Credential #"><input @bind="item.CredentialNumber" /></CanonicalField>
+                    </div>
+
+                    <CanonicalField Label="Notes"><textarea rows="2" @bind="item.Notes"></textarea></CanonicalField>
+
+                    <details class="advanced">
+                        <summary>Advanced / Event Links</summary>
+                        <div class="grid three">
+                            <CanonicalField Label="Issuer Institution ID"><input @bind="item.IssuerInstitutionId" /></CanonicalField>
+                            <CanonicalField Label="Issued"><input @bind="item.IssuedGameTime" /></CanonicalField>
+                            <CanonicalField Label="Expires"><input @bind="item.ExpiresGameTime" /></CanonicalField>
+                            <CanonicalField Label="Obtained Event"><input @bind="item.ObtainedEventId" /></CanonicalField>
+                            <CanonicalField Label="Renewed Event"><input @bind="item.RenewedEventId" /></CanonicalField>
+                            <CanonicalField Label="Suspended Event"><input @bind="item.SuspendedEventId" /></CanonicalField>
+                            <CanonicalField Label="Revoked Event"><input @bind="item.RevokedEventId" /></CanonicalField>
+                        </div>
+                    </details>
+
+                    <button class="btn primary" @onclick="() => SaveQualificationAsync(item)" disabled="@_busy">Save Qualification</button>
+                </details>
+            }
+        </section>
+
+        <section class="panel">
+            <div class="section-head">
+                <div>
+                    <div class="eyebrow">WORK CAPABILITY</div>
+                    <h2>Competencies (@_bundle.Competencies.Count)</h2>
+                </div>
+                <button class="btn secondary" @onclick="AddCompetency">+ Competency</button>
+            </div>
+
+            <p class="muted">
+                Compact view: one row per competency. Open Details only when you need notes or source/event links.
+            </p>
+
+            <div class="competency-list">
+                <div class="competency-header">
+                    <span>Competency</span>
+                    <span>Current</span>
+                    <span>Set Point</span>
+                    <span>Confidence</span>
+                    <span>Level</span>
+                    <span></span>
+                </div>
+
+                @foreach (var item in _bundle.Competencies)
+                {
+                    <div class="competency-card">
+                        <div class="competency-row">
+                            <div class="competency-name">
+                                <input class="name-input" @bind="item.CompetencyName" />
+                                <small>@item.CompetencyId</small>
+                            </div>
+
+                            <input type="number" min="0" max="100" @bind="item.CurrentValue" />
+                            <input type="number" min="0" max="100" @bind="item.SetPointValue" />
+                            <input type="number" min="0" max="100" @bind="item.Confidence" />
+                            <input @bind="item.ExperienceLevel" />
+
+                            <button class="btn primary small" @onclick="() => SaveCompetencyAsync(item)" disabled="@_busy">Save</button>
+                        </div>
+
+                        <details class="advanced compact-advanced">
+                            <summary>Details</summary>
+                            <div class="grid three">
+                                <CanonicalField Label="Role ID"><input @bind="item.RoleId" /></CanonicalField>
+                                <CanonicalField Label="Competency ID"><input @bind="item.CompetencyId" /></CanonicalField>
+                                <CanonicalField Label="Source Education"><input @bind="item.SourceEducationRecordId" /></CanonicalField>
+                                <CanonicalField Label="Source Qualification"><input @bind="item.SourceQualificationId" /></CanonicalField>
+                                <CanonicalField Label="Last Change Event"><input @bind="item.LastChangeEventId" /></CanonicalField>
+                            </div>
+                            <CanonicalField Label="Notes"><textarea rows="2" @bind="item.Notes"></textarea></CanonicalField>
+                        </details>
+                    </div>
+                }
+            </div>
+        </section>
+    }
+</div>
+
+@code {
+    [Parameter] public int NpcId { get; set; }
+
+    private CanonicalProfessionalBundle? _bundle;
+    private bool _loading = true;
+    private bool _busy;
+    private string _error = "";
+    private string _message = "";
+
+    protected override Task OnParametersSetAsync() => ReloadAsync();
+
+    private async Task ReloadAsync()
+    {
+        _loading = true;
+        _error = "";
+        _message = "";
+
+        try
+        {
+            _bundle = await Repo.GetCanonicalProfessionalBundleAsync(NpcId);
+        }
+        catch (Exception ex)
+        {
+            _error = ex.ToString();
+        }
+        finally
+        {
+            _loading = false;
+        }
+    }
+
+    private void AddEducation()
+    {
+        if (_bundle is null) return;
+        _bundle.Education.Add(new CanonicalEducationRecord { NpcId = NpcId, Status = "Completed" });
+    }
+
+    private void AddQualification()
+    {
+        if (_bundle is null) return;
+        _bundle.Qualifications.Add(new CanonicalProfessionalQualification
+        {
+            NpcId = NpcId,
+            RoleId = _bundle.ProfessionalProfile.PrimaryRoleId,
+            Status = "Active"
+        });
+    }
+
+    private void AddCompetency()
+    {
+        if (_bundle is null) return;
+        _bundle.Competencies.Add(new CanonicalProfessionalCompetency
+        {
+            NpcId = NpcId,
+            RoleId = _bundle.ProfessionalProfile.PrimaryRoleId,
+            CurrentValue = 50,
+            SetPointValue = 50,
+            Confidence = 50
+        });
+    }
+
+    private Task SaveProfileAsync()
+        => _bundle is null ? Task.CompletedTask : RunSave(
+            () => Repo.SaveCanonicalProfessionalProfileAsync(_bundle.ProfessionalProfile),
+            "Professional profile saved.");
+
+    private async Task SaveAndVerifyProfileAsync()
+    {
+        if (_bundle is null) return;
+
+        _busy = true;
+        _message = "";
+        _error = "";
+
+        try
+        {
+            var expected = _bundle.ProfessionalProfile.Notes ?? "";
+
+            var saved = await Repo.SaveAndVerifyCanonicalProfessionalProfileAsync(
+                _bundle.ProfessionalProfile);
+
+            _bundle = await Repo.GetCanonicalProfessionalBundleAsync(NpcId);
+
+            var reloaded = _bundle?.ProfessionalProfile.Notes ?? "";
+
+            if (!string.Equals(saved, reloaded, StringComparison.Ordinal))
+            {
+                throw new InvalidOperationException(
+                    "Save succeeded, but page reload returned a different Notes value.");
+            }
+
+            _message =
+                "SAVE VERIFIED: SQLite stored the Professional Notes and the page reloaded the exact same value.";
+        }
+        catch (Exception ex)
+        {
+            _error = ex.ToString();
+        }
+        finally
+        {
+            _busy = false;
+        }
+    }
+
+    private Task SaveEducationAsync(CanonicalEducationRecord item)
+    {
+        item.NpcId = NpcId;
+        return RunSave(() => Repo.SaveCanonicalEducationAsync(item), "Education record saved.");
+    }
+
+    private Task SaveQualificationAsync(CanonicalProfessionalQualification item)
+    {
+        item.NpcId = NpcId;
+        return RunSave(() => Repo.SaveCanonicalQualificationAsync(item), "Qualification saved.");
+    }
+
+    private Task SaveCompetencyAsync(CanonicalProfessionalCompetency item)
+    {
+        item.NpcId = NpcId;
+        return RunSave(() => Repo.SaveCanonicalCompetencyAsync(item), "Competency saved.");
+    }
+
+    private async Task RunSave(Func<Task> action, string success)
+    {
+        _busy = true;
+        _message = "";
+        _error = "";
+
+        try
+        {
+            await action();
+            _bundle = await Repo.GetCanonicalProfessionalBundleAsync(NpcId);
+            _message = success + " Reload confirmed.";
+        }
+        catch (Exception ex)
+        {
+            _error = ex.ToString();
+        }
+        finally
+        {
+            _busy = false;
+        }
+    }
+
+    private static string LabelOr(string? value, string fallback)
+        => string.IsNullOrWhiteSpace(value) ? fallback : value;
+}

@@ -1,0 +1,129 @@
+@page "/npc-studio/relationship-map"
+@rendermode InteractiveServer
+@using ProjectEve.NpcStudio.Models
+@using ProjectEve.NpcStudio.Services
+@inject NpcStudioService Studio
+
+<PageTitle>Relationship Web</PageTitle>
+
+<div class="relationship-dossier-page">
+    <header class="relationship-dossier-header">
+        <div>
+            <span class="relationship-kicker">NPC DOSSIER · SOCIAL INTELLIGENCE</span>
+            <h1>Relationship Web</h1>
+            <p>See who matters most, how each bond feels, and the history behind every score.</p>
+        </div>
+        <div class="relationship-load-box">
+            <label>
+                <span>NPC</span>
+                <select @bind="_npcId">
+                    @foreach (var npc in _npcChoices)
+                    {
+                        <option value="@npc.Id">@npc.Name</option>
+                    }
+                </select>
+            </label>
+            <button type="button" @onclick="LoadAsync">Load Dossier</button>
+        </div>
+    </header>
+
+    @if (_loading)
+    {
+        <section class="relationship-state-card">Loading relationship dossier…</section>
+    }
+    else if (_sheet is null)
+    {
+        <section class="relationship-state-card missing">No NPC relationship dossier could be loaded.</section>
+    }
+    else
+    {
+        <section class="relationship-subject-card">
+            <div class="relationship-avatar">
+                @if (!string.IsNullOrWhiteSpace(_portraitUrl))
+                {
+                    <img src="@_portraitUrl" alt="@_sheet.Name" />
+                }
+                else
+                {
+                    <span>@Initials(_sheet.Name)</span>
+                }
+            </div>
+            <div class="relationship-subject-copy">
+                <span class="relationship-kicker">RELATIONSHIP FILE</span>
+                <h2>@_sheet.Name</h2>
+                <p>@_sheet.Relationships.Count saved relationships · @_sheet.Occupation</p>
+                <div class="relationship-summary-chips">
+                    <span>@FamilyCount Family</span>
+                    <span>@FriendCount Friends</span>
+                    <span>@RivalCount Rivals / Enemies</span>
+                    <span>@_sheet.Relationships.Count Total</span>
+                </div>
+            </div>
+            <a class="relationship-open-dossier" href="/npc-studio/npc/@_sheet.Id">Open Full NPC Dossier →</a>
+        </section>
+
+        <NpcRelationshipWeb Sheet="_sheet" OnChanged="ReloadCurrentAsync" />
+    }
+</div>
+
+@code {
+    private int _npcId = 1;
+    private bool _loading = true;
+    private NpcCharacterSheet? _sheet;
+    private List<NpcBrowserRow> _npcChoices = new();
+    private string? _portraitUrl;
+
+    private int FamilyCount => _sheet?.Relationships.Count(r => Category(r) == "Family") ?? 0;
+    private int FriendCount => _sheet?.Relationships.Count(r => Category(r) is "Friend" or "Romantic" or "Mentor") ?? 0;
+    private int RivalCount => _sheet?.Relationships.Count(r => Category(r) is "Rival" or "Enemy") ?? 0;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _npcChoices = await Studio.SearchNpcsAsync("", "", null);
+        if (_npcChoices.Count > 0 && !_npcChoices.Any(n => n.Id == _npcId))
+            _npcId = _npcChoices[0].Id;
+
+        await LoadAsync();
+    }
+
+    private async Task LoadAsync()
+    {
+        _loading = true;
+        _sheet = await Studio.GetCharacterSheetAsync(_npcId);
+        _portraitUrl = BuildMediaUrl(_sheet?.Appearance?.ProfileImagePath)
+            ?? BuildMediaUrl(_sheet?.Appearance?.ReferenceImagePath)
+            ?? BuildMediaUrl(_sheet?.Appearance?.ContactImagePath);
+        _loading = false;
+    }
+
+    private async Task ReloadCurrentAsync() => await LoadAsync();
+
+    private static string Category(NpcRelationshipRow rel)
+    {
+        if (!string.IsNullOrWhiteSpace(rel.RelationshipCategory)) return rel.RelationshipCategory;
+        var type = rel.RelationshipType ?? "";
+        if (type.Contains("mother", StringComparison.OrdinalIgnoreCase) ||
+            type.Contains("father", StringComparison.OrdinalIgnoreCase) ||
+            type.Contains("brother", StringComparison.OrdinalIgnoreCase) ||
+            type.Contains("sister", StringComparison.OrdinalIgnoreCase) ||
+            type.Contains("family", StringComparison.OrdinalIgnoreCase)) return "Family";
+        if (type.Contains("rival", StringComparison.OrdinalIgnoreCase)) return "Rival";
+        if (type.Contains("enemy", StringComparison.OrdinalIgnoreCase)) return "Enemy";
+        if (type.Contains("romantic", StringComparison.OrdinalIgnoreCase) || type.Contains("partner", StringComparison.OrdinalIgnoreCase)) return "Romantic";
+        return "Friend";
+    }
+
+    private static string? BuildMediaUrl(string? path)
+    {
+        if (string.IsNullOrWhiteSpace(path)) return null;
+        return $"/npc-media?path={Uri.EscapeDataString(path)}&v={DateTimeOffset.UtcNow.ToUnixTimeSeconds()}";
+    }
+
+    private static string Initials(string? name)
+    {
+        var parts = (name ?? "?").Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        if (parts.Length == 0) return "?";
+        if (parts.Length == 1) return parts[0][0].ToString().ToUpperInvariant();
+        return $"{char.ToUpperInvariant(parts[0][0])}{char.ToUpperInvariant(parts[^1][0])}";
+    }
+}

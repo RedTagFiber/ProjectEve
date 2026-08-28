@@ -406,3 +406,10 @@ ComfyUI/output/
 secrets.json
 appsettings.Local.json
 appsettings.Development.local.json
+
+# World Builder Studio generated / bulky local content
+ProjectEve.NpcStudio/Data.zip
+ProjectEve.NpcStudio/bin/
+ProjectEve.NpcStudio/obj/
+ProjectEve.NpcStudio/.vs/
+ProjectEve.NpcStudio/*.user

@@ -1,0 +1,105 @@
+.relationship-dossier-page {
+    min-height: 100%;
+    padding: 18px 20px 28px;
+    color: #e9eef8;
+    background:
+        radial-gradient(circle at 70% -10%, rgba(120,86,255,.08), transparent 32rem),
+        #090e18;
+    overflow-x: hidden;
+}
+
+.relationship-dossier-header,
+.relationship-subject-card,
+.relationship-state-card {
+    border: 1px solid #202b40;
+    background: linear-gradient(180deg, rgba(17,26,42,.98), rgba(12,19,32,.98));
+    border-radius: 13px;
+    box-shadow: 0 12px 30px rgba(0,0,0,.12);
+}
+
+.relationship-dossier-header {
+    display:flex;
+    justify-content:space-between;
+    gap:24px;
+    align-items:center;
+    padding:18px 20px;
+    margin-bottom:12px;
+}
+
+.relationship-kicker {
+    display:block;
+    margin-bottom:4px;
+    font-size:9px;
+    font-weight:900;
+    letter-spacing:.16em;
+    color:#a78bfa;
+}
+
+.relationship-dossier-header h1,
+.relationship-subject-card h2 { margin:0; color:#f7f9ff; font-weight:700; }
+.relationship-dossier-header h1 { font-size:26px; letter-spacing:-.02em; }
+.relationship-dossier-header p,
+.relationship-subject-card p { margin:5px 0 0; color:#8fa0bb; font-size:12px; }
+
+.relationship-load-box { display:flex; gap:9px; align-items:end; }
+.relationship-load-box label { display:grid; gap:4px; color:#72829c; font-size:9px; text-transform:uppercase; letter-spacing:.1em; font-weight:800; }
+.relationship-load-box select {
+    min-width:220px;
+    height:38px;
+    border-radius:8px;
+    border:1px solid #2b3851;
+    background:#090f1a;
+    color:#eef3ff;
+    padding:0 11px;
+    outline:none;
+}
+.relationship-load-box select:focus { border-color:#7c5cff; box-shadow:0 0 0 3px rgba(124,92,255,.12); }
+.relationship-load-box button,
+.relationship-open-dossier {
+    min-height:38px;
+    border:1px solid #785ce8;
+    border-radius:8px;
+    background:linear-gradient(180deg,#7a56ed,#6444d0);
+    color:#fff;
+    padding:8px 14px;
+    text-decoration:none;
+    font-size:12px;
+    font-weight:800;
+    box-shadow:0 8px 18px rgba(99,67,210,.16);
+}
+
+.relationship-subject-card {
+    display:grid;
+    grid-template-columns:76px minmax(0,1fr) auto;
+    align-items:center;
+    gap:15px;
+    padding:14px 16px;
+    margin-bottom:12px;
+}
+.relationship-avatar {
+    width:76px;
+    height:88px;
+    overflow:hidden;
+    border-radius:10px;
+    border:1px solid #30405b;
+    background:#172136;
+    display:grid;
+    place-items:center;
+    font-size:25px;
+    font-weight:800;
+}
+.relationship-avatar img { width:100%; height:100%; object-fit:cover; }
+.relationship-subject-card h2 { font-size:23px; }
+.relationship-summary-chips { display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
+.relationship-summary-chips span { border:1px solid #29364f; background:#0b1320; color:#aebbd0; border-radius:999px; padding:4px 8px; font-size:10px; }
+.relationship-state-card { padding:22px; color:#aebbd0; }
+.relationship-state-card.missing { color:#ff746d; border-color:#6e2e35; }
+
+@media (max-width: 900px) {
+    .relationship-dossier-header { align-items:stretch; flex-direction:column; }
+    .relationship-load-box { align-items:stretch; flex-direction:column; }
+    .relationship-load-box select { min-width:0; width:100%; }
+    .relationship-subject-card { grid-template-columns:64px minmax(0,1fr); }
+    .relationship-avatar { width:64px; height:76px; }
+    .relationship-open-dossier { grid-column:1/-1; text-align:center; }
+}

@@ -1,0 +1,39 @@
+﻿NPC STUDIO — CANONICAL VERIFICATION PAGE
+
+Why this exists
+---------------
+The two UI insertion scripts failed because the local NpcProfile.razor
+does not match the older copies available to the patch generator.
+
+The important backend bridge already builds successfully.
+
+This patch therefore does NOT touch NpcProfile.razor.
+
+It adds one standalone read-only page:
+  Components\Pages\CanonicalFoundation.razor
+
+Route:
+  /canonical-foundation/{NpcId}
+
+For Eve:
+  http://localhost:5123/canonical-foundation/1
+
+Expected Eve values
+-------------------
+Employer               Sinclair Coffee (Lisa Sinclair, owner)
+Current Location ID    blank/dynamic
+Home Location ID       blank
+Work Location ID       WP_COFFEE_001
+
+Education              1
+Professional Profile   1
+Qualifications         1
+Competencies           6
+Phones                  0
+Vehicles                0
+Financial Accounts      1
+Financial Obligations   2
+
+Once this page proves the repository is reading the canonical records
+correctly, we can integrate the panel into the exact current NpcProfile
+without guessing its structure.
