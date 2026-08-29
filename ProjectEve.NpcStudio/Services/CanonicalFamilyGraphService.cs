@@ -74,12 +74,17 @@ public sealed class CanonicalFamilyGraphService
             AddEdge(rootNpcId, siblingId, "Sibling", role, GenderedRole(rootNpcId, "Brother", "Sister", "Sibling"), true);
         }
 
-        // Grandparents: parents of parents.
+                // Grandparents: parents of parents.
+        // Preserve which root-parent branch owns each grandparent.
         foreach (var parent in Parents(rootNpcId))
         {
+            var branch = ParentBranchLabel(parent.Role);
+
             foreach (var gp in Parents(parent.Id))
             {
-                var role = GenderedRole(gp.Id, "Grandfather", "Grandmother", "Grandparent");
+                var baseRole = GenderedRole(gp.Id, "Father", "Mother", "Parent");
+                var role = $"{branch}'s {baseRole}";
+
                 AddPerson(gp.Id, role, -2, false, true);
                 AddEdge(parent.Id, gp.Id, "ParentChild", gp.Role, GenderedRole(parent.Id, "Son", "Daughter", "Child"), true);
                 AddEdge(rootNpcId, gp.Id, "Grandparent", role, GenderedRole(rootNpcId, "Grandson", "Granddaughter", "Grandchild"), true);
@@ -98,19 +103,25 @@ public sealed class CanonicalFamilyGraphService
             }
         }
 
-        // Aunts/uncles + cousins.
+                // Aunts/uncles + cousins.
+        // Preserve which root-parent branch owns the relative.
         foreach (var parent in Parents(rootNpcId))
         {
+            var branch = ParentBranchLabel(parent.Role);
+
             foreach (var auntUncleId in Siblings(parent.Id))
             {
-                var auRole = GenderedRole(auntUncleId, "Uncle", "Aunt", "Aunt/Uncle");
+                var siblingRole = GenderedRole(auntUncleId, "Brother", "Sister", "Sibling");
+                var auRole = $"{branch}'s {siblingRole}";
+
                 AddPerson(auntUncleId, auRole, -1, false, true);
                 AddEdge(rootNpcId, auntUncleId, "AuntUncle", auRole, GenderedRole(rootNpcId, "Nephew", "Niece", "Niece/Nephew"), true);
 
                 foreach (var cousinId in Children(auntUncleId))
                 {
-                    AddPerson(cousinId, "Cousin", 0, false, true);
-                    AddEdge(rootNpcId, cousinId, "Cousin", "Cousin", "Cousin", true);
+                    var cousinRole = $"{branch}'s {siblingRole}'s Child";
+                    AddPerson(cousinId, cousinRole, 0, false, true);
+                    AddEdge(rootNpcId, cousinId, "Cousin", cousinRole, "Cousin", true);
                 }
             }
         }
@@ -151,6 +162,114 @@ public sealed class CanonicalFamilyGraphService
             AddEdge(rootNpcId, ov.Source, "OverrideInverse", inverse, ov.Role, true);
         }
 
+        AssignFamilySides();
+
+        void AssignFamilySides()
+        {
+            var motherAnchors = Parents(rootNpcId)
+                .Where(p => p.Role.Equals("Mother", StringComparison.OrdinalIgnoreCase) ||
+                            p.Role.Equals("Stepmother", StringComparison.OrdinalIgnoreCase))
+                .Select(p => p.Id)
+                .Distinct()
+                .ToHashSet();
+
+            var fatherAnchors = Parents(rootNpcId)
+                .Where(p => p.Role.Equals("Father", StringComparison.OrdinalIgnoreCase) ||
+                            p.Role.Equals("Stepfather", StringComparison.OrdinalIgnoreCase))
+                .Select(p => p.Id)
+                .Distinct()
+                .ToHashSet();
+
+            var fatherSide = BuildBranch(fatherAnchors, motherAnchors);
+            var motherSide = BuildBranch(motherAnchors, fatherAnchors);
+
+            foreach (var person in people.Values)
+            {
+                var inFather = fatherSide.Contains(person.NpcId);
+                var inMother = motherSide.Contains(person.NpcId);
+
+                if (inFather && inMother)
+                {
+                    person.FamilySide = "Shared";
+                    person.BranchAnchorNpcId = 0;
+                }
+                else if (inFather)
+                {
+                    person.FamilySide = "Father";
+                    person.BranchAnchorNpcId = fatherAnchors.FirstOrDefault();
+                }
+                else if (inMother)
+                {
+                    person.FamilySide = "Mother";
+                    person.BranchAnchorNpcId = motherAnchors.FirstOrDefault();
+                }
+                else
+                {
+                    person.FamilySide = "Other";
+                    person.BranchAnchorNpcId = 0;
+                }
+            }
+
+            // The actual root parents must always own their branch, even
+            // if legacy spouse/child links make them reachable from both.
+            foreach (var id in fatherAnchors)
+            {
+                if (people.TryGetValue(id, out var p))
+                {
+                    p.FamilySide = "Father";
+                    p.BranchAnchorNpcId = id;
+                }
+            }
+
+            foreach (var id in motherAnchors)
+            {
+                if (people.TryGetValue(id, out var p))
+                {
+                    p.FamilySide = "Mother";
+                    p.BranchAnchorNpcId = id;
+                }
+            }
+        }
+
+        HashSet<int> BuildBranch(HashSet<int> anchors, HashSet<int> blockedRootParents)
+        {
+            var branch = new HashSet<int>();
+            var queue = new Queue<int>();
+
+            foreach (var anchorId in anchors)
+            {
+                if (anchorId <= 0) continue;
+                branch.Add(anchorId);
+                queue.Enqueue(anchorId);
+            }
+
+            while (queue.Count > 0)
+            {
+                var current = queue.Dequeue();
+
+                IEnumerable<int> StructuralNeighbors()
+                {
+                    foreach (var p in Parents(current)) yield return p.Id;
+                    foreach (var c in Children(current)) yield return c;
+                    foreach (var spouse in Spouses(current)) yield return spouse;
+                }
+
+                foreach (var next in StructuralNeighbors().Distinct())
+                {
+                    if (next <= 0 || next == rootNpcId) continue;
+                    if (blockedRootParents.Contains(next)) continue;
+
+                    // Resolve only the people this graph actually exposes.
+                    if (!people.ContainsKey(next) && !anchors.Contains(next))
+                        continue;
+
+                    if (branch.Add(next))
+                        queue.Enqueue(next);
+                }
+            }
+
+            return branch;
+        }
         result.People.AddRange(
             people.Values
                 .Where(p => p.NpcId != rootNpcId)
@@ -433,6 +552,14 @@ public sealed class CanonicalFamilyGraphService
         return neutral;
     }
 
+    private static string ParentBranchLabel(string parentRole) =>
+        parentRole.Trim().ToLowerInvariant() switch
+        {
+            "mother" or "stepmother" => "Mother",
+            "father" or "stepfather" => "Father",
+            _ => "Parent"
+        };
+
     private string ParentRole(int npcId) =>
         GenderedRole(npcId, "Father", "Mother", "Parent");
 
@@ -457,6 +584,9 @@ public sealed class CanonicalFamilyGraphService
         };
 
     private static int RoleSpecificity(string role) =>
+        role.Contains("'s ", StringComparison.OrdinalIgnoreCase)
+            ? 4
+            :
         role.Trim().ToLowerInvariant() switch
         {
             "mother" or "father" or "son" or "daughter" or
@@ -480,3 +610,5 @@ public sealed class CanonicalFamilyGraphService
         return Convert.ToInt32(cmd.ExecuteScalar() ?? 0) > 0;
     }
 }
+
+

@@ -32,12 +32,14 @@ builder.Services.AddScoped<NpcStudioService>();
 builder.Services.AddScoped<FamilyIntegrityGuardService>();
 builder.Services.AddScoped<CanonicalFamilyMigrationService>();
 builder.Services.AddScoped<CanonicalFamilyGraphService>();
+builder.Services.AddScoped<CanonicalFamilyRepairService>();
 builder.Services.AddScoped<NpcFamilyBuilderService>();
 builder.Services.AddScoped<RelationshipCandidateService>();
 builder.Services.AddScoped<FamilyGraphResolverService>();
 builder.Services.AddScoped<FamilyNpcFactoryPreviewService>();
 
 builder.Services.AddHttpClient<OllamaPromptEngineerService>();
+builder.Services.AddHttpClient<AiNpcProfileBuilderService>();
 builder.Services.AddHttpClient<ComfyStudioService>();
 builder.Services.AddHttpClient<ComfyWorkflowService>();
 builder.Services.AddScoped<NpcFileSystemService>();
@@ -58,6 +60,9 @@ using (var scope = app.Services.CreateScope())
     var canonicalFamilyMigration =
         scope.ServiceProvider.GetRequiredService<CanonicalFamilyMigrationService>();
     canonicalFamilyMigration.ImportLegacyFamilyRelationships();
+    var canonicalFamilyRepair =
+        scope.ServiceProvider.GetRequiredService<CanonicalFamilyRepairService>();
+    canonicalFamilyRepair.RepairLegacyTestFamily();
 }
 
 if (!app.Environment.IsDevelopment())
@@ -104,6 +109,8 @@ app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 
 app.Run();
+
+
 
 
 

@@ -17,6 +17,8 @@ public sealed class CanonicalFamilyPerson
     public int Generation { get; init; }
     public bool IsDirect { get; init; }
     public bool IsInferred { get; init; }
+    public string FamilySide { get; set; } = "Other";
+    public int BranchAnchorNpcId { get; set; }
 }
 
 public sealed class CanonicalFamilyEdge
@@ -27,6 +29,8 @@ public sealed class CanonicalFamilyEdge
     public string RoleFromFrom { get; init; } = "";
     public string RoleFromTo { get; init; } = "";
     public bool IsInferred { get; init; }
+    public string FamilySide { get; set; } = "Other";
+    public int BranchAnchorNpcId { get; set; }
 }
 
 public sealed class CanonicalFamilyMigrationReport
@@ -37,3 +41,4 @@ public sealed class CanonicalFamilyMigrationReport
     public int SkippedRows { get; set; }
     public List<string> Warnings { get; } = new();
 }
+

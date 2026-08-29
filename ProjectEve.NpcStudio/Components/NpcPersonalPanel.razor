@@ -22,6 +22,7 @@ else
 
 @if(_tab=="summary")
 {
+<AiNpcProfileBuilderPanel NpcId="NpcId" />
 <div class="personal-summary-strip">
 <div><span>Current Life</span><b>@Safe(Character.Occupation,"Not built")</b></div>
 <div><span>Career</span><b>@(_professional?.ProfessionalProfile.CareerField??"Not built")</b></div>
@@ -604,3 +605,4 @@ else
         _message = "";
     }
 }
+

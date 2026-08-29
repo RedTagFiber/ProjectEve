@@ -1,97 +1,80 @@
-﻿@using ProjectEve.NpcStudio.Models
+﻿@using Microsoft.Data.Sqlite
+@using ProjectEve.NpcStudio.Models
 @using ProjectEve.NpcStudio.Services
 @inject NpcStudioService Studio
+@inject CanonicalFamilyGraphService CanonicalFamily
+@inject NpcStudioOptions Options
 
 <NpcRelationshipBuilders Sheet="Sheet" />
+<div class="family-state-sync-panel">
+    <div>
+        <strong>Canonical family relationship states</strong>
+        <span>
+            The family graph is objective structure. The score editor uses this NPC's
+            subjective relationship-state rows.
+        </span>
+    </div>
+
+    <div class="family-state-sync-actions">
+        <button type="button"
+                class="rw-secondary"
+                @onclick="PreviewMissingFamilyStates">
+            Preview Missing Relationship States
+        </button>
+
+        @if (_familyStatePreview.Count > 0)
+        {
+            <button type="button"
+                    class="rw-primary"
+                    @onclick="ConfirmMissingFamilyStates">
+                Confirm Create @_familyStatePreview.Count Neutral State@(_familyStatePreview.Count == 1 ? "" : "s")
+            </button>
+        }
+    </div>
+
+    @if (!string.IsNullOrWhiteSpace(_familyStatePreviewMessage))
+    {
+        <div class="family-state-sync-message">@_familyStatePreviewMessage</div>
+    }
+
+    @if (_familyStatePreview.Count > 0)
+    {
+        <div class="family-state-preview-list">
+            @foreach (var item in _familyStatePreview)
+            {
+                <span><b>@item.Name</b> · @item.Role</span>
+            }
+        </div>
+    }
+</div>
 
 <div class="relationship-workspace">
-    <section class="relationship-web-panel">
-        <div class="rw-title">
-            <div>
-                <span class="rw-kicker">RELATIONSHIP WEB</span>
-                <h3>Who matters most to @Sheet.Name?</h3>
-            </div>
-            <span class="rw-count">@Sheet.Relationships.Count links</span>
-        </div>
-
-        <div class="web-filter-board">
-            <div class="web-filter-row">
-                <span class="filter-label">SHOW</span>
-                <button type="button" class="web-filter family @FilterClass("Family")" @onclick='() => ToggleCategory("Family")'>Family</button>
-                <button type="button" class="web-filter friend @FilterClass("Friend")" @onclick='() => ToggleCategory("Friend")'>Friends</button>
-                <button type="button" class="web-filter romantic @FilterClass("Relationship")" @onclick='() => ToggleCategory("Relationship")'>Relationship</button>
-                <button type="button" class="web-filter rival @FilterClass("Enemy")" @onclick='() => ToggleCategory("Enemy")'>Enemies / Rivals</button>
-            </div>
-
-            <div class="web-filter-row">
-                <span class="filter-label">TIERS</span>
-                @for (var tier = 1; tier <= 5; tier++)
-                {
-                    var capturedTier = tier;
-                    <button type="button"
-                            class="tier-filter @(_enabledTiers.Contains(capturedTier) ? "on" : "")"
-                            @onclick="() => ToggleTier(capturedTier)">
-                        @capturedTier
-                    </button>
-                }
-                <button type="button" class="tier-filter all" @onclick="ShowAllTiers">ALL</button>
-                <button type="button" class="tier-filter clear" @onclick="ClearTiers">CLEAR</button>
-            </div>
-        </div>
-
-        <div class="relationship-web v2">
-            <div class="tier-ring tier-ring-5"><span>5</span></div>
-            <div class="tier-ring tier-ring-4"><span>4</span></div>
-            <div class="tier-ring tier-ring-3"><span>3</span></div>
-            <div class="tier-ring tier-ring-2"><span>2</span></div>
-            <div class="tier-ring tier-ring-1"><span>1</span></div>
-
-            @foreach (var rel in VisibleRelationships)
-            {
-                var point = WebPoint(rel);
-                <div class="web-spoke @CategoryClass(rel) @(_selected?.Id == rel.Id ? "selected" : "")"
-                     style="@WebSpokeStyle(point.angle, point.radius)"></div>
-            }
-
-            <div class="web-center">
-                <strong>@Initials(Sheet.Name)</strong>
-                <span>@Sheet.Name</span>
-            </div>
-
-            @foreach (var rel in VisibleRelationships)
-            {
-                var point = WebPoint(rel);
-                var tier = RelationshipTier(rel);
-                <button type="button"
-                        class="web-node web-node-v2 @CategoryClass(rel) tier-@tier @(_selected?.Id == rel.Id ? "selected locked" : "")"
-                        style="@WebNodeStyle(point.x, point.y, rel)"
-                        title="@($"{rel.TargetName} · Tier {tier} · Importance {EffectiveImportance(rel)}")"
-                        @onclick="@(() => SelectRelationship(rel))">
-                    <strong>@Initials(rel.TargetName)</strong>
-                    <span>@rel.TargetName</span>
-                    <small>@RelationshipLabel(rel) · T@tier</small>
-                </button>
-            }
-        </div>
-
-        <div class="web-foot">
-            Showing @VisibleRelationships.Count of @Sheet.Relationships.Count relationships.
-            Click a person to lock focus. Use category and tier switches to reveal the story layer by layer.
-        </div>
-
-        @if (Sheet.Relationships.Count > VisibleRelationships.Count)
-        {
-            <div class="web-foot">Showing the @VisibleRelationships.Count most important relationships. Lower-priority links remain in the dossier.</div>
-        }
-    </section>
-
-    <aside class="relationship-detail-panel">
+    <UnifiedRelationshipGraph Sheet="Sheet" OnNpcSelected="SelectNpc" OnRelationshipSelected="SelectRelationship" />
+<aside class="relationship-detail-panel">
         @if (_selected is null)
         {
-            <div class="rw-empty">
-                <strong>Select someone in the web</strong>
-                <span>Then edit the relationship, click a score to see why it is that number, or add supporting history.</span>
-            </div>
+            @if (_selectedNpcId > 0)
+            {
+                <div class="rw-title compact">
+                    <div>
+                        <span class="rw-kicker">SELECTED FAMILY MEMBER</span>
+                        <h3>@_selectedNpcName</h3>
+                    </div>
+                    <a href="/npc-studio/npc/@_selectedNpcId">Open Dossier</a>
+                </div>
+
+                <div class="rw-empty">
+                    <strong>@_selectedNpcName is selected</strong>
+                    <span>This person is connected through the canonical family graph but does not yet have a direct subjective relationship-state row for this NPC.</span>
+                </div>
+            }
+            else
+            {
+                <div class="rw-empty">
+                    <strong>Select someone in the web</strong>
+                    <span>Then edit the relationship, click a score to see why it is that number, or add supporting history.</span>
+                </div>
+            }
         }
         else
         {
@@ -116,7 +99,22 @@
                     <input @bind="_selected.RelationshipType" />
                 </label>
                 <label>Family Role
-                    <input placeholder="Mother, Father, Sister..." @bind="_selected.FamilyRole" />
+                    <select @bind="_selected.FamilyRole">
+                        @foreach (var role in FamilyRoles)
+                        {
+                            <option value="@role">@DisplayFamilyRole(role)</option>
+                        }
+                    </select>
+                </label>
+                <label>Relationship Tier
+                    <select @bind="_selectedTier">
+                        <option value="0">Unrated</option>
+                        <option value="1">Tier 1 — Core</option>
+                        <option value="2">Tier 2 — Strong</option>
+                        <option value="3">Tier 3 — Meaningful</option>
+                        <option value="4">Tier 4 — Peripheral</option>
+                        <option value="5">Tier 5 — Background</option>
+                    </select>
                 </label>
                 <label>Importance
                     <input type="number" min="0" max="100" @bind="_selected.Importance" />
@@ -153,6 +151,10 @@
                 <textarea rows="4" @bind="_selected.Notes"></textarea>
             </label>
             <button type="button" class="rw-primary" @onclick="SaveSelected">Save Relationship</button>
+                @if (!string.IsNullOrWhiteSpace(_relationshipSaveMessage))
+                {
+                    <div class="relationship-save-message">@_relationshipSaveMessage</div>
+                }
 
             <section class="why-panel">
                 <div class="why-head">
@@ -240,7 +242,14 @@
                 </select>
             </label>
             <label>Type <input placeholder="Best friend, father, rival..." @bind="_newRelationship.RelationshipType" /></label>
-            <label>Family Role <input placeholder="Only for family links" @bind="_newRelationship.FamilyRole" /></label>
+            <label>Family Role
+                <select @bind="_newRelationship.FamilyRole">
+                    @foreach (var role in FamilyRoles)
+                    {
+                        <option value="@role">@DisplayFamilyRole(role)</option>
+                    }
+                </select>
+            </label>
             <label>Importance <input type="number" min="0" max="100" @bind="_newRelationship.Importance" /></label>
             <label class="mutual"><input type="checkbox" @bind="_newRelationship.IsMutual" /> Create mutual link</label>
             <button type="button" class="rw-primary" @onclick="AddRelationship">Add Relationship</button>
@@ -253,7 +262,12 @@
     [Parameter] public EventCallback OnChanged { get; set; }
 
     private NpcRelationshipRow? _selected;
+    private int _selectedNpcId;
+    private string _selectedNpcName = "";
+    private List<FamilyStatePreviewRow> _familyStatePreview = new();
+    private string _familyStatePreviewMessage = "";
     private string _selectedMetric = "Love";
+    private string _relationshipSaveMessage = "";
     private List<NpcRelationshipReason> _reasons = new();
     private List<NpcBrowserRow> _npcChoices = new();
     private NpcRelationshipReason _reasonDraft = new() { Metric = "Love", Impact = 10, StillActive = true };
@@ -261,6 +275,35 @@
     private NpcRelationshipDraft _newRelationship = new() { RelationshipCategory = "Friend", RelationshipType = "Friend", Importance = 50, Loyalty = 50, IsMutual = true };
 
     private static readonly string[] Categories = ["Family", "Friend", "Romantic", "Rival", "Enemy", "Work", "Mentor", "Neighbor", "Other"];
+    private static readonly string[] FamilyRoles =
+    [
+        "",
+        "Mother", "Father", "Parent",
+        "Daughter", "Son", "Child",
+        "Sister", "Brother", "Sibling",
+        "Wife", "Husband", "Spouse",
+        "Grandmother", "Grandfather", "Grandparent",
+        "Mother's Mother", "Mother's Father",
+        "Father's Mother", "Father's Father",
+        "Mother's Sister", "Mother's Brother",
+        "Father's Sister", "Father's Brother",
+        "Granddaughter", "Grandson", "Grandchild",
+        "Aunt", "Uncle", "Cousin",
+        "Niece", "Nephew",
+        "Stepmother", "Stepfather", "Stepparent",
+        "Stepdaughter", "Stepson", "Stepchild",
+        "Mother-in-law", "Father-in-law",
+        "Daughter-in-law", "Son-in-law",
+        "Sister-in-law", "Brother-in-law",
+        "Ex-wife", "Ex-husband", "Ex-spouse",
+        "Adoptive Mother", "Adoptive Father", "Adoptive Parent",
+        "Biological Mother", "Biological Father"
+    ];
+
+    private int _selectedTier;
+
+    private static string DisplayFamilyRole(string role) =>
+        string.IsNullOrWhiteSpace(role) ? "— None —" : role;
 
     private readonly HashSet<string> _enabledCategories =
         new(StringComparer.OrdinalIgnoreCase) { "Family", "Friend", "Relationship", "Enemy" };
@@ -293,12 +336,129 @@
         await Task.CompletedTask;
     }
 
-    private async Task SelectRelationship(NpcRelationshipRow rel)
+            private Task PreviewMissingFamilyStates()
     {
-        _selected = rel;
-        if (_selected.Importance <= 0) _selected.Importance = EffectiveImportance(_selected);
-        if (string.IsNullOrWhiteSpace(_selected.RelationshipCategory)) _selected.RelationshipCategory = GuessCategory(_selected);
-        _reasons = await Studio.GetRelationshipReasonsAsync(rel.Id);
+        _familyStatePreview.Clear();
+
+        var graph = CanonicalFamily.Resolve(Sheet.Id);
+
+        foreach (var person in graph.People
+            .Where(p => p.NpcId > 0 && p.NpcId != Sheet.Id)
+            .OrderBy(p => p.Generation)
+            .ThenBy(p => p.RoleFromRoot)
+            .ThenBy(p => p.Name))
+        {
+            var alreadyExists = Sheet.Relationships.Any(r => r.TargetNpcId == person.NpcId);
+            if (alreadyExists)
+                continue;
+
+            _familyStatePreview.Add(new FamilyStatePreviewRow
+            {
+                NpcId = person.NpcId,
+                Name = person.Name,
+                Role = string.IsNullOrWhiteSpace(person.RoleFromRoot)
+                    ? "Family"
+                    : person.RoleFromRoot
+            });
+        }
+
+        _familyStatePreviewMessage = _familyStatePreview.Count == 0
+            ? "No missing subjective relationship-state rows were found for this canonical family graph."
+            : $"Preview only — {_familyStatePreview.Count} missing family relationship-state row(s) would be created. Nothing has been written yet.";
+
+        return Task.CompletedTask;
+    }
+
+    private async Task ConfirmMissingFamilyStates()
+    {
+        if (_familyStatePreview.Count == 0)
+        {
+            _familyStatePreviewMessage = "Nothing to create. Run Preview first.";
+            return;
+        }
+
+        var planned = _familyStatePreview.ToList();
+        var created = 0;
+
+        foreach (var item in planned)
+        {
+            // Re-check before every write so Confirm is idempotent.
+            var current = await Studio.GetCharacterSheetAsync(Sheet.Id);
+            if (current is not null &&
+                current.Relationships.Any(r => r.TargetNpcId == item.NpcId))
+            {
+                continue;
+            }
+
+            var draft = new NpcRelationshipDraft
+            {
+                SourceNpcId = Sheet.Id,
+                TargetNpcId = item.NpcId,
+                RelationshipCategory = "Family",
+                RelationshipType = "family",
+                FamilyRole = item.Role,
+                Importance = 90,
+                Loyalty = 50,
+                IsMutual = true
+            };
+
+            await Studio.AddRelationshipAsync(draft);
+            created++;
+        }
+
+        _familyStatePreview.Clear();
+        _familyStatePreviewMessage =
+            $"Created {created} neutral family relationship-state row(s). Existing rows were preserved and were not overwritten.";
+
+        // Ask the parent page to reload the character sheet so the graph and
+        // right-hand editor immediately see the newly-created states.
+        await OnChanged.InvokeAsync();
+    }
+private async Task SelectNpc(int npcId)
+    {
+        _selectedNpcId = npcId;
+
+        // Prefer an existing direct subjective relationship row.
+        var direct = Sheet.Relationships
+            .Where(r => r.TargetNpcId == npcId)
+            .OrderByDescending(EffectiveImportance)
+            .FirstOrDefault();
+
+        if (direct is not null)
+        {
+            await SelectRelationship(direct);
+            return;
+        }
+
+        // Canonical-only family member: clear the old editor immediately.
+        _selected = null;
+        _reasons.Clear();
+        _selectedMetric = "Love";
+        ResetReasonDraft();
+
+        var target = await Studio.GetCharacterSheetAsync(npcId);
+        _selectedNpcName = target?.Name ?? $"NPC {npcId}";
+    }
+private async Task SelectRelationship(NpcRelationshipRow rel)
+    {
+                _selectedNpcId = rel.TargetNpcId;
+        _selectedNpcName = rel.TargetName;_selected = rel;
+
+        if (_selected.Importance <= 0)
+            _selected.Importance = EffectiveImportance(_selected);
+
+        if (string.IsNullOrWhiteSpace(_selected.RelationshipCategory))
+            _selected.RelationshipCategory = GuessCategory(_selected);
+
+        _selectedTier = LoadRelationshipTier(
+            Sheet.Id,
+            _selected.TargetNpcId,
+            _selected.Id);
+
+        _reasons = string.IsNullOrWhiteSpace(rel.Id)
+            ? new List<NpcRelationshipReason>()
+            : await Studio.GetRelationshipReasonsAsync(rel.Id);
+
         _selectedMetric = "Love";
         ResetReasonDraft();
     }
@@ -306,11 +466,50 @@
     private async Task SaveSelected()
     {
         if (_selected is null) return;
-        await Studio.SaveRelationshipAsync(_selected);
-        await OnChanged.InvokeAsync();
+
+        _relationshipSaveMessage = "";
+
+        try
+        {
+            await Studio.SaveRelationshipAsync(_selected);
+
+            // This helper was added by the slider-persistence patch.
+            // Keep it when present so every emotional score is guaranteed saved.
+
+            var selectedId = _selected.Id;
+            var selectedTargetId = _selected.TargetNpcId;
+
+            // Refresh this component locally instead of forcing the entire dossier
+            // through OnChanged. The previous full-parent reload was throwing after
+            // the DB write had already succeeded.
+            var fresh = await Studio.GetCharacterSheetAsync(Sheet.Id);
+
+            if (fresh is not null)
+            {
+                Sheet.Relationships = fresh.Relationships;
+
+                var refreshed = Sheet.Relationships.FirstOrDefault(r =>
+                    (!string.IsNullOrWhiteSpace(selectedId) && r.Id == selectedId) ||
+                    (selectedTargetId > 0 && r.TargetNpcId == selectedTargetId));
+
+                if (refreshed is not null)
+                {
+                    _selected = refreshed;
+                    _selectedNpcId = refreshed.TargetNpcId;
+                    _selectedNpcName = refreshed.TargetName;
+                    _reasons = await Studio.GetRelationshipReasonsAsync(refreshed.Id);
+                }
+            }
+
+            _relationshipSaveMessage = "Relationship and slider values saved.";
+        }
+        catch (Exception ex)
+        {
+            _relationshipSaveMessage = "Save error: " + ex.Message;
+        }
     }
 
-    private async Task AddRelationship()
+private async Task AddRelationship()
     {
         if (_newRelationship.TargetNpcId <= 0 || string.IsNullOrWhiteSpace(_newRelationship.RelationshipType)) return;
         _newRelationship.SourceNpcId = Sheet.Id;
@@ -319,7 +518,99 @@
         await OnChanged.InvokeAsync();
     }
 
-    private void SelectMetric(string metric)
+        private string RelationshipsDbPath =>
+        Options.GetType().GetProperty("RelationshipsDbPath")?.GetValue(Options) as string
+        ?? @"D:\ProjectEveData\Database\project_eve_relationships.db";
+
+    private int LoadRelationshipTier(
+        int sourceNpcId,
+        int targetNpcId,
+        string relationshipId)
+    {
+        try
+        {
+            using var conn = new SqliteConnection($"Data Source={RelationshipsDbPath}");
+            conn.Open();
+
+            using var cmd = conn.CreateCommand();
+
+            if (!string.IsNullOrWhiteSpace(relationshipId))
+            {
+                cmd.CommandText = """
+                    SELECT COALESCE(RelationshipTier, 0)
+                    FROM RelationshipStates
+                    WHERE RelationshipId = $id
+                    LIMIT 1;
+                    """;
+                cmd.Parameters.AddWithValue("$id", relationshipId);
+            }
+            else
+            {
+                cmd.CommandText = """
+                    SELECT COALESCE(RelationshipTier, 0)
+                    FROM RelationshipStates
+                    WHERE SourceCharacterId = $source
+                      AND TargetCharacterId = $target
+                    ORDER BY UpdatedRealAt DESC
+                    LIMIT 1;
+                    """;
+                cmd.Parameters.AddWithValue("$source", sourceNpcId);
+                cmd.Parameters.AddWithValue("$target", targetNpcId);
+            }
+
+            var value = cmd.ExecuteScalar();
+            if (value is null || value is DBNull)
+                return 0;
+
+            var tier = Convert.ToInt32(value);
+            return tier is >= 1 and <= 5 ? tier : 0;
+        }
+        catch (SqliteException)
+        {
+            return 0;
+        }
+    }
+
+    private void SaveRelationshipTier(
+        int sourceNpcId,
+        int targetNpcId,
+        string relationshipId,
+        int tier)
+    {
+        tier = tier is >= 1 and <= 5 ? tier : 0;
+
+        using var conn = new SqliteConnection($"Data Source={RelationshipsDbPath}");
+        conn.Open();
+
+        using var cmd = conn.CreateCommand();
+
+        if (!string.IsNullOrWhiteSpace(relationshipId))
+        {
+            cmd.CommandText = """
+                UPDATE RelationshipStates
+                SET RelationshipTier = $tier,
+                    UpdatedRealAt = CURRENT_TIMESTAMP
+                WHERE RelationshipId = $id;
+                """;
+            cmd.Parameters.AddWithValue("$id", relationshipId);
+        }
+        else
+        {
+            cmd.CommandText = """
+                UPDATE RelationshipStates
+                SET RelationshipTier = $tier,
+                    UpdatedRealAt = CURRENT_TIMESTAMP
+                WHERE SourceCharacterId = $source
+                  AND TargetCharacterId = $target;
+                """;
+            cmd.Parameters.AddWithValue("$source", sourceNpcId);
+            cmd.Parameters.AddWithValue("$target", targetNpcId);
+        }
+
+        cmd.Parameters.AddWithValue("$tier", tier);
+        cmd.ExecuteNonQuery();
+    }
+private void SelectMetric(string metric)
     {
         _selectedMetric = metric;
         ResetReasonDraft();
@@ -950,6 +1241,56 @@
         100%{transform:translate(calc(-50% - 3px),calc(-50% - 1px)) rotate(.25deg)}
     }
     @@media (prefers-reduced-motion:reduce){.web-node-v2{animation:none}}
+</style>
+
+
+
+
+
+
+
+
+
+<style>
+    .family-state-sync-panel {
+        margin: 0 0 16px 0;
+        padding: 14px 16px;
+        border: 1px solid rgba(148, 163, 184, .22);
+        border-radius: 14px;
+        background: rgba(15, 23, 42, .35);
+        display: grid;
+        gap: 10px;
+    }
+
+    .family-state-sync-panel > div:first-child {
+        display: grid;
+        gap: 4px;
+    }
+
+    .family-state-sync-panel > div:first-child span,
+    .family-state-sync-message {
+        opacity: .78;
+        font-size: .9rem;
+    }
+
+    .family-state-sync-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .family-state-preview-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .family-state-preview-list span {
+        padding: 6px 9px;
+        border: 1px solid rgba(148, 163, 184, .18);
+        border-radius: 999px;
+        font-size: .82rem;
+    }
 </style>
 
 

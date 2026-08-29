@@ -163,7 +163,8 @@ public sealed class FamilyNpcFactoryPreviewService
         var seed = StableSeed(root.Id, memberKey);
         var rng = new Random(seed);
 
-        var lastName = GuessFamilyLastName(root.Name, role);
+        var surname = ResolveFamilySurnames(root.Id, root.Name, role);
+        var lastName = surname.Current;
         var firstName = UniqueFirstName(gender, lastName, usedNames, rng);
         var fullName = (firstName + " " + lastName).Trim();
         usedNames.Add(fullName);
@@ -518,17 +519,88 @@ public sealed class FamilyNpcFactoryPreviewService
         return $"Generate education/training consistent with age and proposed occupation ({occupation}); employer must be matched to the canonical workplace system before final write.";
     }
 
-    private static string GuessFamilyLastName(string rootName, string role)
+    private (string Current, string Birth) ResolveFamilySurnames(int rootNpcId, string rootName, string role)
     {
-        var parts = rootName.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
-        var rootLast = parts.Length == 0 ? "Family" : parts[^1];
+        var rootFallback = LastToken(rootName);
+        var rootProfile = LoadSurnameProfile(rootNpcId);
+        var rootCurrent = FirstNonBlank(rootProfile.Current, rootFallback, "Family");
+        var rootBirth = FirstNonBlank(rootProfile.Birth, rootCurrent);
 
-        // Preview-only: keep the visible family surname unless the eventual
-        // confirmed relationship/history supplies a different maiden/married name.
-        return rootLast;
+        var fatherId = FindBiologicalParentBySlot(rootNpcId, "Father");
+        var motherId = FindBiologicalParentBySlot(rootNpcId, "Mother");
+        var father = LoadSurnameProfile(fatherId);
+        var mother = LoadSurnameProfile(motherId);
+
+        var paternal = FirstNonBlank(father.Birth, father.Current, rootBirth, rootCurrent);
+        var maternalKnown = FirstNonBlank(mother.Birth, mother.Current);
+        var maternal = !string.IsNullOrWhiteSpace(maternalKnown) &&
+                       !maternalKnown.Equals(paternal, StringComparison.OrdinalIgnoreCase)
+            ? maternalKnown
+            : StableBranchSurname(rootNpcId, "maternal", paternal);
+
+        var paternalGrandmotherBirth = StableBranchSurname(rootNpcId, "paternal-grandmother-birth", paternal, maternal);
+        var maternalGrandmotherBirth = StableBranchSurname(rootNpcId, "maternal-grandmother-birth", maternal, paternal);
+        var r = (role ?? "").Trim().ToLowerInvariant();
+
+        if (r.Contains("mother's mother") || r.Contains("maternal grandmother")) return (maternal, maternalGrandmotherBirth);
+        if (r.Contains("mother's father") || r.Contains("maternal grandfather")) return (maternal, maternal);
+        if (r.Contains("father's mother") || r.Contains("paternal grandmother")) return (paternal, paternalGrandmotherBirth);
+        if (r.Contains("father's father") || r.Contains("paternal grandfather")) return (paternal, paternal);
+        if (r.Contains("mother's brother") || r.Contains("mother's sister") || r.Contains("maternal aunt") || r.Contains("maternal uncle")) return (maternal, maternal);
+        if (r.Contains("father's brother") || r.Contains("father's sister") || r.Contains("paternal aunt") || r.Contains("paternal uncle")) return (paternal, paternal);
+        if (r == "mother" || r == "stepmother") return (rootCurrent, maternal);
+        if (r == "father" || r == "stepfather") return (paternal, paternal);
+        if (r is "brother" or "sister" or "sibling") return (rootCurrent, rootBirth);
+        return (rootCurrent, rootBirth);
     }
 
-    private static int StableSeed(int rootId, string memberKey)
+    private (string Current, string Birth) LoadSurnameProfile(int npcId)
+    {
+        if (npcId <= 0) return ("", "");
+        using var conn = new SqliteConnection($"Data Source={_options.MainDbPath}");
+        conn.Open();
+        using var cmd = conn.CreateCommand();
+        cmd.CommandText = "SELECT COALESCE(CurrentLastName, ), COALESCE(BirthLastName, ) FROM NpcNameProfiles WHERE NpcId=$id LIMIT 1;";
+        cmd.Parameters.AddWithValue("$id", npcId);
+        using var reader = cmd.ExecuteReader();
+        return reader.Read() ? (reader.GetString(0), reader.GetString(1)) : ("", "");
+    }
+
+    private int FindBiologicalParentBySlot(int childNpcId, string slot)
+    {
+        var relPath = _options.GetType().GetProperty("RelationshipsDbPath")?.GetValue(_options) as string
+            ?? @"D:\ProjectEveData\Database\project_eve_relationships.db";
+        using var conn = new SqliteConnection($"Data Source={relPath}");
+        conn.Open();
+        using var cmd = conn.CreateCommand();
+        cmd.CommandText = "SELECT ParentNpcId FROM FamilyParentChildLinks WHERE ChildNpcId=$child AND IsCurrent=1 AND lower(ParentKind)='biological' AND lower(ParentSlot)=lower($slot) ORDER BY UpdatedRealAt DESC, Id DESC LIMIT 1;";
+        cmd.Parameters.AddWithValue("$child", childNpcId);
+        cmd.Parameters.AddWithValue("$slot", slot);
+        return Convert.ToInt32(cmd.ExecuteScalar() ?? 0);
+    }
+
+    private static string StableBranchSurname(int rootNpcId, string branchKey, params string[] avoid)
+    {
+        string[] pool = ["Bennett","Carter","Hayes","Mercer","Collins","Parker","Foster","Sullivan","Miller","Reed","Walsh","Turner","Hughes","Morgan","Dalton","Harris","Brooks","Griffin","Mason","Walker","Porter","Dawson","Snyder","Keller"];
+        var blocked = avoid.Where(x => !string.IsNullOrWhiteSpace(x)).ToHashSet(StringComparer.OrdinalIgnoreCase);
+        var start = Math.Abs(StableSeed(rootNpcId, branchKey) % pool.Length);
+        for (var i = 0; i < pool.Length; i++)
+        {
+            var candidate = pool[(start + i) % pool.Length];
+            if (!blocked.Contains(candidate)) return candidate;
+        }
+        return "Family";
+    }
+
+    private static string FirstNonBlank(params string[] values) =>
+        values.FirstOrDefault(x => !string.IsNullOrWhiteSpace(x))?.Trim() ?? "";
+
+    private static string LastToken(string value)
+    {
+        var parts = (value ?? "").Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        return parts.Length == 0 ? "" : parts[^1];
+    }
+private static int StableSeed(int rootId, string memberKey)
     {
         unchecked
         {
@@ -571,3 +643,4 @@ public sealed class FamilyNpcFactoryPreviewService
         bool CreatePaternalGrandmother,
         bool CreatePaternalGrandfather);
 }
+

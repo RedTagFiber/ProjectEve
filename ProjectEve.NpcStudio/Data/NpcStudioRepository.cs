@@ -145,6 +145,11 @@ public sealed partial class NpcStudioRepository
         if (sheet == null)
             return Task.FromResult<NpcCharacterSheet?>(null);
 
+        // Canonical current identity comes from NpcNameProfiles.
+        // Characters remains the denormalized/search copy, but must not override
+        // an established canonical name profile.
+        ApplyCanonicalNameProfile(conn, sheet);
+
         sheet.Relationships = GetRelationships(conn, npcId);
         sheet.Traits = GetTraits(conn, npcId);
         sheet.Appearance = GetAppearance(conn, npcId);
@@ -166,6 +171,11 @@ public sealed partial class NpcStudioRepository
     public Task SaveCharacterCoreAsync(NpcCharacterSheet sheet)
     {
         using var conn = Open();
+
+        // The manual Core editor exposes Full Name as one field. Normalize it
+        // before writing so Characters and NpcNameProfiles cannot drift apart.
+        NormalizeEditableIdentity(sheet);
+
         using var cmd = conn.CreateCommand();
 
         cmd.CommandText = """
@@ -240,11 +250,147 @@ public sealed partial class NpcStudioRepository
         cmd.Parameters.AddWithValue("$statusNotes", sheet.StatusNotes ?? "");
 
         cmd.ExecuteNonQuery();
-        AddRevision(conn, sheet.Id, "Character Sheet", "Character sheet saved", "NPC Studio V0.2 saved overview/core character fields.");
+
+        // Keep the canonical structured name profile synchronized with every
+        // manual Core-editor save. Birth surname is preserved once established.
+        SaveCanonicalNameProfile(conn, sheet);
+
+        AddRevision(conn, sheet.Id, "Character Sheet", "Character sheet saved", "NPC Studio saved overview/core character fields and synchronized canonical identity.");
 
         return Task.CompletedTask;
     }
 
+    private static void ApplyCanonicalNameProfile(SqliteConnection conn, NpcCharacterSheet sheet)
+    {
+        if (!TableExists(conn, "NpcNameProfiles"))
+            return;
+
+        using var cmd = conn.CreateCommand();
+        cmd.CommandText = """
+            SELECT
+                COALESCE(FirstName,''),
+                COALESCE(MiddleName,''),
+                COALESCE(CurrentLastName,''),
+                COALESCE(PreferredName,''),
+                COALESCE(Suffix,'')
+            FROM NpcNameProfiles
+            WHERE NpcId = $id
+            LIMIT 1;
+            """;
+        cmd.Parameters.AddWithValue("$id", sheet.Id);
+
+        using var reader = cmd.ExecuteReader();
+        if (!reader.Read())
+            return;
+
+        var first = reader.GetString(0).Trim();
+        var middle = reader.GetString(1).Trim();
+        var currentSurname = reader.GetString(2).Trim();
+        var preferred = reader.GetString(3).Trim();
+        var suffix = reader.GetString(4).Trim();
+
+        if (!string.IsNullOrWhiteSpace(first))
+            sheet.FirstName = first;
+
+        if (!string.IsNullOrWhiteSpace(currentSurname))
+            sheet.LastName = currentSurname;
+
+        var canonicalFullName = JoinName(first, middle, currentSurname, suffix);
+        if (!string.IsNullOrWhiteSpace(canonicalFullName))
+            sheet.Name = canonicalFullName;
+
+        if (!string.IsNullOrWhiteSpace(preferred))
+            sheet.DisplayName = preferred;
+        else if (!string.IsNullOrWhiteSpace(first) && string.IsNullOrWhiteSpace(sheet.DisplayName))
+            sheet.DisplayName = first;
+    }
+
+    private static void NormalizeEditableIdentity(NpcCharacterSheet sheet)
+    {
+        var full = (sheet.Name ?? "").Trim();
+        if (string.IsNullOrWhiteSpace(full))
+            return;
+
+        var parts = full.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        if (parts.Length == 0)
+            return;
+
+        // Full Name is authoritative in the manual Core editor.
+        sheet.FirstName = parts[0];
+
+        if (parts.Length >= 2)
+            sheet.LastName = parts[^1];
+
+        if (string.IsNullOrWhiteSpace(sheet.DisplayName))
+            sheet.DisplayName = sheet.FirstName;
+
+        sheet.Name = string.Join(" ", parts);
+    }
+
+    private static void SaveCanonicalNameProfile(SqliteConnection conn, NpcCharacterSheet sheet)
+    {
+        if (!TableExists(conn, "NpcNameProfiles"))
+            return;
+
+        var full = (sheet.Name ?? "").Trim();
+        var parts = full.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+        var first = !string.IsNullOrWhiteSpace(sheet.FirstName)
+            ? sheet.FirstName.Trim()
+            : (parts.Length > 0 ? parts[0] : "");
+
+        var currentSurname = !string.IsNullOrWhiteSpace(sheet.LastName)
+            ? sheet.LastName.Trim()
+            : (parts.Length > 1 ? parts[^1] : "");
+
+        var middle = parts.Length > 2
+            ? string.Join(" ", parts.Skip(1).Take(parts.Length - 2))
+            : "";
+
+        var preferred = !string.IsNullOrWhiteSpace(sheet.DisplayName)
+            ? sheet.DisplayName.Trim()
+            : first;
+
+        using var cmd = conn.CreateCommand();
+        cmd.CommandText = """
+            INSERT INTO NpcNameProfiles
+            (
+                NpcId, FirstName, MiddleName, CurrentLastName,
+                BirthLastName, PreferredName, Suffix, UpdatedRealAt
+            )
+            VALUES
+            (
+                $id, $first, $middle, $current,
+                $birth, $preferred, '', CURRENT_TIMESTAMP
+            )
+            ON CONFLICT(NpcId) DO UPDATE SET
+                FirstName = excluded.FirstName,
+                MiddleName = CASE
+                    WHEN TRIM(excluded.MiddleName) <> '' THEN excluded.MiddleName
+                    ELSE NpcNameProfiles.MiddleName
+                END,
+                CurrentLastName = excluded.CurrentLastName,
+                BirthLastName = CASE
+                    WHEN TRIM(NpcNameProfiles.BirthLastName) <> '' THEN NpcNameProfiles.BirthLastName
+                    ELSE excluded.BirthLastName
+                END,
+                PreferredName = excluded.PreferredName,
+                UpdatedRealAt = CURRENT_TIMESTAMP;
+            """;
+        cmd.Parameters.AddWithValue("$id", sheet.Id);
+        cmd.Parameters.AddWithValue("$first", first);
+        cmd.Parameters.AddWithValue("$middle", middle);
+        cmd.Parameters.AddWithValue("$current", currentSurname);
+
+        // For a brand-new structured-name row only, current surname is the safest
+        // initial birth-surname fallback. Once BirthLastName exists, it is preserved.
+        cmd.Parameters.AddWithValue("$birth", currentSurname);
+        cmd.Parameters.AddWithValue("$preferred", preferred);
+        cmd.ExecuteNonQuery();
+    }
+
+    private static string JoinName(params string[] parts) =>
+        string.Join(" ", parts.Where(x => !string.IsNullOrWhiteSpace(x)).Select(x => x.Trim()));
     public Task SaveTraitAsync(NpcTraitRow trait)
     {
         using var conn = Open();
@@ -1629,3 +1775,4 @@ public sealed partial class NpcStudioRepository
         return ReadInt(reader, name) != 0;
     }
 }
+
