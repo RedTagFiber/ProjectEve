@@ -147,19 +147,39 @@ public sealed class CanonicalFamilyGraphService
             }
         }
 
-        // Explicit override rows fill structural gaps that cannot yet be derived.
+        // Explicit override rows fill STRUCTURAL GAPS ONLY.
+        //
+        // Important:
+        // If the canonical parent/child/spouse graph has already resolved this
+        // person from the CURRENT root NPC's point of view, that root-relative
+        // role must win.
+        //
+        // Example:
+        // Thomas -> Adam can be Grandson,
+        // while Adam -> Thomas must independently resolve as Grandfather.
+        //
+        // A historical/migrated override must never force the same label in
+        // both directions.
         foreach (var ov in overrides.Where(x => x.Source == rootNpcId))
         {
-            AddPerson(ov.Target, ov.Role, 0, true, false);
-            AddEdge(rootNpcId, ov.Target, "Override", ov.Role, "", false);
+            if (!people.ContainsKey(ov.Target))
+            {
+                AddPerson(ov.Target, ov.Role, 0, true, false);
+                AddEdge(rootNpcId, ov.Target, "Override", ov.Role, "", false);
+            }
         }
 
-        // Also respect inverse override rows using reciprocal role logic.
+        // Inverse override rows are also gap-fillers only.
+        // ReciprocalRole is used only when the structural graph cannot derive
+        // the relationship for the current root NPC.
         foreach (var ov in overrides.Where(x => x.Target == rootNpcId))
         {
-            var inverse = ReciprocalRole(ov.Role);
-            AddPerson(ov.Source, inverse, 0, true, true);
-            AddEdge(rootNpcId, ov.Source, "OverrideInverse", inverse, ov.Role, true);
+            if (!people.ContainsKey(ov.Source))
+            {
+                var inverse = ReciprocalRole(ov.Role);
+                AddPerson(ov.Source, inverse, 0, true, true);
+                AddEdge(rootNpcId, ov.Source, "OverrideInverse", inverse, ov.Role, true);
+            }
         }
 
         AssignFamilySides();
@@ -330,14 +350,7 @@ public sealed class CanonicalFamilyGraphService
         {
             if (npcId <= 0) return;
 
-            if (people.TryGetValue(npcId, out var existing))
-            {
-                // Prefer a more specific role over a generic one.
-                if (RoleSpecificity(role) <= RoleSpecificity(existing.RoleFromRoot))
-                    return;
-            }
-
-            people[npcId] = new CanonicalFamilyPerson
+            var incoming = new CanonicalFamilyPerson
             {
                 NpcId = npcId,
                 Name = GetDisplayName(npcId),
@@ -346,6 +359,14 @@ public sealed class CanonicalFamilyGraphService
                 IsDirect = direct,
                 IsInferred = inferred
             };
+
+            if (people.TryGetValue(npcId, out var existing))
+            {
+                if (!ShouldReplaceRole(existing, incoming))
+                    return;
+            }
+
+            people[npcId] = incoming;
         }
 
         void AddEdge(int from, int to, string edgeType, string roleFromFrom, string roleFromTo, bool inferred)
@@ -552,6 +573,87 @@ public sealed class CanonicalFamilyGraphService
         return neutral;
     }
 
+    private static bool ShouldReplaceRole(
+        CanonicalFamilyPerson existing,
+        CanonicalFamilyPerson incoming)
+    {
+        // 1. Direct canonical structure still beats inferred structure.
+        if (existing.IsDirect != incoming.IsDirect)
+            return incoming.IsDirect && !existing.IsDirect;
+
+        // 2. At equal directness, non-inferred beats inferred.
+        if (existing.IsInferred != incoming.IsInferred)
+            return !incoming.IsInferred && existing.IsInferred;
+
+        // 3. Compare semantic role confidence BEFORE generation distance.
+        //
+        // This is critical for grandparents. A bad sibling path may discover
+        // Thomas as "Brother" at generation 0 before the true parent-of-parent
+        // path discovers him as "Father's Father" at generation -2.
+        //
+        // The branch-specific grandparent role must win.
+        var existingPriority = RolePriority(existing.RoleFromRoot);
+        var incomingPriority = RolePriority(incoming.RoleFromRoot);
+
+        if (incomingPriority != existingPriority)
+            return incomingPriority > existingPriority;
+
+        // 4. At equal semantic confidence, prefer the closer generation.
+        var existingDepth = Math.Abs(existing.Generation);
+        var incomingDepth = Math.Abs(incoming.Generation);
+
+        if (incomingDepth != existingDepth)
+            return incomingDepth < existingDepth;
+
+        // 5. Final fallback: use the existing specificity test.
+        return RoleSpecificity(incoming.RoleFromRoot) >
+               RoleSpecificity(existing.RoleFromRoot);
+    }
+
+    private static int RolePriority(string? role)
+    {
+        var value = (role ?? "").Trim().ToLowerInvariant();
+
+        // Parent-of-parent roles are the strongest inferred grandparent proof.
+        // Keep the branch label because it tells us exactly whose parent it is:
+        // Father's Father, Father's Mother, Mother's Father, Mother's Mother.
+        if ((value.StartsWith("father's ") || value.StartsWith("mother's ")) &&
+            (value.EndsWith(" father") ||
+             value.EndsWith(" mother") ||
+             value.EndsWith(" parent")))
+            return 98;
+
+        return value switch
+        {
+            "husband" or "wife" or "spouse" or "partner" => 100,
+
+            "father" or "mother" or "parent" or
+            "stepfather" or "stepmother" or "stepparent" => 95,
+
+            "son" or "daughter" or "child" or
+            "stepson" or "stepdaughter" or "stepchild" => 95,
+
+            "brother" or "sister" or "sibling" or
+            "stepbrother" or "stepsister" or
+            "half-brother" or "half-sister" => 90,
+
+            "grandfather" or "grandmother" or "grandparent" or
+            "grandson" or "granddaughter" or "grandchild" => 88,
+
+            "uncle" or "aunt" or
+            "niece" or "nephew" or
+            "cousin" => 75,
+
+            "father-in-law" or "mother-in-law" or "parent-in-law" or
+            "son-in-law" or "daughter-in-law" or "child-in-law" => 65,
+
+            // Other branch descriptions remain useful but are below the
+            // dedicated parent-of-parent grandparent pattern above.
+            _ when value.Contains("'s ") => 80,
+
+            _ => 0
+        };
+    }
     private static string ParentBranchLabel(string parentRole) =>
         parentRole.Trim().ToLowerInvariant() switch
         {
@@ -610,5 +712,8 @@ public sealed class CanonicalFamilyGraphService
         return Convert.ToInt32(cmd.ExecuteScalar() ?? 0) > 0;
     }
 }
+
+
+
 
 
