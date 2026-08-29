@@ -1,6 +1,8 @@
 ﻿@using ProjectEve.NpcStudio.Models
 @using ProjectEve.NpcStudio.Data
+@using ProjectEve.NpcStudio.Services
 @inject NpcStudioRepository Repo
+@inject NpcFamilyBuilderService FamilyBuilder
 
 @if(Character is null){<div class="personal-panel-empty">Personal data unavailable.</div>}
 else
@@ -147,6 +149,31 @@ else
 <div class="edit-field checkbox"><label><input type="checkbox" @bind="_family.GenerateSpousesInLaws"/> Generate spouses / in-laws</label></div>
 <div class="edit-field checkbox"><label><input type="checkbox" @bind="_family.ReuseExistingTownNpcForSpouses"/> Reuse suitable town NPCs for spouses / in-laws</label></div>
 </div><div class="edit-actions"><button class="save" @onclick="SaveFamily">Save Family Plan</button></div>
+<div class="loan-box">
+    <b>Family Builder Pass 1</b>
+    <span>Creates draft structural NPC shells for the selected parents, siblings, and grandparents, then writes canonical family relationships. It does not generate TRUE HISTORY or memories yet.</span>
+</div>
+<div class="edit-actions">
+    <button class="save" @onclick="BuildImmediateFamily">Build Immediate Family (Draft)</button>
+</div>
+@if(_familyBuildResult is not null)
+{
+    <div class="family-summary">
+        @_familyBuildResult.Message
+        @if(_familyBuildResult.Members.Count > 0)
+        {
+            <div class="contact-edit-list">
+                @foreach(var member in _familyBuildResult.Members)
+                {
+                    <div>
+                        <span>@member.FamilyRole — @member.DisplayName — NPC @member.NpcId</span>
+                        <small>@(member.CreatedNow ? "Created" : "Reused")</small>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+}
 }
 }
 </section>
@@ -183,6 +210,7 @@ else
     };
 
     private FamilyBuildPlanEdit _family = new();
+    private FamilyBuildResult? _familyBuildResult;
 
     private readonly (string Key, string Label)[] _tabs =
     [
@@ -446,6 +474,16 @@ else
         StateHasChanged();
     }
 
+    private async Task BuildImmediateFamily()
+    {
+        _familyBuildResult = FamilyBuilder.BuildImmediateFamily(NpcId);
+
+        _message = _familyBuildResult.Message;
+
+        await Reload();
+
+        StateHasChanged();
+    }
     private async Task SaveFamily()
     {
         await Repo.SaveFamilyBuildPlanAsync(

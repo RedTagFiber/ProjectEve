@@ -1,4 +1,4 @@
-using ProjectEve.NpcStudio.Components;
+﻿using ProjectEve.NpcStudio.Components;
 using ProjectEve.NpcStudio.Data;
 using ProjectEve.NpcStudio.Models;
 using ProjectEve.NpcStudio.Services;
@@ -29,6 +29,13 @@ builder.Services.AddSingleton(new NpcStudioOptions
 builder.Services.AddSingleton<NpcStudioSchema>();
 builder.Services.AddScoped<NpcStudioRepository>();
 builder.Services.AddScoped<NpcStudioService>();
+builder.Services.AddScoped<FamilyIntegrityGuardService>();
+builder.Services.AddScoped<CanonicalFamilyMigrationService>();
+builder.Services.AddScoped<CanonicalFamilyGraphService>();
+builder.Services.AddScoped<NpcFamilyBuilderService>();
+builder.Services.AddScoped<RelationshipCandidateService>();
+builder.Services.AddScoped<FamilyGraphResolverService>();
+builder.Services.AddScoped<FamilyNpcFactoryPreviewService>();
 
 builder.Services.AddHttpClient<OllamaPromptEngineerService>();
 builder.Services.AddHttpClient<ComfyStudioService>();
@@ -44,6 +51,13 @@ using (var scope = app.Services.CreateScope())
 {
     var schema = scope.ServiceProvider.GetRequiredService<NpcStudioSchema>();
     schema.Ensure();
+
+    var options = scope.ServiceProvider.GetRequiredService<NpcStudioOptions>();
+    NpcStudioFamilySchemaCompatibility.Ensure(options);
+    NpcFamilyIdentityIntegritySchema.Ensure(options);
+    var canonicalFamilyMigration =
+        scope.ServiceProvider.GetRequiredService<CanonicalFamilyMigrationService>();
+    canonicalFamilyMigration.ImportLegacyFamilyRelationships();
 }
 
 if (!app.Environment.IsDevelopment())
@@ -90,3 +104,10 @@ app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 
 app.Run();
+
+
+
+
+
+
+

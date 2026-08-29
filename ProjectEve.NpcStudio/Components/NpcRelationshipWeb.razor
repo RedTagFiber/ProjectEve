@@ -2,6 +2,8 @@
 @using ProjectEve.NpcStudio.Services
 @inject NpcStudioService Studio
 
+<NpcRelationshipBuilders Sheet="Sheet" />
+
 <div class="relationship-workspace">
     <section class="relationship-web-panel">
         <div class="rw-title">
@@ -12,33 +14,69 @@
             <span class="rw-count">@Sheet.Relationships.Count links</span>
         </div>
 
-        <div class="web-legend">
-            <span><i class="family"></i>Family</span>
-            <span><i class="friend"></i>Friends</span>
-            <span><i class="romantic"></i>Romantic</span>
-            <span><i class="rival"></i>Rivals / Enemies</span>
-            <span><i class="work"></i>Work / Other</span>
+        <div class="web-filter-board">
+            <div class="web-filter-row">
+                <span class="filter-label">SHOW</span>
+                <button type="button" class="web-filter family @FilterClass("Family")" @onclick='() => ToggleCategory("Family")'>Family</button>
+                <button type="button" class="web-filter friend @FilterClass("Friend")" @onclick='() => ToggleCategory("Friend")'>Friends</button>
+                <button type="button" class="web-filter romantic @FilterClass("Relationship")" @onclick='() => ToggleCategory("Relationship")'>Relationship</button>
+                <button type="button" class="web-filter rival @FilterClass("Enemy")" @onclick='() => ToggleCategory("Enemy")'>Enemies / Rivals</button>
+            </div>
+
+            <div class="web-filter-row">
+                <span class="filter-label">TIERS</span>
+                @for (var tier = 1; tier <= 5; tier++)
+                {
+                    var capturedTier = tier;
+                    <button type="button"
+                            class="tier-filter @(_enabledTiers.Contains(capturedTier) ? "on" : "")"
+                            @onclick="() => ToggleTier(capturedTier)">
+                        @capturedTier
+                    </button>
+                }
+                <button type="button" class="tier-filter all" @onclick="ShowAllTiers">ALL</button>
+                <button type="button" class="tier-filter clear" @onclick="ClearTiers">CLEAR</button>
+            </div>
         </div>
 
-        <div class="relationship-web">
+        <div class="relationship-web v2">
+            <div class="tier-ring tier-ring-5"><span>5</span></div>
+            <div class="tier-ring tier-ring-4"><span>4</span></div>
+            <div class="tier-ring tier-ring-3"><span>3</span></div>
+            <div class="tier-ring tier-ring-2"><span>2</span></div>
+            <div class="tier-ring tier-ring-1"><span>1</span></div>
+
+            @foreach (var rel in VisibleRelationships)
+            {
+                var point = WebPoint(rel);
+                <div class="web-spoke @CategoryClass(rel) @(_selected?.Id == rel.Id ? "selected" : "")"
+                     style="@WebSpokeStyle(point.angle, point.radius)"></div>
+            }
+
             <div class="web-center">
                 <strong>@Initials(Sheet.Name)</strong>
                 <span>@Sheet.Name</span>
             </div>
 
-            @for (var i = 0; i < VisibleRelationships.Count; i++)
+            @foreach (var rel in VisibleRelationships)
             {
-                var rel = VisibleRelationships[i];
+                var point = WebPoint(rel);
+                var tier = RelationshipTier(rel);
                 <button type="button"
-                        class="web-node @CategoryClass(rel) @(_selected?.Id == rel.Id ? "selected" : "")"
-                        style="@WebPositionStyle(i, VisibleRelationships.Count, rel)"
-                        title="@($"{rel.TargetName} · Importance {EffectiveImportance(rel)}")"
+                        class="web-node web-node-v2 @CategoryClass(rel) tier-@tier @(_selected?.Id == rel.Id ? "selected locked" : "")"
+                        style="@WebNodeStyle(point.x, point.y, rel)"
+                        title="@($"{rel.TargetName} · Tier {tier} · Importance {EffectiveImportance(rel)}")"
                         @onclick="@(() => SelectRelationship(rel))">
                     <strong>@Initials(rel.TargetName)</strong>
                     <span>@rel.TargetName</span>
-                    <small>@EffectiveImportance(rel)</small>
+                    <small>@RelationshipLabel(rel) · T@tier</small>
                 </button>
             }
+        </div>
+
+        <div class="web-foot">
+            Showing @VisibleRelationships.Count of @Sheet.Relationships.Count relationships.
+            Click a person to lock focus. Use category and tier switches to reveal the story layer by layer.
         </div>
 
         @if (Sheet.Relationships.Count > VisibleRelationships.Count)
@@ -223,7 +261,19 @@
     private NpcRelationshipDraft _newRelationship = new() { RelationshipCategory = "Friend", RelationshipType = "Friend", Importance = 50, Loyalty = 50, IsMutual = true };
 
     private static readonly string[] Categories = ["Family", "Friend", "Romantic", "Rival", "Enemy", "Work", "Mentor", "Neighbor", "Other"];
-    private List<NpcRelationshipRow> VisibleRelationships => Sheet.Relationships.OrderByDescending(EffectiveImportance).Take(12).ToList();
+
+    private readonly HashSet<string> _enabledCategories =
+        new(StringComparer.OrdinalIgnoreCase) { "Family", "Friend", "Relationship", "Enemy" };
+
+    private readonly HashSet<int> _enabledTiers = [1, 2, 3, 4, 5];
+
+    private List<NpcRelationshipRow> VisibleRelationships =>
+        Sheet.Relationships
+            .Where(r => _enabledCategories.Contains(FilterCategory(r)))
+            .Where(r => _enabledTiers.Contains(RelationshipTier(r)))
+            .OrderBy(RelationshipTier)
+            .ThenByDescending(EffectiveImportance)
+            .ToList();
 
     protected override async Task OnInitializedAsync()
     {
@@ -422,18 +472,106 @@
         return Math.Clamp((Math.Max(rel.Affection, Math.Max(rel.Trust, rel.Respect)) + Math.Max(rel.Tension, Math.Max(rel.Resentment, rel.Fear))) / 2, 1, 100);
     }
 
-    private static string WebPositionStyle(int index, int count, NpcRelationshipRow rel)
+    private (double x, double y, double angle, double radius) WebPoint(NpcRelationshipRow rel)
     {
-        if (count <= 0) return "left:50%;top:50%;";
-        var angle = (-Math.PI / 2d) + (2d * Math.PI * index / count);
-        var importance = EffectiveImportance(rel);
-        var radius = 43d - (importance * 0.17d); // more important = closer to center
+        var tier = RelationshipTier(rel);
+        var tierRows = VisibleRelationships.Where(r => RelationshipTier(r) == tier).ToList();
+        var index = Math.Max(0, tierRows.FindIndex(r => r.Id == rel.Id));
+        var count = Math.Max(1, tierRows.Count);
+
+        var offset = (tier - 1) * 0.39d;
+        var angle = (-Math.PI / 2d) + offset + (2d * Math.PI * index / count);
+        var radius = tier switch
+        {
+            1 => 16d,
+            2 => 24d,
+            3 => 32d,
+            4 => 40d,
+            _ => 47d
+        };
+
         var x = 50d + Math.Cos(angle) * radius;
         var y = 50d + Math.Sin(angle) * radius;
-        var size = 54d + importance * 0.25d;
-        return $"left:{x:0.##}%;top:{y:0.##}%;--node-size:{size:0.#}px;";
+        return (x, y, angle, radius);
     }
 
+    private static string WebNodeStyle(double x, double y, NpcRelationshipRow rel)
+    {
+        var importance = EffectiveImportance(rel);
+        var size = 64d + Math.Clamp(importance, 0, 100) * 0.22d;
+        var delay = -((rel.TargetNpcId > 0 ? rel.TargetNpcId : importance) % 17) * 0.37d;
+        return $"left:{x:0.##}%;top:{y:0.##}%;--node-size:{size:0.#}px;--wind-delay:{delay:0.##}s;";
+    }
+
+    private static string WebSpokeStyle(double angle, double radius)
+    {
+        var degrees = angle * 180d / Math.PI;
+        return $"width:{radius:0.##}%;transform:rotate({degrees:0.##}deg);";
+    }
+
+    private static int RelationshipTier(NpcRelationshipRow rel)
+    {
+        var importance = EffectiveImportance(rel);
+        if (importance >= 80) return 1;
+        if (importance >= 60) return 2;
+        if (importance >= 40) return 3;
+        if (importance >= 20) return 4;
+        return 5;
+    }
+
+    private static string FilterCategory(NpcRelationshipRow rel)
+    {
+        var category = string.IsNullOrWhiteSpace(rel.RelationshipCategory)
+            ? GuessCategory(rel)
+            : rel.RelationshipCategory;
+
+        var c = category.Trim().ToLowerInvariant();
+        if (c == "family") return "Family";
+        if (c == "friend") return "Friend";
+        if (c is "romantic" or "romance" or "relationship") return "Relationship";
+        if (c is "rival" or "enemy") return "Enemy";
+
+        var type = (rel.RelationshipType ?? "").ToLowerInvariant();
+        if (type.Contains("wife") || type.Contains("husband") || type.Contains("girlfriend") ||
+            type.Contains("boyfriend") || type.Contains("fianc") || type.Contains("partner") ||
+            type.Contains("lover"))
+            return "Relationship";
+
+        if (type.Contains("rival") || type.Contains("enemy"))
+            return "Enemy";
+
+        return "Friend";
+    }
+
+    private static string RelationshipLabel(NpcRelationshipRow rel)
+    {
+        if (!string.IsNullOrWhiteSpace(rel.FamilyRole)) return rel.FamilyRole;
+        if (!string.IsNullOrWhiteSpace(rel.RelationshipType)) return rel.RelationshipType;
+        return FilterCategory(rel);
+    }
+
+    private void ToggleCategory(string category)
+    {
+        if (!_enabledCategories.Add(category))
+            _enabledCategories.Remove(category);
+    }
+
+    private string FilterClass(string category) =>
+        _enabledCategories.Contains(category) ? "on" : "";
+
+    private void ToggleTier(int tier)
+    {
+        if (!_enabledTiers.Add(tier))
+            _enabledTiers.Remove(tier);
+    }
+
+    private void ShowAllTiers()
+    {
+        _enabledTiers.Clear();
+        for (var tier = 1; tier <= 5; tier++) _enabledTiers.Add(tier);
+    }
+
+    private void ClearTiers() => _enabledTiers.Clear();
     private static string CategoryClass(NpcRelationshipRow rel)
     {
         var category = string.IsNullOrWhiteSpace(rel.RelationshipCategory) ? GuessCategory(rel) : rel.RelationshipCategory;
@@ -779,5 +917,41 @@
         .reason-row{grid-template-columns:1fr}
         .why-head{align-items:flex-start;flex-direction:column}
     }
+
+    /* Relationship Web v2 prototype */
+    .web-filter-board{display:grid;gap:8px;margin:12px 0 14px;padding:10px 12px;border:1px solid #25344a;border-radius:12px;background:#0b1420}
+    .web-filter-row{display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+    .filter-label{width:54px;font-size:10px;letter-spacing:.16em;color:#74869d;font-weight:800}
+    .web-filter,.tier-filter{border:1px solid #314158;border-radius:999px;background:#0f1926;color:#8fa1b7;padding:7px 11px;font-size:12px;cursor:pointer;transition:all .16s ease}
+    .web-filter.on,.tier-filter.on{color:#eef7ff;border-color:#6d87aa;box-shadow:0 0 0 1px rgba(109,135,170,.18),inset 0 0 16px rgba(109,135,170,.08)}
+    .web-filter.family.on{border-color:#d6ae55;color:#ffe2a0}
+    .web-filter.friend.on{border-color:#4cc6cf;color:#a7f7ff}
+    .web-filter.romantic.on{border-color:#b47bdd;color:#e9c4ff}
+    .web-filter.rival.on{border-color:#c85b52;color:#ffb0aa}
+    .tier-filter.all,.tier-filter.clear{font-size:10px;letter-spacing:.08em}
+    .relationship-web.v2{position:relative;min-height:660px;overflow:hidden;isolation:isolate;background:radial-gradient(circle at center,rgba(100,75,180,.08) 0,rgba(7,15,25,0) 34%),#08111c}
+    .tier-ring{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);border:1px solid rgba(90,170,190,.18);border-radius:50%;pointer-events:none;z-index:0}
+    .tier-ring span{position:absolute;right:5px;top:50%;transform:translateY(-50%);display:grid;place-items:center;width:20px;height:20px;border:1px solid rgba(118,190,207,.28);border-radius:50%;background:#08111c;color:#779aaa;font-size:10px;font-weight:800}
+    .tier-ring-1{width:32%;height:32%;border-color:rgba(220,170,72,.42)}
+    .tier-ring-2{width:48%;height:48%}.tier-ring-3{width:64%;height:64%}.tier-ring-4{width:80%;height:80%}.tier-ring-5{width:94%;height:94%}
+    .web-spoke{position:absolute;left:50%;top:50%;height:1px;transform-origin:0 50%;background:linear-gradient(90deg,rgba(100,210,220,.34),rgba(100,210,220,.06));pointer-events:none;z-index:1;opacity:.55;transition:opacity .18s ease,height .18s ease,filter .18s ease}
+    .web-spoke.family{background:linear-gradient(90deg,rgba(221,177,78,.45),rgba(221,177,78,.05))}
+    .web-spoke.romantic{background:linear-gradient(90deg,rgba(180,123,221,.48),rgba(180,123,221,.05))}
+    .web-spoke.rival{background:linear-gradient(90deg,rgba(205,84,72,.56),rgba(205,84,72,.05))}
+    .web-spoke.selected{height:2px;opacity:1;filter:drop-shadow(0 0 5px currentColor)}
+    .web-node-v2{z-index:3;animation:relationship-soft-wind 8.5s ease-in-out infinite alternate;animation-delay:var(--wind-delay,0s);will-change:transform}
+    .web-node-v2:nth-of-type(3n){animation-duration:10.5s}.web-node-v2:nth-of-type(4n){animation-duration:12s}
+    .web-node-v2.locked{animation-play-state:paused;z-index:6;transform:translate(-50%,-50%) scale(1.08);box-shadow:0 0 0 3px rgba(255,255,255,.10),0 0 24px rgba(120,170,255,.24)}
+    .web-node-v2 small{white-space:nowrap;max-width:120px;overflow:hidden;text-overflow:ellipsis}
+    @@keyframes relationship-soft-wind{
+        0%{transform:translate(calc(-50% - 2px),calc(-50% + 1px)) rotate(-.25deg)}
+        35%{transform:translate(calc(-50% + 3px),calc(-50% - 2px)) rotate(.35deg)}
+        70%{transform:translate(calc(-50% + 1px),calc(-50% + 3px)) rotate(-.2deg)}
+        100%{transform:translate(calc(-50% - 3px),calc(-50% - 1px)) rotate(.25deg)}
+    }
+    @@media (prefers-reduced-motion:reduce){.web-node-v2{animation:none}}
 </style>
+
+
+
 
