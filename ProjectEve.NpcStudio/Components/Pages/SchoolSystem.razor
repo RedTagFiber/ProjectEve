@@ -1,0 +1,410 @@
+﻿@page "/npc-studio/schools"
+@rendermode InteractiveServer
+@using ProjectEve.NpcStudio.Models
+@using ProjectEve.NpcStudio.Services
+@inject ProjectEve.NpcStudio.Services.SchoolSystemService Schools
+@inject ProjectEve.NpcStudio.Services.BhsStaffDraftService BhsStaffDrafts
+@inject ProjectEve.NpcStudio.Services.BhsStaffPersistenceService BhsStaffPersistence
+
+<PageTitle>School System</PageTitle>
+
+<div class="school-shell">
+    <header class="school-hero">
+        <div class="chief-mark" aria-label="ProjectEve Chieftains mark">
+            <svg viewBox="0 0 120 120" role="img">
+                <path d="M60 7 L106 28 L97 81 L60 111 L23 81 L14 28 Z" fill="#111" stroke="#b51f2e" stroke-width="7"/>
+                <path d="M69 24 C54 30 45 43 47 57 C49 69 58 77 69 80 C59 84 48 83 39 76 C27 67 23 49 31 35 C38 23 53 17 69 24Z" fill="#b51f2e"/>
+                <path d="M68 26 L92 17 L81 40 Z" fill="#f2f2f2"/>
+                <text x="60" y="98" text-anchor="middle" font-size="20" font-weight="900" fill="#fff">B</text>
+            </svg>
+        </div>
+        <div>
+            <span class="kicker">PROJECT EVE · BELLEFONTAINE SCHOOL SYSTEM</span>
+            <h1>Bellefontaine Chieftains</h1>
+<div style="margin:12px 0;padding:12px 14px;border:1px solid #4f6b57;border-radius:10px;background:#17241c;">
+    <strong>ONE PERSON TEST MODE</strong><br />
+    Generate and validate one BHS staff member at a time before persistence is enabled.
+</div>
+            <p>Real building structure and locations. Fictional ProjectEve staff and student histories.</p>
+        </div>
+    </header>
+
+    <div class="stats">
+        <div><b>@_summary.Schools</b><span>Schools</span></div>
+        <div><b>@_summary.Departments</b><span>Departments</span></div>
+        <div><b>@_summary.Courses</b><span>Courses</span></div>
+        <div><b>@_summary.StaffSlots</b><span>Staff Slots</span></div>
+        <div><b>@_summary.AssignedStaff</b><span>NPC Staff Assigned</span></div>
+    </div>
+
+        <section class="staff-generator">
+        <div class="staff-generator-head">
+            <div>
+                <span>BHS STAFF GENERATOR · PHASE 1</span>
+                <h2>High School Staff First</h2>
+                <p>
+                    Start with non-teaching staff. AI creates complete adult-life drafts for review only.
+                    High-school teachers are Phase 2 after this passes.
+                </p>
+            </div>
+            <button @onclick="GenerateBhsStaffAsync" disabled="@_bhsGenerating">
+                @(_bhsGenerating ? "Generating ONE complete staff..." : "Generate ONE BHS Staff")
+            </button>
+        </div>
+
+        @if (!string.IsNullOrWhiteSpace(_bhsMessage))
+        {
+            <div class="staff-message">@_bhsMessage</div>
+        }
+
+        @if (!string.IsNullOrWhiteSpace(_bhsError))
+        {
+            <div class="staff-message error">@_bhsError</div>
+        }
+
+        @if (_bhsDraft is not null)
+        {
+            <div class="staff-preview-warning">
+                PREVIEW ONLY — nothing below has been written to NPC, finance, family, vehicle, phone,
+                relationship, history, or location canon.
+            </div>
+
+            @if (!string.IsNullOrWhiteSpace(_bhsDraft.Summary))
+            {
+                <p class="staff-batch-summary">@_bhsDraft.Summary</p>
+            }
+
+            <div class="staff-preview-grid">
+                @foreach (var staff in _bhsDraft.Staff)
+                {
+                    <details class="staff-preview-card" open>
+                        <summary>
+                            <div>
+                                <b>@staff.FullName</b>
+                                <span>@staff.RoleTitle · Age @staff.Age · Tier @staff.Tier</span>
+                            </div>
+                            <strong>@staff.AnnualSalary.ToString("C0") / yr</strong>
+                        </summary>
+
+                        <div class="staff-preview-body">
+                            <div class="staff-facts">
+                                <div><span>Gender</span><b>@staff.Gender</b>
+                        <div>
+    <span>Race / Ethnicity</span>
+    <select @bind="staff.RaceEthnicity">
+        <option value="">Choose...</option>
+        @foreach (var race in BhsStaffPersistenceService.OhioRaceEthnicityOptions)
+        {
+            <option value="@race">@race</option>
+        }
+    </select>
+</div></div>
+                                <div><span>Marital</span><b>@staff.MaritalStatus</b></div>
+                                <div><span>Occupation</span><b>@staff.Occupation</b></div>
+                                <div><span>Home</span><b>@staff.Home.StreetOrArea · @staff.Home.HousingType</b></div>
+                                <div><span>Housing Cost</span><b>@staff.Home.EstimatedMonthlyHousingCost.ToString("C0") / mo</b></div>
+                                <div><span>Vehicle</span><b>@staff.Vehicle.Year @staff.Vehicle.Make @staff.Vehicle.Model</b></div>
+                                <div><span>Checking</span><b>@staff.Banking.CheckingBalance.ToString("C0")</b></div>
+                                <div><span>Savings</span><b>@staff.Banking.SavingsBalance.ToString("C0")</b></div>
+                            </div>
+
+                            <details class="staff-subsection">
+                                <summary>Education & Credentials</summary>
+                                @foreach (var edu in staff.Education)
+                                {
+                                    <div class="staff-line">
+                                        <b>@edu.Level</b>
+                                        <span>@edu.Institution · @edu.Credential @edu.Field</span>
+                                    </div>
+                                }
+                                @if (staff.Certifications.Count > 0)
+                                {
+                                    <div class="staff-chip-row">
+                                        @foreach (var item in staff.Certifications)
+                                        {
+                                            <span>@item</span>
+                                        }
+                                    </div>
+                                }
+                            </details>
+
+                            <details class="staff-subsection">
+                                <summary>Appearance & Clothing</summary>
+                                <div class="staff-facts">
+                                    <div><span>Height</span><b>@staff.Appearance.HeightText</b></div>
+                                    <div><span>Weight</span><b>@staff.Appearance.WeightLb lb</b></div>
+                                    <div><span>Build</span><b>@staff.Appearance.BodyType</b></div>
+                                    <div><span>Hair</span><b>@staff.Appearance.HairColor · @staff.Appearance.HairStyle</b></div>
+                                    <div><span>Eyes</span><b>@staff.Appearance.EyeColor</b></div>
+                                    <div><span>Skin</span><b>@staff.Appearance.SkinTone</b></div>
+                                </div>
+                                <p><b>Dress:</b> @staff.Appearance.ClothingStyle</p>
+                                <p><b>Features:</b> @staff.Appearance.DistinguishingFeatures</p>
+                                @if (!string.IsNullOrWhiteSpace(staff.Appearance.AdultAnatomyNotes))
+                                {
+                                    <p><b>Adult physical profile:</b> @staff.Appearance.AdultAnatomyNotes</p>
+                                }
+                            </details>
+
+                            <details class="staff-subsection">
+                                <summary>Traits, Personality & Interests</summary>
+                                <p>@staff.Personality.Summary</p>
+                                <div class="staff-chip-row">
+                                    @foreach (var item in staff.Personality.Traits)
+                                    {
+                                        <span>@item</span>
+                                    }
+                                </div>
+                                <p><b>Hobbies:</b> @string.Join(", ", staff.Personality.Hobbies)</p>
+                                <p><b>Public:</b> @staff.Personality.PublicPersona</p>
+                                <p><b>Private:</b> @staff.Personality.PrivatePersona</p>
+                                <p><b>Goal:</b> @staff.Personality.Goal</p>
+                                <p><b>Need:</b> @staff.Personality.Need</p>
+                                <p><b>Fear:</b> @staff.Personality.Fear</p>
+                            </details>
+
+                            <details class="staff-subsection">
+                                <summary>Household</summary>
+                                @if (staff.Spouse.Include)
+                                {
+                                    <div class="staff-line">
+                                        <b>Spouse: @staff.Spouse.Name</b>
+                                        <span>Age @staff.Spouse.Age · @staff.Spouse.Occupation · Tier @staff.Spouse.Tier</span>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <p>No spouse proposed.</p>
+                                }
+
+                                @if (staff.Children.Count > 0)
+                                {
+                                    @foreach (var child in staff.Children)
+                                    {
+                                        <div class="staff-line">
+                                            <b>@child.Name</b>
+                                            <span>Age @child.Age · @child.Gender · Tier @child.Tier</span>
+                                        </div>
+                                    }
+                                }
+                            </details>
+
+                            <details class="staff-subsection">
+                                <summary>Professional / Future Connection Hooks</summary>
+                                <p><b>Reputation:</b> @staff.Professional.Reputation</p>
+                                <p><b>Strengths:</b> @string.Join(", ", staff.Professional.Strengths)</p>
+                                @foreach (var hook in staff.Professional.StudentFamilyConnectionHooks)
+                                {
+                                    <div class="staff-hook">@hook</div>
+                                }
+                            </details>
+                            <div class="staff-save-actions">
+                                <button class="secondary"
+                                        @onclick="GenerateBhsStaffAsync"
+                                        disabled="@(_bhsGenerating || _bhsSaving)">
+                                    Regenerate
+                                </button>
+
+                                <button class="save"
+                                        @onclick="() => SaveBhsStaffAsync(staff)"
+                                        disabled="@(_bhsGenerating || _bhsSaving)">
+                                    @(_bhsSaving ? "Saving..." : "Approve & Save Household")
+                                </button>
+                            </div>
+                        </div>
+                    </details>
+                }
+            </div>
+        }
+
+        @if (_lastSaved is not null)
+        {
+            <div class="saved-batch-box">
+                <b>SAVED TEST HOUSEHOLD</b>
+                <span>Batch @_lastSaved.BatchId · Staff NPC @_lastSaved.StaffNpcId · Household @_lastSaved.HouseholdId</span>
+                <span>@_lastSaved.Message</span>
+                <button class="danger" @onclick="DeleteLastSavedBatch">DELETE ENTIRE GENERATED PROFILE</button>
+            </div>
+        }
+    </section>
+<details class="section" open>
+        <summary><div><b>1 · Buildings & Locations</b><small>Real Bellefontaine City Schools structure</small></div></summary>
+        <div class="body school-grid">
+            @foreach (var school in _schools)
+            {
+                <article class="school-card">
+                    <span>@school.SchoolId · @school.BuildingType</span>
+                    <h3>@school.Name</h3>
+                    <p>Grades @school.GradeLow–@school.GradeHigh</p>
+                    <p>@school.Address</p>
+                    <small>@school.StartTime–@school.EndTime · @school.MascotName</small>
+                </article>
+            }
+        </div>
+    </details>
+
+    <details class="section" open>
+        <summary><div><b>2 · Fictional Anchor Staff</b><small>Preview candidates — not NPCs yet</small></div></summary>
+        <div class="body anchor-grid">
+            @foreach (var anchor in _anchors)
+            {
+                <article>
+                    <div class="anchor-head"><b>@anchor.SuggestedName</b><span>Tier @anchor.Tier</span></div>
+                    <p>@anchor.SchoolId · @anchor.RoleTitle · @anchor.DepartmentId</p>
+                    <div class="chips">
+                        @foreach (var code in anchor.TeachableCourseCodes)
+                        {
+                            <span>@CourseName(code)</span>
+                        }
+                    </div>
+                    <small>@anchor.Notes</small>
+                </article>
+            }
+        </div>
+    </details>
+
+    <details class="section">
+        <summary><div><b>3 · Complete Staff Model</b><small>Teachers, nurses, counselors, principals, custodians, food service, aides, district operations</small></div></summary>
+        <div class="body">
+            @foreach (var group in _roles.GroupBy(x => x.SchoolId))
+            {
+                <h3 class="group-title">@SchoolLabel(group.Key)</h3>
+                <div class="role-grid">
+                    @foreach (var role in group)
+                    {
+                        <div><b>@role.TargetCount</b><span>@role.RoleTitle</span><small>@role.DepartmentId · Tier @role.DefaultTier</small></div>
+                    }
+                </div>
+            }
+        </div>
+    </details>
+
+    <details class="section">
+        <summary><div><b>4 · Course Catalog</b><small>Grade core, middle subjects, high-school departments and electives</small></div><span>@_courses.Count courses</span></summary>
+        <div class="body">
+            @foreach (var group in _courses.GroupBy(x => x.SchoolId))
+            {
+                <h3 class="group-title">@SchoolLabel(group.Key)</h3>
+                <div class="course-grid">
+                    @foreach (var c in group)
+                    {
+                        <div><b>@c.Name</b><span>@string.Join(", ", c.GradeLevels)</span><small>@c.CourseCode · @c.DepartmentId</small></div>
+                    }
+                </div>
+            }
+        </div>
+    </details>
+
+    <div class="rule-box">
+        <b>School NPC Rule</b>
+        <p>
+            Staff slots do not silently create people. NPC Studio must search/reuse an existing suitable NPC first,
+            otherwise propose a fictional staff NPC for Preview → Confirm. Student course rows then link to the real NPC ID.
+        </p>
+    </div>
+</div>
+
+<style>
+.staff-facts select{width:100%;background:#101b2a;color:#edf2fa;border:1px solid #34465f;border-radius:6px;padding:7px}
+.staff-save-actions{display:flex;gap:8px;margin-top:12px;padding-top:10px;border-top:1px solid #263750}
+.staff-save-actions button,.saved-batch-box button{border-radius:8px;padding:10px 14px;font-weight:900;cursor:pointer}
+.staff-save-actions .secondary{background:#172131;color:#d7dfeb;border:1px solid #42536c}
+.staff-save-actions .save{background:#1d6b3a;color:white;border:1px solid #42a365}
+.saved-batch-box{margin-top:12px;padding:12px;border:1px solid #37654a;background:#102019;border-radius:10px;display:flex;gap:8px;flex-direction:column}
+.saved-batch-box .danger{background:#6c2028;color:#fff;border:1px solid #b44a55}
+.staff-generator{background:#11131b;border:1px solid #563039;border-radius:13px;padding:15px;margin-bottom:12px}.staff-generator-head{display:flex;justify-content:space-between;gap:16px;align-items:center}.staff-generator-head span{font-size:9px;color:#e0808c;letter-spacing:.12em;font-weight:900}.staff-generator-head h2{margin:4px 0}.staff-generator-head p{margin:0;color:#94a3b7;max-width:760px}.staff-generator-head button{background:#b51f2e;color:#fff;border:1px solid #dc5261;border-radius:8px;padding:10px 14px;font-weight:900;cursor:pointer}.staff-generator-head button:disabled{opacity:.55}.staff-message{margin-top:10px;background:#0c1922;border:1px solid #28533e;color:#8fe6ad;border-radius:8px;padding:9px}.staff-message.error{border-color:#6d3038;color:#ff9aa8}.staff-preview-warning{margin-top:12px;background:#2b1a0b;border:1px solid #77531f;color:#f5cd80;border-radius:8px;padding:9px;font-weight:800}.staff-batch-summary{color:#aeb9c8}.staff-preview-grid{display:grid;grid-template-columns:1fr;gap:9px}.staff-preview-card{background:#09121f;border:1px solid #2a3b55;border-radius:10px;overflow:hidden}.staff-preview-card>summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:12px;padding:12px}.staff-preview-card>summary::-webkit-details-marker{display:none}.staff-preview-card>summary b,.staff-preview-card>summary span{display:block}.staff-preview-card>summary span{color:#8ea0b8;font-size:11px;margin-top:2px}.staff-preview-body{border-top:1px solid #1f2e46;padding:11px}.staff-facts{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}.staff-facts div{background:#07101c;border:1px solid #23334c;border-radius:7px;padding:8px}.staff-facts span,.staff-facts b{display:block}.staff-facts span{font-size:8px;color:#7f91aa;text-transform:uppercase}.staff-subsection{margin-top:8px;border:1px solid #263750;border-radius:8px;padding:8px}.staff-subsection>summary{cursor:pointer;font-weight:800;color:#d7dfeb}.staff-line{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:1px solid #1a2940}.staff-line span{color:#8fa0b8}.staff-chip-row{display:flex;gap:5px;flex-wrap:wrap;margin:7px 0}.staff-chip-row span{background:#25131a;border:1px solid #5c2e38;border-radius:999px;padding:4px 7px;font-size:9px;color:#e3a3ab}.staff-hook{background:#0b1725;border-left:3px solid #b51f2e;padding:7px;margin:5px 0;color:#aab8ca}
+.school-shell{max-width:1350px;margin:0 auto;padding:28px;color:#edf2fa}.school-hero{display:flex;gap:18px;align-items:center;background:linear-gradient(135deg,#171717,#260d11);border:1px solid #59232a;border-radius:16px;padding:20px;margin-bottom:14px}.chief-mark{width:90px;height:90px;flex:0 0 auto}.chief-mark svg{width:100%;height:100%}.kicker{font-size:10px;letter-spacing:.14em;color:#e28a96;font-weight:900}.school-hero h1{margin:4px 0;font-size:32px}.school-hero p{margin:0;color:#9daabe}.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin-bottom:12px}.stats div,.role-grid div,.course-grid div{background:#0b1422;border:1px solid #253650;border-radius:9px;padding:11px}.stats b{display:block;font-size:22px}.stats span,.role-grid span,.course-grid span{display:block;color:#9aa9be}.section{background:#0d1625;border:1px solid #273650;border-radius:12px;margin-bottom:10px;overflow:hidden}.section>summary{list-style:none;cursor:pointer;padding:14px 16px;display:flex;justify-content:space-between}.section>summary::-webkit-details-marker{display:none}.section>summary b,.section>summary small{display:block}.section>summary small{color:#8293ad;margin-top:2px}.body{border-top:1px solid #1f2d44;padding:14px}.school-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.school-card,.anchor-grid article{background:#09121f;border:1px solid #25354d;border-radius:10px;padding:12px}.school-card>span{font-size:9px;color:#de7684}.school-card h3{margin:4px 0}.school-card p{margin:4px 0;color:#aeb9c8}.school-card small,.anchor-grid small,.role-grid small,.course-grid small{color:#788aa5}.anchor-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.anchor-head{display:flex;justify-content:space-between}.chips{display:flex;gap:5px;flex-wrap:wrap;margin:8px 0}.chips span{background:#271418;border:1px solid #66303a;color:#e8a5ae;border-radius:999px;padding:4px 7px;font-size:9px}.group-title{margin:16px 0 8px;color:#d7deea}.role-grid,.course-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.role-grid b{font-size:18px;margin-right:6px}.rule-box{background:#0b1422;border:1px solid #3b4c68;border-radius:10px;padding:13px}.rule-box p{color:#9cabc0;margin-bottom:0}
+@@media(max-width:1000px){.school-grid,.role-grid,.course-grid{grid-template-columns:1fr 1fr}.stats{grid-template-columns:repeat(3,1fr)}}
+@@media(max-width:650px){.school-grid,.role-grid,.course-grid,.anchor-grid,.stats{grid-template-columns:1fr}.school-hero{align-items:flex-start}}
+</style>
+
+@code {
+    private BhsStaffDraftBatch? _bhsDraft;
+    private bool _bhsGenerating;
+    private bool _bhsSaving;
+    private BhsStaffSaveResult? _lastSaved;
+    private string _bhsMessage = "";
+    private string _bhsError = "";
+
+    private async Task GenerateBhsStaffAsync()
+    {
+        _bhsGenerating = true;
+        _bhsMessage = "";
+        _bhsError = "";
+        try
+        {
+            _bhsDraft = await BhsStaffDrafts.GenerateAsync(1);
+            _bhsMessage = $"AI created {_bhsDraft.Staff.Count} complete BHS staff previews. Review only; nothing is saved.";
+        }
+        catch (Exception ex)
+        {
+            _bhsError = ex.Message;
+        }
+        finally
+        {
+            _bhsGenerating = false;
+        }
+    }
+
+
+    private async Task SaveBhsStaffAsync(BhsStaffDraft staff)
+    {
+        _bhsSaving = true;
+        _bhsError = "";
+        _bhsMessage = "";
+        try
+        {
+            _lastSaved = await BhsStaffPersistence.SaveOneHouseholdAsync(staff);
+            _summary = Schools.GetSummary();
+            _bhsMessage = _lastSaved.Message;
+            _bhsDraft = null;
+        }
+        catch (Exception ex)
+        {
+            _bhsError = ex.Message;
+        }
+        finally
+        {
+            _bhsSaving = false;
+        }
+    }
+
+    private void DeleteLastSavedBatch()
+    {
+        if (_lastSaved is null)
+            return;
+
+        var result = BhsStaffPersistence.DeleteGeneratedBatch(_lastSaved.BatchId);
+        _bhsMessage = result.Message;
+        if (result.Success)
+            _lastSaved = null;
+
+        _summary = Schools.GetSummary();
+    }
+    private SchoolSystemSummary _summary = new(0,0,0,0,0,0,0);
+    private IReadOnlyList<SchoolMaster> _schools = Array.Empty<SchoolMaster>();
+    private IReadOnlyList<SchoolCourseMaster> _courses = Array.Empty<SchoolCourseMaster>();
+    private IReadOnlyList<SchoolStaffRoleTemplateMaster> _roles = Array.Empty<SchoolStaffRoleTemplateMaster>();
+    private IReadOnlyList<FictionalSchoolStaffAnchorMaster> _anchors = Array.Empty<FictionalSchoolStaffAnchorMaster>();
+
+    protected override void OnInitialized()
+    {
+        _summary = Schools.GetSummary();
+        _schools = Schools.GetSchools();
+        _courses = Schools.GetCourses();
+        _roles = Schools.GetRoleTemplates();
+        _anchors = Schools.GetAnchors();
+    }
+
+    private string CourseName(string code)
+        => _courses.FirstOrDefault(x => x.CourseCode == code)?.Name ?? code;
+
+    private string SchoolLabel(string id)
+        => id == "DISTRICT" ? "District / Central Office" :
+           _schools.FirstOrDefault(x => x.SchoolId == id)?.Name ?? id;
+}
+
+
+
+
+

@@ -1,4 +1,4 @@
-﻿@page "/npc-studio/npc/{NpcId:int}"
+@page "/npc-studio/npc/{NpcId:int}"
 @rendermode InteractiveServer
 @using ProjectEve.NpcStudio.Models
 @using ProjectEve.Characters.Traits
@@ -163,7 +163,7 @@ else
                                 <div><span>Distinguishing Features</span><strong>@Safe(_sheet.Appearance.DistinguishingFeatures, "None recorded")</strong></div>
                             </div>
                             <div class="overview-photo-grid">
-                                @PhotoThumb("Face Front", _sheet.Appearance.ReferenceImagePath)
+                                @PhotoThumb("Canonical Profile", !string.IsNullOrWhiteSpace(_sheet.Appearance.ProfileImagePath) ? _sheet.Appearance.ProfileImagePath : _sheet.Appearance.ReferenceImagePath)
                                 @PhotoThumb("Profile Picture", _sheet.Appearance.ProfileImagePath)
                                 @PhotoThumb("Contact Picture", _sheet.Appearance.ContactImagePath)
                                 @foreach (var image in AdditionalPhotoImages.Take(3))
@@ -256,6 +256,9 @@ else
             <main class="dossier-main">
                 <details class="dossier-panel editor-collapsible" open>
                     <summary class="panel-title collapsible-title"><div><span>01</span><h2>Identity & Physical Profile</h2></div><div class="collapsible-meta"><span class="field-state @CompletionClass(IdentityReady)">@CompletionText(IdentityReady)</span><span class="collapse-chevron">⌄</span></div></summary>
+        <div class="appearance-owner-note">
+            Body, eyes, hair, skin, race and wardrobe are managed in Canonical Appearance below.
+        </div>
                     <div class="dossier-grid four">
                         <DossierField Label="Full Name" Missing="@IsMissing(_sheet.Name)"><input @bind="_sheet.Name" /></DossierField>
                         <DossierField Label="Display Name"><input @bind="_sheet.DisplayName" /></DossierField>
@@ -266,13 +269,10 @@ else
                         </DossierField>
                         <DossierField Label="Weight" Missing="@(_sheet.WeightKg <= 0)"><div class="unit-row single"><input type="number" min="0" step="0.1" @bind="_weightPounds" /><span>lb</span></div></DossierField>
                         <DossierField Label="IQ / Intelligence" Missing="@(_sheet.IQ <= 0)"><input type="number" min="0" max="200" @bind="_sheet.IQ" /></DossierField>
-                        <DossierField Label="Body / Build" Missing="@IsMissing(_sheet.Appearance.BodyType)"><input @bind="_sheet.Appearance.BodyType" /></DossierField>
-                        <DossierField Label="Eye Color" Missing="@IsMissing(_sheet.Appearance.EyeColor)"><input @bind="_sheet.Appearance.EyeColor" /></DossierField>
-                        <DossierField Label="Hair Color" Missing="@IsMissing(_sheet.Appearance.HairColor)"><input @bind="_sheet.Appearance.HairColor" /></DossierField>
-                        <DossierField Label="Hair Style" Missing="@IsMissing(_sheet.Appearance.HairStyle)"><input @bind="_sheet.Appearance.HairStyle" /></DossierField>
-                        <DossierField Label="Skin Tone" Missing="@IsMissing(_sheet.Appearance.SkinTone)"><input @bind="_sheet.Appearance.SkinTone" /></DossierField>
                     </div>
                 </details>
+
+                    <NpcAppearanceDetailEditor NpcId="NpcId" />
 
                 <details class="dossier-panel editor-collapsible" open>
                     <summary class="panel-title collapsible-title"><div><span>02</span><h2>Life & World Placement</h2></div><div class="collapsible-meta"><span class="field-state @CompletionClass(WorldReady)">@CompletionText(WorldReady)</span><span class="collapse-chevron">⌄</span></div></summary>
@@ -317,7 +317,7 @@ else
 
                 <div class="save-strip">
                     <button class="dossier-button primary" @onclick="SaveOverview">Save Overview</button>
-                    <button class="dossier-button secondary" @onclick="SaveAppearance">Save Physical / Appearance</button>
+                    <button class="dossier-button secondary" @onclick="SaveAppearance">Save Height / Weight Core</button>
                 </div>
             </main>
 
@@ -2317,6 +2317,9 @@ else
     }
     else if (_tab == "media")
     {
+        <!-- PROJECTEVE_MEDIA_STUDIO_MEDIA_TAB_ONLY -->
+        <NpcMediaStudio NpcId="NpcId" />
+
         <section class="dossier-panel wide-panel">
             <div class="panel-title"><div><span>M</span><h2>Media</h2></div></div>
             <nav class="media-subtabs">
@@ -2336,7 +2339,7 @@ else
                         @PhotoCard(image.ImageType, image.ImagePath, image.Approved ? "Approved" : "Current")
                     }
                 </div>
-                <div class="save-strip"><a class="dossier-button secondary" href="/npc-studio/comfy">Open Comfy Room</a><a class="dossier-button secondary" href="/npc-studio/image-approval">Open Image Approval</a></div>
+                <div class="save-strip"></div>
             }
             else if (_mediaTab == "video")
             {
@@ -2376,6 +2379,24 @@ else
 }
 </section>
 
+
+@if (_sheet is not null)
+{
+    <section class="dossier-media-inline">
+</section>
+}
+
+<style>
+.appearance-owner-note{
+    margin:8px 12px 12px;
+    padding:8px 10px;
+    border:1px solid #2b4260;
+    border-radius:8px;
+    background:#0c1a2d;
+    color:#8fa5c7;
+    font-size:.72rem;
+}
+</style>
 @code {
     [Parameter] public int NpcId { get; set; }
 
@@ -3799,4 +3820,7 @@ else
     }
 
 }
+
+
+
 

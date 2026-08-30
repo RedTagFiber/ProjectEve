@@ -1,7 +1,8 @@
-@page "/npc-studio/browser"
+﻿@page "/npc-studio/browser"
 @rendermode InteractiveServer
 @using ProjectEve.NpcStudio.Models
 @inject ProjectEve.NpcStudio.Services.NpcStudioService Studio
+@inject ProjectEve.NpcStudio.Services.FirstNpcCreationService FirstNpcCreator
 @inject NavigationManager Nav
 
 <PageTitle>NPC Dossiers</PageTitle>
@@ -37,13 +38,95 @@
     <main class="npc-file">
         @if (_sheet is null)
         {
-            <div class="empty"><h1>Select an NPC</h1><p>Open a dossier from the list.</p></div>
+            @if (_rows.Count == 0)
+            {
+                <section class="first-npc-shell">
+                    <div class="first-npc-head">
+                        <small>PROJECT EVE · NEW WORLD</small>
+                        <h1>Create the first NPC</h1>
+                        <p>
+                            This person becomes the first canonical person in the town.
+                            NPC Studio will build the rest of their profile and family from this foundation.
+                        </p>
+                    </div>
+
+                    <div class="first-npc-grid">
+                        <label>
+                            <span>First name</span>
+                            <input @bind="_firstNpc.FirstName" placeholder="Evelyn" />
+                        </label>
+
+                        <label>
+                            <span>Last name</span>
+                            <input @bind="_firstNpc.LastName" placeholder="Sinclair" />
+                        </label>
+
+                        <label>
+                            <span>Age</span>
+                            <input type="number" min="1" max="110" @bind="_firstNpc.Age" />
+                        </label>
+
+                        <label>
+                            <span>Gender</span>
+                            <select @bind="_firstNpc.Gender">
+                                <option>Female</option>
+                                <option>Male</option>
+                                <option>Nonbinary</option>
+                            </select>
+                        </label>
+
+                        <label>
+                            <span>Tier</span>
+                            <select @bind="_firstNpc.Tier">
+                                <option value="1">Tier 1 · Major NPC</option>
+                                <option value="2">Tier 2 · Strong recurring NPC</option>
+                                <option value="3">Tier 3 · Support NPC</option>
+                                <option value="4">Tier 4 · Light NPC</option>
+                                <option value="5">Tier 5 · Background / history NPC</option>
+                            </select>
+                        </label>
+
+                        <label>
+                            <span>Hometown</span>
+                            <input @bind="_firstNpc.Hometown" />
+                        </label>
+
+                        <label class="wide">
+                            <span>Current occupation</span>
+                            <input @bind="_firstNpc.Occupation"
+                                   placeholder="Coffee shop manager, Student, Retired Teacher..." />
+                            <small>A real current occupation/status is required.</small>
+                        </label>
+                    </div>
+
+                    @if (!string.IsNullOrWhiteSpace(_firstNpcError))
+                    {
+                        <div class="first-npc-error">@_firstNpcError</div>
+                    }
+
+                    <div class="first-npc-actions">
+                        <button @onclick="CreateFirstNpcAsync" disabled="@_creatingFirstNpc">
+                            @(_creatingFirstNpc ? "Creating..." : "Create First NPC")
+                        </button>
+                    </div>
+
+                    <div class="first-npc-note">
+                        <b>This screen creates identity only.</b>
+                        It does not invent history, family members, money, car, traits, appearance,
+                        or relationships. Those will be built by NPC Studio in the next controlled stages.
+                    </div>
+                </section>
+            }
+            else
+            {
+                <div class="empty"><h1>Select an NPC</h1><p>Open a dossier from the list.</p></div>
+            }
         }
         else
         {
             <section class="hero card">
                 <div class="portrait">@if (!string.IsNullOrWhiteSpace(Portrait)){<img src="@Media(Portrait)" alt="@_sheet.Name" />}else{<span>@Initials(_sheet.Name)</span>}</div>
-                <div class="hero-main"><small class="eyebrow">NPC DOSSIER · FILE #@_sheet.Id.ToString("D4")</small><h1>@_sheet.Name</h1><div class="meta"><span>@_sheet.Age years</span><span>@Safe(_sheet.Occupation,"Unassigned")</span><span>@Safe(_sheet.Location,"Missing location")</span><span>Tier @_sheet.Tier</span></div><p>@Summary</p><div class="chips">@foreach(var a in Archetypes){<span>@a</span>}@if(!Archetypes.Any()){<span class="bad">Archetype missing</span>}</div></div>
+                <div class="hero-main"><small class="eyebrow">NPC DOSSIER Â· FILE #@_sheet.Id.ToString("D4")</small><h1>@_sheet.Name</h1><div class="meta"><span>@_sheet.Age years</span><span>@Safe(_sheet.Occupation,"Unassigned")</span><span>@Safe(_sheet.Location,"Missing location")</span><span>Tier @_sheet.Tier</span></div><p>@Summary</p><div class="chips">@foreach(var a in Archetypes){<span>@a</span>}@if(!Archetypes.Any()){<span class="bad">Archetype missing</span>}</div></div>
                 <div class="complete"><div class="ring"><b>@Completion%</b></div><strong>Dossier Complete</strong><small>@MissingCount areas need work</small><a href="/npc-studio/npc/@_sheet.Id">Open Full Dossier</a></div>
             </section>
 
@@ -62,10 +145,53 @@
 </div>
 
 <style>
-.npc-dossier-index{display:grid;grid-template-columns:285px minmax(0,1fr);min-height:calc(100vh - 1rem);background:#070d18;color:#edf2fb;border:1px solid #1d2a42;border-radius:15px;overflow:hidden}.npc-index-rail{background:#091221;border-right:1px solid #20304b;padding:14px;display:flex;flex-direction:column;min-width:0}.rail-title{display:flex;justify-content:space-between;align-items:center;padding:5px 3px 13px}.rail-title small,.eyebrow{color:#a98cff;letter-spacing:.15em;font-weight:800}.rail-title h2{margin:2px 0}.rail-title>span{background:#111d31;border:1px solid #283a5a;border-radius:999px;padding:5px 9px}.rail-search{background:#0b1525!important;color:#eaf0fb!important;border:1px solid #283a58!important;border-radius:9px!important;padding:10px!important}.rail-buttons{display:flex;gap:6px;margin:9px 0}.rail-buttons button{background:#0c1626;color:#96a8c4;border:1px solid #263752;border-radius:7px;padding:6px 10px}.rail-buttons .active{background:#2b2250;color:#d9ceff;border-color:#7657dd}.npc-scroll{overflow:auto;max-height:calc(100vh - 190px)}.npc-row{width:100%;display:grid;grid-template-columns:52px minmax(0,1fr);gap:9px;align-items:center;background:transparent;color:inherit;border:1px solid transparent;border-radius:9px;padding:8px;text-align:left;margin-bottom:4px}.npc-row:hover{background:#0f1a2c}.npc-row.selected{background:#111f35;border-color:#7053dd;box-shadow:inset 3px 0 #8b6cff}.thumb{width:52px;height:52px;border-radius:7px;background:#182640;overflow:hidden;display:grid;place-items:center}.thumb-action{padding:0;border:1px solid #304463;color:#fff;cursor:pointer}.thumb-action:hover{border-color:#8b6cff;box-shadow:0 0 0 2px rgba(139,108,255,.15)}.thumb img{width:100%;height:100%;object-fit:cover}.row-select{min-width:0;display:grid;grid-template-columns:minmax(0,1fr) 8px;gap:8px;align-items:center;background:transparent;border:0;color:inherit;text-align:left;padding:0;cursor:pointer}.row-copy{min-width:0}.row-copy strong,.row-copy small{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.row-copy small{font-size:11px;color:#8698b5}.npc-row i{width:8px;height:8px;border-radius:50%}.npc-row i.green{background:#55d170}.npc-row i.yellow{background:#e7b94a}.npc-row i.red{background:#ef6161}.npc-file{padding:18px;min-width:0;background:radial-gradient(circle at 20% 0,#111a2b,#080e18 40%)}.card{background:#0d1625;border:1px solid #22314b;border-radius:11px;padding:14px}.hero{display:grid;grid-template-columns:145px 1fr 175px;gap:18px}.portrait{height:170px;border-radius:9px;background:#18263c;overflow:hidden;display:grid;place-items:center;font-size:38px;font-weight:900}.portrait img{width:100%;height:100%;object-fit:cover}.hero h1{font-size:32px;margin:3px 0 9px}.meta{display:flex;gap:15px;flex-wrap:wrap;color:#9bacC7;font-size:12px}.hero-main p{color:#b9c5d8;line-height:1.45;margin:12px 0}.chips{display:flex;gap:6px;flex-wrap:wrap}.chips span{border:1px solid #34445f;background:#111d31;border-radius:6px;padding:4px 8px;font-size:11px}.chips .bad,.bad{color:#ff8b8b;border-color:#63323e;background:#27151c}.complete{border-left:1px solid #22314b;padding-left:15px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center}.ring{width:82px;height:82px;border-radius:50%;border:8px solid #27364f;border-top-color:#70d05f;display:grid;place-items:center}.complete a{width:100%;background:#7048e4;color:white;text-decoration:none;border-radius:7px;padding:8px;margin-top:5px}.tabs{display:flex;gap:3px;border-bottom:1px solid #22314b;margin:12px 0}.tabs a{color:#9fb0c9;text-decoration:none;padding:9px 13px}.tabs a:first-child{color:#cfc3ff;border-bottom:2px solid #8c69ff}.dashboard-grid{display:grid;grid-template-columns:1.05fr 1.05fr .9fr;gap:11px}.card header{font-size:11px;letter-spacing:.1em;color:#b9a9ff;font-weight:800;border-bottom:1px solid #1b2940;padding-bottom:9px;margin-bottom:9px}.card header a{float:right;color:#9d86ff;text-decoration:none}.facts{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}.fact{display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px solid #17243a;font-size:11px}.fact span{color:#8495b1}.fact.missing b{color:#ff7777}.traits{margin-bottom:9px}.card p{font-size:11px;color:#aebbd0}.mini{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}.mini div{background:#0a1320;border:1px solid #1c2a42;border-radius:7px;padding:7px}.mini small{display:block;color:#7386a4;font-size:9px}.mini b{font-size:11px}.story{border-left:2px solid #6f4be0;padding-left:9px;margin:9px 0}.story.missing{border-color:#cf4c58}.story small,.ai small{color:#8d7ae9;font-size:9px;font-weight:800;letter-spacing:.08em}.story p{margin:2px 0}.history{display:grid;grid-template-columns:10px 1fr;gap:7px;margin:8px 0}.history i{width:7px;height:7px;border-radius:50%;background:#7958e7;margin-top:4px}.history b,.history small{display:block;font-size:11px}.history small{color:#8394af}.missing-box{border:1px dashed #5c3340;background:#21141a;color:#ef8888;border-radius:7px;padding:9px;font-size:11px}.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}.kpis div{background:#0a1320;border:1px solid #1d2a42;border-radius:7px;text-align:center;padding:7px}.kpis b{display:block;color:#c9bdff}.kpis small{font-size:9px;color:#7d8eaa}.rel{display:grid;grid-template-columns:1fr auto 28px;gap:7px;padding:6px 0;border-top:1px solid #17243a;font-size:10px}.rel span{color:#7f90aa}.ready{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #17243a;font-size:10px}.ready b{padding:2px 5px;border-radius:4px}.ready .good{background:#173b24;color:#76d98b}.ready .bad{background:#3a1b22;color:#ff8383}.ai{margin-top:9px;background:#0a1320;border:1px solid #20304a;border-radius:7px;padding:8px}.ai p{margin:4px 0}.empty{text-align:center;padding:80px;color:#8fa0ba}@@media(max-width:1150px){.npc-dossier-index{grid-template-columns:240px 1fr}.dashboard-grid{grid-template-columns:1fr 1fr}.hero{grid-template-columns:115px 1fr}.portrait{height:145px}.complete{grid-column:1/-1;border-left:0;border-top:1px solid #22314b;padding:10px 0;flex-direction:row}.ring{width:55px;height:55px}}@@media(max-width:780px){.npc-dossier-index{grid-template-columns:1fr}.npc-scroll{max-height:300px}.dashboard-grid,.hero{grid-template-columns:1fr}.portrait{height:250px}.facts{grid-template-columns:1fr}.tabs{overflow:auto}}
+.npc-dossier-index{display:grid;grid-template-columns:285px minmax(0,1fr);min-height:calc(100vh - 1rem);background:#070d18;color:#edf2fb;border:1px solid #1d2a42;border-radius:15px;overflow:hidden}.npc-index-rail{background:#091221;border-right:1px solid #20304b;padding:14px;display:flex;flex-direction:column;min-width:0}.rail-title{display:flex;justify-content:space-between;align-items:center;padding:5px 3px 13px}.rail-title small,.eyebrow{color:#a98cff;letter-spacing:.15em;font-weight:800}.rail-title h2{margin:2px 0}.rail-title>span{background:#111d31;border:1px solid #283a5a;border-radius:999px;padding:5px 9px}.rail-search{background:#0b1525!important;color:#eaf0fb!important;border:1px solid #283a58!important;border-radius:9px!important;padding:10px!important}.rail-buttons{display:flex;gap:6px;margin:9px 0}.rail-buttons button{background:#0c1626;color:#96a8c4;border:1px solid #263752;border-radius:7px;padding:6px 10px}.rail-buttons .active{background:#2b2250;color:#d9ceff;border-color:#7657dd}.npc-scroll{overflow:auto;max-height:calc(100vh - 190px)}.npc-row{width:100%;display:grid;grid-template-columns:52px minmax(0,1fr);gap:9px;align-items:center;background:transparent;color:inherit;border:1px solid transparent;border-radius:9px;padding:8px;text-align:left;margin-bottom:4px}.npc-row:hover{background:#0f1a2c}.npc-row.selected{background:#111f35;border-color:#7053dd;box-shadow:inset 3px 0 #8b6cff}.thumb{width:52px;height:52px;border-radius:7px;background:#182640;overflow:hidden;display:grid;place-items:center}.thumb-action{padding:0;border:1px solid #304463;color:#fff;cursor:pointer}.thumb-action:hover{border-color:#8b6cff;box-shadow:0 0 0 2px rgba(139,108,255,.15)}.thumb img{width:100%;height:100%;object-fit:cover}.row-select{min-width:0;display:grid;grid-template-columns:minmax(0,1fr) 8px;gap:8px;align-items:center;background:transparent;border:0;color:inherit;text-align:left;padding:0;cursor:pointer}.row-copy{min-width:0}.row-copy strong,.row-copy small{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.row-copy small{font-size:11px;color:#8698b5}.npc-row i{width:8px;height:8px;border-radius:50%}.npc-row i.green{background:#55d170}.npc-row i.yellow{background:#e7b94a}.npc-row i.red{background:#ef6161}.npc-file{padding:18px;min-width:0;background:radial-gradient(circle at 20% 0,#111a2b,#080e18 40%)}.card{background:#0d1625;border:1px solid #22314b;border-radius:11px;padding:14px}.hero{display:grid;grid-template-columns:145px 1fr 175px;gap:18px}.portrait{height:170px;border-radius:9px;background:#18263c;overflow:hidden;display:grid;place-items:center;font-size:38px;font-weight:900}.portrait img{width:100%;height:100%;object-fit:cover}.hero h1{font-size:32px;margin:3px 0 9px}.meta{display:flex;gap:15px;flex-wrap:wrap;color:#9bacC7;font-size:12px}.hero-main p{color:#b9c5d8;line-height:1.45;margin:12px 0}.chips{display:flex;gap:6px;flex-wrap:wrap}.chips span{border:1px solid #34445f;background:#111d31;border-radius:6px;padding:4px 8px;font-size:11px}.chips .bad,.bad{color:#ff8b8b;border-color:#63323e;background:#27151c}.complete{border-left:1px solid #22314b;padding-left:15px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center}.ring{width:82px;height:82px;border-radius:50%;border:8px solid #27364f;border-top-color:#70d05f;display:grid;place-items:center}.complete a{width:100%;background:#7048e4;color:white;text-decoration:none;border-radius:7px;padding:8px;margin-top:5px}.tabs{display:flex;gap:3px;border-bottom:1px solid #22314b;margin:12px 0}.tabs a{color:#9fb0c9;text-decoration:none;padding:9px 13px}.tabs a:first-child{color:#cfc3ff;border-bottom:2px solid #8c69ff}.dashboard-grid{display:grid;grid-template-columns:1.05fr 1.05fr .9fr;gap:11px}.card header{font-size:11px;letter-spacing:.1em;color:#b9a9ff;font-weight:800;border-bottom:1px solid #1b2940;padding-bottom:9px;margin-bottom:9px}.card header a{float:right;color:#9d86ff;text-decoration:none}.facts{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}.fact{display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px solid #17243a;font-size:11px}.fact span{color:#8495b1}.fact.missing b{color:#ff7777}.traits{margin-bottom:9px}.card p{font-size:11px;color:#aebbd0}.mini{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}.mini div{background:#0a1320;border:1px solid #1c2a42;border-radius:7px;padding:7px}.mini small{display:block;color:#7386a4;font-size:9px}.mini b{font-size:11px}.story{border-left:2px solid #6f4be0;padding-left:9px;margin:9px 0}.story.missing{border-color:#cf4c58}.story small,.ai small{color:#8d7ae9;font-size:9px;font-weight:800;letter-spacing:.08em}.story p{margin:2px 0}.history{display:grid;grid-template-columns:10px 1fr;gap:7px;margin:8px 0}.history i{width:7px;height:7px;border-radius:50%;background:#7958e7;margin-top:4px}.history b,.history small{display:block;font-size:11px}.history small{color:#8394af}.missing-box{border:1px dashed #5c3340;background:#21141a;color:#ef8888;border-radius:7px;padding:9px;font-size:11px}.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}.kpis div{background:#0a1320;border:1px solid #1d2a42;border-radius:7px;text-align:center;padding:7px}.kpis b{display:block;color:#c9bdff}.kpis small{font-size:9px;color:#7d8eaa}.rel{display:grid;grid-template-columns:1fr auto 28px;gap:7px;padding:6px 0;border-top:1px solid #17243a;font-size:10px}.rel span{color:#7f90aa}.ready{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #17243a;font-size:10px}.ready b{padding:2px 5px;border-radius:4px}.ready .good{background:#173b24;color:#76d98b}.ready .bad{background:#3a1b22;color:#ff8383}.ai{margin-top:9px;background:#0a1320;border:1px solid #20304a;border-radius:7px;padding:8px}.ai p{margin:4px 0}.empty{text-align:center;padding:80px;color:#8fa0ba}
+.first-npc-shell{max-width:900px;margin:34px auto;background:#0d1625;border:1px solid #2b3b58;border-radius:18px;padding:28px;box-shadow:0 24px 80px rgba(0,0,0,.25)}
+.first-npc-head small{color:#a98cff;letter-spacing:.16em;font-size:11px;font-weight:900}
+.first-npc-head h1{font-size:34px;margin:7px 0 8px}
+.first-npc-head p{max-width:680px;color:#9dacC4;font-size:13px;line-height:1.55}
+.first-npc-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px}
+.first-npc-grid label{display:flex;flex-direction:column;gap:6px}
+.first-npc-grid label.wide{grid-column:1/-1}
+.first-npc-grid span{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#aebbd0;font-weight:800}
+.first-npc-grid input,.first-npc-grid select{background:#091221;color:#eef3ff;border:1px solid #2c3e5d;border-radius:9px;padding:11px 12px;font-size:14px}
+.first-npc-grid input:focus,.first-npc-grid select:focus{outline:none;border-color:#8b6cff;box-shadow:0 0 0 3px rgba(139,108,255,.12)}
+.first-npc-grid small{color:#7285a3;font-size:10px}
+.first-npc-actions{display:flex;justify-content:flex-end;margin-top:18px}
+.first-npc-actions button{background:linear-gradient(135deg,#7955eb,#5d3fd3);border:1px solid #9479ee;color:#fff;border-radius:9px;padding:11px 20px;font-weight:800;cursor:pointer}
+.first-npc-actions button:disabled{opacity:.55;cursor:wait}
+.first-npc-error{margin-top:16px;border:1px solid #7c3340;background:#2a161d;color:#ff9ca9;border-radius:9px;padding:10px 12px;font-size:12px}
+.first-npc-note{margin-top:18px;background:#091221;border:1px solid #21324e;border-radius:10px;padding:12px;color:#899bb8;font-size:11px;line-height:1.5}
+.first-npc-note b{color:#cbbfff}@@media(max-width:1150px){.npc-dossier-index{grid-template-columns:240px 1fr}.dashboard-grid{grid-template-columns:1fr 1fr}.hero{grid-template-columns:115px 1fr}.portrait{height:145px}.complete{grid-column:1/-1;border-left:0;border-top:1px solid #22314b;padding:10px 0;flex-direction:row}.ring{width:55px;height:55px}}@@media(max-width:780px){.npc-dossier-index{grid-template-columns:1fr}.npc-scroll{max-height:300px}.dashboard-grid,.hero{grid-template-columns:1fr}.portrait{height:250px}.facts{grid-template-columns:1fr}.tabs{overflow:auto}}
 </style>
 
 @code {
+    ProjectEve.NpcStudio.Services.FirstNpcCreateRequest _firstNpc = new();
+    string _firstNpcError = "";
+    bool _creatingFirstNpc;
+
+    async Task CreateFirstNpcAsync()
+    {
+        _firstNpcError = "";
+
+        try
+        {
+            _creatingFirstNpc = true;
+            var id = FirstNpcCreator.Create(_firstNpc);
+
+            _rows = await Studio.SearchNpcsAsync("", "", null);
+            await SelectAsync(id);
+        }
+        catch (Exception ex)
+        {
+            _firstNpcError = ex.Message;
+        }
+        finally
+        {
+            _creatingFirstNpc = false;
+        }
+    }
+
     string _search="", _status=""; List<NpcBrowserRow> _rows=new(); NpcCharacterSheet? _sheet;
     protected override async Task OnInitializedAsync(){_rows=await Studio.SearchNpcsAsync("","",null); if(_rows.Count>0) await SelectAsync(_rows[0].Id);}
     IEnumerable<NpcBrowserRow> FilteredRows => _rows.Where(r => string.IsNullOrWhiteSpace(_search) || r.Name.Contains(_search,StringComparison.OrdinalIgnoreCase) || r.Occupation.Contains(_search,StringComparison.OrdinalIgnoreCase));
@@ -101,6 +227,8 @@
     static string Initials(string n){var p=(n??"?").Split(' ',StringSplitOptions.RemoveEmptyEntries);return p.Length==0?"?":p.Length==1?p[0][0].ToString().ToUpperInvariant():$"{p[0][0]}{p[^1][0]}".ToUpperInvariant();}
     static string Media(string? p)=>string.IsNullOrWhiteSpace(p)?"":p.StartsWith("http",StringComparison.OrdinalIgnoreCase)||p.StartsWith("/",StringComparison.OrdinalIgnoreCase)?p:"/npc-media?path="+Uri.EscapeDataString(p)+"&v="+DateTime.UtcNow.Ticks;
     RenderFragment Fact(string l,string v,bool ok)=>b=>{var i=0;b.OpenElement(i++,"div");b.AddAttribute(i++,"class","fact"+(ok?"":" missing"));b.OpenElement(i++,"span");b.AddContent(i++,l);b.CloseElement();b.OpenElement(i++,"b");b.AddContent(i++,v);b.CloseElement();b.CloseElement();};
-    RenderFragment Story(string l,string? v)=>b=>{var ok=!Missing(v);var i=0;b.OpenElement(i++,"div");b.AddAttribute(i++,"class","story"+(ok?"":" missing"));b.OpenElement(i++,"small");b.AddContent(i++,l);b.CloseElement();b.OpenElement(i++,"p");b.AddContent(i++,ok?v:"Missing — needs authoring");b.CloseElement();b.CloseElement();};
+    RenderFragment Story(string l,string? v)=>b=>{var ok=!Missing(v);var i=0;b.OpenElement(i++,"div");b.AddAttribute(i++,"class","story"+(ok?"":" missing"));b.OpenElement(i++,"small");b.AddContent(i++,l);b.CloseElement();b.OpenElement(i++,"p");b.AddContent(i++,ok?v:"Missing â€” needs authoring");b.CloseElement();b.CloseElement();};
     RenderFragment Ready(string l,bool ok)=>b=>{var i=0;b.OpenElement(i++,"div");b.AddAttribute(i++,"class","ready");b.OpenElement(i++,"span");b.AddContent(i++,l);b.CloseElement();b.OpenElement(i++,"b");b.AddAttribute(i++,"class",ok?"good":"bad");b.AddContent(i++,ok?"READY":"MISSING");b.CloseElement();b.CloseElement();};
 }
+
+

@@ -1,0 +1,399 @@
+@using Microsoft.Data.Sqlite
+@using System.Globalization
+@rendermode InteractiveServer
+
+<section class="media-cleanup">
+    <div class="media-cleanup-head">
+        <div>
+            <span>MEDIA LIBRARY</span>
+            <h2>Image History</h2>
+            <p>Small previews of every generated image. Keep what belongs to the NPC and remove drafts or bad generations.</p>
+        </div>
+        <button type="button" class="mc-refresh" @onclick="LoadAsync">Refresh</button>
+    </div>
+
+    @if (!string.IsNullOrWhiteSpace(_message))
+    {
+        <div class="mc-message">@_message</div>
+    }
+
+    @if (_rows.Count == 0)
+    {
+        <div class="mc-empty">No saved image-history records found for this NPC.</div>
+    }
+    else
+    {
+        <div class="mc-grid">
+            @foreach (var image in _rows)
+            {
+                <article class="mc-card @(image.IsApproved ? "approved" : "")">
+                    <div class="mc-thumb">
+                        @if (!string.IsNullOrWhiteSpace(image.PreviewUrl))
+                        {
+                            <img src="@image.PreviewUrl" alt="@image.ImageType preview" />
+                        }
+                        else
+                        {
+                            <div class="mc-no-image">NO PREVIEW</div>
+                        }
+                    </div>
+
+                    <div class="mc-copy">
+                        <div class="mc-title-row">
+                            <strong>@DisplayType(image.ImageType)</strong>
+                            <span class="@(image.IsApproved ? "mc-approved" : "mc-draft")">
+                                @(image.IsApproved ? "APPROVED" : "DRAFT")
+                            </span>
+                        </div>
+
+                        <small>@image.CreatedText</small>
+
+                        @if (string.Equals(_confirmDeleteId, image.Id, StringComparison.Ordinal))
+                        {
+                            <div class="mc-confirm">
+                                <span>Delete this image record@(image.IsApproved ? " (approved)" : "")?</span>
+                                <button type="button" class="mc-danger" @onclick="() => DeleteAsync(image)">Yes, delete</button>
+                                <button type="button" class="mc-cancel" @onclick="CancelDelete">Cancel</button>
+                            </div>
+                        }
+                        else
+                        {
+                            <button type="button" class="mc-delete" @onclick="() => AskDelete(image)">
+                                Delete
+                            </button>
+                        }
+                    </div>
+                </article>
+            }
+        </div>
+    }
+</section>
+
+<style>
+.media-cleanup{
+    margin-top:18px;
+    padding:18px;
+    border:1px solid #28425f;
+    border-radius:14px;
+    background:#09172a;
+    color:#eef5ff;
+}
+.media-cleanup-head{
+    display:flex;
+    justify-content:space-between;
+    gap:16px;
+    align-items:flex-start;
+    margin-bottom:14px;
+}
+.media-cleanup-head span{
+    color:#9a7cff;
+    font-size:.72rem;
+    font-weight:800;
+    letter-spacing:.12em;
+}
+.media-cleanup-head h2{margin:3px 0 4px;font-size:1.7rem}
+.media-cleanup-head p{margin:0;color:#90a8c8}
+.mc-refresh,.mc-delete,.mc-danger,.mc-cancel{
+    border:1px solid #36516f;
+    border-radius:8px;
+    padding:8px 12px;
+    cursor:pointer;
+    font-weight:700;
+}
+.mc-refresh,.mc-cancel,.mc-delete{background:#10243a;color:#eef5ff}
+.mc-danger{background:#5f1720;color:#fff;border-color:#a83b49}
+.mc-message,.mc-empty{
+    padding:10px 12px;
+    margin:8px 0 14px;
+    border:1px solid #294765;
+    border-radius:8px;
+    color:#a9c3e4;
+}
+.mc-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+    gap:12px;
+}
+.mc-card{
+    display:grid;
+    grid-template-columns:86px minmax(0,1fr);
+    gap:12px;
+    padding:10px;
+    border:1px solid #28405a;
+    border-radius:10px;
+    background:#0d1c30;
+    min-width:0;
+}
+.mc-card.approved{border-color:#237a58}
+.mc-thumb{
+    width:86px;
+    height:104px;
+    border-radius:8px;
+    overflow:hidden;
+    background:#06101e;
+    border:1px solid #2d465f;
+}
+.mc-thumb img{
+    width:100%;
+    height:100%;
+    display:block;
+    object-fit:cover;
+}
+.mc-no-image{
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    color:#728aa7;
+    font-size:.65rem;
+}
+.mc-copy{min-width:0}
+.mc-title-row{
+    display:flex;
+    gap:8px;
+    justify-content:space-between;
+    align-items:flex-start;
+}
+.mc-title-row strong{
+    overflow-wrap:anywhere;
+}
+.mc-approved,.mc-draft{
+    flex:0 0 auto;
+    font-size:.6rem;
+    font-weight:900;
+    padding:3px 5px;
+    border-radius:5px;
+}
+.mc-approved{background:#123b2d;color:#67e6a6}
+.mc-draft{background:#283448;color:#bfd0e6}
+.mc-copy small{display:block;color:#82a0c2;margin:6px 0 10px}
+.mc-confirm{display:flex;gap:6px;flex-wrap:wrap;font-size:.72rem;color:#ffc4c9}
+.mc-confirm span{width:100%}
+@@media (max-width:700px){
+    .media-cleanup-head{flex-direction:column}
+    .mc-grid{grid-template-columns:1fr}
+}
+</style>
+
+@code {
+    [Parameter] public int NpcId { get; set; }
+
+    private const string DbPath = @"D:\ProjectEveData\Database\project_eve.db";
+    private readonly List<MediaRow> _rows = new();
+    private string? _confirmDeleteId;
+    private string _message = "";
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await LoadAsync();
+    }
+
+    private async Task LoadAsync()
+    {
+        _rows.Clear();
+        _confirmDeleteId = null;
+        _message = "";
+
+        if (!File.Exists(DbPath))
+        {
+            _message = $"Database not found: {DbPath}";
+            return;
+        }
+
+        await using var conn = new SqliteConnection($"Data Source={DbPath}");
+        await conn.OpenAsync();
+
+        if (!await TableExists(conn, "NpcImageGenerations"))
+        {
+            _message = "NpcImageGenerations table was not found.";
+            return;
+        }
+
+        var cols = await Columns(conn, "NpcImageGenerations");
+
+        string Pick(params string[] names) =>
+            names.FirstOrDefault(n => cols.Contains(n, StringComparer.OrdinalIgnoreCase)) ?? "";
+
+        var idCol = Pick("Id", "ImageGenerationId", "GenerationId");
+        var npcCol = Pick("NpcId", "CharacterId");
+        var typeCol = Pick("ImageType", "Type", "MediaType");
+        var pathCol = Pick("ImagePath", "OutputPath", "Path", "FilePath");
+        var approvedCol = Pick("IsApproved", "Approved");
+        var statusCol = Pick("Status");
+        var createdCol = Pick("CreatedRealAt", "CreatedAt", "CreatedUtc", "Created");
+
+        if (string.IsNullOrWhiteSpace(idCol) ||
+            string.IsNullOrWhiteSpace(npcCol) ||
+            string.IsNullOrWhiteSpace(typeCol))
+        {
+            _message = "Image-history schema is missing required Id/NpcId/ImageType columns.";
+            return;
+        }
+
+        string Q(string s) => "\"" + s.Replace("\"","\"\"") + "\"";
+        string Expr(string col, string fallback) =>
+            string.IsNullOrWhiteSpace(col) ? fallback : Q(col);
+
+        await using var cmd = conn.CreateCommand();
+        cmd.CommandText = $"""
+            SELECT
+                {Q(idCol)} AS RowId,
+                {Q(typeCol)} AS ImageTypeValue,
+                {Expr(pathCol,"''")} AS ImagePathValue,
+                {Expr(approvedCol,"0")} AS ApprovedValue,
+                {Expr(statusCol,"''")} AS StatusValue,
+                {Expr(createdCol,"''")} AS CreatedValue
+            FROM NpcImageGenerations
+            WHERE {Q(npcCol)}=$npc
+            ORDER BY {Q(idCol)} DESC;
+            """;
+        cmd.Parameters.AddWithValue("$npc", NpcId);
+
+        await using var reader = await cmd.ExecuteReaderAsync();
+        while (await reader.ReadAsync())
+        {
+            var id = Convert.ToString(reader["RowId"], CultureInfo.InvariantCulture) ?? "";
+            var type = Convert.ToString(reader["ImageTypeValue"], CultureInfo.InvariantCulture) ?? "";
+            var path = Convert.ToString(reader["ImagePathValue"], CultureInfo.InvariantCulture) ?? "";
+            var status = Convert.ToString(reader["StatusValue"], CultureInfo.InvariantCulture) ?? "";
+            var approvedRaw = reader["ApprovedValue"];
+
+            var approved =
+                (!Convert.IsDBNull(approvedRaw) && (
+                    (approvedRaw is long l && l != 0) ||
+                    (approvedRaw is int i && i != 0) ||
+                    bool.TryParse(Convert.ToString(approvedRaw), out var b) && b))
+                || status.Equals("APPROVED", StringComparison.OrdinalIgnoreCase)
+                || status.Equals("Approved", StringComparison.OrdinalIgnoreCase);
+
+            var created = Convert.ToString(reader["CreatedValue"], CultureInfo.InvariantCulture) ?? "";
+
+            _rows.Add(new MediaRow(
+                id,
+                type,
+                path,
+                BuildPreviewUrl(path),
+                approved,
+                created));
+        }
+    }
+
+    private void AskDelete(MediaRow image)
+    {
+        _confirmDeleteId = image.Id;
+        _message = "";
+    }
+
+    private void CancelDelete()
+    {
+        _confirmDeleteId = null;
+    }
+
+    private async Task DeleteAsync(MediaRow image)
+    {
+        try
+        {
+            await using var conn = new SqliteConnection($"Data Source={DbPath}");
+            await conn.OpenAsync();
+
+            await using var cmd = conn.CreateCommand();
+            cmd.CommandText = "DELETE FROM NpcImageGenerations WHERE Id=$id AND NpcId=$npc;";
+            cmd.Parameters.AddWithValue("$id", image.Id);
+            cmd.Parameters.AddWithValue("$npc", NpcId);
+
+            var changed = await cmd.ExecuteNonQueryAsync();
+
+            // Delete the physical generated file only when it is definitely
+            // under ProjectEveData. Never delete arbitrary outside files.
+            if (changed > 0 &&
+                !string.IsNullOrWhiteSpace(image.ImagePath) &&
+                Path.IsPathRooted(image.ImagePath) &&
+                image.ImagePath.StartsWith(@"D:\ProjectEveData\", StringComparison.OrdinalIgnoreCase) &&
+                File.Exists(image.ImagePath))
+            {
+                try { File.Delete(image.ImagePath); }
+                catch { /* DB cleanup still succeeds if file is locked. */ }
+            }
+
+            _message = changed > 0
+                ? $"Deleted {DisplayType(image.ImageType)} image #{image.Id}."
+                : "Nothing was deleted.";
+
+            await LoadAsync();
+        }
+        catch (Exception ex)
+        {
+            _message = "Delete failed: " + ex.Message;
+        }
+    }
+
+    private static string DisplayType(string value) => value switch
+    {
+        "ProfilePicture" => "Profile Picture",
+        "FrontReference" => "Front Reference",
+        "SideReference" => "Side Reference",
+        "BodyReference" => "Body Reference",
+        "PhonePicture" => "Phone Picture",
+        "ContactPicture" => "Contact Picture",
+        "PersonalPicture" => "Personal Picture",
+        "ClubPicture" => "Club / Social",
+        "HistoryPicture" => "History Picture",
+        "SchoolHistoryPicture" => "School History",
+        _ when value.StartsWith("CANONICAL IDENTITY PROFILE:", StringComparison.OrdinalIgnoreCase)
+            => "Profile Picture",
+        _ => string.IsNullOrWhiteSpace(value) ? "Image" : value
+    };
+
+    private static string BuildPreviewUrl(string path)
+    {
+        if (string.IsNullOrWhiteSpace(path)) return "";
+
+        if (path.StartsWith("http://", StringComparison.OrdinalIgnoreCase) ||
+            path.StartsWith("https://", StringComparison.OrdinalIgnoreCase) ||
+            path.StartsWith("/", StringComparison.Ordinal))
+            return path;
+
+        // ProjectEve's generated media commonly sits beneath a wwwroot
+        // directory. Convert that portion to a browser-relative path.
+        var normalized = path.Replace('\\','/');
+        var marker = "/wwwroot/";
+        var at = normalized.IndexOf(marker, StringComparison.OrdinalIgnoreCase);
+        if (at >= 0)
+            return "/" + normalized[(at + marker.Length)..];
+
+        // If the DB already stores a relative media path, make it root-relative.
+        if (!Path.IsPathRooted(path))
+            return "/" + normalized.TrimStart('/');
+
+        // Unknown absolute filesystem paths cannot be loaded directly by the browser.
+        return "";
+    }
+
+    private static async Task<bool> TableExists(SqliteConnection conn, string table)
+    {
+        await using var cmd = conn.CreateCommand();
+        cmd.CommandText = "SELECT 1 FROM sqlite_master WHERE type='table' AND name=$name LIMIT 1;";
+        cmd.Parameters.AddWithValue("$name", table);
+        return await cmd.ExecuteScalarAsync() is not null;
+    }
+
+    private static async Task<HashSet<string>> Columns(SqliteConnection conn, string table)
+    {
+        var result = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        await using var cmd = conn.CreateCommand();
+        cmd.CommandText = $"PRAGMA table_info(\"{table.Replace("\"","\"\"")}\");";
+        await using var reader = await cmd.ExecuteReaderAsync();
+        while (await reader.ReadAsync())
+            result.Add(reader.GetString(1));
+        return result;
+    }
+
+    private sealed record MediaRow(
+        string Id,
+        string ImageType,
+        string ImagePath,
+        string PreviewUrl,
+        bool IsApproved,
+        string CreatedText);
+}

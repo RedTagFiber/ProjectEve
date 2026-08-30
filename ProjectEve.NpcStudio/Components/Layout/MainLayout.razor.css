@@ -1,4 +1,4 @@
-.page {
+﻿.page {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -120,4 +120,38 @@ main {
     .full-dossier-page .full-dossier-content {
         width: 100%;
     }
+}
+
+/* DOSSIER-FIRST NAVIGATION */
+.sidebar {
+    display: none !important;
+}
+.page {
+    display: block !important;
+    min-height: 100vh;
+}
+main {
+    width: 100% !important;
+    min-width: 0;
+}
+.top-row {
+    display: none !important;
+}
+.content {
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+    max-width: 1700px;
+    margin: 0 auto;
+}
+.dossier-media-fallback {
+    margin: 16px 28px;
+}
+.dossier-media-fallback > details > summary {
+    cursor: pointer;
+    padding: 14px 16px;
+    border: 1px solid #354867;
+    border-radius: 10px;
+    background: #0c1728;
+    color: #fff;
+    font-weight: 900;
 }

@@ -29,6 +29,11 @@ builder.Services.AddSingleton(new NpcStudioOptions
 builder.Services.AddSingleton<NpcStudioSchema>();
 builder.Services.AddScoped<NpcStudioRepository>();
 builder.Services.AddScoped<NpcStudioService>();
+builder.Services.AddScoped<SchoolSystemService>();
+builder.Services.AddScoped<BhsStaffDraftService>();
+builder.Services.AddScoped<BhsStaffPersistenceService>();
+builder.Services.AddScoped<AiEducationProfessionalAssistService>();
+builder.Services.AddScoped<FirstNpcCreationService>();
 builder.Services.AddScoped<FamilyIntegrityGuardService>();
 builder.Services.AddScoped<CanonicalFamilyMigrationService>();
 builder.Services.AddScoped<CanonicalFamilyGraphService>();
@@ -40,10 +45,15 @@ builder.Services.AddScoped<FamilyNpcFactoryPreviewService>();
 
 builder.Services.AddHttpClient<OllamaPromptEngineerService>();
 builder.Services.AddHttpClient<AiNpcProfileBuilderService>();
+builder.Services.AddHttpClient<AiAppearanceProfileAssistService>();
 builder.Services.AddHttpClient<ComfyStudioService>();
 builder.Services.AddHttpClient<ComfyWorkflowService>();
 builder.Services.AddScoped<NpcFileSystemService>();
 
+
+builder.Services.AddSingleton<ProjectEve.NpcStudio.Services.MediaStorageService>();
+
+builder.Services.AddSingleton<ProjectEve.NpcStudio.Services.NpcAppearanceDetailService>();
 
 var app = builder.Build();
 
@@ -55,15 +65,16 @@ using (var scope = app.Services.CreateScope())
     schema.Ensure();
 
     var options = scope.ServiceProvider.GetRequiredService<NpcStudioOptions>();
+    NpcStudioCompleteProfileSchema.Ensure(options);
+    NpcStudioSchoolSchema.Ensure(options);
+    NpcStudioRelationshipSchema.Ensure(options);
     NpcStudioFamilySchemaCompatibility.Ensure(options);
+    var schoolSystem = scope.ServiceProvider.GetRequiredService<SchoolSystemService>();
+    schoolSystem.SeedMaster();
     NpcFamilyIdentityIntegritySchema.Ensure(options);
-    var canonicalFamilyMigration =
-        scope.ServiceProvider.GetRequiredService<CanonicalFamilyMigrationService>();
-    canonicalFamilyMigration.ImportLegacyFamilyRelationships();
-    var canonicalFamilyRepair =
-        scope.ServiceProvider.GetRequiredService<CanonicalFamilyRepairService>();
-    canonicalFamilyRepair.RepairLegacyTestFamily();
+    // CLEAN FAMILY SYSTEM: legacy migration/repair is no longer run automatically.
 }
+
 
 if (!app.Environment.IsDevelopment())
 {
@@ -109,6 +120,18 @@ app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 
 app.Run();
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

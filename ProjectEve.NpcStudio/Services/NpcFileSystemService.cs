@@ -1,4 +1,4 @@
-using ProjectEve.NpcStudio.Models;
+﻿using ProjectEve.NpcStudio.Models;
 
 namespace ProjectEve.NpcStudio.Services;
 
@@ -119,13 +119,41 @@ public sealed class NpcFileSystemService
 
     public string FindNewestComfyOutput(int npcId)
     {
-        var npcFolder = Path.Combine(ComfyTempRoot, "ProjectEve", $"NPC_{npcId:D6}");
-        var found = FindNewestImageFile(npcFolder);
+        var npcToken = $"NPC_{npcId:D6}";
+
+        // Old layout first: D:\ProjectEveData\Comfy\Temp\ProjectEve\NPC_000002
+        var legacyNpcFolder = Path.Combine(ComfyTempRoot, "ProjectEve", npcToken);
+        var found = FindNewestImageFile(legacyNpcFolder);
         if (!string.IsNullOrWhiteSpace(found))
             return found;
 
-        // Fallback: some Comfy versions keep everything directly under output/temp.
-        return FindNewestImageFile(ComfyTempRoot);
+        // New School/Family generation layouts can place NPC folders deeper:
+        // ProjectEve\SchoolSystem\BHS\NPC_000002\...
+        // ProjectEve\Families\Household_000001\NPC_000002\...
+        // Search only paths that contain THIS NPC token so another household
+        // member's newer image cannot be mistaken for this NPC.
+        try
+        {
+            if (Directory.Exists(ComfyTempRoot))
+            {
+                var npcSpecific = Directory
+                    .EnumerateFiles(ComfyTempRoot, "*.*", SearchOption.AllDirectories)
+                    .Where(path =>
+                        ImageExtensions.Contains(Path.GetExtension(path)) &&
+                        path.Contains(npcToken, StringComparison.OrdinalIgnoreCase))
+                    .OrderByDescending(File.GetLastWriteTimeUtc)
+                    .FirstOrDefault();
+
+                if (!string.IsNullOrWhiteSpace(npcSpecific))
+                    return npcSpecific;
+            }
+        }
+        catch
+        {
+            // Approval room will report that no NPC-specific output was found.
+        }
+
+        return "";
     }
 
     public ImagePathValidation ValidateImagePath(string? path)
@@ -221,3 +249,4 @@ public sealed class ImagePathValidation
         Message = message
     };
 }
+

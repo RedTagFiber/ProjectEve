@@ -64,9 +64,8 @@ else
 }
 else if(_tab=="career")
 {
-<div class="section-toolbar"><h3>Education & Career</h3><a class="edit-button" href="@($"/canonical-professional/{NpcId}")">Edit Full Record</a></div>
-<div class="metric-row"><div><b>@Foundation.EducationRecords</b><span>Education</span></div><div><b>@Foundation.Qualifications</b><span>Qualifications</span></div><div><b>@Foundation.ProfessionalCompetencies</b><span>Skills</span></div></div>
-@if(_professional is not null){@Fact("Career Field",_professional.ProfessionalProfile.CareerField) @Fact("Training",_professional.ProfessionalProfile.TrainingLevel) @Fact("Experience",_professional.ProfessionalProfile.YearsExperience<=0?"Not set":$"{_professional.ProfessionalProfile.YearsExperience:0.#} years")}
+<div class="section-toolbar"><h3>Education & Career</h3></div>
+<EducationCareerEditor NpcId="NpcId" />
 }
 else if(_tab=="finance")
 {
@@ -605,4 +604,5 @@ else
         _message = "";
     }
 }
+
 

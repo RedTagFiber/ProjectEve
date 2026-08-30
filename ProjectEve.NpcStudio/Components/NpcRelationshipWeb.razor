@@ -445,6 +445,10 @@ private async Task SelectRelationship(NpcRelationshipRow rel)
                 _selectedNpcId = rel.TargetNpcId;
         _selectedNpcName = rel.TargetName;_selected = rel;
 
+        // Family role shown in the editor must come from the canonical graph
+        // resolved from THIS dossier NPC's point of view.
+        ApplyCanonicalFamilyRoleToSelected();
+
         if (_selected.Importance <= 0)
             _selected.Importance = EffectiveImportance(_selected);
 
@@ -474,6 +478,10 @@ private async Task SelectRelationship(NpcRelationshipRow rel)
         {
             await Studio.SaveRelationshipAsync(_selected);
 
+            // Keep cached FamilyRole values consistent in BOTH directions.
+            // The canonical family graph remains the objective source of truth.
+            SyncCanonicalFamilyRolePair(Sheet.Id, _selected.TargetNpcId);
+
             // This helper was added by the slider-persistence patch.
             // Keep it when present so every emotional score is guaranteed saved.
 
@@ -498,6 +506,7 @@ private async Task SelectRelationship(NpcRelationshipRow rel)
                     _selected = refreshed;
                     _selectedNpcId = refreshed.TargetNpcId;
                     _selectedNpcName = refreshed.TargetName;
+                    ApplyCanonicalFamilyRoleToSelected();
                     _reasons = await Studio.GetRelationshipReasonsAsync(refreshed.Id);
                 }
             }
@@ -524,6 +533,104 @@ private async Task AddRelationship()
         Options.GetType().GetProperty("RelationshipsDbPath")?.GetValue(Options) as string
         ?? @"D:\ProjectEveData\Database\project_eve_relationships.db";
 
+    private void ApplyCanonicalFamilyRoleToSelected()
+    {
+        if (_selected is null || _selected.TargetNpcId <= 0 || Sheet.Id <= 0)
+            return;
+
+        try
+        {
+            var graph = CanonicalFamily.Resolve(Sheet.Id);
+            var person = graph.People.FirstOrDefault(p => p.NpcId == _selected.TargetNpcId);
+
+            if (person is not null && !string.IsNullOrWhiteSpace(person.RoleFromRoot))
+            {
+                _selected.FamilyRole = person.RoleFromRoot.Trim();
+
+                if (string.IsNullOrWhiteSpace(_selected.RelationshipCategory))
+                    _selected.RelationshipCategory = "Family";
+            }
+        }
+        catch
+        {
+            // Never break the editor because canonical family resolution failed.
+        }
+    }
+
+    private void SyncCanonicalFamilyRolePair(int sourceNpcId, int targetNpcId)
+    {
+        if (sourceNpcId <= 0 || targetNpcId <= 0 || sourceNpcId == targetNpcId)
+            return;
+
+        try
+        {
+            var sourceGraph = CanonicalFamily.Resolve(sourceNpcId);
+            var sourceToTarget = sourceGraph.People
+                .FirstOrDefault(p => p.NpcId == targetNpcId)?.RoleFromRoot;
+
+            var targetGraph = CanonicalFamily.Resolve(targetNpcId);
+            var targetToSource = targetGraph.People
+                .FirstOrDefault(p => p.NpcId == sourceNpcId)?.RoleFromRoot;
+
+            using var conn = new SqliteConnection($"Data Source={RelationshipsDbPath}");
+            conn.Open();
+
+            using var tx = conn.BeginTransaction();
+
+            UpdateFamilyRoleCache(
+                conn,
+                tx,
+                sourceNpcId,
+                targetNpcId,
+                sourceToTarget);
+
+            UpdateFamilyRoleCache(
+                conn,
+                tx,
+                targetNpcId,
+                sourceNpcId,
+                targetToSource);
+
+            tx.Commit();
+        }
+        catch
+        {
+            // Canonical graph stays authoritative even if a legacy cache row
+            // cannot be synchronized. Never destroy subjective score saves.
+        }
+    }
+
+    private static void UpdateFamilyRoleCache(
+        SqliteConnection conn,
+        SqliteTransaction tx,
+        int sourceNpcId,
+        int targetNpcId,
+        string? canonicalRole)
+    {
+        if (string.IsNullOrWhiteSpace(canonicalRole))
+            return;
+
+        using var cmd = conn.CreateCommand();
+        cmd.Transaction = tx;
+        cmd.CommandText = """
+            UPDATE RelationshipStates
+            SET FamilyRole = $role,
+                RelationshipCategory =
+                    CASE
+                        WHEN COALESCE(TRIM(RelationshipCategory), '') = ''
+                            THEN 'Family'
+                        ELSE RelationshipCategory
+                    END,
+                UpdatedRealAt = CURRENT_TIMESTAMP
+            WHERE SourceCharacterId = $source
+              AND TargetCharacterId = $target;
+            """;
+
+        cmd.Parameters.AddWithValue("$role", canonicalRole.Trim());
+        cmd.Parameters.AddWithValue("$source", sourceNpcId);
+        cmd.Parameters.AddWithValue("$target", targetNpcId);
+        cmd.ExecuteNonQuery();
+    }
     private int LoadRelationshipTier(
         int sourceNpcId,
         int targetNpcId,
@@ -1294,6 +1401,7 @@ private void SelectMetric(string metric)
         font-size: .82rem;
     }
 </style>
+
 
 
 

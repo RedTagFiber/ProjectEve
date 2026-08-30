@@ -1,0 +1,602 @@
+﻿@using ProjectEve.NpcStudio.Models
+@using ProjectEve.NpcStudio.Services
+@inject ProjectEve.NpcStudio.Data.NpcStudioRepository Repo
+@inject AiEducationProfessionalAssistService AiAssist
+
+<div class="embedded-edu">
+    <section class="school-reference">
+        <div>
+            <span>BCS SCHOOL SYSTEM</span>
+            <b>Real Bellefontaine buildings · fictional ProjectEve staff</b>
+            <small>K–12 courses, teacher pools, counselors, nurses, principals, custodians and support staff are now modeled.</small>
+        </div>
+        <a href="/npc-studio/schools">School System Reference</a>
+    </section>
+    @if (_loading)
+    {
+        <div class="edu-status">Loading education & career...</div>
+    }
+    else if (!string.IsNullOrWhiteSpace(_error))
+    {
+        <div class="edu-status error">@_error</div>
+    }
+    else if (_bundle is null)
+    {
+        <div class="edu-status">Education & career data unavailable.</div>
+    }
+    else
+    {
+        @if (!string.IsNullOrWhiteSpace(_message))
+        {
+            <div class="edu-status success">@_message</div>
+        }
+
+        <section class="edu-ai">
+            <div>
+                <span class="kicker">✦ AI ASSIST</span>
+                <h3>AI builds the draft. You review and fine tune it.</h3>
+                <p>
+                    AI reads this NPC's existing canon and proposes education, professional,
+                    qualification and competency data. Nothing is saved automatically.
+                </p>
+            </div>
+            <div class="ai-buttons">
+                <button class="primary" @onclick="GenerateAiPreviewAsync" disabled="@_aiBusy">
+                    @(_aiBusy ? "Building Draft..." : "Generate AI Draft")
+                </button>
+                @if (_aiPreview is not null)
+                {
+                    <button @onclick="ApplyAiPreviewToForm">Apply Reviewed Draft</button>
+                }
+            </div>
+        </section>
+
+        @if (_aiPreview is not null)
+        {
+            <details class="ai-review" open>
+                <summary>
+                    <div>
+                        <b>AI Draft Review</b>
+                        <span>Review everything before applying it to the editable form</span>
+                    </div>
+                    <strong>@_aiPreview.Education.Count education · @_aiPreview.Qualifications.Count qualification · @_aiPreview.Competencies.Count skills</strong>
+                </summary>
+
+                <div class="review-body">
+                    @if (!string.IsNullOrWhiteSpace(_aiPreview.Summary))
+                    {
+                        <div class="review-summary">@_aiPreview.Summary</div>
+                    }
+
+                    <div class="review-section">
+                        <h4>Professional Proposal</h4>
+                        <div class="review-grid">
+                            @ReviewFact("Role", _aiPreview.Professional.PrimaryRoleId)
+                            @ReviewFact("Career Field", _aiPreview.Professional.CareerField)
+                            @ReviewFact("Training", _aiPreview.Professional.TrainingLevel)
+                            @ReviewFact("Experience", $"{_aiPreview.Professional.YearsExperience} years")
+                            @ReviewFact("License", _aiPreview.Professional.LicenseStanding)
+                            @ReviewFact("Motivation", _aiPreview.Professional.Motivation.ToString())
+                            @ReviewFact("Performance", _aiPreview.Professional.CurrentPerformance.ToString())
+                            @ReviewFact("Reputation", _aiPreview.Professional.ProfessionalReputation.ToString())
+                        </div>
+                    </div>
+
+                    <div class="review-section">
+                        <h4>Education Proposal</h4>
+                        @if (_aiPreview.Education.Count == 0)
+                        {
+                            <p class="muted">AI proposed no education records.</p>
+                        }
+                        else
+                        {
+                            <div class="review-list">
+                                @foreach (var item in _aiPreview.Education)
+                                {
+                                    <article>
+                                        <b>@Safe(item.EducationType, "Education")</b>
+                                        <span>@Safe(item.InstitutionName, "Institution not set")</span>
+                                        <small>
+                                            @Safe(item.Status, "Status not set")
+                                            @if (item.StartAge is not null || item.EndAge is not null)
+                                            {
+                                                <text> · age @(item.StartAge?.ToString() ?? "?")–@(item.EndAge?.ToString() ?? "?")</text>
+                                            }
+                                        </small>
+                                        @if (!string.IsNullOrWhiteSpace(item.DegreeOrCredential))
+                                        {
+                                            <small>@item.DegreeOrCredential</small>
+                                        }
+                                    </article>
+                                }
+                            </div>
+                        }
+                    </div>
+
+                    @if (_aiPreview.Qualifications.Count > 0)
+                    {
+                        <div class="review-section">
+                            <h4>Qualifications Proposal</h4>
+                            <div class="review-list">
+                                @foreach (var item in _aiPreview.Qualifications)
+                                {
+                                    <article>
+                                        <b>@Safe(item.Name, "Qualification")</b>
+                                        <span>@Safe(item.QualificationType, "Type not set")</span>
+                                        <small>@Safe(item.IssuerName, "Issuer not set") · @Safe(item.Status, "Status not set")</small>
+                                    </article>
+                                }
+                            </div>
+                        </div>
+                    }
+
+                    @if (_aiPreview.Competencies.Count > 0)
+                    {
+                        <div class="review-section">
+                            <h4>Competencies Proposal</h4>
+                            <div class="review-list">
+                                @foreach (var item in _aiPreview.Competencies)
+                                {
+                                    <article>
+                                        <b>@Safe(item.CompetencyName, "Competency")</b>
+                                        <span>@Safe(item.ExperienceLevel, "Level not set")</span>
+                                        <small>Current @item.CurrentValue · Set point @item.SetPointValue · Confidence @item.Confidence</small>
+                                    </article>
+                                }
+                            </div>
+                        </div>
+                    }
+
+                    <div class="review-actions">
+                        <button class="primary" @onclick="ApplyAiPreviewToForm">Apply This Draft to Form</button>
+                        <button @onclick="GenerateAiPreviewAsync" disabled="@_aiBusy">Regenerate</button>
+                    </div>
+                </div>
+            </details>
+        }
+
+        <details class="edu-section" open>
+            <summary>
+                <div><span class="num">1</span><div><b>Education</b><small>School progression and credentials</small></div></div>
+                <span>@_bundle.Education.Count records</span>
+            </summary>
+
+            <div class="section-body">
+                <div class="section-toolbar">
+                    <p>Elementary → Middle School → High School → College / Trade only when appropriate.</p>
+                    <button @onclick="AddEducation">+ Add Education</button>
+                </div>
+
+                @if (_bundle.Education.Count == 0)
+                {
+                    <div class="empty-box">No education records yet.</div>
+                }
+
+                @for (var i = 0; i < _bundle.Education.Count; i++)
+                {
+                    var item = _bundle.Education[i];
+                    var number = i + 1;
+
+                    <details class="record" open="@(i == 0)">
+                        <summary>
+                            <div><b>Education @number · @Safe(item.EducationType, "Choose level")</b><small>@Safe(item.InstitutionName, "Institution not set")</small></div>
+                            <span>@Safe(item.Status, "")</span>
+                        </summary>
+
+                        <div class="record-body">
+                            <div class="grid">
+                                <label>
+                                    <span>Education Level</span>
+                                    <select @bind="item.EducationType">
+                                        <option value="">Select level...</option>
+                                        @foreach (var level in EducationLevels)
+                                        {
+                                            <option value="@level">@level</option>
+                                        }
+                                    </select>
+                                </label>
+                                <label><span>School / Institution</span><input @bind="item.InstitutionName" /></label>
+                                <label>
+                                    <span>Status</span>
+                                    <select @bind="item.Status">
+                                        <option>Completed</option>
+                                        <option>Currently Enrolled</option>
+                                        <option>Graduated</option>
+                                        <option>Transferred</option>
+                                        <option>Withdrawn</option>
+                                        <option>Did Not Complete</option>
+                                        <option>Not Applicable</option>
+                                    </select>
+                                </label>
+                                <label><span>Degree / Credential</span><input @bind="item.DegreeOrCredential" /></label>
+                                <label><span>Program</span><input @bind="item.ProgramName" /></label>
+                                <label><span>Field of Study</span><input @bind="item.FieldOfStudy" /></label>
+                                <label><span>Start Age</span><input type="number" min="3" max="100" @bind="item.StartAge" /></label>
+                                <label><span>End Age</span><input type="number" min="3" max="110" @bind="item.EndAge" /></label>
+                                <label><span>GPA</span><input type="number" min="0" max="4" step="0.01" @bind="item.Gpa" /></label>
+                            </div>
+
+                            <label class="wide"><span>Honors</span><input @bind="item.Honors" /></label>
+                            <label class="wide"><span>Notes</span><textarea rows="2" @bind="item.Notes"></textarea></label>
+
+                            <details class="advanced">
+                                <summary>Advanced / Event Links</summary>
+                                <div class="grid">
+                                    <label><span>Institution ID</span><input @bind="item.InstitutionId" /></label>
+                                    <label><span>Start Time</span><input @bind="item.StartGameTime" /></label>
+                                    <label><span>End Time</span><input @bind="item.EndGameTime" /></label>
+                                    <label><span>Start Event ID</span><input @bind="item.StartEventId" /></label>
+                                    <label><span>Completion Event ID</span><input @bind="item.CompletionEventId" /></label>
+                                    <label><span>Withdrawal Event ID</span><input @bind="item.WithdrawalEventId" /></label>
+                                </div>
+                            </details>
+
+                            <div class="actions">
+                                <button class="primary" @onclick="() => SaveEducationAsync(item)" disabled="@_busy">Save Education @number</button>
+                            </div>
+                        </div>
+                    </details>
+                }
+            </div>
+        </details>
+
+        <details class="edu-section" open>
+            <summary>
+                <div><span class="num">2</span><div><b>Professional</b><small>Current work and career truth</small></div></div>
+                <span>Current profile</span>
+            </summary>
+            <div class="section-body">
+                <div class="grid">
+                    <label><span>Primary Role ID</span><input @bind="_bundle.ProfessionalProfile.PrimaryRoleId" /></label>
+                    <label><span>Career Field</span><input @bind="_bundle.ProfessionalProfile.CareerField" /></label>
+                    <label>
+                        <span>Training Level</span>
+                        <select @bind="_bundle.ProfessionalProfile.TrainingLevel">
+                            <option value="">Select...</option>
+                            <option>None / Entry Level</option>
+                            <option>On-the-Job Training</option>
+                            <option>High School / Equivalent</option>
+                            <option>Trade / Vocational</option>
+                            <option>Associate Degree</option>
+                            <option>Bachelor's Degree</option>
+                            <option>Graduate Degree</option>
+                            <option>Doctoral / Professional</option>
+                            <option>Licensed Professional</option>
+                            <option>Retired / Former Professional</option>
+                            <option>Student</option>
+                        </select>
+                    </label>
+                    <label><span>Years Experience</span><input type="number" min="0" max="80" @bind="_bundle.ProfessionalProfile.YearsExperience" /></label>
+                    <label><span>License Standing</span><input @bind="_bundle.ProfessionalProfile.LicenseStanding" /></label>
+                    <label class="checkbox"><span>Profile Status</span><div><input type="checkbox" @bind="_bundle.ProfessionalProfile.IsActive" /> Active</div></label>
+                </div>
+
+                <div class="metrics">
+                    <label><span>Burnout</span><input type="number" min="0" max="100" @bind="_bundle.ProfessionalProfile.Burnout" /></label>
+                    <label><span>Motivation</span><input type="number" min="0" max="100" @bind="_bundle.ProfessionalProfile.Motivation" /></label>
+                    <label><span>Performance</span><input type="number" min="0" max="100" @bind="_bundle.ProfessionalProfile.CurrentPerformance" /></label>
+                    <label><span>Reputation</span><input type="number" min="0" max="100" @bind="_bundle.ProfessionalProfile.ProfessionalReputation" /></label>
+                </div>
+
+                <label class="wide"><span>Professional Notes</span><textarea rows="3" @bind="_bundle.ProfessionalProfile.Notes"></textarea></label>
+                <div class="actions"><button class="primary" @onclick="SaveProfessionalAsync" disabled="@_busy">Save Professional</button></div>
+            </div>
+        </details>
+
+        <details class="edu-section">
+            <summary>
+                <div><span class="num">3</span><div><b>Qualifications</b><small>Licenses and certifications</small></div></div>
+                <span>@_bundle.Qualifications.Count records</span>
+            </summary>
+            <div class="section-body">
+                <div class="section-toolbar"><p>Add only what fits the NPC's education and job.</p><button @onclick="AddQualification">+ Add Qualification</button></div>
+                @foreach (var item in _bundle.Qualifications)
+                {
+                    <details class="record">
+                        <summary><div><b>@Safe(item.Name, "Qualification")</b><small>@Safe(item.QualificationType, "")</small></div><span>@Safe(item.Status, "")</span></summary>
+                        <div class="record-body">
+                            <div class="grid">
+                                <label><span>Role ID</span><input @bind="item.RoleId" /></label>
+                                <label><span>Type</span><input @bind="item.QualificationType" /></label>
+                                <label><span>Name</span><input @bind="item.Name" /></label>
+                                <label><span>Issuer</span><input @bind="item.IssuerName" /></label>
+                                <label><span>Status</span><input @bind="item.Status" /></label>
+                                <label><span>Credential #</span><input @bind="item.CredentialNumber" /></label>
+                            </div>
+                            <label class="wide"><span>Notes</span><textarea rows="2" @bind="item.Notes"></textarea></label>
+                            <div class="actions"><button class="primary" @onclick="() => SaveQualificationAsync(item)">Save Qualification</button></div>
+                        </div>
+                    </details>
+                }
+            </div>
+        </details>
+
+        <details class="edu-section">
+            <summary>
+                <div><span class="num">4</span><div><b>Competencies</b><small>What this NPC can actually do</small></div></div>
+                <span>@_bundle.Competencies.Count records</span>
+            </summary>
+            <div class="section-body">
+                <div class="section-toolbar"><p>Skills should come from education, training or work.</p><button @onclick="AddCompetency">+ Add Competency</button></div>
+                @foreach (var item in _bundle.Competencies)
+                {
+                    <div class="competency">
+                        <input @bind="item.CompetencyName" placeholder="Competency" />
+                        <label><span>Current</span><input type="number" min="0" max="100" @bind="item.CurrentValue" /></label>
+                        <label><span>Set Point</span><input type="number" min="0" max="100" @bind="item.SetPointValue" /></label>
+                        <label><span>Confidence</span><input type="number" min="0" max="100" @bind="item.Confidence" /></label>
+                        <input @bind="item.ExperienceLevel" placeholder="Beginner / Skilled / Expert" />
+                        <button class="primary" @onclick="() => SaveCompetencyAsync(item)">Save</button>
+                    </div>
+                }
+            </div>
+        </details>
+    }
+</div>
+
+<style>
+.school-reference{display:flex;justify-content:space-between;gap:14px;align-items:center;background:#160d11;border:1px solid #57242b;border-radius:10px;padding:12px 14px}.school-reference span,.school-reference b,.school-reference small{display:block}.school-reference span{font-size:9px;letter-spacing:.1em;color:#df7d89;font-weight:900}.school-reference b{margin-top:2px}.school-reference small{color:#8f9db3;margin-top:2px}.school-reference a{white-space:nowrap;background:#b51f2e;color:#fff;border:1px solid #d34a59;padding:8px 10px;border-radius:7px;text-decoration:none;font-weight:800}
+
+.embedded-edu{display:flex;flex-direction:column;gap:12px}.edu-status{padding:11px 13px;border-radius:9px;background:#0d1625;border:1px solid #273650;color:#b7c4d8}.edu-status.success{border-color:#27563a;color:#7ee2a0}.edu-status.error{border-color:#6b303b;color:#ff9cab}.edu-ai{display:flex;justify-content:space-between;gap:18px;align-items:center;padding:17px;background:linear-gradient(135deg,#11182b,#18133e);border:1px solid #352b69;border-radius:12px}.edu-ai h3{margin:4px 0 5px}.edu-ai p{margin:0;color:#92a2bc;font-size:12px;max-width:720px}.kicker{font-size:10px;color:#b7a5ff;letter-spacing:.12em;font-weight:900}.ai-buttons{display:flex;gap:8px;flex-wrap:wrap}.embedded-edu button{background:#101a2c;color:#c6d2e4;border:1px solid #30415e;border-radius:7px;padding:8px 11px;font-weight:800;cursor:pointer}.embedded-edu button.primary{background:#704be5;color:white;border-color:#8d6df0}.ai-review,.edu-section{background:#0d1625;border:1px solid #273650;border-radius:11px;overflow:hidden}.ai-review>summary,.edu-section>summary,.record>summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 15px}.ai-review>summary::-webkit-details-marker,.edu-section>summary::-webkit-details-marker,.record>summary::-webkit-details-marker{display:none}.ai-review>summary div,.edu-section>summary>div{display:flex;gap:10px;align-items:center}.ai-review>summary span,.edu-section>summary small,.record>summary small,.record>summary span{display:block;color:#8394af;font-size:10px}.num{width:27px;height:27px;border-radius:7px;display:grid;place-items:center;background:#281e58;border:1px solid #4e3d8f;color:#c9bcff;font-weight:900}.review-body,.section-body{border-top:1px solid #1d2b43;padding:14px 15px}.review-summary{background:#0a1322;border:1px solid #273851;border-radius:8px;padding:10px;color:#b9c6d9;margin-bottom:12px}.review-section{margin:12px 0}.review-section h4{margin:0 0 8px}.review-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.review-fact{background:#091220;border:1px solid #22324c;border-radius:8px;padding:8px}.review-fact span{display:block;color:#7f91ad;font-size:9px;text-transform:uppercase}.review-fact b{display:block;margin-top:3px}.review-list{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.review-list article{background:#091220;border:1px solid #22324c;border-radius:8px;padding:9px}.review-list article b,.review-list article span,.review-list article small{display:block}.review-list article span{color:#aab8cc;margin-top:3px}.review-list article small{color:#7f91aa;margin-top:3px}.review-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:12px}.section-toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px}.section-toolbar p{margin:0;color:#8495af;font-size:11px}.empty-box{border:1px dashed #344760;border-radius:8px;padding:14px;text-align:center;color:#8495af}.record{background:#091220;border:1px solid #20314b;border-radius:9px;margin:8px 0}.record-body{border-top:1px solid #1b2b42;padding:12px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px}.embedded-edu label{display:flex;flex-direction:column;gap:4px}.embedded-edu label>span{font-size:9px;text-transform:uppercase;letter-spacing:.06em;color:#8395b0;font-weight:800}.embedded-edu input,.embedded-edu select,.embedded-edu textarea{box-sizing:border-box;width:100%;background:#081321;color:#e8edf7;border:1px solid #2b3c58;border-radius:7px;padding:8px 9px}.wide{margin-top:10px}.advanced{margin-top:10px;border:1px dashed #2d3e5c;border-radius:7px;padding:8px}.advanced summary{cursor:pointer;color:#9d8ed3;font-size:10px}.actions{display:flex;justify-content:flex-end;margin-top:10px}.checkbox div{height:34px;display:flex;align-items:center;gap:7px}.checkbox input{width:auto}.competency{display:grid;grid-template-columns:1.4fr repeat(3,.55fr) 1fr auto;gap:7px;align-items:end;background:#091220;border:1px solid #20314b;border-radius:8px;padding:9px;margin-bottom:7px}.muted{color:#8292aa}.review-fact{min-width:0}
+@@media(max-width:1000px){.review-grid{grid-template-columns:1fr 1fr}.review-list{grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr 1fr}.competency{grid-template-columns:1fr 1fr}.edu-ai{flex-direction:column;align-items:flex-start}}
+@@media(max-width:650px){.review-grid,.review-list,.grid,.metrics{grid-template-columns:1fr}.section-toolbar{flex-direction:column;align-items:flex-start}}
+</style>
+
+@code {
+    [Parameter] public int NpcId { get; set; }
+
+    private CanonicalProfessionalBundle? _bundle;
+    private AiEducationProfessionalProposal? _aiPreview;
+    private bool _loading = true;
+    private bool _busy;
+    private bool _aiBusy;
+    private string _message = "";
+    private string _error = "";
+
+    private static readonly string[] EducationLevels =
+    [
+        "Elementary School",
+        "Middle School",
+        "High School",
+        "College / University",
+        "Trade / Vocational",
+        "Graduate School",
+        "Doctoral / Professional School",
+        "Certification / Continuing Education",
+        "Other"
+    ];
+
+    protected override Task OnParametersSetAsync() => LoadAsync();
+
+    private async Task LoadAsync()
+    {
+        _loading = true;
+        _error = "";
+        try
+        {
+            _bundle = await Repo.GetCanonicalProfessionalBundleAsync(NpcId);
+        }
+        catch (Exception ex)
+        {
+            _error = ex.Message;
+        }
+        finally
+        {
+            _loading = false;
+        }
+    }
+
+    private async Task GenerateAiPreviewAsync()
+    {
+        if (_bundle is null) return;
+
+        _aiBusy = true;
+        _message = "";
+        _error = "";
+
+        try
+        {
+            _aiPreview = await AiAssist.BuildPreviewAsync(NpcId, _bundle);
+            _message = "AI draft ready below. Review it before applying. Nothing has been saved.";
+        }
+        catch (Exception ex)
+        {
+            _error = ex.Message;
+        }
+        finally
+        {
+            _aiBusy = false;
+        }
+    }
+
+    private void ApplyAiPreviewToForm()
+    {
+        if (_bundle is null || _aiPreview is null) return;
+
+        static string Fill(string current, string proposed) =>
+            string.IsNullOrWhiteSpace(current) ? (proposed ?? "") : current;
+
+        var p = _bundle.ProfessionalProfile;
+        var a = _aiPreview.Professional;
+
+        p.PrimaryRoleId = Fill(p.PrimaryRoleId, a.PrimaryRoleId);
+        p.CareerField = Fill(p.CareerField, a.CareerField);
+        p.TrainingLevel = Fill(p.TrainingLevel, a.TrainingLevel);
+        if (p.YearsExperience <= 0) p.YearsExperience = Math.Max(0, a.YearsExperience);
+        p.LicenseStanding = Fill(p.LicenseStanding, a.LicenseStanding);
+        if (p.Burnout == 0) p.Burnout = Math.Clamp(a.Burnout, 0, 100);
+        if (p.Motivation == 50) p.Motivation = Math.Clamp(a.Motivation, 0, 100);
+        if (p.CurrentPerformance == 50) p.CurrentPerformance = Math.Clamp(a.CurrentPerformance, 0, 100);
+        if (p.ProfessionalReputation == 50) p.ProfessionalReputation = Math.Clamp(a.ProfessionalReputation, 0, 100);
+        p.Notes = Fill(p.Notes, a.Notes);
+
+        if (_bundle.Education.Count == 0)
+        {
+            foreach (var x in _aiPreview.Education)
+            {
+                _bundle.Education.Add(new CanonicalEducationRecord
+                {
+                    NpcId = NpcId,
+                    EducationType = x.EducationType,
+                    InstitutionName = x.InstitutionName,
+                    DegreeOrCredential = x.DegreeOrCredential,
+                    ProgramName = x.ProgramName,
+                    FieldOfStudy = x.FieldOfStudy,
+                    Status = string.IsNullOrWhiteSpace(x.Status) ? "Completed" : x.Status,
+                    StartAge = x.StartAge,
+                    EndAge = x.EndAge,
+                    Gpa = x.Gpa,
+                    Honors = x.Honors,
+                    Notes = x.Notes
+                });
+            }
+        }
+
+        if (_bundle.Qualifications.Count == 0)
+        {
+            foreach (var x in _aiPreview.Qualifications)
+            {
+                _bundle.Qualifications.Add(new CanonicalProfessionalQualification
+                {
+                    NpcId = NpcId,
+                    RoleId = p.PrimaryRoleId,
+                    QualificationType = x.QualificationType,
+                    Name = x.Name,
+                    IssuerName = x.IssuerName,
+                    Status = string.IsNullOrWhiteSpace(x.Status) ? "Active" : x.Status,
+                    CredentialNumber = x.CredentialNumber,
+                    Notes = x.Notes
+                });
+            }
+        }
+
+        if (_bundle.Competencies.Count == 0)
+        {
+            foreach (var x in _aiPreview.Competencies)
+            {
+                _bundle.Competencies.Add(new CanonicalProfessionalCompetency
+                {
+                    NpcId = NpcId,
+                    RoleId = p.PrimaryRoleId,
+                    CompetencyId = x.CompetencyId,
+                    CompetencyName = x.CompetencyName,
+                    CurrentValue = Math.Clamp(x.CurrentValue, 0, 100),
+                    SetPointValue = Math.Clamp(x.SetPointValue, 0, 100),
+                    Confidence = Math.Clamp(x.Confidence, 0, 100),
+                    ExperienceLevel = x.ExperienceLevel,
+                    Notes = x.Notes
+                });
+            }
+        }
+
+        _message = "AI draft copied into the form only. Fine tune it now; nothing is saved yet.";
+    }
+
+    private void AddEducation()
+    {
+        if (_bundle is null) return;
+        var next = EducationLevels.FirstOrDefault(level =>
+            !_bundle.Education.Any(x => string.Equals(x.EducationType, level, StringComparison.OrdinalIgnoreCase)))
+            ?? "Other";
+
+        _bundle.Education.Add(new CanonicalEducationRecord
+        {
+            NpcId = NpcId,
+            EducationType = next,
+            Status = "Completed"
+        });
+    }
+
+    private void AddQualification()
+    {
+        if (_bundle is null) return;
+        _bundle.Qualifications.Add(new CanonicalProfessionalQualification
+        {
+            NpcId = NpcId,
+            RoleId = _bundle.ProfessionalProfile.PrimaryRoleId,
+            Status = "Active"
+        });
+    }
+
+    private void AddCompetency()
+    {
+        if (_bundle is null) return;
+        _bundle.Competencies.Add(new CanonicalProfessionalCompetency
+        {
+            NpcId = NpcId,
+            RoleId = _bundle.ProfessionalProfile.PrimaryRoleId,
+            CurrentValue = 50,
+            SetPointValue = 50,
+            Confidence = 50
+        });
+    }
+
+    private Task SaveProfessionalAsync()
+        => _bundle is null
+            ? Task.CompletedTask
+            : SaveAndReload(
+                () => Repo.SaveCanonicalProfessionalProfileAsync(_bundle.ProfessionalProfile),
+                "Professional profile saved.");
+
+    private Task SaveEducationAsync(CanonicalEducationRecord item)
+    {
+        item.NpcId = NpcId;
+        return SaveAndReload(() => Repo.SaveCanonicalEducationAsync(item), "Education saved.");
+    }
+
+    private Task SaveQualificationAsync(CanonicalProfessionalQualification item)
+    {
+        item.NpcId = NpcId;
+        return SaveAndReload(() => Repo.SaveCanonicalQualificationAsync(item), "Qualification saved.");
+    }
+
+    private Task SaveCompetencyAsync(CanonicalProfessionalCompetency item)
+    {
+        item.NpcId = NpcId;
+        return SaveAndReload(() => Repo.SaveCanonicalCompetencyAsync(item), "Competency saved.");
+    }
+
+    private async Task SaveAndReload(Func<Task> action, string success)
+    {
+        _busy = true;
+        _message = "";
+        _error = "";
+        try
+        {
+            await action();
+            _bundle = await Repo.GetCanonicalProfessionalBundleAsync(NpcId);
+            _message = success + " Reload confirmed.";
+        }
+        catch (Exception ex)
+        {
+            _error = ex.Message;
+        }
+        finally
+        {
+            _busy = false;
+        }
+    }
+
+    private RenderFragment ReviewFact(string label, string? value) => builder =>
+    {
+        var sequence = 0;
+
+        builder.OpenElement(sequence++, "div");
+        builder.AddAttribute(sequence++, "class", "review-fact");
+
+        builder.OpenElement(sequence++, "span");
+        builder.AddContent(sequence++, label);
+        builder.CloseElement();
+
+        builder.OpenElement(sequence++, "b");
+        builder.AddContent(sequence++, Safe(value, "Not set"));
+        builder.CloseElement();
+
+        builder.CloseElement();
+    };
+
+    private static string Safe(string? value, string fallback)
+        => string.IsNullOrWhiteSpace(value) ? fallback : value;
+}
+
+

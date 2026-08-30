@@ -450,19 +450,27 @@ private Dictionary<int, WebPoint> Positions => BuildDeterministicRelationshipLay
         string canonicalRole,
         NpcRelationshipRow? direct)
     {
-        // The canonical graph supplies the automatic role.
+        // IMPORTANT:
+        // The NPC in the CENTER of the web is always the point of view.
         //
-        // The relationship editor is the fine-tuning layer. If the user has
-        // explicitly saved a FamilyRole on this NPC -> target relationship,
-        // show that saved role immediately on the web.
+        // FamilyRole stored on RelationshipStates is a subjective/cache copy.
+        // It must NEVER override objective canonical family structure.
         //
-        // This changes the DISPLAY role/color only. Canonical parent-child and
-        // spouse edges remain the objective structure.
+        // Example:
+        //   Edward center -> Adam must resolve as Son
+        //   Adam center   -> Edward must resolve as Father
+        //   Lisa center   -> Tom must resolve as Father
+        //   Tom center    -> Lisa must resolve as Daughter
+        //
+        // The canonical graph derives that answer independently for every root.
+        if (!string.IsNullOrWhiteSpace(canonicalRole))
+            return canonicalRole.Trim();
+
         if (direct is not null &&
             !string.IsNullOrWhiteSpace(direct.FamilyRole))
             return direct.FamilyRole.Trim();
 
-        return canonicalRole;
+        return direct?.RelationshipType ?? "Family";
     }
     private WebNode FromDirect(NpcRelationshipRow rel, string category) =>
         new()
@@ -608,27 +616,20 @@ private int TierFor(int targetNpcId, NpcRelationshipRow? direct)
         var importance = node.Relationship is null ? 50 : EffectiveImportance(node.Relationship);
         var size = 64d + Math.Clamp(importance, 0, 100) * 0.20d;
         var delay = -(Math.Abs(node.NpcId) % 13) * 0.41d;
-        var visual = NodeVisualCss(node);
 
-        return $"left:{p.X:0.##}%;top:{p.Y:0.##}%;--ug-size:{size:0.#}px;--ug-delay:{delay:0.##}s;{visual}";
+        var ringColor = NodeRingColor(node);
+        var glowColor = NodeGlowColor(node);
+        var glowSoft = HexToRgba(glowColor, 0.24d);
+        var glowStrong = HexToRgba(glowColor, 0.42d);
+        var muted = HexToRgba(ringColor, 0.92d);
+
+        return $"left:{p.X:0.##}%;top:{p.Y:0.##}%;--ug-size:{size:0.#}px;--ug-delay:{delay:0.##}s;--ug-border:{ringColor};--ug-glow-soft:{glowSoft};--ug-glow-strong:{glowStrong};--ug-accent:{ringColor};--ug-text:#eef5fb;--ug-muted:{muted};";
     }
 
-    private static string NodeVisualCss(WebNode node)
-    {
-        var color = NodeBorderColor(node);
-        var glowSoft = HexToRgba(color, 0.20d);
-        var glowStrong = HexToRgba(color, 0.36d);
-        var accent = color;
-        var text = "#eef5fb";
-        var muted = HexToRgba(color, 0.92d);
-
-        return $"--ug-border:{color};--ug-glow-soft:{glowSoft};--ug-glow-strong:{glowStrong};--ug-accent:{accent};--ug-text:{text};--ug-muted:{muted};";
-    }
-
-    private static string NodeBorderColor(WebNode node)
+    private string NodeRingColor(WebNode node)
     {
         if (node.Category.Equals("Family", StringComparison.OrdinalIgnoreCase))
-            return FamilyRoleColor(node.Role);
+            return FamilyRoleRingColor(node.Role);
 
         return node.Category switch
         {
@@ -639,7 +640,64 @@ private int TierFor(int targetNpcId, NpcRelationshipRow? direct)
         };
     }
 
-    private static string FamilyRoleColor(string? role)
+    private string NodeGlowColor(WebNode node)
+    {
+        var role = (node.Role ?? "").Trim();
+        if (string.IsNullOrWhiteSpace(role))
+            return NodeRingColor(node);
+
+        // Highest priority: direct spouse always glows gold.
+        if (IsSpouseRole(role))
+            return "#F4C542";
+
+        // Exact family path from the CENTER NPC point of view.
+        // Husband/Father side = blue glow.
+        if (IsHusbandSidePath(role) || IsFatherSidePath(role))
+            return "#5AA9FF";
+
+        // Wife/Mother side = pink glow.
+        if (IsWifeSidePath(role) || IsMotherSidePath(role))
+            return "#FF79C8";
+
+        // If this node is on a known canonical branch, use it.
+        var person = _family.People.FirstOrDefault(p => p.NpcId == node.NpcId);
+        if (person is not null)
+        {
+            if (person.FamilySide.Equals("Father", StringComparison.OrdinalIgnoreCase))
+                return "#5AA9FF";
+
+            if (person.FamilySide.Equals("Mother", StringComparison.OrdinalIgnoreCase))
+                return "#FF79C8";
+        }
+
+        // If the center NPC has a spouse, blood-family/default direct family
+        // can inherit that center-side color so the whole web reads clearly.
+        var rootSideColor = RootDefaultSideGlow();
+        if (!string.IsNullOrWhiteSpace(rootSideColor) && IsRootBloodFamilyRole(role))
+            return rootSideColor;
+
+        // Otherwise fall back to the semantic role ring color.
+        return NodeRingColor(node);
+    }
+
+    private string RootDefaultSideGlow()
+    {
+        var familyRoles = VisibleNodes
+            .Where(n => n.Category.Equals("Family", StringComparison.OrdinalIgnoreCase))
+            .Select(n => (n.Role ?? "").Trim())
+            .Where(r => !string.IsNullOrWhiteSpace(r))
+            .ToList();
+
+        if (familyRoles.Any(IsWifeRole))
+            return "#5AA9FF"; // center NPC is the husband side
+
+        if (familyRoles.Any(IsHusbandRole))
+            return "#FF79C8"; // center NPC is the wife side
+
+        return "";
+    }
+
+    private static string FamilyRoleRingColor(string? role)
     {
         var value = NormalizeFamilyRole(role);
 
@@ -657,7 +715,7 @@ private int TierFor(int targetNpcId, NpcRelationshipRow? direct)
             "brother" or "sister" or "sibling" or "stepbrother" or "stepsister"
                 => "#A56EFF",
 
-            "aunt" or "uncle"
+            "aunt" or "uncle" or "aunt/uncle"
                 => "#FF9B42",
 
             "niece" or "nephew"
@@ -676,34 +734,78 @@ private int TierFor(int targetNpcId, NpcRelationshipRow? direct)
         };
     }
 
+    private static bool IsSpouseRole(string? role) =>
+        IsWifeRole(role) || IsHusbandRole(role) ||
+        ContainsWholeWord(role, "spouse") ||
+        ContainsWholeWord(role, "partner");
+
+    private static bool IsWifeRole(string? role) => ContainsWholeWord(role, "wife");
+
+    private static bool IsHusbandRole(string? role) => ContainsWholeWord(role, "husband");
+
+    private static bool IsFatherSidePath(string? role)
+    {
+        var value = (role ?? "").Trim().ToLowerInvariant();
+        return value.StartsWith("father's ") || value.StartsWith("fathers ");
+    }
+
+    private static bool IsMotherSidePath(string? role)
+    {
+        var value = (role ?? "").Trim().ToLowerInvariant();
+        return value.StartsWith("mother's ") || value.StartsWith("mothers ");
+    }
+
+    private static bool IsHusbandSidePath(string? role)
+    {
+        var value = (role ?? "").Trim().ToLowerInvariant();
+        return value.StartsWith("husband's ") || value.StartsWith("husbands ");
+    }
+
+    private static bool IsWifeSidePath(string? role)
+    {
+        var value = (role ?? "").Trim().ToLowerInvariant();
+        return value.StartsWith("wife's ") || value.StartsWith("wives ");
+    }
+
+    private static bool IsRootBloodFamilyRole(string? role)
+    {
+        var value = NormalizeFamilyRole(role);
+
+        return value switch
+        {
+            "mother" or "father" or "parent" or "stepmother" or "stepfather" or "stepparent" or
+            "son" or "daughter" or "child" or "stepson" or "stepdaughter" or "stepchild" or
+            "brother" or "sister" or "sibling" or "stepbrother" or "stepsister" or
+            "grandmother" or "grandfather" or "grandparent" or
+            "grandson" or "granddaughter" or "grandchild" or
+            "aunt" or "uncle" or "aunt/uncle" or
+            "niece" or "nephew" or
+            "cousin"
+                => true,
+            _ => false
+        };
+    }
+
+    private static bool ContainsWholeWord(string? text, string word)
+    {
+        var value = (text ?? "").Trim();
+        if (string.IsNullOrWhiteSpace(value))
+            return false;
+
+        return System.Text.RegularExpressions.Regex.IsMatch(
+            value,
+            $@"\b{System.Text.RegularExpressions.Regex.Escape(word)}\b",
+            System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.CultureInvariant);
+    }
     private static string NormalizeFamilyRole(string? role)
     {
         var value = (role ?? "").Trim().ToLowerInvariant();
 
         // ==========================================================
-        // RELATIONSHIP SEMANTICS ARE ROOT-RELATIVE.
-        //
-        // The text may be a simple role:
-        //   Father, Sister, Grandson
-        //
-        // or a canonical branch path:
-        //   Father's Father
-        //   Mother's Mother
-        //   Father's Brother
-        //   Mother's Sister
-        //   Father's Brother's Child
-        //
-        // Always classify the FULL family path before looking for simple
-        // words such as "father" or "brother". Otherwise:
-        //
-        //   "Father's Father" incorrectly becomes Father
-        //   "Father's Brother" incorrectly becomes Brother
-        //
-        // This semantic group controls the bubble color only. The visible
-        // label remains the exact role from the open NPC's point of view.
+        // ROOT-RELATIVE SEMANTIC FAMILY ROLE CLASSIFICATION
         // ==========================================================
 
-        // Cousins: child of an aunt/uncle branch.
+        // Cousins: child of a parent's sibling.
         if ((value.StartsWith("father's ") || value.StartsWith("mother's ")) &&
             value.EndsWith("'s child"))
             return "cousin";
@@ -715,7 +817,7 @@ private int TierFor(int targetNpcId, NpcRelationshipRow? direct)
              value.EndsWith(" parent")))
             return "grandparent";
 
-        // Aunt / Uncle: current NPC's parent's sibling.
+        // Aunts / uncles: current NPC's parent's sibling.
         if ((value.StartsWith("father's ") || value.StartsWith("mother's ")) &&
             value.EndsWith(" brother"))
             return "uncle";
@@ -734,7 +836,7 @@ private int TierFor(int targetNpcId, NpcRelationshipRow? direct)
         if (value.Contains("spouse")) return "spouse";
         if (value.Contains("partner")) return "partner";
 
-        // Grand relations MUST be checked before parent/child words.
+        // Grand relations before parent/child keywords.
         if (value.Contains("grandmother")) return "grandmother";
         if (value.Contains("grandfather")) return "grandfather";
         if (value.Contains("grandparent")) return "grandparent";
@@ -774,9 +876,11 @@ private int TierFor(int targetNpcId, NpcRelationshipRow? direct)
 
         return value;
     }
+
     private static string HexToRgba(string hex, double alpha)
     {
         var value = (hex ?? "").Trim().TrimStart('#');
+
         if (value.Length != 6)
             return $"rgba(127,138,154,{alpha:0.##})";
 
@@ -786,7 +890,6 @@ private int TierFor(int targetNpcId, NpcRelationshipRow? direct)
 
         return $"rgba({r},{g},{b},{alpha:0.##})";
     }
-
     private static string LineStyle(WebLine line)
     {
         var dx = line.To.X - line.From.X;
@@ -996,6 +1099,9 @@ private int TierFor(int targetNpcId, NpcRelationshipRow? direct)
         .ug-node{animation:none}
     }
 </style>
+
+
+
 
 
 
