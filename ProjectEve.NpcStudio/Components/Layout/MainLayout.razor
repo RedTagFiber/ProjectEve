@@ -1,0 +1,53 @@
+﻿@inherits LayoutComponentBase
+@implements IDisposable
+@inject NavigationManager Navigation
+
+<div class="page @(IsFullDossier ? "full-dossier-page" : "")">
+    @if (!IsFullDossier)
+    {
+        <div class="sidebar">
+            <NavMenu />
+        </div>
+    }
+
+    <main class="@(IsFullDossier ? "full-dossier-main" : "")">
+        @if (!IsFullDossier)
+        {
+            <div class="top-row px-4">
+                <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+            </div>
+        }
+
+        <article class="content @(IsFullDossier ? "full-dossier-content" : "px-4")">
+            <ProjectEveTopNav />
+            @Body
+        </article>
+    </main>
+</div>
+
+<div id="blazor-error-ui" data-nosnippet>
+    An unhandled error has occurred.
+    <a href="." class="reload">Reload</a>
+    <span class="dismiss">ðŸ—™</span>
+</div>
+
+@code {
+    private bool IsFullDossier =>
+        new Uri(Navigation.Uri).AbsolutePath.StartsWith("/npc-studio/npc/", StringComparison.OrdinalIgnoreCase);
+
+    protected override void OnInitialized()
+    {
+        Navigation.LocationChanged += OnLocationChanged;
+    }
+
+    private void OnLocationChanged(object? sender, Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs e)
+    {
+        _ = InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        Navigation.LocationChanged -= OnLocationChanged;
+    }
+}
+

@@ -1,0 +1,35 @@
+﻿NPC STUDIO FINANCE — COMPACT STYLE FIX
+
+Problem
+-------
+Finance data loaded correctly, but fields rendered in one long vertical
+column and Save & Verify appeared mostly unstyled.
+
+Root cause
+----------
+Blazor CSS isolation.
+
+CanonicalFinance.razor.css styles CanonicalFinance.razor, but the actual
+finance record markup lives inside the child component:
+
+Components\FinanceRowEditor.razor
+
+Scoped CSS from the parent component does not automatically style markup
+inside the child component.
+
+Fix
+---
+Adds:
+
+Components\FinanceRowEditor.razor.css
+
+This gives the child component:
+- 3-column field grid on desktop
+- 2 columns on medium screens
+- 1 column on mobile
+- styled inputs
+- styled Save & Verify button
+- compact Advanced section
+- clean record headers
+
+No repository/database/model code changes.

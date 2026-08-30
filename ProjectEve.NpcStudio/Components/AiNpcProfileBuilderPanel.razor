@@ -1,0 +1,599 @@
+﻿@using ProjectEve.NpcStudio.Models
+@using ProjectEve.NpcStudio.Services
+@inject AiNpcProfileBuilderService AiProfiles
+@inject NavigationManager Nav
+
+<section class="ai-profile-panel">
+    <div class="ai-profile-head">
+        <div>
+            <span>AI PROFILE BUILDER</span>
+            <h3>Fill Missing NPC Profile</h3>
+            <p>AI proposes missing dossier data. Nothing is written until a later Confirm pass.</p>
+        </div>
+
+        <div class="ai-profile-controls">
+            <label>
+                Build depth
+                <select @bind="_tier">
+                    <option value="1">Tier 1 — Deep</option>
+                    <option value="2">Tier 2 — Strong</option>
+                    <option value="3">Tier 3 — Medium</option>
+                    <option value="4">Tier 4 — Light</option>
+                    <option value="5">Tier 5 — Minimal</option>
+                </select>
+            </label>
+
+            <button type="button"
+                    class="ai-profile-primary"
+                    disabled="@_busy"
+                    @onclick="BuildPreview">
+                @(_busy ? $"AI Building... {_elapsedSeconds}s" : "Preview AI Profile")
+            </button>
+        </div>
+    </div>
+
+    <div class="ai-profile-switches">
+        <label><input type="checkbox" @bind="_identity" /> Identity / names</label>
+        <label><input type="checkbox" @bind="_appearance" /> Appearance</label>
+        <label><input type="checkbox" @bind="_traits" /> Traits</label>
+        <label><input type="checkbox" @bind="_currentLife" /> Current life</label>
+        <label><input type="checkbox" @bind="_career" /> Education / career</label>
+        <label><input type="checkbox" @bind="_habits" /> Habits / interests</label>
+        <label><input type="checkbox" @bind="_relationshipContext" /> Relationship style</label>
+    </div>
+
+    @if (!string.IsNullOrWhiteSpace(_error))
+    {
+        <div class="ai-profile-error">@_error</div>
+    }
+    @if (!string.IsNullOrWhiteSpace(_applyMessage))
+    {
+        <div class="ai-profile-success">@_applyMessage</div>
+    }
+
+    @if (_preview is not null)
+    {
+        <div class="ai-preview-status @(_preview.IsValid ? "safe" : "blocked")">
+            <strong>@(_preview.IsValid ? "PREVIEW READY — NO WRITES" : "PREVIEW BLOCKED")</strong>
+            <span>NPC @_preview.NpcId · Tier @_preview.BuildTier · @_preview.SourceModel</span>
+        </div>
+
+        @if (_preview.Warnings.Count > 0)
+        {
+            <div class="ai-preview-warnings">
+                @foreach (var warning in _preview.Warnings)
+                {
+                    <div>@warning</div>
+                }
+            </div>
+        }
+
+        @if (_preview.Proposal is not null)
+        {
+            var p = _preview.Proposal;
+
+            <div class="ai-preview-grid">
+                <article>
+                    <h4>Identity <small class="ai-edit-note">editable before confirm</small></h4>
+
+                    <label class="ai-edit-field">
+                        <span>First</span>
+                        <input @bind="p.FirstName" />
+                    </label>
+
+                    <label class="ai-edit-field">
+                        <span>Middle</span>
+                        <input @bind="p.MiddleName" />
+                    </label>
+
+                    <label class="ai-edit-field">
+                        <span>Current surname</span>
+                        <input @bind="p.CurrentLastName" />
+                    </label>
+
+                    <label class="ai-edit-field">
+                        <span>Birth surname</span>
+                        <input @bind="p.BirthLastName" />
+                    </label>
+
+                    <label class="ai-edit-field">
+                        <span>Preferred</span>
+                        <input @bind="p.PreferredName" />
+                    </label>
+                </article>
+
+                <article>
+                    <h4>Personality / Motivation</h4>
+                    @PreviewFact("Summary", p.PersonalitySummary)
+                    @PreviewFact("Goal", p.Goal)
+                    @PreviewFact("Need", p.Need)
+                    @PreviewFact("Fear", p.Fear)
+                    @PreviewFact("Want", p.Want)
+                </article>
+
+                <article>
+                    <h4>Core / Physical</h4>
+                    @PreviewFact("Age", p.Age <= 0 ? "" : p.Age.ToString())
+                    @PreviewFact("Gender", p.Gender)
+                    @PreviewFact("Height", p.HeightCm <= 0 ? "" : $"{p.HeightCm:0} cm")
+                    @PreviewFact("Weight", p.WeightKg <= 0 ? "" : $"{p.WeightKg:0} kg")
+                    @PreviewFact("IQ", p.IQ <= 0 ? "" : p.IQ.ToString())
+                    @PreviewFact("Archetype", p.Archetype1)
+                    @PreviewFact("Public persona", p.PublicPersona)
+                    @PreviewFact("Private persona", p.PrivatePersona)
+                    @PreviewFact("Hidden behavior", p.HiddenBehavior)
+                </article>
+
+                <article>
+                    <h4>Current Life / Career</h4>
+                    @PreviewFact("Occupation", p.Occupation)
+                    @PreviewFact("Employer", p.Employer)
+                    @PreviewFact("Education", p.EducationSummary)
+                    @PreviewFact("Relationship style", p.RelationshipStyle)
+                </article>
+
+                <article>
+                    <h4>Appearance</h4>
+                    @PreviewFact("Body", p.BodyType)
+                    @PreviewFact("Hair", $"{p.HairColor} {p.HairStyle}".Trim())
+                    @PreviewFact("Eyes", p.EyeColor)
+                    @PreviewFact("Skin", p.SkinTone)
+                    @PreviewFact("Clothing", p.ClothingStyle)
+                    @PreviewFact("Features", p.DistinguishingFeatures)
+                </article>
+            </div>
+
+            <div class="ai-preview-columns">
+                <article>
+                    <h4>Traits</h4>
+                    @if (p.Traits.Count == 0)
+                    {
+                        <span class="ai-muted">No traits proposed.</span>
+                    }
+                    else
+                    {
+                        @foreach (var trait in p.Traits)
+                        {
+                            <div class="ai-chip-row">
+                                <span>@trait.Name</span>
+                                <b>@trait.Value</b>
+                            </div>
+                        }
+                    }
+                </article>
+
+                <article>
+                    <h4>Interests</h4>
+                    <div class="ai-chip-wrap">
+                        @foreach (var item in p.Interests)
+                        {
+                            <span class="ai-chip">@item</span>
+                        }
+                    </div>
+                </article>
+
+                <article>
+                    <h4>Habits</h4>
+                    <div class="ai-chip-wrap">
+                        @foreach (var item in p.Habits)
+                        {
+                            <span class="ai-chip">@item</span>
+                        }
+                    </div>
+                </article>
+            </div>
+
+            @if (!string.IsNullOrWhiteSpace(p.Notes))
+            {
+                <div class="ai-profile-notes">
+                    <strong>AI notes</strong>
+                    <p>@p.Notes</p>
+                </div>
+            }
+            <div class="ai-preview-actions">
+                <button type="button" class="ai-secondary" @onclick="ClearPreview">Back / Clear Preview</button>
+                <button type="button" class="ai-secondary" disabled="@_busy" @onclick="RegeneratePreview">
+                    @(_busy ? $"Regenerating... {_elapsedSeconds}s" : "Regenerate New Version")
+                </button>
+                <button type="button" class="ai-confirm" disabled="@(!_preview.IsValid || _busy)" @onclick="ConfirmAndApply">Confirm & Apply</button>
+            </div>
+        }
+    }
+</section>
+
+@code {
+    [Parameter, EditorRequired] public int NpcId { get; set; }
+
+    private int _tier = 3;
+    private bool _identity = true;
+    private bool _appearance = true;
+    private bool _traits = true;
+    private bool _currentLife = true;
+    private bool _career = true;
+    private bool _habits = true;
+    private bool _relationshipContext = true;
+
+    private bool _busy;
+    private int _elapsedSeconds;
+    private CancellationTokenSource? _timerCts;
+    private string _error = "";
+    private AiNpcProfilePreview? _preview;
+    private bool _approved;
+    private string _applyMessage = "";
+
+    private async Task BuildPreview()
+    {
+        if (NpcId <= 0 || _busy) return;
+
+        _busy = true;
+        _elapsedSeconds = 0;
+        _error = "";
+        _preview = null;
+
+        _timerCts?.Cancel();
+        _timerCts?.Dispose();
+        _timerCts = new CancellationTokenSource();
+        _ = RunElapsedTimerAsync(_timerCts.Token);
+
+        try
+        {
+            _preview = await AiProfiles.BuildPreviewAsync(
+                new AiNpcProfileBuildRequest
+                {
+                    NpcId = NpcId,
+                    BuildTier = _tier,
+                    FillIdentity = _identity,
+                    FillAppearance = _appearance,
+                    FillTraits = _traits,
+                    FillCurrentLife = _currentLife,
+                    FillEducationCareer = _career,
+                    FillHabitsInterests = _habits,
+                    FillRelationshipContext = _relationshipContext
+                });
+        }
+        catch (Exception ex)
+        {
+            _error = ex.Message;
+        }
+        finally
+        {
+            _timerCts?.Cancel();
+            _busy = false;
+        }
+    }
+
+    private async Task RunElapsedTimerAsync(CancellationToken token)
+    {
+        try
+        {
+            while (!token.IsCancellationRequested)
+            {
+                await Task.Delay(1000, token);
+                _elapsedSeconds++;
+                await InvokeAsync(StateHasChanged);
+            }
+        }
+        catch (OperationCanceledException)
+        {
+        }
+    }
+    private async Task ConfirmAndApply()
+    {
+        if (_preview is null || !_preview.IsValid || _busy)
+            return;
+
+        _busy = true;
+        _error = "";
+        _applyMessage = "";
+
+        try
+        {
+            await AiProfiles.ApplyApprovedPreviewAsync(_preview);
+            _approved = true;
+            _applyMessage = "Profile applied successfully. Reloading dossier...";
+            await InvokeAsync(StateHasChanged);
+            await Task.Delay(350);
+            Nav.NavigateTo($"/npc-studio/npc/{NpcId}", forceLoad: true);
+        }
+        catch (Exception ex)
+        {
+            _error = "Apply blocked: " + ex.Message;
+        }
+        finally
+        {
+            _busy = false;
+        }
+    }
+private async Task RegeneratePreview()
+    {
+        ClearPreview();
+        await BuildPreview();
+    }
+    private void ClearPreview()
+    {
+        _timerCts?.Cancel();
+        _timerCts?.Dispose();
+        _timerCts = null;
+
+        _busy = false;
+        _elapsedSeconds = 0;
+        _preview = null;
+        _error = "";
+    }
+
+    private RenderFragment PreviewFact(string label, string? value) => builder =>
+    {
+        var seq = 0;
+        builder.OpenElement(seq++, "div");
+        builder.AddAttribute(seq++, "class", "ai-preview-fact");
+
+        builder.OpenElement(seq++, "span");
+        builder.AddContent(seq++, label);
+        builder.CloseElement();
+
+        builder.OpenElement(seq++, "b");
+        builder.AddContent(seq++, string.IsNullOrWhiteSpace(value) ? "—" : value);
+        builder.CloseElement();
+
+        builder.CloseElement();
+    };
+}
+
+<style>
+    .ai-profile-panel{
+        margin:0 0 16px;
+        padding:16px;
+        border:1px solid #2d4058;
+        border-radius:14px;
+        background:linear-gradient(180deg,#0f1b2a,#0b1521);
+    }
+
+    .ai-profile-head{
+        display:flex;
+        align-items:flex-start;
+        justify-content:space-between;
+        gap:18px;
+        flex-wrap:wrap;
+    }
+
+    .ai-profile-head span{
+        color:#7f91a8;
+        font-size:10px;
+        font-weight:800;
+        letter-spacing:.15em;
+    }
+
+    .ai-profile-head h3{
+        margin:4px 0 4px;
+        color:#f1f5f9;
+    }
+
+    .ai-profile-head p{
+        margin:0;
+        color:#8fa0b4;
+        font-size:12px;
+    }
+
+    .ai-profile-controls{
+        display:flex;
+        align-items:end;
+        gap:10px;
+        flex-wrap:wrap;
+    }
+
+    .ai-profile-controls label{
+        display:grid;
+        gap:4px;
+        color:#8fa0b4;
+        font-size:10px;
+    }
+
+    .ai-profile-controls select{
+        min-width:150px;
+        padding:8px 10px;
+        border:1px solid #31465f;
+        border-radius:8px;
+        background:#0b1420;
+        color:#dbe5ef;
+    }
+
+    .ai-profile-primary,.ai-secondary,.ai-confirm{
+        padding:9px 13px;
+        border-radius:8px;
+        border:1px solid #425c78;
+        background:#152539;
+        color:#e6eef7;
+        cursor:pointer;
+    }
+
+    .ai-profile-primary{
+        border-color:#4f76aa;
+        background:#1c3554;
+    }
+
+    .ai-profile-primary:disabled,.ai-confirm:disabled{
+        opacity:.5;
+        cursor:not-allowed;
+    }
+
+    .ai-profile-switches{
+        display:flex;
+        gap:10px 16px;
+        flex-wrap:wrap;
+        margin-top:14px;
+        padding-top:12px;
+        border-top:1px solid #223248;
+        color:#a8b5c4;
+        font-size:11px;
+    }
+
+    .ai-profile-switches label{
+        display:flex;
+        align-items:center;
+        gap:5px;
+    }
+
+    .ai-profile-success{
+        margin-top:12px;
+        padding:10px 12px;
+        border:1px solid #2f6e60;
+        border-radius:9px;
+        background:#10261f;
+        color:#a8f0d5;
+        font-size:11px;
+    }
+    .ai-profile-error,.ai-preview-warnings{
+        margin-top:12px;
+        padding:10px 12px;
+        border:1px solid #7a3f45;
+        border-radius:9px;
+        background:#27151a;
+        color:#ffc0c5;
+        font-size:11px;
+    }
+
+    .ai-preview-status{
+        display:flex;
+        justify-content:space-between;
+        gap:10px;
+        flex-wrap:wrap;
+        margin-top:14px;
+        padding:10px 12px;
+        border-radius:9px;
+        font-size:11px;
+    }
+
+    .ai-preview-status.safe{
+        border:1px solid #2f6e60;
+        background:#10261f;
+        color:#a8f0d5;
+    }
+
+    .ai-preview-status.blocked{
+        border:1px solid #7a3f45;
+        background:#27151a;
+        color:#ffc0c5;
+    }
+
+    .ai-preview-grid,.ai-preview-columns{
+        display:grid;
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:10px;
+        margin-top:12px;
+    }
+
+    .ai-preview-grid article,.ai-preview-columns article,.ai-profile-notes{
+        border:1px solid #26384e;
+        border-radius:10px;
+        background:#0b1521;
+        padding:11px;
+    }
+
+    .ai-preview-grid h4,.ai-preview-columns h4{
+        margin:0 0 8px;
+        color:#dce6f0;
+    }
+
+    .ai-preview-fact{
+        display:grid;
+        grid-template-columns:110px 1fr;
+        gap:8px;
+        padding:4px 0;
+        border-bottom:1px solid rgba(255,255,255,.035);
+        font-size:11px;
+    }
+
+    .ai-preview-fact span{color:#778ba3}
+    .ai-preview-fact b{color:#dce5ef;font-weight:600}
+
+    .ai-chip-wrap{
+        display:flex;
+        flex-wrap:wrap;
+        gap:6px;
+    }
+
+    .ai-chip,.ai-chip-row{
+        border:1px solid #334a64;
+        border-radius:999px;
+        background:#101f30;
+        color:#b9c8d8;
+        font-size:10px;
+    }
+
+    .ai-chip{padding:5px 8px}
+
+    .ai-chip-row{
+        display:flex;
+        justify-content:space-between;
+        gap:12px;
+        margin:5px 0;
+        padding:5px 8px;
+    }
+
+    .ai-profile-notes{
+        margin-top:12px;
+        color:#9bacbe;
+        font-size:11px;
+    }
+
+    .ai-profile-notes p{margin:5px 0 0}
+
+    .ai-preview-actions{
+        display:flex;
+        justify-content:flex-end;
+        gap:8px;
+        margin-top:12px;
+    }
+
+    .ai-confirm{
+        border-color:#3f6d5f;
+        background:#173127;
+    }
+
+    .ai-muted{color:#6f8299;font-size:10px}
+
+    .ai-edit-note{
+        margin-left:6px;
+        color:#6f8299;
+        font-size:9px;
+        font-weight:500;
+    }
+
+    .ai-edit-field{
+        display:grid;
+        grid-template-columns:110px 1fr;
+        align-items:center;
+        gap:8px;
+        padding:4px 0;
+    }
+
+    .ai-edit-field span{
+        color:#778ba3;
+        font-size:11px;
+    }
+
+    .ai-edit-field input{
+        width:100%;
+        min-width:0;
+        padding:6px 8px;
+        border:1px solid #334a64;
+        border-radius:7px;
+        background:#0d1927;
+        color:#e4edf6;
+        font-size:11px;
+    }
+
+    .ai-edit-field input:focus{
+        outline:none;
+        border-color:#608bc4;
+        box-shadow:0 0 0 2px rgba(96,139,196,.12);
+    }
+    @@media (max-width:900px){
+        .ai-preview-grid,.ai-preview-columns{grid-template-columns:1fr}
+    }
+</style>
+
+
+
+
+

@@ -1,0 +1,632 @@
+@using ProjectEve.NpcStudio.Models
+@using ProjectEve.NpcStudio.Services
+@inject NpcStudioService Studio
+@inject NpcFileSystemService FileSystem
+@inject ComfyWorkflowService Comfy
+@inject NpcAppearanceDetailService AppearanceDetails
+
+<section class="tier-media-studio">
+    @if (_sheet is null)
+    {
+        <div class="tm-card">Loading NPC media...</div>
+    }
+    else
+    {
+        <div class="tm-head">
+            <div>
+                <span class="tm-kicker">DOSSIER MEDIA · TIER @_sheet.Tier</span>
+                <h2>Portrait & Life Image Studio</h2>
+                <p>@TierDescription</p>
+            </div>
+            <div class="tm-status @StatusClass">@StatusText</div>
+        </div>
+
+        <div class="tm-policy">
+            @foreach (var type in RequiredImageTypes)
+            {
+                <button class="tm-type @(type == _imageType ? "active" : "")"
+                        @onclick="() => SelectImageType(type)">
+                    <span>@Pretty(type)</span>
+                    <small>@ImageTypeNote(type)</small>
+                </button>
+            }
+        </div>
+
+        <div class="tm-grid">
+            <div class="tm-card">
+                <h3>@Pretty(_imageType)</h3>
+
+                @if (IsExistingImage(_candidatePath))
+                {
+                    <img class="tm-image" src="@PreviewUrl(_candidatePath)" alt="@Pretty(_imageType) preview" />
+                    <div class="tm-path">@_candidatePath</div>
+                }
+                else if (_imageType == "ProfilePicture" && IsExistingImage(_sheet.Appearance.ReferenceImagePath))
+                {
+                    <img class="tm-image" src="@PreviewUrl(_sheet.Appearance.ReferenceImagePath)" alt="@_sheet.Name profile picture" />
+                    <div class="tm-path">@_sheet.Appearance.ReferenceImagePath</div>
+                }
+                else
+                {
+                    <div class="tm-empty">
+                        No finished @Pretty(_imageType).ToLowerInvariant() selected yet.
+                    </div>
+                }
+
+                <div class="tm-actions">
+                    <button disabled="@_busy" @onclick="FindNewestOutput">Use Newest Comfy Output</button>
+                    <button class="approve"
+                            disabled="@(_busy || !IsExistingImage(_candidatePath))"
+                            @onclick="ApproveAsync">
+                        Save / Approve @Pretty(_imageType)
+                    </button>
+                </div>
+            </div>
+
+            <div class="tm-card">
+                <h3>Generate in Comfy</h3>
+                <div class="tm-person">
+                    <b>@_sheet.Name</b>
+                    <span>Tier @_sheet.Tier · @_sheet.Age · @_sheet.Occupation</span>
+                </div>
+
+                <label>Positive Prompt</label>
+                <textarea rows="8" @bind="_positivePrompt"></textarea>
+
+                <label>Negative Prompt</label>
+                <textarea rows="4" @bind="_negativePrompt"></textarea>
+
+                <div class="tm-actions">
+                    <button @onclick="BuildPrompt">Rebuild Prompt</button>
+                    <button class="primary" disabled="@_busy" @onclick="QueuePortraitAsync">
+                        @(_busy ? "Working..." : $"Generate {Pretty(_imageType)}")
+                    </button>
+                </div>
+
+                @if (!string.IsNullOrWhiteSpace(_promptId))
+                {
+                    <div class="tm-info"><b>Comfy Prompt ID:</b> @_promptId</div>
+                }
+            </div>
+        </div>
+
+        <div class="tm-card">
+            <div class="tm-history-head">
+                <h3>Image History</h3>
+                <button disabled="@_busy" @onclick="ReloadAsync">Refresh</button>
+            </div>
+
+            @if (_sheet.Images.Count == 0)
+            {
+                <div class="tm-empty">No image generations recorded for this NPC yet.</div>
+            }
+            else
+            {
+                <div class="tm-history">
+                    @foreach (var image in _sheet.Images.OrderByDescending(x => x.CreatedRealAt))
+                    {
+                        <button class="tm-history-row @(image.Approved || image.IsCurrent ? "approved" : "")"
+                                @onclick="() => SelectGeneration(image)">
+                            <span>
+                                <b>@Pretty(Safe(image.ImageType, "Image"))</b>
+                                <small>@Safe(image.CreatedRealAt, "time not recorded")</small>
+                            </span>
+                            <span>
+                                @(image.Approved ? "APPROVED" : "DRAFT")
+                                @(image.IsCurrent ? " · PROFILE" : "")
+                            </span>
+                        </button>
+                    }
+                </div>
+            }
+        </div>
+    }
+</section>
+
+<style>
+.tier-media-studio{display:grid;gap:14px;margin-top:18px}
+.tm-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;padding:16px;border:1px solid #2b3d5a;border-radius:14px;background:#091426;color:#eef4ff}
+.tm-head h2{margin:3px 0 6px}.tm-head p{margin:0;color:#91a7c9;max-width:850px}
+.tm-kicker{font-size:.62rem;font-weight:900;letter-spacing:.16em;color:#9e81ff}
+.tm-status{padding:8px 11px;border-radius:9px;font-weight:800;background:#15233a;color:#adbad2;white-space:nowrap}
+.tm-status.ok{background:#10311f;color:#75eca2}.tm-status.fail{background:#35161c;color:#ff8d98}.tm-status.busy{background:#362a0d;color:#ffd66d}
+.tm-policy{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:8px}
+.tm-type{min-height:72px;text-align:left;background:#0e1a2c;color:#dce8fb;border:1px solid #2f4564;border-radius:10px;padding:10px;cursor:pointer}
+.tm-type.active{border-color:#825eff;background:#1b2044;box-shadow:0 0 0 1px rgba(130,94,255,.25)}
+.tm-type span{display:block;font-weight:900}.tm-type small{display:block;color:#8fa3c3;margin-top:4px;line-height:1.25}
+.tm-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.tm-card{background:#0a1423;border:1px solid #273953;border-radius:13px;padding:15px;color:#e9effa}
+.tm-card h3{margin:0 0 12px}
+.tm-card label{display:block;margin:10px 0 5px;color:#8fa6c9;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
+.tm-card textarea,.tm-card input{width:100%;box-sizing:border-box;background:#101c2d;color:#edf3ff;border:1px solid #344862;border-radius:8px;padding:9px}
+.tm-image{display:block;width:min(100%,520px);max-height:650px;object-fit:contain;margin:8px auto;border-radius:11px;border:1px solid #34455d;background:#111927}
+.tm-empty{padding:34px;text-align:center;border:1px dashed #394960;border-radius:10px;color:#8296b5}
+.tm-path,.tm-info{margin-top:9px;padding:8px 10px;background:#101b2c;border-radius:8px;color:#9db0cf;overflow-wrap:anywhere;font-size:.78rem}
+.tm-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px}
+.tm-actions button,.tm-history-head button{background:#16243a;color:#e9effa;border:1px solid #3b506d;border-radius:8px;padding:9px 12px;font-weight:800;cursor:pointer}
+.tm-actions button.primary{background:#5935d9;border-color:#795cf4}.tm-actions button.approve{background:#176c39;border-color:#33a55c}
+.tm-actions button:disabled{opacity:.45;cursor:not-allowed}
+.tm-person{display:flex;gap:8px;flex-direction:column;padding:10px;background:#101b2c;border-radius:8px}
+.tm-person span{color:#8fa4c4}
+.tm-history-head{display:flex;align-items:center;justify-content:space-between}
+.tm-history{display:grid;gap:7px}
+.tm-history-row{width:100%;display:flex;justify-content:space-between;text-align:left;background:#101b2c;color:#dfe8f8;border:1px solid #273b57;border-radius:8px;padding:9px 11px}
+.tm-history-row.approved{border-color:#2d8050}.tm-history-row small{display:block;color:#8194b3;margin-top:2px}
+@@media(max-width:900px){.tm-grid{grid-template-columns:1fr}.tm-head{flex-direction:column}}
+</style>
+
+@code {
+    [Parameter] public int NpcId { get; set; }
+
+    private NpcCharacterSheet? _sheet;
+    private NpcAppearanceDetailProfile? _appearance;
+    private NpcImageGeneration? _selectedGeneration;
+    private string _imageType = "ProfilePicture";
+    private string _candidatePath = "";
+    private string _positivePrompt = "";
+    private string _negativePrompt = DefaultNegativePrompt;
+    private string _promptId = "";
+    private string _status = "idle";
+    private string _message = "Ready";
+    private bool _busy;
+
+    private string StatusClass => _status;
+    private string StatusText => _message;
+
+    private IReadOnlyList<string> RequiredImageTypes
+    {
+        get
+        {
+            if (_sheet is null) return Array.Empty<string>();
+
+            return _sheet.Tier switch
+            {
+                5 => new[] { "ProfilePicture" },
+                4 => new[] { "ProfilePicture" },
+                3 => new[] { "FrontReference", "SideReference", "BodyReference", "ProfilePicture", "PhonePicture" },
+                2 => new[] { "FrontReference", "SideReference", "BodyReference", "ProfilePicture", "PhonePicture", "PersonalPicture", "ClubPicture", "HistoryPicture" },
+                1 => new[] { "FrontReference", "SideReference", "BodyReference", "ProfilePicture", "PhonePicture", "PersonalPicture", "ClubPicture", "HistoryPicture", "SchoolHistoryPicture" },
+                _ => new[] { "ProfilePicture" }
+            };
+        }
+    }
+
+    private string TierDescription => _sheet?.Tier switch
+    {
+        5 => "Tier 5 keeps one lightweight profile picture.",
+        4 => "Tier 4 keeps one profile picture.",
+        3 => "Tier 3 adds canonical front, side and full-body references plus profile and phone pictures.",
+        2 => "Tier 2 includes the Tier 3 set plus personal-life, club/social and history images.",
+        1 => "Tier 1 keeps the full image set, including personal life, club/social, history and school-history imagery.",
+        _ => "This NPC uses a profile picture."
+    };
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await ReloadAsync();
+    }
+
+    private async Task ReloadAsync()
+    {
+        if (NpcId <= 0) return;
+
+        _sheet = await Studio.GetCharacterSheetAsync(NpcId);
+        if (_sheet is null)
+        {
+            SetStatus("fail", $"NPC {NpcId} was not found.");
+            return;
+        }
+
+        if (!RequiredImageTypes.Contains(_imageType))
+            _imageType = RequiredImageTypes.First();
+
+        SelectNewestGenerationForType();
+
+        if (string.IsNullOrWhiteSpace(_positivePrompt))
+            BuildPrompt();
+
+        SetStatus("ok", $"Media loaded for {_sheet.Name}. Generate will auto-sync the latest dossier first.");
+    }
+
+    private void SelectImageType(string type)
+    {
+        _imageType = type;
+        _candidatePath = "";
+        _promptId = "";
+        SelectNewestGenerationForType();
+        BuildPrompt();
+        SetStatus("ok", $"{Pretty(type)} selected.");
+    }
+
+    private void BuildPrompt()
+    {
+        if (_sheet is null) return;
+
+        // Always read the latest canonical appearance before constructing
+        // any visual prompt.
+        _appearance = AppearanceDetails.Load(_sheet.Id);
+        var a = _appearance;
+
+        var framing = _imageType switch
+        {
+            "FrontReference" =>
+                "STRICT FRONT REFERENCE: preserve the exact same canonical facial identity as the approved Profile Picture; same facial structure, eyes, nose, lips, jaw, cheekbones, skin features and hair identity;  camera directly centered on face and torso, subject facing exactly 0 degrees toward camera, both ears equally visible, both eyes equally visible, shoulders square to camera, no head turn, no three-quarter angle, neutral posture, even reference lighting, plain background",
+
+            "SideReference" =>
+                "STRICT 90-DEGREE SIDE PROFILE REFERENCE: preserve the exact same canonical facial identity as the approved Profile Picture; same skull, nose, lips, jaw, cheekbones, eyes, skin features and hair identity;  subject turned exactly 90 degrees from camera, only one eye visible, only one ear visible, nose silhouette clearly in profile, chin and forehead seen from the side, shoulders aligned side-on, absolutely no front-facing view, absolutely no three-quarter angle, do not look toward camera, neutral expression, plain background",
+
+            "BodyReference" =>
+                "STRICT FULL-BODY REFERENCE: preserve the exact same canonical facial identity as the approved Profile Picture; same face, hair identity, body/build and adult proportions;  full person from top of head to soles of shoes, standing upright, arms relaxed and slightly separated from torso, both hands visible, both feet visible, no crop, neutral pose, plain reference background",
+
+            "PhonePicture" =>
+                PhoneScene(a),
+
+            "ContactPicture" =>
+                "natural phone contact portrait, realistic casual crop, friendly believable expression, shoulders and face visible",
+
+            "PersonalPicture" =>
+                "candid personal-life photograph appropriate to personality, age, household and normal daily life",
+
+            "ClubPicture" =>
+                "realistic club, social, hobby or activity photograph only if it fits this person's personality and lifestyle; otherwise choose an appropriate social setting",
+
+            "HistoryPicture" =>
+                "realistic documentary-style life-history photograph, age and setting appropriate, no text overlay",
+
+            "SchoolHistoryPicture" =>
+                "realistic school-history photograph appropriate to the represented life period, documentary realism",
+
+            _ =>
+                "polished dossier profile portrait, natural expression, clean composition, believable game-facing portrait"
+        };
+
+        var eyes = NpcAppearanceDetailService.ComposeEyes(a);
+        var hair = NpcAppearanceDetailService.ComposeHair(a);
+        var skin = NpcAppearanceDetailService.ComposeSkin(a);
+        var face = NpcAppearanceDetailService.ComposeFace(a);
+        var clothing = NpcAppearanceDetailService.ClothingForImage(a, _imageType);
+
+        var context = BuildSceneContext();
+        var adultBodyConsistency = AdultBodyConsistencyPrompt(a, _imageType);
+
+        // PERSON-FIRST PROMPT:
+        // No job/location identity labels for normal reference/profile/contact/phone images.
+        _positivePrompt =
+            $"single-person photorealistic image of {Clean(_sheet.Name)}, age {_sheet.Age}, {Clean(_sheet.Gender)}; preserve one stable facial identity across every generated image; approved Profile Picture is the canonical face identity; " +
+            $"{framing}; " +
+            $"overall appearance: {Clean(a.AppearanceLevel)}; " +
+            $"body/build: {Clean(a.BodyBuild)}; " +
+            $"eyes: {Clean(eyes)}; " +
+            $"hair: {Clean(hair)}; " +
+            $"skin: {Clean(skin)}; " +
+            $"face: {Clean(face)}; " +
+            $"clothing: {Clean(clothing)}; " +
+            $"{adultBodyConsistency}" +
+            $"{context}" +
+            $"personality cues: {Clean(a.PersonalitySummary)}; " +
+            $"goal {Clean(a.Goal)}; " +
+            $"need {Clean(a.Need)}; " +
+            $"fear {Clean(a.Fear)}; " +
+            $"want {Clean(a.Want)}; " +
+            "realistic skin texture, consistent identity, believable contemporary photography, one person only";
+
+        _negativePrompt = DefaultNegativePrompt;
+        SetStatus("ok", "Prompt synced from latest saved dossier appearance ✓");
+    }
+
+    private static string AdultBodyConsistencyPrompt(NpcAppearanceDetailProfile a, string imageType)
+    {
+        if (a.Age < 18)
+            return "";
+
+        var isFemale =
+            (a.Gender ?? "").Contains("female", StringComparison.OrdinalIgnoreCase)
+            || string.Equals(a.Gender, "woman", StringComparison.OrdinalIgnoreCase);
+
+        if (isFemale
+            && !string.IsNullOrWhiteSpace(a.BraSize)
+            && imageType is "FrontReference" or "SideReference" or "BodyReference")
+        {
+            return $"adult body proportion: clothed natural bust/chest proportions consistent with bra size {a.BraSize}; ";
+        }
+
+        return "";
+    }
+    private string BuildSceneContext()
+    {
+        if (_sheet is null) return "";
+
+        // Only scene-specific imagery receives job/location context.
+        // Identity imagery stays person-first.
+        return _imageType switch
+        {
+            "WorkPicture" or "WorkScene" =>
+                $"work context: {Clean(_sheet.Occupation)}; location context: {Clean(_sheet.Location)}; ",
+
+            "SchoolHistoryPicture" =>
+                $"school-history scene context; location context: {Clean(_sheet.Location)}; ",
+
+            "HistoryPicture" =>
+                string.IsNullOrWhiteSpace(_sheet.Location)
+                    ? ""
+                    : $"historical scene location context: {Clean(_sheet.Location)}; ",
+
+            _ => ""
+        };
+    }
+
+    private static string PhoneScene(NpcAppearanceDetailProfile a)
+    {
+        var p = (a.PersonalitySummary + " " + a.Goal + " " + a.Want).ToLowerInvariant();
+
+        if (p.Contains("club") || p.Contains("social") || p.Contains("party"))
+            return "casual smartphone selfie feel, slightly imperfect handheld framing, believable nightclub/lounge/live-music background appropriate to this person, natural ambient light";
+        if (p.Contains("outdoor") || p.Contains("athletic") || p.Contains("run") || p.Contains("sport"))
+            return "casual smartphone selfie feel outdoors, park/trail/street background appropriate to this person, natural daylight, spontaneous everyday framing";
+        if (p.Contains("family") || p.Contains("home") || p.Contains("private"))
+            return "casual smartphone selfie feel at home, believable kitchen/living-room/porch background, warm everyday atmosphere";
+        if (p.Contains("work") || p.Contains("career") || p.Contains("school"))
+            return "casual smartphone selfie feel near work or school, believable hallway/office/coffee-shop/outdoor workday background, not a formal headshot";
+
+        return "casual smartphone selfie feel with a believable randomly varied everyday background such as outdoors, a coffee shop, home, car, neighborhood street or local social setting, chosen to fit the person's personality; natural imperfect framing";
+    }
+
+    private async Task QueuePortraitAsync()
+    {
+        if (_sheet is null) return;
+
+        // HARD RULE: never queue Comfy from a stale UI prompt.
+        // Reload canonical dossier + appearance and rebuild immediately before send.
+        _sheet = await Studio.GetCharacterSheetAsync(NpcId);
+        if (_sheet is null) return;
+        _appearance = AppearanceDetails.Load(NpcId);
+        BuildPrompt();
+
+        _busy = true;
+        SetStatus("busy", $"Queuing {Pretty(_imageType)} in ComfyUI...");
+
+        try
+        {
+            var request = new NpcComfyGenerationRequest
+            {
+                NpcId = _sheet.Id,
+                ImageType = _imageType,
+                PositivePrompt = _positivePrompt,
+                NegativePrompt = _negativePrompt,
+                SavePrefix = $"ProjectEve/NPC_{_sheet.Id:D6}/{_imageType}"
+            };
+
+            var result = await Comfy.QueueReferencePortraitAsync(request);
+            _promptId = result.PromptId;
+
+            var image = new NpcImageGeneration
+            {
+                Id = $"dossier-image-{Guid.NewGuid():N}",
+                NpcId = _sheet.Id,
+                ImageType = _imageType,
+                PromptGenerationId = result.PromptId,
+                PositivePrompt = request.PositivePrompt,
+                NegativePrompt = request.NegativePrompt,
+                Seed = request.Seed,
+                WorkflowName = string.IsNullOrWhiteSpace(result.WorkflowUsed) ? request.WorkflowName : result.WorkflowUsed,
+                Checkpoint = request.Checkpoint,
+                Width = request.Width,
+                Height = request.Height,
+                Steps = request.Steps,
+                Cfg = request.Cfg,
+                Sampler = request.Sampler + " / " + request.Scheduler,
+                ImagePath = "",
+                IsCurrent = false,
+                Approved = false,
+                Notes = $"Queued from dossier Tier {_sheet.Tier} Media Studio. PromptId={result.PromptId}. SavePrefix={result.SavePrefix}"
+            };
+
+            await Studio.AddImageGenerationAsync(image);
+            _selectedGeneration = image;
+
+            SetStatus(result.Success ? "ok" : "fail",
+                result.Success
+                    ? $"{Pretty(_imageType)} queued. When Comfy finishes, click Use Newest Comfy Output."
+                    : "Comfy queue failed: " + result.Message);
+        }
+        catch (Exception ex)
+        {
+            SetStatus("fail", "Comfy error: " + ex.Message);
+        }
+        finally
+        {
+            _busy = false;
+        }
+    }
+
+    private void FindNewestOutput()
+    {
+        var newest = FileSystem.FindNewestComfyOutput(NpcId);
+        if (string.IsNullOrWhiteSpace(newest))
+        {
+            SetStatus("fail", "No NPC-specific Comfy output found yet.");
+            return;
+        }
+
+        _candidatePath = newest;
+        SelectNewestGenerationForType();
+        SetStatus("ok", $"Newest Comfy output loaded for {Pretty(_imageType)}.");
+    }
+
+    private void SelectNewestGenerationForType()
+    {
+        if (_sheet is null || _sheet.Images.Count == 0)
+        {
+            _selectedGeneration = null;
+            return;
+        }
+
+        _selectedGeneration = _sheet.Images
+            .Where(x => string.Equals(x.ImageType, _imageType, StringComparison.OrdinalIgnoreCase)
+                     || (_imageType == "ProfilePicture" && string.Equals(x.ImageType, "ProfessionalProfile", StringComparison.OrdinalIgnoreCase))
+                     || (_imageType == "ProfilePicture" && string.Equals(x.ImageType, "ReferencePortrait", StringComparison.OrdinalIgnoreCase)))
+            .OrderByDescending(x => x.CreatedRealAt)
+            .FirstOrDefault();
+    }
+
+    private void SelectGeneration(NpcImageGeneration image)
+    {
+        _selectedGeneration = image;
+        if (RequiredImageTypes.Contains(image.ImageType))
+            _imageType = image.ImageType;
+        else if (image.ImageType is "ProfessionalProfile" or "ReferencePortrait")
+            _imageType = "ProfilePicture";
+
+        if (IsExistingImage(image.ImagePath))
+            _candidatePath = image.ImagePath;
+
+        BuildPrompt();
+        SetStatus("ok", $"Selected {Pretty(_imageType)} generation.");
+    }
+
+    private async Task ApproveAsync()
+    {
+        if (_sheet is null) return;
+
+        if (!IsExistingImage(_candidatePath))
+        {
+            SetStatus("fail", "The selected Comfy image file does not exist.");
+            return;
+        }
+
+        _busy = true;
+        SetStatus("busy", $"Saving {Pretty(_imageType)} into this dossier...");
+
+        try
+        {
+            var generation = _selectedGeneration;
+
+            // Old school-generated images may exist on disk without a matching
+            // generation selected in this new tier-aware UI. Create the missing
+            // generation record automatically so Save always works.
+            if (generation is null)
+            {
+                generation = new NpcImageGeneration
+                {
+                    Id = $"dossier-image-{Guid.NewGuid():N}",
+                    NpcId = _sheet.Id,
+                    ImageType = _imageType,
+                    PositivePrompt = _positivePrompt,
+                    NegativePrompt = _negativePrompt,
+                    Seed = "-1",
+                    WorkflowName = "Existing Comfy output linked from dossier",
+                    ImagePath = _candidatePath,
+                    IsCurrent = false,
+                    Approved = false,
+                    Notes = "Linked automatically by the embedded dossier Media Studio."
+                };
+
+                await Studio.AddImageGenerationAsync(generation);
+                _selectedGeneration = generation;
+            }
+
+            var setAsProfile = _imageType == "ProfilePicture";
+            var approvedPath = _candidatePath;
+
+            if (setAsProfile)
+            {
+                await FileSystem.EnsureNpcFolderLayoutAsync(_sheet);
+                approvedPath = await FileSystem.CopyImageToNpcReferenceAsync(_sheet, _candidatePath);
+            }
+
+            await Studio.ApproveImageGenerationAsync(
+                generation.Id,
+                _sheet.Id,
+                approvedPath,
+                setAsProfile);
+
+            _candidatePath = approvedPath;
+            await ReloadAsync();
+
+            SetStatus("ok",
+                setAsProfile
+                    ? "Profile picture saved and set as this NPC's dossier portrait."
+                    : $"{Pretty(_imageType)} saved and approved in this NPC's image history.");
+        }
+        catch (Exception ex)
+        {
+            SetStatus("fail", "Save failed: " + ex.Message);
+        }
+        finally
+        {
+            _busy = false;
+        }
+    }
+
+    private void SetStatus(string status, string message)
+    {
+        _status = status;
+        _message = message;
+    }
+
+    private static string Pretty(string value) => value switch
+    {
+        "FrontReference" => "Front Reference",
+        "SideReference" => "Side Reference",
+        "BodyReference" => "Body Reference",
+        "ProfilePicture" =>
+                "CANONICAL IDENTITY PROFILE: tight close-up head-and-shoulders portrait, face centered and clearly visible, natural expression, realistic eye detail, realistic skin texture, camera near eye level, no full-body framing, no distant framing, no dramatic angle, clean simple background, this image becomes the primary canonical face identity for the NPC",
+        "PhonePicture" => "Phone Picture",
+        "PersonalPicture" => "Personal Picture",
+        "ClubPicture" => "Club / Social",
+        "HistoryPicture" => "History Picture",
+        "SchoolHistoryPicture" => "School History",
+        "ProfessionalProfile" => "Profile Picture",
+        "ReferencePortrait" => "Profile Picture",
+        _ => value
+    };
+
+    private static string ImageTypeNote(string value) => value switch
+    {
+        "FrontReference" => "canonical face/front",
+        "SideReference" => "canonical side/profile",
+        "BodyReference" => "canonical full body",
+        "ProfilePicture" =>
+                "CANONICAL IDENTITY PROFILE: tight close-up head-and-shoulders portrait, face centered and clearly visible, natural expression, realistic eye detail, realistic skin texture, camera near eye level, no full-body framing, no distant framing, no dramatic angle, clean simple background, this image becomes the primary canonical face identity for the NPC",
+        "PhonePicture" => "phone/contact portrait",
+        "PersonalPicture" => "private/everyday life",
+        "ClubPicture" => "club/social/activity",
+        "HistoryPicture" => "life-history imagery",
+        "SchoolHistoryPicture" => "school-years imagery",
+        _ => "NPC media"
+    };
+
+    private static bool IsExistingImage(string? path)
+    {
+        if (string.IsNullOrWhiteSpace(path)) return false;
+        try
+        {
+            var full = Path.GetFullPath(path.Trim().Trim('"'));
+            var allowed = Path.GetFullPath(@"D:\ProjectEveData");
+            var ext = Path.GetExtension(full).ToLowerInvariant();
+            return full.StartsWith(allowed, StringComparison.OrdinalIgnoreCase)
+                && File.Exists(full)
+                && ext is ".png" or ".jpg" or ".jpeg" or ".webp" or ".gif";
+        }
+        catch { return false; }
+    }
+
+    private static string PreviewUrl(string? path)
+        => string.IsNullOrWhiteSpace(path)
+            ? ""
+            : "/npc-media?path=" + Uri.EscapeDataString(path) + "&v=" + DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+
+    private static string Safe(string? value, string fallback)
+        => string.IsNullOrWhiteSpace(value) ? fallback : value;
+
+    private static string Clean(string? value)
+        => string.IsNullOrWhiteSpace(value) ? "unspecified" : value.Trim().Replace("\r"," ").Replace("\n"," ");
+
+    private const string DefaultNegativePrompt =
+        "multiple people, duplicate person, text, watermark, logo, cartoon, anime, painting, CGI, plastic skin, blurry, low quality, " +
+        "distorted face, bad eyes, bad anatomy, extra fingers, missing fingers, cropped face, cut off head, deformed body, " +
+        "unrealistic proportions, celebrity likeness, nudity, sexualized pose, wrong camera angle, three-quarter view when side profile requested, front-facing when side profile requested, looking at camera when side profile requested";
+}
+
+
+

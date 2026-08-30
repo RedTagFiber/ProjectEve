@@ -36,6 +36,7 @@ public static class ProjectEveDatabaseSetup
         ProjectEveEducationProfessionalSchema.Ensure();
         ProjectEvePhoneVehicleSchema.Ensure();
         ProjectEveLifeHistoryFoundationSchema.Ensure();
+        ProjectEveHistoryGenerationFoundationSchema.Ensure();
         EnsureLocationDatabase();
 
                 EnsureFinanceSchema();
@@ -1167,6 +1168,7 @@ Environment.SetEnvironmentVariable("EVE_DB_PATH", MainDatabasePath);
             cmd.ExecuteNonQuery();
         }
 }
+
 
 
 

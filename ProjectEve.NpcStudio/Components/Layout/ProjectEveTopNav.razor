@@ -1,0 +1,100 @@
+﻿<nav class="eve-top-nav">
+    <a class="eve-brand" href="/npc-studio">
+        <span class="eve-brand-mark">PE</span>
+        <span>
+            <b>PROJECT EVE</b>
+            <small>WORLD BUILDER</small>
+        </span>
+    </a>
+
+    <div class="eve-top-nav-links">
+        <a href="/npc-studio/schools">
+            <span class="nav-kicker">ORG</span>
+            <strong>Organizations</strong>
+        </a>
+
+        <a href="/npc-studio/locations">
+            <span class="nav-kicker">PLACE</span>
+            <strong>Locations</strong>
+        </a>
+
+        <a href="/npc-studio/browser">
+            <span class="nav-kicker">PEOPLE</span>
+            <strong>NPC Dossiers</strong>
+        </a>
+
+        <a href="/npc-studio">
+            <span class="nav-kicker">SIM</span>
+            <strong>World</strong>
+        </a>
+    </div>
+</nav>
+
+<style>
+.eve-top-nav{
+    position:sticky;
+    top:0;
+    z-index:2000;
+    min-height:72px;
+    padding:10px 22px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+    background:linear-gradient(90deg,#071126 0%,#0b1731 55%,#150b2c 100%);
+    border-bottom:1px solid rgba(137,111,255,.32);
+    box-shadow:0 10px 30px rgba(0,0,0,.26);
+}
+.eve-brand{
+    color:#fff;
+    text-decoration:none;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    min-width:190px;
+}
+.eve-brand-mark{
+    width:38px;
+    height:38px;
+    border-radius:11px;
+    display:grid;
+    place-items:center;
+    font-weight:900;
+    background:linear-gradient(145deg,#5b38f6,#803cff);
+}
+.eve-brand b{display:block;font-size:.84rem;letter-spacing:.08em}
+.eve-brand small{display:block;font-size:.58rem;color:#7e95c6;letter-spacing:.14em;margin-top:3px}
+.eve-top-nav-links{
+    display:grid;
+    grid-template-columns:repeat(4,minmax(135px,1fr));
+    gap:8px;
+    width:min(760px,72vw);
+}
+.eve-top-nav-links a{
+    text-decoration:none;
+    color:#f7f8ff;
+    background:#101a2d;
+    border:1px solid #273958;
+    border-radius:11px;
+    padding:9px 13px;
+    transition:.15s ease;
+}
+.eve-top-nav-links a:hover{
+    transform:translateY(-1px);
+    border-color:#765cff;
+    background:#18243d;
+}
+.eve-top-nav-links .nav-kicker{
+    display:block;
+    color:#8598c2;
+    font-size:.56rem;
+    letter-spacing:.14em;
+    margin-bottom:2px;
+}
+.eve-top-nav-links strong{font-size:.9rem}
+@@media(max-width:850px){
+    .eve-top-nav{align-items:flex-start;flex-direction:column}
+    .eve-top-nav-links{width:100%;grid-template-columns:repeat(2,1fr)}
+}
+</style>
+

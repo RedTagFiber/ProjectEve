@@ -1,0 +1,608 @@
+﻿@using ProjectEve.NpcStudio.Models
+@using ProjectEve.NpcStudio.Data
+@using ProjectEve.NpcStudio.Services
+@inject NpcStudioRepository Repo
+@inject NpcFamilyBuilderService FamilyBuilder
+
+@if(Character is null){<div class="personal-panel-empty">Personal data unavailable.</div>}
+else
+{
+<section class="personal-shell">
+<div class="personal-subtabs">
+            @foreach (var tab in _tabs)
+            {
+                <button class="@(_tab == tab.Key ? "active" : "")"
+                        @onclick="(() => SelectTab(tab.Key))">
+                    @tab.Label
+                </button>
+            }
+</div>
+
+@if(!string.IsNullOrWhiteSpace(_message)){<div class="save-message">@_message</div>}
+
+@if(_tab=="summary")
+{
+<AiNpcProfileBuilderPanel NpcId="NpcId" />
+<div class="personal-summary-strip">
+<div><span>Current Life</span><b>@Safe(Character.Occupation,"Not built")</b></div>
+<div><span>Career</span><b>@(_professional?.ProfessionalProfile.CareerField??"Not built")</b></div>
+<div><span>Finance</span><b>@($"{Foundation.FinancialAccounts} acct · {Foundation.FinancialObligations} obligation")</b></div>
+<div><span>Phone</span><b>@($"{_personal.Phones.Count} phone · {_personal.PhoneContacts.Count} contacts")</b></div>
+<div><span>Vehicle</span><b>@($"{_personal.Vehicles.Count} vehicle")</b></div>
+<div><span>Family</span><b>@($"{FamilyLinkCount} links")</b></div>
+</div>
+}
+else if(_tab=="life")
+{
+<div class="section-toolbar"><h3>Current Life & Looks</h3><button @onclick="ToggleEdit">@(_edit?"Cancel":"Edit")</button></div>
+@if(!_edit)
+{
+<div class="personal-grid"><article class="personal-card">
+@Fact("Occupation",Character.Occupation) @Fact("Employer",Character.Employer)
+@Fact("Current Location",Character.Location) @Fact("Home",Character.HomeLocationId)
+@Fact("Work Location",Character.WorkLocationId) @Fact("Hometown",Character.Hometown) @Fact("Address",Character.Address)
+</article><article class="personal-card">
+@Fact("Height",Character.Appearance.HeightText) @Fact("Body Type",Character.Appearance.BodyType)
+@Fact("Hair",$"{Character.Appearance.HairColor} {Character.Appearance.HairStyle}".Trim())
+@Fact("Eyes",Character.Appearance.EyeColor) @Fact("Skin",Character.Appearance.SkinTone)
+@Fact("Clothing",Character.Appearance.ClothingStyle) @Fact("Features",Character.Appearance.DistinguishingFeatures)
+</article></div>
+}
+else
+{
+<div class="edit-grid">
+@Input("Occupation",()=>_life.Occupation,v=>_life.Occupation=v) @Input("Employer",()=>_life.Employer,v=>_life.Employer=v)
+@Input("Current Location",()=>_life.Location,v=>_life.Location=v) @Input("Current Location ID",()=>_life.CurrentLocationId,v=>_life.CurrentLocationId=v)
+@Input("Home Location ID",()=>_life.HomeLocationId,v=>_life.HomeLocationId=v) @Input("Work Location ID",()=>_life.WorkLocationId,v=>_life.WorkLocationId=v)
+@Input("Hometown",()=>_life.Hometown,v=>_life.Hometown=v) @Input("Address",()=>_life.Address,v=>_life.Address=v)
+@Input("Body Type",()=>_life.BodyType,v=>_life.BodyType=v) @Input("Hair Color",()=>_life.HairColor,v=>_life.HairColor=v)
+@Input("Hair Style",()=>_life.HairStyle,v=>_life.HairStyle=v) @Input("Eye Color",()=>_life.EyeColor,v=>_life.EyeColor=v)
+@Input("Skin Tone",()=>_life.SkinTone,v=>_life.SkinTone=v) @Input("Clothing",()=>_life.ClothingStyle,v=>_life.ClothingStyle=v)
+<div class="edit-field full"><label>Distinguishing Features</label><textarea @bind="_life.DistinguishingFeatures"></textarea></div>
+</div><div class="edit-actions"><button class="save" @onclick="SaveLife">Save Current Life</button></div>
+}
+}
+else if(_tab=="career")
+{
+<div class="section-toolbar"><h3>Education & Career</h3></div>
+<EducationCareerEditor NpcId="NpcId" />
+}
+else if(_tab=="finance")
+{
+<div class="section-toolbar"><h3>Finance</h3><a class="edit-button" href="@($"/canonical-finance/{NpcId}")">Edit Full Record</a></div>
+<div class="metric-row two"><div><b>@Foundation.FinancialAccounts</b><span>Accounts</span></div><div><b>@Foundation.FinancialObligations</b><span>Obligations</span></div></div>
+@if(_finance?.Obligations.Count>0){<div class="compact-table">@foreach(var row in _finance.Obligations){<div class="compact-row"><b>@Val(row,"Name","ObligationType","Type","Category")</b><span>@Money(Val(row,"MonthlyPayment","PaymentAmount","Payment","AmountDue")) / mo</span><span>Remaining @Money(Val(row,"RemainingBalance","Balance","PrincipalRemaining","AmountRemaining"))</span><span>APR @Pct(Val(row,"Apr","APR","InterestRate","Rate"))</span></div>}</div>}
+}
+else if(_tab=="phone")
+{
+<div class="section-toolbar"><h3>Phone & Contacts</h3><button @onclick="(()=>{_edit=!_edit;if(_edit)BeginPhone();})">@(_edit?"Cancel":"Edit / Add")</button></div>
+@if(!_edit)
+{
+<div class="personal-grid"><article class="personal-card"><h3>Phone</h3>@if(_personal.Phones.Count==0){<p class="muted">No canonical phone yet.</p>}@foreach(var p in _personal.Phones){<div class="device-block"><b>@Safe(p.PhoneNumber,"Number not set")</b><span>@($"{p.CarrierName} · {p.DeviceMake} {p.DeviceModel}".Trim(' ','·'))</span><small>@(p.IsPrimary?"Primary":"Secondary") · @(p.IsActive?"Active":"Inactive")</small></div>}</article>
+<article class="personal-card"><h3>Contact List <span class="count">@_personal.PhoneContacts.Count</span></h3>@if(_personal.PhoneContacts.Count==0){<p class="muted">No contacts saved yet.</p>}@foreach(var c in _personal.PhoneContacts.Take(50)){<div class="contact-row"><b>@Safe(c.DisplayName,$"NPC {c.ContactNpcId}")</b><span>@Safe(c.PhoneNumber,"No number")</span><small>@c.RelationshipLabel @(c.IsFavorite?"★":"") @(c.IsBlocked?"Blocked":"")</small></div>}</article></div>
+}
+else
+{
+<div class="edit-grid">
+@Input("Phone Number",()=>_phone.PhoneNumber,v=>_phone.PhoneNumber=v) @Input("Carrier",()=>_phone.CarrierName,v=>_phone.CarrierName=v)
+@Input("Device Make",()=>_phone.DeviceMake,v=>_phone.DeviceMake=v) @Input("Device Model",()=>_phone.DeviceModel,v=>_phone.DeviceModel=v)
+@Input("Device Label",()=>_phone.DeviceLabel,v=>_phone.DeviceLabel=v)
+<div class="edit-field checkbox"><label><input type="checkbox" @bind="_phone.IsPrimary"/> Primary phone</label></div>
+<div class="edit-field checkbox"><label><input type="checkbox" @bind="_phone.IsActive"/> Active</label></div>
+</div><div class="edit-actions"><button class="save" @onclick="SavePhone">Save Phone</button></div>
+<hr class="thin"/>
+<h4>Add / Edit Contact</h4>
+<div class="edit-grid">@Input("Name",()=>_contact.DisplayName,v=>_contact.DisplayName=v) @Input("Phone Number",()=>_contact.PhoneNumber,v=>_contact.PhoneNumber=v)
+@Input("Relationship",()=>_contact.RelationshipLabel,v=>_contact.RelationshipLabel=v)
+<div class="edit-field checkbox"><label><input type="checkbox" @bind="_contact.IsFavorite"/> Favorite</label></div>
+</div><div class="edit-actions"><button class="save" @onclick="SaveContact">Save Contact</button></div>
+<div class="contact-edit-list">@foreach(var c in _personal.PhoneContacts){<div><span>@c.DisplayName — @c.PhoneNumber</span><button @onclick="(()=>EditContact(c))">Edit</button><button class="danger" @onclick="(()=>DeleteContact(c.ContactId))">Delete</button></div>}</div>
+}
+}
+else if(_tab=="vehicle")
+{
+<div class="section-toolbar"><h3>Vehicle</h3><button @onclick="(()=>{_edit=!_edit;if(_edit)BeginVehicle();})">@(_edit?"Cancel":"Edit / Add")</button></div>
+@if(!_edit)
+{
+@if(_personal.Vehicles.Count==0){<p class="muted">No canonical vehicle yet.</p>}@foreach(var v in _personal.Vehicles){<div class="vehicle-block"><div class="vehicle-title">@($"{v.ModelYear?.ToString()??""} {v.Make} {v.Model}".Trim())</div><div class="vehicle-grid">@Fact("Color",v.Color) @Fact("Plate",$"{v.PlateState} {v.PlateNumber}".Trim()) @Fact("VIN",v.Vin) @Fact("Odometer",v.OdometerMiles is null?"Not set":$"{v.OdometerMiles:N0} mi") @Fact("Status",v.Status) @Fact("Current Value","Finance/property-value field coming next")</div><div class="loan-box"><b>Vehicle financing</b><span>Monthly payment, remaining balance, APR and payoff are linked through Finance obligations.</span></div></div>}
+}
+else
+{
+<div class="edit-grid">
+@Input("Make",()=>_vehicle.Make,v=>_vehicle.Make=v) @Input("Model",()=>_vehicle.Model,v=>_vehicle.Model=v)
+<div class="edit-field"><label>Year</label><input type="number" @bind="_vehicle.ModelYear"/></div>
+@Input("Color",()=>_vehicle.Color,v=>_vehicle.Color=v) @Input("VIN",()=>_vehicle.Vin,v=>_vehicle.Vin=v)
+@Input("Plate",()=>_vehicle.PlateNumber,v=>_vehicle.PlateNumber=v) @Input("Plate State",()=>_vehicle.PlateState,v=>_vehicle.PlateState=v)
+@Input("Status",()=>_vehicle.Status,v=>_vehicle.Status=v)
+<div class="edit-field"><label>Odometer Miles</label><input type="number" @bind="_vehicle.OdometerMiles"/></div>
+</div><div class="edit-actions"><button class="save" @onclick="SaveVehicle">Save Vehicle</button></div>
+<div class="loan-box"><b>Loan / value editing</b><span>Use Finance for the loan today. The next finance pass will add purchase cost, current value, payment, remaining principal, APR and payments left in one vehicle-finance view.</span></div>
+}
+}
+else if(_tab=="home")
+{
+<div class="section-toolbar"><h3>Home / Property</h3><button @onclick="(()=>{_edit=!_edit;if(_edit)BeginHome();})">@(_edit?"Cancel":"Edit")</button></div>
+@if(!_edit){@Fact("Home Location",Character.HomeLocationId) @Fact("Address",Character.Address) @Fact("Current Location",Character.CurrentLocationId) <p class="muted">Residence and property ownership remain separate canonical concepts.</p>}
+else{<div class="edit-grid">@Input("Home Location ID",()=>_home.HomeLocationId,v=>_home.HomeLocationId=v) @Input("Current Location ID",()=>_home.CurrentLocationId,v=>_home.CurrentLocationId=v) @Input("Work Location ID",()=>_home.WorkLocationId,v=>_home.WorkLocationId=v) @Input("Display Location",()=>_home.Location,v=>_home.Location=v) @Input("Address",()=>_home.Address,v=>_home.Address=v)</div><div class="edit-actions"><button class="save" @onclick="SaveHome">Save Home</button></div>}
+}
+else if(_tab=="family")
+{
+<div class="section-toolbar"><h3>Family Setup</h3><button @onclick="(()=>_edit=!_edit)">@(_edit?"Cancel":"Edit Plan")</button></div>
+@if(!_edit){<p>@FamilyLinkCount current family links.</p><div class="family-summary">Mother @Yes(_family.CreateMother) · Father @Yes(_family.CreateFather) · Brothers @_family.BrotherCount · Sisters @_family.SisterCount · Mother's siblings @_family.MotherSiblingCount · Father's siblings @_family.FatherSiblingCount</div>}
+else
+{
+<div class="edit-grid">
+<div class="edit-field checkbox"><label><input type="checkbox" @bind="_family.CreateMother"/> Create mother</label></div>
+<div class="edit-field"><label>Mother's brothers / sisters</label><input type="number" min="0" @bind="_family.MotherSiblingCount"/></div>
+<div class="edit-field checkbox"><label><input type="checkbox" @bind="_family.CreateFather"/> Create father</label></div>
+<div class="edit-field"><label>Father's brothers / sisters</label><input type="number" min="0" @bind="_family.FatherSiblingCount"/></div>
+<div class="edit-field"><label>Eve's brothers</label><input type="number" min="0" @bind="_family.BrotherCount"/></div>
+<div class="edit-field"><label>Eve's sisters</label><input type="number" min="0" @bind="_family.SisterCount"/></div>
+@Input("Sibling Pattern",()=>_family.SiblingBirthPattern,v=>_family.SiblingBirthPattern=v)
+@Input("Extended Family Depth",()=>_family.ExtendedFamilyDepth,v=>_family.ExtendedFamilyDepth=v)
+<div class="edit-field checkbox"><label><input type="checkbox" @bind="_family.CreateMaternalGrandmother"/> Maternal grandmother</label></div>
+<div class="edit-field checkbox"><label><input type="checkbox" @bind="_family.CreateMaternalGrandfather"/> Maternal grandfather</label></div>
+<div class="edit-field checkbox"><label><input type="checkbox" @bind="_family.CreatePaternalGrandmother"/> Paternal grandmother</label></div>
+<div class="edit-field checkbox"><label><input type="checkbox" @bind="_family.CreatePaternalGrandfather"/> Paternal grandfather</label></div>
+<div class="edit-field checkbox"><label><input type="checkbox" @bind="_family.GenerateAuntsUncles"/> Generate aunts / uncles</label></div>
+<div class="edit-field checkbox"><label><input type="checkbox" @bind="_family.GenerateCousins"/> Generate cousins</label></div>
+<div class="edit-field checkbox"><label><input type="checkbox" @bind="_family.GenerateSpousesInLaws"/> Generate spouses / in-laws</label></div>
+<div class="edit-field checkbox"><label><input type="checkbox" @bind="_family.ReuseExistingTownNpcForSpouses"/> Reuse suitable town NPCs for spouses / in-laws</label></div>
+</div><div class="edit-actions"><button class="save" @onclick="SaveFamily">Save Family Plan</button></div>
+<div class="loan-box">
+    <b>Family Builder Pass 1</b>
+    <span>Creates draft structural NPC shells for the selected parents, siblings, and grandparents, then writes canonical family relationships. It does not generate TRUE HISTORY or memories yet.</span>
+</div>
+<div class="edit-actions">
+    <button class="save" @onclick="BuildImmediateFamily">Build Immediate Family (Draft)</button>
+</div>
+@if(_familyBuildResult is not null)
+{
+    <div class="family-summary">
+        @_familyBuildResult.Message
+        @if(_familyBuildResult.Members.Count > 0)
+        {
+            <div class="contact-edit-list">
+                @foreach(var member in _familyBuildResult.Members)
+                {
+                    <div>
+                        <span>@member.FamilyRole — @member.DisplayName — NPC @member.NpcId</span>
+                        <small>@(member.CreatedNow ? "Created" : "Reused")</small>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+}
+}
+}
+</section>
+}
+
+@code {
+    [Parameter] public int NpcId { get; set; }
+    [Parameter] public NpcCharacterSheet? Character { get; set; }
+
+    private string _tab = "summary";
+    private bool _edit;
+    private string _message = "";
+
+    private CanonicalProfessionalBundle? _professional;
+    private CanonicalFinanceBundle? _finance;
+    private CanonicalPersonalBundle _personal = new();
+
+    private PersonalCurrentLifeEdit _life = new();
+    private PersonalHomeEdit _home = new();
+
+    private CanonicalPhoneRow _phone = new()
+    {
+        PhoneType = "Mobile",
+        IsPrimary = true,
+        IsActive = true
+    };
+
+    private CanonicalPhoneContactRow _contact = new();
+
+    private CanonicalVehicleRow _vehicle = new()
+    {
+        VehicleType = "Car",
+        Status = "Active"
+    };
+
+    private FamilyBuildPlanEdit _family = new();
+    private FamilyBuildResult? _familyBuildResult;
+
+    private readonly (string Key, string Label)[] _tabs =
+    [
+        ("summary", "Summary"),
+        ("life", "Current Life"),
+        ("career", "Education & Career"),
+        ("finance", "Finance"),
+        ("phone", "Phone"),
+        ("vehicle", "Vehicle"),
+        ("home", "Home / Property"),
+        ("family", "Family Setup")
+    ];
+
+    private NpcCanonicalFoundationSummary Foundation
+        => Character?.CanonicalFoundation ?? new();
+
+    private int FamilyLinkCount
+        => Character?.Relationships.Count(
+            r => string.Equals(
+                r.RelationshipCategory,
+                "Family",
+                StringComparison.OrdinalIgnoreCase))
+           ?? 0;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await Reload();
+    }
+
+    private async Task Reload()
+    {
+        if (NpcId <= 0)
+            return;
+
+        // IMPORTANT:
+        // Reload the complete NPC sheet so Current Life and Appearance
+        // do not keep showing stale in-memory values after a save.
+        try
+        {
+            var refreshedCharacter =
+                await Repo.GetCharacterSheetAsync(NpcId);
+
+            if (refreshedCharacter is not null)
+                Character = refreshedCharacter;
+        }
+        catch
+        {
+            // Keep the currently loaded character if refresh fails.
+        }
+
+        try
+        {
+            _professional =
+                await Repo.GetCanonicalProfessionalBundleAsync(NpcId);
+        }
+        catch
+        {
+            _professional = null;
+        }
+
+        try
+        {
+            _finance =
+                await Repo.GetCanonicalFinanceBundleAsync(NpcId);
+        }
+        catch
+        {
+            _finance = null;
+        }
+
+        try
+        {
+            _personal =
+                await Repo.GetCanonicalPersonalBundleAsync(NpcId);
+        }
+        catch
+        {
+            _personal = new();
+        }
+
+        try
+        {
+            _family =
+                await Repo.GetFamilyBuildPlanAsync(NpcId);
+        }
+        catch
+        {
+            _family = new();
+        }
+
+        BeginLife();
+        BeginHome();
+    }
+
+    private void BeginLife()
+    {
+        if (Character is null)
+            return;
+
+        _life = new()
+        {
+            Occupation = Character.Occupation,
+            Employer = Character.Employer,
+            Location = Character.Location,
+            CurrentLocationId = Character.CurrentLocationId,
+            HomeLocationId = Character.HomeLocationId,
+            WorkLocationId = Character.WorkLocationId,
+            Hometown = Character.Hometown,
+            Address = Character.Address,
+
+            Height = Character.Appearance.HeightText,
+            BodyType = Character.Appearance.BodyType,
+            HairColor = Character.Appearance.HairColor,
+            HairStyle = Character.Appearance.HairStyle,
+            EyeColor = Character.Appearance.EyeColor,
+            SkinTone = Character.Appearance.SkinTone,
+            ClothingStyle = Character.Appearance.ClothingStyle,
+            DistinguishingFeatures =
+                Character.Appearance.DistinguishingFeatures
+        };
+    }
+
+    private void BeginHome()
+    {
+        if (Character is null)
+            return;
+
+        _home = new()
+        {
+            HomeLocationId = Character.HomeLocationId,
+            CurrentLocationId = Character.CurrentLocationId,
+            WorkLocationId = Character.WorkLocationId,
+            Location = Character.Location,
+            Address = Character.Address
+        };
+    }
+
+    private void BeginPhone()
+    {
+        _phone = _personal.Phones.FirstOrDefault()
+            ?? new CanonicalPhoneRow
+            {
+                PhoneType = "Mobile",
+                IsPrimary = true,
+                IsActive = true
+            };
+    }
+
+    private void BeginVehicle()
+    {
+        _vehicle = _personal.Vehicles.FirstOrDefault()
+            ?? new CanonicalVehicleRow
+            {
+                VehicleType = "Car",
+                Status = "Active"
+            };
+    }
+
+    private void ToggleEdit()
+    {
+        _edit = !_edit;
+
+        if (_edit)
+            BeginLife();
+    }
+
+    private async Task SaveLife()
+    {
+        await Repo.SavePersonalCurrentLifeAsync(
+            NpcId,
+            _life);
+
+        _message = "Saved current life and appearance.";
+        _edit = false;
+
+        // Reload the full NPC sheet after saving.
+        await Reload();
+
+        StateHasChanged();
+    }
+
+    private async Task SaveHome()
+    {
+        await Repo.SavePersonalHomeAsync(
+            NpcId,
+            _home);
+
+        _message = "Saved home/location fields.";
+        _edit = false;
+
+        await Reload();
+
+        StateHasChanged();
+    }
+
+    private async Task SavePhone()
+    {
+        await Repo.SavePhoneAsync(
+            NpcId,
+            _phone);
+
+        _message = "Saved phone.";
+
+        await Reload();
+        BeginPhone();
+
+        StateHasChanged();
+    }
+
+    private async Task SaveContact()
+    {
+        await Repo.SavePhoneContactAsync(
+            NpcId,
+            _contact);
+
+        _contact = new();
+        _message = "Saved contact.";
+
+        await Reload();
+
+        StateHasChanged();
+    }
+
+    private void EditContact(
+        CanonicalPhoneContactRow c)
+    {
+        _contact = new()
+        {
+            ContactId = c.ContactId,
+            ContactNpcId = c.ContactNpcId,
+            DisplayName = c.DisplayName,
+            PhoneNumber = c.PhoneNumber,
+            RelationshipLabel = c.RelationshipLabel,
+            IsFavorite = c.IsFavorite,
+            IsBlocked = c.IsBlocked
+        };
+    }
+
+    private async Task DeleteContact(string id)
+    {
+        await Repo.DeletePhoneContactAsync(id);
+
+        _message = "Deleted contact.";
+
+        await Reload();
+
+        StateHasChanged();
+    }
+
+    private async Task SaveVehicle()
+    {
+        await Repo.SaveVehicleAsync(
+            NpcId,
+            _vehicle);
+
+        _message = "Saved vehicle.";
+
+        await Reload();
+        BeginVehicle();
+
+        StateHasChanged();
+    }
+
+    private async Task BuildImmediateFamily()
+    {
+        _familyBuildResult = FamilyBuilder.BuildImmediateFamily(NpcId);
+
+        _message = _familyBuildResult.Message;
+
+        await Reload();
+
+        StateHasChanged();
+    }
+    private async Task SaveFamily()
+    {
+        await Repo.SaveFamilyBuildPlanAsync(
+            NpcId,
+            _family);
+
+        _message = "Saved family generation plan.";
+        _edit = false;
+
+        await Reload();
+
+        StateHasChanged();
+    }
+
+    private RenderFragment Fact(
+        string label,
+        string? value)
+        => builder =>
+        {
+            builder.OpenElement(0, "div");
+            builder.AddAttribute(1, "class", "fact-line");
+
+            builder.OpenElement(2, "span");
+            builder.AddContent(3, label);
+            builder.CloseElement();
+
+            builder.OpenElement(4, "b");
+            builder.AddContent(
+                5,
+                Safe(value, "Not set"));
+            builder.CloseElement();
+
+            builder.CloseElement();
+        };
+
+    private RenderFragment Input(
+        string label,
+        Func<string> get,
+        Action<string> set)
+        => builder =>
+        {
+            builder.OpenElement(0, "div");
+            builder.AddAttribute(
+                1,
+                "class",
+                "edit-field");
+
+            builder.OpenElement(2, "label");
+            builder.AddContent(3, label);
+            builder.CloseElement();
+
+            builder.OpenElement(4, "input");
+            builder.AddAttribute(
+                5,
+                "value",
+                get());
+
+            builder.AddAttribute(
+                6,
+                "onchange",
+                EventCallback.Factory.Create<ChangeEventArgs>(
+                    this,
+                    e =>
+                        set(
+                            e.Value?.ToString()
+                            ?? "")));
+
+            builder.CloseElement();
+            builder.CloseElement();
+        };
+
+    private static string Safe(
+        string? value,
+        string fallback)
+        => string.IsNullOrWhiteSpace(value)
+            ? fallback
+            : value.Trim();
+
+    private static string Yes(bool value)
+        => value ? "Yes" : "No";
+
+    private static string Val(
+        CanonicalDynamicRow row,
+        params string[] keys)
+    {
+        foreach (var key in keys)
+        {
+            if (row.Values.TryGetValue(
+                    key,
+                    out var value)
+                && !string.IsNullOrWhiteSpace(value))
+            {
+                return value!;
+            }
+        }
+
+        return "Not set";
+    }
+
+    private static string Money(string value)
+        => decimal.TryParse(
+            value,
+            out var amount)
+            ? amount.ToString("C0")
+            : value;
+
+    private static string Pct(string value)
+        => decimal.TryParse(
+            value,
+            out var amount)
+            ? $"{amount:0.##}%"
+            : value;
+
+    private void SelectTab(string key)
+    {
+        _tab = key;
+        _edit = false;
+        _message = "";
+    }
+}
+
+

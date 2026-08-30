@@ -1,0 +1,192 @@
+﻿@page "/canonical-finance/{NpcId:int}"
+@rendermode InteractiveServer
+@using ProjectEve.NpcStudio.Models
+@inject ProjectEve.NpcStudio.Data.NpcStudioRepository Repo
+
+<PageTitle>Canonical Finance</PageTitle>
+
+<div class="finance-shell">
+    <header class="finance-head">
+        <div>
+            <div class="eyebrow">PROJECT EVE · CANONICAL WRITE BRIDGE 3</div>
+            <h1>Finance</h1>
+            @if (_bundle is not null)
+            {
+                <p>@_bundle.NpcId — @_bundle.NpcName</p>
+            }
+        </div>
+
+        <button class="btn secondary" @onclick="ReloadAsync" disabled="@_busy">
+            Reload
+        </button>
+    </header>
+
+    @if (_loading)
+    {
+        <section class="panel">Loading NPC @NpcId...</section>
+    }
+    else if (!string.IsNullOrWhiteSpace(_error))
+    {
+        <section class="panel error">
+            <strong>Finance error</strong>
+            <pre>@_error</pre>
+        </section>
+    }
+    else if (_bundle is null)
+    {
+        <section class="panel">NPC @NpcId not found.</section>
+    }
+    else
+    {
+        @if (!string.IsNullOrWhiteSpace(_message))
+        {
+            <section class="panel notice">@_message</section>
+        }
+
+        <section class="panel">
+            <div class="section-head">
+                <div>
+                    <div class="eyebrow">ASSETS / FUNDS</div>
+                    <h2>Accounts (@_bundle.Accounts.Count)</h2>
+                </div>
+
+                <button class="btn secondary" @onclick="AddAccount">
+                    + Account
+                </button>
+            </div>
+
+            @foreach (var row in _bundle.Accounts)
+            {
+                <FinanceRowEditor Row="row"
+                                  Columns="_bundle.AccountColumns"
+                                  OnSave="SaveRowAsync" />
+            }
+        </section>
+
+        <section class="panel">
+            <div class="section-head">
+                <div>
+                    <div class="eyebrow">DEBT / RECURRING COSTS</div>
+                    <h2>Obligations (@_bundle.Obligations.Count)</h2>
+                </div>
+
+                <button class="btn secondary" @onclick="AddObligation">
+                    + Obligation
+                </button>
+            </div>
+
+            @foreach (var row in _bundle.Obligations)
+            {
+                <FinanceRowEditor Row="row"
+                                  Columns="_bundle.ObligationColumns"
+                                  OnSave="SaveRowAsync" />
+            }
+        </section>
+    }
+</div>
+
+@code {
+    [Parameter] public int NpcId { get; set; }
+
+    private CanonicalFinanceBundle? _bundle;
+    private bool _loading = true;
+    private bool _busy;
+    private string _error = "";
+    private string _message = "";
+
+    protected override Task OnParametersSetAsync() => ReloadAsync();
+
+    private async Task ReloadAsync()
+    {
+        _loading = true;
+        _error = "";
+        _message = "";
+
+        try
+        {
+            _bundle = await Repo.GetCanonicalFinanceBundleAsync(NpcId);
+        }
+        catch (Exception ex)
+        {
+            _error = ex.ToString();
+        }
+        finally
+        {
+            _loading = false;
+        }
+    }
+
+    private void AddAccount()
+    {
+        if (_bundle is null) return;
+
+        var row = NewRow("FinancialAccounts", _bundle.AccountColumns);
+
+        if (row.Values.ContainsKey("OwnerType"))
+            row.Values["OwnerType"] = "NPC";
+
+        if (row.Values.ContainsKey("OwnerId"))
+            row.Values["OwnerId"] = NpcId.ToString();
+
+        _bundle.Accounts.Add(row);
+    }
+
+    private void AddObligation()
+    {
+        if (_bundle is null) return;
+
+        var row = NewRow(
+            "FinancialObligations",
+            _bundle.ObligationColumns);
+
+        if (row.Values.ContainsKey("OwnerNpcId"))
+            row.Values["OwnerNpcId"] = NpcId.ToString();
+
+        _bundle.Obligations.Add(row);
+    }
+
+    private static CanonicalDynamicRow NewRow(
+        string table,
+        List<CanonicalTableColumn> columns)
+    {
+        var row = new CanonicalDynamicRow
+        {
+            TableName = table,
+            PrimaryKeyColumn =
+                columns.FirstOrDefault(c => c.IsPrimaryKey)?.Name ?? "Id"
+        };
+
+        foreach (var col in columns)
+        {
+            row.Values[col.Name] = null;
+        }
+
+        return row;
+    }
+
+    private async Task SaveRowAsync(CanonicalDynamicRow row)
+    {
+        _busy = true;
+        _error = "";
+        _message = "";
+
+        try
+        {
+            await Repo.SaveCanonicalFinanceRowAsync(row, NpcId);
+
+            _bundle =
+                await Repo.GetCanonicalFinanceBundleAsync(NpcId);
+
+            _message =
+                $"{row.TableName} saved and verified in SQLite.";
+        }
+        catch (Exception ex)
+        {
+            _error = ex.ToString();
+        }
+        finally
+        {
+            _busy = false;
+        }
+    }
+}

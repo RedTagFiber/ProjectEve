@@ -1,0 +1,293 @@
+@using ProjectEve.NpcStudio.Services
+@inject NpcAppearanceDetailService AppearanceDetails
+@inject AiAppearanceProfileAssistService AppearanceAI
+
+<section class="appearance-detail-editor">
+    <div class="ade-head">
+        <div>
+            <span>CANONICAL APPEARANCE</span>
+            <h3>Physical Look, Face, Eyes, Hair & Wardrobe</h3>
+            <p>AI builds a coherent first draft from the NPC. You review it. Save makes it canonical.</p>
+        </div>
+        <div class="ade-actions">
+            <button class="ai" disabled="@_busy" @onclick="BuildAiDraftAsync">@(_busy ? "AI Working..." : "AI Fill Missing Details")</button>
+            <button class="save" disabled="@_busy" @onclick="SaveAsync">Save Appearance Details</button>
+        </div>
+    </div>
+
+    @if (_profile is null)
+    {
+        <div class="ade-panel">Loading appearance...</div>
+    }
+    else
+    {
+        <div class="ade-banner">
+            <b>@_profile.Gender · Age @_profile.Age · Tier @_profile.Tier</b>
+            <span>@_profile.RaceEthnicity · @_profile.Occupation · @_profile.Location</span>
+        </div>
+
+        <div class="ade-section-title">Overall Look</div>
+        <div class="ade-grid four">
+            @Select("Overall Look", AppearanceLevels, _profile.AppearanceLevel, v => _profile.AppearanceLevel=v)
+            @Select("Body / Build", BodyBuilds, _profile.BodyBuild, v => _profile.BodyBuild=v)
+            <label>
+                <span>Race / Ethnicity</span>
+                <select value="@_profile.RaceEthnicity" @onchange="RaceChanged">
+                    @foreach (var x in RaceEthnicityOptions) { <option value="@x">@x</option> }
+                </select>
+            </label>
+            @Select("Skin Tone", SkinToneOptions, _profile.SkinTone, v => _profile.SkinTone=v)
+        </div>
+
+        <div class="ade-grid three">
+            @Select("Skin Undertone", SkinUndertones, _profile.SkinUndertone, v => _profile.SkinUndertone=v)
+            @Select("Complexion Detail", ComplexionDetails, _profile.ComplexionDetails, v => _profile.ComplexionDetails=v)
+            <label><span>Distinguishing Features</span><input @bind="_profile.DistinguishingFeatures" placeholder="freckles, scar, beauty mark, glasses..." /></label>
+        </div>
+
+        <div class="ade-section-title">Eyes — layered identity detail</div>
+        <div class="ade-grid five">
+            <label>
+                <span>Base Eye Color</span>
+                <select value="@_profile.EyeBaseColor" @onchange="EyeBaseChanged">
+                    @foreach (var x in EyeBaseColors) { <option value="@x">@x</option> }
+                </select>
+            </label>
+            @Select("Eye Variant", EyeVariants, _profile.EyeVariant, v => _profile.EyeVariant=v)
+            @Select("Pattern / Flecks", EyePatterns, _profile.EyePattern, v => _profile.EyePattern=v)
+            @Select("Eye Shape", EyeShapes, _profile.EyeShape, v => _profile.EyeShape=v)
+            @Select("Eye Expression", EyeExpressions, _profile.EyeExpression, v => _profile.EyeExpression=v)
+        </div>
+        <label class="ade-wide"><span>Eye Notes</span><input @bind="_profile.EyeNotes" placeholder="optional subtle eye detail" /></label>
+
+        <div class="ade-section-title">Hair</div>
+        <div class="ade-grid four">
+            @Select("Hair Color", HairColors, _profile.HairColor, v => _profile.HairColor=v)
+            @Select("Undertone", HairUndertones, _profile.HairUndertone, v => _profile.HairUndertone=v)
+            @Select("Highlights", HairHighlights, _profile.HairHighlights, v => _profile.HairHighlights=v)
+            @Select("Length", HairLengths, _profile.HairLength, v => _profile.HairLength=v)
+            @Select("Texture", HairTextures, _profile.HairTexture, v => _profile.HairTexture=v)
+            @Select("Style / Cut", HairStyles, _profile.HairStyle, v => _profile.HairStyle=v)
+            @Select("Density", HairDensities, _profile.HairDensity, v => _profile.HairDensity=v)
+        </div>
+
+        <div class="ade-section-title">Face</div>
+        <div class="ade-grid three">
+            @Select("Face Shape", FaceShapes, _profile.FaceShape, v => _profile.FaceShape=v)
+            @Select("Jaw", JawShapes, _profile.JawShape, v => _profile.JawShape=v)
+            @Select("Nose", NoseShapes, _profile.NoseShape, v => _profile.NoseShape=v)
+            @Select("Lips", LipShapes, _profile.LipShape, v => _profile.LipShape=v)
+            @Select("Brows", BrowStyles, _profile.BrowStyle, v => _profile.BrowStyle=v)
+            @Select("Cheekbones", CheekboneStyles, _profile.CheekboneStyle, v => _profile.CheekboneStyle=v)
+        </div>
+
+        <div class="ade-section-title">Wardrobe by situation</div>
+        <div class="ade-grid five">
+            @Select("Default", ClothingStyles, _profile.DefaultClothingStyle, v => _profile.DefaultClothingStyle=v)
+            @Select("Work", WorkStyles, _profile.WorkClothingStyle, v => _profile.WorkClothingStyle=v)
+            @Select("Home", HomeStyles, _profile.HomeClothingStyle, v => _profile.HomeClothingStyle=v)
+            @Select("Going Out", GoingOutStyles, _profile.GoingOutClothingStyle, v => _profile.GoingOutClothingStyle=v)
+            @Select("Club / Social", ClubStyles, _profile.ClubClothingStyle, v => _profile.ClubClothingStyle=v)
+            @Select("Family Event", FamilyStyles, _profile.FamilyEventClothingStyle, v => _profile.FamilyEventClothingStyle=v)
+            @Select("Formal", FormalStyles, _profile.FormalClothingStyle, v => _profile.FormalClothingStyle=v)
+            @Select("Athletic", AthleticStyles, _profile.AthleticClothingStyle, v => _profile.AthleticClothingStyle=v)
+            @Select("Sleepwear", SleepStyles, _profile.SleepwearStyle, v => _profile.SleepwearStyle=v)
+            @Select("Winter", WinterStyles, _profile.WinterClothingStyle, v => _profile.WinterClothingStyle=v)
+        </div>
+
+        @if (_profile.Age >= 18)
+        {
+            <div class="ade-section-title">Adult Physical Details</div>
+            <div class="ade-grid three">
+                @if (IsFemale)
+                {
+                    @Select("Bra Size", BraSizes, _profile.BraSize, v => _profile.BraSize=v)
+                }
+                @if (IsMale)
+                {
+                    @Select("Penis Size", PenisSizes, _profile.PenisSize, v => _profile.PenisSize=v)
+                    @Select("Circumcision", CircumcisionOptions, _profile.CircumcisionStatus, v => _profile.CircumcisionStatus=v)
+                }
+                <label class="wide"><span>Adult Anatomy Notes</span><input @bind="_profile.AdultAnatomyNotes" placeholder="optional adult-only physical notes" /></label>
+            </div>
+        }
+        else
+        {
+            <div class="ade-minor-note">Minor NPC: intimate adult anatomy is not shown, generated, or stored.</div>
+        }
+
+        @if (!string.IsNullOrWhiteSpace(_message))
+        {
+            <div class="ade-message @(_error ? "error" : "")">@_message</div>
+        }
+    }
+</section>
+
+<style>
+.appearance-detail-editor{margin-top:12px;padding:16px;border:1px solid #283c59;border-radius:14px;background:#091426;color:#eaf1fd}
+.ade-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}.ade-head>div:first-child>span,.ade-section-title{font-size:.65rem;font-weight:900;letter-spacing:.13em;color:#9c7eff}.ade-head h3{margin:4px 0}.ade-head p{margin:0;color:#8fa4c4}
+.ade-actions{display:flex;gap:8px;flex-wrap:wrap}.ade-actions button{border-radius:8px;padding:9px 13px;font-weight:900;cursor:pointer}.ade-actions .ai{background:#133455;color:#b9dcff;border:1px solid #2e6b9e}.ade-actions .save{background:#5e3cdb;color:#fff;border:1px solid #8267f2}.ade-actions button:disabled{opacity:.5}
+.ade-banner{margin-top:13px;padding:10px 12px;background:#101c2e;border-radius:9px;display:flex;gap:8px;flex-direction:column}.ade-banner span{color:#91a5c5}
+.ade-section-title{margin:17px 0 8px}.ade-grid{display:grid;gap:9px}.ade-grid.five{grid-template-columns:repeat(5,1fr)}.ade-grid.four{grid-template-columns:repeat(4,1fr)}.ade-grid.three{grid-template-columns:repeat(3,1fr)}
+.ade-grid label,.ade-wide{display:grid;gap:5px}.ade-grid label span,.ade-wide span{font-size:.66rem;font-weight:800;color:#8ea3c5;text-transform:uppercase;letter-spacing:.06em}.ade-grid select,.ade-grid input,.ade-wide input{width:100%;box-sizing:border-box;background:#101c2d;color:#eff4ff;border:1px solid #344965;border-radius:7px;padding:9px}.ade-wide{margin-top:9px}.wide{grid-column:span 2}
+.ade-minor-note,.ade-message{margin-top:13px;padding:10px;border-radius:8px;background:#102337;color:#a7c8e9}.ade-message.error{background:#361820;color:#ffabb2}
+@@media(max-width:1200px){.ade-grid.five,.ade-grid.four{grid-template-columns:repeat(2,1fr)}}@@media(max-width:700px){.ade-grid.five,.ade-grid.four,.ade-grid.three{grid-template-columns:1fr}.wide{grid-column:auto}.ade-head{flex-direction:column}}
+</style>
+
+@code {
+    [Parameter] public int NpcId { get; set; }
+
+    private NpcAppearanceDetailProfile? _profile;
+    private bool _busy;
+    private bool _error;
+    private string _message = "";
+
+    protected override void OnParametersSet()
+    {
+        if (NpcId > 0) _profile = AppearanceDetails.Load(NpcId);
+    }
+
+    private bool IsFemale => (_profile?.Gender ?? "").Contains("female",StringComparison.OrdinalIgnoreCase)
+                             || string.Equals(_profile?.Gender,"woman",StringComparison.OrdinalIgnoreCase);
+    private bool IsMale => (((_profile?.Gender ?? "").Contains("male",StringComparison.OrdinalIgnoreCase)
+                            && !(_profile?.Gender ?? "").Contains("female",StringComparison.OrdinalIgnoreCase))
+                            || string.Equals(_profile?.Gender,"man",StringComparison.OrdinalIgnoreCase));
+
+    private async Task BuildAiDraftAsync()
+    {
+        _busy=true; _error=false; _message="AI is reading this NPC and filling missing appearance details...";
+        try
+        {
+            _profile = await AppearanceAI.BuildDraftAsync(NpcId);
+            _message="AI draft ready. Review every field, then click Save Appearance Details.";
+        }
+        catch(Exception ex)
+        {
+            _error=true; _message="AI appearance draft failed: " + ex.Message;
+        }
+        finally { _busy=false; }
+    }
+
+    private Task SaveAsync()
+    {
+        if (_profile is null) return Task.CompletedTask;
+        AppearanceDetails.Save(_profile);
+        _profile = AppearanceDetails.Load(NpcId);
+        _error=false;
+        _message="Appearance saved. Comfy will reload this canonical profile automatically before every Generate.";
+        return Task.CompletedTask;
+    }
+
+    private void RaceChanged(ChangeEventArgs e)
+    {
+        if (_profile is null) return;
+
+        _profile.RaceEthnicity = e.Value?.ToString() ?? "";
+
+        // Race changes the available complexion range. Keep the current tone
+        // only if it is still a valid option; otherwise force review.
+        if (!SkinToneOptions.Contains(_profile.SkinTone, StringComparer.OrdinalIgnoreCase))
+            _profile.SkinTone = "";
+    }
+    private void EyeBaseChanged(ChangeEventArgs e)
+    {
+        if (_profile is null) return;
+        _profile.EyeBaseColor = e.Value?.ToString() ?? "";
+        if (!EyeVariants.Contains(_profile.EyeVariant,StringComparer.OrdinalIgnoreCase))
+            _profile.EyeVariant="";
+    }
+
+    private RenderFragment Select(string label,IEnumerable<string> options,string value,Action<string> setter) => builder =>
+    {
+        var seq=0;
+        builder.OpenElement(seq++,"label");
+        builder.OpenElement(seq++,"span"); builder.AddContent(seq++,label); builder.CloseElement();
+        builder.OpenElement(seq++,"select");
+        builder.AddAttribute(seq++,"value",value);
+        builder.AddAttribute(seq++,"onchange",EventCallback.Factory.Create<ChangeEventArgs>(this,e=>setter(e.Value?.ToString() ?? "")));
+        foreach(var x in options)
+        {
+            builder.OpenElement(seq++,"option"); builder.AddAttribute(seq++,"value",x); builder.AddContent(seq++,x); builder.CloseElement();
+        }
+        builder.CloseElement(); builder.CloseElement();
+    };
+
+    private IEnumerable<string> EyeVariants => (_profile?.EyeBaseColor ?? "") switch
+    {
+        "Brown" => new[]{"","Deep Espresso Brown","Espresso Brown","Dark Chocolate Brown","Chocolate Brown","Warm Brown","Medium Brown","Chestnut Brown","Walnut Brown","Mocha Brown","Cinnamon Brown","Light Brown","Honey Brown","Golden Brown","Copper Brown","Auburn Brown"},
+        "Hazel" => new[]{"","Brown-Green Hazel","Green-Brown Hazel","Golden Hazel","Olive Hazel","Light Hazel","Dark Hazel","Amber Hazel","Hazel with Green Center","Hazel with Brown Center","Hazel with Gold Center","Hazel with Gray Rim","Hazel with Blue-Gray Rim"},
+        "Green" => new[]{"","Pale Green","Light Green","True Green","Dark Green","Forest Green","Emerald Green","Jade Green","Moss Green","Olive Green","Gray-Green","Blue-Green","Sea Green","Deep Green"},
+        "Blue" => new[]{"","Ice Blue","Pale Blue","Light Blue","Sky Blue","True Blue","Bright Blue","Ocean Blue","Steel Blue","Gray-Blue","Blue-Green","Sapphire Blue","Deep Blue","Dark Blue"},
+        "Gray" => new[]{"","Silver Gray","Light Gray","Soft Gray","Smoky Gray","Storm Gray","Blue-Gray","Green-Gray","Steel Gray","Dark Gray","Charcoal Gray"},
+        "Amber" => new[]{"","Light Amber","Honey Amber","Golden Amber","Yellow Amber","Copper Amber","Dark Amber","Amber-Brown"},
+        "Rare / Mixed" => new[]{"","Violet-Tinted","Very Dark / Almost Black","Blue-Brown Heterochromia","Green-Brown Heterochromia","Gray-Blue Heterochromia","Green-Blue Heterochromia","Central Heterochromia","Sectoral Heterochromia"},
+        _ => new[]{""}
+    };
+
+    private IEnumerable<string> SkinToneOptions
+    {
+        get
+        {
+            var race=(_profile?.RaceEthnicity ?? "").ToLowerInvariant();
+            if(race.Contains("black")||race.Contains("african")) return new[]{"","Golden Brown","Caramel Brown","Warm Brown","Medium Brown","Medium-Deep Brown","Rich Brown","Dark Brown","Deep Brown","Deep Ebony"};
+            if(race.Contains("asian")) return new[]{"","Very Fair Neutral","Fair Warm","Light Beige","Warm Beige","Light Golden","Medium Golden","Golden Tan","Olive Golden","Warm Tan"};
+            if(race.Contains("hispanic")||race.Contains("latino")) return new[]{"","Fair Warm","Light Beige","Light Olive","Golden Beige","Honey","Medium Olive","Warm Tan","Caramel","Medium Brown","Deep Brown"};
+            if(race.Contains("american indian")||race.Contains("alaska native")||race.Contains("native")) return new[]{"","Light Warm","Golden Beige","Copper","Warm Tan","Medium Brown","Rich Brown","Deep Brown"};
+            if(race.Contains("white")) return new[]{"","Porcelain","Very Fair Cool","Very Fair Neutral","Fair Rosy","Fair","Light","Light Warm","Light Beige","Light Olive","Medium Beige","Warm Tan"};
+            return new[]{"","Porcelain","Very Fair","Fair","Light","Light Beige","Light Olive","Golden Beige","Medium","Warm Tan","Caramel","Medium Brown","Dark Brown","Deep Brown","Deep Ebony"};
+        }
+    }
+
+    private static readonly string[] RaceEthnicityOptions =
+    {
+        "",
+        "White, non-Hispanic",
+        "Black or African American, non-Hispanic",
+        "Asian, non-Hispanic",
+        "American Indian or Alaska Native, non-Hispanic",
+        "Native Hawaiian or Other Pacific Islander, non-Hispanic",
+        "Two or More Races, non-Hispanic",
+        "Hispanic or Latino - White",
+        "Hispanic or Latino - Black or African American",
+        "Hispanic or Latino - Two or More Races",
+        "Hispanic or Latino - Other race",
+        "Middle Eastern / North African",
+        "Mixed / Multiracial",
+        "Other / Self-described"
+    };
+    private static readonly string[] AppearanceLevels={"","Below Average","Normal / Everyday","Pleasant","Above Average","Attractive","Very Attractive","Striking","Model-Like","Supermodel-Like"};
+    private static readonly string[] BodyBuilds={"","Very Slim","Slim","Petite","Lean","Average","Soft Average","Curvy","Full-Figured","Thick","Stocky","Broad","Athletic","Lean Athletic","Fit","Toned","Muscular","Very Muscular","Heavyset","Tall / Lanky"};
+    private static readonly string[] EyeBaseColors={"","Brown","Hazel","Green","Blue","Gray","Amber","Rare / Mixed"};
+    private static readonly string[] EyePatterns={"","None / Solid","Gold Flecks","Amber Flecks","Brown Flecks","Green Flecks","Blue Flecks","Gray Flecks","Dark Outer Ring","Soft Outer Ring","Gray Outer Ring","Blue-Gray Outer Ring","Central Brown Ring","Central Amber Ring","Central Gold Ring","Central Heterochromia","Sectoral Heterochromia","One Eye Slightly Darker"};
+    private static readonly string[] EyeShapes={"","Almond","Round","Hooded","Deep-Set","Wide-Set","Close-Set","Upturned","Downturned","Narrow","Large / Open","Slightly Hooded Almond","Deep-Set Almond"};
+    private static readonly string[] EyeExpressions={"","Warm","Soft","Attentive","Friendly","Bright","Curious","Calm","Reserved","Serious","Intense","Sharp","Tired","Guarded","Playful","Confident"};
+    private static readonly string[] HairColors={"","Jet Black","Black","Soft Black","Espresso Brown","Dark Brown","Chocolate Brown","Medium Brown","Chestnut Brown","Walnut Brown","Light Brown","Auburn","Copper","Strawberry Blonde","Dark Blonde","Golden Blonde","Honey Blonde","Ash Blonde","Platinum Blonde","Gray","Salt and Pepper","White","Dyed Red","Dyed Blue","Dyed Purple","Dyed Pink","Multicolor"};
+    private static readonly string[] HairUndertones={"","Neutral","Warm","Cool","Ash","Golden","Copper","Red","Chocolate","Caramel"};
+    private static readonly string[] HairHighlights={"","None","Subtle Natural Highlights","Caramel Highlights","Honey Highlights","Golden Highlights","Ash Highlights","Copper Highlights","Face-Framing Highlights","Balayage","Sun-Kissed Ends"};
+    private static readonly string[] HairLengths={"","Shaved / Bald","Buzz Cut","Very Short","Short","Ear Length","Chin Length","Shoulder Length","Upper Back","Mid-Back","Waist Length","Very Long"};
+    private static readonly string[] HairTextures={"","Pin Straight","Straight","Slight Wave","Wavy","Loose Waves","Loose Curls","Curly","Tight Curls","Coily","Kinky / Coily","Mixed Texture"};
+    private static readonly string[] HairStyles={"","Buzz Cut","Crew Cut","Fade","High Fade","Low Fade","Taper Fade","Undercut","Side Part","Slicked Back","Textured Crop","Messy Crop","Caesar","Pompadour","Quiff","Short and Neat","Natural Short","Afro","Tapered Afro","Braids","Box Braids","Cornrows","Locs","Twists","Curly Natural","Wavy Natural","Straight Natural","Pixie Cut","Bob","Blunt Bob","Layered Bob","Long Bob / Lob","Long Layers","Face-Framing Layers","Curtain Bangs","Straight Bangs","Side-Swept Bangs","Ponytail","High Ponytail","Low Ponytail","Messy Bun","Sleek Bun","Top Knot","Half Up / Half Down","French Braid","Dutch Braid","Fishtail Braid","Loose Waves","Beach Waves","Defined Curls","Blowout","Bald"};
+    private static readonly string[] HairDensities={"","Fine / Thin","Fine","Medium","Thick","Very Thick","Dense","Receding","Thinning at Crown"};
+    private static readonly string[] SkinUndertones={"","Cool","Neutral","Warm","Golden","Olive","Peach","Red / Rosy"};
+    private static readonly string[] ComplexionDetails={"","Clear / Even","Natural Texture","Light Freckles","Moderate Freckles","Heavy Freckles","Rosy Cheeks","Sun-Kissed","Light Acne Scarring","Visible Pores","Small Beauty Marks","Weathered","Mature Fine Lines"};
+    private static readonly string[] FaceShapes={"","Oval","Round","Square","Heart","Diamond","Oblong","Long Oval","Soft Square","Triangular"};
+    private static readonly string[] JawShapes={"","Soft","Rounded","Defined","Angular","Square","Narrow","Broad","Tapered","Strong"};
+    private static readonly string[] NoseShapes={"","Straight","Small Straight","Medium Straight","Narrow","Broad","Rounded Tip","Upturned","Slightly Aquiline","Aquiline","Button","Prominent Bridge"};
+    private static readonly string[] LipShapes={"","Thin","Medium","Full","Full Lower Lip","Defined Cupid's Bow","Soft Cupid's Bow","Wide","Narrow","Balanced Full"};
+    private static readonly string[] BrowStyles={"","Fine","Natural","Full","Thick","Straight","Soft Arch","Defined Arch","High Arch","Low Arch","Dark Full"};
+    private static readonly string[] CheekboneStyles={"","Soft","Average","High","Prominent","Defined","Broad","Subtle"};
+    private static readonly string[] ClothingStyles={"","Work Uniform","Business Formal","Business Professional","Business Casual","Smart Casual","Casual","Small-Town Casual","Preppy","Classic","Minimalist","Sporty","Athleisure","Bohemian","Country / Western","Streetwear","Alternative","Vintage","Trendy"};
+    private static readonly string[] WorkStyles={"","Work Uniform","Business Formal","Business Professional","Business Casual","Smart Casual","Practical Workwear","Healthcare Scrubs","School Professional","Retail Casual","Service Uniform","Trades Workwear"};
+    private static readonly string[] HomeStyles={"","T-Shirt and Shorts","T-Shirt and Jeans","Sweatshirt and Joggers","Hoodie and Leggings","Tank Top and Shorts","Pajamas","Loungewear","Sweater and Jeans","Casual Dress","Athleisure"};
+    private static readonly string[] GoingOutStyles={"","Clean Casual","Smart Casual","Dressy Casual","Trendy","Date-Night Casual","Cocktail","Upscale Casual","Streetwear","Country / Western","Alternative"};
+    private static readonly string[] ClubStyles={"","Not a Club Person","Casual Nightlife","Trendy Nightlife","Cocktail / Lounge","Upscale Club","Dance Club","Alternative Club","Country Bar","Live-Music Venue","Sports Bar Casual"};
+    private static readonly string[] FamilyStyles={"","Relaxed Casual","Nice Casual","Sunday Best","Dressy Casual","Semi-Formal","Holiday / Seasonal","Family Cookout Casual","Wedding Guest","Funeral / Memorial Formal"};
+    private static readonly string[] FormalStyles={"","Business Formal","Cocktail","Semi-Formal","Formal Suit","Formal Dress","Black Tie","Conservative Formal","Modern Formal"};
+    private static readonly string[] AthleticStyles={"","Basic Gym Wear","Running Gear","Yoga / Studio Wear","Athleisure","Team-Sport Wear","Outdoor Fitness","No Regular Athletic Wear"};
+    private static readonly string[] SleepStyles={"","T-Shirt and Shorts","Pajama Set","Sweats","Loungewear","Nightshirt","Sleep Tank and Shorts","Simple Sleepwear"};
+    private static readonly string[] WinterStyles={"","Winter Casual Layers","Wool Coat and Smart Casual","Puffer Jacket Casual","Work Winter Layers","Hoodie and Winter Coat","Dress Coat / Formal Winter","Outdoor / Snow Gear"};
+    private static readonly string[] BraSizes={"","28A","28B","28C","28D","28DD","30A","30B","30C","30D","30DD","32A","32B","32C","32D","32DD","32DDD","34A","34B","34C","34D","34DD","34DDD","36A","36B","36C","36D","36DD","36DDD","38B","38C","38D","38DD","38DDD","40B","40C","40D","40DD","42C","42D","42DD"};
+    private static readonly string[] PenisSizes={"","Small","Below Average","Average","Above Average","Large","Very Large"};
+    private static readonly string[] CircumcisionOptions={"","Cut / Circumcised","Uncut / Uncircumcised"};
+}
+

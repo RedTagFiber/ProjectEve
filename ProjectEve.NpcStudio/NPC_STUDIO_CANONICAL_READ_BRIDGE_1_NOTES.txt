@@ -1,0 +1,63 @@
+﻿NPC STUDIO — CANONICAL READ BRIDGE 1
+
+Purpose
+-------
+Make the validated Golden NPC foundation visible in NPC Studio BEFORE
+we add new save/edit operations.
+
+This is read-only for the new canonical domains.
+
+Files modified
+--------------
+Models\NpcStudioModels.cs
+Data\NpcStudioRepository.cs
+Components\Pages\NpcProfile.razor
+
+What Eve should show
+--------------------
+Employer:
+  Sinclair Coffee (Lisa Sinclair, owner)
+
+Current Location ID:
+  blank / dynamic
+
+Home Location ID:
+  blank
+
+Work Location ID:
+  WP_COFFEE_001
+
+Canonical counts:
+  Education              1
+  Professional Profile   1
+  Qualifications         1
+  Competencies           6
+  Phones                 0
+  Vehicles               0
+  Financial Accounts     1
+  Financial Obligations  2
+
+Why read-only first?
+--------------------
+We already proved the database architecture with the Golden NPC audit.
+The safest next step is proving NPC Studio reads that same truth instead
+of creating another parallel set of Studio-only records.
+
+After this passes, the next patch will add the first domain editor/save
+path against the canonical tables.
+
+Install location
+----------------
+Extract directly into:
+
+D:\ProjectEve\code\ProjectEve.NpcStudio\ProjectEve.NpcStudio
+
+Then run:
+
+powershell -ExecutionPolicy Bypass -File ".\apply_npc_studio_canonical_read_bridge_1.ps1"
+
+Get-Process ProjectEve.NpcStudio -ErrorAction SilentlyContinue |
+    Stop-Process -Force
+
+dotnet build
+dotnet run

@@ -1,0 +1,150 @@
+﻿@using ProjectEve.NpcStudio.Models
+
+<div class="finance-record">
+    <div class="record-title">
+        <strong>@DisplayTitle</strong>
+        <small>@Row.PrimaryKeyValue</small>
+    </div>
+
+    <div class="field-grid">
+        @foreach (var col in VisibleColumns)
+        {
+            <div class="field">
+                <label>@Pretty(col.Name)</label>
+
+                @if (IsReadOnlyOwner(col.Name))
+                {
+                    <input value="@GetValue(col.Name)" disabled />
+                }
+                else
+                {
+                    <input value="@GetValue(col.Name)"
+                           @oninput="e => SetValue(col.Name, e.Value?.ToString())" />
+                }
+            </div>
+        }
+    </div>
+
+    @if (AdvancedColumns.Count > 0)
+    {
+        <details class="advanced">
+            <summary>Advanced</summary>
+
+            <div class="field-grid">
+                @foreach (var col in AdvancedColumns)
+                {
+                    <div class="field">
+                        <label>@Pretty(col.Name)</label>
+
+                        @if (IsReadOnlyOwner(col.Name))
+                        {
+                            <input value="@GetValue(col.Name)" disabled />
+                        }
+                        else
+                        {
+                            <input value="@GetValue(col.Name)"
+                                   @oninput="e => SetValue(col.Name, e.Value?.ToString())" />
+                        }
+                    </div>
+                }
+            </div>
+        </details>
+    }
+
+    <button class="btn primary"
+            @onclick="() => OnSave.InvokeAsync(Row)">
+        Save & Verify
+    </button>
+</div>
+
+@code {
+    [Parameter] public CanonicalDynamicRow Row { get; set; } = new();
+    [Parameter] public List<CanonicalTableColumn> Columns { get; set; } = new();
+    [Parameter] public EventCallback<CanonicalDynamicRow> OnSave { get; set; }
+
+    private static readonly HashSet<string> HiddenByDefault =
+        new(StringComparer.OrdinalIgnoreCase)
+        {
+            "CreatedRealAt",
+            "UpdatedRealAt"
+        };
+
+    private List<CanonicalTableColumn> VisibleColumns =>
+        Columns
+            .Where(c =>
+                !HiddenByDefault.Contains(c.Name) &&
+                !IsAdvanced(c.Name))
+            .ToList();
+
+    private List<CanonicalTableColumn> AdvancedColumns =>
+        Columns
+            .Where(c =>
+                HiddenByDefault.Contains(c.Name) ||
+                IsAdvanced(c.Name))
+            .ToList();
+
+    private string DisplayTitle
+    {
+        get
+        {
+            foreach (var key in new[]
+            {
+                "AccountName",
+                "PayeeName",
+                "AccountType",
+                "ObligationType",
+                "Type",
+                "Name"
+            })
+            {
+                var value = GetValue(key);
+
+                if (!string.IsNullOrWhiteSpace(value))
+                    return value;
+            }
+
+            return Row.TableName == "FinancialAccounts"
+                ? "Financial Account"
+                : "Financial Obligation";
+        }
+    }
+
+    private string GetValue(string key)
+        => Row.Values.TryGetValue(key, out var value)
+            ? value ?? ""
+            : "";
+
+    private void SetValue(string key, string? value)
+        => Row.Values[key] = value;
+
+    private static bool IsReadOnlyOwner(string name)
+        => name.Equals("OwnerType", StringComparison.OrdinalIgnoreCase)
+        || name.Equals("OwnerId", StringComparison.OrdinalIgnoreCase)
+        || name.Equals("OwnerNpcId", StringComparison.OrdinalIgnoreCase);
+
+    private static bool IsAdvanced(string name)
+        => name.EndsWith("EventId", StringComparison.OrdinalIgnoreCase)
+        || name.Equals("CreatedRealAt", StringComparison.OrdinalIgnoreCase)
+        || name.Equals("UpdatedRealAt", StringComparison.OrdinalIgnoreCase);
+
+    private static string Pretty(string value)
+    {
+        if (string.IsNullOrWhiteSpace(value)) return "";
+
+        var chars = new List<char>();
+
+        for (int i = 0; i < value.Length; i++)
+        {
+            if (i > 0 &&
+                char.IsUpper(value[i]) &&
+                !char.IsUpper(value[i - 1]))
+            {
+                chars.Add(' ');
+            }
+
+            chars.Add(value[i]);
+        }
+
+        return new string(chars.ToArray());
+    }
+}

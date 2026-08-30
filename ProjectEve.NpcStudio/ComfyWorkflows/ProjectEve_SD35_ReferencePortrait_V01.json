@@ -1,0 +1,107 @@
+{
+  "3": {
+    "inputs": {
+      "seed": 228925952556307,
+      "steps": 32,
+      "cfg": 5,
+      "sampler_name": "dpm_adaptive",
+      "scheduler": "karras",
+      "denoise": 1,
+      "model": [
+        "4",
+        0
+      ],
+      "positive": [
+        "16",
+        0
+      ],
+      "negative": [
+        "40",
+        0
+      ],
+      "latent_image": [
+        "53",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "4": {
+    "inputs": {
+      "ckpt_name": "sd3.5_large_fp8_scaled.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Load Checkpoint"
+    }
+  },
+  "8": {
+    "inputs": {
+      "samples": [
+        "3",
+        0
+      ],
+      "vae": [
+        "4",
+        2
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "9": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "images": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  },
+  "16": {
+    "inputs": {
+      "text": "sharp realistic studio reference photo of Eve Sinclair, 25-year-old woman from Bellefontaine Ohio, front-facing, centered, upper body visible from waist up, face clearly visible, warm hazel eyes, wavy medium-brown hair, soft natural smile, light warm skin tone, curvy hourglass figure, fuller bust, fitted cream top, realistic skin texture, natural pores, subtle beauty filter, soft neutral studio lighting, clean light gray background, sharp focus, high detail, realistic proportions, attractive but believable real person, identity reference photo topless ",
+      "clip": [
+        "4",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "Positive Prompt"
+    }
+  },
+  "40": {
+    "inputs": {
+      "text": "blurry, soft focus, low quality, orange lighting, red hair, distorted face, bad anatomy, extra fingers, missing fingers, cross-eyed, lazy eye, duplicate person, second person, cartoon, anime, painting, CGI, plastic skin, over-smoothed skin, bad teeth, harsh shadows, text, watermark, logo, cropped face, cut off head, deformed body, unrealistic proportions",
+      "clip": [
+        "4",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "Negative Prompt"
+    }
+  },
+  "53": {
+    "inputs": {
+      "width": 768,
+      "height": 1152,
+      "batch_size": 1
+    },
+    "class_type": "EmptySD3LatentImage",
+    "_meta": {
+      "title": "EmptySD3LatentImage"
+    }
+  }
+}

@@ -1,0 +1,56 @@
+﻿NPC STUDIO — CANONICAL WRITE BRIDGE 2
+Education / Professional
+
+Goal
+----
+Prove NPC Studio can both READ and WRITE the canonical Golden NPC
+formation/professional tables in project_eve.db.
+
+This patch does NOT touch NpcProfile.razor.
+
+It adds:
+- Models\CanonicalProfessionalModels.cs
+- Data\NpcStudioRepository.CanonicalProfessional.cs
+- Components\Pages\CanonicalProfessional.razor
+- Components\Pages\CanonicalProfessional.razor.css
+- Components\CanonicalField.razor
+
+Route
+-----
+http://localhost:5123/canonical-professional/1
+
+Canonical tables
+----------------
+NpcEducationRecords
+NpcProfessionalProfiles
+NpcProfessionalQualifications
+NpcProfessionalCompetencies
+
+Safety
+------
+- Existing row IDs are preserved.
+- New education/qualification IDs are generated only when a new blank record is saved.
+- 0-100 professional/competency metrics are clamped.
+- Every successful save writes a NpcBuildRevisions entry.
+- HISTORY EventId fields are editable but no HISTORY event is auto-created.
+- Existing competency RoleId + CompetencyId form the primary key. Do not change
+  those two key fields during this first validation pass.
+
+Recommended first test
+----------------------
+Do NOT change Eve's canon yet.
+
+1. Open /canonical-professional/1
+2. Confirm:
+   - 1 education record
+   - professional role coffee-shop-manager
+   - 1 qualification
+   - 6 competencies
+3. In Professional Profile Notes, add:
+      Studio write bridge test
+4. Click Save Profile.
+5. The page reloads automatically from SQLite.
+6. Confirm the note remains.
+7. Remove that test text and save again.
+
+That proves round-trip persistence without changing Eve's actual canon.

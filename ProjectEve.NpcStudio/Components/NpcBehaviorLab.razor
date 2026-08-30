@@ -1,0 +1,272 @@
+@using ProjectEve.NpcStudio.Models
+@using ProjectEve.NpcStudio.Services
+@inject NpcStudioService Studio
+@inject OllamaPromptEngineerService PromptEngineer
+
+<div class="behavior-lab">
+    <div class="behavior-head">
+        <div>
+            <span class="behavior-kicker">HUMAN BEHAVIOR TEST</span>
+            <h3>Push @Sheet.Name and see if they still feel like the same person.</h3>
+            <p>Uses the loaded dossier, traits, IQ, history, relationships, Action line, and temporary emotional state. Test state never changes canon.</p>
+        </div>
+        <div class="mode-switch">
+            <button type="button" class="@(_mode == "In-Person" ? "active" : "")" @onclick="@(() => _mode = "In-Person")">In-Person</button>
+            <button type="button" class="@(_mode == "Message" ? "active" : "")" @onclick="@(() => _mode = "Message")">Message</button>
+        </div>
+    </div>
+
+    <div class="preset-row">
+        @foreach (var preset in Presets)
+        {
+            <button type="button" class="@(_preset == preset ? "active" : "")" @onclick="@(() => ApplyPreset(preset))">@preset</button>
+        }
+    </div>
+
+    <div class="behavior-grid">
+        <section class="emotion-panel">
+            <div class="section-title"><strong>Live Emotional State</strong><span>temporary test overlay</span></div>
+            @EmotionSlider("Joy", _state.Joy, v => _state.Joy = v)
+            @EmotionSlider("Anger", _state.Anger, v => _state.Anger = v)
+            @EmotionSlider("Sadness", _state.Sadness, v => _state.Sadness = v)
+            @EmotionSlider("Hurt", _state.Hurt, v => _state.Hurt = v)
+            @EmotionSlider("Fear", _state.Fear, v => _state.Fear = v)
+            @EmotionSlider("Attraction", _state.Attraction, v => _state.Attraction = v)
+            @EmotionSlider("Jealousy", _state.Jealousy, v => _state.Jealousy = v)
+            @EmotionSlider("Stress", _state.Stress, v => _state.Stress = v)
+            @EmotionSlider("Affection", _state.Affection, v => _state.Affection = v)
+            @if (!string.IsNullOrWhiteSpace(_lastTrigger))
+            {
+                <div class="trigger-fired">Trigger fired: @_lastTrigger</div>
+            }
+        </section>
+
+        <section class="chat-panel">
+            <div class="section-title"><strong>@Sheet.Name Test Chat</strong><span>@_mode</span></div>
+            <div class="chat-window">
+                @if (_turns.Count == 0)
+                {
+                    <div class="chat-empty">Try joking, teasing, flirting, comforting, arguing, insulting, apologizing, or pushing a sensitive topic.</div>
+                }
+                @foreach (var turn in _turns)
+                {
+                    <article class="chat-turn">
+                        <div class="player-line"><span>PLAYER</span><p>@turn.PlayerText</p></div>
+                        @if (!string.IsNullOrWhiteSpace(turn.PlayerAction))
+                        {
+                            <div class="action-line"><span>ACTION</span><p>@turn.PlayerAction</p></div>
+                        }
+                        <div class="npc-line"><span>@Sheet.Name.ToUpperInvariant()</span><p>@turn.Result.Dialogue</p></div>
+                    </article>
+                }
+            </div>
+
+            @if (_mode == "In-Person")
+            {
+                <div class="chat-input-group">
+                    <label class="chat-input-label" for="player-action-input">Action line</label>
+                    <div class="action-compose">
+                        <input id="player-action-input" placeholder="looks away, jaw tight, arms folded..." @bind="_playerAction" />
+                        <button type="button" title="Use a short AI-friendly observable action" @onclick="SuggestAction">Suggest</button>
+                    </div>
+                </div>
+            }
+            <label class="chat-input-label">What do you say?
+                <textarea rows="3" placeholder="Talk to the NPC exactly like a player would..." @bind="_playerText"></textarea>
+            </label>
+            <div class="chat-actions">
+                <button type="button" class="clear" @onclick="ClearChat">Reset Test</button>
+                <button type="button" class="send" disabled="@(_sending || string.IsNullOrWhiteSpace(_playerText))" @onclick="SendTest">@(_sending ? "Thinking..." : "Send Test")</button>
+            </div>
+        </section>
+
+        <section class="debug-panel">
+            <div class="section-title"><strong>Brain / Thought / Dialogue</strong><span>author debug</span></div>
+            @if (_latest is null)
+            {
+                <div class="debug-empty">Send a test message to inspect the response path.</div>
+            }
+            else
+            {
+                <div class="debug-card brain"><span>BRAIN</span><p>@_latest.Brain</p></div>
+                <div class="debug-card thought"><span>THOUGHT</span><p>@_latest.Thought</p></div>
+                <div class="debug-card action"><span>ACTION</span><p>@_latest.Action</p></div>
+                <div class="debug-card dialogue"><span>DIALOGUE</span><p>@_latest.Dialogue</p></div>
+            }
+            <div class="engine-note">This studio sandbox uses the current Ollama model through the World Builder behavior prompt. It is intentionally shaped as the adapter point for the production Brain / Thought / Dialogue engines as we extract them from the Small Town implementation.</div>
+        </section>
+    </div>
+
+    <section class="trigger-panel">
+        <div class="section-title"><strong>Emotion Triggers</strong><span>saved to this NPC</span></div>
+        <div class="trigger-list">
+            @foreach (var trigger in _triggers)
+            {
+                <article class="trigger-card">
+                    <div><strong>@trigger.Emotion @FormatImpact(trigger.Impact)</strong><span>@trigger.TriggerText</span></div>
+                    <p>@trigger.Reason</p>
+                    @if (!string.IsNullOrWhiteSpace(trigger.CalmedBy)) { <small>Calmed by: @trigger.CalmedBy</small> }
+                    @if (!string.IsNullOrWhiteSpace(trigger.MadeWorseBy)) { <small>Worse by: @trigger.MadeWorseBy</small> }
+                    <div class="trigger-actions"><button type="button" @onclick="@(() => FireTrigger(trigger))">Fire Test</button><button type="button" class="delete" @onclick="@(() => DeleteTrigger(trigger.Id))">Delete</button></div>
+                </article>
+            }
+        </div>
+
+        <details class="trigger-add">
+            <summary>+ Add emotional trigger</summary>
+            <div class="trigger-form">
+                <label>Emotion
+                    <select @bind="_newTrigger.Emotion">@foreach (var emotion in EmotionNames) { <option value="@emotion">@emotion</option> }</select>
+                </label>
+                <label>Impact (-100 to 100)<input type="number" min="-100" max="100" @bind="_newTrigger.Impact" /></label>
+                <label class="wide">Trigger<input placeholder="broken promise, being ignored, public embarrassment..." @bind="_newTrigger.TriggerText" /></label>
+                <label class="wide">Why this matters<input placeholder="History/meaning behind the trigger" @bind="_newTrigger.Reason" /></label>
+                <label>Calmed By<input @bind="_newTrigger.CalmedBy" /></label>
+                <label>Made Worse By<input @bind="_newTrigger.MadeWorseBy" /></label>
+            </div>
+            <button type="button" class="save-trigger" @onclick="SaveTrigger">Save Trigger</button>
+        </details>
+    </section>
+</div>
+
+@code {
+    [Parameter, EditorRequired] public NpcCharacterSheet Sheet { get; set; } = default!;
+
+    private string _mode = "In-Person";
+    private string _preset = "Normal";
+    private string _playerText = "";
+    private string _playerAction = "";
+    private string _lastTrigger = "";
+    private bool _sending;
+    private NpcBehaviorTestState _state = new();
+    private NpcBehaviorTestResult? _latest;
+    private List<NpcEmotionTrigger> _triggers = new();
+    private List<TestTurn> _turns = new();
+    private NpcEmotionTrigger _newTrigger = new() { Emotion = "Anger", Impact = 20, IsActive = true };
+
+    private static readonly string[] Presets = ["Normal", "Happy", "Sad", "Mad", "Flirty", "Nervous", "Hurt", "Jealous", "Tired", "Defensive", "Custom"];
+    private static readonly string[] EmotionNames = ["Joy", "Anger", "Sadness", "Hurt", "Fear", "Attraction", "Jealousy", "Stress", "Affection"];
+
+    protected override async Task OnParametersSetAsync()
+    {
+        _triggers = await Studio.GetEmotionTriggersAsync(Sheet.Id);
+        _newTrigger.NpcId = Sheet.Id;
+    }
+
+    private void ApplyPreset(string preset)
+    {
+        _preset = preset;
+        _state = preset switch
+        {
+            "Happy" => new() { Joy = 85, Anger = 5, Sadness = 5, Hurt = 5, Fear = 5, Attraction = 25, Jealousy = 5, Stress = 15, Affection = 70 },
+            "Sad" => new() { Joy = 15, Anger = 15, Sadness = 82, Hurt = 65, Fear = 20, Attraction = 10, Jealousy = 10, Stress = 60, Affection = 55 },
+            "Mad" => new() { Joy = 8, Anger = 86, Sadness = 20, Hurt = 58, Fear = 10, Attraction = 10, Jealousy = 15, Stress = 78, Affection = 45 },
+            "Flirty" => new() { Joy = 72, Anger = 4, Sadness = 4, Hurt = 4, Fear = 8, Attraction = 86, Jealousy = 12, Stress = 18, Affection = 78 },
+            "Nervous" => new() { Joy = 25, Anger = 12, Sadness = 18, Hurt = 18, Fear = 68, Attraction = 15, Jealousy = 10, Stress = 82, Affection = 50 },
+            "Hurt" => new() { Joy = 10, Anger = 45, Sadness = 68, Hurt = 88, Fear = 20, Attraction = 10, Jealousy = 15, Stress = 70, Affection = 72 },
+            "Jealous" => new() { Joy = 18, Anger = 52, Sadness = 28, Hurt = 48, Fear = 25, Attraction = 55, Jealousy = 88, Stress = 72, Affection = 70 },
+            "Tired" => new() { Joy = 25, Anger = 18, Sadness = 22, Hurt = 10, Fear = 8, Attraction = 8, Jealousy = 5, Stress = 62, Affection = 48 },
+            "Defensive" => new() { Joy = 12, Anger = 48, Sadness = 18, Hurt = 42, Fear = 32, Attraction = 8, Jealousy = 12, Stress = 75, Affection = 42 },
+            "Custom" => _state,
+            _ => new()
+        };
+    }
+
+    private async Task SendTest()
+    {
+        if (string.IsNullOrWhiteSpace(_playerText)) return;
+        _sending = true;
+        try
+        {
+            ApplyMatchingTriggers(_playerText + " " + _playerAction);
+            var recent = _turns.SelectMany(t => new[] { "PLAYER: " + t.PlayerText, Sheet.Name + ": " + t.Result.Dialogue }).ToList();
+            _latest = await PromptEngineer.GenerateBehaviorTestAsync(Sheet, _mode, _playerText, _mode == "In-Person" ? _playerAction : "", _state, recent);
+            _turns.Add(new TestTurn(_playerText, _mode == "In-Person" ? _playerAction : "", _latest));
+            _playerText = "";
+            _playerAction = "";
+        }
+        finally { _sending = false; }
+    }
+
+    private void ApplyMatchingTriggers(string text)
+    {
+        _lastTrigger = "";
+        foreach (var trigger in _triggers.Where(t => t.IsActive && !string.IsNullOrWhiteSpace(t.TriggerText)))
+        {
+            if (text.Contains(trigger.TriggerText, StringComparison.OrdinalIgnoreCase)) FireTrigger(trigger);
+        }
+    }
+
+    private void FireTrigger(NpcEmotionTrigger trigger)
+    {
+        _lastTrigger = $"{trigger.TriggerText} → {trigger.Emotion} {FormatImpact(trigger.Impact)}";
+        ApplyEmotionImpact(trigger.Emotion, trigger.Impact);
+        _preset = "Custom";
+    }
+
+    private void ApplyEmotionImpact(string emotion, int impact)
+    {
+        int C(int value) => Math.Clamp(value + impact, 0, 100);
+        switch (emotion)
+        {
+            case "Joy": _state.Joy = C(_state.Joy); break;
+            case "Anger": _state.Anger = C(_state.Anger); break;
+            case "Sadness": _state.Sadness = C(_state.Sadness); break;
+            case "Hurt": _state.Hurt = C(_state.Hurt); break;
+            case "Fear": _state.Fear = C(_state.Fear); break;
+            case "Attraction": _state.Attraction = C(_state.Attraction); break;
+            case "Jealousy": _state.Jealousy = C(_state.Jealousy); break;
+            case "Stress": _state.Stress = C(_state.Stress); break;
+            case "Affection": _state.Affection = C(_state.Affection); break;
+        }
+    }
+
+    private async Task SaveTrigger()
+    {
+        if (string.IsNullOrWhiteSpace(_newTrigger.TriggerText)) return;
+        _newTrigger.NpcId = Sheet.Id;
+        await Studio.SaveEmotionTriggerAsync(_newTrigger);
+        _triggers = await Studio.GetEmotionTriggersAsync(Sheet.Id);
+        _newTrigger = new NpcEmotionTrigger { NpcId = Sheet.Id, Emotion = "Anger", Impact = 20, IsActive = true };
+    }
+
+    private async Task DeleteTrigger(string id)
+    {
+        await Studio.DeleteEmotionTriggerAsync(id);
+        _triggers = await Studio.GetEmotionTriggersAsync(Sheet.Id);
+    }
+
+    private void ClearChat()
+    {
+        _turns.Clear(); _latest = null; _playerText = ""; _playerAction = ""; _lastTrigger = ""; ApplyPreset("Normal");
+    }
+
+    private void SuggestAction()
+    {
+        _playerAction = _preset switch
+        {
+            "Mad" => "looks away, jaw tight, shoulders tense",
+            "Sad" => "eyes drop, voice quieter, shoulders slightly slumped",
+            "Flirty" => "holds eye contact a beat longer and smiles",
+            "Nervous" => "fidgets with their hands and avoids steady eye contact",
+            "Hurt" => "goes quiet and looks away",
+            "Jealous" => "folds their arms and watches closely",
+            "Tired" => "rubs their eyes and exhales slowly",
+            "Defensive" => "leans back slightly and folds their arms",
+            _ => "meets their eyes with a neutral expression"
+        };
+    }
+
+    private RenderFragment EmotionSlider(string name, int value, Action<int> setter) => builder =>
+    {
+        var seq = 0;
+        builder.OpenElement(seq++, "label"); builder.AddAttribute(seq++, "class", "emotion-slider");
+        builder.OpenElement(seq++, "span"); builder.AddContent(seq++, name); builder.CloseElement();
+        builder.OpenElement(seq++, "input"); builder.AddAttribute(seq++, "type", "range"); builder.AddAttribute(seq++, "min", "0"); builder.AddAttribute(seq++, "max", "100"); builder.AddAttribute(seq++, "value", value); builder.AddAttribute(seq++, "oninput", EventCallback.Factory.CreateBinder<int>(this, setter, value)); builder.CloseElement();
+        builder.OpenElement(seq++, "b"); builder.AddContent(seq++, value); builder.CloseElement();
+        builder.CloseElement();
+    };
+
+    private static string FormatImpact(int value) => value > 0 ? $"+{value}" : value.ToString();
+    private sealed record TestTurn(string PlayerText, string PlayerAction, NpcBehaviorTestResult Result);
+}

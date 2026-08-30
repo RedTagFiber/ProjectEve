@@ -1,0 +1,90 @@
+@page "/npc-studio"
+@rendermode InteractiveServer
+@using ProjectEve.NpcStudio.Models
+@inject ProjectEve.NpcStudio.Services.NpcStudioService Studio
+
+<PageTitle>NPC Studio Dashboard</PageTitle>
+
+<section class="studio-page studio-page-dark">
+    <div class="studio-hero">
+        <div>
+            <p class="studio-eyebrow">Project Eve Control Room</p>
+            <h1>NPC Studio</h1>
+            <p class="studio-muted">A clean case-board view of the town: people, relationships, images, voices, and AI ideas.</p>
+        </div>
+        <div class="studio-hero-actions">
+            <a class="studio-btn studio-btn-primary" href="/npc-studio/browser">Open NPC Browser</a>
+            <a class="studio-btn" href="/npc-studio/prompt-lab">Prompt Lab</a>
+            <a class="studio-btn" href="/npc-studio/comfy">Comfy Room</a>
+        </div>
+    </div>
+
+    @if (_dashboard is null)
+    {
+        <div class="studio-card studio-loading">Loading dashboard...</div>
+    }
+    else
+    {
+        <div class="studio-metric-grid">
+            <article class="studio-metric"><span class="studio-metric-title">Total NPCs</span><strong>@_dashboard.TotalCharacters</strong><small>Complete database population</small></article>
+            <article class="studio-metric"><span class="studio-metric-title">Core Files</span><strong>@_dashboard.CoreCharacters</strong><small>Eve, Adam, Lisa, Edward</small></article>
+            <article class="studio-metric"><span class="studio-metric-title">Town NPCs</span><strong>@_dashboard.TownCharacters</strong><small>Active Bellefontaine/Sidney people</small></article>
+            <article class="studio-metric"><span class="studio-metric-title">History NPCs</span><strong>@_dashboard.HistoryCharacters</strong><small>Background/family/history links</small></article>
+            <article class="studio-metric"><span class="studio-metric-title">Relationships</span><strong>@_dashboard.RelationshipCount</strong><small>Saved social connections</small></article>
+            <article class="studio-metric warn"><span class="studio-metric-title">Missing Images</span><strong>@_dashboard.MissingReferenceImages</strong><small>Needs Comfy reference portrait</small></article>
+            <article class="studio-metric warn"><span class="studio-metric-title">Missing Voices</span><strong>@_dashboard.MissingVoices</strong><small>Needs voice direction/approval</small></article>
+            <article class="studio-metric ok"><span class="studio-metric-title">Approved Images</span><strong>@_dashboard.ApprovedImages</strong><small>Visual identity approved</small></article>
+            <article class="studio-metric ok"><span class="studio-metric-title">Approved Voices</span><strong>@_dashboard.ApprovedVoices</strong><small>Voice identity approved</small></article>
+        </div>
+
+        <div class="studio-columns">
+            <section class="studio-card">
+                <div class="studio-card-head">
+                    <h2>Top Occupations</h2>
+                    <span class="studio-pill">world texture</span>
+                </div>
+                <div class="studio-list">
+                    @foreach (var row in _dashboard.TopOccupations)
+                    {
+                        <div class="studio-list-row"><span>@row.Label</span><strong>@row.Count</strong></div>
+                    }
+                </div>
+            </section>
+
+            <section class="studio-card">
+                <div class="studio-card-head">
+                    <h2>Relationship Leaders</h2>
+                    <span class="studio-pill">social web</span>
+                </div>
+                <div class="studio-list">
+                    @foreach (var row in _dashboard.TopRelationshipCounts)
+                    {
+                        <div class="studio-list-row"><span>@row.Label</span><strong>@row.Count</strong></div>
+                    }
+                </div>
+            </section>
+        </div>
+
+        <section class="studio-card studio-action-board">
+            <div>
+                <h2>Next Work Queue</h2>
+                <p class="studio-muted">Start with reference images. A face makes each NPC easier to understand before voice and deeper writing.</p>
+            </div>
+            <div class="studio-action-grid">
+                <a class="studio-file-tile" href="/npc-studio/needs-image"><strong>Needs Image</strong><span>Comfy reference portraits</span></a>
+                <a class="studio-file-tile" href="/npc-studio/needs-voice"><strong>Needs Voice</strong><span>Voice notes and approval</span></a>
+                <a class="studio-file-tile" href="/npc-studio/image-approval"><strong>Image Approval</strong><span>Mark final pictures current</span></a>
+                <a class="studio-file-tile" href="/npc-studio/relationship-map"><strong>Relationship Map</strong><span>See how people connect</span></a>
+            </div>
+        </section>
+    }
+</section>
+
+@code {
+    private ProjectEve.NpcStudio.Models.NpcStudioDashboard? _dashboard;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _dashboard = await Studio.GetDashboardAsync();
+    }
+}

@@ -1,0 +1,583 @@
+﻿@page "/canonical-professional/{NpcId:int}"
+@rendermode InteractiveServer
+@using ProjectEve.NpcStudio.Models
+@using ProjectEve.NpcStudio.Services
+@inject ProjectEve.NpcStudio.Data.NpcStudioRepository Repo
+@inject AiEducationProfessionalAssistService AiAssist
+
+<PageTitle>Education & Professional</PageTitle>
+
+<div class="edu-shell">
+    <header class="edu-hero">
+        <div>
+            <div class="eyebrow">PROJECT EVE · NPC STUDIO</div>
+            <h1>Education & Professional</h1>
+            @if (_bundle is not null)
+            {
+                <p>NPC #@_bundle.NpcId · @_bundle.NpcName</p>
+            }
+        </div>
+        <button class="ghost-btn" @onclick="ReloadAsync" disabled="@_busy">Reload</button>
+    </header>
+
+    @if (_loading)
+    {
+        <div class="status-card">Loading NPC @NpcId...</div>
+    }
+    else if (!string.IsNullOrWhiteSpace(_error))
+    {
+        <div class="status-card error"><b>Load failed</b><pre>@_error</pre></div>
+    }
+    else if (_bundle is null)
+    {
+        <div class="status-card">NPC @NpcId was not found.</div>
+    }
+    else
+    {
+        @if (!string.IsNullOrWhiteSpace(_message))
+        {
+            <div class="status-card success">@_message</div>
+        }
+
+        <section class="ai-card">
+            <div class="ai-copy">
+                <span class="ai-kicker">✦ AI ASSIST</span>
+                <h2>Build the draft. You fine tune it.</h2>
+                <p>
+                    AI reads the NPC's existing canon and proposes education, career,
+                    qualifications and competencies. It does not save anything automatically.
+                </p>
+            </div>
+            <div class="ai-actions">
+                <button class="ai-btn" @onclick="GenerateAiPreviewAsync" disabled="@_aiBusy">
+                    @(_aiBusy ? "AI is building..." : "Generate AI Draft")
+                </button>
+                @if (_aiPreview is not null)
+                {
+                    <button class="ghost-btn" @onclick="ApplyAiPreviewToForm">Apply Draft to Form</button>
+                }
+            </div>
+
+            @if (_aiPreview is not null)
+            {
+                <div class="ai-preview">
+                    <b>AI Preview</b>
+                    <p>@_aiPreview.Summary</p>
+                    <div class="preview-chips">
+                        <span>@_aiPreview.Education.Count education records</span>
+                        <span>@_aiPreview.Qualifications.Count qualifications</span>
+                        <span>@_aiPreview.Competencies.Count competencies</span>
+                    </div>
+                    <small>Nothing is written until you review the form and press Save.</small>
+                </div>
+            }
+        </section>
+
+        <details class="section-card" open>
+            <summary>
+                <div>
+                    <span class="section-num">1</span>
+                    <div><b>Education</b><small>School progression and credentials</small></div>
+                </div>
+                <span class="count">@_bundle.Education.Count records</span>
+            </summary>
+
+            <div class="section-body">
+                <div class="section-toolbar">
+                    <p>
+                        Start with Elementary School, then Middle School, High School,
+                        and College / University only when it makes sense for this NPC.
+                    </p>
+                    <button class="secondary-btn" @onclick="AddEducation">+ Add Education</button>
+                </div>
+
+                @if (_bundle.Education.Count == 0)
+                {
+                    <div class="empty-record">
+                        No education records yet. Use AI Draft or add the first school record.
+                    </div>
+                }
+
+                @for (var i = 0; i < _bundle.Education.Count; i++)
+                {
+                    var item = _bundle.Education[i];
+                    var number = i + 1;
+
+                    <details class="record-card" open="@(i == 0)">
+                        <summary>
+                            <div>
+                                <span class="record-index">Education @number</span>
+                                <b>@LabelOr(item.EducationType, "Choose education level")</b>
+                            </div>
+                            <span>@LabelOr(item.InstitutionName, item.Status)</span>
+                        </summary>
+
+                        <div class="record-body">
+                            <div class="form-grid">
+                                <label>
+                                    <span>Education Level</span>
+                                    <select @bind="item.EducationType">
+                                        <option value="">Select level...</option>
+                                        @foreach (var option in EducationLevels)
+                                        {
+                                            <option value="@option">@option</option>
+                                        }
+                                    </select>
+                                </label>
+
+                                <label>
+                                    <span>School / Institution</span>
+                                    <input @bind="item.InstitutionName" placeholder="School name" />
+                                </label>
+
+                                <label>
+                                    <span>Status</span>
+                                    <select @bind="item.Status">
+                                        <option>Completed</option>
+                                        <option>Currently Enrolled</option>
+                                        <option>Graduated</option>
+                                        <option>Transferred</option>
+                                        <option>Withdrawn</option>
+                                        <option>Did Not Complete</option>
+                                        <option>Not Applicable</option>
+                                    </select>
+                                </label>
+
+                                <label>
+                                    <span>Degree / Credential</span>
+                                    <input @bind="item.DegreeOrCredential" placeholder="Diploma, GED, Associate, Bachelor's..." />
+                                </label>
+
+                                <label>
+                                    <span>Program</span>
+                                    <input @bind="item.ProgramName" />
+                                </label>
+
+                                <label>
+                                    <span>Field of Study</span>
+                                    <input @bind="item.FieldOfStudy" />
+                                </label>
+                            </div>
+
+                            <div class="mini-grid">
+                                <label><span>Start Age</span><input type="number" min="3" max="100" @bind="item.StartAge" /></label>
+                                <label><span>End Age</span><input type="number" min="3" max="110" @bind="item.EndAge" /></label>
+                                <label><span>GPA</span><input type="number" min="0" max="4" step="0.01" @bind="item.Gpa" /></label>
+                            </div>
+
+                            <label class="wide-field">
+                                <span>Honors / Notes</span>
+                                <input @bind="item.Honors" placeholder="Honors, activities, distinctions..." />
+                            </label>
+
+                            <label class="wide-field">
+                                <span>Education Notes</span>
+                                <textarea rows="2" @bind="item.Notes"></textarea>
+                            </label>
+
+                            <details class="advanced">
+                                <summary>Advanced / Canonical Event Links</summary>
+                                <div class="form-grid">
+                                    <label><span>Institution ID</span><input @bind="item.InstitutionId" /></label>
+                                    <label><span>Start Time</span><input @bind="item.StartGameTime" /></label>
+                                    <label><span>End Time</span><input @bind="item.EndGameTime" /></label>
+                                    <label><span>Start Event ID</span><input @bind="item.StartEventId" /></label>
+                                    <label><span>Completion Event ID</span><input @bind="item.CompletionEventId" /></label>
+                                    <label><span>Withdrawal Event ID</span><input @bind="item.WithdrawalEventId" /></label>
+                                </div>
+                            </details>
+
+                            <div class="save-row">
+                                <button class="primary-btn" @onclick="() => SaveEducationAsync(item)" disabled="@_busy">
+                                    Save Education @number
+                                </button>
+                            </div>
+                        </div>
+                    </details>
+                }
+            </div>
+        </details>
+
+        <details class="section-card" open>
+            <summary>
+                <div>
+                    <span class="section-num">2</span>
+                    <div><b>Professional</b><small>Current work and career truth</small></div>
+                </div>
+                <span class="count">Current profile</span>
+            </summary>
+
+            <div class="section-body">
+                <div class="form-grid">
+                    <label><span>Primary Role ID</span><input @bind="_bundle.ProfessionalProfile.PrimaryRoleId" /></label>
+                    <label><span>Career Field</span><input @bind="_bundle.ProfessionalProfile.CareerField" /></label>
+                    <label>
+                        <span>Training Level</span>
+                        <select @bind="_bundle.ProfessionalProfile.TrainingLevel">
+                            <option value="">Select...</option>
+                            <option>None / Entry Level</option>
+                            <option>On-the-Job Training</option>
+                            <option>High School / Equivalent</option>
+                            <option>Trade / Vocational</option>
+                            <option>Associate Degree</option>
+                            <option>Bachelor's Degree</option>
+                            <option>Graduate Degree</option>
+                            <option>Doctoral / Professional</option>
+                            <option>Licensed Professional</option>
+                            <option>Retired / Former Professional</option>
+                            <option>Student</option>
+                        </select>
+                    </label>
+                    <label><span>Years Experience</span><input type="number" min="0" max="80" @bind="_bundle.ProfessionalProfile.YearsExperience" /></label>
+                    <label><span>License Standing</span><input @bind="_bundle.ProfessionalProfile.LicenseStanding" placeholder="N/A, Active, Expired..." /></label>
+                    <label class="check-field"><span>Profile Status</span><div><input type="checkbox" @bind="_bundle.ProfessionalProfile.IsActive" /> Active</div></label>
+                </div>
+
+                <div class="metric-grid">
+                    <label><span>Burnout</span><input type="number" min="0" max="100" @bind="_bundle.ProfessionalProfile.Burnout" /></label>
+                    <label><span>Motivation</span><input type="number" min="0" max="100" @bind="_bundle.ProfessionalProfile.Motivation" /></label>
+                    <label><span>Performance</span><input type="number" min="0" max="100" @bind="_bundle.ProfessionalProfile.CurrentPerformance" /></label>
+                    <label><span>Reputation</span><input type="number" min="0" max="100" @bind="_bundle.ProfessionalProfile.ProfessionalReputation" /></label>
+                </div>
+
+                <label class="wide-field">
+                    <span>Professional Notes</span>
+                    <textarea rows="3" @bind="_bundle.ProfessionalProfile.Notes"></textarea>
+                </label>
+
+                <div class="save-row">
+                    <button class="primary-btn" @onclick="SaveAndVerifyProfileAsync" disabled="@_busy">Save Professional Profile</button>
+                </div>
+            </div>
+        </details>
+
+        <details class="section-card">
+            <summary>
+                <div>
+                    <span class="section-num">3</span>
+                    <div><b>Qualifications</b><small>Licenses, certificates and formal qualifications</small></div>
+                </div>
+                <span class="count">@_bundle.Qualifications.Count records</span>
+            </summary>
+            <div class="section-body">
+                <div class="section-toolbar">
+                    <p>Only add qualifications that make sense for the job and education route.</p>
+                    <button class="secondary-btn" @onclick="AddQualification">+ Add Qualification</button>
+                </div>
+
+                @foreach (var item in _bundle.Qualifications)
+                {
+                    <details class="record-card">
+                        <summary><div><b>@LabelOr(item.Name, "Qualification")</b></div><span>@item.QualificationType · @item.Status</span></summary>
+                        <div class="record-body">
+                            <div class="form-grid">
+                                <label><span>Role ID</span><input @bind="item.RoleId" /></label>
+                                <label><span>Type</span><input @bind="item.QualificationType" /></label>
+                                <label><span>Name</span><input @bind="item.Name" /></label>
+                                <label><span>Issuer</span><input @bind="item.IssuerName" /></label>
+                                <label><span>Status</span><input @bind="item.Status" /></label>
+                                <label><span>Credential #</span><input @bind="item.CredentialNumber" /></label>
+                            </div>
+                            <label class="wide-field"><span>Notes</span><textarea rows="2" @bind="item.Notes"></textarea></label>
+                            <div class="save-row"><button class="primary-btn" @onclick="() => SaveQualificationAsync(item)" disabled="@_busy">Save Qualification</button></div>
+                        </div>
+                    </details>
+                }
+            </div>
+        </details>
+
+        <details class="section-card">
+            <summary>
+                <div>
+                    <span class="section-num">4</span>
+                    <div><b>Competencies</b><small>What this NPC can actually do</small></div>
+                </div>
+                <span class="count">@_bundle.Competencies.Count records</span>
+            </summary>
+            <div class="section-body">
+                <div class="section-toolbar">
+                    <p>Competencies should come from education, training and real work experience.</p>
+                    <button class="secondary-btn" @onclick="AddCompetency">+ Add Competency</button>
+                </div>
+
+                @foreach (var item in _bundle.Competencies)
+                {
+                    <div class="competency">
+                        <input class="competency-name" @bind="item.CompetencyName" placeholder="Competency" />
+                        <label><span>Current</span><input type="number" min="0" max="100" @bind="item.CurrentValue" /></label>
+                        <label><span>Set Point</span><input type="number" min="0" max="100" @bind="item.SetPointValue" /></label>
+                        <label><span>Confidence</span><input type="number" min="0" max="100" @bind="item.Confidence" /></label>
+                        <input @bind="item.ExperienceLevel" placeholder="Beginner / Skilled / Expert" />
+                        <button class="primary-btn small" @onclick="() => SaveCompetencyAsync(item)" disabled="@_busy">Save</button>
+                    </div>
+                }
+            </div>
+        </details>
+    }
+</div>
+
+<style>
+.edu-shell{max-width:1280px;margin:0 auto;padding:26px;color:#e9eef8}.edu-hero{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-bottom:18px}.eyebrow{color:#9d83ff;letter-spacing:.14em;font-size:11px;font-weight:900}.edu-hero h1{margin:4px 0;font-size:34px}.edu-hero p{color:#8fa0ba;margin:4px 0}.status-card,.ai-card,.section-card{background:#0d1625;border:1px solid #263650;border-radius:14px;margin-bottom:14px}.status-card{padding:14px}.status-card.success{border-color:#28543a;color:#8ae3a1}.status-card.error{border-color:#6a303c;color:#ff9bab}.status-card pre{white-space:pre-wrap}.ai-card{padding:18px;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;background:linear-gradient(135deg,#11182a,#16123b)}.ai-kicker{color:#c7b8ff;font-weight:900;font-size:11px;letter-spacing:.12em}.ai-copy h2{margin:5px 0 6px;font-size:21px}.ai-copy p{margin:0;color:#9caac0;max-width:720px;font-size:12px;line-height:1.5}.ai-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.ai-preview{grid-column:1/-1;border-top:1px solid #302958;padding-top:13px}.ai-preview p{color:#b8c3d5}.preview-chips{display:flex;gap:7px;flex-wrap:wrap;margin:8px 0}.preview-chips span{background:#201a48;border:1px solid #4a3b88;border-radius:999px;padding:5px 9px;font-size:10px;color:#cfc5ff}.ai-preview small{color:#8191aa}.section-card>summary{list-style:none;display:flex;justify-content:space-between;align-items:center;padding:16px 18px;cursor:pointer}.section-card>summary::-webkit-details-marker{display:none}.section-card>summary>div{display:flex;gap:12px;align-items:center}.section-card>summary b{display:block;font-size:17px}.section-card>summary small{display:block;color:#7f91ad;font-size:10px;margin-top:2px}.section-num{width:30px;height:30px;border-radius:8px;background:#251d52;border:1px solid #493a8a;display:grid;place-items:center;color:#cbbfff;font-weight:900}.count{font-size:10px;color:#9aa9bf}.section-body{border-top:1px solid #1e2d45;padding:16px 18px}.section-toolbar{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:12px}.section-toolbar p{margin:0;color:#8d9eb8;font-size:11px}.record-card{border:1px solid #21314b;background:#091220;border-radius:11px;margin:9px 0}.record-card>summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:12px;padding:12px 14px}.record-card>summary::-webkit-details-marker{display:none}.record-card>summary b{display:block}.record-card>summary span{color:#8191aa;font-size:10px}.record-index{color:#a993ff!important;text-transform:uppercase;letter-spacing:.09em}.record-body{border-top:1px solid #1d2c44;padding:14px}.form-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.mini-grid,.metric-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:12px}label{display:flex;flex-direction:column;gap:5px}label>span{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:#8395b2;font-weight:800}input,select,textarea{width:100%;box-sizing:border-box;background:#0a1423;color:#eaf0fa;border:1px solid #2a3b58;border-radius:8px;padding:9px 10px}input:focus,select:focus,textarea:focus{outline:none;border-color:#8364f3;box-shadow:0 0 0 3px rgba(131,100,243,.11)}.wide-field{margin-top:12px}.check-field div{height:38px;display:flex;align-items:center;gap:8px}.check-field input{width:auto}.advanced{margin-top:12px;border:1px dashed #2a3c5b;border-radius:8px;padding:9px}.advanced summary{cursor:pointer;color:#9a8bd0;font-size:11px}.save-row{display:flex;justify-content:flex-end;margin-top:13px}.primary-btn,.secondary-btn,.ghost-btn,.ai-btn{border-radius:8px;padding:9px 13px;font-weight:800;cursor:pointer}.primary-btn,.ai-btn{background:#6f49e8;border:1px solid #8a69ef;color:white}.ai-btn{background:linear-gradient(135deg,#7d5af0,#5b39c8)}.secondary-btn,.ghost-btn{background:#101b2d;border:1px solid #304362;color:#b8c6da}.small{padding:7px 10px}.empty-record{border:1px dashed #334664;border-radius:9px;padding:16px;color:#7f91aa;text-align:center}.competency{display:grid;grid-template-columns:1.4fr repeat(3,.55fr) 1fr auto;gap:8px;align-items:end;background:#091220;border:1px solid #21314b;border-radius:9px;padding:10px;margin-bottom:8px}.competency-name{align-self:end}@@media(max-width:950px){.form-grid{grid-template-columns:1fr 1fr}.competency{grid-template-columns:1fr 1fr}.ai-card{grid-template-columns:1fr}.ai-actions{justify-content:flex-start}}@@media(max-width:650px){.form-grid,.mini-grid,.metric-grid{grid-template-columns:1fr}.section-toolbar,.edu-hero{flex-direction:column}}
+</style>
+
+@code {
+    [Parameter] public int NpcId { get; set; }
+
+    private CanonicalProfessionalBundle? _bundle;
+    private AiEducationProfessionalProposal? _aiPreview;
+    private bool _loading = true;
+    private bool _busy;
+    private bool _aiBusy;
+    private string _error = "";
+    private string _message = "";
+
+    private static readonly string[] EducationLevels =
+    [
+        "Elementary School",
+        "Middle School",
+        "High School",
+        "College / University",
+        "Trade / Vocational",
+        "Graduate School",
+        "Doctoral / Professional School",
+        "Certification / Continuing Education",
+        "Other"
+    ];
+
+    protected override Task OnParametersSetAsync() => ReloadAsync();
+
+    private async Task ReloadAsync()
+    {
+        _loading = true;
+        _error = "";
+        _message = "";
+
+        try
+        {
+            _bundle = await Repo.GetCanonicalProfessionalBundleAsync(NpcId);
+        }
+        catch (Exception ex)
+        {
+            _error = ex.ToString();
+        }
+        finally
+        {
+            _loading = false;
+        }
+    }
+
+    private async Task GenerateAiPreviewAsync()
+    {
+        if (_bundle is null) return;
+
+        _aiBusy = true;
+        _error = "";
+        _message = "";
+
+        try
+        {
+            _aiPreview = await AiAssist.BuildPreviewAsync(NpcId, _bundle);
+            _message = "AI draft created. Review it, then Apply Draft to Form. Nothing has been saved.";
+        }
+        catch (Exception ex)
+        {
+            _error = ex.Message;
+        }
+        finally
+        {
+            _aiBusy = false;
+        }
+    }
+
+    private void ApplyAiPreviewToForm()
+    {
+        if (_bundle is null || _aiPreview is null) return;
+
+        static string Fill(string current, string proposed) =>
+            string.IsNullOrWhiteSpace(current) ? (proposed ?? "") : current;
+
+        var p = _bundle.ProfessionalProfile;
+        var a = _aiPreview.Professional;
+
+        p.PrimaryRoleId = Fill(p.PrimaryRoleId, a.PrimaryRoleId);
+        p.CareerField = Fill(p.CareerField, a.CareerField);
+        p.TrainingLevel = Fill(p.TrainingLevel, a.TrainingLevel);
+        if (p.YearsExperience <= 0) p.YearsExperience = Math.Max(0, a.YearsExperience);
+        p.LicenseStanding = Fill(p.LicenseStanding, a.LicenseStanding);
+        if (p.Burnout == 0) p.Burnout = Math.Clamp(a.Burnout, 0, 100);
+        if (p.Motivation == 50) p.Motivation = Math.Clamp(a.Motivation, 0, 100);
+        if (p.CurrentPerformance == 50) p.CurrentPerformance = Math.Clamp(a.CurrentPerformance, 0, 100);
+        if (p.ProfessionalReputation == 50) p.ProfessionalReputation = Math.Clamp(a.ProfessionalReputation, 0, 100);
+        p.Notes = Fill(p.Notes, a.Notes);
+
+        if (_bundle.Education.Count == 0)
+        {
+            foreach (var x in _aiPreview.Education)
+            {
+                _bundle.Education.Add(new CanonicalEducationRecord
+                {
+                    NpcId = NpcId,
+                    EducationType = x.EducationType,
+                    InstitutionName = x.InstitutionName,
+                    DegreeOrCredential = x.DegreeOrCredential,
+                    ProgramName = x.ProgramName,
+                    FieldOfStudy = x.FieldOfStudy,
+                    Status = string.IsNullOrWhiteSpace(x.Status) ? "Completed" : x.Status,
+                    StartAge = x.StartAge,
+                    EndAge = x.EndAge,
+                    Gpa = x.Gpa,
+                    Honors = x.Honors,
+                    Notes = x.Notes
+                });
+            }
+        }
+
+        if (_bundle.Qualifications.Count == 0)
+        {
+            foreach (var x in _aiPreview.Qualifications)
+            {
+                _bundle.Qualifications.Add(new CanonicalProfessionalQualification
+                {
+                    NpcId = NpcId,
+                    RoleId = p.PrimaryRoleId,
+                    QualificationType = x.QualificationType,
+                    Name = x.Name,
+                    IssuerName = x.IssuerName,
+                    Status = string.IsNullOrWhiteSpace(x.Status) ? "Active" : x.Status,
+                    CredentialNumber = x.CredentialNumber,
+                    Notes = x.Notes
+                });
+            }
+        }
+
+        if (_bundle.Competencies.Count == 0)
+        {
+            foreach (var x in _aiPreview.Competencies)
+            {
+                _bundle.Competencies.Add(new CanonicalProfessionalCompetency
+                {
+                    NpcId = NpcId,
+                    RoleId = p.PrimaryRoleId,
+                    CompetencyId = x.CompetencyId,
+                    CompetencyName = x.CompetencyName,
+                    CurrentValue = Math.Clamp(x.CurrentValue, 0, 100),
+                    SetPointValue = Math.Clamp(x.SetPointValue, 0, 100),
+                    Confidence = Math.Clamp(x.Confidence, 0, 100),
+                    ExperienceLevel = x.ExperienceLevel,
+                    Notes = x.Notes
+                });
+            }
+        }
+
+        _message = "AI draft applied to the form only. Fine tune everything before saving.";
+    }
+
+    private void AddEducation()
+    {
+        if (_bundle is null) return;
+
+        var next = EducationLevels.FirstOrDefault(level =>
+            !_bundle.Education.Any(x =>
+                string.Equals(x.EducationType, level, StringComparison.OrdinalIgnoreCase)))
+            ?? "Other";
+
+        _bundle.Education.Add(new CanonicalEducationRecord
+        {
+            NpcId = NpcId,
+            EducationType = next,
+            Status = "Completed"
+        });
+    }
+
+    private void AddQualification()
+    {
+        if (_bundle is null) return;
+        _bundle.Qualifications.Add(new CanonicalProfessionalQualification
+        {
+            NpcId = NpcId,
+            RoleId = _bundle.ProfessionalProfile.PrimaryRoleId,
+            Status = "Active"
+        });
+    }
+
+    private void AddCompetency()
+    {
+        if (_bundle is null) return;
+        _bundle.Competencies.Add(new CanonicalProfessionalCompetency
+        {
+            NpcId = NpcId,
+            RoleId = _bundle.ProfessionalProfile.PrimaryRoleId,
+            CurrentValue = 50,
+            SetPointValue = 50,
+            Confidence = 50
+        });
+    }
+
+    private async Task SaveAndVerifyProfileAsync()
+    {
+        if (_bundle is null) return;
+
+        _busy = true;
+        _message = "";
+        _error = "";
+
+        try
+        {
+            await Repo.SaveAndVerifyCanonicalProfessionalProfileAsync(_bundle.ProfessionalProfile);
+            _bundle = await Repo.GetCanonicalProfessionalBundleAsync(NpcId);
+            _message = "Professional profile saved and reloaded from SQLite.";
+        }
+        catch (Exception ex)
+        {
+            _error = ex.ToString();
+        }
+        finally
+        {
+            _busy = false;
+        }
+    }
+
+    private Task SaveEducationAsync(CanonicalEducationRecord item)
+    {
+        item.NpcId = NpcId;
+        return RunSave(() => Repo.SaveCanonicalEducationAsync(item), "Education record saved.");
+    }
+
+    private Task SaveQualificationAsync(CanonicalProfessionalQualification item)
+    {
+        item.NpcId = NpcId;
+        return RunSave(() => Repo.SaveCanonicalQualificationAsync(item), "Qualification saved.");
+    }
+
+    private Task SaveCompetencyAsync(CanonicalProfessionalCompetency item)
+    {
+        item.NpcId = NpcId;
+        return RunSave(() => Repo.SaveCanonicalCompetencyAsync(item), "Competency saved.");
+    }
+
+    private async Task RunSave(Func<Task> action, string success)
+    {
+        _busy = true;
+        _message = "";
+        _error = "";
+
+        try
+        {
+            await action();
+            _bundle = await Repo.GetCanonicalProfessionalBundleAsync(NpcId);
+            _message = success + " Reload confirmed.";
+        }
+        catch (Exception ex)
+        {
+            _error = ex.ToString();
+        }
+        finally
+        {
+            _busy = false;
+        }
+    }
+
+    private static string LabelOr(string? value, string fallback)
+        => string.IsNullOrWhiteSpace(value) ? fallback : value;
+}
+

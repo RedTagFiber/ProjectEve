@@ -1,0 +1,367 @@
+@page "/npc-studio/prompt-lab"
+@rendermode InteractiveServer
+@using ProjectEve.NpcStudio.Models
+@inject ProjectEve.NpcStudio.Services.NpcStudioService Studio
+@inject ProjectEve.NpcStudio.Services.OllamaPromptEngineerService PromptEngineer
+
+<PageTitle>Prompt Engineer Lab</PageTitle>
+
+<section class="studio-page studio-page-dark">
+<div class="studio-page-header"><div><p class="studio-eyebrow">Ollama Creative Desk</p><h1>Prompt Engineer Lab</h1><p class="studio-muted">Every text generation step shows waiting, working, success, or failure.</p></div><a class="studio-btn" href="/npc-studio/comfy">Comfy Room</a></div>
+
+<div class="studio-card">
+    <h3>Generation Status</h3>
+    <p class="text-muted">This panel tells you what is happening right now so you know if Ollama/text generation is working.</p>
+
+    <div class="studio-status-list">
+        <div class="studio-status-row @StatusCss(_loadSheetStatus)">
+            <strong>@StatusIcon(_loadSheetStatus) Load character sheet</strong>
+            <span>@_loadSheetMessage</span>
+        </div>
+        <div class="studio-status-row @StatusCss(_ollamaStatus)">
+            <strong>@StatusIcon(_ollamaStatus) Ollama Prompt Engineer</strong>
+            <span>@_ollamaMessage</span>
+        </div>
+        <div class="studio-status-row @StatusCss(_extractStatus)">
+            <strong>@StatusIcon(_extractStatus) Extract Comfy prompt</strong>
+            <span>@_extractMessage</span>
+        </div>
+        <div class="studio-status-row @StatusCss(_saveIdeaStatus)">
+            <strong>@StatusIcon(_saveIdeaStatus) Save AI idea</strong>
+            <span>@_saveIdeaMessage</span>
+        </div>
+        <div class="studio-status-row @StatusCss(_savePromptStatus)">
+            <strong>@StatusIcon(_savePromptStatus) Save Comfy prompt</strong>
+            <span>@_savePromptMessage</span>
+        </div>
+    </div>
+</div>
+
+<div class="studio-card">
+    <h3>Analyze NPC</h3>
+
+    <label>NPC Id</label>
+    <input class="form-control" type="number" @bind="_npcId" />
+
+    <label>Mode</label>
+    <select class="form-control" @bind="_mode">
+        <option value="Full Character Read">Full Character Read</option>
+        <option value="Comfy Reference Portrait">Comfy Reference Portrait</option>
+        <option value="Voice Direction">Voice Direction</option>
+        <option value="Relationship Ideas">Relationship Ideas</option>
+        <option value="Secrets and Conflict">Secrets and Conflict</option>
+    </select>
+
+    <label>Instruction</label>
+    <textarea class="form-control" rows="5" @bind="_extraDirection"></textarea>
+
+    <button class="btn btn-primary" @onclick="AnalyzeAsync" disabled="@_isBusy">
+        @(_isBusy ? "Working..." : "Analyze Character Sheet")
+    </button>
+
+    @if (!string.IsNullOrWhiteSpace(_status))
+    {
+        <p class="text-muted"><strong>Status:</strong> @_status</p>
+    }
+</div>
+
+@if (_sheet is not null)
+{
+    <div class="studio-card">
+        <h3>@_sheet.Name</h3>
+        <p>
+            <strong>Id:</strong> @_sheet.Id |
+            <strong>Age:</strong> @_sheet.Age |
+            <strong>Gender:</strong> @_sheet.Gender |
+            <strong>Tier:</strong> @_sheet.Tier |
+            <strong>Status:</strong> @_sheet.Status
+        </p>
+        <p><strong>Job:</strong> @_sheet.Occupation</p>
+        <p><strong>Location:</strong> @_sheet.Location</p>
+        <p><strong>Goal:</strong> @_sheet.Goal</p>
+        <p><strong>Need:</strong> @_sheet.Need</p>
+        <p><strong>Fear:</strong> @_sheet.Fear</p>
+        <p><strong>Want:</strong> @_sheet.Want</p>
+        <p>
+            <strong>Relationships:</strong> @_sheet.Relationships.Count |
+            <strong>Traits:</strong> @_sheet.Traits.Count |
+            <strong>Images:</strong> @_sheet.Images.Count |
+            <strong>Ideas:</strong> @_sheet.Ideas.Count
+        </p>
+    </div>
+}
+
+@if (_idea is not null)
+{
+    <div class="studio-card">
+        <h3>AI Ideas</h3>
+        <p><strong>Mode:</strong> @_idea.IdeaType | <strong>Model:</strong> @_idea.SourceModel</p>
+        <pre>@_idea.IdeaText</pre>
+
+        <button class="btn btn-success" @onclick="SaveIdeaAsync" disabled="@_isSaving">
+            @(_isSaving ? "Saving..." : "Save AI Idea to NPC")
+        </button>
+
+        <button class="btn btn-outline-primary" @onclick="SaveComfyPromptToAppearanceAsync" disabled="@_isSaving">
+            Save Comfy Prompt to Appearance
+        </button>
+    </div>
+}
+
+@if (!string.IsNullOrWhiteSpace(_positivePrompt) || !string.IsNullOrWhiteSpace(_negativePrompt))
+{
+    <div class="studio-card">
+        <h3>Extracted Comfy Prompt Preview</h3>
+        <p class="text-muted">This is what will be sent to Comfy or saved to the NPC Appearance tab.</p>
+
+        <label>Positive Prompt</label>
+        <textarea class="form-control" rows="6" @bind="_positivePrompt"></textarea>
+
+        <label>Negative Prompt</label>
+        <textarea class="form-control" rows="4" @bind="_negativePrompt"></textarea>
+    </div>
+}
+
+</section>
+
+@code {
+    private int _npcId = 1;
+    private string _mode = "Full Character Read";
+    private string _extraDirection = "Study the full character sheet. Suggest appearance, voice, secrets, conflict, relationship ideas, and a Comfy reference portrait prompt. Do not change canon facts.";
+
+    private NpcCharacterSheet? _sheet;
+    private NpcStudioIdea? _idea;
+
+    private string _positivePrompt = "";
+    private string _negativePrompt = "";
+    private string _status = "";
+    private bool _isBusy;
+    private bool _isSaving;
+
+    // Step status values: idle, working, ok, fail.
+    private string _loadSheetStatus = "idle";
+    private string _ollamaStatus = "idle";
+    private string _extractStatus = "idle";
+    private string _saveIdeaStatus = "idle";
+    private string _savePromptStatus = "idle";
+
+    private string _loadSheetMessage = "Waiting.";
+    private string _ollamaMessage = "Waiting.";
+    private string _extractMessage = "Waiting.";
+    private string _saveIdeaMessage = "Not saved yet.";
+    private string _savePromptMessage = "Not saved yet.";
+
+    private async Task AnalyzeAsync()
+    {
+        _isBusy = true;
+        _status = "Starting text generation workflow...";
+        _idea = null;
+        _positivePrompt = "";
+        _negativePrompt = "";
+        ResetGenerationStatuses();
+
+        try
+        {
+            SetStep(ref _loadSheetStatus, ref _loadSheetMessage, "working", $"Loading NPC {_npcId} from the database...");
+            _sheet = await Studio.GetCharacterSheetAsync(_npcId);
+
+            if (_sheet is null)
+            {
+                SetStep(ref _loadSheetStatus, ref _loadSheetMessage, "fail", "NPC not found in the database.");
+                _status = "Stopped. NPC not found.";
+                return;
+            }
+
+            SetStep(ref _loadSheetStatus, ref _loadSheetMessage, "ok", $"Loaded {_sheet.Name}.");
+
+            SetStep(ref _ollamaStatus, ref _ollamaMessage, "working", "Sending complete character sheet to Ollama...");
+
+            var direction = string.IsNullOrWhiteSpace(_extraDirection)
+                ? _mode
+                : _mode + Environment.NewLine + _extraDirection;
+
+            _idea = await PromptEngineer.AnalyzeCharacterAsync(_sheet, direction);
+
+            if (_idea is null)
+            {
+                SetStep(ref _ollamaStatus, ref _ollamaMessage, "fail", "Ollama returned no idea object.");
+                _status = "Stopped. Prompt Engineer returned no idea.";
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(_idea.IdeaText))
+            {
+                SetStep(ref _ollamaStatus, ref _ollamaMessage, "fail", "Ollama responded, but the text was empty.");
+                _status = "Stopped. Empty Prompt Engineer response.";
+                return;
+            }
+
+            SetStep(ref _ollamaStatus, ref _ollamaMessage, "ok", "Ollama returned text successfully.");
+
+            SetStep(ref _extractStatus, ref _extractMessage, "working", "Looking for POSITIVE PROMPT and NEGATIVE PROMPT sections...");
+            _positivePrompt = ExtractPromptSection(_idea.IdeaText, "POSITIVE PROMPT:");
+            _negativePrompt = ExtractPromptSection(_idea.IdeaText, "NEGATIVE PROMPT:");
+
+            if (string.IsNullOrWhiteSpace(_positivePrompt) && _mode.Contains("Comfy", StringComparison.OrdinalIgnoreCase))
+            {
+                _positivePrompt = _idea.IdeaText;
+                SetStep(ref _extractStatus, ref _extractMessage, "ok", "No heading found. Used the full AI response as the positive prompt.");
+            }
+            else if (!string.IsNullOrWhiteSpace(_positivePrompt))
+            {
+                SetStep(ref _extractStatus, ref _extractMessage, "ok", "Prompt sections found.");
+            }
+            else
+            {
+                SetStep(ref _extractStatus, ref _extractMessage, "ok", "No Comfy prompt extracted. That is okay for non-image modes.");
+            }
+
+            if (string.IsNullOrWhiteSpace(_negativePrompt))
+                _negativePrompt = "cartoon, anime, plastic skin, distorted face, bad eyes, blurry, extra fingers, watermark, text, celebrity likeness";
+
+            _status = "Text generation complete. Review the result below.";
+        }
+        catch (Exception ex)
+        {
+            if (_loadSheetStatus == "working")
+                SetStep(ref _loadSheetStatus, ref _loadSheetMessage, "fail", ex.Message);
+
+            if (_ollamaStatus == "working")
+                SetStep(ref _ollamaStatus, ref _ollamaMessage, "fail", ex.Message);
+
+            if (_extractStatus == "working")
+                SetStep(ref _extractStatus, ref _extractMessage, "fail", ex.Message);
+
+            _status = "Text generation failed.";
+            _idea = new NpcStudioIdea
+            {
+                NpcId = _npcId,
+                IdeaType = _mode,
+                IdeaText = ex.Message
+            };
+        }
+        finally
+        {
+            _isBusy = false;
+        }
+    }
+
+    private async Task SaveIdeaAsync()
+    {
+        if (_idea is null)
+            return;
+
+        _isSaving = true;
+        SetStep(ref _saveIdeaStatus, ref _saveIdeaMessage, "working", "Saving AI idea and prompt history...");
+
+        try
+        {
+            await Studio.AddIdeaAsync(_idea);
+            await Studio.SavePromptGenerationAsync(new NpcPromptGeneration
+            {
+                NpcId = _idea.NpcId,
+                PromptType = _mode,
+                SourceModel = _idea.SourceModel,
+                InputJson = _idea.InputSummary,
+                OutputText = _idea.IdeaText,
+                PositivePrompt = _positivePrompt,
+                NegativePrompt = _negativePrompt,
+                Notes = "Saved from Prompt Engineer Lab Phase 9 status workflow."
+            });
+
+            SetStep(ref _saveIdeaStatus, ref _saveIdeaMessage, "ok", "Saved to NPC ideas and prompt history.");
+        }
+        catch (Exception ex)
+        {
+            SetStep(ref _saveIdeaStatus, ref _saveIdeaMessage, "fail", "Save failed: " + ex.Message);
+        }
+        finally
+        {
+            _isSaving = false;
+        }
+    }
+
+    private async Task SaveComfyPromptToAppearanceAsync()
+    {
+        if (_sheet is null)
+            return;
+
+        _isSaving = true;
+        SetStep(ref _savePromptStatus, ref _savePromptMessage, "working", "Saving Comfy prompt to appearance profile...");
+
+        try
+        {
+            await Studio.SaveAppearancePromptAsync(_sheet.Id, _positivePrompt, _negativePrompt);
+            SetStep(ref _savePromptStatus, ref _savePromptMessage, "ok", "Comfy prompt saved to Appearance / Comfy tab.");
+        }
+        catch (Exception ex)
+        {
+            SetStep(ref _savePromptStatus, ref _savePromptMessage, "fail", "Save failed: " + ex.Message);
+        }
+        finally
+        {
+            _isSaving = false;
+        }
+    }
+
+    private void ResetGenerationStatuses()
+    {
+        _loadSheetStatus = "idle";
+        _ollamaStatus = "idle";
+        _extractStatus = "idle";
+        _saveIdeaStatus = "idle";
+        _savePromptStatus = "idle";
+
+        _loadSheetMessage = "Waiting.";
+        _ollamaMessage = "Waiting.";
+        _extractMessage = "Waiting.";
+        _saveIdeaMessage = "Not saved yet.";
+        _savePromptMessage = "Not saved yet.";
+    }
+
+    private void SetStep(ref string status, ref string message, string value, string text)
+    {
+        status = value;
+        message = text;
+        StateHasChanged();
+    }
+
+    private static string StatusIcon(string status) => status switch
+    {
+        "working" => "⏳",
+        "ok" => "✅",
+        "fail" => "❌",
+        _ => "⚪"
+    };
+
+    private static string StatusCss(string status) => status switch
+    {
+        "working" => "studio-status-working",
+        "ok" => "studio-status-ok",
+        "fail" => "studio-status-fail",
+        _ => "studio-status-idle"
+    };
+
+    private static string ExtractPromptSection(string text, string heading)
+    {
+        if (string.IsNullOrWhiteSpace(text))
+            return "";
+
+        var index = text.IndexOf(heading, StringComparison.OrdinalIgnoreCase);
+        if (index < 0)
+            return "";
+
+        var start = index + heading.Length;
+        var rest = text[start..].Trim();
+
+        var nextPositive = rest.IndexOf("POSITIVE PROMPT:", StringComparison.OrdinalIgnoreCase);
+        var nextNegative = rest.IndexOf("NEGATIVE PROMPT:", StringComparison.OrdinalIgnoreCase);
+
+        var next = new[] { nextPositive, nextNegative }
+            .Where(i => i > 0)
+            .DefaultIfEmpty(-1)
+            .Min();
+
+        return next > 0 ? rest[..next].Trim() : rest.Trim();
+    }
+}

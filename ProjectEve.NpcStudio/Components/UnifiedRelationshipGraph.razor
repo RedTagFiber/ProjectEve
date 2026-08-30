@@ -1,0 +1,1127 @@
+﻿@using Microsoft.Data.Sqlite
+@using ProjectEve.NpcStudio.Models
+@using ProjectEve.NpcStudio.Services
+@inject CanonicalFamilyGraphService CanonicalFamily
+@inject NpcStudioOptions Options
+
+<section class="relationship-web-panel unified-graph-panel">
+    <div class="rw-title">
+        <div>
+            <span class="rw-kicker">RELATIONSHIP WEB</span>
+            <h3>Who matters most to @CleanDisplayName(Sheet.Name)?</h3>
+        </div>
+        <span class="rw-count">@VisibleNodes.Count visible</span>
+    </div>
+
+    <div class="ug-filter-board">
+        <div class="ug-filter-row">
+            <span class="ug-filter-label">SHOW</span>
+            <button type="button" class="ug-filter family @CategoryOn("Family")" @onclick='() => ToggleCategory("Family")'>Family</button>
+            <button type="button" class="ug-filter friend @CategoryOn("Friend")" @onclick='() => ToggleCategory("Friend")'>Friends</button>
+            <button type="button" class="ug-filter romance @CategoryOn("Relationship")" @onclick='() => ToggleCategory("Relationship")'>Relationship</button>
+            <button type="button" class="ug-filter enemy @CategoryOn("Enemy")" @onclick='() => ToggleCategory("Enemy")'>Enemies / Rivals</button>
+        </div>
+
+        <div class="ug-filter-row">
+            <span class="ug-filter-label">FAMILY VIEW</span>
+            <button type="button"
+                    class="ug-filter family @FamilyViewCss("All")"
+                    @onclick='() => SetFamilyView("All")'>
+                All Family
+            </button>
+            <button type="button"
+                    class="ug-filter family @FamilyViewCss("Father")"
+                    @onclick='() => SetFamilyView("Father")'>
+                Father Side
+            </button>
+            <button type="button"
+                    class="ug-filter family @FamilyViewCss("Mother")"
+                    @onclick='() => SetFamilyView("Mother")'>
+                Mother Side
+            </button>
+        </div>
+
+        <div class="ug-filter-row">
+            <span class="ug-filter-label">TIERS</span>
+            @for (var tier = 1; tier <= 5; tier++)
+            {
+                var t = tier;
+                <button type="button"
+                        class="ug-tier @(_enabledTiers.Contains(t) ? "on" : "")"
+                        @onclick="() => ToggleTier(t)">
+                    @t
+                </button>
+            }
+            <button type="button" class="ug-tier ug-small" @onclick="AllTiers">ALL</button>
+            <button type="button" class="ug-tier ug-small" @onclick="ClearTiers">CLEAR</button>
+        </div>
+    </div>
+
+    <div class="ug-graph">
+        <div class="ug-ring ug-ring-5"><span>5</span></div>
+        <div class="ug-ring ug-ring-4"><span>4</span></div>
+        <div class="ug-ring ug-ring-3"><span>3</span></div>
+        <div class="ug-ring ug-ring-2"><span>2</span></div>
+        <div class="ug-ring ug-ring-1"><span>1</span></div>
+
+        @foreach (var line in VisibleLines)
+        {
+            <div class="ug-line @line.CssClass @(_lockedNpcId.HasValue && (line.FromNpcId == _lockedNpcId || line.ToNpcId == _lockedNpcId) ? "focus" : "")"
+                 style="@LineStyle(line)"></div>
+        }
+
+        <div class="ug-center">
+            <strong>@Initials(CleanDisplayName(Sheet.Name))</strong>
+            <span>@CleanDisplayName(Sheet.Name)</span>
+        </div>
+
+        @foreach (var node in VisibleNodes)
+        {
+            <button type="button"
+                    class="ug-node @CategoryCss(node.Category) tier-@node.Tier @(_lockedNpcId == node.NpcId ? "locked" : "") @(node.IsInferred ? "inferred" : "")"
+                    style="@NodeStyle(node)"
+                    title="@NodeTitle(node)"
+                    @onclick="() => LockNode(node)">
+                <strong>@Initials(node.Name)</strong>
+                <span>@node.Name</span>
+                <small>@node.Role · T@(node.Tier)</small>
+            </button>
+        }
+    </div>
+
+    <div class="ug-foot">
+        <span>Family uses the shared canonical family graph.</span>
+        @if (_lockedNpcId.HasValue)
+        {
+            <span>Focused: @_lockedName</span>
+        }
+        else
+        {
+            <span>Click a person to lock focus.</span>
+        }
+    </div>
+</section>
+
+@code {
+    private static bool IsLegacyFamilyDirectRow(dynamic row)
+    {
+        string type = "";
+        string role = "";
+
+        try { type = Convert.ToString(row.RelationshipType) ?? ""; } catch { }
+        try { role = Convert.ToString(row.FamilyRole) ?? ""; } catch { }
+
+        if (!string.IsNullOrWhiteSpace(role))
+            return true;
+
+        var value = type.Trim().ToLowerInvariant();
+
+        return value is
+            "mother" or "father" or "parent" or
+            "son" or "daughter" or "child" or
+            "brother" or "sister" or "sibling" or
+            "husband" or "wife" or "spouse" or
+            "grandmother" or "grandfather" or "grandparent" or
+            "granddaughter" or "grandson" or "grandchild" or
+            "aunt" or "uncle" or "cousin" or
+            "niece" or "nephew" or
+            "stepmother" or "stepfather" or "stepparent" or
+            "stepson" or "stepdaughter" or "stepchild";
+    }
+
+    [Parameter, EditorRequired] public NpcCharacterSheet Sheet { get; set; } = default!;
+    [Parameter] public EventCallback<NpcRelationshipRow> OnRelationshipSelected { get; set; }
+    [Parameter] public EventCallback<int> OnNpcSelected { get; set; }
+
+    private readonly HashSet<string> _enabledCategories =
+        new(StringComparer.OrdinalIgnoreCase) { "Family", "Friend", "Relationship", "Enemy" };
+
+    private readonly HashSet<int> _enabledTiers = [1, 2, 3, 4, 5];
+
+    private CanonicalFamilyGraph _family = new();
+    private Dictionary<int, int> _storedTierByTarget = new();
+    private string _familyView = "All";
+    private int? _lockedNpcId;
+    private string _lockedName = "";
+
+    protected override void OnParametersSet()
+    {
+        _family = CanonicalFamily.Resolve(Sheet.Id);
+        _storedTierByTarget = LoadStoredTiers(Sheet.Id);
+    }
+
+    private List<WebNode> AllNodes
+    {
+        get
+        {
+            var result = new Dictionary<string, WebNode>(StringComparer.OrdinalIgnoreCase);
+
+            // Canonical family network first. This is what makes family work
+            // from Eve, sister, parent, grandparent, etc. without duplicating people.
+            foreach (var person in _family.People)
+            {
+                var direct = FindAnyDirectRelationship(person.NpcId);
+                var tier = TierFor(person.NpcId, direct);
+
+                result[$"npc:{person.NpcId}"] = new WebNode
+                {
+                    NpcId = person.NpcId,
+                    Name = FamilyDisplayName(person),
+                    Category = "Family",
+                    Role = DisplayRole(person.RoleFromRoot, direct),
+                    Tier = tier,
+                    Relationship = direct,
+                    IsInferred = person.IsInferred
+                };
+            }
+
+            // Keep a direct family relationship visible even if legacy data has
+            // not yet produced a canonical node.
+            foreach (var rel in Sheet.Relationships.Where(r => !IsLegacyFamilyDirectRow(r)).Where(IsFamily))
+            {
+                if (rel.TargetNpcId <= 0) continue;
+                var key = $"npc:{rel.TargetNpcId}";
+                if (result.ContainsKey(key)) continue;
+
+                result[key] = FromDirect(rel, "Family");
+            }
+
+            // Non-family relationships remain direct relationship-state nodes.
+            foreach (var rel in Sheet.Relationships.Where(r => !IsLegacyFamilyDirectRow(r)).Where(r => !IsFamily(r)))
+            {
+                if (rel.TargetNpcId <= 0) continue;
+
+                var category = FilterCategory(rel);
+                if (category is not ("Friend" or "Relationship" or "Enemy"))
+                    continue;
+
+                var key = $"npc:{rel.TargetNpcId}";
+                if (result.TryGetValue(key, out var existing))
+                {
+                    // Family structure wins node identity, but a hostile/romantic
+                    // direct relationship can still affect the tooltip/detail.
+                    if (existing.Relationship is null)
+                        existing.Relationship = rel;
+                    continue;
+                }
+
+                result[key] = FromDirect(rel, category);
+            }
+
+            var values = result.Values.ToList();
+            values = SuppressGenericParentPlaceholder(values, "Mother");
+            values = SuppressGenericParentPlaceholder(values, "Father");
+
+            return values
+                .OrderBy(n => n.Tier)
+                .ThenBy(n => n.Category)
+                .ThenBy(n => n.Name)
+                .ToList();
+        }
+    }
+
+        private static List<WebNode> SuppressGenericParentPlaceholder(
+        List<WebNode> nodes,
+        string role)
+    {
+        var sameRole = nodes
+            .Where(n =>
+                n.Category.Equals("Family", StringComparison.OrdinalIgnoreCase) &&
+                n.Role.Equals(role, StringComparison.OrdinalIgnoreCase))
+            .ToList();
+
+        if (sameRole.Count <= 1)
+            return nodes;
+
+        bool IsGeneric(WebNode n)
+        {
+            var name = (n.Name ?? "").Trim();
+
+            return name.Equals(role, StringComparison.OrdinalIgnoreCase) ||
+                   name.Equals($"[Family Draft] {role}", StringComparison.OrdinalIgnoreCase) ||
+                   name.Equals($"Family Draft {role}", StringComparison.OrdinalIgnoreCase);
+        }
+
+        // Keep a real named NPC such as Lisa Sinclair / Edward Sinclair.
+        if (!sameRole.Any(n => !IsGeneric(n)))
+            return nodes;
+
+        var genericIds = sameRole
+            .Where(IsGeneric)
+            .Select(n => n.NpcId)
+            .ToHashSet();
+
+        return nodes
+            .Where(n => !genericIds.Contains(n.NpcId))
+            .ToList();
+    }
+private List<WebNode> VisibleNodes =>
+        ApplyFamilyView(
+            AllNodes
+                .Where(n => _enabledCategories.Contains(n.Category))
+                .Where(n => _enabledTiers.Contains(n.Tier))
+                .ToList());
+
+    private List<WebNode> ApplyFamilyView(List<WebNode> nodes)
+    {
+        if (_familyView.Equals("All", StringComparison.OrdinalIgnoreCase))
+            return nodes;
+
+        var sideByNpc = _family.People
+            .GroupBy(p => p.NpcId)
+            .ToDictionary(g => g.Key, g => g.First().FamilySide);
+
+        return nodes
+            .Where(n => n.Category.Equals("Family", StringComparison.OrdinalIgnoreCase))
+            .Where(n =>
+                sideByNpc.TryGetValue(n.NpcId, out var side) &&
+                side.Equals(_familyView, StringComparison.OrdinalIgnoreCase))
+            .ToList();
+    }
+
+private Dictionary<int, WebPoint> Positions => BuildDeterministicRelationshipLayout();
+
+    private Dictionary<int, WebPoint> BuildDeterministicRelationshipLayout()
+    {
+        // ONE AUTHORITATIVE LAYOUT SYSTEM.
+        //
+        // No collision pass, no snap pass, no branch-layout override.
+        // Every visible NPC receives exactly one final coordinate here.
+        //
+        // FamilySide controls the large family branches:
+        //   Father -> left arc
+        //   Mother -> right arc
+        //   Other/shared -> lower inner arc
+        //
+        // Non-family relationships are placed in the shared group unless they
+        // already have a canonical FamilySide. This keeps the method generic
+        // for every NPC dossier, not just Eve or Thomas.
+
+        var result = new Dictionary<int, WebPoint>();
+
+        var nodes = VisibleNodes
+            .GroupBy(n => n.NpcId)
+            .Select(g => g
+                .OrderBy(n => n.Tier)
+                .ThenBy(n => n.Category)
+                .ThenBy(n => n.NpcId)
+                .First())
+            .ToList();
+
+        string SideFor(WebNode node)
+        {
+            if (!node.Category.Equals("Family", StringComparison.OrdinalIgnoreCase))
+                return "Shared";
+
+            var person = _family.People.FirstOrDefault(p => p.NpcId == node.NpcId);
+            var side = (person?.FamilySide ?? "").Trim();
+
+            if (side.Equals("Father", StringComparison.OrdinalIgnoreCase))
+                return "Father";
+
+            if (side.Equals("Mother", StringComparison.OrdinalIgnoreCase))
+                return "Mother";
+
+            return "Shared";
+        }
+
+        var fatherSide = nodes
+            .Where(n => SideFor(n) == "Father")
+            .OrderBy(n => n.Tier)
+            .ThenBy(n => n.Role)
+            .ThenBy(n => n.NpcId)
+            .ToList();
+
+        var motherSide = nodes
+            .Where(n => SideFor(n) == "Mother")
+            .OrderBy(n => n.Tier)
+            .ThenBy(n => n.Role)
+            .ThenBy(n => n.NpcId)
+            .ToList();
+
+        var shared = nodes
+            .Where(n => SideFor(n) == "Shared")
+            .OrderBy(n => n.Tier)
+            .ThenBy(n => n.Category)
+            .ThenBy(n => n.NpcId)
+            .ToList();
+
+        static void PlaceArc(
+            Dictionary<int, WebPoint> output,
+            IReadOnlyList<WebNode> arcNodes,
+            double startDegrees,
+            double arcDegrees,
+            double radius)
+        {
+            if (arcNodes.Count == 0)
+                return;
+
+            // Divide the usable arc into equal segments.
+            // Each bubble sits at the center of one unique segment.
+            var step = arcDegrees / arcNodes.Count;
+
+            for (var i = 0; i < arcNodes.Count; i++)
+            {
+                var degrees = startDegrees + (step * i) + (step / 2d);
+                var radians = degrees * Math.PI / 180d;
+
+                output[arcNodes[i].NpcId] = new WebPoint(
+                    50d + Math.Cos(radians) * radius,
+                    50d + Math.Sin(radians) * radius);
+            }
+        }
+
+        // CSS Y grows downward.
+        //
+        // Father side occupies the LEFT outer arc.
+        // 110° -> 250° keeps the entire branch on the left.
+        PlaceArc(result, fatherSide, 110d, 140d, 40d);
+
+        // Mother side occupies the RIGHT outer arc.
+        // -70° -> +70° keeps the entire branch on the right.
+        PlaceArc(result, motherSide, -70d, 140d, 40d);
+
+        // Shared / siblings / friends / romance / rivals occupy the LOWER
+        // inner arc. 20° -> 160° keeps them away from both parent branches
+        // and away from the center bubble.
+        PlaceArc(result, shared, 20d, 140d, 29d);
+
+        return result;
+    }
+
+    private List<WebLine> VisibleLines
+    {
+        get
+        {
+            var lines = new List<WebLine>();
+            var visibleIds = VisibleNodes.Select(n => n.NpcId).ToHashSet();
+            var positions = Positions;
+
+            // Canonical person-to-person family edges.
+            if (_enabledCategories.Contains("Family"))
+            {
+                foreach (var edge in _family.Edges)
+                {
+                    var fromIsRoot = edge.FromNpcId == Sheet.Id;
+                    var toIsRoot = edge.ToNpcId == Sheet.Id;
+
+                    if (!fromIsRoot && !visibleIds.Contains(edge.FromNpcId)) continue;
+                    if (!toIsRoot && !visibleIds.Contains(edge.ToNpcId)) continue;
+
+                    var from = fromIsRoot ? new WebPoint(50, 50) :
+                        positions.TryGetValue(edge.FromNpcId, out var fp) ? fp : default;
+                    var to = toIsRoot ? new WebPoint(50, 50) :
+                        positions.TryGetValue(edge.ToNpcId, out var tp) ? tp : default;
+
+                    if ((!fromIsRoot && from == default) || (!toIsRoot && to == default))
+                        continue;
+
+                    lines.Add(new WebLine
+                    {
+                        FromNpcId = edge.FromNpcId,
+                        ToNpcId = edge.ToNpcId,
+                        From = from,
+                        To = to,
+                        CssClass = "family"
+                    });
+                }
+            }
+
+            // Direct center spokes for friends/romance/enemies.
+            foreach (var node in VisibleNodes.Where(n => n.Category != "Family"))
+            {
+                if (!positions.TryGetValue(node.NpcId, out var point)) continue;
+
+                lines.Add(new WebLine
+                {
+                    FromNpcId = Sheet.Id,
+                    ToNpcId = node.NpcId,
+                    From = new WebPoint(50, 50),
+                    To = point,
+                    CssClass = CategoryCss(node.Category)
+                });
+            }
+
+            return lines;
+        }
+    }
+
+    private static string DisplayRole(
+        string canonicalRole,
+        NpcRelationshipRow? direct)
+    {
+        // IMPORTANT:
+        // The NPC in the CENTER of the web is always the point of view.
+        //
+        // FamilyRole stored on RelationshipStates is a subjective/cache copy.
+        // It must NEVER override objective canonical family structure.
+        //
+        // Example:
+        //   Edward center -> Adam must resolve as Son
+        //   Adam center   -> Edward must resolve as Father
+        //   Lisa center   -> Tom must resolve as Father
+        //   Tom center    -> Lisa must resolve as Daughter
+        //
+        // The canonical graph derives that answer independently for every root.
+        if (!string.IsNullOrWhiteSpace(canonicalRole))
+            return canonicalRole.Trim();
+
+        if (direct is not null &&
+            !string.IsNullOrWhiteSpace(direct.FamilyRole))
+            return direct.FamilyRole.Trim();
+
+        return direct?.RelationshipType ?? "Family";
+    }
+    private WebNode FromDirect(NpcRelationshipRow rel, string category) =>
+        new()
+        {
+            NpcId = rel.TargetNpcId,
+            Name = CleanDisplayName(rel.TargetName),
+            Category = category,
+            Role = RelationshipLabel(rel),
+            Tier = TierFor(rel.TargetNpcId, rel),
+            Relationship = rel,
+            IsInferred = false
+        };
+
+    private NpcRelationshipRow? FindDirectRelationship(int targetNpcId) =>
+        Sheet.Relationships.Where(r => !IsLegacyFamilyDirectRow(r))
+            .Where(r => r.TargetNpcId == targetNpcId)
+            .OrderByDescending(EffectiveImportance)
+            .FirstOrDefault();
+
+        private NpcRelationshipRow? FindAnyDirectRelationship(int targetNpcId) =>
+        Sheet.Relationships
+            .Where(r => r.TargetNpcId == targetNpcId)
+            .OrderByDescending(EffectiveImportance)
+            .FirstOrDefault();
+private int TierFor(int targetNpcId, NpcRelationshipRow? direct)
+    {
+        if (_storedTierByTarget.TryGetValue(targetNpcId, out var stored) &&
+            stored is >= 1 and <= 5)
+            return stored;
+
+        // Existing data predates RelationshipTier. Use importance only as a
+        // migration/default suggestion until the relationship gets an explicit tier.
+        if (direct is not null)
+        {
+            var importance = EffectiveImportance(direct);
+            if (importance >= 80) return 1;
+            if (importance >= 60) return 2;
+            if (importance >= 40) return 3;
+            if (importance >= 20) return 4;
+            return 5;
+        }
+
+        // Structural family can exist without a current emotional relationship.
+        // Keep it visible at a neutral middle depth until explicitly tiered.
+        return 3;
+    }
+
+    private Dictionary<int, int> LoadStoredTiers(int sourceNpcId)
+    {
+        var map = new Dictionary<int, int>();
+        var path =
+            Options.GetType().GetProperty("RelationshipsDbPath")?.GetValue(Options) as string
+            ?? @"D:\ProjectEveData\Database\project_eve_relationships.db";
+
+        try
+        {
+            using var conn = new SqliteConnection($"Data Source={path}");
+            conn.Open();
+
+            using var cmd = conn.CreateCommand();
+            cmd.CommandText = """
+                SELECT TargetCharacterId, RelationshipTier
+                FROM RelationshipStates
+                WHERE SourceCharacterId = $source
+                  AND TargetCharacterId IS NOT NULL
+                  AND RelationshipTier BETWEEN 1 AND 5;
+                """;
+            cmd.Parameters.AddWithValue("$source", sourceNpcId);
+
+            using var reader = cmd.ExecuteReader();
+            while (reader.Read())
+                map[Convert.ToInt32(reader.GetValue(0))] = Convert.ToInt32(reader.GetValue(1));
+        }
+        catch (SqliteException)
+        {
+            // Foundation may be on an older test DB. The web still works with
+            // migration-tier suggestions instead of failing the dossier.
+        }
+
+        return map;
+    }
+
+    private async Task LockNode(WebNode node)
+    {
+        if (_lockedNpcId == node.NpcId)
+        {
+            _lockedNpcId = null;
+            _lockedName = "";
+            return;
+        }
+
+        _lockedNpcId = node.NpcId;
+        _lockedName = node.Name;
+
+        // Always tell the parent which person was clicked. Canonical family
+        // nodes may not have a subjective RelationshipStates row yet.
+        await OnNpcSelected.InvokeAsync(node.NpcId);
+
+        if (node.Relationship is not null)
+            await OnRelationshipSelected.InvokeAsync(node.Relationship);
+    }
+
+    private void ToggleCategory(string category)
+    {
+        if (!_enabledCategories.Add(category))
+            _enabledCategories.Remove(category);
+    }
+
+    private string CategoryOn(string category) =>
+        _enabledCategories.Contains(category) ? "on" : "";
+
+    private void SetFamilyView(string view)
+    {
+        _familyView = view;
+        _lockedNpcId = null;
+        _lockedName = "";
+    }
+
+    private string FamilyViewCss(string view) =>
+        _familyView.Equals(view, StringComparison.OrdinalIgnoreCase)
+            ? "on"
+            : "";
+
+    private void ToggleTier(int tier)
+    {
+        if (!_enabledTiers.Add(tier))
+            _enabledTiers.Remove(tier);
+    }
+
+    private void AllTiers()
+    {
+        _enabledTiers.Clear();
+        for (var i = 1; i <= 5; i++) _enabledTiers.Add(i);
+    }
+
+    private void ClearTiers() => _enabledTiers.Clear();
+
+    private string NodeStyle(WebNode node)
+    {
+        if (!Positions.TryGetValue(node.NpcId, out var p))
+            return "display:none;";
+
+        var importance = node.Relationship is null ? 50 : EffectiveImportance(node.Relationship);
+        var size = 64d + Math.Clamp(importance, 0, 100) * 0.20d;
+        var delay = -(Math.Abs(node.NpcId) % 13) * 0.41d;
+
+        var ringColor = NodeRingColor(node);
+        var glowColor = NodeGlowColor(node);
+        var glowSoft = HexToRgba(glowColor, 0.24d);
+        var glowStrong = HexToRgba(glowColor, 0.42d);
+        var muted = HexToRgba(ringColor, 0.92d);
+
+        return $"left:{p.X:0.##}%;top:{p.Y:0.##}%;--ug-size:{size:0.#}px;--ug-delay:{delay:0.##}s;--ug-border:{ringColor};--ug-glow-soft:{glowSoft};--ug-glow-strong:{glowStrong};--ug-accent:{ringColor};--ug-text:#eef5fb;--ug-muted:{muted};";
+    }
+
+    private string NodeRingColor(WebNode node)
+    {
+        if (node.Category.Equals("Family", StringComparison.OrdinalIgnoreCase))
+            return FamilyRoleRingColor(node.Role);
+
+        return node.Category switch
+        {
+            "Friend" => "#45AEB8",
+            "Relationship" => "#9A68C0",
+            "Enemy" => "#B84D45",
+            _ => "#53677F"
+        };
+    }
+
+    private string NodeGlowColor(WebNode node)
+    {
+        var role = (node.Role ?? "").Trim();
+        if (string.IsNullOrWhiteSpace(role))
+            return NodeRingColor(node);
+
+        // Highest priority: direct spouse always glows gold.
+        if (IsSpouseRole(role))
+            return "#F4C542";
+
+        // Exact family path from the CENTER NPC point of view.
+        // Husband/Father side = blue glow.
+        if (IsHusbandSidePath(role) || IsFatherSidePath(role))
+            return "#5AA9FF";
+
+        // Wife/Mother side = pink glow.
+        if (IsWifeSidePath(role) || IsMotherSidePath(role))
+            return "#FF79C8";
+
+        // If this node is on a known canonical branch, use it.
+        var person = _family.People.FirstOrDefault(p => p.NpcId == node.NpcId);
+        if (person is not null)
+        {
+            if (person.FamilySide.Equals("Father", StringComparison.OrdinalIgnoreCase))
+                return "#5AA9FF";
+
+            if (person.FamilySide.Equals("Mother", StringComparison.OrdinalIgnoreCase))
+                return "#FF79C8";
+        }
+
+        // If the center NPC has a spouse, blood-family/default direct family
+        // can inherit that center-side color so the whole web reads clearly.
+        var rootSideColor = RootDefaultSideGlow();
+        if (!string.IsNullOrWhiteSpace(rootSideColor) && IsRootBloodFamilyRole(role))
+            return rootSideColor;
+
+        // Otherwise fall back to the semantic role ring color.
+        return NodeRingColor(node);
+    }
+
+    private string RootDefaultSideGlow()
+    {
+        var familyRoles = VisibleNodes
+            .Where(n => n.Category.Equals("Family", StringComparison.OrdinalIgnoreCase))
+            .Select(n => (n.Role ?? "").Trim())
+            .Where(r => !string.IsNullOrWhiteSpace(r))
+            .ToList();
+
+        if (familyRoles.Any(IsWifeRole))
+            return "#5AA9FF"; // center NPC is the husband side
+
+        if (familyRoles.Any(IsHusbandRole))
+            return "#FF79C8"; // center NPC is the wife side
+
+        return "";
+    }
+
+    private static string FamilyRoleRingColor(string? role)
+    {
+        var value = NormalizeFamilyRole(role);
+
+        return value switch
+        {
+            "wife" or "husband" or "spouse" or "partner"
+                => "#F4C542",
+
+            "mother" or "father" or "parent" or "stepmother" or "stepfather" or "stepparent"
+                => "#4DA3FF",
+
+            "son" or "daughter" or "child" or "stepson" or "stepdaughter" or "stepchild"
+                => "#46D36B",
+
+            "brother" or "sister" or "sibling" or "stepbrother" or "stepsister"
+                => "#A56EFF",
+
+            "aunt" or "uncle" or "aunt/uncle"
+                => "#FF9B42",
+
+            "niece" or "nephew"
+                => "#FF6FAE",
+
+            "cousin"
+                => "#3ED6D0",
+
+            "grandmother" or "grandfather" or "grandparent"
+                => "#B8C4D9",
+
+            "grandson" or "granddaughter" or "grandchild"
+                => "#9BE564",
+
+            _ => "#7F8A9A"
+        };
+    }
+
+    private static bool IsSpouseRole(string? role) =>
+        IsWifeRole(role) || IsHusbandRole(role) ||
+        ContainsWholeWord(role, "spouse") ||
+        ContainsWholeWord(role, "partner");
+
+    private static bool IsWifeRole(string? role) => ContainsWholeWord(role, "wife");
+
+    private static bool IsHusbandRole(string? role) => ContainsWholeWord(role, "husband");
+
+    private static bool IsFatherSidePath(string? role)
+    {
+        var value = (role ?? "").Trim().ToLowerInvariant();
+        return value.StartsWith("father's ") || value.StartsWith("fathers ");
+    }
+
+    private static bool IsMotherSidePath(string? role)
+    {
+        var value = (role ?? "").Trim().ToLowerInvariant();
+        return value.StartsWith("mother's ") || value.StartsWith("mothers ");
+    }
+
+    private static bool IsHusbandSidePath(string? role)
+    {
+        var value = (role ?? "").Trim().ToLowerInvariant();
+        return value.StartsWith("husband's ") || value.StartsWith("husbands ");
+    }
+
+    private static bool IsWifeSidePath(string? role)
+    {
+        var value = (role ?? "").Trim().ToLowerInvariant();
+        return value.StartsWith("wife's ") || value.StartsWith("wives ");
+    }
+
+    private static bool IsRootBloodFamilyRole(string? role)
+    {
+        var value = NormalizeFamilyRole(role);
+
+        return value switch
+        {
+            "mother" or "father" or "parent" or "stepmother" or "stepfather" or "stepparent" or
+            "son" or "daughter" or "child" or "stepson" or "stepdaughter" or "stepchild" or
+            "brother" or "sister" or "sibling" or "stepbrother" or "stepsister" or
+            "grandmother" or "grandfather" or "grandparent" or
+            "grandson" or "granddaughter" or "grandchild" or
+            "aunt" or "uncle" or "aunt/uncle" or
+            "niece" or "nephew" or
+            "cousin"
+                => true,
+            _ => false
+        };
+    }
+
+    private static bool ContainsWholeWord(string? text, string word)
+    {
+        var value = (text ?? "").Trim();
+        if (string.IsNullOrWhiteSpace(value))
+            return false;
+
+        return System.Text.RegularExpressions.Regex.IsMatch(
+            value,
+            $@"\b{System.Text.RegularExpressions.Regex.Escape(word)}\b",
+            System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.CultureInvariant);
+    }
+    private static string NormalizeFamilyRole(string? role)
+    {
+        var value = (role ?? "").Trim().ToLowerInvariant();
+
+        // ==========================================================
+        // ROOT-RELATIVE SEMANTIC FAMILY ROLE CLASSIFICATION
+        // ==========================================================
+
+        // Cousins: child of a parent's sibling.
+        if ((value.StartsWith("father's ") || value.StartsWith("mother's ")) &&
+            value.EndsWith("'s child"))
+            return "cousin";
+
+        // Grandparents: current NPC's parent's parent.
+        if ((value.StartsWith("father's ") || value.StartsWith("mother's ")) &&
+            (value.EndsWith(" father") ||
+             value.EndsWith(" mother") ||
+             value.EndsWith(" parent")))
+            return "grandparent";
+
+        // Aunts / uncles: current NPC's parent's sibling.
+        if ((value.StartsWith("father's ") || value.StartsWith("mother's ")) &&
+            value.EndsWith(" brother"))
+            return "uncle";
+
+        if ((value.StartsWith("father's ") || value.StartsWith("mother's ")) &&
+            value.EndsWith(" sister"))
+            return "aunt";
+
+        if ((value.StartsWith("father's ") || value.StartsWith("mother's ")) &&
+            value.EndsWith(" sibling"))
+            return "aunt/uncle";
+
+        // Spouse / partner.
+        if (value.Contains("wife")) return "wife";
+        if (value.Contains("husband")) return "husband";
+        if (value.Contains("spouse")) return "spouse";
+        if (value.Contains("partner")) return "partner";
+
+        // Grand relations before parent/child keywords.
+        if (value.Contains("grandmother")) return "grandmother";
+        if (value.Contains("grandfather")) return "grandfather";
+        if (value.Contains("grandparent")) return "grandparent";
+        if (value.Contains("grandson")) return "grandson";
+        if (value.Contains("granddaughter")) return "granddaughter";
+        if (value.Contains("grandchild")) return "grandchild";
+
+        // Parent.
+        if (value.Contains("stepmother")) return "stepmother";
+        if (value.Contains("stepfather")) return "stepfather";
+        if (value.Contains("stepparent")) return "stepparent";
+        if (value.Equals("mother")) return "mother";
+        if (value.Equals("father")) return "father";
+        if (value.Equals("parent")) return "parent";
+
+        // Child.
+        if (value.Contains("stepson")) return "stepson";
+        if (value.Contains("stepdaughter")) return "stepdaughter";
+        if (value.Contains("stepchild")) return "stepchild";
+        if (value.Equals("son")) return "son";
+        if (value.Equals("daughter")) return "daughter";
+        if (value.Equals("child")) return "child";
+
+        // Sibling.
+        if (value.Contains("stepbrother")) return "stepbrother";
+        if (value.Contains("stepsister")) return "stepsister";
+        if (value.Equals("brother")) return "brother";
+        if (value.Equals("sister")) return "sister";
+        if (value.Equals("sibling")) return "sibling";
+
+        // Extended family.
+        if (value.Contains("aunt")) return "aunt";
+        if (value.Contains("uncle")) return "uncle";
+        if (value.Contains("niece")) return "niece";
+        if (value.Contains("nephew")) return "nephew";
+        if (value.Contains("cousin")) return "cousin";
+
+        return value;
+    }
+
+    private static string HexToRgba(string hex, double alpha)
+    {
+        var value = (hex ?? "").Trim().TrimStart('#');
+
+        if (value.Length != 6)
+            return $"rgba(127,138,154,{alpha:0.##})";
+
+        var r = Convert.ToInt32(value.Substring(0, 2), 16);
+        var g = Convert.ToInt32(value.Substring(2, 2), 16);
+        var b = Convert.ToInt32(value.Substring(4, 2), 16);
+
+        return $"rgba({r},{g},{b},{alpha:0.##})";
+    }
+    private static string LineStyle(WebLine line)
+    {
+        var dx = line.To.X - line.From.X;
+        var dy = line.To.Y - line.From.Y;
+        var length = Math.Sqrt(dx * dx + dy * dy);
+        var angle = Math.Atan2(dy, dx) * 180d / Math.PI;
+
+        return $"left:{line.From.X:0.##}%;top:{line.From.Y:0.##}%;width:{length:0.##}%;transform:rotate({angle:0.##}deg);";
+    }
+
+    private static bool IsFamily(NpcRelationshipRow rel)
+    {
+        var category = (rel.RelationshipCategory ?? "").Trim();
+        if (category.Equals("Family", StringComparison.OrdinalIgnoreCase)) return true;
+
+        var role = (rel.FamilyRole ?? "").Trim();
+        if (!string.IsNullOrWhiteSpace(role)) return true;
+
+        var type = (rel.RelationshipType ?? "").ToLowerInvariant();
+        return type.Contains("mother") || type.Contains("father") ||
+               type.Contains("parent") || type.Contains("sister") ||
+               type.Contains("brother") || type.Contains("sibling") ||
+               type.Contains("grand") || type.Contains("aunt") ||
+               type.Contains("uncle") || type.Contains("cousin") ||
+               type.Contains("niece") || type.Contains("nephew") ||
+               type.Contains("wife") || type.Contains("husband") ||
+               type.Contains("spouse") || type.Contains("step");
+    }
+
+    private static string FilterCategory(NpcRelationshipRow rel)
+    {
+        if (IsFamily(rel)) return "Family";
+
+        var c = (rel.RelationshipCategory ?? "").Trim().ToLowerInvariant();
+        if (c == "friend") return "Friend";
+        if (c is "romantic" or "romance" or "relationship") return "Relationship";
+        if (c is "rival" or "enemy") return "Enemy";
+
+        var type = (rel.RelationshipType ?? "").ToLowerInvariant();
+        if (type.Contains("enemy") || type.Contains("rival")) return "Enemy";
+        if (type.Contains("wife") || type.Contains("husband") ||
+            type.Contains("girlfriend") || type.Contains("boyfriend") ||
+            type.Contains("partner") || type.Contains("lover") ||
+            type.Contains("fianc") || type.Contains("ex-") || type.StartsWith("ex "))
+            return "Relationship";
+
+        return "Friend";
+    }
+
+    private static string CategoryCss(string category) =>
+        category switch
+        {
+            "Family" => "family",
+            "Friend" => "friend",
+            "Relationship" => "romance",
+            "Enemy" => "enemy",
+            _ => "other"
+        };
+
+    private static string RelationshipLabel(NpcRelationshipRow rel)
+    {
+        if (!string.IsNullOrWhiteSpace(rel.FamilyRole)) return rel.FamilyRole;
+        if (!string.IsNullOrWhiteSpace(rel.RelationshipType)) return rel.RelationshipType;
+        return FilterCategory(rel);
+    }
+
+    private static int EffectiveImportance(NpcRelationshipRow rel)
+    {
+        if (rel.Importance > 0) return Math.Clamp(rel.Importance, 0, 100);
+        return Math.Clamp(
+            (Math.Max(rel.Affection, Math.Max(rel.Trust, rel.Respect)) +
+             Math.Max(rel.Tension, Math.Max(rel.Resentment, rel.Fear))) / 2,
+            1, 100);
+    }
+
+    private string FamilyDisplayName(CanonicalFamilyPerson person)
+    {
+        var clean = CleanDisplayName(person.Name);
+        var root = CleanDisplayName(Sheet.Name);
+
+        // Existing test FamilyDraft shells were seeded from the root name, so
+        // their structured name profile can incorrectly say "Evelyn Sinclair".
+        // Show the structural role until the NPC Factory assigns a real name.
+        if (clean.Equals(root, StringComparison.OrdinalIgnoreCase) ||
+            string.IsNullOrWhiteSpace(clean))
+        {
+            return string.IsNullOrWhiteSpace(person.RoleFromRoot)
+                ? $"NPC {person.NpcId}"
+                : person.RoleFromRoot;
+        }
+
+        return clean;
+    }
+    private static string CleanDisplayName(string? raw)
+    {
+        var value = (raw ?? "").Trim();
+
+        if (value.StartsWith("[Family Draft]", StringComparison.OrdinalIgnoreCase))
+            value = value["[Family Draft]".Length..].Trim();
+
+        // Draft shells currently often contain "Root Name — Role".
+        // On the graph, show the role instead of leaking the internal draft tag.
+        var dash = value.IndexOf('—');
+        if (dash >= 0)
+        {
+            var right = value[(dash + 1)..].Trim();
+            if (!string.IsNullOrWhiteSpace(right))
+                return right;
+        }
+
+        return string.IsNullOrWhiteSpace(value) ? "Unnamed NPC" : value;
+    }
+
+    private static string Initials(string? name)
+    {
+        var parts = (name ?? "?").Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        return parts.Length switch
+        {
+            0 => "?",
+            1 => parts[0][0].ToString().ToUpperInvariant(),
+            _ => $"{parts[0][0]}{parts[^1][0]}".ToUpperInvariant()
+        };
+    }
+
+    private static string NodeTitle(WebNode node)
+    {
+        var kind = node.IsInferred ? "Resolved from family graph" : "Direct relationship";
+        return $"{node.Name} · {node.Role} · Tier {node.Tier} · {kind}";
+    }
+
+    private sealed class WebNode
+    {
+        public int NpcId { get; init; }
+        public string Name { get; init; } = "";
+        public string Category { get; init; } = "";
+        public string Role { get; init; } = "";
+        public int Tier { get; init; } = 3;
+        public NpcRelationshipRow? Relationship { get; set; }
+        public bool IsInferred { get; init; }
+    }
+
+    private readonly record struct WebPoint(double X, double Y);
+
+    private sealed class WebLine
+    {
+        public int FromNpcId { get; init; }
+        public int ToNpcId { get; init; }
+        public WebPoint From { get; init; }
+        public WebPoint To { get; init; }
+        public string CssClass { get; init; } = "";
+    }
+}
+
+<style>
+    .unified-graph-panel{min-width:0}
+    .ug-filter-board{display:grid;gap:8px;margin:12px 0 14px;padding:10px 12px;border:1px solid #26364d;border-radius:12px;background:#0a1420}
+    .ug-filter-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+    .ug-filter-label{width:52px;font-size:10px;font-weight:800;letter-spacing:.15em;color:#75869d}
+    .ug-filter,.ug-tier{border:1px solid #304159;border-radius:999px;background:#0e1927;color:#8fa1b6;padding:7px 11px;cursor:pointer;font-size:12px}
+    .ug-filter.on,.ug-tier.on{color:#eef7ff;border-color:#6d88aa;box-shadow:inset 0 0 16px rgba(100,140,190,.08)}
+    .ug-filter.family.on{border-color:#d5ad55;color:#ffe1a0}
+    .ug-filter.friend.on{border-color:#4ec4cf;color:#aaf7ff}
+    .ug-filter.romance.on{border-color:#b47bdc;color:#eac6ff}
+    .ug-filter.enemy.on{border-color:#ca5a50;color:#ffada6}
+    .ug-small{font-size:10px;letter-spacing:.06em}
+
+    .ug-graph{position:relative;min-height:680px;overflow:hidden;isolation:isolate;background:radial-gradient(circle at center,rgba(107,78,180,.08),transparent 35%),#08111c}
+    .ug-ring{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);border:1px solid rgba(91,170,190,.18);border-radius:50%;z-index:0;pointer-events:none}
+    .ug-ring span{position:absolute;right:5px;top:50%;transform:translateY(-50%);display:grid;place-items:center;width:20px;height:20px;border:1px solid rgba(112,181,199,.28);border-radius:50%;background:#08111c;color:#7696a6;font-size:10px;font-weight:800}
+    .ug-ring-1{width:32%;height:32%;border-color:rgba(215,169,73,.42)}
+    .ug-ring-2{width:48%;height:48%}
+    .ug-ring-3{width:64%;height:64%}
+    .ug-ring-4{width:80%;height:80%}
+    .ug-ring-5{width:94%;height:94%}
+
+    .ug-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:6;display:grid;place-items:center;width:104px;height:104px;border-radius:50%;border:2px solid #7a66dd;background:#15152a;box-shadow:0 0 28px rgba(111,86,211,.25)}
+    .ug-center strong{font-size:23px;color:#ded7ff}
+    .ug-center span{position:absolute;top:108px;white-space:nowrap;color:#e5e9f0;font-size:12px;font-weight:700}
+
+    .ug-line{position:absolute;height:1px;transform-origin:0 50%;z-index:1;pointer-events:none;opacity:.46;background:linear-gradient(90deg,rgba(91,200,210,.42),rgba(91,200,210,.09));transition:opacity .16s ease,height .16s ease,filter .16s ease}
+    .ug-line.family{background:linear-gradient(90deg,rgba(216,174,77,.48),rgba(216,174,77,.08))}
+    .ug-line.romance{background:linear-gradient(90deg,rgba(180,123,220,.52),rgba(180,123,220,.08))}
+    .ug-line.enemy{background:linear-gradient(90deg,rgba(212,75,66,.65),rgba(212,75,66,.09))}
+    .ug-line.focus{height:2px;opacity:1;filter:drop-shadow(0 0 5px rgba(255,255,255,.25))}
+
+    .ug-node{position:absolute;transform:translate(-50%,-50%);z-index:4;display:grid;place-items:center;align-content:center;width:var(--ug-size,78px);height:var(--ug-size,78px);padding:5px;border-radius:50%;border:2px solid var(--ug-border,#53677f);background:radial-gradient(circle at 35% 28%,rgba(255,255,255,.07),transparent 42%),#111c2b;color:var(--ug-text,#e8eef5);cursor:pointer;animation:ug-soft-wind 9.5s ease-in-out infinite alternate;animation-delay:var(--ug-delay,0s);box-shadow:0 6px 18px rgba(0,0,0,.22),0 0 18px var(--ug-glow-soft,rgba(83,103,127,.18))}
+    .ug-node strong{font-size:16px;color:var(--ug-accent,#e8eef5);text-shadow:0 1px 0 rgba(0,0,0,.3)}
+    .ug-node span{position:absolute;top:calc(100% + 6px);max-width:145px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:11px;font-weight:700;color:var(--ug-text,#e8eef5);text-shadow:0 1px 0 rgba(0,0,0,.28)}
+    .ug-node small{position:absolute;top:calc(100% + 22px);max-width:150px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:9px;color:var(--ug-muted,#8495aa);text-shadow:0 1px 0 rgba(0,0,0,.28)}
+    .ug-node.family{--ug-border:#b99349;--ug-glow-soft:rgba(185,147,73,.18);--ug-glow-strong:rgba(185,147,73,.34);--ug-accent:#f3d493}
+    .ug-node.friend{--ug-border:#45aeb8;--ug-glow-soft:rgba(69,174,184,.18);--ug-glow-strong:rgba(69,174,184,.34);--ug-accent:#92eef5}
+    .ug-node.romance{--ug-border:#9a68c0;--ug-glow-soft:rgba(154,104,192,.18);--ug-glow-strong:rgba(154,104,192,.34);--ug-accent:#e1c4ff}
+    .ug-node.enemy{--ug-border:#b84d45;--ug-glow-soft:rgba(184,77,69,.18);--ug-glow-strong:rgba(184,77,69,.34);--ug-accent:#ffb8b0}
+    .ug-node.inferred{border-style:dashed}
+    .ug-node.locked{animation-play-state:paused;z-index:8;transform:translate(-50%,-50%) scale(1.10);box-shadow:0 0 0 3px rgba(255,255,255,.10),0 0 0 1px var(--ug-border,#799eff),0 0 30px var(--ug-glow-strong,rgba(121,158,255,.30))}
+
+    .ug-foot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:8px;color:#708299;font-size:10px}
+
+    @@keyframes ug-soft-wind{
+        0%{margin-left:-2px;margin-top:1px}
+        35%{margin-left:3px;margin-top:-2px}
+        70%{margin-left:1px;margin-top:3px}
+        100%{margin-left:-3px;margin-top:-1px}
+    }
+
+    @@media (prefers-reduced-motion:reduce){
+        .ug-node{animation:none}
+    }
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

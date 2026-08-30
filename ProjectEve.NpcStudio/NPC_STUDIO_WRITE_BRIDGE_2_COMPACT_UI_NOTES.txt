@@ -1,0 +1,18 @@
+﻿NPC STUDIO — WRITE BRIDGE 2 COMPACT UI
+
+Problem:
+The first editor was functionally correct but too repetitive, especially
+six full competency cards with the same labels and large vertical spacing.
+
+This patch changes UI only.
+
+New layout:
+- Professional Profile: compact grid
+- Education: collapsible record
+- Qualification: collapsible record
+- Competencies: one compact row per competency
+  Columns:
+    Competency | Current | Set Point | Confidence | Level | Save
+- Notes/source/event fields move behind a small "Details" disclosure
+
+No database schema, repository, models, or save behavior changed.

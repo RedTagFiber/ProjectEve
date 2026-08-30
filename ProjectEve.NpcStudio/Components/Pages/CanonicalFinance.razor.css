@@ -1,0 +1,133 @@
+﻿.finance-shell {
+    max-width: 1450px;
+    margin: 0 auto;
+    padding: 28px;
+}
+
+.finance-head,
+.section-head,
+.record-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.eyebrow {
+    font-size: .78rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    opacity: .65;
+}
+
+.panel {
+    border: 1px solid rgba(120,130,150,.4);
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 18px;
+    background: rgba(255,255,255,.025);
+}
+
+.finance-record {
+    border-top: 1px solid rgba(120,130,150,.3);
+    padding: 16px 0;
+}
+
+.finance-record:first-of-type {
+    border-top: 0;
+}
+
+.record-title small {
+    opacity: .6;
+}
+
+.field-grid {
+    display: grid;
+    grid-template-columns: repeat(3,minmax(0,1fr));
+    gap: 12px;
+    margin: 12px 0;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.field label {
+    font-size: .88rem;
+    font-weight: 650;
+}
+
+.field input {
+    width: 100%;
+    border: 1px solid rgba(120,130,150,.45);
+    border-radius: 8px;
+    padding: 9px 10px;
+    background: var(--bs-body-bg,#fff);
+    color: var(--bs-body-color,#111);
+}
+
+.field input:disabled {
+    opacity: .65;
+}
+
+.advanced {
+    margin: 10px 0;
+    padding: 8px 10px;
+    border-radius: 8px;
+    background: rgba(120,130,150,.07);
+}
+
+.btn {
+    border: 0;
+    border-radius: 8px;
+    padding: 9px 14px;
+    cursor: pointer;
+    font-weight: 650;
+}
+
+.btn.primary {
+    background: #5b44e8;
+    color: white;
+}
+
+.btn.secondary {
+    background: rgba(120,130,150,.18);
+    color: inherit;
+    border: 1px solid rgba(120,130,150,.35);
+}
+
+.notice {
+    border-color: rgba(50,160,90,.55);
+}
+
+.error {
+    border-color: rgba(190,60,60,.7);
+}
+
+.error pre {
+    white-space: pre-wrap;
+}
+
+@media (max-width: 950px) {
+    .field-grid {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+    }
+}
+
+@media (max-width: 650px) {
+    .finance-shell {
+        padding: 16px;
+    }
+
+    .finance-head,
+    .section-head {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .field-grid {
+        grid-template-columns: 1fr;
+    }
+}

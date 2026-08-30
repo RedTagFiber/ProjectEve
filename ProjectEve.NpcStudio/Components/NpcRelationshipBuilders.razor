@@ -1,0 +1,363 @@
+﻿@using ProjectEve.NpcStudio.Models
+@using ProjectEve.NpcStudio.Services
+@inject RelationshipCandidateService Matcher
+@inject FamilyGraphResolverService FamilyGraph
+@inject FamilyNpcFactoryPreviewService FamilyNpcFactory
+
+<section class="builder-shell">
+    <div class="builder-heading">
+        <div>
+            <span class="builder-kicker">RELATIONSHIP BUILDERS</span>
+            <h3>Build @Sheet.Name's network</h3>
+            <p>Preview first. Nothing in this panel writes to the database yet.</p>
+        </div>
+    </div>
+
+    <div class="builder-tabs">
+        <button class="@TabClass("Family")" @onclick="@(() => _tab = "Family")">Family Builder</button>
+        <button class="@TabClass("Romance")" @onclick="@(() => _tab = "Romance")">Romance Builder</button>
+        <button class="@TabClass("Friends")" @onclick="@(() => _tab = "Friends")">Friends Builder</button>
+        <button class="@TabClass("WorkSchool")" @onclick="@(() => _tab = "WorkSchool")">Work / School Builder</button>
+    </div>
+
+    @if (_tab == "Family")
+    {
+        <div class="builder-card">
+            <div class="builder-row">
+                <div>
+                    <h4>Family Network Builder</h4>
+                    <p>
+                        Resolve the existing canonical family first. Shared parents, grandparents,
+                        aunts/uncles and cousins are reused instead of regenerated.
+                    </p>
+                </div>
+                <div style="display:flex; gap:.5rem; flex-wrap:wrap;">
+    <button class="builder-primary" @onclick="ResolveFamilyGraph">Resolve Existing Family</button>
+    <button class="builder-primary" @onclick="PreviewMissingFamilyNpcs">Preview Missing NPCs</button>
+</div>
+            </div>
+
+            @if (_familyGraph is null)
+            {
+                <div class="builder-note">
+                    Read-only preview. This does not create or change any NPC.
+                </div>
+            }
+            else
+            {
+                <div class="preview-box">
+                    <h4>Family Graph Preview — @_familyGraph.RootName</h4>
+                    <p>
+                        <b>@_familyGraph.ReuseCount existing relatives will be reused.</b>
+                        @_familyGraph.MissingCount branches are currently missing or intentionally empty.
+                    </p>
+
+                    <h5>EXISTING / INHERITED — LOCKED TO REUSE</h5>
+                    @if (_familyGraph.ExistingPeople.Count == 0)
+                    {
+                        <div>No canonical relatives could be resolved.</div>
+                    }
+                    else
+                    {
+                        <div class="candidate-list">
+                            @foreach (var person in _familyGraph.ExistingPeople)
+                            {
+                                <article class="candidate-card">
+                                    <div class="candidate-top">
+                                        <div>
+                                            <strong>@person.Role — @person.Name</strong>
+                                            <span>NPC @person.NpcId · REUSE</span>
+                                            <span>@person.Source</span>
+                                        </div>
+                                        <div class="availability">LOCKED REUSE</div>
+                                    </div>
+                                    <details>
+                                        <summary>Relationship path</summary>
+                                        <div>@person.RelationshipPath</div>
+                                    </details>
+                                </article>
+                            }
+                        </div>
+                    }
+
+                    <h5>MISSING / OPTIONAL BRANCHES</h5>
+                    @if (_familyGraph.MissingBranches.Count == 0)
+                    {
+                        <div>No missing family branches detected.</div>
+                    }
+                    else
+                    {
+                        @foreach (var branch in _familyGraph.MissingBranches)
+                        {
+                            <div>• <b>@branch.Label</b> — @branch.WhyMissing</div>
+                        }
+                    }
+
+                    <div class="builder-note" style="margin-top:1rem;">
+                        NEXT PASS: missing branches will go through populated NPC generation,
+                        then Preview → Confirm. Nothing on this screen writes yet.
+                    </div>
+                </div>
+            }
+
+            @if (_familyManifest is not null)
+            {
+                <div class="preview-box" style="margin-top:1rem;">
+                    <h4>Family NPC Factory Preview — @_familyManifest.RootName</h4>
+                    <p>
+                        <b>@_familyManifest.ReuseCount existing NPCs will be reused.</b>
+                        <b>@_familyManifest.NewCount populated NPCs are proposed.</b>
+                    </p>
+
+                    @if (_familyManifest.Warnings.Count > 0)
+                    {
+                        <h5>Warnings</h5>
+                        @foreach (var warning in _familyManifest.Warnings)
+                        {
+                            <div>• @warning</div>
+                        }
+                    }
+
+                    <div class="candidate-list">
+                        @foreach (var row in _familyManifest.Rows)
+                        {
+                            <article class="candidate-card">
+                                <div class="candidate-top">
+                                    <div>
+                                        <strong>@row.FamilyRole — @row.ProposedName</strong>
+                                        <span>@row.Action @(row.ExistingNpcId.HasValue ? $"· NPC {row.ExistingNpcId}" : "")</span>
+                                        @if (row.Action == "NEW NPC")
+                                        {
+                                            <span>Age @row.ProposedAge · @row.ProposedGender · Tier @row.ProposedTier</span>
+                                            <span>@row.Occupation · @row.Location</span>
+                                        }
+                                    </div>
+                                    <div class="availability">@row.Action</div>
+                                </div>
+
+                                @if (row.Action == "NEW NPC")
+                                {
+                                    <details open>
+                                        <summary>Populated personal preview</summary>
+                                        <div><b>Personality:</b> @row.PersonalitySummary</div>
+                                        <div><b>Goal:</b> @row.Goal</div>
+                                        <div><b>Need:</b> @row.Need</div>
+                                        <div><b>Fear:</b> @row.Fear</div>
+                                        <div><b>Want:</b> @row.Want</div>
+                                        <div><b>Interests:</b> @string.Join(", ", row.Interests)</div>
+                                        <div><b>Education / Career:</b> @row.EducationCareerDirection</div>
+                                        <div><b>Physical:</b> @row.PhysicalDirection</div>
+                                    </details>
+
+                                    <details>
+                                        <summary>Proposed traits</summary>
+                                        @foreach (var trait in row.Traits)
+                                        {
+                                            <div>• @trait.Name: @trait.Value</div>
+                                        }
+                                    </details>
+                                }
+
+                                <details>
+                                    <summary>Factory notes</summary>
+                                    <div>@row.Notes</div>
+                                </details>
+                            </article>
+                        }
+                    </div>
+
+                    @if (_familyManifest.ProposedRelationshipWrites.Count > 0)
+                    {
+                        <h5>Would create / reuse</h5>
+                        @foreach (var write in _familyManifest.ProposedRelationshipWrites)
+                        {
+                            <div>• @write</div>
+                        }
+                    }
+
+                    <div class="preview-actions">
+                        <button @onclick="ClearFamilyManifest">Back to Edit</button>
+                        <button disabled title="Write/confirm remains disabled until this preview is validated.">
+                            Confirm & Build Family — NEXT PASS
+                        </button>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else if (_tab == "Romance")
+    {
+        <div class="builder-card">
+            <div class="builder-row">
+                <div>
+                    <h4>Existing NPC candidate finder</h4>
+                    <p>Searches the town first and excludes active marriages and direct family.</p>
+                </div>
+                <button class="builder-primary" @onclick="FindRomance">Find Matches</button>
+            </div>
+
+            @if (_loading)
+            {
+                <p>Checking existing NPCs...</p>
+            }
+            else if (_candidates.Count > 0)
+            {
+                <div class="candidate-list">
+                    @foreach (var c in _candidates)
+                    {
+                        <article class="candidate-card @(!c.Eligible ? "blocked" : "")">
+                            <div class="candidate-top">
+                                <div>
+                                    <strong>@c.Name</strong>
+                                    <span>NPC @c.NpcId · Tier @c.Tier · Age @c.Age</span>
+                                    <span>@c.Occupation · @c.Location</span>
+                                </div>
+                                <div class="score">
+                                    <b>@c.CompatibilityScore%</b>
+                                    <small>@c.CompatibilityConfidence% confidence</small>
+                                </div>
+                            </div>
+
+                            <div class="availability">@c.Availability</div>
+
+                            @if (c.StrongMatches.Count > 0)
+                            {
+                                <details>
+                                    <summary>Strong matches</summary>
+                                    @foreach (var x in c.StrongMatches) { <div>• @x</div> }
+                                </details>
+                            }
+
+                            @if (c.Differences.Count > 0)
+                            {
+                                <details>
+                                    <summary>Differences</summary>
+                                    @foreach (var x in c.Differences) { <div>• @x</div> }
+                                </details>
+                            }
+
+                            @if (c.Conflicts.Count > 0)
+                            {
+                                <details open>
+                                    <summary>Conflicts / blocks</summary>
+                                    @foreach (var x in c.Conflicts) { <div>• @x</div> }
+                                </details>
+                            }
+
+                            @if (c.CanDeepenToFit)
+                            {
+                                <details>
+                                    <summary>Tier 5 deepening suggestions</summary>
+                                    @foreach (var x in c.DeepeningSuggestions) { <div>• @x</div> }
+                                </details>
+                            }
+
+                            <div class="candidate-actions">
+                                <button disabled="@(!c.Eligible)" @onclick="@(() => PreviewMarriage(c))">
+                                    Preview Marriage
+                                </button>
+                            </div>
+                        </article>
+                    }
+                </div>
+            }
+
+            @if (_preview is not null)
+            {
+                <div class="preview-box">
+                    <h4>Marriage Preview — nothing written yet</h4>
+                    <p><b>@_preview.RootName</b> + <b>@_preview.CandidateName</b></p>
+                    <p>
+                        Compatibility @_preview.CompatibilityScore% ·
+                        Confidence @_preview.CompatibilityConfidence%
+                    </p>
+
+                    <h5>Would write</h5>
+                    @foreach (var x in _preview.Writes) { <div>• @x</div> }
+
+                    @if (_preview.ProposedTier5Updates.Count > 0)
+                    {
+                        <h5>Optional Tier 5 deepening</h5>
+                        @foreach (var x in _preview.ProposedTier5Updates) { <div>• @x</div> }
+                    }
+
+                    @if (_preview.Warnings.Count > 0)
+                    {
+                        <h5>Warnings</h5>
+                        @foreach (var x in _preview.Warnings) { <div>• @x</div> }
+                    }
+
+                    <div class="preview-actions">
+                        <button @onclick="ClearPreview">Choose Different Person</button>
+                        <button disabled title="Confirm/write is intentionally disabled until preview rules are proven.">
+                            Confirm Marriage — NEXT PASS
+                        </button>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else if (_tab == "Friends")
+    {
+        <div class="builder-card">
+            <h4>Friends Builder</h4>
+            <p>Best friend, close friend, childhood friend, current friend, former friend, acquaintance and neighbor.</p>
+            <div class="builder-note">Will use the same preview-first candidate engine with friendship-specific scoring.</div>
+        </div>
+    }
+    else
+    {
+        <div class="builder-card">
+            <h4>Work / School Builder</h4>
+            <p>Coworkers, bosses, employees, mentors, teachers, professors, coaches and classmates.</p>
+            <div class="builder-note">Will reuse existing teachers, doctors, police, workplace NPCs and school NPCs before creating anyone new.</div>
+        </div>
+    }
+</section>
+
+@code {
+    [Parameter, EditorRequired] public NpcCharacterSheet Sheet { get; set; } = default!;
+
+    private string _tab = "Family";
+    private bool _loading;
+    private List<RelationshipCandidate> _candidates = new();
+    private RelationshipBuildPreview? _preview;
+    private FamilyGraphPreview? _familyGraph;
+    private FamilyNpcFactoryManifest? _familyManifest;
+
+    private string TabClass(string name) => _tab == name ? "active" : "";
+
+    private void ResolveFamilyGraph()
+    {
+        _familyGraph = FamilyGraph.Resolve(Sheet.Id);
+        _familyManifest = null;
+    }
+
+    private void PreviewMissingFamilyNpcs()
+    {
+        _familyGraph ??= FamilyGraph.Resolve(Sheet.Id);
+        _familyManifest = FamilyNpcFactory.BuildPreview(Sheet.Id);
+    }
+
+    private void ClearFamilyManifest()
+    {
+        _familyManifest = null;
+    }
+    private async Task FindRomance()
+    {
+        _loading = true;
+        _preview = null;
+        await Task.Yield();
+        _candidates = Matcher.FindRomanceCandidates(Sheet.Id, 30);
+        _loading = false;
+    }
+
+    private void PreviewMarriage(RelationshipCandidate candidate)
+    {
+        _preview = Matcher.PreviewMarriage(Sheet.Id, candidate.NpcId);
+    }
+
+    private void ClearPreview() => _preview = null;
+}
+
+

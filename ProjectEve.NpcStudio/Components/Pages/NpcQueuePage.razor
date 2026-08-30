@@ -1,0 +1,65 @@
+@page "/npc-studio/needs-image"
+@page "/npc-studio/needs-voice"
+@rendermode InteractiveServer
+@using ProjectEve.NpcStudio.Models
+@inject ProjectEve.NpcStudio.Services.NpcStudioService Studio
+@inject NavigationManager Nav
+
+<PageTitle>NPC Work Queue</PageTitle>
+
+<section class="studio-page studio-page-dark">
+    <div class="studio-page-header">
+        <div>
+            <p class="studio-eyebrow">Work Queue</p>
+            <h1>@Title</h1>
+            <p class="studio-muted">Open a file and complete the missing creative work.</p>
+        </div>
+        <a class="studio-btn" href="/npc-studio/browser">All NPCs</a>
+    </div>
+
+    @if (_rows.Count == 0)
+    {
+        <div class="studio-card">No matching files found.</div>
+    }
+    else
+    {
+        <div class="studio-file-grid">
+            @foreach (var row in FilteredRows)
+            {
+                <a class="studio-case-card" href="/npc-studio/npc/@row.Id">
+                    <div class="studio-case-photo small">@Initials(row.Name)</div>
+                    <div>
+                        <strong>@row.Name</strong>
+                        <span>@row.Occupation</span>
+                        <small>Tier @row.Tier · @row.Status · @row.RelationshipCount relationships</small>
+                    </div>
+                    <span class="studio-badge red">@(IsImageQueue ? row.ImageStatus : row.VoiceStatus)</span>
+                </a>
+            }
+        </div>
+    }
+</section>
+
+@code {
+    private List<NpcBrowserRow> _rows = new();
+    private bool IsImageQueue => Nav.Uri.Contains("needs-image", StringComparison.OrdinalIgnoreCase);
+    private string Title => IsImageQueue ? "NPCs Needing Reference Images" : "NPCs Needing Voices";
+
+    private IEnumerable<NpcBrowserRow> FilteredRows => _rows.Where(r =>
+        IsImageQueue
+            ? !string.Equals(r.ImageStatus, "Approved", StringComparison.OrdinalIgnoreCase)
+            : !string.Equals(r.VoiceStatus, "Approved", StringComparison.OrdinalIgnoreCase));
+
+    protected override async Task OnInitializedAsync()
+    {
+        _rows = await Studio.SearchNpcsAsync("", "", null);
+    }
+
+    private static string Initials(string name)
+    {
+        var parts = (name ?? "?").Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        if (parts.Length == 0) return "?";
+        if (parts.Length == 1) return parts[0][0].ToString().ToUpperInvariant();
+        return (parts[0][0].ToString() + parts[^1][0].ToString()).ToUpperInvariant();
+    }
+}
