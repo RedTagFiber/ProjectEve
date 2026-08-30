@@ -129,7 +129,82 @@ public static class NpcFamilyIdentityIntegritySchema
                 insert.Parameters.AddWithValue("$suffix", parts.Suffix);
                 insert.ExecuteNonQuery();
             }
+
+            RepairPlaceholderCanonicalSurnames(conn);
         }
+    }
+
+    private static void RepairPlaceholderCanonicalSurnames(SqliteConnection conn)
+    {
+        if (!TableExists(conn, "Characters") || !TableExists(conn, "NpcNameProfiles"))
+            return;
+
+        using var read = conn.CreateCommand();
+        read.CommandText = """
+            SELECT
+                c.Id,
+                COALESCE(c.Name, ''),
+                COALESCE(n.CurrentLastName, ''),
+                COALESCE(n.BirthLastName, '')
+            FROM Characters c
+            INNER JOIN NpcNameProfiles n ON n.NpcId = c.Id;
+            """;
+
+        using var reader = read.ExecuteReader();
+        var repairs = new List<(int Id, string CurrentLast, string BirthLast)>();
+
+        while (reader.Read())
+        {
+            var id = reader.GetInt32(0);
+            var characterName = reader.GetString(1);
+            var profileCurrent = reader.GetString(2);
+            var profileBirth = reader.GetString(3);
+
+            var parts = SplitName(CleanDraftDisplayName(characterName));
+            var realSurname = parts.Last;
+
+            if (string.IsNullOrWhiteSpace(realSurname) || IsPlaceholderSurname(realSurname))
+                continue;
+
+            var newCurrent = IsPlaceholderSurname(profileCurrent) ? realSurname : profileCurrent;
+            var newBirth = string.IsNullOrWhiteSpace(profileBirth) || IsPlaceholderSurname(profileBirth)
+                ? realSurname
+                : profileBirth;
+
+            if (!string.Equals(newCurrent, profileCurrent, StringComparison.OrdinalIgnoreCase) ||
+                !string.Equals(newBirth, profileBirth, StringComparison.OrdinalIgnoreCase))
+            {
+                repairs.Add((id, newCurrent, newBirth));
+            }
+        }
+
+        reader.Close();
+
+        foreach (var repair in repairs)
+        {
+            using var update = conn.CreateCommand();
+            update.CommandText = """
+                UPDATE NpcNameProfiles
+                SET CurrentLastName = $current,
+                    BirthLastName = $birth,
+                    UpdatedRealAt = CURRENT_TIMESTAMP
+                WHERE NpcId = $id;
+                """;
+            update.Parameters.AddWithValue("$id", repair.Id);
+            update.Parameters.AddWithValue("$current", repair.CurrentLast);
+            update.Parameters.AddWithValue("$birth", repair.BirthLast);
+            update.ExecuteNonQuery();
+        }
+    }
+
+    private static bool IsPlaceholderSurname(string? value)
+    {
+        var text = (value ?? "").Trim();
+        return text.Length == 0
+            || text.Equals("Resident", StringComparison.OrdinalIgnoreCase)
+            || text.Equals("Unknown", StringComparison.OrdinalIgnoreCase)
+            || text.Equals("TBD", StringComparison.OrdinalIgnoreCase)
+            || text.Equals("Draft", StringComparison.OrdinalIgnoreCase);
     }
 
     private static void EnsureRelationships(string dbPath)

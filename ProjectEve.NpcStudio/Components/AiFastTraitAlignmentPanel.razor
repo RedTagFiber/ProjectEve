@@ -1,0 +1,144 @@
+﻿@using ProjectEve.NpcStudio.Services
+@inject AiFastTraitAlignmentService FastAi
+@inject ProjectEve.NpcStudio.Services.NpcStudioService Studio
+@inject NavigationManager Navigation
+
+<section class="fast-ai-aligner">
+    <header>
+        <div>
+            <span>AI FAST20 ALIGNMENT</span>
+            <h3>Match Emotional Baselines to Mid + Slow Personality</h3>
+            <p>Mid and Slow stay authoritative. This pass sets the Fast20 starting emotional profile to fit them.</p>
+        </div>
+        <button disabled="@_working" @onclick="BuildPreviewAsync">
+            @(_working ? "Aligning..." : "AI Align Fast20")
+        </button>
+    </header>
+
+    @if (!string.IsNullOrWhiteSpace(_message))
+    {
+        <div class="fast-ai-message">@_message</div>
+    }
+
+    @if (_preview is not null)
+    {
+        <div class="fast-ai-meta">
+            <span>MID <b>@_preview.MidCount</b></span>
+            <span>SLOW <b>@_preview.SlowCount</b></span>
+            <span>FAST <b>@_preview.Selections.Count / 20</b></span>
+        </div>
+
+        <div class="fast-ai-grid">
+            @foreach (var item in _preview.Selections.OrderByDescending(x => Math.Abs(x.Value - 50)).ThenBy(x => x.TraitName))
+            {
+                <article>
+                    <div>
+                        <strong>@item.TraitName</strong>
+                        <small>@item.TraitId</small>
+                    </div>
+                    <div class="fast-ai-shift">
+                        <span>@item.BeforeValue.ToString("0")</span>
+                        <b>-></b>
+                        <strong>@item.Value</strong>
+                    </div>
+                    <p>@item.Rationale</p>
+                </article>
+            }
+        </div>
+
+        @if (_preview.Warnings.Count > 0)
+        {
+            <details class="fast-ai-warnings">
+                <summary>Validation notes (@_preview.Warnings.Count)</summary>
+                @foreach (var warning in _preview.Warnings)
+                {
+                    <p>@warning</p>
+                }
+            </details>
+        }
+
+        <div class="fast-ai-actions">
+            <button class="save" disabled="@(_working || !_preview.IsValid)" @onclick="ApproveAsync">
+                Approve & Save Fast20
+            </button>
+            <button disabled="@_working" @onclick="Discard">Discard Preview</button>
+            <small>Saving sets both the starting Current and Baseline values. Gameplay can move Current later.</small>
+        </div>
+    }
+</section>
+
+@code {
+    [Parameter] public int NpcId { get; set; }
+
+    private AiFastTraitAlignmentPreview? _preview;
+    private bool _working;
+    private string _message = "";
+
+    private async Task BuildPreviewAsync()
+    {
+        _working = true;
+        _preview = null;
+        _message = "";
+
+        try
+        {
+            var sheet = await Studio.GetCharacterSheetAsync(NpcId);
+            var context = sheet is null
+                ? $"NPC {NpcId}"
+                : string.Join(" | ", new[]
+                {
+                    $"Name: {sheet.Name}",
+                    $"Age: {sheet.Age}",
+                    $"Gender: {sheet.Gender}",
+                    $"Occupation: {sheet.Occupation}",
+                    $"Location: {sheet.Location}",
+                    $"Archetypes: {sheet.Archetype1}, {sheet.Archetype2}, {sheet.Archetype3}",
+                    $"Public persona: {sheet.PublicPersona}",
+                    $"Private persona: {sheet.PrivatePersona}",
+                    $"Goal: {sheet.Goal}",
+                    $"Fear: {sheet.Fear}"
+                }.Where(x => !string.IsNullOrWhiteSpace(x)));
+
+            _preview = await FastAi.BuildPreviewAsync(NpcId, context);
+            _message = _preview.IsValid
+                ? "Fast20 alignment preview is ready. Review before saving."
+                : "Fast20 alignment needs review before saving.";
+        }
+        catch (Exception ex)
+        {
+            _message = "Fast20 AI alignment failed: " + ex.Message;
+        }
+        finally
+        {
+            _working = false;
+        }
+    }
+
+    private async Task ApproveAsync()
+    {
+        if (_preview is null || !_preview.IsValid)
+            return;
+
+        _working = true;
+        try
+        {
+            await FastAi.ApplyApprovedPreviewAsync(_preview);
+            _message = "Fast20 aligned and saved. Reloading dossier...";
+            Navigation.NavigateTo(Navigation.Uri, forceLoad: true);
+        }
+        catch (Exception ex)
+        {
+            _message = "Fast20 save failed: " + ex.Message;
+        }
+        finally
+        {
+            _working = false;
+        }
+    }
+
+    private void Discard()
+    {
+        _preview = null;
+        _message = "Fast20 alignment preview discarded. No data changed.";
+    }
+}

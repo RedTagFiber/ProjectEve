@@ -1,0 +1,115 @@
+﻿@page "/kinship-test/{NpcId:int}"
+@using ProjectEve.NpcStudio.Services
+@inject CanonicalKinshipTitleService Kinship
+
+<PageTitle>Canonical Kinship Test</PageTitle>
+
+<section class="kt">
+    <header>
+        <div>
+            <small>PROJECT EVE · FAMILY FOUNDATION</small>
+            <h1>Canonical Kinship Test</h1>
+            <p>
+                Read-only. Titles below are derived from structural
+                parent/child and union links, never from cached FamilyRole text.
+            </p>
+        </div>
+        <button @onclick="Reload">Reload</button>
+    </header>
+
+    @if (_error.Length > 0)
+    {
+        <div class="error">@_error</div>
+    }
+    else if (_rows.Count == 0)
+    {
+        <div class="empty">
+            No structural relatives resolved for NPC @NpcId.
+        </div>
+    }
+    else
+    {
+        <div class="viewer">
+            <b>Viewer:</b>
+            @_rows[0].ViewerName
+            <span>NPC @NpcId</span>
+        </div>
+
+        <div class="rows">
+            @foreach (var row in _rows)
+            {
+                <article>
+                    <div class="person">
+                        <strong>@row.TargetName</strong>
+                        <span>NPC @row.TargetNpcId</span>
+                    </div>
+
+                    <div class="title">
+                        <small>VIEWER SEES TARGET AS</small>
+                        <b>@row.Title</b>
+                    </div>
+
+                    <div class="meta">
+                        <span>@row.Kind</span>
+                        @if (!string.IsNullOrWhiteSpace(row.FamilySide))
+                        {
+                            <span>@row.FamilySide side</span>
+                        }
+                        <span>@row.SourceKind</span>
+                    </div>
+
+                    <a href="@($"/kinship-test/{row.TargetNpcId}")">
+                        View from their perspective
+                    </a>
+                </article>
+            }
+        </div>
+    }
+</section>
+
+<style>
+.kt{display:grid;gap:14px;padding:18px;color:#e9f0fb}
+.kt header{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;padding:18px;border:1px solid #34475f;border-radius:14px;background:#0a1525}
+.kt header small{font-weight:900;letter-spacing:.12em;color:#9b87ff}
+.kt h1{margin:4px 0}.kt p{margin:0;max-width:820px;color:#91a5c2}
+.kt button{border:1px solid #7259df;background:#5639c8;color:white;border-radius:9px;padding:10px 15px;font-weight:900;cursor:pointer}
+.viewer{padding:12px;border:1px solid #33475f;border-radius:10px;background:#0e1a2a}
+.viewer span,.person span{margin-left:8px;color:#8195b1;font-size:.75rem}
+.rows{display:grid;gap:8px}
+.rows article{display:grid;grid-template-columns:minmax(180px,1.3fr) minmax(180px,1fr) minmax(220px,1.2fr) auto;gap:12px;align-items:center;padding:12px;border:1px solid #2f435c;border-radius:10px;background:#0b1726}
+.person{display:flex;align-items:baseline;min-width:0}
+.title small{display:block;color:#7f93af;font-size:.61rem}.title b{font-size:1.03rem}
+.meta{display:flex;flex-wrap:wrap;gap:5px}.meta span{padding:4px 7px;border-radius:999px;background:#17263a;color:#a8b8cf;font-size:.7rem}
+.rows a{color:#b5a4ff;text-decoration:none;font-weight:800;font-size:.75rem}
+.error{padding:12px;border:1px solid #8a3440;border-radius:9px;background:#2a1117;color:#ffadb5}
+.empty{padding:26px;border:1px dashed #3b4f68;border-radius:10px;text-align:center;color:#91a4bf}
+@@media(max-width:850px){.kt header{flex-direction:column}.rows article{grid-template-columns:1fr}}
+</style>
+
+@code {
+    [Parameter] public int NpcId { get; set; }
+
+    private IReadOnlyList<KinshipResolution> _rows =
+        Array.Empty<KinshipResolution>();
+
+    private string _error = "";
+
+    protected override void OnParametersSet()
+    {
+        Reload();
+    }
+
+    private void Reload()
+    {
+        try
+        {
+            _error = "";
+            _rows = Kinship.ResolveFamily(NpcId);
+        }
+        catch (Exception ex)
+        {
+            _rows = Array.Empty<KinshipResolution>();
+            _error = ex.Message;
+        }
+    }
+}

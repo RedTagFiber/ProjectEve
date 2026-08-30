@@ -166,9 +166,51 @@ public sealed partial class NpcStudioRepository
     public Task SavePhoneAsync(int npcId, CanonicalPhoneRow phone)
     {
         using var conn=Open();
+
+        EnsureGlobalNpcPhoneUniqueness(conn);
+
         var id=string.IsNullOrWhiteSpace(phone.PhoneId)
-            ? $"phone-{npcId}-{Guid.NewGuid():N}"
-            : phone.PhoneId;
+        ? $"phone-{npcId}-{Guid.NewGuid():N}"
+        : phone.PhoneId;
+
+        var normalizedNumber = NormalizeNpcPhoneNumber(phone.PhoneNumber);
+
+        if (!string.IsNullOrWhiteSpace(normalizedNumber))
+        {
+            using var ownership = conn.CreateCommand();
+            ownership.CommandText = """
+                SELECT PhoneId, NpcId
+                FROM NpcPhones
+                WHERE trim(COALESCE(PhoneNumber,'')) <> ''
+                  AND replace(
+                        replace(
+                          replace(
+                            replace(
+                              replace(trim(PhoneNumber),'(', ''),
+                            ')', ''),
+                          '-', ''),
+                        ' ', ''),
+                      '.', '') = $number
+                  AND PhoneId <> $phoneId
+                LIMIT 1;
+                """;
+            ownership.Parameters.AddWithValue(
+                "$number",
+                PhoneDigitsOnly(normalizedNumber));
+            ownership.Parameters.AddWithValue("$phoneId", id);
+
+            using var ownerReader = ownership.ExecuteReader();
+
+            if (ownerReader.Read())
+            {
+                var existingPhoneId = ownerReader.GetString(0);
+                var existingNpcId = ownerReader.GetInt32(1);
+
+                throw new InvalidOperationException(
+                    $"Phone number '{normalizedNumber}' is already owned by NPC {existingNpcId} " +
+                    $"(PhoneId {existingPhoneId}). NPC phone numbers are globally unique and may not be reused.");
+            }
+        }
 
         if(phone.IsPrimary)
         {
@@ -182,22 +224,22 @@ public sealed partial class NpcStudioRepository
         cmd.CommandText="""
         INSERT INTO NpcPhones
         (PhoneId,WorldId,NpcId,PhoneNumber,PhoneType,CarrierName,DeviceMake,DeviceModel,DeviceLabel,
-         IsPrimary,IsActive,UpdatedRealAt)
+        IsPrimary,IsActive,UpdatedRealAt)
         VALUES($phoneId,'smalltown',$npcId,$number,$type,$carrier,$make,$model,$label,$primary,$active,CURRENT_TIMESTAMP)
         ON CONFLICT(PhoneId) DO UPDATE SET
-            PhoneNumber=excluded.PhoneNumber,
-            PhoneType=excluded.PhoneType,
-            CarrierName=excluded.CarrierName,
-            DeviceMake=excluded.DeviceMake,
-            DeviceModel=excluded.DeviceModel,
-            DeviceLabel=excluded.DeviceLabel,
-            IsPrimary=excluded.IsPrimary,
-            IsActive=excluded.IsActive,
-            UpdatedRealAt=CURRENT_TIMESTAMP;
+        PhoneNumber=excluded.PhoneNumber,
+        PhoneType=excluded.PhoneType,
+        CarrierName=excluded.CarrierName,
+        DeviceMake=excluded.DeviceMake,
+        DeviceModel=excluded.DeviceModel,
+        DeviceLabel=excluded.DeviceLabel,
+        IsPrimary=excluded.IsPrimary,
+        IsActive=excluded.IsActive,
+        UpdatedRealAt=CURRENT_TIMESTAMP;
         """;
         cmd.Parameters.AddWithValue("$phoneId",id);
         cmd.Parameters.AddWithValue("$npcId",npcId);
-        cmd.Parameters.AddWithValue("$number",phone.PhoneNumber??"");
+        cmd.Parameters.AddWithValue("$number",normalizedNumber);
         cmd.Parameters.AddWithValue("$type",string.IsNullOrWhiteSpace(phone.PhoneType)?"Mobile":phone.PhoneType);
         cmd.Parameters.AddWithValue("$carrier",phone.CarrierName??"");
         cmd.Parameters.AddWithValue("$make",phone.DeviceMake??"");
@@ -209,6 +251,59 @@ public sealed partial class NpcStudioRepository
         return Task.CompletedTask;
     }
 
+    private static void EnsureGlobalNpcPhoneUniqueness(SqliteConnection conn)
+    {
+        using var cmd=conn.CreateCommand();
+        cmd.CommandText="""
+            CREATE UNIQUE INDEX IF NOT EXISTS UX_NpcPhones_Number_Global
+            ON NpcPhones
+            (
+                replace(
+                    replace(
+                        replace(
+                            replace(
+                                replace(trim(PhoneNumber),'(', ''),
+                            ')', ''),
+                        '-', ''),
+                    ' ', ''),
+                '.', '')
+            )
+            WHERE trim(COALESCE(PhoneNumber,'')) <> '';
+            """;
+
+        try
+        {
+            cmd.ExecuteNonQuery();
+        }
+        catch (SqliteException ex)
+        {
+            throw new InvalidOperationException(
+                "NpcPhones already contains duplicate phone numbers after normalization. " +
+                "Repair those duplicates before saving additional NPC phones.",
+                ex);
+        }
+    }
+
+    private static string NormalizeNpcPhoneNumber(string? value)
+    {
+        var raw=(value??"").Trim();
+
+        if(string.IsNullOrWhiteSpace(raw))
+            return "";
+
+        var digits=PhoneDigitsOnly(raw);
+
+        if(digits.Length==10)
+            return $"({digits.Substring(0,3)}) {digits.Substring(3,3)}-{digits.Substring(6,4)}";
+
+        if(digits.Length==11 && digits.StartsWith("1",StringComparison.Ordinal))
+            return $"+1 ({digits.Substring(1,3)}) {digits.Substring(4,3)}-{digits.Substring(7,4)}";
+
+        return raw;
+    }
+
+    private static string PhoneDigitsOnly(string? value)
+        => new string((value??"").Where(char.IsDigit).ToArray());
     public Task SavePhoneContactAsync(int npcId, CanonicalPhoneContactRow c)
     {
         using var conn=Open();
@@ -254,6 +349,59 @@ public sealed partial class NpcStudioRepository
     public Task SaveVehicleAsync(int npcId, CanonicalVehicleRow v)
     {
         using var conn=Open();
+    EnsureGlobalVehiclePlateUniqueness(conn);
+
+    var normalizedPlate = NormalizeVehiclePlate(v.PlateNumber);
+
+    if (!string.IsNullOrWhiteSpace(normalizedPlate))
+    {
+        using var ownership = conn.CreateCommand();
+        ownership.CommandText = """
+            SELECT VehicleId, RegisteredOwnerNpcId, PrimaryDriverNpcId
+            FROM Vehicles
+            WHERE trim(COALESCE(PlateNumber,'')) <> ''
+              AND upper(
+                    replace(
+                      replace(
+                        replace(trim(PlateNumber),'-',''),
+                      ' ',''),
+                    '.','')
+                  ) = $plate
+              AND VehicleId <> $vehicleId
+            LIMIT 1;
+            """;
+
+        ownership.Parameters.AddWithValue(
+            "$plate",
+            VehiclePlateKey(normalizedPlate));
+
+        var existingVehicleId =
+            string.IsNullOrWhiteSpace(v.VehicleId)
+            ? ""
+            : v.VehicleId;
+
+        ownership.Parameters.AddWithValue(
+            "$vehicleId",
+            existingVehicleId);
+
+        using var ownerReader = ownership.ExecuteReader();
+
+        if (ownerReader.Read())
+        {
+            var usedVehicleId = ownerReader.GetString(0);
+            var ownerNpcId = ownerReader.IsDBNull(1)
+                ? 0
+                : ownerReader.GetInt32(1);
+            var driverNpcId = ownerReader.IsDBNull(2)
+                ? 0
+                : ownerReader.GetInt32(2);
+
+            throw new InvalidOperationException(
+                $"License plate '{normalizedPlate}' is already assigned to vehicle {usedVehicleId} " +
+                $"(registered owner NPC {ownerNpcId}, primary driver NPC {driverNpcId}). " +
+                "Vehicle license plates are globally unique and may not be reused.");
+        }
+    }
         var id=string.IsNullOrWhiteSpace(v.VehicleId)?$"vehicle-{npcId}-{Guid.NewGuid():N}":v.VehicleId;
         using var cmd=conn.CreateCommand();
         cmd.CommandText="""
@@ -282,7 +430,7 @@ public sealed partial class NpcStudioRepository
         cmd.Parameters.AddWithValue("$year",(object?)v.ModelYear??DBNull.Value);
         cmd.Parameters.AddWithValue("$color",v.Color??"");
         cmd.Parameters.AddWithValue("$vin",v.Vin??"");
-        cmd.Parameters.AddWithValue("$plate",v.PlateNumber??"");
+        cmd.Parameters.AddWithValue("$plate",normalizedPlate);
         cmd.Parameters.AddWithValue("$state",v.PlateState??"");
         cmd.Parameters.AddWithValue("$status",string.IsNullOrWhiteSpace(v.Status)?"Active":v.Status);
         cmd.Parameters.AddWithValue("$miles",(object?)v.OdometerMiles??DBNull.Value);
@@ -398,4 +546,52 @@ public sealed partial class NpcStudioRepository
     private static bool B(SqliteDataReader r,int i)=>!r.IsDBNull(i)&&Convert.ToInt32(r.GetValue(i))!=0;
     private static int Int(SqliteDataReader r,int i)=>r.IsDBNull(i)?0:Convert.ToInt32(r.GetValue(i));
     private static string Str(SqliteDataReader r,int i,string f)=>r.IsDBNull(i)?f:(r.GetString(i)??f);
+
+    private static void EnsureGlobalVehiclePlateUniqueness(
+        SqliteConnection conn)
+    {
+        using var cmd=conn.CreateCommand();
+        cmd.CommandText="""
+            CREATE UNIQUE INDEX IF NOT EXISTS UX_Vehicles_Plate_Global
+            ON Vehicles
+            (
+                upper(
+                    replace(
+                        replace(
+                            replace(trim(PlateNumber),'-',''),
+                        ' ',''),
+                    '.','')
+                )
+            )
+            WHERE trim(COALESCE(PlateNumber,'')) <> '';
+            """;
+
+        try
+        {
+            cmd.ExecuteNonQuery();
+        }
+        catch(SqliteException ex)
+        {
+            throw new InvalidOperationException(
+                "Vehicles already contains duplicate license plates after normalization. " +
+                "Repair those duplicates before saving additional vehicles.",
+                ex);
+        }
+    }
+
+    private static string NormalizeVehiclePlate(string? value)
+    {
+        var raw=(value??"").Trim().ToUpperInvariant();
+
+        return string.IsNullOrWhiteSpace(raw)
+            ? ""
+            : raw;
+    }
+
+    private static string VehiclePlateKey(string? value)
+        => new string(
+            (value??"")
+            .Where(ch => ch!='-' && ch!=' ' && ch!='.')
+            .Select(char.ToUpperInvariant)
+            .ToArray());
 }

@@ -1,0 +1,304 @@
+﻿@using ProjectEve.NpcStudio.Models
+@using ProjectEve.NpcStudio.Services
+@inject ProjectEve.NpcStudio.Services.AiTraitPopulationService TraitAi
+@inject ProjectEve.NpcStudio.Services.NpcStudioService Studio
+@inject NavigationManager Navigation
+
+<section class="ai-trait-builder">
+    <header class="ai-trait-head">
+        <div>
+            <span class="ai-kicker">AI TRAIT BUILDER</span>
+            <h3>Canonical Personality Fill</h3>
+            <p>
+                Uses only authored ProjectEve trait IDs. Existing manual traits are protected.
+                Compatibility is checked before preview and again before save.
+            </p>
+        </div>
+
+        <div class="ai-counts">
+            <span>MID <b>@CurrentMid / 10</b></span>
+            <span>SLOW <b>@CurrentSlow / 15+</b></span>
+        </div>
+    </header>
+
+    <div class="ai-trait-actions">
+        <button type="button"
+                disabled="@_working"
+                @onclick="@(() => BuildPreviewAsync(true, false))">
+            @(_working ? "Working..." : "AI Fill Mid Traits")
+        </button>
+
+        <button type="button"
+                disabled="@_working"
+                @onclick="@(() => BuildPreviewAsync(false, true))">
+            @(_working ? "Working..." : "AI Fill Slow + Sub-Traits")
+        </button>
+
+        <button type="button"
+                class="primary"
+                disabled="@_working"
+                @onclick="@(() => BuildPreviewAsync(true, true))">
+            @(_working ? "Building..." : "AI Complete Trait Profile")
+        </button>
+    </div>
+
+    @if (!string.IsNullOrWhiteSpace(_message))
+    {
+        <div class="ai-trait-message @(_preview?.IsValid == false ? "warn" : "")">
+            @_message
+        </div>
+    }
+
+    @if (_preview is not null)
+    {
+        <div class="ai-compat-strip @(_preview.IsValid ? "pass" : "block")">
+            <strong>Compatibility: @(_preview.IsValid ? "PASS" : "REVIEW / BLOCK")</strong>
+            <span>@_preview.HardConflicts.Count hard conflicts</span>
+            <span>@_preview.SoftTensions.Count soft tensions</span>
+        </div>
+
+        <div class="ai-preview-stats">
+            @if (_preview.RequestedMid)
+            {
+                <div>
+                    <span>MID RESULT</span>
+                    <strong>@_preview.ResultingMidCount / 10</strong>
+                    <small>@_preview.MidSelections.Count new</small>
+                </div>
+            }
+
+            @if (_preview.RequestedSlow)
+            {
+                <div>
+                    <span>SLOW RESULT</span>
+                    <strong>@_preview.ResultingSlowCount / @_preview.SlowTarget</strong>
+                    <small>@_preview.SlowSelections.Count new</small>
+                </div>
+
+                <div>
+                    <span>SUB-TRAITS</span>
+                    <strong>@_preview.SubTraitSelections.Count / @_preview.RequiredMissingSubTraitCount</strong>
+                    <small>missing values filled</small>
+                </div>
+            }
+        </div>
+
+        @if (_preview.MidSelections.Count > 0)
+        {
+            <details class="ai-preview-group" open>
+                <summary>New Mid Traits <span>@_preview.MidSelections.Count</span></summary>
+                <div class="ai-trait-list">
+                    @foreach (var item in _preview.MidSelections)
+                    {
+                        <div>
+                            <span>
+                                <strong>@item.TraitName</strong>
+                                <small>@item.TraitId @StyleText(item.Style)</small>
+                            </span>
+                            <b>@item.Value</b>
+                        </div>
+                    }
+                </div>
+            </details>
+        }
+
+        @if (_preview.SlowSelections.Count > 0)
+        {
+            <details class="ai-preview-group" open>
+                <summary>New Slow Traits <span>@_preview.SlowSelections.Count</span></summary>
+                <div class="ai-trait-list">
+                    @foreach (var item in _preview.SlowSelections)
+                    {
+                        <div>
+                            <span>
+                                <strong>@item.TraitName</strong>
+                                <small>@item.TraitId @StyleText(item.Style)</small>
+                            </span>
+                            <b>@item.Value</b>
+                        </div>
+                    }
+                </div>
+            </details>
+        }
+
+        @if (_preview.SubTraitSelections.Count > 0)
+        {
+            <details class="ai-preview-group">
+                <summary>Sub-Trait Values <span>@_preview.SubTraitSelections.Count</span></summary>
+                <div class="ai-sub-list">
+                    @foreach (var item in _preview.SubTraitSelections
+                        .OrderBy(x => x.ParentTraitId)
+                        .ThenBy(x => x.SubTraitName))
+                    {
+                        <div>
+                            <strong>@item.SubTraitName</strong>
+                            <small>@item.ParentTraitId -> @item.SubTraitId</small>
+                            <span>@DisplaySubValue(item.ValueText)</span>
+                        </div>
+                    }
+                </div>
+            </details>
+        }
+
+        @if (_preview.SoftTensions.Count > 0)
+        {
+            <details class="ai-preview-group tension">
+                <summary>Soft Personality Tensions <span>@_preview.SoftTensions.Count</span></summary>
+                @foreach (var warning in _preview.SoftTensions)
+                {
+                    <p>@warning</p>
+                }
+            </details>
+        }
+
+        @if (_preview.Warnings.Count > 0 || _preview.HardConflicts.Count > 0)
+        {
+            <details class="ai-preview-group warnings" open="@(!_preview.IsValid)">
+                <summary>Validation Notes <span>@(_preview.Warnings.Count + _preview.HardConflicts.Count)</span></summary>
+
+                @foreach (var warning in _preview.HardConflicts)
+                {
+                    <p class="hard">@warning</p>
+                }
+
+                @foreach (var warning in _preview.Warnings)
+                {
+                    <p>@warning</p>
+                }
+            </details>
+        }
+
+        <div class="ai-approval-row">
+            <button type="button"
+                    class="save"
+                    disabled="@(_working || !_preview.IsValid)"
+                    @onclick="ApproveAndSaveAsync">
+                Approve & Save Canonical Traits
+            </button>
+
+            <button type="button"
+                    class="discard"
+                    disabled="@_working"
+                    @onclick="DiscardPreview">
+                Discard Preview
+            </button>
+
+            <small>
+                Nothing is written until Approve & Save.
+            </small>
+        </div>
+    }
+</section>
+
+@code {
+    [Parameter]
+    public int NpcId { get; set; }
+
+    private AiTraitPopulationPreview? _preview;
+    private bool _working;
+    private string _message = "";
+    private int CurrentMid =>
+        _preview?.ExistingMidCount ??
+        ProjectEve.Characters.Traits.MidTraitDossierService.Load(NpcId).Active.Count;
+
+    private int CurrentSlow =>
+        _preview?.ExistingSlowCount ??
+        ProjectEve.Characters.Traits.SlowTraitDossierService.Load(NpcId).Active.Count;
+
+    private async Task BuildPreviewAsync(bool fillMid, bool fillSlow)
+    {
+        _working = true;
+        _message = "";
+        _preview = null;
+
+        try
+        {
+            var sheet = await Studio.GetCharacterSheetAsync(NpcId);
+
+            var context = sheet is null
+                ? $"NPC {NpcId}"
+                : string.Join(
+                    " | ",
+                    new[]
+                    {
+                        $"Name: {sheet.Name}",
+                        $"Age: {sheet.Age}",
+                        $"Gender: {sheet.Gender}",
+                        $"Occupation: {sheet.Occupation}",
+                        $"Location: {sheet.Location}",
+                        $"Archetypes: {sheet.Archetype1}, {sheet.Archetype2}, {sheet.Archetype3}",
+                        $"Public persona: {sheet.PublicPersona}",
+                        $"Private persona: {sheet.PrivatePersona}",
+                        $"Goal: {sheet.Goal}",
+                        $"Fear: {sheet.Fear}"
+                    }.Where(x => !string.IsNullOrWhiteSpace(x)));
+
+            _preview = await TraitAi.BuildPreviewAsync(
+                NpcId,
+                sheet?.Tier ?? 3,
+                context,
+                fillMid,
+                fillSlow,
+                sheet?.Age ?? 0);
+
+            _message = _preview.IsValid
+                ? "AI trait preview is ready. Review it before saving."
+                : "AI generated a preview, but validation must pass before it can be saved.";
+        }
+        catch (Exception ex)
+        {
+            _message = "AI trait build failed: " + ex.Message;
+        }
+        finally
+        {
+            _working = false;
+        }
+    }
+
+    private async Task ApproveAndSaveAsync()
+    {
+        if (_preview is null || !_preview.IsValid)
+            return;
+
+        _working = true;
+
+        try
+        {
+            await TraitAi.ApplyApprovedPreviewAsync(_preview);
+            _message = "Canonical traits saved. Reloading dossier...";
+            Navigation.NavigateTo(Navigation.Uri, forceLoad: true);
+        }
+        catch (Exception ex)
+        {
+            _message = "Trait save blocked: " + ex.Message;
+        }
+        finally
+        {
+            _working = false;
+        }
+    }
+
+    private void DiscardPreview()
+    {
+        _preview = null;
+        _message = "AI trait preview discarded. No canonical data was changed.";
+    }
+
+    private static string StyleText(string style) =>
+        string.IsNullOrWhiteSpace(style)
+            ? ""
+            : $" | style: {style}";
+
+    private static string DisplaySubValue(string raw)
+    {
+        if (string.IsNullOrWhiteSpace(raw))
+            return "(blank)";
+
+        var parsed = ProjectEve.Characters.Traits.SubSlowDossierService
+            .ParseMultiValue(raw);
+
+        return parsed.Count > 1
+            ? string.Join(", ", parsed)
+            : raw;
+    }
+}

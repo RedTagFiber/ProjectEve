@@ -1,0 +1,240 @@
+﻿.ai-trait-builder {
+    margin: 0 0 18px;
+    padding: 18px;
+    border: 1px solid rgba(126, 162, 255, .22);
+    border-radius: 16px;
+    background: linear-gradient(180deg, rgba(23, 32, 54, .92), rgba(15, 22, 38, .92));
+    box-shadow: 0 14px 38px rgba(0, 0, 0, .18);
+}
+
+.ai-trait-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+    align-items: flex-start;
+}
+
+.ai-kicker {
+    display: block;
+    margin-bottom: 4px;
+    color: #8fb2ff;
+    font-size: .72rem;
+    font-weight: 800;
+    letter-spacing: .12em;
+}
+
+.ai-trait-head h3 {
+    margin: 0;
+    font-size: 1.18rem;
+}
+
+.ai-trait-head p {
+    max-width: 760px;
+    margin: 6px 0 0;
+    color: #aab5ca;
+    font-size: .88rem;
+    line-height: 1.5;
+}
+
+.ai-counts {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.ai-counts span {
+    padding: 7px 10px;
+    border: 1px solid rgba(255,255,255,.09);
+    border-radius: 999px;
+    color: #aab5ca;
+    font-size: .78rem;
+    white-space: nowrap;
+}
+
+.ai-counts b {
+    color: #eef4ff;
+}
+
+.ai-trait-actions {
+    display: flex;
+    gap: 9px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+}
+
+.ai-trait-actions button,
+.ai-approval-row button {
+    border: 1px solid rgba(143, 178, 255, .28);
+    border-radius: 9px;
+    padding: 9px 13px;
+    background: rgba(143, 178, 255, .08);
+    color: #eaf0ff;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.ai-trait-actions button.primary,
+.ai-approval-row button.save {
+    background: #dbe7ff;
+    color: #111827;
+    border-color: transparent;
+}
+
+.ai-trait-actions button:disabled,
+.ai-approval-row button:disabled {
+    opacity: .45;
+    cursor: default;
+}
+
+.ai-trait-message,
+.ai-compat-strip {
+    margin-top: 12px;
+    padding: 10px 12px;
+    border-radius: 9px;
+    background: rgba(255,255,255,.045);
+    color: #cbd5e1;
+    font-size: .86rem;
+}
+
+.ai-trait-message.warn,
+.ai-compat-strip.block {
+    border: 1px solid rgba(251, 146, 60, .34);
+}
+
+.ai-compat-strip.pass {
+    border: 1px solid rgba(74, 222, 128, .28);
+}
+
+.ai-compat-strip {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.ai-preview-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.ai-preview-stats > div {
+    padding: 11px;
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 10px;
+    background: rgba(255,255,255,.025);
+}
+
+.ai-preview-stats span,
+.ai-preview-stats small {
+    display: block;
+    color: #8e9ab0;
+    font-size: .72rem;
+}
+
+.ai-preview-stats strong {
+    display: block;
+    margin: 2px 0;
+    font-size: 1.1rem;
+}
+
+.ai-preview-group {
+    margin-top: 10px;
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.ai-preview-group summary {
+    padding: 10px 12px;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.ai-preview-group summary span {
+    float: right;
+    color: #8fb2ff;
+}
+
+.ai-trait-list,
+.ai-sub-list {
+    padding: 0 10px 10px;
+}
+
+.ai-trait-list > div,
+.ai-sub-list > div {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 9px;
+    border-top: 1px solid rgba(255,255,255,.055);
+}
+
+.ai-trait-list span,
+.ai-sub-list strong {
+    min-width: 0;
+}
+
+.ai-trait-list small,
+.ai-sub-list small {
+    display: block;
+    color: #8591a8;
+    font-size: .72rem;
+    overflow-wrap: anywhere;
+}
+
+.ai-sub-list > div {
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.ai-sub-list > div > span {
+    color: #d9e2f2;
+    font-size: .82rem;
+    overflow-wrap: anywhere;
+}
+
+.ai-preview-group.tension p,
+.ai-preview-group.warnings p {
+    margin: 0;
+    padding: 8px 12px;
+    border-top: 1px solid rgba(255,255,255,.055);
+    color: #c9d2e1;
+    font-size: .82rem;
+}
+
+.ai-preview-group.warnings p.hard {
+    color: #ffb4a8;
+}
+
+.ai-approval-row {
+    display: flex;
+    gap: 9px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 14px;
+}
+
+.ai-approval-row button.discard {
+    background: transparent;
+}
+
+.ai-approval-row small {
+    color: #7f8ba0;
+}
+
+@media (max-width: 800px) {
+    .ai-trait-head {
+        flex-direction: column;
+    }
+
+    .ai-counts {
+        justify-content: flex-start;
+    }
+
+    .ai-preview-stats {
+        grid-template-columns: 1fr;
+    }
+}

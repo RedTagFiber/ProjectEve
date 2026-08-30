@@ -1,6 +1,7 @@
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
 using ProjectEve.NpcStudio.Models;
 using System.Net.Http.Json;
+using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 
@@ -49,7 +50,32 @@ public sealed class ComfyWorkflowService
     {
         try
         {
-            var workflow = BuildWorkflowJson(request, out var workflowUsed, out var savePrefix);
+            string comfyReferenceName = "";
+
+            if (!string.IsNullOrWhiteSpace(request.ReferenceImagePath))
+            {
+                if (!File.Exists(request.ReferenceImagePath))
+                {
+                    throw new FileNotFoundException(
+                        "Canonical reference image does not exist.",
+                        request.ReferenceImagePath);
+                }
+
+                comfyReferenceName =
+                    await UploadReferenceImageAsync(request.ReferenceImagePath);
+            }
+            else if (RequiresRealReference(request.ImageType))
+            {
+                throw new InvalidOperationException(
+                    $"{request.ImageType} requires a real approved Profile/Front reference image. " +
+                    "Project Eve will not generate this reference from text alone.");
+            }
+
+            var workflow = BuildWorkflowJson(
+                request,
+                comfyReferenceName,
+                out var workflowUsed,
+                out var savePrefix);
 
             var payload = new JsonObject
             {
@@ -57,7 +83,9 @@ public sealed class ComfyWorkflowService
                 ["client_id"] = "ProjectEve.NpcStudio"
             };
 
-            using var response = await _http.PostAsJsonAsync(BuildUrl("/prompt"), payload);
+            using var response =
+                await _http.PostAsJsonAsync(BuildUrl("/prompt"), payload);
+
             var raw = await response.Content.ReadAsStringAsync();
 
             if (!response.IsSuccessStatusCode)
@@ -65,20 +93,21 @@ public sealed class ComfyWorkflowService
                 return new NpcComfyGenerationResult
                 {
                     Success = false,
-                    Message = $"Comfy returned HTTP {(int)response.StatusCode}: {response.ReasonPhrase}",
+                    Message =
+                        $"Comfy returned HTTP {(int)response.StatusCode}: {response.ReasonPhrase}",
                     RawResponse = raw,
                     WorkflowUsed = workflowUsed,
                     SavePrefix = savePrefix
                 };
             }
 
-            var promptId = ExtractPromptId(raw);
-
             return new NpcComfyGenerationResult
             {
                 Success = true,
-                Message = "Queued SD3.5 Comfy generation.",
-                PromptId = promptId,
+                Message = string.IsNullOrWhiteSpace(comfyReferenceName)
+                    ? "Queued Comfy generation."
+                    : $"Queued reference-conditioned generation using {Path.GetFileName(request.ReferenceImagePath)}.",
+                PromptId = ExtractPromptId(raw),
                 RawResponse = raw,
                 WorkflowUsed = workflowUsed,
                 SavePrefix = savePrefix
@@ -91,6 +120,115 @@ public sealed class ComfyWorkflowService
                 Success = false,
                 Message = ex.Message
             };
+        }
+    }
+
+    private async Task<string> UploadReferenceImageAsync(string absolutePath)
+    {
+        await using var stream = File.OpenRead(absolutePath);
+        using var content = new MultipartFormDataContent();
+        using var fileContent = new StreamContent(stream);
+
+        fileContent.Headers.ContentType =
+            new MediaTypeHeaderValue("image/png");
+
+        content.Add(
+            fileContent,
+            "image",
+            Path.GetFileName(absolutePath));
+
+        content.Add(
+            new StringContent("overwrite"),
+            "overwrite");
+
+        content.Add(
+            new StringContent("input"),
+            "type");
+
+        using var response =
+            await _http.PostAsync(BuildUrl("/upload/image"), content);
+
+        var raw = await response.Content.ReadAsStringAsync();
+        response.EnsureSuccessStatusCode();
+
+        using var doc = JsonDocument.Parse(raw);
+        var root = doc.RootElement;
+
+        var name =
+            root.TryGetProperty("name", out var nameNode)
+                ? nameNode.GetString() ?? ""
+                : "";
+
+        var subfolder =
+            root.TryGetProperty("subfolder", out var subNode)
+                ? subNode.GetString() ?? ""
+                : "";
+
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            throw new InvalidOperationException(
+                "Comfy did not return the uploaded reference filename.");
+        }
+
+        return string.IsNullOrWhiteSpace(subfolder)
+            ? name
+            : subfolder.TrimEnd('/', '\\') + "/" + name;
+    }
+
+    private static bool RequiresRealReference(string? imageType) =>
+        imageType is "SideReference" or "BodyReference";
+
+    public async Task<string> GetPromptStatusAsync(string promptId)
+    {
+        if (string.IsNullOrWhiteSpace(promptId))
+            return "Ready";
+
+        try
+        {
+            using var response = await _http.GetAsync(
+                BuildUrl("/history/" + Uri.EscapeDataString(promptId)));
+
+            if (!response.IsSuccessStatusCode)
+                return "Making";
+
+            var raw = await response.Content.ReadAsStringAsync();
+
+            if (string.IsNullOrWhiteSpace(raw) || raw.Trim() == "{}")
+                return "Making";
+
+            using var doc = JsonDocument.Parse(raw);
+
+            if (!doc.RootElement.TryGetProperty(promptId, out var history))
+                return "Making";
+
+            if (history.TryGetProperty("status", out var status))
+            {
+                if (status.TryGetProperty("status_str", out var statusText))
+                {
+                    var value = statusText.GetString() ?? "";
+
+                    if (value.Contains(
+                        "error",
+                        StringComparison.OrdinalIgnoreCase))
+                        return "Failed";
+                }
+
+                if (status.TryGetProperty("completed", out var completed) &&
+                    completed.ValueKind == JsonValueKind.True)
+                    return "Complete";
+            }
+
+            if (history.TryGetProperty("outputs", out var outputs) &&
+                outputs.ValueKind == JsonValueKind.Object &&
+                outputs.EnumerateObject().Any())
+                return "Complete";
+
+            return "Making";
+        }
+        catch
+        {
+            // A temporary history/read failure should not mark the image failed.
+            return "Making";
         }
     }
 
@@ -116,47 +254,272 @@ public sealed class ComfyWorkflowService
         return "";
     }
 
-    private static JsonObject BuildWorkflowJson(NpcComfyGenerationRequest request, out string workflowUsed, out string savePrefix)
+    private static JsonObject BuildWorkflowJson(
+        NpcComfyGenerationRequest request,
+        string comfyReferenceName,
+        out string workflowUsed,
+        out string savePrefix)
     {
         var workflow = LoadWorkflowTemplate(request, out workflowUsed);
 
-        var positivePrompt = RequireObject(workflow, "16", "Positive Prompt");
-        var positiveInputs = RequireObject(positivePrompt, "inputs", "Positive Prompt inputs");
-        positiveInputs["text"] = request.PositivePrompt ?? "";
+        JsonObject? FindByClass(params string[] names)
+        {
+            foreach (var pair in workflow)
+            {
+                if (pair.Value is not JsonObject obj)
+                    continue;
 
-        var negativePrompt = RequireObject(workflow, "40", "Negative Prompt");
-        var negativeInputs = RequireObject(negativePrompt, "inputs", "Negative Prompt inputs");
-        negativeInputs["text"] = request.NegativePrompt ?? "";
+                var classType = obj["class_type"]?.GetValue<string>() ?? "";
+                if (names.Any(x => string.Equals(x, classType, StringComparison.OrdinalIgnoreCase)))
+                    return obj;
+            }
 
-        var checkpoint = RequireObject(workflow, "4", "Load Checkpoint");
-        var checkpointInputs = RequireObject(checkpoint, "inputs", "Load Checkpoint inputs");
-        checkpointInputs["ckpt_name"] = string.IsNullOrWhiteSpace(request.Checkpoint)
-            ? DefaultCheckpoint
-            : request.Checkpoint.Trim();
+            return null;
+        }
 
-        var latent = RequireObject(workflow, "53", "EmptySD3LatentImage");
-        var latentInputs = RequireObject(latent, "inputs", "EmptySD3LatentImage inputs");
-        latentInputs["width"] = request.Width <= 0 ? 768 : request.Width;
-        latentInputs["height"] = request.Height <= 0 ? 1152 : request.Height;
-        latentInputs["batch_size"] = 1;
+        JsonObject? FindByTitle(string text)
+        {
+            foreach (var pair in workflow)
+            {
+                if (pair.Value is not JsonObject obj)
+                    continue;
 
-        var sampler = RequireObject(workflow, "3", "KSampler");
-        var samplerInputs = RequireObject(sampler, "inputs", "KSampler inputs");
-        samplerInputs["seed"] = ResolveSeed(request.Seed);
-        samplerInputs["steps"] = request.Steps <= 0 ? 32 : request.Steps;
-        samplerInputs["cfg"] = request.Cfg <= 0 ? 5.0 : request.Cfg;
-        samplerInputs["sampler_name"] = string.IsNullOrWhiteSpace(request.Sampler) ? "dpm_adaptive" : request.Sampler.Trim();
-        samplerInputs["scheduler"] = string.IsNullOrWhiteSpace(request.Scheduler) ? "karras" : request.Scheduler.Trim();
-        samplerInputs["denoise"] = 1.0;
+                var title = obj["_meta"]?["title"]?.GetValue<string>() ?? "";
+                if (title.Contains(text, StringComparison.OrdinalIgnoreCase))
+                    return obj;
+            }
+
+            return null;
+        }
+
+        JsonObject Inputs(JsonObject node, string label) =>
+            RequireObject(node, "inputs", label + " inputs");
+
+        var positive = FindByTitle("Positive") ?? FindByClass("CLIPTextEncode", "TextEncodeQwenImageEditPlus");
+        if (positive is null)
+            throw new InvalidOperationException("Workflow has no positive prompt node.");
+
+        var pi = Inputs(positive, "Positive Prompt");
+        if (pi.ContainsKey("text"))
+            pi["text"] = request.PositivePrompt ?? "";
+        else if (pi.ContainsKey("prompt"))
+            pi["prompt"] = request.PositivePrompt ?? "";
+
+        var negative = FindByTitle("Negative");
+
+        if (negative is null &&
+            string.Equals(
+                positive["class_type"]?.GetValue<string>(),
+                "TextEncodeQwenImageEditPlus",
+                StringComparison.OrdinalIgnoreCase))
+        {
+            negative = workflow
+                .Select(x => x.Value as JsonObject)
+                .Where(x => x is not null && !ReferenceEquals(x, positive))
+                .FirstOrDefault(x =>
+                    string.Equals(
+                        x!["class_type"]?.GetValue<string>(),
+                        "TextEncodeQwenImageEditPlus",
+                        StringComparison.OrdinalIgnoreCase));
+        }
+
+        if (negative is not null)
+        {
+            var ni = Inputs(negative, "Negative Prompt");
+
+            if (ni.ContainsKey("text"))
+                ni["text"] = request.NegativePrompt ?? "";
+            else if (ni.ContainsKey("prompt"))
+                ni["prompt"] = request.NegativePrompt ?? "";
+        }
+
+        var sampler = FindByClass("KSampler")
+            ?? throw new InvalidOperationException("Workflow has no KSampler.");
+
+        var si = Inputs(sampler, "KSampler");
+        si["seed"] = ResolveSeed(request.Seed);
+
+        if (si["steps"] is JsonValue && request.Steps > 0)
+            si["steps"] = request.Steps;
+
+        if (si["cfg"] is JsonValue && request.Cfg > 0)
+            si["cfg"] = request.Cfg;
 
         savePrefix = BuildSavePrefix(request);
-        var save = RequireObject(workflow, "9", "Save Image");
-        var saveInputs = RequireObject(save, "inputs", "Save Image inputs");
-        saveInputs["filename_prefix"] = savePrefix;
+
+        var save = FindByClass("SaveImage", "SaveImageAdvanced")
+            ?? throw new InvalidOperationException("Workflow has no SaveImage node.");
+
+        Inputs(save, "Save Image")["filename_prefix"] = savePrefix;
+
+        if (!string.IsNullOrWhiteSpace(comfyReferenceName))
+        {
+            var loadImage = FindByClass("LoadImage");
+
+            if (loadImage is not null)
+            {
+                Inputs(loadImage, "Load Image")["image"] = comfyReferenceName;
+            }
+            else
+            {
+                InjectReferenceImageConditioning(workflow, request, comfyReferenceName);
+            }
+        }
+
+        var latent = FindByClass("EmptySD3LatentImage");
+
+        if (latent is not null)
+        {
+            var li = Inputs(latent, "Empty Latent");
+
+            if (request.Width > 0)
+                li["width"] = request.Width;
+
+            if (request.Height > 0)
+                li["height"] = request.Height;
+
+            li["batch_size"] = 1;
+        }
 
         return workflow;
     }
 
+    private static void InjectReferenceImageConditioning(
+        JsonObject workflow,
+        NpcComfyGenerationRequest request,
+        string comfyReferenceName)
+    {
+        var samplerPair = workflow.FirstOrDefault(x =>
+            x.Value is JsonObject obj &&
+            string.Equals(
+                obj["class_type"]?.GetValue<string>(),
+                "KSampler",
+                StringComparison.OrdinalIgnoreCase));
+
+        if (samplerPair.Value is not JsonObject sampler)
+        {
+            throw new InvalidOperationException(
+                "Reference workflow has no KSampler node.");
+        }
+
+        JsonArray? vaeConnection = null;
+
+        foreach (var pair in workflow)
+        {
+            if (pair.Value is not JsonObject obj)
+                continue;
+
+            if (!string.Equals(
+                    obj["class_type"]?.GetValue<string>(),
+                    "VAEDecode",
+                    StringComparison.OrdinalIgnoreCase))
+            {
+                continue;
+            }
+
+            if (obj["inputs"] is JsonObject inputs &&
+                inputs["vae"] is JsonArray vae)
+            {
+                vaeConnection = vae.DeepClone().AsArray();
+                break;
+            }
+        }
+
+        if (vaeConnection is null)
+        {
+            throw new InvalidOperationException(
+                "Reference workflow has no reusable VAE connection.");
+        }
+
+        var loadId = NextNumericNodeId(workflow);
+
+        var encodeNumber = long.Parse(loadId) + 1;
+        while (workflow.ContainsKey(encodeNumber.ToString()))
+            encodeNumber++;
+
+        var encodeId = encodeNumber.ToString();
+
+        workflow[loadId] = new JsonObject
+        {
+            ["inputs"] = new JsonObject
+            {
+                ["image"] = comfyReferenceName
+            },
+            ["class_type"] = "LoadImage",
+            ["_meta"] = new JsonObject
+            {
+                ["title"] =
+                    "ProjectEve Canonical Identity Reference"
+            }
+        };
+
+        workflow[encodeId] = new JsonObject
+        {
+            ["inputs"] = new JsonObject
+            {
+                ["pixels"] = new JsonArray(loadId, 0),
+                ["vae"] = vaeConnection
+            },
+            ["class_type"] = "VAEEncode",
+            ["_meta"] = new JsonObject
+            {
+                ["title"] =
+                    "ProjectEve Reference VAE Encode"
+            }
+        };
+
+        var samplerInputs =
+            RequireObject(
+                sampler,
+                "inputs",
+                "KSampler inputs");
+
+        samplerInputs["latent_image"] =
+            new JsonArray(encodeId, 0);
+
+        samplerInputs["denoise"] =
+            ResolveReferenceDenoise(request);
+    }
+
+    private static double ResolveReferenceDenoise(
+        NpcComfyGenerationRequest request)
+    {
+        if (request.ReferenceDenoise > 0 &&
+            request.ReferenceDenoise <= 1)
+        {
+            return request.ReferenceDenoise;
+        }
+
+        return request.ImageType switch
+        {
+            "FrontReference" => 0.48,
+            "SideReference" => 0.72,
+            "BodyReference" => 0.80,
+            _ => 0.65
+        };
+    }
+
+    private static string NextNumericNodeId(
+        JsonObject workflow)
+    {
+        long max = 1000;
+
+        foreach (var key in workflow.Select(x => x.Key))
+        {
+            if (long.TryParse(key, out var parsed) &&
+                parsed > max)
+            {
+                max = parsed;
+            }
+        }
+
+        var candidate = max + 1;
+
+        while (workflow.ContainsKey(candidate.ToString()))
+            candidate++;
+
+        return candidate.ToString();
+    }
     private static JsonObject LoadWorkflowTemplate(NpcComfyGenerationRequest request, out string workflowUsed)
     {
         var explicitPath = request.WorkflowTemplatePath;

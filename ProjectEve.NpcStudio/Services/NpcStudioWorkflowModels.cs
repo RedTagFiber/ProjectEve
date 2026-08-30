@@ -1,4 +1,4 @@
-namespace ProjectEve.NpcStudio.Services;
+﻿namespace ProjectEve.NpcStudio.Services;
 
 public sealed class NpcPromptBuildRequest
 {
@@ -9,6 +9,14 @@ public sealed class NpcPromptBuildRequest
 
 public sealed class NpcComfyGenerationRequest
 {
+    // ProjectEve canonical identity-conditioning input.
+    // When populated, ComfyWorkflowService uploads this exact image and
+    // converts the workflow from text-only generation to image-conditioned img2img.
+    public string ReferenceImagePath { get; set; } = "";
+
+    // 0..1 KSampler denoise for reference-conditioned generation.
+    // <= 0 lets ComfyWorkflowService choose a safe value by image type.
+    public double ReferenceDenoise { get; set; }
     public int NpcId { get; set; }
     public string ImageType { get; set; } = "ReferencePortrait";
     public string PositivePrompt { get; set; } = "";

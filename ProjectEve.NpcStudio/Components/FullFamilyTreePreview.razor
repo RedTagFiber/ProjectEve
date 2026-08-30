@@ -1,0 +1,475 @@
+﻿@page "/family-tree-preview/{NpcId:int}"
+@using ProjectEve.NpcStudio.Services
+@inject FullFamilyTreePreviewService PreviewService
+@inject FullFamilyTreeBuildService BuildService
+
+<PageTitle>Full Family Tree Preview</PageTitle>
+
+<section class="ftp">
+    <header>
+        <div>
+            <small>PROJECT EVE · FAMILY FOUNDATION · STAGE 3A-3</small>
+            <h1>Full Family Tree Designer</h1>
+            <p>
+                Preview only. Every outside spouse has a separate birth family,
+                and marriage/child surname rules are explicit per household.
+            </p>
+        </div>
+        <button class="refresh" @onclick="BuildPreview">
+            Rebuild Preview
+        </button>
+    </header>
+
+    @if (!string.IsNullOrWhiteSpace(_error))
+    {
+        <div class="error">@_error</div>
+    }
+
+    <section class="designer">
+        <div class="root">
+            <span>ROOT NPC</span>
+            <strong>@(_preview?.RootName ?? $"NPC {NpcId}")</strong>
+            <small>NPC @NpcId</small>
+        </div>
+
+        <div class="grid">
+            <article>
+                <h2>Parents & siblings</h2>
+                <label class="check"><input type="checkbox" @bind="_design.IncludeMother" /> Mother</label>
+                <label class="check"><input type="checkbox" @bind="_design.IncludeFather" /> Father</label>
+                <label>Brothers <input type="number" min="0" max="8" @bind="_design.BrotherCount" /></label>
+                <label>Sisters <input type="number" min="0" max="8" @bind="_design.SisterCount" /></label>
+            </article>
+
+            <article>
+                <h2>Grandparents</h2>
+                <label class="check"><input type="checkbox" @bind="_design.IncludeMaternalGrandmother" /> Maternal grandmother</label>
+                <label class="check"><input type="checkbox" @bind="_design.IncludeMaternalGrandfather" /> Maternal grandfather</label>
+                <label class="check"><input type="checkbox" @bind="_design.IncludePaternalGrandmother" /> Paternal grandmother</label>
+                <label class="check"><input type="checkbox" @bind="_design.IncludePaternalGrandfather" /> Paternal grandfather</label>
+                <label class="check"><input type="checkbox" @bind="_design.IncludeGreatGrandparents" /> Include great-grandparent generation</label>
+            </article>
+
+            <article>
+                <h2>Mother's siblings</h2>
+                <label>Uncles <input type="number" min="0" max="6" @bind="_design.MaternalUncleCount" /></label>
+                <label>Aunts <input type="number" min="0" max="6" @bind="_design.MaternalAuntCount" /></label>
+            </article>
+
+            <article>
+                <h2>Father's siblings</h2>
+                <label>Uncles <input type="number" min="0" max="6" @bind="_design.PaternalUncleCount" /></label>
+                <label>Aunts <input type="number" min="0" max="6" @bind="_design.PaternalAuntCount" /></label>
+            </article>
+
+            <article>
+                <h2>Root's future household</h2>
+                <label class="check">
+                    <input type="checkbox" @bind="_design.IncludeRootSpouse" />
+                    Include spouse
+                </label>
+                <label>Children <input type="number" min="0" max="8" @bind="_design.RootChildCount" /></label>
+            </article>
+        </div>
+
+        <button class="sync" @onclick="RefreshBranches">
+            Update Branch Assignment List
+        </button>
+
+        <section class="branches">
+            <h2>Exact aunt / uncle households</h2>
+            <p>
+                Each spouse gets a unique outside birth family by default.
+                Choose what happens to surnames after marriage and what surname the children use.
+            </p>
+
+            @if (_design.Branches.Count == 0)
+            {
+                <div class="empty">No aunt/uncle branches requested.</div>
+            }
+            else
+            {
+                @foreach (var branch in _design.Branches)
+                {
+                    var branchPreview = _preview?.BranchSummaries
+                        .FirstOrDefault(x => x.BranchKey == branch.Key);
+
+                    <article class="branch-card">
+                        <div class="branch-id">
+                            <small>BRANCH</small>
+                            <strong>@branch.Side @branch.BloodRole @branch.Ordinal</strong>
+
+                            @if (branchPreview is not null)
+                            {
+                                <div class="inline-surnames">
+                                    <span>
+                                        Blood family:
+                                        <b>@branchPreview.BloodBirthSurname</b>
+                                    </span>
+                                    <span>
+                                        Spouse born:
+                                        <b>@branchPreview.OutsideSpouseBirthSurname</b>
+                                    </span>
+                                    <span>
+                                        Household:
+                                        <b>@branchPreview.HouseholdSurname</b>
+                                    </span>
+                                    <span>
+                                        Children:
+                                        <b>@branchPreview.ChildSurname</b>
+                                    </span>
+                                </div>
+                            }
+                        </div>
+
+                        <label class="check">
+                            <input type="checkbox"
+                                   @bind="branch.IncludeSpouse"
+                                   @bind:after="BuildPreview" />
+                            Include spouse
+                        </label>
+
+                        <label>
+                            Children / cousins
+                            <input type="number"
+                                   min="0"
+                                   max="8"
+                                   @bind="branch.ChildCount"
+                                   @bind:after="BuildPreview" />
+                        </label>
+
+                        <label>
+                            Marriage surname
+                            <select @bind="branch.MarriageSurnameRule"
+                                    @bind:after="BuildPreview">
+                                <option value="Traditional">Traditional default</option>
+                                <option value="BloodFamily">Both use blood-family surname</option>
+                                <option value="SpouseFamily">Both use spouse-family surname</option>
+                                <option value="KeepOwn">Each keeps own surname</option>
+                                <option value="Hyphenate">Both hyphenate</option>
+                            </select>
+                        </label>
+
+                        <label>
+                            Children's surname
+                            <select @bind="branch.ChildSurnameRule"
+                                    @bind:after="BuildPreview">
+                                <option value="Household">Household surname</option>
+                                <option value="BloodFamily">Blood-family surname</option>
+                                <option value="SpouseFamily">Spouse-family surname</option>
+                                <option value="Hyphenate">Hyphenated</option>
+                            </select>
+                        </label>
+                    </article>
+                }
+            }
+        </section>
+
+        <button class="build" @onclick="BuildPreview">
+            Preview This Exact Family Tree
+        </button>
+    </section>
+
+    @if (_preview is not null)
+    {
+        <section class="surname-map">
+            <article>
+                <small>ROOT CURRENT</small>
+                <strong>@_preview.RootCurrentSurname</strong>
+            </article>
+            <article>
+                <small>ROOT BIRTH</small>
+                <strong>@_preview.RootBirthSurname</strong>
+            </article>
+            <article>
+                <small>MATERNAL BIRTH FAMILY</small>
+                <strong>@_preview.MaternalFamilySurname</strong>
+            </article>
+            <article>
+                <small>PATERNAL BIRTH FAMILY</small>
+                <strong>@_preview.PaternalFamilySurname</strong>
+            </article>
+        </section>
+
+        <section class="stats">
+            <article><small>REUSE CANON</small><strong>@_preview.ReuseCount</strong></article>
+            <article><small>CREATE IN 3B</small><strong>@_preview.CreateCount</strong></article>
+            <article><small>EXACT BRANCHES</small><strong>@_preview.BranchSummaries.Count</strong></article>
+            <article><small>KEEP OUTSIDE DESIGN</small><strong>@_preview.ExistingOutsideDesign.Count</strong></article>
+        </section>
+
+        @if (_preview.BranchSummaries.Count > 0)
+        {
+            <section class="branch-summary">
+                <h2>Marriage, household & child surname plan</h2>
+
+                @foreach (var branch in _preview.BranchSummaries)
+                {
+                    <article>
+                        <div>
+                            <small>BRANCH</small>
+                            <strong>@branch.Side @branch.BloodRole @branch.Ordinal</strong>
+                        </div>
+                        <span>Blood birth: <b>@branch.BloodBirthSurname</b></span>
+                        <span>Blood current: <b>@branch.BloodCurrentSurname</b></span>
+                        <span>Spouse birth: <b>@branch.OutsideSpouseBirthSurname</b></span>
+                        <span>Spouse current: <b>@branch.SpouseCurrentSurname</b></span>
+                        <span>Household: <b>@branch.HouseholdSurname</b></span>
+                        <span>Children: <b>@branch.ChildSurname</b></span>
+                        <span>Children count: <b>@branch.ChildCount</b></span>
+                    </article>
+                }
+            </section>
+        }
+
+        <section class="plan">
+            <h2>Stage 3B exact build manifest preview</h2>
+
+            @foreach (var row in _preview.Rows)
+            {
+                <article class="row">
+                    <span class="action @ActionClass(row.Action)">@row.Action</span>
+
+                    <div>
+                        <small>REQUESTED ROLE</small>
+                        <strong>@row.RequestedRole</strong>
+                        <span>@row.Branch</span>
+                    </div>
+
+                    <div>
+                        <small>MEMBER KEY</small>
+                        <code>@row.MemberKey</code>
+                    </div>
+
+                    <div>
+                        <small>PERSON</small>
+                        @if (row.ExistingNpcId.HasValue)
+                        {
+                            <strong>@row.ExistingName</strong>
+                            <span>NPC @row.ExistingNpcId</span>
+                        }
+                        else
+                        {
+                            <span>New structural NPC shell</span>
+                        }
+                    </div>
+
+                    <div class="names">
+                        <small>SURNAMES</small>
+                        <span>Current: <b>@row.CurrentSurname</b></span>
+                        <span>Birth: <b>@row.BirthSurname</b></span>
+                    </div>
+
+                    <div>
+                        <small>NOTES</small>
+                        <span>@row.Notes</span>
+                    </div>
+                </article>
+            }
+        </section>
+
+        
+        <div class="stage3b">
+            <label class="confirm">
+                <input type="checkbox" @bind="_confirmStage3B" />
+                I reviewed this exact tree and understand Stage 3B creates permanent
+                structural NPC shells and canonical family links.
+            </label>
+
+            <button class="commit"
+                    disabled="@(!_confirmStage3B || _building)"
+                    @onclick="BuildStage3B">
+                @(_building ? "Building Structural Family..." : "Build Stage 3B Structural Family")
+            </button>
+
+            @if (_buildResult is not null)
+            {
+                <div class="@(_buildResult.Success ? "build-ok" : "build-bad")">
+                    <strong>@_buildResult.Message</strong>
+
+                    @if (!string.IsNullOrWhiteSpace(_buildResult.CacheMessage))
+                    {
+                        <span>@_buildResult.CacheMessage</span>
+                    }
+
+                    @foreach (var warning in _buildResult.Warnings)
+                    {
+                        <span>Needs repair: @warning</span>
+                    }
+                </div>
+            }
+        </div>
+
+    }
+</section>
+
+<style>
+.ftp{display:grid;gap:14px;padding:18px;color:#e9f0fb}
+.ftp header{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;padding:18px;border:1px solid #34475f;border-radius:14px;background:#0a1525}
+.ftp header small{font-weight:900;letter-spacing:.12em;color:#9b87ff}
+.ftp h1{margin:4px 0}.ftp p{margin:0;color:#91a5c2}
+.ftp button{border:1px solid #7259df;border-radius:9px;padding:10px 15px;font-weight:900;cursor:pointer}
+.refresh,.sync{background:#17253a;color:#dce7f7}.build{background:#5639c8;color:white;justify-self:start}
+.designer{display:grid;gap:12px;padding:14px;border:1px solid #34475f;border-radius:12px;background:#0d1828}
+.root{display:flex;gap:10px;align-items:baseline}.root span{font-size:.66rem;color:#9b87ff;font-weight:900}.root small{color:#8094b0}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.grid article{display:grid;gap:8px;padding:12px;border:1px solid #2f435c;border-radius:10px;background:#0a1524}
+.grid h2,.branches h2,.branch-summary h2{font-size:1rem;margin:0}
+.grid label,.branch-card label{display:flex;justify-content:space-between;gap:10px;align-items:center;color:#b7c6da}
+.grid .check,.branch-card .check{justify-content:flex-start}
+input[type=number],select{background:#101f32;color:#eef4ff;border:1px solid #3b506b;border-radius:7px;padding:6px}
+input[type=number]{width:76px}
+select{min-width:180px}
+.branches{display:grid;gap:7px}
+.branch-card{display:grid;grid-template-columns:minmax(300px,1.25fr) 150px 180px minmax(240px,1fr) minmax(220px,1fr);gap:12px;align-items:center;padding:10px;border:1px solid #30445d;border-radius:9px;background:#0b1726}.branch-id{display:grid;gap:5px}.inline-surnames{display:flex;flex-wrap:wrap;gap:5px 10px;margin-top:3px}.inline-surnames span{font-size:.68rem;color:#91a5c2}.inline-surnames b{color:#d8ccff}
+.branch-card small{display:block;color:#8296b2;font-size:.63rem}
+.surname-map,.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.surname-map article,.stats article{padding:12px;border:1px solid #33475f;border-radius:10px;background:#0e1a2a}
+.surname-map small,.stats small{display:block;color:#8296b2;font-size:.66rem}.stats strong{font-size:1.55rem}
+.branch-summary{display:grid;gap:7px}
+.branch-summary article{display:grid;grid-template-columns:minmax(170px,1.1fr) repeat(7,minmax(110px,1fr));gap:8px;padding:10px;border:1px solid #34475f;border-radius:9px;background:#0b1726}
+.branch-summary small{display:block;color:#8296b2;font-size:.62rem}.branch-summary span{font-size:.73rem;color:#aebdd1}
+.plan{display:grid;gap:7px}
+.row{display:grid;grid-template-columns:145px minmax(150px,.8fr) minmax(135px,.7fr) minmax(160px,.9fr) minmax(160px,.8fr) minmax(220px,1.2fr);gap:10px;align-items:center;padding:10px;border:1px solid #30445d;border-radius:9px;background:#0b1726}
+.row small{display:block;color:#8296b2;font-size:.63rem}.row strong,.row span,.row code{display:block}
+.action{display:inline-flex;justify-content:center;padding:5px 7px;border-radius:999px;font-size:.65rem;font-weight:900;background:#17263a}.action.reuse{color:#9be4b6}.action.create{color:#ffd990}
+.names b{color:#d5c8ff}
+.safe{padding:12px;border:1px solid #38684b;border-radius:10px;background:#10261a;color:#a8ebbd}
+.error{padding:12px;border:1px solid #8a3440;border-radius:9px;background:#2a1117;color:#ffadb5}
+.empty{padding:12px;color:#8fa2bd}
+@@media(max-width:1200px){.branch-card{grid-template-columns:1fr 1fr}.branch-summary article{grid-template-columns:1fr 1fr}.row{grid-template-columns:1fr 1fr}}
+@@media(max-width:700px){.ftp header{flex-direction:column}.grid,.surname-map,.stats,.row,.branch-card,.branch-summary article{grid-template-columns:1fr}}
+.stage3b{display:grid;gap:10px;padding:14px;border:1px solid #7259df;border-radius:11px;background:#11162b}
+.confirm{display:flex;gap:8px;align-items:flex-start;color:#d7e0ee}
+.commit{justify-self:start;background:#5639c8;color:white}
+.build-ok,.build-bad{display:grid;gap:4px;padding:10px;border-radius:8px}
+.build-ok{border:1px solid #38684b;background:#10261a;color:#a8ebbd}
+.build-bad{border:1px solid #8a3440;background:#2a1117;color:#ffadb5}
+.build-ok span,.build-bad span{display:block}
+</style>
+
+@code {
+    [Parameter] public int NpcId { get; set; }
+
+    private FullFamilyTreeDesign _design = new();
+    private ProjectEve.NpcStudio.Services.FullFamilyTreePreview? _preview;
+    private string _error = "";
+    private bool _confirmStage3B;
+    private bool _building;
+    private FullFamilyTreeBuildResult? _buildResult;
+
+    protected override void OnParametersSet()
+    {
+        RefreshBranches();
+        BuildPreview();
+    }
+
+    private void RefreshBranches()
+    {
+        try
+        {
+            _error = "";
+
+            var existing = _design.Branches
+                .ToDictionary(x => x.Key, StringComparer.OrdinalIgnoreCase);
+
+            var rebuilt = new List<FullFamilyBranchDesign>();
+
+            AddBranches(rebuilt, existing, "Maternal", "Uncle", _design.MaternalUncleCount);
+            AddBranches(rebuilt, existing, "Maternal", "Aunt", _design.MaternalAuntCount);
+            AddBranches(rebuilt, existing, "Paternal", "Uncle", _design.PaternalUncleCount);
+            AddBranches(rebuilt, existing, "Paternal", "Aunt", _design.PaternalAuntCount);
+
+            _design.Branches = rebuilt;
+        }
+        catch (Exception ex)
+        {
+            _error = ex.Message;
+        }
+    }
+
+    private static void AddBranches(
+        List<FullFamilyBranchDesign> target,
+        Dictionary<string, FullFamilyBranchDesign> existing,
+        string side,
+        string role,
+        int requestedCount)
+    {
+        var count = Math.Clamp(requestedCount, 0, 6);
+
+        for (var i = 1; i <= count; i++)
+        {
+            var key =
+                $"{side.ToLowerInvariant()}-{role.ToLowerInvariant()}-{i}";
+
+            if (existing.TryGetValue(key, out var saved))
+            {
+                target.Add(saved);
+            }
+            else
+            {
+                target.Add(new FullFamilyBranchDesign
+                {
+                    Side = side,
+                    BloodRole = role,
+                    Ordinal = i,
+                    IncludeSpouse = true,
+                    ChildCount = 1,
+                    MarriageSurnameRule = "Traditional",
+                    ChildSurnameRule = "Household"
+                });
+            }
+        }
+    }
+
+    private void BuildPreview()
+    {
+        try
+        {
+            RefreshBranches();
+            _error = "";
+            _preview = PreviewService.Build(NpcId, _design);
+        }
+        catch (Exception ex)
+        {
+            _preview = null;
+            _error = ex.Message;
+        }
+    }
+
+    private void BuildStage3B()
+    {
+        if (!_confirmStage3B || _building)
+            return;
+
+        try
+        {
+            _building = true;
+            _error = "";
+            _buildResult = BuildService.Build(NpcId, _design);
+
+            if (_buildResult.Success)
+            {
+                _confirmStage3B = false;
+                _preview = PreviewService.Build(NpcId, _design);
+            }
+        }
+        catch (Exception ex)
+        {
+            _buildResult = null;
+            _error = ex.Message;
+        }
+        finally
+        {
+            _building = false;
+        }
+    }
+
+    private static string ActionClass(string action)
+        => action switch
+        {
+            "REUSE" => "reuse",
+            "CREATE IN STAGE 3B" => "create",
+            _ => ""
+        };
+}

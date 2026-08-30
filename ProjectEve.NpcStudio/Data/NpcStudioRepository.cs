@@ -93,7 +93,31 @@ public sealed partial class NpcStudioRepository
             IFNULL(c.Status, '') AS Status,
             IFNULL(c.Occupation, '') AS Occupation,
             IFNULL(c.Location, '') AS Location,
-            COALESCE(NULLIF(a.ProfileImagePath, ''), NULLIF(a.ReferenceImagePath, ''), '') AS PortraitPath,
+            COALESCE(
+                (
+                    SELECT NULLIF(g.ImagePath, '')
+                    FROM NpcImageGenerations g
+                    WHERE g.NpcId = c.Id
+                      AND g.Approved = 1
+                      AND g.ImageType = 'ProfilePicture'
+                      AND NULLIF(g.ImagePath, '') IS NOT NULL
+                    ORDER BY g.IsCurrent DESC, g.CreatedRealAt DESC
+                    LIMIT 1
+                ),
+                NULLIF(a.ProfileImagePath, ''),
+                (
+                    SELECT NULLIF(g.ImagePath, '')
+                    FROM NpcImageGenerations g
+                    WHERE g.NpcId = c.Id
+                      AND g.Approved = 1
+                      AND g.ImageType = 'FrontReference'
+                      AND NULLIF(g.ImagePath, '') IS NOT NULL
+                    ORDER BY g.IsCurrent DESC, g.CreatedRealAt DESC
+                    LIMIT 1
+                ),
+                NULLIF(a.ReferenceImagePath, ''),
+                ''
+            ) AS PortraitPath,
             IFNULL(a.AppearanceStatus, CASE WHEN IFNULL(a.Approved, 0) = 1 THEN 'Approved' ELSE 'Missing' END) AS ImageStatus,
             IFNULL(v.VoiceStatus, CASE WHEN IFNULL(v.Approved, 0) = 1 THEN 'Approved' ELSE 'Missing' END) AS VoiceStatus
         FROM Characters c
@@ -292,10 +316,21 @@ public sealed partial class NpcStudioRepository
         if (!string.IsNullOrWhiteSpace(first))
             sheet.FirstName = first;
 
-        if (!string.IsNullOrWhiteSpace(currentSurname))
-            sheet.LastName = currentSurname;
+        var effectiveSurname = currentSurname;
 
-        var canonicalFullName = JoinName(first, middle, currentSurname, suffix);
+        // Never allow placeholder canonical data to overwrite a real
+        // surname already loaded from Characters.
+        if (IsPlaceholderSurname(effectiveSurname) &&
+            !string.IsNullOrWhiteSpace(sheet.LastName) &&
+            !IsPlaceholderSurname(sheet.LastName))
+        {
+            effectiveSurname = sheet.LastName.Trim();
+        }
+
+        if (!string.IsNullOrWhiteSpace(effectiveSurname))
+            sheet.LastName = effectiveSurname;
+
+        var canonicalFullName = JoinName(first, middle, effectiveSurname, suffix);
         if (!string.IsNullOrWhiteSpace(canonicalFullName))
             sheet.Name = canonicalFullName;
 
@@ -387,6 +422,16 @@ public sealed partial class NpcStudioRepository
         cmd.Parameters.AddWithValue("$birth", currentSurname);
         cmd.Parameters.AddWithValue("$preferred", preferred);
         cmd.ExecuteNonQuery();
+    }
+
+    private static bool IsPlaceholderSurname(string? value)
+    {
+        var text = (value ?? "").Trim();
+        return text.Length == 0
+            || text.Equals("Resident", StringComparison.OrdinalIgnoreCase)
+            || text.Equals("Unknown", StringComparison.OrdinalIgnoreCase)
+            || text.Equals("TBD", StringComparison.OrdinalIgnoreCase)
+            || text.Equals("Draft", StringComparison.OrdinalIgnoreCase);
     }
 
     private static string JoinName(params string[] parts) =>

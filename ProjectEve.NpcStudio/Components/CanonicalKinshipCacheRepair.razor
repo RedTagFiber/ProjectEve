@@ -1,0 +1,212 @@
+﻿@page "/kinship-cache-repair"
+@using ProjectEve.NpcStudio.Services
+@inject CanonicalKinshipCacheRepairService Repair
+
+<PageTitle>Kinship Cache Repair</PageTitle>
+
+<section class="kr">
+    <header>
+        <div>
+            <small>PROJECT EVE · FAMILY FOUNDATION · STAGE 2C</small>
+            <h1>Kinship Cache Repair</h1>
+            <p>
+                Structural family tables remain the source of truth.
+                This screen previews the derived RelationshipStates.FamilyRole cache.
+            </p>
+        </div>
+        <button class="secondary" @onclick="LoadPreview">
+            Refresh Preview
+        </button>
+    </header>
+
+    @if (!string.IsNullOrWhiteSpace(_error))
+    {
+        <div class="error">@_error</div>
+    }
+
+    @if (!string.IsNullOrWhiteSpace(_message))
+    {
+        <div class="success">@_message</div>
+    }
+
+    @if (_preview is not null)
+    {
+        <div class="stats">
+            <article>
+                <small>UPDATE</small>
+                <strong>@_preview.UpdateCount</strong>
+            </article>
+            <article>
+                <small>INSERT</small>
+                <strong>@_preview.InsertCount</strong>
+            </article>
+            <article>
+                <small>ALREADY CORRECT</small>
+                <strong>@_preview.CorrectCount</strong>
+            </article>
+            <article>
+                <small>STALE / NOT DELETED</small>
+                <strong>@_preview.StaleItems.Count</strong>
+            </article>
+        </div>
+
+        <div class="notice">
+            <b>Apply changes only FamilyRole on existing rows.</b>
+            Missing directed family cache rows are inserted with schema defaults.
+            Love, Trust, Respect, Loyalty, Anger, Resentment, Fear,
+            Jealousy, Attraction, Tension, Importance, history fields,
+            notes and memories are not overwritten.
+        </div>
+
+        @if (_preview.UpdateCount > 0 || _preview.InsertCount > 0)
+        {
+            <button class="apply"
+                    disabled="@_working"
+                    @onclick="ApplyRepair">
+                @(_working ? "Applying..." : "Apply Canonical Cache Repair")
+            </button>
+        }
+
+        <section class="group">
+            <h2>Canonical cache plan</h2>
+
+            @foreach (var row in _preview.Items)
+            {
+                <article class="row">
+                    <span class="action @row.Action.ToLowerInvariant()">
+                        @row.Action
+                    </span>
+
+                    <div>
+                        <b>@row.SourceName</b>
+                        <small>NPC @row.SourceNpcId</small>
+                    </div>
+
+                    <span class="arrow">→</span>
+
+                    <div>
+                        <b>@row.TargetName</b>
+                        <small>NPC @row.TargetNpcId</small>
+                    </div>
+
+                    <div class="roles">
+                        <small>OLD</small>
+                        <span>@(string.IsNullOrWhiteSpace(row.ExistingRole) ? "—" : row.ExistingRole)</span>
+                    </div>
+
+                    <div class="roles">
+                        <small>CANONICAL</small>
+                        <strong>@row.ExpectedRole</strong>
+                    </div>
+                </article>
+            }
+        </section>
+
+        @if (_preview.StaleItems.Count > 0)
+        {
+            <section class="group">
+                <h2>Stale cache rows — left untouched</h2>
+                <p>
+                    These rows claim a family role but no longer resolve from
+                    structural kinship. Stage 2C does not delete them.
+                </p>
+
+                @foreach (var row in _preview.StaleItems)
+                {
+                    <article class="row stale-row">
+                        <span class="action stale">STALE</span>
+
+                        <div>
+                            <b>@row.SourceName</b>
+                            <small>NPC @row.SourceNpcId</small>
+                        </div>
+
+                        <span class="arrow">→</span>
+
+                        <div>
+                            <b>@row.TargetName</b>
+                            <small>NPC @row.TargetNpcId</small>
+                        </div>
+
+                        <div class="roles">
+                            <small>CACHED ROLE</small>
+                            <span>@row.ExistingRole</span>
+                        </div>
+                    </article>
+                }
+            </section>
+        }
+    }
+</section>
+
+<style>
+.kr{display:grid;gap:14px;padding:18px;color:#e9f0fb}
+.kr header{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;padding:18px;border:1px solid #34475f;border-radius:14px;background:#0a1525}
+.kr header small{font-weight:900;letter-spacing:.12em;color:#9b87ff}
+.kr h1{margin:4px 0}.kr p{margin:0;color:#91a5c2}
+.kr button{border:1px solid #7259df;border-radius:9px;padding:10px 15px;font-weight:900;cursor:pointer}
+.secondary{background:#17253a;color:#dce7f7}.apply{background:#5639c8;color:white;justify-self:start}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.stats article{padding:12px;border:1px solid #33475f;border-radius:10px;background:#0e1a2a}
+.stats small{display:block;color:#8296b2;font-size:.66rem}.stats strong{font-size:1.55rem}
+.notice{padding:12px;border:1px solid #6353aa;border-radius:10px;background:#15142a;color:#bfcaf0}
+.group{display:grid;gap:7px}.group h2{margin:8px 0 0}.group>p{margin:0 0 5px;color:#91a5c2}
+.row{display:grid;grid-template-columns:88px minmax(150px,1fr) 24px minmax(150px,1fr) minmax(100px,.7fr) minmax(120px,.8fr);gap:10px;align-items:center;padding:10px;border:1px solid #30445d;border-radius:9px;background:#0b1726}
+.row small{display:block;color:#8296b2;font-size:.65rem}.arrow{color:#7f93af;text-align:center}
+.action{display:inline-flex;justify-content:center;padding:5px 7px;border-radius:999px;font-size:.68rem;font-weight:900;background:#17263a}
+.action.update{color:#ffd990}.action.insert{color:#9be4b6}.action.correct{color:#9db7d7}.action.stale{color:#ffb0b8}
+.roles span,.roles strong{display:block;margin-top:2px}
+.stale-row{grid-template-columns:88px minmax(150px,1fr) 24px minmax(150px,1fr) minmax(120px,.8fr)}
+.error,.success{padding:12px;border-radius:9px}
+.error{border:1px solid #8a3440;background:#2a1117;color:#ffadb5}
+.success{border:1px solid #38684b;background:#10261a;color:#a8ebbd}
+@@media(max-width:900px){.kr header{flex-direction:column}.stats{grid-template-columns:repeat(2,1fr)}.row,.stale-row{grid-template-columns:1fr}.arrow{text-align:left}}
+</style>
+
+@code {
+    private KinshipCacheRepairPreview? _preview;
+    private string _error = "";
+    private string _message = "";
+    private bool _working;
+
+    protected override void OnInitialized()
+    {
+        LoadPreview();
+    }
+
+    private void LoadPreview()
+    {
+        try
+        {
+            _error = "";
+            _message = "";
+            _preview = Repair.Preview();
+        }
+        catch (Exception ex)
+        {
+            _preview = null;
+            _error = ex.Message;
+        }
+    }
+
+    private void ApplyRepair()
+    {
+        try
+        {
+            _working = true;
+            _error = "";
+
+            var result = Repair.Apply();
+            _message = result.Message;
+            _preview = Repair.Preview();
+        }
+        catch (Exception ex)
+        {
+            _error = ex.Message;
+        }
+        finally
+        {
+            _working = false;
+        }
+    }
+}

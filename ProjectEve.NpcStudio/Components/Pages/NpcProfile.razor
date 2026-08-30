@@ -1,12 +1,13 @@
-@page "/npc-studio/npc/{NpcId:int}"
+﻿@page "/npc-studio/npc/{NpcId:int}"
 @rendermode InteractiveServer
 @using ProjectEve.NpcStudio.Models
 @using ProjectEve.Characters.Traits
 @using ProjectEve.Relationships
 @inject ProjectEve.NpcStudio.Services.NpcStudioService Studio
 @inject ProjectEve.NpcStudio.Services.OllamaPromptEngineerService PromptEngineer
+@inject ProjectEve.NpcStudio.Services.AiTraitReasonService TraitReasonAi
 
-<PageTitle>@(_sheet?.Name ?? "NPC") — Dossier</PageTitle>
+<PageTitle>@(_sheet?.Name ?? "NPC") â€” Dossier</PageTitle>
 
 <section class="dossier-page">
 @if (_sheet is null)
@@ -17,7 +18,7 @@ else
 {
     <header class="dossier-topbar">
         <div>
-            <div class="dossier-kicker">PROJECT EVE · NPC DOSSIER</div>
+            <div class="dossier-kicker">PROJECT EVE Â· NPC DOSSIER</div>
             <div class="dossier-world">World: <strong>Small Town / Contemporary</strong></div>
         </div>
         <div class="dossier-top-actions">
@@ -46,7 +47,7 @@ else
                 <h1>@_sheet.Name</h1>
                 <span class="dossier-status-badge">@Safe(_sheet.Status, "ACTIVE")</span>
             </div>
-            <p>@Safe(_sheet.Occupation, "Occupation missing") · @Safe(_sheet.Location, "Location missing")</p>
+            <p>@Safe(_sheet.Occupation, "Occupation missing") Â· @Safe(_sheet.Location, "Location missing")</p>
             <div class="dossier-chips">
                 <span>ID @_sheet.Id</span>
                 <span>Tier @_sheet.Tier</span>
@@ -82,12 +83,12 @@ else
     @if (_tab == "overview")
     {
         <div class="overview-actionbar overview-actionbar-top">
-            <button @onclick="@(() => _overviewEdit = !_overviewEdit)">✎ Edit Overview</button>
-            <button @onclick="GenerateAiSummary" disabled="@_aiWorking">✦ @(_aiWorking ? "Reviewing..." : "Generate with AI")</button>
-            <button @onclick="@(() => _tab = "history")">▣ View Full Timeline</button>
-            <button @onclick="@(() => _tab = "relationships")">⌁ Open Relationships</button>
-            <button @onclick="@(() => _tab = "voice")">◉ Open Voice</button>
-            <button @onclick="@(() => _tab = "media")">▧ Open Media</button>
+            <button @onclick="@(() => _overviewEdit = !_overviewEdit)">âœŽ Edit Overview</button>
+            <button @onclick="GenerateAiSummary" disabled="@_aiWorking">âœ¦ @(_aiWorking ? "Reviewing..." : "Generate with AI")</button>
+            <button @onclick="@(() => _tab = "history")">â–£ View Full Timeline</button>
+            <button @onclick="@(() => _tab = "relationships")">âŒ Open Relationships</button>
+            <button @onclick="@(() => _tab = "voice")">â—‰ Open Voice</button>
+            <button @onclick="@(() => _tab = "media")">â–§ Open Media</button>
         </div>
     }
 
@@ -123,19 +124,19 @@ else
                     <div class="overview-quick-title">Dossier Completion</div>
                     <div class="overview-completion-number">@CompletionPercent%</div>
                     <div class="overview-completion-bar"><span style="width:@CompletionPercent%"></span></div>
-                    <div class="overview-section-status"><span>Overview</span><b class="@CompletionClass(IdentityReady && WorldReady)">@((IdentityReady && WorldReady) ? "✓" : "!")</b></div>
-                    <div class="overview-section-status"><span>Traits</span><b class="@CompletionClass(_sheet.Traits.Count > 0)">@(_sheet.Traits.Count > 0 ? "✓" : "!")</b></div>
-                    <div class="overview-section-status"><span>History</span><b class="@CompletionClass(_sheet.HistoryEvents.Count > 0)">@(_sheet.HistoryEvents.Count > 0 ? "✓" : "!")</b></div>
-                    <div class="overview-section-status"><span>Relationships</span><b class="@CompletionClass(_sheet.Relationships.Count > 0)">@(_sheet.Relationships.Count > 0 ? "✓" : "!")</b></div>
-                    <div class="overview-section-status"><span>Voice</span><b class="@CompletionClass(VoiceReady)">@(VoiceReady ? "✓" : "!")</b></div>
-                    <div class="overview-section-status"><span>Media</span><b class="@CompletionClass(PhotoReady)">@(PhotoReady ? "✓" : "!")</b></div>
+                    <div class="overview-section-status"><span>Overview</span><b class="@CompletionClass(IdentityReady && WorldReady)">@((IdentityReady && WorldReady) ? "âœ“" : "!")</b></div>
+                    <div class="overview-section-status"><span>Traits</span><b class="@CompletionClass(_sheet.Traits.Count > 0)">@(_sheet.Traits.Count > 0 ? "âœ“" : "!")</b></div>
+                    <div class="overview-section-status"><span>History</span><b class="@CompletionClass(_sheet.HistoryEvents.Count > 0)">@(_sheet.HistoryEvents.Count > 0 ? "âœ“" : "!")</b></div>
+                    <div class="overview-section-status"><span>Relationships</span><b class="@CompletionClass(_sheet.Relationships.Count > 0)">@(_sheet.Relationships.Count > 0 ? "âœ“" : "!")</b></div>
+                    <div class="overview-section-status"><span>Voice</span><b class="@CompletionClass(VoiceReady)">@(VoiceReady ? "âœ“" : "!")</b></div>
+                    <div class="overview-section-status"><span>Media</span><b class="@CompletionClass(PhotoReady)">@(PhotoReady ? "âœ“" : "!")</b></div>
                 </div>
             </aside>
 
             <div class="overview-dashboard">
                 <div class="overview-grid overview-grid-top">
                     <section class="overview-card identity-card">
-                        <div class="overview-card-title"><span>◎</span><h2>Identity</h2></div>
+                        <div class="overview-card-title"><span>â—Ž</span><h2>Identity</h2></div>
                         <div class="overview-facts two-col">
                             <div><span>Full Name</span><strong>@Safe(_sheet.Name, "Missing")</strong></div>
                             <div><span>Known As / Nickname</span><strong>@Safe(string.IsNullOrWhiteSpace(_sheet.Nickname) ? _sheet.DisplayName : _sheet.Nickname, "Missing")</strong></div>
@@ -150,7 +151,7 @@ else
                     </section>
 
                     <section class="overview-card appearance-card">
-                        <div class="overview-card-title"><span>♙</span><h2>Appearance</h2></div>
+                        <div class="overview-card-title"><span>â™™</span><h2>Appearance</h2></div>
                         <div class="appearance-content">
                             <div class="overview-facts appearance-facts">
                                 <div><span>Height</span><strong>@(_sheet.HeightCm > 0 ? $"{_heightFeet}' {_heightInches}\"" : "Missing")</strong></div>
@@ -172,11 +173,11 @@ else
                                 }
                             </div>
                         </div>
-                        <button class="overview-edit-button" @onclick="@(() => _tab = "media")">Open in Media →</button>
+                        <button class="overview-edit-button" @onclick="@(() => _tab = "media")">Open in Media â†’</button>
                     </section>
 
                     <section class="overview-card personality-card">
-                        <div class="overview-card-title"><span>☆</span><h2>Personality Snapshot</h2></div>
+                        <div class="overview-card-title"><span>â˜†</span><h2>Personality Snapshot</h2></div>
                         <div class="personality-chips">
                             @foreach (var archetype in Archetypes)
                             {
@@ -204,7 +205,7 @@ else
 
                 <div class="overview-grid overview-grid-bottom">
                     <section class="overview-card background-card">
-                        <div class="overview-card-title"><span>▣</span><h2>Background</h2></div>
+                        <div class="overview-card-title"><span>â–£</span><h2>Background</h2></div>
                         <div class="overview-facts">
                             <div><span>Occupation</span><strong>@Safe(_sheet.Occupation, "Missing")</strong></div>
                             <div><span>Hometown</span><strong>@Safe(_sheet.Hometown, "Missing")</strong></div>
@@ -213,11 +214,11 @@ else
                             <div><span>Relationship Links</span><strong>@_sheet.Relationships.Count total</strong></div>
                             <div><span>History</span><strong>@_sheet.HistoryEvents.Count authored events</strong></div>
                         </div>
-                        <button class="overview-edit-button" @onclick="@(() => _tab = "history")">Open History →</button>
+                        <button class="overview-edit-button" @onclick="@(() => _tab = "history")">Open History â†’</button>
                     </section>
 
                     <section class="overview-card vibe-card">
-                        <div class="overview-card-title"><span>◉</span><h2>Vibe & Core Identity</h2></div>
+                        <div class="overview-card-title"><span>â—‰</span><h2>Vibe & Core Identity</h2></div>
                         <div class="overview-facts">
                             <div><span>Primary Archetype</span><strong>@Safe(_sheet.Archetype1, "Missing")</strong></div>
                             <div><span>Secondary</span><strong>@Safe(_sheet.Archetype2, "Not set")</strong></div>
@@ -231,7 +232,7 @@ else
                     </section>
 
                     <section class="overview-card status-card">
-                        <div class="overview-card-title status-heading"><span>⚑</span><h2>Status & Notes</h2><span class="mini-status">@Safe(_sheet.Status, "ACTIVE")</span></div>
+                        <div class="overview-card-title status-heading"><span>âš‘</span><h2>Status & Notes</h2><span class="mini-status">@Safe(_sheet.Status, "ACTIVE")</span></div>
                         <div class="ai-dossier-read">
                             <div class="ai-label">AI Dossier Summary</div>
                             <p>@Safe(_sheet.AiSummary, "AI summary has not been generated yet. Review the dossier to create one from the current canon data.")</p>
@@ -255,7 +256,7 @@ else
         <div class="dossier-layout">
             <main class="dossier-main">
                 <details class="dossier-panel editor-collapsible" open>
-                    <summary class="panel-title collapsible-title"><div><span>01</span><h2>Identity & Physical Profile</h2></div><div class="collapsible-meta"><span class="field-state @CompletionClass(IdentityReady)">@CompletionText(IdentityReady)</span><span class="collapse-chevron">⌄</span></div></summary>
+                    <summary class="panel-title collapsible-title"><div><span>01</span><h2>Identity & Physical Profile</h2></div><div class="collapsible-meta"><span class="field-state @CompletionClass(IdentityReady)">@CompletionText(IdentityReady)</span><span class="collapse-chevron">âŒ„</span></div></summary>
         <div class="appearance-owner-note">
             Body, eyes, hair, skin, race and wardrobe are managed in Canonical Appearance below.
         </div>
@@ -275,7 +276,7 @@ else
                     <NpcAppearanceDetailEditor NpcId="NpcId" />
 
                 <details class="dossier-panel editor-collapsible" open>
-                    <summary class="panel-title collapsible-title"><div><span>02</span><h2>Life & World Placement</h2></div><div class="collapsible-meta"><span class="field-state @CompletionClass(WorldReady)">@CompletionText(WorldReady)</span><span class="collapse-chevron">⌄</span></div></summary>
+                    <summary class="panel-title collapsible-title"><div><span>02</span><h2>Life & World Placement</h2></div><div class="collapsible-meta"><span class="field-state @CompletionClass(WorldReady)">@CompletionText(WorldReady)</span><span class="collapse-chevron">âŒ„</span></div></summary>
                     <div class="dossier-grid three">
                         <DossierField Label="Occupation" Missing="@IsMissing(_sheet.Occupation)"><input @bind="_sheet.Occupation" /></DossierField>
                         <DossierField Label="Current Location" Missing="@IsMissing(_sheet.Location)"><input @bind="_sheet.Location" /></DossierField>
@@ -287,7 +288,7 @@ else
                 </details>
 
                 <details class="dossier-panel editor-collapsible" open>
-                    <summary class="panel-title collapsible-title"><div><span>03</span><h2>NPC Type / Archetype Seed</h2></div><div class="collapsible-meta"><span class="field-state @CompletionClass(ArchetypeReady)">@CompletionText(ArchetypeReady)</span><span class="collapse-chevron">⌄</span></div></summary>
+                    <summary class="panel-title collapsible-title"><div><span>03</span><h2>NPC Type / Archetype Seed</h2></div><div class="collapsible-meta"><span class="field-state @CompletionClass(ArchetypeReady)">@CompletionText(ArchetypeReady)</span><span class="collapse-chevron">âŒ„</span></div></summary>
                     <p class="panel-help">Choose up to three. Primary carries the most weight; secondary and third add contradiction and texture. These guide AI drafts but never lock the character.</p>
                     <div class="dossier-grid three">
                         <DossierField Label="Primary Type" Missing="@IsMissing(_sheet.Archetype1)"><select @bind="_sheet.Archetype1">@ArchetypeOptions(_sheet.Archetype1)</select></DossierField>
@@ -297,7 +298,7 @@ else
                 </details>
 
                 <details class="dossier-panel editor-collapsible" open>
-                    <summary class="panel-title collapsible-title"><div><span>04</span><h2>Public vs Private Person</h2></div><div class="collapsible-meta"><span class="field-state @CompletionClass(PersonaReady)">@CompletionText(PersonaReady)</span><span class="collapse-chevron">⌄</span></div></summary>
+                    <summary class="panel-title collapsible-title"><div><span>04</span><h2>Public vs Private Person</h2></div><div class="collapsible-meta"><span class="field-state @CompletionClass(PersonaReady)">@CompletionText(PersonaReady)</span><span class="collapse-chevron">âŒ„</span></div></summary>
                     <div class="dossier-grid three">
                         <DossierField Label="Public Persona" Missing="@IsMissing(_sheet.PublicPersona)"><textarea rows="5" @bind="_sheet.PublicPersona"></textarea></DossierField>
                         <DossierField Label="Private Persona"><textarea rows="5" @bind="_sheet.PrivatePersona"></textarea></DossierField>
@@ -306,7 +307,7 @@ else
                 </details>
 
                 <details class="dossier-panel editor-collapsible" open>
-                    <summary class="panel-title collapsible-title"><div><span>05</span><h2>Inner Life</h2></div><div class="collapsible-meta"><span class="field-state @CompletionClass(InnerLifeReady)">@CompletionText(InnerLifeReady)</span><span class="collapse-chevron">⌄</span></div></summary>
+                    <summary class="panel-title collapsible-title"><div><span>05</span><h2>Inner Life</h2></div><div class="collapsible-meta"><span class="field-state @CompletionClass(InnerLifeReady)">@CompletionText(InnerLifeReady)</span><span class="collapse-chevron">âŒ„</span></div></summary>
                     <div class="dossier-grid two">
                         <DossierField Label="Goal" Missing="@IsMissing(_sheet.Goal)"><textarea rows="3" @bind="_sheet.Goal"></textarea></DossierField>
                         <DossierField Label="Need" Missing="@IsMissing(_sheet.Need)"><textarea rows="3" @bind="_sheet.Need"></textarea></DossierField>
@@ -338,7 +339,7 @@ else
                             </div>
                         }
                     }
-                    <button class="text-button" @onclick="@(() => _tab = "traits")">Open full Traits →</button>
+                    <button class="text-button" @onclick="@(() => _tab = "traits")">Open full Traits â†’</button>
                 </section>
 
                 <section class="dossier-panel ai-summary">
@@ -387,20 +388,22 @@ else
                 <button class="trait-back-summary"
                         type="button"
                         @onclick="BackToTraitSummary">
-                    ← Back to Summary
+                    â† Back to Summary
                 </button>
             }
         </div>
 
         @if (_traitSubTab == "summary")
         {
+        <AiTraitBuilderPanel NpcId="NpcId" />
+
         <section class="dossier-panel wide-panel trait-summary-panel">
             <div class="panel-title">
-                <div><span>Σ</span><h2>Trait Summary</h2></div>
+                <div><span>Î£</span><h2>Trait Summary</h2></div>
                 <span class="field-state green">READ ONLY</span>
             </div>
             <p class="panel-help">
-                Scan only — nothing can be changed here. Click any trait that looks wrong and NpcStudio opens that exact Fast20, Mid, or Slow editor.
+                Scan only â€” nothing can be changed here. Click any trait that looks wrong and NpcStudio opens that exact Fast20, Mid, or Slow editor.
             </p>
 
             <div class="trait-summary-stats">
@@ -463,7 +466,7 @@ else
                                     @onclick="@(() => OpenTraitEditor("fast", item.TraitId))">
                                 <span class="attention-layer">FAST20</span>
                                 <strong>@item.TraitName</strong>
-                                <small>@item.StageLabel · deviation @Signed(item.DeviationFromBaseline)</small>
+                                <small>@item.StageLabel Â· deviation @Signed(item.DeviationFromBaseline)</small>
                                 <b>@item.CurrentValue.ToString("0")</b>
                             </button>
                         }
@@ -517,10 +520,10 @@ else
                                 <span>
                                     <strong>@item.TraitName</strong>
                                     <small>
-                                        @item.StageLabel · Δ @Signed(item.DeviationFromBaseline)
+                                        @item.StageLabel Â· Î” @Signed(item.DeviationFromBaseline)
                                         @if (!string.IsNullOrWhiteSpace(item.Style))
                                         {
-                                            <text> · @StyleLabel(item.Style)</text>
+                                            <text> Â· @StyleLabel(item.Style)</text>
                                         }
                                     </small>
                                 </span>
@@ -557,14 +560,14 @@ else
                                     <span>
                                         <strong>@item.TraitName</strong>
                                         <small>
-                                            Δ @Signed(item.DeviationFromBaseline)
+                                            Î” @Signed(item.DeviationFromBaseline)
                                             @if (!string.IsNullOrWhiteSpace(item.Style))
                                             {
-                                                <text> · @StyleLabel(item.Style)</text>
+                                                <text> Â· @StyleLabel(item.Style)</text>
                                             }
                                             @if (item.DefinitionMissing)
                                             {
-                                                <text> · definition missing</text>
+                                                <text> Â· definition missing</text>
                                             }
                                         </small>
                                     </span>
@@ -613,14 +616,14 @@ else
                                             <span>
                                                 <strong>@item.TraitName</strong>
                                                 <small>
-                                                    Δ @Signed(item.DeviationFromBaseline)
+                                                    Î” @Signed(item.DeviationFromBaseline)
                                                     @if (!string.IsNullOrWhiteSpace(item.Style))
                                                     {
-                                                        <text> · @StyleLabel(item.Style)</text>
+                                                        <text> Â· @StyleLabel(item.Style)</text>
                                                     }
                                                     @if (item.DefinitionMissing)
                                                     {
-                                                        <text> · definition missing</text>
+                                                        <text> Â· definition missing</text>
                                                     }
                                                 </small>
                                             </span>
@@ -638,6 +641,8 @@ else
         }
         else if (_traitSubTab == "fast")
         {
+        <AiFastTraitAlignmentPanel NpcId="NpcId" />
+
         <section class="dossier-panel wide-panel fast20-dossier-panel">
             <div class="panel-title">
                 <div><span>20</span><h2>Fast20 Emotional State</h2></div>
@@ -667,7 +672,7 @@ else
                             </header>
 
                             <div class="fast20-stage-row">
-                                <span class="fast20-stage">@item.StageLabel · @item.StageMin–@item.StageMax</span>
+                                <span class="fast20-stage">@item.StageLabel | @item.StageMin - @item.StageMax</span>
                                 @if (item.IsWildcard)
                                 {
                                     <span class="wildcard-badge">WILDCARD</span>
@@ -723,7 +728,7 @@ else
                                 <label class="style-editor">
                                     <span>Style</span>
                                     <select @bind="item.Style">
-                                        <option value="">— default —</option>
+                                        <option value="">â€” default â€”</option>
                                         @foreach (var styleOption in item.StyleOptions)
                                         {
                                             <option value="@styleOption">@StyleLabel(styleOption)</option>
@@ -859,6 +864,12 @@ else
 
                                         <div class="reason-actions reason-wide">
                                             <button class="dossier-button tiny primary" @onclick="@(() => AddReason(item, draft))">Add Reason</button>
+                                            <button class="dossier-button tiny"
+                                                    disabled="@_aiTraitReasonWorking"
+                                                    @onclick="@(() => AddAiReasons(item))">
+                                                @(_aiTraitReasonWorking ? "AI Writing..." : "AI Reasons")
+                                            </button>
+                                            <small>AI fills this trait up to 1-4 grounded causal reasons.</small>
                                         </div>
                                     </div>
                                 </details>
@@ -873,7 +884,7 @@ else
                                 else
                                 {
                                     <div class="last-change-line">
-                                        <strong>@item.LastChange.BeforeValue.ToString("0.#") → @item.LastChange.AfterValue.ToString("0.#")</strong>
+                                        <strong>@item.LastChange.BeforeValue.ToString("0.#") â†’ @item.LastChange.AfterValue.ToString("0.#")</strong>
                                         <span>@FastValue(item.LastChange.Reason, item.LastChange.ReasonType)</span>
                                     </div>
                                     <small>@FastValue(item.LastChange.GameTime, item.LastChange.CreatedRealAt)</small>
@@ -950,7 +961,7 @@ else
 
                             @if (item.DefinitionMissing)
                             {
-                                <div class="mid-warning">JSON definition missing — persisted row preserved.</div>
+                                <div class="mid-warning">JSON definition missing â€” persisted row preserved.</div>
                             }
 
                             <div class="mid-meter">
@@ -1007,7 +1018,7 @@ else
                                 <label class="mid-style-editor">
                                     <span>Style</span>
                                     <select @bind="item.Style">
-                                        <option value="">— default —</option>
+                                        <option value="">â€” default â€”</option>
                                         @foreach (var style in item.StyleOptions)
                                         {
                                             <option value="@style">@StyleLabel(style)</option>
@@ -1054,7 +1065,7 @@ else
                 <label>
                     <span>Add Mid trait</span>
                     <select @bind="_newMidTraitId">
-                        <option value="">Choose available definition…</option>
+                        <option value="">Choose available definitionâ€¦</option>
                         @foreach (var definition in _midDossier.Available)
                         {
                             <option value="@definition.TraitId">
@@ -1181,7 +1192,7 @@ else
                                                 <label class="slow-style-editor">
                                                     <span>Style / Leaning</span>
                                                     <select @bind="item.Style">
-                                                        <option value="">— default —</option>
+                                                        <option value="">â€” default â€”</option>
                                                         @foreach (var style in item.StyleOptions)
                                                         {
                                                             <option value="@style">@StyleLabel(style)</option>
@@ -1210,7 +1221,7 @@ else
                                                             <span>SUBSLOW DETAILS</span>
                                                             <strong>@item.TraitName</strong>
                                                         </div>
-                                                        <small>Blank = definition default · nothing is authored until you save it.</small>
+                                                        <small>Blank = definition default Â· nothing is authored until you save it.</small>
                                                     </div>
 
                                                     @{
@@ -1239,7 +1250,7 @@ else
                                                                     {
                                                                         <select @bind="detail.EditValue">
                                                                             <option value="">
-                                                                                — default: @SubSlowDisplay(detail.DefaultValue) —
+                                                                                â€” default: @SubSlowDisplay(detail.DefaultValue) â€”
                                                                             </option>
 
                                                                             @foreach (var option in detail.Options)
@@ -1251,7 +1262,7 @@ else
                                                                     else if (detail.ValueType == "catalog_ref" && detail.PickCount <= 1)
                                                                     {
                                                                         <select @bind="detail.EditValue">
-                                                                            <option value="">— not selected —</option>
+                                                                            <option value="">â€” not selected â€”</option>
                                                                             @foreach (var option in detail.Options)
                                                                             {
                                                                                 <option value="@option.Value">@option.Label</option>
@@ -1284,7 +1295,7 @@ else
                                                                     {
                                                                         <input class="subslow-text-input"
                                                                                type="text"
-                                                                               placeholder="Enter value…"
+                                                                               placeholder="Enter valueâ€¦"
                                                                                @bind="detail.EditValue" />
                                                                     }
 
@@ -1324,7 +1335,7 @@ else
                 <label>
                     <span>Add Slow trait</span>
                     <select @bind="_newSlowTraitId">
-                        <option value="">Choose available definition…</option>
+                        <option value="">Choose available definitionâ€¦</option>
                         @foreach (var group in _slowDossier.Available
                             .GroupBy(x => GetSlowCategory(x.TraitId))
                             .OrderBy(x => SlowCategoryOrder(x.Key))
@@ -1416,7 +1427,7 @@ else
                     <button class="relationship-back-summary"
                             type="button"
                             @onclick="BackToRelationshipSummary">
-                        ← Back to Summary
+                        â† Back to Summary
                     </button>
                 }
             </div>
@@ -1437,7 +1448,7 @@ else
                         <div><span>PEOPLE</span><strong>@_relationshipDossier.Relationships.Count</strong><small>directed bonds</small></div>
                         <div><span>ACTIVE REASONS</span><strong>@_relationshipDossier.Reasons.Count(x => x.IsStillActive)</strong><small>why scores feel this way</small></div>
                         <div><span>MEMORIES</span><strong>@_relationshipDossier.Memories.Count</strong><small>subjective recall</small></div>
-                        <div><span>BELIEFS</span><strong>@_relationshipDossier.Knowledge.Count</strong><small>@_relationshipDossier.Knowledge.Count(x => x.IsFalseBelief) false · @_relationshipDossier.Knowledge.Count(x => x.IsRumor) rumor</small></div>
+                        <div><span>BELIEFS</span><strong>@_relationshipDossier.Knowledge.Count</strong><small>@_relationshipDossier.Knowledge.Count(x => x.IsFalseBelief) false Â· @_relationshipDossier.Knowledge.Count(x => x.IsRumor) rumor</small></div>
                     </div>
 
                     @if (_relationshipDossier.Relationships.Count == 0)
@@ -1510,7 +1521,7 @@ else
                     {
                         <div class="relationship-focus-banner">
                             <span>SELECTED RELATIONSHIP</span>
-                            <strong>@_sheet.Name → @selected.TargetName</strong>
+                            <strong>@_sheet.Name â†’ @selected.TargetName</strong>
                             <small>@RelationshipLabel(selected)</small>
                         </div>
                     }
@@ -1561,7 +1572,7 @@ else
                                     <header>
                                         <div>
                                             <strong>@reason.TargetName</strong>
-                                            <span>@Safe(reason.ScoreName, "relationship") · Δ @Signed(reason.Delta)</span>
+                                            <span>@Safe(reason.ScoreName, "relationship") Â· Î” @Signed(reason.Delta)</span>
                                         </div>
                                         <b>@(reason.IsStillActive ? "ACTIVE" : "PAST")</b>
                                     </header>
@@ -1620,7 +1631,7 @@ else
                         <button type="button" class="dossier-button secondary tiny" @onclick="OpenNewKnowledgeEditor">
                             + Knowledge / Belief
                         </button>
-                        <span>@FilteredMemories.Count memories · @FilteredKnowledge.Count knowledge/beliefs</span>
+                        <span>@FilteredMemories.Count memories Â· @FilteredKnowledge.Count knowledge/beliefs</span>
                     </div>
 
                     @if (_sharedEventEditorOpen)
@@ -1653,19 +1664,19 @@ else
                                 </label>
 
                                 <label class="shared-event-wide">
-                                    <span>TRUE HISTORY — what objectively happened</span>
+                                    <span>TRUE HISTORY â€” what objectively happened</span>
                                     <textarea rows="2" @bind="_sharedEventDraft.TrueEventSummary"
                                               placeholder="Objective facts only. This is the canonical truth."></textarea>
                                 </label>
 
                                 <label class="shared-event-wide">
-                                    <span>Shared Known History — what everyone present can reasonably know</span>
+                                    <span>Shared Known History â€” what everyone present can reasonably know</span>
                                     <textarea rows="2" @bind="_sharedEventDraft.SharedKnownHistory"
                                               placeholder="Baseline knowledge shared by everyone present. Individual views can override this below."></textarea>
                                 </label>
 
                                 <label class="shared-event-wide">
-                                    <span>Shared Base Memory — starting memory for everyone present</span>
+                                    <span>Shared Base Memory â€” starting memory for everyone present</span>
                                     <textarea rows="2" @bind="_sharedEventDraft.SharedBaseMemory"
                                               placeholder="Common memory of the event. Individual memory views can override this below."></textarea>
                                 </label>
@@ -1674,7 +1685,7 @@ else
                                     <div class="shared-ai-head">
                                         <div>
                                             <strong>AI Draft Participant Views</strong>
-                                            <small>Draft only — nothing becomes canon until you review and save.</small>
+                                            <small>Draft only â€” nothing becomes canon until you review and save.</small>
                                         </div>
                                         <button type="button"
                                                 class="dossier-button primary tiny"
@@ -1746,7 +1757,7 @@ else
                                                     class="@(IsSharedParticipant(person.CharacterId) ? "active" : "")"
                                                     @onclick="@(() => ToggleSharedParticipant(person.CharacterId))">
                                                 <strong>@person.Name</strong>
-                                                <small>Tier @person.Tier · @Safe(person.Occupation, "No job") · @Safe(person.Location, "No location")</small>
+                                                <small>Tier @person.Tier Â· @Safe(person.Occupation, "No job") Â· @Safe(person.Location, "No location")</small>
                                             </button>
                                         }
                                     </div>
@@ -1797,8 +1808,8 @@ else
                                                 <strong>@(person?.Name ?? $"Character #{view.CharacterId}")</strong>
                                                 <span>
                                                     @(view.IsTrueEventParticipant ? "TRUE participant" : "Knows later")
-                                                    · @view.KnowledgeLevel knowledge
-                                                    · @(view.CreateMemory ? "memory on" : "memory off")
+                                                    Â· @view.KnowledgeLevel knowledge
+                                                    Â· @(view.CreateMemory ? "memory on" : "memory off")
                                                 </span>
                                             </summary>
                                             <div class="participant-view-grid">
@@ -1873,7 +1884,7 @@ else
                                             <strong>@KnowledgeSubjectLabel</strong>
                                             @if (_knowledgeDraft.SubjectCharacterId is not null)
                                             {
-                                                <button type="button" @onclick="@(() => SetKnowledgeSubject(null))">×</button>
+                                                <button type="button" @onclick="@(() => SetKnowledgeSubject(null))">Ã—</button>
                                             }
                                         </div>
                                         <input class="people-picker-search"
@@ -1935,7 +1946,7 @@ else
                                                             <strong>@Safe(historyEvent.Title, Safe(historyEvent.Summary, "Untitled event"))</strong>
                                                             <code>@historyEvent.EventId</code>
                                                         </div>
-                                                        <span>@Safe(historyEvent.GameTime, "Undated") · @Safe(historyEvent.EventType, "Event")</span>
+                                                        <span>@Safe(historyEvent.GameTime, "Undated") Â· @Safe(historyEvent.EventType, "Event")</span>
                                                         @if (!string.IsNullOrWhiteSpace(historyEvent.PlaceText))
                                                         {
                                                             <small>@historyEvent.PlaceText</small>
@@ -2011,7 +2022,7 @@ else
                                             <header>
                                                 <div>
                                                     <strong>@Safe(memory.MemoryType, "General")</strong>
-                                                    <span>Importance @memory.Importance · Strength @memory.Strength</span>
+                                                    <span>Importance @memory.Importance Â· Strength @memory.Strength</span>
                                                 </div>
                                                 <button type="button" class="subjective-edit-button" @onclick="@(() => BeginEditMemory(memory))">Edit</button>
                                             </header>
@@ -2040,7 +2051,7 @@ else
                                                 }
                                                 @if (!string.IsNullOrWhiteSpace(memory.EventId))
                                                 {
-                                                    <span class="history-linked-badge">History linked · @GetHistoryEventLabel(memory.EventId)</span>
+                                                    <span class="history-linked-badge">History linked Â· @GetHistoryEventLabel(memory.EventId)</span>
                                                 }
                                             </footer>
                                         </article>
@@ -2072,7 +2083,7 @@ else
                                             <strong>@MemorySubjectLabel</strong>
                                             @if (_memoryDraft.SubjectCharacterId is not null)
                                             {
-                                                <button type="button" @onclick="@(() => SetMemorySubject(null))">×</button>
+                                                <button type="button" @onclick="@(() => SetMemorySubject(null))">Ã—</button>
                                             }
                                         </div>
                                         <input class="people-picker-search"
@@ -2134,7 +2145,7 @@ else
                                                             <strong>@Safe(historyEvent.Title, Safe(historyEvent.Summary, "Untitled event"))</strong>
                                                             <code>@historyEvent.EventId</code>
                                                         </div>
-                                                        <span>@Safe(historyEvent.GameTime, "Undated") · @Safe(historyEvent.EventType, "Event")</span>
+                                                        <span>@Safe(historyEvent.GameTime, "Undated") Â· @Safe(historyEvent.EventType, "Event")</span>
                                                         @if (!string.IsNullOrWhiteSpace(historyEvent.PlaceText))
                                                         {
                                                             <small>@historyEvent.PlaceText</small>
@@ -2162,7 +2173,7 @@ else
                                             <strong>@KnowledgeSourceLabel</strong>
                                             @if (_knowledgeDraft.SourceCharacterId is not null)
                                             {
-                                                <button type="button" @onclick="@(() => SetKnowledgeSource(null))">×</button>
+                                                <button type="button" @onclick="@(() => SetKnowledgeSource(null))">Ã—</button>
                                             }
                                         </div>
                                         <input class="people-picker-search"
@@ -2257,7 +2268,7 @@ else
                                                 }
                                                 @if (!string.IsNullOrWhiteSpace(item.EventId))
                                                 {
-                                                    <span class="history-linked-badge">History linked · @GetHistoryEventLabel(item.EventId)</span>
+                                                    <span class="history-linked-badge">History linked Â· @GetHistoryEventLabel(item.EventId)</span>
                                                 }
                                             </footer>
                                         </article>
@@ -2320,7 +2331,9 @@ else
         <!-- PROJECTEVE_MEDIA_STUDIO_MEDIA_TAB_ONLY -->
         <NpcMediaStudio NpcId="NpcId" />
 
-        <section class="dossier-panel wide-panel">
+        @* Legacy media surface retained temporarily for rollback safety.
+           NpcMediaStudio is now the canonical Media UI. *@
+        <section class="dossier-panel wide-panel legacy-media-surface">
             <div class="panel-title"><div><span>M</span><h2>Media</h2></div></div>
             <nav class="media-subtabs">
                 <button class="@(_mediaTab == "photos" ? "active" : "")" @onclick="@(() => _mediaTab = "photos")">Photos</button>
@@ -2396,6 +2409,11 @@ else
     color:#8fa5c7;
     font-size:.72rem;
 }
+
+/* MEDIA CONSOLIDATION:
+   NpcMediaStudio is the single live Media tab.
+   Keep legacy markup hidden temporarily for rollback safety. */
+.legacy-media-surface{display:none !important;}
 </style>
 @code {
     [Parameter] public int NpcId { get; set; }
@@ -2517,7 +2535,7 @@ else
         _tab = "traits";
         _traitSubTab = "mid";
         _traitFocusId = "";
-        _statusMessage = "Personality editor opened under Traits → Mid.";
+        _statusMessage = "Personality editor opened under Traits â†’ Mid.";
     }
 
     private async Task SavePersonality()
@@ -2554,6 +2572,57 @@ else
         _statusMessage = "Voice dossier saved.";
     }
 
+    private bool _aiTraitReasonWorking;
+
+    private async Task AddAiReasons(FastTraitDossierItem item)
+    {
+        if (_sheet is null || _aiTraitReasonWorking)
+            return;
+
+        _aiTraitReasonWorking = true;
+        _statusMessage = $"AI is writing grounded causal reasons for {item.TraitName}...";
+
+        try
+        {
+            var context = string.Join(
+                " | ",
+                new[]
+                {
+                    $"Name: {_sheet.Name}",
+                    $"Age: {_sheet.Age}",
+                    $"Gender: {_sheet.Gender}",
+                    $"Occupation: {_sheet.Occupation}",
+                    $"Location: {_sheet.Location}",
+                    $"Archetypes: {_sheet.Archetype1}, {_sheet.Archetype2}, {_sheet.Archetype3}",
+                    $"Public persona: {_sheet.PublicPersona}",
+                    $"Private persona: {_sheet.PrivatePersona}",
+                    $"Goal: {_sheet.Goal}",
+                    $"Fear: {_sheet.Fear}"
+                }.Where(x => !string.IsNullOrWhiteSpace(x)));
+
+            var added = await TraitReasonAi.AddReasonsAsync(
+                _sheet.Id,
+                item.TraitId,
+                item.TraitName,
+                item.CurrentValue,
+                context,
+                maxTotalReasons: 4);
+
+            RefreshFast20Reasons();
+
+            _statusMessage = added > 0
+                ? $"AI added {added} causal reason{(added == 1 ? "" : "s")} for {item.TraitName}."
+                : $"{item.TraitName} already has enough causal reasons or AI returned no safe new reason.";
+        }
+        catch (Exception ex)
+        {
+            _statusMessage = "AI causal reason failed: " + ex.Message;
+        }
+        finally
+        {
+            _aiTraitReasonWorking = false;
+        }
+    }
     private TraitReasonDraft GetNewReasonDraft(string traitId)
     {
         if (_newReasonDrafts.TryGetValue(traitId, out var existing))
@@ -2731,7 +2800,7 @@ else
     {
         _traitSubTab = "summary";
         _traitFocusId = "";
-        _statusMessage = "Returned to Traits → Summary.";
+        _statusMessage = "Returned to Traits â†’ Summary.";
     }
 
     private void SelectTraitSubTab(string key)
@@ -2744,7 +2813,7 @@ else
     {
         _traitSubTab = layer;
         _traitFocusId = traitId ?? "";
-        _statusMessage = $"Opened {traitId} in Traits → {layer}.";
+        _statusMessage = $"Opened {traitId} in Traits â†’ {layer}.";
     }
 
     private bool IsTraitFocused(string traitId) =>
@@ -3424,7 +3493,7 @@ else
         var item = _canonicalHistoryEvents.FirstOrDefault(x => x.EventId == eventId);
         return item is null
             ? $"Linked event: {eventId}"
-            : $"{item.DisplayLabel} · ID {item.EventId}";
+            : $"{item.DisplayLabel} Â· ID {item.EventId}";
     }
 
     private void SelectMemoryHistoryEvent(string eventId)
@@ -3537,7 +3606,7 @@ else
         _relationshipSubTab = "summary";
         _selectedRelationshipId = "";
         _selectedTargetCharacterId = null;
-        _statusMessage = "Returned to Relationships → Summary.";
+        _statusMessage = "Returned to Relationships â†’ Summary.";
     }
 
     private void OpenRelationshipPerson(RelationshipDossierItem relation)
@@ -3545,7 +3614,7 @@ else
         _selectedRelationshipId = relation.RelationshipId;
         _selectedTargetCharacterId = relation.TargetCharacterId;
         _relationshipSubTab = "people";
-        _statusMessage = $"Opened relationship: {_sheet?.Name} → {relation.TargetName}.";
+        _statusMessage = $"Opened relationship: {_sheet?.Name} â†’ {relation.TargetName}.";
     }
 
     private void OpenRelationshipReasons(RelationshipDossierItem relation)
@@ -3598,7 +3667,7 @@ else
     private static string RelationshipLabel(RelationshipDossierItem relation)
     {
         if (!string.IsNullOrWhiteSpace(relation.FamilyRole))
-            return $"{relation.RelationshipType} · {relation.FamilyRole}";
+            return $"{relation.RelationshipType} Â· {relation.FamilyRole}";
 
         return relation.RelationshipType;
     }
@@ -3691,7 +3760,7 @@ else
         var seq = 0;
         if (allowBlank)
         {
-            builder.OpenElement(seq++, "option"); builder.AddAttribute(seq++, "value", ""); builder.AddContent(seq++, "— None —"); builder.CloseElement();
+            builder.OpenElement(seq++, "option"); builder.AddAttribute(seq++, "value", ""); builder.AddContent(seq++, "â€” None â€”"); builder.CloseElement();
         }
         foreach (var option in _archetypes)
         {
@@ -3769,7 +3838,7 @@ else
             if (!PersonaReady) needs.Add("Define public/private persona");
             if (!InnerLifeReady) needs.Add("Complete goals, needs and fears");
             if (IsMissing(_sheet.AiSummary)) needs.Add("Generate AI dossier summary");
-            return needs.Count == 0 ? "Dossier is coherent and ready for deeper behavior testing." : string.Join(" · ", needs.Take(3));
+            return needs.Count == 0 ? "Dossier is coherent and ready for deeper behavior testing." : string.Join(" Â· ", needs.Take(3));
         }
     }
 
@@ -3820,6 +3889,7 @@ else
     }
 
 }
+
 
 
 

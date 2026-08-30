@@ -143,6 +143,8 @@ public sealed class NpcAppearanceDetailService
 
     public void Save(NpcAppearanceDetailProfile p)
     {
+        NormalizeCompleteness(p);
+
         using var conn = Open();
         using var tx = conn.BeginTransaction();
 
@@ -289,8 +291,94 @@ public sealed class NpcAppearanceDetailService
         tx.Commit();
     }
 
+
+    public static void NormalizeCompleteness(NpcAppearanceDetailProfile p)
+    {
+        // Every string variable in the EXISTING appearance-detail model
+        // receives an explicit value. This automatically follows future
+        // fields added to NpcAppearanceDetailProfile without maintaining
+        // a second hard-coded field list.
+        foreach (var prop in typeof(NpcAppearanceDetailProfile)
+            .GetProperties(System.Reflection.BindingFlags.Instance |
+                           System.Reflection.BindingFlags.Public)
+            .Where(x => x.PropertyType == typeof(string) && x.CanRead && x.CanWrite))
+        {
+            var value = Convert.ToString(prop.GetValue(p))?.Trim() ?? "";
+
+            if (string.IsNullOrWhiteSpace(value))
+                prop.SetValue(p,"N/A");
+            else
+                prop.SetValue(p,value);
+        }
+
+        // "None" is a better semantic value for visual absence than N/A.
+        SetIfNA(p,nameof(p.EyeNotes),"None");
+        SetIfNA(p,nameof(p.HairHighlights),"None");
+        SetIfNA(p,nameof(p.ComplexionDetails),"None");
+        SetIfNA(p,nameof(p.DistinguishingFeatures),"None");
+
+        // Adult-only variables are explicit N/A when not applicable.
+        var adult = p.Age >= 18;
+        var gender = (p.Gender ?? "").Trim();
+
+        var female =
+            gender.Contains("female",StringComparison.OrdinalIgnoreCase) ||
+            gender.Equals("woman",StringComparison.OrdinalIgnoreCase);
+
+        var male =
+            (gender.Contains("male",StringComparison.OrdinalIgnoreCase) &&
+             !gender.Contains("female",StringComparison.OrdinalIgnoreCase)) ||
+            gender.Equals("man",StringComparison.OrdinalIgnoreCase);
+
+        if (!adult)
+        {
+            SetStringProperty(p,"BraSize","N/A");
+            SetStringProperty(p,"PenisSize","N/A");
+            SetStringProperty(p,"CircumcisionStatus","N/A");
+            SetStringProperty(p,"AdultAnatomyNotes","N/A");
+        }
+        else if (female)
+        {
+            SetStringProperty(p,"PenisSize","N/A");
+            SetStringProperty(p,"CircumcisionStatus","N/A");
+        }
+        else if (male)
+        {
+            SetStringProperty(p,"BraSize","N/A");
+        }
+    }
+
+    private static void SetIfNA(
+        NpcAppearanceDetailProfile p,
+        string propertyName,
+        string value)
+    {
+        var prop = typeof(NpcAppearanceDetailProfile).GetProperty(propertyName);
+
+        if (prop is null || prop.PropertyType != typeof(string) || !prop.CanRead || !prop.CanWrite)
+            return;
+
+        var current = Convert.ToString(prop.GetValue(p))?.Trim() ?? "";
+
+        if (current.Length == 0 ||
+            current.Equals("N/A",StringComparison.OrdinalIgnoreCase))
+            prop.SetValue(p,value);
+    }
+
+    private static void SetStringProperty(
+        NpcAppearanceDetailProfile p,
+        string propertyName,
+        string value)
+    {
+        var prop = typeof(NpcAppearanceDetailProfile).GetProperty(propertyName);
+
+        if (prop is not null &&
+            prop.PropertyType == typeof(string) &&
+            prop.CanWrite)
+            prop.SetValue(p,value);
+    }
     public static string ComposeEyes(NpcAppearanceDetailProfile p)
-        => Join(", ", p.EyeVariant, p.EyePattern, p.EyeShape, p.EyeExpression, p.EyeNotes);
+        => Join(", ", p.EyeBaseColor, p.EyeVariant, p.EyePattern, p.EyeShape, p.EyeExpression, p.EyeNotes);
 
     public static string ComposeHair(NpcAppearanceDetailProfile p)
         => Join(", ", p.HairColor, p.HairUndertone, p.HairHighlights, p.HairLength, p.HairTexture, p.HairStyle, p.HairDensity);
@@ -462,8 +550,14 @@ public sealed class NpcAppearanceDetailService
         => values.FirstOrDefault(x => !string.IsNullOrWhiteSpace(x))?.Trim() ?? "";
 
     private static string Join(string separator, params string?[] values)
-        => string.Join(separator, values.Where(x => !string.IsNullOrWhiteSpace(x)).Select(x => x!.Trim()));
-
+    => string.Join(
+        separator,
+        values
+            .Where(x =>
+                !string.IsNullOrWhiteSpace(x) &&
+                !x!.Trim().Equals("N/A",StringComparison.OrdinalIgnoreCase) &&
+                !x.Trim().Equals("Not Applicable",StringComparison.OrdinalIgnoreCase))
+            .Select(x => x!.Trim()));
     private static bool Blank(string? value) => string.IsNullOrWhiteSpace(value);
     private static string S(SqliteDataReader r, int i) => r.IsDBNull(i) ? "" : Convert.ToString(r.GetValue(i)) ?? "";
     private static void Add(SqliteCommand cmd,string name,object? value) => cmd.Parameters.AddWithValue(name,value ?? "");

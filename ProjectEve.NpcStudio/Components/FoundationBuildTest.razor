@@ -1,0 +1,314 @@
+﻿@page "/foundation-test/{NpcId:int}"
+@using ProjectEve.NpcStudio.Services
+@inject NpcFoundationBuildService Foundation
+
+<PageTitle>Foundation Test - NPC @NpcId</PageTitle>
+
+<div class="fnd">
+    <header>
+        <div>
+            <span>STAGE 4B-1 · PREVIEW ONLY</span>
+            <h1>Foundation Test — NPC @NpcId</h1>
+            <p>
+                Builds a Phase 1 preview without saving NPC canon.
+                Identity, appearance, current life, phone, vehicle and finance are shown for inspection.
+            </p>
+        </div>
+
+        <div class="actions">
+            <button disabled="@_busy" @onclick="BuildPreview">
+                @(_busy ? "Working..." : "Build Foundation Preview")
+            </button>
+
+            @if (_preview is not null && NpcId == 6)
+            {
+                <label class="confirm">
+                    <input type="checkbox" @bind="_confirmCommit" />
+                    I understand this writes Phase 1 canon for NPC 6.
+                </label>
+
+                <button class="commit"
+                        disabled="@(_busy || !_confirmCommit)"
+                        @onclick="CommitFoundation">
+                    Commit NPC 6 Foundation
+                </button>
+            }
+        </div>
+    </header>
+
+    @if (!string.IsNullOrWhiteSpace(_error))
+    {
+        <div class="err">@_error</div>
+    }
+
+    @if (!string.IsNullOrWhiteSpace(_commitMessage))
+    {
+        <div class="commit-result">@_commitMessage</div>
+    }
+
+    @if (_preview is null)
+    {
+        <div class="empty">
+            Nothing has been generated or saved. Click Build Foundation Preview.
+        </div>
+    }
+    else
+    {
+        <section class="summary">
+            @Row("NPC", _preview.ExistingName)
+            @Row("Tier", _preview.Tier.ToString())
+            @Row("Current surname", _preview.ExistingCurrentLastName)
+            @Row("Birth surname", _preview.ExistingBirthLastName)
+        </section>
+
+        @if (_preview.Profile?.Proposal is not null)
+        {
+            var p = _preview.Profile.Proposal;
+
+            <section>
+                <h2>Identity + Current Life</h2>
+                <div class="grid">
+                    @Row("Proposed name", $"{p.FirstName} {p.MiddleName} {p.CurrentLastName}".Replace("  ", " ").Trim())
+                    @Row("Birth surname", p.BirthLastName)
+                    @Row("Age", p.Age.ToString())
+                    @Row("Gender", p.Gender)
+                    @Row("Occupation", p.Occupation)
+                    @Row("Employer", p.Employer)
+                    @Row("Hometown", p.Hometown)
+                    @Row("Address proposal", p.Address)
+                </div>
+            </section>
+
+            <section>
+                <h2>Appearance</h2>
+                <div class="grid">
+                    @Row("Height", $"{p.HeightCm:0} cm")
+                    @Row("Weight", $"{p.WeightKg:0} kg")
+                    @Row("Body type", p.BodyType)
+                    @Row("Hair", $"{p.HairColor} · {p.HairStyle}")
+                    @Row("Eyes", p.EyeColor)
+                    @Row("Skin tone", p.SkinTone)
+                    @Row("Clothing", p.ClothingStyle)
+                    @Row("Features", p.DistinguishingFeatures)
+                </div>
+            </section>
+        }
+
+        <section>
+            <h2>Home / Location</h2>
+
+            @if (!string.IsNullOrWhiteSpace(_preview.ExistingHomeLocationId) ||
+                 !string.IsNullOrWhiteSpace(_preview.ExistingAddress))
+            {
+                <p class="keep">Existing canonical housing found. Foundation will preserve it.</p>
+
+                <div class="grid">
+                    @Row("Existing HomeLocationId", _preview.ExistingHomeLocationId)
+                    @Row("Existing Address", _preview.ExistingAddress)
+                </div>
+            }
+            else if (_preview.Housing is not null &&
+                     !string.IsNullOrWhiteSpace(_preview.Housing.UnitId))
+            {
+                <div class="housing-callout">
+                    <div>
+                        <small>PROPOSED CANONICAL HOUSING</small>
+                        <b>@_preview.Housing.PropertyType</b>
+                    </div>
+                    <span>@(_preview.Housing.IsExistingAssignment ? "EXISTING" : "AVAILABLE")</span>
+                </div>
+
+                <div class="grid">
+                    @Row("Housing UnitId", _preview.Housing.UnitId)
+                    @Row("Property type", _preview.Housing.PropertyType)
+                    @Row("Address", _preview.Housing.Address)
+                    @Row("HomeLocationId", _preview.Housing.HomeLocationId)
+                    @Row("Household key", _preview.Housing.HouseholdKey)
+                    @Row("Household size", _preview.HouseholdSize.ToString())
+                    @Row("Assignment rule", _preview.Housing.Reason)
+                </div>
+            }
+            else
+            {
+                <p class="warn-text">
+                    No suitable Bellefontaine housing unit was available.
+                    This NPC should be marked Needs Repair instead of sharing another household's UnitId.
+                </p>
+            }
+        </section>
+
+        <section>
+            <h2>Phone</h2>
+            @if (_preview.ExistingPhoneCount > 0)
+            {
+                <p class="keep">Existing canonical phone found. Foundation will preserve it.</p>
+            }
+            else if (_preview.Phone is not null)
+            {
+                <div class="grid">
+                    @Row("Number", _preview.Phone.PhoneNumber)
+                    @Row("Carrier", _preview.Phone.CarrierName)
+                    @Row("Device", $"{_preview.Phone.DeviceMake} {_preview.Phone.DeviceModel}")
+                    @Row("Label", _preview.Phone.DeviceLabel)
+                </div>
+            }
+        </section>
+
+        <section>
+            <h2>Vehicle</h2>
+            @if (_preview.ExistingVehicleCount > 0)
+            {
+                <p class="keep">Existing canonical vehicle found. Foundation will preserve it.</p>
+            }
+            else if (_preview.Vehicle is not null)
+            {
+                <div class="grid">
+                    @Row("Vehicle", $"{_preview.Vehicle.ModelYear} {_preview.Vehicle.Make} {_preview.Vehicle.Model}")
+                    @Row("Color", _preview.Vehicle.Color)
+                    @Row("Plate", $"{_preview.Vehicle.PlateState} {_preview.Vehicle.PlateNumber}")
+                    @Row("VIN", _preview.Vehicle.Vin)
+                    @Row("Odometer", $"{_preview.Vehicle.OdometerMiles:N0} mi")
+                </div>
+            }
+            else
+            {
+                <p class="keep">No vehicle proposed for this age/profile.</p>
+            }
+        </section>
+
+        <section>
+            <div class="bank-title">
+                <img src="/assets/banking/cullen-federal-bank.png"
+                     alt="Cullen Federal Bank" />
+                <div>
+                    <small>CANONICAL BANKING</small>
+                    <h2>Banking</h2>
+                </div>
+            </div>
+            @if (_preview.ExistingFinanceAccountCount > 0)
+            {
+                <p class="keep">Existing canonical financial account found. Foundation will preserve it.</p>
+            }
+            else if (_preview.Finance is not null)
+            {
+                <div class="grid">
+                    @Row("Institution", _preview.Finance.InstitutionName)
+                    @Row("Account", _preview.Finance.AccountName)
+                    @Row("Type", _preview.Finance.AccountType)
+                    @Row("Opening balance", _preview.Finance.Balance.ToString("C0"))
+                </div>
+            }
+        </section>
+
+        @if (_preview.Warnings.Count > 0)
+        {
+            <section class="warnings">
+                <h2>Review</h2>
+                @foreach (var warning in _preview.Warnings)
+                {
+                    <div>@warning</div>
+                }
+            </section>
+        }
+
+        <div class="nosave">
+            PREVIEW ONLY — canonical NPC data is unchanged. The first valid AI proposal is stored only as a locked Foundation draft so repeated previews stay identical.
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter] public int NpcId { get; set; }
+
+    private bool _busy;
+    private bool _confirmCommit;
+    private string _error = "";
+    private string _commitMessage = "";
+    private NpcFoundationPreview? _preview;
+
+    private async Task BuildPreview()
+    {
+        _busy = true;
+        _error = "";
+
+        try
+        {
+            _preview = await Foundation.BuildPreviewAsync(NpcId);
+        }
+        catch (Exception ex)
+        {
+            _error = ex.Message;
+        }
+        finally
+        {
+            _busy = false;
+        }
+    }
+
+    private async Task CommitFoundation()
+    {
+        if (!_confirmCommit || NpcId != 6)
+            return;
+
+        _busy = true;
+        _error = "";
+        _commitMessage = "";
+
+        try
+        {
+            var result = await Foundation.CommitFoundationAsync(NpcId);
+            _commitMessage = result.Message;
+            _confirmCommit = false;
+            _preview = await Foundation.BuildPreviewAsync(NpcId);
+        }
+        catch (Exception ex)
+        {
+            _error = ex.ToString();
+        }
+        finally
+        {
+            _busy = false;
+        }
+    }
+
+    private RenderFragment Row(string label, string? value) => builder =>
+    {
+        var safe = string.IsNullOrWhiteSpace(value) ? "—" : value;
+
+        builder.OpenElement(0, "div");
+        builder.OpenElement(1, "small");
+        builder.AddContent(2, label);
+        builder.CloseElement();
+        builder.OpenElement(3, "b");
+        builder.AddContent(4, safe);
+        builder.CloseElement();
+        builder.CloseElement();
+    };
+}
+
+<style>
+.fnd{display:grid;gap:14px;color:#e9f0fb}
+.fnd header{display:flex;justify-content:space-between;gap:18px;padding:18px;border:1px solid #344861;border-radius:14px;background:#091426}
+.fnd header span{font-size:.68rem;font-weight:900;letter-spacing:.13em;color:#9c85ff}
+.fnd header h1{margin:4px 0 6px}.fnd header p{margin:0;color:#93a7c5;max-width:850px}
+.fnd button{background:#5935d9;color:#fff;border:1px solid #795cf4;border-radius:9px;padding:10px 14px;font-weight:900;cursor:pointer}
+.fnd button:disabled{opacity:.5}
+.actions{display:flex;flex-direction:column;align-items:stretch;gap:8px;min-width:260px}
+.confirm{display:flex;align-items:center;gap:7px;padding:8px 10px;border:1px solid #5a4e20;border-radius:8px;background:#211d0d;color:#f1d777;font-size:.76rem}
+.commit{background:#7c2d12!important;border-color:#c0562f!important}
+.commit-result{padding:12px;border:1px solid #2f7d4b;border-radius:10px;background:#0c2818;color:#9be3b6;font-weight:800}
+.fnd section,.empty,.err,.nosave{padding:14px;border:1px solid #30445d;border-radius:12px;background:#0a1524}
+.fnd section h2{margin:0 0 10px;font-size:1rem}
+.summary{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.summary>div,.grid>div{padding:9px;border:1px solid #2c4059;border-radius:9px;background:#0f1b2b}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.grid small,.summary small{display:block;color:#8298b8;font-size:.66rem}.grid b,.summary b{display:block;margin-top:3px;overflow-wrap:anywhere}
+.warnings{border-color:#80651c!important;background:#282109!important}.warnings div{padding:6px 0;color:#f3d77f}
+.keep{color:#8fd7aa}.err{border-color:#853744;color:#ff9ba6;background:#291117}.nosave{border-style:dashed;color:#95a8c3;text-align:center;font-weight:900}
+.housing-callout{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px;padding:10px 12px;border:1px solid #5269a0;border-radius:10px;background:#101d33}
+.housing-callout small,.bank-title small{display:block;color:#8298b8;font-size:.65rem;letter-spacing:.08em}
+.housing-callout b{display:block;margin-top:3px;font-size:1rem}.housing-callout span{font-size:.65rem;font-weight:900;color:#8fd7aa}
+.bank-title{display:flex;align-items:center;gap:12px;margin-bottom:10px}.bank-title img{width:54px;height:54px;object-fit:contain;border-radius:8px;background:#fff;padding:3px}.bank-title h2{margin:2px 0 0!important}
+.warn-text{color:#f3d77f}
+@@media(max-width:900px){.fnd header{flex-direction:column}.summary,.grid{grid-template-columns:1fr!important}}
+</style>

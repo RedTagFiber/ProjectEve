@@ -37,6 +37,13 @@ builder.Services.AddScoped<FirstNpcCreationService>();
 builder.Services.AddScoped<FamilyIntegrityGuardService>();
 builder.Services.AddScoped<CanonicalFamilyMigrationService>();
 builder.Services.AddScoped<CanonicalFamilyGraphService>();
+builder.Services.AddScoped<CanonicalKinshipTitleService>();
+builder.Services.AddScoped<FullFamilyTreePreviewService>();
+builder.Services.AddScoped<FullFamilyTreeBuildService>();
+builder.Services.AddScoped<CanonicalKinshipCacheRepairService>();
+builder.Services.AddScoped<FamilyBuildOrchestratorService>();
+builder.Services.AddScoped<BellefontaineHousingInventoryService>();
+builder.Services.AddScoped<NpcFoundationBuildService>();
 builder.Services.AddScoped<CanonicalFamilyRepairService>();
 builder.Services.AddScoped<NpcFamilyBuilderService>();
 builder.Services.AddScoped<RelationshipCandidateService>();
@@ -54,6 +61,10 @@ builder.Services.AddScoped<NpcFileSystemService>();
 builder.Services.AddSingleton<ProjectEve.NpcStudio.Services.MediaStorageService>();
 
 builder.Services.AddSingleton<ProjectEve.NpcStudio.Services.NpcAppearanceDetailService>();
+builder.Services.AddSingleton<TraitCompatibilityService>();
+builder.Services.AddSingleton<AiTraitPopulationService>();
+builder.Services.AddSingleton<AiTraitReasonService>();
+builder.Services.AddSingleton<AiFastTraitAlignmentService>();
 
 var app = builder.Build();
 

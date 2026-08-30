@@ -1,4 +1,4 @@
-@using Microsoft.Data.Sqlite
+﻿@using Microsoft.Data.Sqlite
 @using System.Globalization
 @rendermode InteractiveServer
 
@@ -366,7 +366,15 @@
         if (!Path.IsPathRooted(path))
             return "/" + normalized.TrimStart('/');
 
-        // Unknown absolute filesystem paths cannot be loaded directly by the browser.
+        // Approved/generated NPC media lives outside wwwroot.
+        // Program.cs exposes a guarded /npc-media endpoint that only serves
+        // files beneath D:\ProjectEveData.
+        if (Path.IsPathRooted(path) &&
+            path.StartsWith(@"D:\ProjectEveData\", StringComparison.OrdinalIgnoreCase))
+        {
+            return "/npc-media?path=" + Uri.EscapeDataString(path);
+        }
+
         return "";
     }
 

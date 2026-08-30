@@ -1,0 +1,26 @@
+﻿{
+  "schemaVersion": "1.0",
+  "bankId": "cullen-federal-bank",
+  "institutionName": "Cullen Federal Bank",
+  "shortName": "Cullen",
+  "establishedYear": 1978,
+  "worldId": "smalltown",
+  "city": "Bellefontaine",
+  "state": "Ohio",
+  "country": "USA",
+  "logoWebPath": "/assets/banking/cullen-federal-bank.png",
+  "isCanonical": true,
+  "isOnlyNpcBank": true,
+  "allowedAccountTypes": [
+    "Checking",
+    "Savings",
+    "Joint Checking",
+    "Joint Savings"
+  ],
+  "rules": {
+    "aiMayInventInstitutionName": false,
+    "allNpcBankAccountsUseThisInstitution": true,
+    "preserveExistingCanonicalAccounts": true,
+    "foundationMissingOnly": true
+  }
+}

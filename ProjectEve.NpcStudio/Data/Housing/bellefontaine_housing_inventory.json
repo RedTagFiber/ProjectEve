@@ -1,0 +1,3368 @@
+﻿{
+  "schemaVersion": "1.0",
+  "world": "Project Eve",
+  "housingMarket": "Bellefontaine, Ohio",
+  "description": "Canonical game-world housing inventory for NPC household assignment. Addresses are fictional game-world locations located in Bellefontaine, Ohio.",
+  "assignmentRules": {
+    "oneUnitPerHousehold": true,
+    "oneHouseholdPerUnit": true,
+    "familyMembersShareHouseholdUnit": true,
+    "differentFamiliesCannotShareOccupiedUnit": true,
+    "apartmentBuildingsMayContainMultipleHouseholds": true,
+    "apartmentUnitIdMustBeUnique": true,
+    "preserveExistingAssignmentOnRerun": true,
+    "neverReplaceManualAddress": true,
+    "missingOnly": true,
+    "releaseUnitOnlyWhenHouseholdMovesOrIsDeleted": true,
+    "preferredAssignmentOrder": [
+      "existing canonical unit",
+      "same household unit",
+      "available unit matching household size",
+      "available rental or apartment",
+      "NeedsRepair if no suitable unit exists"
+    ],
+    "householdCapacityRule": "Prefer bedrooms appropriate to household size; do not place unrelated families in the same UnitId.",
+    "canonicalFields": {
+      "housingUnitKey": "unitId",
+      "householdKey": "HouseholdId",
+      "rootNpcKey": "rootNpcId",
+      "residentNpcList": "residentNpcIds",
+      "characterHomeField": "HomeLocationId",
+      "characterAddressField": "Address"
+    }
+  },
+  "housingUnits": [
+    {
+      "unitId": "BFH-0001",
+      "propertyType": "House",
+      "address": {
+        "line1": "594 Maple Grove Drive",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "Residential South",
+        "worldLocationId": "loc-housing-bfh-0001"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 5,
+        "bathrooms": 1.0,
+        "ownershipModel": "OwnerOccupied",
+        "monthlyRent": 0,
+        "estimatedValue": 385000,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0002",
+      "propertyType": "House",
+      "address": {
+        "line1": "492 Oak Ridge Lane",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "North Side",
+        "worldLocationId": "loc-housing-bfh-0002"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 4,
+        "bathrooms": 1.0,
+        "ownershipModel": "OwnerOccupied",
+        "monthlyRent": 0,
+        "estimatedValue": 275000,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0003",
+      "propertyType": "House",
+      "address": {
+        "line1": "509 Pinecrest Avenue",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "Downtown Edge",
+        "worldLocationId": "loc-housing-bfh-0003"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 4,
+        "bathrooms": 2.0,
+        "ownershipModel": "OwnerOccupied",
+        "monthlyRent": 0,
+        "estimatedValue": 355000,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0004",
+      "propertyType": "House",
+      "address": {
+        "line1": "271 Willow Bend Road",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "North Side",
+        "worldLocationId": "loc-housing-bfh-0004"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 4,
+        "bathrooms": 1.5,
+        "ownershipModel": "OwnerOccupied",
+        "monthlyRent": 0,
+        "estimatedValue": 380000,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0005",
+      "propertyType": "House",
+      "address": {
+        "line1": "458 Cedar Hill Drive",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "West Side",
+        "worldLocationId": "loc-housing-bfh-0005"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 2,
+        "bathrooms": 3.0,
+        "ownershipModel": "OwnerOccupied",
+        "monthlyRent": 0,
+        "estimatedValue": 225000,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0006",
+      "propertyType": "House",
+      "address": {
+        "line1": "254 Meadowbrook Lane",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "Residential North",
+        "worldLocationId": "loc-housing-bfh-0006"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 2,
+        "bathrooms": 1.5,
+        "ownershipModel": "OwnerOccupied",
+        "monthlyRent": 0,
+        "estimatedValue": 185000,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0007",
+      "propertyType": "House",
+      "address": {
+        "line1": "611 Lakeview Court",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "Downtown Edge",
+        "worldLocationId": "loc-housing-bfh-0007"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 3,
+        "bathrooms": 2.0,
+        "ownershipModel": "OwnerOccupied",
+        "monthlyRent": 0,
+        "estimatedValue": 355000,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0008",
+      "propertyType": "House",
+      "address": {
+        "line1": "764 Northwood Avenue",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "South Side",
+        "worldLocationId": "loc-housing-bfh-0008"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 3,
+        "bathrooms": 2.0,
+        "ownershipModel": "OwnerOccupied",
+        "monthlyRent": 0,
+        "estimatedValue": 265000,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0009",
+      "propertyType": "House",
+      "address": {
+        "line1": "305 Sycamore Street",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "North Side",
+        "worldLocationId": "loc-housing-bfh-0009"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 4,
+        "bathrooms": 2.0,
+        "ownershipModel": "OwnerOccupied",
+        "monthlyRent": 0,
+        "estimatedValue": 375000,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0010",
+      "propertyType": "House",
+      "address": {
+        "line1": "152 Cherry Lane",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "South Side",
+        "worldLocationId": "loc-housing-bfh-0010"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 4,
+        "bathrooms": 3.0,
+        "ownershipModel": "OwnerOccupied",
+        "monthlyRent": 0,
+        "estimatedValue": 205000,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0011",
+      "propertyType": "House",
+      "address": {
+        "line1": "696 Elmwood Drive",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "West Side",
+        "worldLocationId": "loc-housing-bfh-0011"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 3,
+        "bathrooms": 2.0,
+        "ownershipModel": "OwnerOccupied",
+        "monthlyRent": 0,
+        "estimatedValue": 275000,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0012",
+      "propertyType": "House",
+      "address": {
+        "line1": "169 Birchwood Court",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "South Side",
+        "worldLocationId": "loc-housing-bfh-0012"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 4,
+        "bathrooms": 3.0,
+        "ownershipModel": "OwnerOccupied",
+        "monthlyRent": 0,
+        "estimatedValue": 330000,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0013",
+      "propertyType": "House",
+      "address": {
+        "line1": "832 Highland Avenue",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "Central Bellefontaine",
+        "worldLocationId": "loc-housing-bfh-0013"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 4,
+        "bathrooms": 2.0,
+        "ownershipModel": "OwnerOccupied",
+        "monthlyRent": 0,
+        "estimatedValue": 400000,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0014",
+      "propertyType": "House",
+      "address": {
+        "line1": "543 Fairview Road",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "Residential North",
+        "worldLocationId": "loc-housing-bfh-0014"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 3,
+        "bathrooms": 1.0,
+        "ownershipModel": "OwnerOccupied",
+        "monthlyRent": 0,
+        "estimatedValue": 255000,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0015",
+      "propertyType": "House",
+      "address": {
+        "line1": "288 Spring Street",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "Downtown Edge",
+        "worldLocationId": "loc-housing-bfh-0015"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 3,
+        "bathrooms": 1.0,
+        "ownershipModel": "OwnerOccupied",
+        "monthlyRent": 0,
+        "estimatedValue": 220000,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0016",
+      "propertyType": "House",
+      "address": {
+        "line1": "662 Chestnut Avenue",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "Residential North",
+        "worldLocationId": "loc-housing-bfh-0016"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 3,
+        "bathrooms": 3.0,
+        "ownershipModel": "OwnerOccupied",
+        "monthlyRent": 0,
+        "estimatedValue": 310000,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0017",
+      "propertyType": "House",
+      "address": {
+        "line1": "577 Walnut Street",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "West Side",
+        "worldLocationId": "loc-housing-bfh-0017"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 4,
+        "bathrooms": 2.0,
+        "ownershipModel": "OwnerOccupied",
+        "monthlyRent": 0,
+        "estimatedValue": 200000,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0018",
+      "propertyType": "House",
+      "address": {
+        "line1": "798 Parkview Drive",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "West Side",
+        "worldLocationId": "loc-housing-bfh-0018"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 3,
+        "bathrooms": 1.5,
+        "ownershipModel": "OwnerOccupied",
+        "monthlyRent": 0,
+        "estimatedValue": 390000,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0019",
+      "propertyType": "House",
+      "address": {
+        "line1": "407 Brookside Lane",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "Residential North",
+        "worldLocationId": "loc-housing-bfh-0019"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 4,
+        "bathrooms": 2.5,
+        "ownershipModel": "OwnerOccupied",
+        "monthlyRent": 0,
+        "estimatedValue": 290000,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0020",
+      "propertyType": "House",
+      "address": {
+        "line1": "628 Ridgeview Court",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "Residential South",
+        "worldLocationId": "loc-housing-bfh-0020"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 3,
+        "bathrooms": 1.5,
+        "ownershipModel": "OwnerOccupied",
+        "monthlyRent": 0,
+        "estimatedValue": 195000,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0021",
+      "propertyType": "House",
+      "address": {
+        "line1": "883 Maple Grove Drive",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "East Side",
+        "worldLocationId": "loc-housing-bfh-0021"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 2,
+        "bathrooms": 1.0,
+        "ownershipModel": "OwnerOccupied",
+        "monthlyRent": 0,
+        "estimatedValue": 190000,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0022",
+      "propertyType": "House",
+      "address": {
+        "line1": "645 Oak Ridge Lane",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "Residential North",
+        "worldLocationId": "loc-housing-bfh-0022"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 4,
+        "bathrooms": 1.5,
+        "ownershipModel": "OwnerOccupied",
+        "monthlyRent": 0,
+        "estimatedValue": 405000,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0023",
+      "propertyType": "House",
+      "address": {
+        "line1": "713 Pinecrest Avenue",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "Residential North",
+        "worldLocationId": "loc-housing-bfh-0023"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 4,
+        "bathrooms": 1.0,
+        "ownershipModel": "OwnerOccupied",
+        "monthlyRent": 0,
+        "estimatedValue": 275000,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0024",
+      "propertyType": "House",
+      "address": {
+        "line1": "526 Willow Bend Road",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "West Side",
+        "worldLocationId": "loc-housing-bfh-0024"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 4,
+        "bathrooms": 2.0,
+        "ownershipModel": "OwnerOccupied",
+        "monthlyRent": 0,
+        "estimatedValue": 320000,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0025",
+      "propertyType": "House",
+      "address": {
+        "line1": "441 Cedar Hill Drive",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "North Side",
+        "worldLocationId": "loc-housing-bfh-0025"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 4,
+        "bathrooms": 1.0,
+        "ownershipModel": "OwnerOccupied",
+        "monthlyRent": 0,
+        "estimatedValue": 370000,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0026",
+      "propertyType": "House",
+      "address": {
+        "line1": "475 Meadowbrook Lane",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "West Side",
+        "worldLocationId": "loc-housing-bfh-0026"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 4,
+        "bathrooms": 2.5,
+        "ownershipModel": "OwnerOccupied",
+        "monthlyRent": 0,
+        "estimatedValue": 395000,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0027",
+      "propertyType": "House",
+      "address": {
+        "line1": "900 Lakeview Court",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "North Side",
+        "worldLocationId": "loc-housing-bfh-0027"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 5,
+        "bathrooms": 3.0,
+        "ownershipModel": "OwnerOccupied",
+        "monthlyRent": 0,
+        "estimatedValue": 260000,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0028",
+      "propertyType": "House",
+      "address": {
+        "line1": "849 Northwood Avenue",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "Residential South",
+        "worldLocationId": "loc-housing-bfh-0028"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 3,
+        "bathrooms": 2.0,
+        "ownershipModel": "OwnerOccupied",
+        "monthlyRent": 0,
+        "estimatedValue": 205000,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0029",
+      "propertyType": "House",
+      "address": {
+        "line1": "101 Sycamore Street",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "West Side",
+        "worldLocationId": "loc-housing-bfh-0029"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 2,
+        "bathrooms": 3.0,
+        "ownershipModel": "OwnerOccupied",
+        "monthlyRent": 0,
+        "estimatedValue": 385000,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0030",
+      "propertyType": "House",
+      "address": {
+        "line1": "424 Cherry Lane",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "North Side",
+        "worldLocationId": "loc-housing-bfh-0030"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 4,
+        "bathrooms": 1.5,
+        "ownershipModel": "OwnerOccupied",
+        "monthlyRent": 0,
+        "estimatedValue": 315000,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0031",
+      "propertyType": "House",
+      "address": {
+        "line1": "373 Elmwood Drive",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "South Side",
+        "worldLocationId": "loc-housing-bfh-0031"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 5,
+        "bathrooms": 3.0,
+        "ownershipModel": "OwnerOccupied",
+        "monthlyRent": 0,
+        "estimatedValue": 250000,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0032",
+      "propertyType": "House",
+      "address": {
+        "line1": "815 Birchwood Court",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "East Side",
+        "worldLocationId": "loc-housing-bfh-0032"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 3,
+        "bathrooms": 2.0,
+        "ownershipModel": "OwnerOccupied",
+        "monthlyRent": 0,
+        "estimatedValue": 395000,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0033",
+      "propertyType": "House",
+      "address": {
+        "line1": "322 Highland Avenue",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "Downtown Edge",
+        "worldLocationId": "loc-housing-bfh-0033"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 4,
+        "bathrooms": 2.5,
+        "ownershipModel": "OwnerOccupied",
+        "monthlyRent": 0,
+        "estimatedValue": 155000,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0034",
+      "propertyType": "House",
+      "address": {
+        "line1": "747 Fairview Road",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "Downtown Edge",
+        "worldLocationId": "loc-housing-bfh-0034"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 3,
+        "bathrooms": 1.0,
+        "ownershipModel": "OwnerOccupied",
+        "monthlyRent": 0,
+        "estimatedValue": 190000,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0035",
+      "propertyType": "House",
+      "address": {
+        "line1": "866 Spring Street",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "Central Bellefontaine",
+        "worldLocationId": "loc-housing-bfh-0035"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 5,
+        "bathrooms": 2.0,
+        "ownershipModel": "OwnerOccupied",
+        "monthlyRent": 0,
+        "estimatedValue": 230000,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0036",
+      "propertyType": "House",
+      "address": {
+        "line1": "135 Chestnut Avenue",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "North Side",
+        "worldLocationId": "loc-housing-bfh-0036"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 3,
+        "bathrooms": 2.5,
+        "ownershipModel": "OwnerOccupied",
+        "monthlyRent": 0,
+        "estimatedValue": 180000,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0037",
+      "propertyType": "House",
+      "address": {
+        "line1": "560 Walnut Street",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "East Side",
+        "worldLocationId": "loc-housing-bfh-0037"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 4,
+        "bathrooms": 2.0,
+        "ownershipModel": "OwnerOccupied",
+        "monthlyRent": 0,
+        "estimatedValue": 175000,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0038",
+      "propertyType": "House",
+      "address": {
+        "line1": "730 Parkview Drive",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "East Side",
+        "worldLocationId": "loc-housing-bfh-0038"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 3,
+        "bathrooms": 3.0,
+        "ownershipModel": "OwnerOccupied",
+        "monthlyRent": 0,
+        "estimatedValue": 305000,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0039",
+      "propertyType": "House",
+      "address": {
+        "line1": "186 Brookside Lane",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "Residential North",
+        "worldLocationId": "loc-housing-bfh-0039"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 3,
+        "bathrooms": 2.5,
+        "ownershipModel": "OwnerOccupied",
+        "monthlyRent": 0,
+        "estimatedValue": 345000,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0040",
+      "propertyType": "House",
+      "address": {
+        "line1": "679 Ridgeview Court",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "South Side",
+        "worldLocationId": "loc-housing-bfh-0040"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 3,
+        "bathrooms": 2.5,
+        "ownershipModel": "OwnerOccupied",
+        "monthlyRent": 0,
+        "estimatedValue": 395000,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0041",
+      "propertyType": "RentalHouse",
+      "address": {
+        "line1": "950 Northwood Avenue",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "Residential South",
+        "worldLocationId": "loc-housing-bfh-0041"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 3,
+        "bathrooms": 1.5,
+        "ownershipModel": "Rental",
+        "monthlyRent": 1650,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0042",
+      "propertyType": "RentalHouse",
+      "address": {
+        "line1": "973 Sycamore Street",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "South Side",
+        "worldLocationId": "loc-housing-bfh-0042"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 4,
+        "bathrooms": 1.0,
+        "ownershipModel": "Rental",
+        "monthlyRent": 1450,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0043",
+      "propertyType": "RentalHouse",
+      "address": {
+        "line1": "996 Cherry Lane",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "South Side",
+        "worldLocationId": "loc-housing-bfh-0043"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 2,
+        "bathrooms": 1.5,
+        "ownershipModel": "Rental",
+        "monthlyRent": 1100,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0044",
+      "propertyType": "RentalHouse",
+      "address": {
+        "line1": "1019 Elmwood Drive",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "Central Bellefontaine",
+        "worldLocationId": "loc-housing-bfh-0044"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 3,
+        "bathrooms": 1.0,
+        "ownershipModel": "Rental",
+        "monthlyRent": 1200,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0045",
+      "propertyType": "RentalHouse",
+      "address": {
+        "line1": "1042 Birchwood Court",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "Downtown Edge",
+        "worldLocationId": "loc-housing-bfh-0045"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 3,
+        "bathrooms": 1.0,
+        "ownershipModel": "Rental",
+        "monthlyRent": 1150,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0046",
+      "propertyType": "RentalHouse",
+      "address": {
+        "line1": "1065 Highland Avenue",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "West Side",
+        "worldLocationId": "loc-housing-bfh-0046"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 2,
+        "bathrooms": 2.0,
+        "ownershipModel": "Rental",
+        "monthlyRent": 1450,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0047",
+      "propertyType": "RentalHouse",
+      "address": {
+        "line1": "1088 Fairview Road",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "East Side",
+        "worldLocationId": "loc-housing-bfh-0047"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 4,
+        "bathrooms": 1.0,
+        "ownershipModel": "Rental",
+        "monthlyRent": 1950,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0048",
+      "propertyType": "RentalHouse",
+      "address": {
+        "line1": "1111 Spring Street",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "Residential North",
+        "worldLocationId": "loc-housing-bfh-0048"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 4,
+        "bathrooms": 1.0,
+        "ownershipModel": "Rental",
+        "monthlyRent": 1850,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0049",
+      "propertyType": "RentalHouse",
+      "address": {
+        "line1": "1134 Chestnut Avenue",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "Residential North",
+        "worldLocationId": "loc-housing-bfh-0049"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 3,
+        "bathrooms": 1.0,
+        "ownershipModel": "Rental",
+        "monthlyRent": 1250,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0050",
+      "propertyType": "RentalHouse",
+      "address": {
+        "line1": "1157 Walnut Street",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "Residential South",
+        "worldLocationId": "loc-housing-bfh-0050"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 3,
+        "bathrooms": 1.5,
+        "ownershipModel": "Rental",
+        "monthlyRent": 1750,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0051",
+      "propertyType": "RentalHouse",
+      "address": {
+        "line1": "1180 Parkview Drive",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "Central Bellefontaine",
+        "worldLocationId": "loc-housing-bfh-0051"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 2,
+        "bathrooms": 2.0,
+        "ownershipModel": "Rental",
+        "monthlyRent": 1250,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0052",
+      "propertyType": "RentalHouse",
+      "address": {
+        "line1": "1203 Brookside Lane",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "North Side",
+        "worldLocationId": "loc-housing-bfh-0052"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 4,
+        "bathrooms": 2.0,
+        "ownershipModel": "Rental",
+        "monthlyRent": 1600,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0053",
+      "propertyType": "Apartment",
+      "address": {
+        "line1": "225 Lakeview Court",
+        "unit": "101",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "West Side",
+        "worldLocationId": "loc-housing-bfh-0053"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 2,
+        "bathrooms": 1.0,
+        "ownershipModel": "Rental",
+        "monthlyRent": 900,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": [],
+      "buildingName": "Belleview Apartments"
+    },
+    {
+      "unitId": "BFH-0054",
+      "propertyType": "Apartment",
+      "address": {
+        "line1": "225 Lakeview Court",
+        "unit": "102",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "East Side",
+        "worldLocationId": "loc-housing-bfh-0054"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 2,
+        "bathrooms": 2.0,
+        "ownershipModel": "Rental",
+        "monthlyRent": 850,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": [],
+      "buildingName": "Belleview Apartments"
+    },
+    {
+      "unitId": "BFH-0055",
+      "propertyType": "Apartment",
+      "address": {
+        "line1": "225 Lakeview Court",
+        "unit": "103",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "Central Bellefontaine",
+        "worldLocationId": "loc-housing-bfh-0055"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 3,
+        "bathrooms": 1.0,
+        "ownershipModel": "Rental",
+        "monthlyRent": 1400,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": [],
+      "buildingName": "Belleview Apartments"
+    },
+    {
+      "unitId": "BFH-0056",
+      "propertyType": "Apartment",
+      "address": {
+        "line1": "225 Lakeview Court",
+        "unit": "104",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "Central Bellefontaine",
+        "worldLocationId": "loc-housing-bfh-0056"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 3,
+        "bathrooms": 1.0,
+        "ownershipModel": "Rental",
+        "monthlyRent": 750,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": [],
+      "buildingName": "Belleview Apartments"
+    },
+    {
+      "unitId": "BFH-0057",
+      "propertyType": "Apartment",
+      "address": {
+        "line1": "225 Lakeview Court",
+        "unit": "201",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "West Side",
+        "worldLocationId": "loc-housing-bfh-0057"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 1,
+        "bathrooms": 1.0,
+        "ownershipModel": "Rental",
+        "monthlyRent": 850,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": [],
+      "buildingName": "Belleview Apartments"
+    },
+    {
+      "unitId": "BFH-0058",
+      "propertyType": "Apartment",
+      "address": {
+        "line1": "225 Lakeview Court",
+        "unit": "202",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "West Side",
+        "worldLocationId": "loc-housing-bfh-0058"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 3,
+        "bathrooms": 2.0,
+        "ownershipModel": "Rental",
+        "monthlyRent": 900,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": [],
+      "buildingName": "Belleview Apartments"
+    },
+    {
+      "unitId": "BFH-0059",
+      "propertyType": "Apartment",
+      "address": {
+        "line1": "225 Lakeview Court",
+        "unit": "203",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "Central Bellefontaine",
+        "worldLocationId": "loc-housing-bfh-0059"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 1,
+        "bathrooms": 1.0,
+        "ownershipModel": "Rental",
+        "monthlyRent": 1050,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": [],
+      "buildingName": "Belleview Apartments"
+    },
+    {
+      "unitId": "BFH-0060",
+      "propertyType": "Apartment",
+      "address": {
+        "line1": "225 Lakeview Court",
+        "unit": "204",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "West Side",
+        "worldLocationId": "loc-housing-bfh-0060"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 3,
+        "bathrooms": 1.5,
+        "ownershipModel": "Rental",
+        "monthlyRent": 1350,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": [],
+      "buildingName": "Belleview Apartments"
+    },
+    {
+      "unitId": "BFH-0061",
+      "propertyType": "Apartment",
+      "address": {
+        "line1": "410 Parkview Drive",
+        "unit": "101",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "West Side",
+        "worldLocationId": "loc-housing-bfh-0061"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 2,
+        "bathrooms": 2.0,
+        "ownershipModel": "Rental",
+        "monthlyRent": 1300,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": [],
+      "buildingName": "Logan Square Apartments"
+    },
+    {
+      "unitId": "BFH-0062",
+      "propertyType": "Apartment",
+      "address": {
+        "line1": "410 Parkview Drive",
+        "unit": "102",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "North Side",
+        "worldLocationId": "loc-housing-bfh-0062"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 2,
+        "bathrooms": 1.0,
+        "ownershipModel": "Rental",
+        "monthlyRent": 950,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": [],
+      "buildingName": "Logan Square Apartments"
+    },
+    {
+      "unitId": "BFH-0063",
+      "propertyType": "Apartment",
+      "address": {
+        "line1": "410 Parkview Drive",
+        "unit": "103",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "East Side",
+        "worldLocationId": "loc-housing-bfh-0063"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 1,
+        "bathrooms": 1.0,
+        "ownershipModel": "Rental",
+        "monthlyRent": 1300,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": [],
+      "buildingName": "Logan Square Apartments"
+    },
+    {
+      "unitId": "BFH-0064",
+      "propertyType": "Apartment",
+      "address": {
+        "line1": "410 Parkview Drive",
+        "unit": "104",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "West Side",
+        "worldLocationId": "loc-housing-bfh-0064"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 1,
+        "bathrooms": 1.0,
+        "ownershipModel": "Rental",
+        "monthlyRent": 1200,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": [],
+      "buildingName": "Logan Square Apartments"
+    },
+    {
+      "unitId": "BFH-0065",
+      "propertyType": "Apartment",
+      "address": {
+        "line1": "410 Parkview Drive",
+        "unit": "201",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "Central Bellefontaine",
+        "worldLocationId": "loc-housing-bfh-0065"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 2,
+        "bathrooms": 1.0,
+        "ownershipModel": "Rental",
+        "monthlyRent": 1150,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": [],
+      "buildingName": "Logan Square Apartments"
+    },
+    {
+      "unitId": "BFH-0066",
+      "propertyType": "Apartment",
+      "address": {
+        "line1": "410 Parkview Drive",
+        "unit": "202",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "Central Bellefontaine",
+        "worldLocationId": "loc-housing-bfh-0066"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 2,
+        "bathrooms": 1.0,
+        "ownershipModel": "Rental",
+        "monthlyRent": 1200,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": [],
+      "buildingName": "Logan Square Apartments"
+    },
+    {
+      "unitId": "BFH-0067",
+      "propertyType": "Apartment",
+      "address": {
+        "line1": "410 Parkview Drive",
+        "unit": "203",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "North Side",
+        "worldLocationId": "loc-housing-bfh-0067"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 2,
+        "bathrooms": 2.0,
+        "ownershipModel": "Rental",
+        "monthlyRent": 800,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": [],
+      "buildingName": "Logan Square Apartments"
+    },
+    {
+      "unitId": "BFH-0068",
+      "propertyType": "Apartment",
+      "address": {
+        "line1": "410 Parkview Drive",
+        "unit": "204",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "East Side",
+        "worldLocationId": "loc-housing-bfh-0068"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 1,
+        "bathrooms": 1.0,
+        "ownershipModel": "Rental",
+        "monthlyRent": 1050,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": [],
+      "buildingName": "Logan Square Apartments"
+    },
+    {
+      "unitId": "BFH-0069",
+      "propertyType": "Apartment",
+      "address": {
+        "line1": "615 Northwood Avenue",
+        "unit": "101",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "East Side",
+        "worldLocationId": "loc-housing-bfh-0069"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 2,
+        "bathrooms": 1.0,
+        "ownershipModel": "Rental",
+        "monthlyRent": 1250,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": [],
+      "buildingName": "Northwood Flats"
+    },
+    {
+      "unitId": "BFH-0070",
+      "propertyType": "Apartment",
+      "address": {
+        "line1": "615 Northwood Avenue",
+        "unit": "102",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "North Side",
+        "worldLocationId": "loc-housing-bfh-0070"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 2,
+        "bathrooms": 1.5,
+        "ownershipModel": "Rental",
+        "monthlyRent": 1050,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": [],
+      "buildingName": "Northwood Flats"
+    },
+    {
+      "unitId": "BFH-0071",
+      "propertyType": "Apartment",
+      "address": {
+        "line1": "615 Northwood Avenue",
+        "unit": "103",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "Central Bellefontaine",
+        "worldLocationId": "loc-housing-bfh-0071"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 2,
+        "bathrooms": 2.0,
+        "ownershipModel": "Rental",
+        "monthlyRent": 1000,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": [],
+      "buildingName": "Northwood Flats"
+    },
+    {
+      "unitId": "BFH-0072",
+      "propertyType": "Apartment",
+      "address": {
+        "line1": "615 Northwood Avenue",
+        "unit": "104",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "Central Bellefontaine",
+        "worldLocationId": "loc-housing-bfh-0072"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 1,
+        "bathrooms": 2.0,
+        "ownershipModel": "Rental",
+        "monthlyRent": 1200,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": [],
+      "buildingName": "Northwood Flats"
+    },
+    {
+      "unitId": "BFH-0073",
+      "propertyType": "Apartment",
+      "address": {
+        "line1": "615 Northwood Avenue",
+        "unit": "201",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "East Side",
+        "worldLocationId": "loc-housing-bfh-0073"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 1,
+        "bathrooms": 1.0,
+        "ownershipModel": "Rental",
+        "monthlyRent": 1150,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": [],
+      "buildingName": "Northwood Flats"
+    },
+    {
+      "unitId": "BFH-0074",
+      "propertyType": "Apartment",
+      "address": {
+        "line1": "615 Northwood Avenue",
+        "unit": "202",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "North Side",
+        "worldLocationId": "loc-housing-bfh-0074"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 2,
+        "bathrooms": 1.5,
+        "ownershipModel": "Rental",
+        "monthlyRent": 800,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": [],
+      "buildingName": "Northwood Flats"
+    },
+    {
+      "unitId": "BFH-0075",
+      "propertyType": "Apartment",
+      "address": {
+        "line1": "615 Northwood Avenue",
+        "unit": "203",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "West Side",
+        "worldLocationId": "loc-housing-bfh-0075"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 2,
+        "bathrooms": 1.5,
+        "ownershipModel": "Rental",
+        "monthlyRent": 850,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": [],
+      "buildingName": "Northwood Flats"
+    },
+    {
+      "unitId": "BFH-0076",
+      "propertyType": "Apartment",
+      "address": {
+        "line1": "615 Northwood Avenue",
+        "unit": "204",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "East Side",
+        "worldLocationId": "loc-housing-bfh-0076"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 2,
+        "bathrooms": 1.0,
+        "ownershipModel": "Rental",
+        "monthlyRent": 1250,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": [],
+      "buildingName": "Northwood Flats"
+    },
+    {
+      "unitId": "BFH-0077",
+      "propertyType": "Apartment",
+      "address": {
+        "line1": "830 Meadowbrook Lane",
+        "unit": "101",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "Central Bellefontaine",
+        "worldLocationId": "loc-housing-bfh-0077"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 1,
+        "bathrooms": 1.0,
+        "ownershipModel": "Rental",
+        "monthlyRent": 950,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": [],
+      "buildingName": "Meadowbrook Apartments"
+    },
+    {
+      "unitId": "BFH-0078",
+      "propertyType": "Apartment",
+      "address": {
+        "line1": "830 Meadowbrook Lane",
+        "unit": "102",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "East Side",
+        "worldLocationId": "loc-housing-bfh-0078"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 1,
+        "bathrooms": 1.0,
+        "ownershipModel": "Rental",
+        "monthlyRent": 950,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": [],
+      "buildingName": "Meadowbrook Apartments"
+    },
+    {
+      "unitId": "BFH-0079",
+      "propertyType": "Apartment",
+      "address": {
+        "line1": "830 Meadowbrook Lane",
+        "unit": "103",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "East Side",
+        "worldLocationId": "loc-housing-bfh-0079"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 2,
+        "bathrooms": 1.5,
+        "ownershipModel": "Rental",
+        "monthlyRent": 900,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": [],
+      "buildingName": "Meadowbrook Apartments"
+    },
+    {
+      "unitId": "BFH-0080",
+      "propertyType": "Apartment",
+      "address": {
+        "line1": "830 Meadowbrook Lane",
+        "unit": "104",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "Central Bellefontaine",
+        "worldLocationId": "loc-housing-bfh-0080"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 3,
+        "bathrooms": 1.5,
+        "ownershipModel": "Rental",
+        "monthlyRent": 1400,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": [],
+      "buildingName": "Meadowbrook Apartments"
+    },
+    {
+      "unitId": "BFH-0081",
+      "propertyType": "Apartment",
+      "address": {
+        "line1": "830 Meadowbrook Lane",
+        "unit": "201",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "East Side",
+        "worldLocationId": "loc-housing-bfh-0081"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 1,
+        "bathrooms": 2.0,
+        "ownershipModel": "Rental",
+        "monthlyRent": 1400,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": [],
+      "buildingName": "Meadowbrook Apartments"
+    },
+    {
+      "unitId": "BFH-0082",
+      "propertyType": "Apartment",
+      "address": {
+        "line1": "830 Meadowbrook Lane",
+        "unit": "202",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "North Side",
+        "worldLocationId": "loc-housing-bfh-0082"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 1,
+        "bathrooms": 1.0,
+        "ownershipModel": "Rental",
+        "monthlyRent": 1000,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": [],
+      "buildingName": "Meadowbrook Apartments"
+    },
+    {
+      "unitId": "BFH-0083",
+      "propertyType": "Apartment",
+      "address": {
+        "line1": "830 Meadowbrook Lane",
+        "unit": "203",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "West Side",
+        "worldLocationId": "loc-housing-bfh-0083"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 2,
+        "bathrooms": 1.0,
+        "ownershipModel": "Rental",
+        "monthlyRent": 1300,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": [],
+      "buildingName": "Meadowbrook Apartments"
+    },
+    {
+      "unitId": "BFH-0084",
+      "propertyType": "Apartment",
+      "address": {
+        "line1": "830 Meadowbrook Lane",
+        "unit": "204",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "Central Bellefontaine",
+        "worldLocationId": "loc-housing-bfh-0084"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 3,
+        "bathrooms": 1.0,
+        "ownershipModel": "Rental",
+        "monthlyRent": 800,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": [],
+      "buildingName": "Meadowbrook Apartments"
+    },
+    {
+      "unitId": "BFH-0085",
+      "propertyType": "Duplex",
+      "address": {
+        "line1": "1200 Highland Avenue",
+        "unit": "A",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "Central Bellefontaine",
+        "worldLocationId": "loc-housing-bfh-0085"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 2,
+        "bathrooms": 2.0,
+        "ownershipModel": "Rental",
+        "monthlyRent": 1500,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0086",
+      "propertyType": "Duplex",
+      "address": {
+        "line1": "1200 Highland Avenue",
+        "unit": "B",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "East Side",
+        "worldLocationId": "loc-housing-bfh-0086"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 2,
+        "bathrooms": 1.5,
+        "ownershipModel": "Rental",
+        "monthlyRent": 1200,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0087",
+      "propertyType": "Duplex",
+      "address": {
+        "line1": "1245 Fairview Road",
+        "unit": "A",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "Central Bellefontaine",
+        "worldLocationId": "loc-housing-bfh-0087"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 3,
+        "bathrooms": 1.5,
+        "ownershipModel": "Rental",
+        "monthlyRent": 950,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0088",
+      "propertyType": "Duplex",
+      "address": {
+        "line1": "1245 Fairview Road",
+        "unit": "B",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "South Side",
+        "worldLocationId": "loc-housing-bfh-0088"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 2,
+        "bathrooms": 2.0,
+        "ownershipModel": "Rental",
+        "monthlyRent": 1200,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0089",
+      "propertyType": "Duplex",
+      "address": {
+        "line1": "1290 Spring Street",
+        "unit": "A",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "Residential North",
+        "worldLocationId": "loc-housing-bfh-0089"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 2,
+        "bathrooms": 1.5,
+        "ownershipModel": "Rental",
+        "monthlyRent": 1450,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0090",
+      "propertyType": "Duplex",
+      "address": {
+        "line1": "1290 Spring Street",
+        "unit": "B",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "East Side",
+        "worldLocationId": "loc-housing-bfh-0090"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 2,
+        "bathrooms": 1.0,
+        "ownershipModel": "Rental",
+        "monthlyRent": 1400,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0091",
+      "propertyType": "Duplex",
+      "address": {
+        "line1": "1335 Chestnut Avenue",
+        "unit": "A",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "East Side",
+        "worldLocationId": "loc-housing-bfh-0091"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 3,
+        "bathrooms": 1.0,
+        "ownershipModel": "Rental",
+        "monthlyRent": 1050,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0092",
+      "propertyType": "Duplex",
+      "address": {
+        "line1": "1335 Chestnut Avenue",
+        "unit": "B",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "South Side",
+        "worldLocationId": "loc-housing-bfh-0092"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 3,
+        "bathrooms": 1.5,
+        "ownershipModel": "Rental",
+        "monthlyRent": 1500,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0093",
+      "propertyType": "Townhome",
+      "address": {
+        "line1": "1500 Ridgeview Court",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "Residential North",
+        "worldLocationId": "loc-housing-bfh-0093"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 3,
+        "bathrooms": 2.5,
+        "ownershipModel": "OwnerOccupied",
+        "monthlyRent": 1250,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0094",
+      "propertyType": "Townhome",
+      "address": {
+        "line1": "1518 Ridgeview Court",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "Residential South",
+        "worldLocationId": "loc-housing-bfh-0094"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 4,
+        "bathrooms": 1.5,
+        "ownershipModel": "Rental",
+        "monthlyRent": 0,
+        "estimatedValue": 205000,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0095",
+      "propertyType": "Townhome",
+      "address": {
+        "line1": "1536 Ridgeview Court",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "Central Bellefontaine",
+        "worldLocationId": "loc-housing-bfh-0095"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 3,
+        "bathrooms": 1.5,
+        "ownershipModel": "OwnerOccupied",
+        "monthlyRent": 1350,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0096",
+      "propertyType": "Townhome",
+      "address": {
+        "line1": "1554 Ridgeview Court",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "North Side",
+        "worldLocationId": "loc-housing-bfh-0096"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 4,
+        "bathrooms": 2.0,
+        "ownershipModel": "Rental",
+        "monthlyRent": 0,
+        "estimatedValue": 215000,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0097",
+      "propertyType": "Townhome",
+      "address": {
+        "line1": "1572 Ridgeview Court",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "Residential North",
+        "worldLocationId": "loc-housing-bfh-0097"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 3,
+        "bathrooms": 2.5,
+        "ownershipModel": "OwnerOccupied",
+        "monthlyRent": 1600,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0098",
+      "propertyType": "Townhome",
+      "address": {
+        "line1": "1590 Ridgeview Court",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "East Side",
+        "worldLocationId": "loc-housing-bfh-0098"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 2,
+        "bathrooms": 1.5,
+        "ownershipModel": "OwnerOccupied",
+        "monthlyRent": 0,
+        "estimatedValue": 215000,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0099",
+      "propertyType": "Townhome",
+      "address": {
+        "line1": "1608 Ridgeview Court",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "Residential North",
+        "worldLocationId": "loc-housing-bfh-0099"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 2,
+        "bathrooms": 1.5,
+        "ownershipModel": "OwnerOccupied",
+        "monthlyRent": 1650,
+        "estimatedValue": 0,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    },
+    {
+      "unitId": "BFH-0100",
+      "propertyType": "Townhome",
+      "address": {
+        "line1": "1626 Ridgeview Court",
+        "unit": "",
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "postalCode": "43311",
+        "country": "USA"
+      },
+      "location": {
+        "city": "Bellefontaine",
+        "state": "Ohio",
+        "district": "North Side",
+        "worldLocationId": "loc-housing-bfh-0100"
+      },
+      "occupancy": {
+        "status": "Available",
+        "householdId": null,
+        "rootNpcId": null,
+        "residentNpcIds": []
+      },
+      "housing": {
+        "bedrooms": 3,
+        "bathrooms": 2.0,
+        "ownershipModel": "OwnerOccupied",
+        "monthlyRent": 0,
+        "estimatedValue": 270000,
+        "allowsFamilyHousehold": true
+      },
+      "tags": []
+    }
+  ]
+}

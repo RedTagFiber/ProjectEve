@@ -1,0 +1,52 @@
+﻿.fast-ai-aligner {
+    margin-bottom: 18px;
+    padding: 16px;
+    border: 1px solid rgba(139, 92, 246, .3);
+    border-radius: 14px;
+    background: rgba(18, 25, 43, .9);
+}
+.fast-ai-aligner > header {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: flex-start;
+}
+.fast-ai-aligner header span {
+    color: #a78bfa;
+    font-size: .72rem;
+    font-weight: 800;
+    letter-spacing: .1em;
+}
+.fast-ai-aligner h3 { margin: 3px 0 5px; }
+.fast-ai-aligner header p { margin: 0; color: #96a3bb; font-size: .84rem; }
+.fast-ai-aligner button {
+    padding: 9px 13px;
+    border-radius: 9px;
+    border: 1px solid rgba(167, 139, 250, .35);
+    background: rgba(124, 58, 237, .14);
+    color: #f4f1ff;
+    font-weight: 700;
+    cursor: pointer;
+}
+.fast-ai-aligner button:disabled { opacity: .45; cursor: default; }
+.fast-ai-message { margin-top: 12px; padding: 9px 11px; border-radius: 8px; background: rgba(255,255,255,.04); color: #cbd5e1; }
+.fast-ai-meta { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+.fast-ai-meta span { padding: 6px 9px; border: 1px solid rgba(255,255,255,.08); border-radius: 999px; color: #93a0b8; font-size: .75rem; }
+.fast-ai-meta b { color: #eef2ff; }
+.fast-ai-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 8px; margin-top: 12px; }
+.fast-ai-grid article { padding: 10px; border: 1px solid rgba(255,255,255,.07); border-radius: 9px; background: rgba(255,255,255,.025); }
+.fast-ai-grid article > div:first-child { display: flex; flex-direction: column; }
+.fast-ai-grid small { color: #77849b; font-size: .7rem; }
+.fast-ai-shift { display: flex; gap: 7px; align-items: baseline; margin-top: 6px; }
+.fast-ai-shift span { color: #7f8ba0; }
+.fast-ai-shift strong { font-size: 1.1rem; color: #ddd6fe; }
+.fast-ai-grid p { margin: 6px 0 0; color: #9ca9be; font-size: .78rem; line-height: 1.4; }
+.fast-ai-warnings { margin-top: 10px; border: 1px solid rgba(255,255,255,.08); border-radius: 9px; padding: 8px 10px; }
+.fast-ai-warnings p { color: #cbd5e1; font-size: .8rem; }
+.fast-ai-actions { display: flex; gap: 9px; align-items: center; flex-wrap: wrap; margin-top: 12px; }
+.fast-ai-actions .save { background: #ddd6fe; color: #18112e; border-color: transparent; }
+.fast-ai-actions small { color: #7f8ba0; }
+@media (max-width: 800px) {
+    .fast-ai-aligner > header { flex-direction: column; }
+    .fast-ai-grid { grid-template-columns: 1fr; }
+}

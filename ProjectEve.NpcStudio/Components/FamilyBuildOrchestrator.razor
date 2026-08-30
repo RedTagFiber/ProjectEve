@@ -1,0 +1,174 @@
+﻿@page "/family-build/{NpcId:int}"
+@using ProjectEve.NpcStudio.Services
+@inject FamilyBuildOrchestratorService Orchestrator
+
+<PageTitle>Family Build Orchestrator</PageTitle>
+
+<section class="fbo">
+    <div class="fbo-head">
+        <div>
+            <span>PROJECT EVE · FAMILY BUILD</span>
+            <h1>Five-Phase Family Orchestrator</h1>
+            <p>
+                Durable build plan. This foundation screen does not generate canon yet.
+                It prepares the family order, five phases, timers, resume state,
+                and repair ledger.
+            </p>
+        </div>
+
+        <button @onclick="PrepareAsync">
+            Prepare / Resume Family
+        </button>
+    </div>
+
+    @if (_error.Length > 0)
+    {
+        <div class="fbo-error">@_error</div>
+    }
+
+    @if (_run is null)
+    {
+        <div class="fbo-empty">
+            Prepare the family to create or resume its durable build ledger.
+        </div>
+    }
+    else
+    {
+        <div class="fbo-summary">
+            <div>
+                <small>RUN</small>
+                <b>@_run.RunId</b>
+            </div>
+            <div>
+                <small>STATUS</small>
+                <b>@_run.Status</b>
+            </div>
+            <div>
+                <small>STARTED</small>
+                <b>@_run.StartedRealAt</b>
+            </div>
+            <div>
+                <small>REPAIRS</small>
+                <b>@_run.Repairs.Count(x => x.Status == "Open")</b>
+            </div>
+        </div>
+
+        <div class="fbo-members">
+            @foreach (var member in _run.Members.OrderBy(x => x.SortOrder))
+            {
+                var phases = _run.Phases
+                    .Where(x => x.NpcId == member.NpcId && x.PhaseNumber <= 5)
+                    .OrderBy(x => x.PhaseNumber)
+                    .ToList();
+
+                <article>
+                    <header>
+                        <div>
+                            <small>@member.Role</small>
+                            <h2>@member.Name</h2>
+                            <span>NPC @member.NpcId</span>
+                        </div>
+                    </header>
+
+                    <div class="fbo-phases">
+                        @foreach (var phase in phases)
+                        {
+                            <div class="fbo-phase @Css(phase.Status)">
+                                <span>@phase.PhaseNumber</span>
+                                <div>
+                                    <b>@phase.PhaseName</b>
+                                    <small>@phase.Status</small>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </article>
+            }
+        </div>
+
+        @if (SharedPhase is not null)
+        {
+            <div class="fbo-shared @Css(SharedPhase.Status)">
+                <span>FINAL FAMILY PASS</span>
+                <h2>Shared Family History</h2>
+                <b>@SharedPhase.Status</b>
+            </div>
+        }
+
+        @if (_run.Repairs.Count > 0)
+        {
+            <div class="fbo-repairs">
+                <h2>Needs Repair</h2>
+
+                @foreach (var repair in _run.Repairs.Where(x => x.Status == "Open"))
+                {
+                    var member = _run.Members.FirstOrDefault(x => x.NpcId == repair.NpcId);
+                    <div>
+                        <b>@(member?.Name ?? $"NPC {repair.NpcId}")</b>
+                        <span>Phase @repair.PhaseNumber · @repair.PhaseName</span>
+                        <small>@repair.Error</small>
+                    </div>
+                }
+            </div>
+        }
+    }
+</section>
+
+<style>
+.fbo{display:grid;gap:14px;padding:18px;color:#eaf1fc}
+.fbo-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;padding:18px;border:1px solid #344861;border-radius:14px;background:#091426}
+.fbo-head span{font-size:.68rem;font-weight:900;letter-spacing:.13em;color:#9c85ff}
+.fbo-head h1{margin:4px 0 6px}.fbo-head p{margin:0;color:#93a7c5;max-width:850px}
+.fbo button{background:#5935d9;color:white;border:1px solid #795cf4;border-radius:9px;padding:10px 14px;font-weight:900;cursor:pointer}
+.fbo-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.fbo-summary>div{padding:11px;border:1px solid #2d4059;border-radius:10px;background:#0d1929;overflow:hidden}
+.fbo-summary small{display:block;color:#8298b8;font-size:.64rem}.fbo-summary b{display:block;margin-top:3px;overflow-wrap:anywhere}
+.fbo-members{display:grid;gap:11px}
+.fbo article{padding:13px;border:1px solid #2e425c;border-radius:12px;background:#0a1524}
+.fbo article header small{color:#9b87ff;text-transform:uppercase;font-weight:900}.fbo article h2{margin:2px 0}.fbo article header span{color:#8297b5;font-size:.75rem}
+.fbo-phases{display:grid;grid-template-columns:repeat(5,minmax(120px,1fr));gap:7px;margin-top:11px}
+.fbo-phase{display:flex;gap:8px;align-items:center;padding:9px;border:1px solid #354960;border-radius:9px;background:#111d2d}
+.fbo-phase>span{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:#24344c;font-weight:900}
+.fbo-phase small{display:block;color:#8295b1;margin-top:2px}
+.fbo-phase.complete,.fbo-phase.skippedexisting{border-color:#27784c;background:#0d281c}
+.fbo-phase.failed{border-color:#8a3440;background:#2a1117}
+.fbo-phase.running{border-color:#80651c;background:#2b230c}
+.fbo-shared{padding:14px;border:1px solid #344861;border-radius:12px;background:#0e1a2b}
+.fbo-shared span{font-size:.66rem;font-weight:900;letter-spacing:.12em;color:#9b87ff}.fbo-shared h2{margin:3px 0}
+.fbo-repairs{padding:14px;border:1px solid #7f3541;border-radius:12px;background:#251117}
+.fbo-repairs>div{display:grid;gap:2px;padding:8px 0;border-top:1px solid #553039}
+.fbo-repairs span,.fbo-repairs small{color:#ddaab1}
+.fbo-error{padding:12px;border:1px solid #8a3440;border-radius:10px;background:#2a1117;color:#ffadb5}
+.fbo-empty{padding:28px;border:1px dashed #3a4e67;border-radius:12px;text-align:center;color:#8da1be}
+@@media(max-width:900px){.fbo-head{flex-direction:column}.fbo-summary{grid-template-columns:1fr 1fr}.fbo-phases{grid-template-columns:1fr}}
+</style>
+
+@code {
+    [Parameter] public int NpcId { get; set; }
+
+    private FamilyBuildPhaseSnapshot? SharedPhase =>
+        _run?.Phases.FirstOrDefault(x => x.PhaseNumber == 6);
+    private FamilyBuildRunSnapshot? _run;
+    private string _error = "";
+
+    protected override Task OnParametersSetAsync()
+        => PrepareAsync();
+
+    private Task PrepareAsync()
+    {
+        try
+        {
+            _error = "";
+            _run = Orchestrator.PrepareOrResume(NpcId);
+        }
+        catch (Exception ex)
+        {
+            _error = ex.Message;
+        }
+
+        return Task.CompletedTask;
+    }
+
+    private static string Css(string status)
+        => (status ?? "").Trim().ToLowerInvariant();
+}
