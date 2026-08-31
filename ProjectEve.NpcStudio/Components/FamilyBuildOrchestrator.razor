@@ -1,6 +1,7 @@
 ﻿@page "/family-build/{NpcId:int}"
 @using ProjectEve.NpcStudio.Services
 @inject FamilyBuildOrchestratorService Orchestrator
+@implements IDisposable
 
 <PageTitle>Family Build Orchestrator</PageTitle>
 
@@ -10,20 +11,39 @@
             <span>PROJECT EVE · FAMILY BUILD</span>
             <h1>Five-Phase Family Orchestrator</h1>
             <p>
-                Durable build plan. This foundation screen does not generate canon yet.
-                It prepares the family order, five phases, timers, resume state,
-                and repair ledger.
+                Durable five-phase family plan. Phase 1 Foundation can now run
+                against the authoritative family roster. Later phases remain untouched.
             </p>
         </div>
 
-        <button @onclick="PrepareAsync">
-            Prepare / Resume Family
-        </button>
+        <div class="fbo-head-actions">
+            <button disabled="@_busy" @onclick="PrepareAsync">
+                Prepare / Resume Family
+            </button>
+
+            <label class="fbo-confirm">
+                <input type="checkbox"
+                       disabled="@_busy"
+                       @bind="_confirmFoundation" />
+                <span>I understand Phase 1 writes missing Foundation canon.</span>
+            </label>
+
+            <button class="foundation-run"
+                    disabled="@(_busy || !_confirmFoundation || _run is null)"
+                    @onclick="RunFoundationAsync">
+                @(_busy ? "Running Phase 1..." : "Run / Resume Phase 1 Foundation")
+            </button>
+        </div>
     </div>
 
     @if (_error.Length > 0)
     {
         <div class="fbo-error">@_error</div>
+    }
+
+    @if (_message.Length > 0)
+    {
+        <div class="fbo-message">@_message</div>
     }
 
     @if (_run is null)
@@ -34,6 +54,55 @@
     }
     else
     {
+        @if (_busy || _progress is not null)
+        {
+            <div class="fbo-live">
+                <div class="fbo-live-title">
+                    <div>
+                        <small>LIVE PHASE 1 ACTIVITY</small>
+                        <h2>@(_progress?.Step ?? "Preparing")</h2>
+                    </div>
+                    <div class="fbo-elapsed">
+                        <small>ELAPSED</small>
+                        <b>@ElapsedText</b>
+                    </div>
+                </div>
+
+                @if (_progress is not null)
+                {
+                    <div class="fbo-live-grid">
+                        <div>
+                            <small>CURRENT NPC</small>
+                            <b>@_progress.NpcName</b>
+                            <span>@_progress.FamilyRole · NPC @_progress.NpcId</span>
+                        </div>
+                        <div>
+                            <small>COMPLETE</small>
+                            <b>@_progress.Completed / @_progress.Total</b>
+                        </div>
+                        <div>
+                            <small>FAILED</small>
+                            <b>@_progress.Failed</b>
+                        </div>
+                        <div>
+                            <small>REMAINING</small>
+                            <b>@_progress.Remaining</b>
+                        </div>
+                    </div>
+
+                    <div class="fbo-progress-track">
+                        <div class="fbo-progress-fill"
+                             style="@($"width:{ProgressPercent:0.##}%")">
+                        </div>
+                    </div>
+
+                    <div class="fbo-live-detail">
+                        @_progress.Detail
+                    </div>
+                }
+            </div>
+        }
+
         <div class="fbo-summary">
             <div>
                 <small>RUN</small>
@@ -120,6 +189,24 @@
 .fbo-head span{font-size:.68rem;font-weight:900;letter-spacing:.13em;color:#9c85ff}
 .fbo-head h1{margin:4px 0 6px}.fbo-head p{margin:0;color:#93a7c5;max-width:850px}
 .fbo button{background:#5935d9;color:white;border:1px solid #795cf4;border-radius:9px;padding:10px 14px;font-weight:900;cursor:pointer}
+.fbo button:disabled{opacity:.45;cursor:not-allowed}
+.fbo-head-actions{display:grid;gap:9px;min-width:290px}
+.fbo-confirm{display:flex;gap:8px;align-items:flex-start;padding:9px;border:1px solid #344861;border-radius:9px;background:#0d1929;color:#aabbd3;font-size:.76rem}
+.fbo-confirm input{margin-top:2px}
+.fbo-message{padding:12px;border:1px solid #27784c;border-radius:10px;background:#0d281c;color:#b9f5d2}
+.fbo-live{display:grid;gap:10px;padding:14px;border:1px solid #7056e8;border-radius:12px;background:#0b1629;box-shadow:0 0 0 1px rgba(112,86,232,.08)}
+.fbo-live-title{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.fbo-live-title small,.fbo-live-grid small,.fbo-elapsed small{display:block;color:#8da3c5;font-size:.64rem;font-weight:900;letter-spacing:.08em}
+.fbo-live-title h2{margin:2px 0 0;color:#fff}
+.fbo-elapsed{text-align:right}
+.fbo-elapsed b{font-size:1.3rem;color:#c7bbff}
+.fbo-live-grid{display:grid;grid-template-columns:2fr repeat(3,1fr);gap:8px}
+.fbo-live-grid>div{padding:10px;border:1px solid #304560;border-radius:9px;background:#0f1d30}
+.fbo-live-grid b{display:block;margin-top:3px;font-size:1.05rem}
+.fbo-live-grid span{display:block;margin-top:3px;color:#91a7c7;font-size:.75rem}
+.fbo-progress-track{height:12px;overflow:hidden;border:1px solid #344a67;border-radius:999px;background:#09111e}
+.fbo-progress-fill{height:100%;background:linear-gradient(90deg,#4d34c7,#896cf7);transition:width .25s ease}
+.fbo-live-detail{padding:9px 10px;border-radius:8px;background:#101f34;color:#b8cae4;font-size:.82rem}
 .fbo-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
 .fbo-summary>div{padding:11px;border:1px solid #2d4059;border-radius:10px;background:#0d1929;overflow:hidden}
 .fbo-summary small{display:block;color:#8298b8;font-size:.64rem}.fbo-summary b{display:block;margin-top:3px;overflow-wrap:anywhere}
@@ -150,6 +237,26 @@
         _run?.Phases.FirstOrDefault(x => x.PhaseNumber == 6);
     private FamilyBuildRunSnapshot? _run;
     private string _error = "";
+    private string _message = "";
+    private bool _busy;
+    private bool _confirmFoundation;
+    private CancellationTokenSource? _cts;
+    private CancellationTokenSource? _timerCts;
+    private FamilyBuildProgressSnapshot? _progress;
+    private DateTimeOffset _runStartedAt;
+    private TimeSpan _elapsed;
+
+    private string ElapsedText =>
+        $"{(int)_elapsed.TotalHours:00}:{_elapsed.Minutes:00}:{_elapsed.Seconds:00}";
+
+    private double ProgressPercent =>
+        _progress is null || _progress.Total <= 0
+            ? 0
+            : Math.Clamp(
+                ((_progress.Completed + _progress.Failed) * 100.0) /
+                _progress.Total,
+                0,
+                100);
 
     protected override Task OnParametersSetAsync()
         => PrepareAsync();
@@ -159,6 +266,7 @@
         try
         {
             _error = "";
+            _message = "";
             _run = Orchestrator.PrepareOrResume(NpcId);
         }
         catch (Exception ex)
@@ -167,6 +275,103 @@
         }
 
         return Task.CompletedTask;
+    }
+
+    private async Task RunFoundationAsync()
+    {
+        if (_busy ||
+            !_confirmFoundation ||
+            _run is null)
+            return;
+
+        _busy = true;
+        _error = "";
+        _message = "";
+        _confirmFoundation = false;
+        _progress = null;
+        _runStartedAt = DateTimeOffset.Now;
+        _elapsed = TimeSpan.Zero;
+
+        _cts?.Cancel();
+        _cts?.Dispose();
+        _cts = new CancellationTokenSource();
+
+        _timerCts?.Cancel();
+        _timerCts?.Dispose();
+        _timerCts = new CancellationTokenSource();
+        _ = RunElapsedTimerAsync(_timerCts.Token);
+
+        try
+        {
+            _run = await Orchestrator.RunFoundationPhaseAsync(
+                NpcId,
+                async update =>
+                {
+                    _progress = update;
+                    await InvokeAsync(StateHasChanged);
+                },
+                _cts.Token);
+
+            var complete = _run.Phases.Count(x =>
+                x.PhaseNumber == 1 &&
+                (x.Status.Equals("Complete",StringComparison.OrdinalIgnoreCase) ||
+                 x.Status.Equals("SkippedExisting",StringComparison.OrdinalIgnoreCase)));
+
+            var failed = _run.Phases.Count(x =>
+                x.PhaseNumber == 1 &&
+                x.Status.Equals("Failed",StringComparison.OrdinalIgnoreCase));
+
+            _message =
+                $"Phase 1 Foundation pass finished. Complete: {complete}. Needs Repair: {failed}. Phases 2-5 were not run.";
+        }
+        catch (OperationCanceledException)
+        {
+            _message =
+                "Phase 1 Foundation run was canceled. Completed NPCs remain durable and Resume will continue from the ledger.";
+            _run = Orchestrator.PrepareOrResume(NpcId);
+        }
+        catch (Exception ex)
+        {
+            _error = ex.ToString();
+            _run = Orchestrator.PrepareOrResume(NpcId);
+        }
+        finally
+        {
+            _busy = false;
+            _timerCts?.Cancel();
+            _elapsed = DateTimeOffset.Now - _runStartedAt;
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+
+    private async Task RunElapsedTimerAsync(
+        CancellationToken cancellationToken)
+    {
+        try
+        {
+            while (!cancellationToken.IsCancellationRequested)
+            {
+                _elapsed =
+                    DateTimeOffset.Now - _runStartedAt;
+
+                await InvokeAsync(StateHasChanged);
+                await Task.Delay(
+                    1000,
+                    cancellationToken);
+            }
+        }
+        catch (OperationCanceledException)
+        {
+        }
+    }
+
+    public void Dispose()
+    {
+        _cts?.Cancel();
+        _cts?.Dispose();
+
+        _timerCts?.Cancel();
+        _timerCts?.Dispose();
     }
 
     private static string Css(string status)

@@ -2538,7 +2538,7 @@ public sealed class NpcFoundationBuildService
         return Convert.ToInt32(cmd.ExecuteScalar() ?? 0) > 0;
     }
 
-    public async Task<NpcFoundationCommitResult> CommitFoundationAsync(
+    public Task<NpcFoundationCommitResult> CommitFoundationAsync(
         int npcId,
         CancellationToken cancellationToken = default)
     {
@@ -2546,11 +2546,37 @@ public sealed class NpcFoundationBuildService
             throw new InvalidOperationException(
                 "Stage 4B controlled commit is currently locked to NPC 6 only.");
 
+        return CommitFoundationCoreAsync(
+            npcId,
+            cancellationToken);
+    }
+
+    /// <summary>
+    /// Canonical Phase 1 entry point used only by the durable family orchestrator.
+    /// This intentionally bypasses the standalone NPC-6 test-page lock while
+    /// preserving all Foundation validation and missing-only write rules.
+    /// </summary>
+    public Task<NpcFoundationCommitResult> CommitFoundationForFamilyAsync(
+        int npcId,
+        CancellationToken cancellationToken = default)
+    {
+        if (npcId <= 0)
+            throw new ArgumentOutOfRangeException(nameof(npcId));
+
+        return CommitFoundationCoreAsync(
+            npcId,
+            cancellationToken);
+    }
+
+    private async Task<NpcFoundationCommitResult> CommitFoundationCoreAsync(
+        int npcId,
+        CancellationToken cancellationToken)
+    {
         var locked = LoadCachedFoundationProfile(npcId);
 
         if (locked?.Proposal is null)
             throw new InvalidOperationException(
-                "NPC 6 has no locked Foundation draft. Build the preview first.");
+                $"NPC {npcId} has no locked Foundation draft. Build the preview first.");
 
         var preview = await BuildPreviewAsync(
             npcId,
@@ -2724,7 +2750,7 @@ public sealed class NpcFoundationBuildService
 
         result.Success = true;
         result.Message =
-            "NPC 6 Foundation committed. Traits, AI Summary, photos and history were not changed.";
+            $"NPC {npcId} Foundation committed. Traits, AI Summary, photos and history were not changed.";
 
         return result;
     }

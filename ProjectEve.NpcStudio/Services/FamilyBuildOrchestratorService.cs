@@ -20,13 +20,16 @@ public sealed class FamilyBuildOrchestratorService
 {
     private readonly NpcStudioOptions _options;
     private readonly CanonicalFamilyGraphService _familyGraph;
+    private readonly NpcFoundationBuildService _foundation;
 
     public FamilyBuildOrchestratorService(
         NpcStudioOptions options,
-        CanonicalFamilyGraphService familyGraph)
+        CanonicalFamilyGraphService familyGraph,
+        NpcFoundationBuildService foundation)
     {
         _options = options;
         _familyGraph = familyGraph;
+        _foundation = foundation;
     }
 
     public FamilyBuildRunSnapshot PrepareOrResume(int rootNpcId)
@@ -56,6 +59,178 @@ public sealed class FamilyBuildOrchestratorService
 
     public FamilyBuildRunSnapshot LoadOrPrepare(int rootNpcId)
         => PrepareOrResume(rootNpcId);
+
+    /// <summary>
+    /// Executes only Phase 1 (Foundation) for the authoritative family roster.
+    /// Completed rows are preserved. Pending, failed, or interrupted rows are
+    /// resumed one NPC at a time. A failure is written to Needs Repair and does
+    /// not stop the rest of the family.
+    /// </summary>
+    public async Task<FamilyBuildRunSnapshot> RunFoundationPhaseAsync(
+        int rootNpcId,
+        Func<FamilyBuildProgressSnapshot,Task>? progress = null,
+        CancellationToken cancellationToken = default)
+    {
+        var run = PrepareOrResume(rootNpcId);
+
+        var totalPhase1 = run.Phases.Count(x => x.PhaseNumber == 1);
+
+        async Task ReportAsync(
+            FamilyBuildMemberSnapshot member,
+            string step,
+            string detail = "")
+        {
+            if (progress is null)
+                return;
+
+            var latest = Snapshot(run.RunId);
+
+            var completed = latest.Phases.Count(x =>
+                x.PhaseNumber == 1 &&
+                (x.Status.Equals("Complete",StringComparison.OrdinalIgnoreCase) ||
+                 x.Status.Equals("SkippedExisting",StringComparison.OrdinalIgnoreCase)));
+
+            var failed = latest.Phases.Count(x =>
+                x.PhaseNumber == 1 &&
+                x.Status.Equals("Failed",StringComparison.OrdinalIgnoreCase));
+
+            await progress(new FamilyBuildProgressSnapshot
+            {
+                RunId = run.RunId,
+                NpcId = member.NpcId,
+                NpcName = member.Name,
+                FamilyRole = member.Role,
+                Step = step,
+                Detail = detail,
+                Total = totalPhase1,
+                Completed = completed,
+                Failed = failed,
+                Remaining = Math.Max(0,totalPhase1 - completed - failed),
+                UpdatedRealAt = DateTimeOffset.Now
+            });
+        }
+
+        foreach (var member in run.Members
+                     .OrderBy(x => x.SortOrder)
+                     .ThenBy(x => x.NpcId))
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+
+            var phase = run.Phases.FirstOrDefault(x =>
+                x.NpcId == member.NpcId &&
+                x.PhaseNumber == 1);
+
+            if (phase is null)
+                continue;
+
+            if (phase.Status.Equals(
+                    "Complete",
+                    StringComparison.OrdinalIgnoreCase) ||
+                phase.Status.Equals(
+                    "SkippedExisting",
+                    StringComparison.OrdinalIgnoreCase))
+            {
+                continue;
+            }
+
+            MarkPhaseStarted(
+                run.RunId,
+                member.NpcId,
+                1,
+                "Foundation");
+
+            await ReportAsync(
+                member,
+                "Starting",
+                "Phase 1 started for this NPC.");
+
+            try
+            {
+                // STRICT SERIAL PHASE 1:
+                // Do not touch the next NPC until this NPC has completed its
+                // entire Foundation preview + validation + canonical commit.
+                await ReportAsync(
+                    member,
+                    "Building Preview",
+                    "Generating and locking Foundation identity, appearance, current life, phone, vehicle, finance and housing preview.");
+
+                var preview =
+                    await _foundation.BuildPreviewAsync(
+                        member.NpcId,
+                        cancellationToken);
+
+                await ReportAsync(
+                    member,
+                    "Validating",
+                    "Checking the locked Foundation preview for blocking errors and family consistency.");
+
+                if (preview.Profile?.Proposal is null)
+                {
+                    throw new InvalidOperationException(
+                        $"NPC {member.NpcId} Foundation preview did not produce a proposal.");
+                }
+
+                var blocking = preview.Warnings
+                    .Where(x => x.StartsWith(
+                        "BLOCK:",
+                        StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+
+                if (blocking.Count > 0)
+                {
+                    throw new InvalidOperationException(
+                        $"NPC {member.NpcId} Foundation preview is blocked: " +
+                        string.Join(" | ", blocking));
+                }
+
+                await ReportAsync(
+                    member,
+                    "Committing",
+                    "Writing missing-only Foundation canon for this NPC.");
+
+                var result =
+                    await _foundation.CommitFoundationForFamilyAsync(
+                        member.NpcId,
+                        cancellationToken);
+
+                MarkPhaseComplete(
+                    run.RunId,
+                    member.NpcId,
+                    1,
+                    result.Message);
+
+                await ReportAsync(
+                    member,
+                    "Complete",
+                    result.Message);
+            }
+            catch (OperationCanceledException)
+                when (cancellationToken.IsCancellationRequested)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
+                MarkPhaseFailedAndContinue(
+                    run.RunId,
+                    member.NpcId,
+                    1,
+                    "Foundation",
+                    ex.ToString());
+
+                await ReportAsync(
+                    member,
+                    "Failed",
+                    ex.Message);
+            }
+
+            // Reload durable status after each NPC so a later interruption can
+            // resume from exactly what has already completed.
+            run = Snapshot(run.RunId);
+        }
+
+        return Snapshot(run.RunId);
+    }
 
     public void MarkPhaseStarted(
         string runId,
@@ -111,6 +286,25 @@ public sealed class FamilyBuildOrchestratorService
         cmd.Parameters.AddWithValue("$npc", npcId);
         cmd.Parameters.AddWithValue("$phase", phaseNumber);
         cmd.ExecuteNonQuery();
+
+        // A successful retry closes any previous repair item for the same
+        // NPC/phase. This keeps Needs Repair equal to CURRENT failures.
+        using (var repair = conn.CreateCommand())
+        {
+            repair.CommandText = """
+                UPDATE NpcBuildRepairItems
+                SET Status='Resolved',
+                    UpdatedRealAt=CURRENT_TIMESTAMP
+                WHERE RunId=$run
+                  AND NpcId=$npc
+                  AND PhaseNumber=$phase
+                  AND Status='Open';
+                """;
+            repair.Parameters.AddWithValue("$run", runId);
+            repair.Parameters.AddWithValue("$npc", npcId);
+            repair.Parameters.AddWithValue("$phase", phaseNumber);
+            repair.ExecuteNonQuery();
+        }
 
         TouchRun(conn, runId, "Running");
     }
@@ -852,6 +1046,21 @@ public sealed class FamilyBuildOrchestratorService
         (4, "AI Summary"),
         (5, "Personal History")
     };
+}
+
+public sealed class FamilyBuildProgressSnapshot
+{
+    public string RunId { get; set; } = "";
+    public int NpcId { get; set; }
+    public string NpcName { get; set; } = "";
+    public string FamilyRole { get; set; } = "";
+    public string Step { get; set; } = "";
+    public string Detail { get; set; } = "";
+    public int Total { get; set; }
+    public int Completed { get; set; }
+    public int Failed { get; set; }
+    public int Remaining { get; set; }
+    public DateTimeOffset UpdatedRealAt { get; set; }
 }
 
 public sealed class FamilyBuildMemberPlan
