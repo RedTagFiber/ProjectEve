@@ -404,8 +404,11 @@
         var adultBodyConsistency = AdultBodyConsistencyPrompt(a, _imageType);
         var context = BuildSceneContext();
 
+        var ancestry = CanonicalAncestryPrompt(a);
+
         var identity =
             $"single-person photorealistic image of {Clean(_sheet.Name)}, age {_sheet.Age}, {Clean(_sheet.Gender)}; " +
+            ancestry +
             $"same stable canonical identity; " +
             $"overall appearance: {Clean(a.AppearanceLevel)}; " +
             $"body/build: {Clean(a.BodyBuild)}; " +
@@ -503,6 +506,24 @@
         SetStatus("ok", $"{Pretty(_imageType)} prompt rebuilt from the latest canonical dossier.");
     }
 
+    private static string CanonicalAncestryPrompt(
+        NpcAppearanceDetailProfile a)
+    {
+        var ancestry = (a.RaceEthnicity ?? "").Trim();
+
+        if (string.IsNullOrWhiteSpace(ancestry) ||
+            ancestry.Equals("N/A",StringComparison.OrdinalIgnoreCase) ||
+            ancestry.Equals("Unknown",StringComparison.OrdinalIgnoreCase) ||
+            ancestry.Equals("Not Yet Determined",StringComparison.OrdinalIgnoreCase))
+        {
+            return "";
+        }
+
+        // This is canonical identity context, not a request for stereotyped
+        // features. Comfy receives the exact saved ancestry and the separately
+        // saved skin/eye/hair/face canon remains authoritative.
+        return $"canonical race / ethnicity / ancestry: {Clean(ancestry)}; ";
+    }
     private static string AdultBodyConsistencyPrompt(NpcAppearanceDetailProfile a, string imageType)
     {
         if (a.Age < 18)

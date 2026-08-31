@@ -20,11 +20,18 @@ public sealed class AiAppearanceProfileAssistService
         _appearance = appearance;
     }
 
-    public async Task<NpcAppearanceDetailProfile> BuildDraftAsync(
+    public Task<NpcAppearanceDetailProfile> BuildDraftAsync(
         int npcId,
         CancellationToken cancellationToken = default)
+        => BuildDraftAsync(
+            _appearance.Load(npcId),
+            cancellationToken);
+
+    public async Task<NpcAppearanceDetailProfile> BuildDraftAsync(
+        NpcAppearanceDetailProfile current,
+        CancellationToken cancellationToken = default)
     {
-        var current = _appearance.Load(npcId);
+        ArgumentNullException.ThrowIfNull(current);
 
         var prompt = $$"""
 You are the ProjectEve canonical NPC appearance author.
@@ -69,10 +76,30 @@ Rules:
 - Clothing must fit age, occupation, personality, income, Bellefontaine/Ohio life, and occasion.
 - "Not a Club Person" is valid when personality/lifestyle suggests it.
 - Adult anatomy is ONLY for age >= 18.
-- If female, braSize may be filled and penisSize/circumcisionStatus MUST be empty.
-- If male, penisSize/circumcisionStatus may be filled and braSize MUST be empty.
-- If under 18, braSize, penisSize, circumcisionStatus, adultAnatomyNotes MUST all be empty.
+- If age >= 18 and female, braSize MUST be filled with a plausible nonempty value; penisSize/circumcisionStatus MUST be N/A.
+- If age >= 18 and male, penisSize/circumcisionStatus MUST be filled with plausible nonempty values; braSize MUST be N/A.
+- If under 18, braSize, penisSize, circumcisionStatus, adultAnatomyNotes MUST all be N/A.
 - Do not sexualize minors.
+- appearanceLevel MUST be exactly one of:
+  Below Average, Normal / Everyday, Pleasant, Above Average, Attractive,
+  Very Attractive, Striking, Model-Like, Supermodel-Like.
+  Never output a number for appearanceLevel.
+- If eyeBaseColor is Brown, eyeVariant MUST be one concrete value such as:
+  Deep Espresso Brown, Espresso Brown, Dark Chocolate Brown, Chocolate Brown,
+  Warm Brown, Medium Brown, Chestnut Brown, Walnut Brown, Mocha Brown,
+  Cinnamon Brown, Light Brown, Honey Brown, Golden Brown, Copper Brown, Auburn Brown.
+- eyePattern MUST be one concrete canonical value. Use None / Solid when there are no visible flecks/rings.
+  Never output N/A for eyeVariant or eyePattern.
+- If age >= 18 and female, braSize MUST be exactly one of:
+  28A, 28B, 28C, 28D, 28DD,
+  30A, 30B, 30C, 30D, 30DD,
+  32A, 32B, 32C, 32D, 32DD, 32DDD,
+  34A, 34B, 34C, 34D, 34DD, 34DDD,
+  36A, 36B, 36C, 36D, 36DD, 36DDD,
+  38B, 38C, 38D, 38DD, 38DDD,
+  40B, 40C, 40D, 40DD,
+  42C, 42D, 42DD.
+  Never output N/A for an adult female braSize.
 - Output JSON only. No markdown.
 
 Return exactly:
@@ -149,6 +176,7 @@ Return exactly:
             ?? throw new InvalidOperationException("AI returned no appearance draft.");
 
         Apply(current,draft);
+        NormalizeCanonicalGeneratedOptions(current);
         EnforceAdultGenderRules(current);
         return current;
     }
@@ -197,11 +225,69 @@ Return exactly:
         p.AdultAnatomyNotes = Choose(p.AdultAnatomyNotes,d.AdultAnatomyNotes);
     }
 
+    private static void NormalizeCanonicalGeneratedOptions(NpcAppearanceDetailProfile p)
+    {
+        static bool Unresolved(string? value)
+        {
+            var x = (value ?? "").Trim();
+            return string.IsNullOrWhiteSpace(x)
+                || x.Equals("N/A", StringComparison.OrdinalIgnoreCase)
+                || x.Equals("Unknown", StringComparison.OrdinalIgnoreCase)
+                || x.Equals("Not Yet Determined", StringComparison.OrdinalIgnoreCase);
+        }
+
+        var appearanceLevels = new HashSet<string>(
+            new[]
+            {
+                "Below Average","Normal / Everyday","Pleasant","Above Average",
+                "Attractive","Very Attractive","Striking","Model-Like","Supermodel-Like"
+            },
+            StringComparer.OrdinalIgnoreCase);
+
+        if (!appearanceLevels.Contains((p.AppearanceLevel ?? "").Trim()))
+            p.AppearanceLevel = "Normal / Everyday";
+
+        if (Unresolved(p.EyePattern))
+            p.EyePattern = "None / Solid";
+
+        if (Unresolved(p.EyeVariant))
+        {
+            p.EyeVariant = (p.EyeBaseColor ?? "").Trim() switch
+            {
+                "Brown" => "Warm Brown",
+                "Hazel" => "Golden Hazel",
+                "Green" => "True Green",
+                "Blue" => "True Blue",
+                "Gray" => "Soft Gray",
+                "Amber" => "Golden Amber",
+                _ => "None / Solid"
+            };
+        }
+
+        var gender = (p.Gender ?? "").Trim();
+        var female =
+            gender.Contains("female",StringComparison.OrdinalIgnoreCase) ||
+            gender.Equals("woman",StringComparison.OrdinalIgnoreCase);
+
+        if (p.Age >= 18 && female && Unresolved(p.BraSize))
+        {
+            // Stable canonical fallback only when the AI still refuses an
+            // applicable adult field. This is deterministic per NPC.
+            var choices = new[]
+            {
+                "32B","32C","32D","34B","34C","34D",
+                "34DD","36B","36C","36D","36DD","38C","38D"
+            };
+
+            var index = Math.Abs(p.NpcId) % choices.Length;
+            p.BraSize = choices[index];
+        }
+    }
     private static void EnforceAdultGenderRules(NpcAppearanceDetailProfile p)
     {
         if (p.Age < 18)
         {
-            p.BraSize = p.PenisSize = p.CircumcisionStatus = p.AdultAnatomyNotes = "";
+            p.BraSize = p.PenisSize = p.CircumcisionStatus = p.AdultAnatomyNotes = "N/A";
             return;
         }
 
@@ -212,14 +298,29 @@ Return exactly:
 
         if (female)
         {
-            p.PenisSize = "";
-            p.CircumcisionStatus = "";
+            p.PenisSize = "N/A";
+            p.CircumcisionStatus = "N/A";
         }
-        if (male) p.BraSize = "";
+        if (male) p.BraSize = "N/A";
     }
 
     private static string Choose(string current,string? proposed)
-        => !string.IsNullOrWhiteSpace(current) ? current : proposed?.Trim() ?? "";
+    {
+        var existing = (current ?? "").Trim();
+
+        // Foundation completeness sentinels mean "no concrete value yet".
+        // They must not block the AI from filling an applicable detail.
+        var unresolved =
+            string.IsNullOrWhiteSpace(existing) ||
+            existing.Equals("N/A", StringComparison.OrdinalIgnoreCase) ||
+            existing.Equals("Unknown", StringComparison.OrdinalIgnoreCase) ||
+            existing.Equals("Not Yet Determined", StringComparison.OrdinalIgnoreCase);
+
+        if (!unresolved)
+            return existing;
+
+        return proposed?.Trim() ?? "";
+    }
 
     private static string ExtractJson(string raw)
     {

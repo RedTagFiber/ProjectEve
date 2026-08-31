@@ -72,6 +72,7 @@
                     @Row("Birth surname", p.BirthLastName)
                     @Row("Age", p.Age.ToString())
                     @Row("Gender", p.Gender)
+                    @Row("Race / Ethnicity", p.RaceEthnicity)
                     @Row("Occupation", p.Occupation)
                     @Row("Employer", p.Employer)
                     @Row("Hometown", p.Hometown)
@@ -82,8 +83,8 @@
             <section>
                 <h2>Appearance</h2>
                 <div class="grid">
-                    @Row("Height", $"{p.HeightCm:0} cm")
-                    @Row("Weight", $"{p.WeightKg:0} kg")
+                    @Row("Height", FormatHeightUs(p.HeightCm))
+                    @Row("Weight", FormatWeightUs(p.WeightKg))
                     @Row("Body type", p.BodyType)
                     @Row("Hair", $"{p.HairColor} · {p.HairStyle}")
                     @Row("Eyes", p.EyeColor)
@@ -94,6 +95,66 @@
             </section>
         }
 
+        @if (_preview.DetailedAppearance is not null)
+        {
+            var d = _preview.DetailedAppearance;
+
+            <section>
+                <h2>Detailed Appearance</h2>
+
+                <p class="keep">
+                    LOCKED DETAILED APPEARANCE PREVIEW — these exact values will be used by Foundation commit.
+                </p>
+
+                <div class="grid">
+                    @Row("Appearance level", d.AppearanceLevel)
+                    @Row("Body build", d.BodyBuild)
+
+                    @Row("Eye base color", d.EyeBaseColor)
+                    @Row("Eye variant", d.EyeVariant)
+                    @Row("Eye pattern", d.EyePattern)
+                    @Row("Eye shape", d.EyeShape)
+                    @Row("Eye expression", d.EyeExpression)
+                    @Row("Eye notes", d.EyeNotes)
+
+                    @Row("Hair color", d.HairColor)
+                    @Row("Hair undertone", d.HairUndertone)
+                    @Row("Hair highlights", d.HairHighlights)
+                    @Row("Hair length", d.HairLength)
+                    @Row("Hair texture", d.HairTexture)
+                    @Row("Hair style", d.HairStyle)
+                    @Row("Hair density", d.HairDensity)
+
+                    @Row("Skin tone", d.SkinTone)
+                    @Row("Skin undertone", d.SkinUndertone)
+                    @Row("Complexion details", d.ComplexionDetails)
+
+                    @Row("Face shape", d.FaceShape)
+                    @Row("Jaw shape", d.JawShape)
+                    @Row("Nose shape", d.NoseShape)
+                    @Row("Lip shape", d.LipShape)
+                    @Row("Brow style", d.BrowStyle)
+                    @Row("Cheekbone style", d.CheekboneStyle)
+                    @Row("Distinguishing features", d.DistinguishingFeatures)
+
+                    @Row("Default clothing", d.DefaultClothingStyle)
+                    @Row("Work clothing", d.WorkClothingStyle)
+                    @Row("Home clothing", d.HomeClothingStyle)
+                    @Row("Going-out clothing", d.GoingOutClothingStyle)
+                    @Row("Club clothing", d.ClubClothingStyle)
+                    @Row("Family-event clothing", d.FamilyEventClothingStyle)
+                    @Row("Formal clothing", d.FormalClothingStyle)
+                    @Row("Athletic clothing", d.AthleticClothingStyle)
+                    @Row("Sleepwear", d.SleepwearStyle)
+                    @Row("Winter clothing", d.WinterClothingStyle)
+
+                    @Row("Bra size", d.BraSize)
+                    @Row("Penis size", d.PenisSize)
+                    @Row("Circumcision status", d.CircumcisionStatus)
+                    @Row("Adult anatomy notes", d.AdultAnatomyNotes)
+                </div>
+            </section>
+        }
         <section>
             <h2>Home / Location</h2>
 
@@ -226,6 +287,26 @@
     private string _commitMessage = "";
     private NpcFoundationPreview? _preview;
 
+    private static string FormatHeightUs(double heightCm)
+    {
+        if (heightCm <= 0)
+            return "N/A";
+
+        var totalInches = (int)Math.Round(heightCm / 2.54);
+        var feet = totalInches / 12;
+        var inches = totalInches % 12;
+
+        return $"{feet}' {inches}\"";
+    }
+
+    private static string FormatWeightUs(double weightKg)
+    {
+        if (weightKg <= 0)
+            return "N/A";
+
+        var pounds = (int)Math.Round(weightKg * 2.2046226218);
+        return $"{pounds:N0} lbs";
+    }
     private async Task BuildPreview()
     {
         _busy = true;

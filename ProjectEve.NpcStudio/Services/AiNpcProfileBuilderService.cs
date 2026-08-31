@@ -190,6 +190,7 @@ public sealed class AiNpcProfileBuilderService
             SetCharacterValue(cmd, sets, "Age", "$age", proposal.Age);
             SetCharacterValue(cmd, sets, "Gender", "$gender",
                 string.IsNullOrWhiteSpace(snapshot.Gender) ? proposal.Gender?.Trim() ?? "" : snapshot.Gender);
+            SetCharacterValue(cmd, sets, "RaceEthnicity", "$raceEthnicity", proposal.RaceEthnicity?.Trim() ?? "");
             SetCharacterValue(cmd, sets, "HeightCm", "$heightCm", proposal.HeightCm);
             SetCharacterValue(cmd, sets, "WeightKg", "$weightKg", proposal.WeightKg);
             SetCharacterValue(cmd, sets, "IQ", "$iq", proposal.IQ);
@@ -553,6 +554,7 @@ public sealed class AiNpcProfileBuilderService
         Name: {{npc.Name}}
         Age: {{npc.Age}}
         Gender: {{npc.Gender}}
+        Race / Ethnicity: {{npc.RaceEthnicity}}
         Location: {{npc.Location}}
         Hometown: {{npc.Hometown}}
         Occupation: {{npc.Occupation}}
@@ -626,6 +628,7 @@ public sealed class AiNpcProfileBuilderService
           "preferredName": "",
           "age": 0,
           "gender": "",
+          "raceEthnicity": "",
           "heightCm": 0,
           "weightKg": 0,
           "iq": 0,
@@ -828,6 +831,7 @@ public sealed class AiNpcProfileBuilderService
         snapshot.Want = ReadCharacterText(conn, npcId, "Want");
         snapshot.PersonalitySummary = ReadCharacterText(conn, npcId, "PersonalityContext");
         snapshot.Employer = ReadCharacterText(conn, npcId, "Employer");
+        snapshot.RaceEthnicity = ReadCharacterText(conn, npcId, "RaceEthnicity");
 
         if (TableExists(conn, "NpcNameProfiles"))
         {
@@ -984,6 +988,7 @@ public sealed class AiNpcProfileBuilderService
 
         proposal.Age = KeepInt(existing.Age, proposal.Age);
         proposal.Gender = KeepText(existing.Gender, proposal.Gender);
+        proposal.RaceEthnicity = KeepText(existing.RaceEthnicity, proposal.RaceEthnicity);
         proposal.HeightCm = KeepDouble(existing.HeightCm, proposal.HeightCm);
         proposal.WeightKg = KeepDouble(existing.WeightKg, proposal.WeightKg);
         proposal.IQ = KeepInt(existing.IQ, proposal.IQ);
@@ -1627,6 +1632,7 @@ public sealed class AiNpcProfileBuilderService
         public string Want { get; set; } = "";
         public string PersonalitySummary { get; set; } = "";
         public string Employer { get; set; } = "";
+        public string RaceEthnicity { get; set; } = "";
         public string Name { get; init; } = "";
         public int Age { get; init; }
         public string Gender { get; init; } = "";

@@ -246,11 +246,12 @@ public sealed class NpcAppearanceDetailService
             Add(cmd,"$formal",p.FormalClothingStyle); Add(cmd,"$athletic",p.AthleticClothingStyle);
             Add(cmd,"$sleep",p.SleepwearStyle); Add(cmd,"$winter",p.WinterClothingStyle);
 
-            // Adult-only and gender-appropriate. Wrong-sex values are actively cleared.
-            Add(cmd,"$bra", adult && female ? p.BraSize : "");
-            Add(cmd,"$penis", adult && male ? p.PenisSize : "");
-            Add(cmd,"$circ", adult && male ? p.CircumcisionStatus : "");
-            Add(cmd,"$adultNotes", adult ? p.AdultAnatomyNotes : "");
+            // Adult-only and gender-appropriate. Non-applicable values are
+            // stored explicitly as N/A; Foundation never writes silent blanks.
+            Add(cmd,"$bra", adult && female ? p.BraSize : "N/A");
+            Add(cmd,"$penis", adult && male ? p.PenisSize : "N/A");
+            Add(cmd,"$circ", adult && male ? p.CircumcisionStatus : "N/A");
+            Add(cmd,"$adultNotes", adult ? p.AdultAnatomyNotes : "N/A");
             cmd.ExecuteNonQuery();
         }
 

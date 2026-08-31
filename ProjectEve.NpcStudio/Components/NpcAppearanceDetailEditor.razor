@@ -1,3 +1,4 @@
+﻿@using ProjectEve.NpcStudio.Models
 @using ProjectEve.NpcStudio.Services
 @inject NpcAppearanceDetailService AppearanceDetails
 @inject AiAppearanceProfileAssistService AppearanceAI
@@ -30,12 +31,25 @@
         <div class="ade-grid four">
             @Select("Overall Look", AppearanceLevels, _profile.AppearanceLevel, v => _profile.AppearanceLevel=v)
             @Select("Body / Build", BodyBuilds, _profile.BodyBuild, v => _profile.BodyBuild=v)
-            <label>
+            <div class="ancestry-picker">
                 <span>Race / Ethnicity</span>
-                <select value="@_profile.RaceEthnicity" @onchange="RaceChanged">
-                    @foreach (var x in RaceEthnicityOptions) { <option value="@x">@x</option> }
-                </select>
-            </label>
+
+                <div class="ancestry-current">
+                    @DisplayAncestry
+                </div>
+
+                <div class="ancestry-options">
+                    @foreach (var x in RaceEthnicityOptions.Where(x => !string.IsNullOrWhiteSpace(x)))
+                    {
+                        <label class="ancestry-option">
+                            <input type="checkbox"
+                                   checked="@IsAncestrySelected(x)"
+                                   @onchange="e => ToggleAncestry(x, e.Value is bool b && b)" />
+                            <span>@x</span>
+                        </label>
+                    }
+                </div>
+            </div>
             @Select("Skin Tone", SkinToneOptions, _profile.SkinTone, v => _profile.SkinTone=v)
         </div>
 
@@ -67,7 +81,32 @@
             @Select("Highlights", HairHighlights, _profile.HairHighlights, v => _profile.HairHighlights=v)
             @Select("Length", HairLengths, _profile.HairLength, v => _profile.HairLength=v)
             @Select("Texture", HairTextures, _profile.HairTexture, v => _profile.HairTexture=v)
-            @Select("Style / Cut", HairStyles, _profile.HairStyle, v => _profile.HairStyle=v)
+                        <label class="hair-style-picker">
+                <span>Style / Cut</span>
+                <div class="hair-mode-buttons">
+                    <button type="button"
+                            class="@HairModeClass("women")"
+                            @onclick='() => SetHairMode("women")'>
+                        Women's Styles
+                    </button>
+                    <button type="button"
+                            class="@HairModeClass("men")"
+                            @onclick='() => SetHairMode("men")'>
+                        Men's Cuts
+                    </button>
+                    <button type="button"
+                            class="@HairModeClass("all")"
+                            @onclick='() => SetHairMode("all")'>
+                        All Styles
+                    </button>
+                </div>
+                <select value="@_profile.HairStyle" @onchange="HairStyleChanged">
+                    @foreach (var x in VisibleHairStyles)
+                    {
+                        <option value="@x">@x</option>
+                    }
+                </select>
+            </label>
             @Select("Density", HairDensities, _profile.HairDensity, v => _profile.HairDensity=v)
         </div>
 
@@ -130,8 +169,20 @@
 .ade-banner{margin-top:13px;padding:10px 12px;background:#101c2e;border-radius:9px;display:flex;gap:8px;flex-direction:column}.ade-banner span{color:#91a5c5}
 .ade-section-title{margin:17px 0 8px}.ade-grid{display:grid;gap:9px}.ade-grid.five{grid-template-columns:repeat(5,1fr)}.ade-grid.four{grid-template-columns:repeat(4,1fr)}.ade-grid.three{grid-template-columns:repeat(3,1fr)}
 .ade-grid label,.ade-wide{display:grid;gap:5px}.ade-grid label span,.ade-wide span{font-size:.66rem;font-weight:800;color:#8ea3c5;text-transform:uppercase;letter-spacing:.06em}.ade-grid select,.ade-grid input,.ade-wide input{width:100%;box-sizing:border-box;background:#101c2d;color:#eff4ff;border:1px solid #344965;border-radius:7px;padding:9px}.ade-wide{margin-top:9px}.wide{grid-column:span 2}
+.hair-style-picker{grid-column:span 2}
+.hair-mode-buttons{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px}
+.hair-mode-buttons button{background:#101c2d;color:#8ea3c5;border:1px solid #344965;border-radius:7px;padding:6px 9px;font-size:.72rem;font-weight:800;cursor:pointer}
+.hair-mode-buttons button.active{background:#5e3cdb;color:#fff;border-color:#8267f2}
 .ade-minor-note,.ade-message{margin-top:13px;padding:10px;border-radius:8px;background:#102337;color:#a7c8e9}.ade-message.error{background:#361820;color:#ffabb2}
 @@media(max-width:1200px){.ade-grid.five,.ade-grid.four{grid-template-columns:repeat(2,1fr)}}@@media(max-width:700px){.ade-grid.five,.ade-grid.four,.ade-grid.three{grid-template-columns:1fr}.wide{grid-column:auto}.ade-head{flex-direction:column}}
+.ancestry-picker{grid-column:span 2;display:flex;flex-direction:column;gap:8px}
+.ancestry-picker>span{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:#8ea3c5}
+.ancestry-current{min-height:44px;padding:10px 12px;border:1px solid #344965;border-radius:10px;background:#101c2d;color:#fff;font-weight:700}
+.ancestry-options{max-height:260px;overflow:auto;padding:8px;border:1px solid #344965;border-radius:10px;background:#0b1625;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px}
+.ancestry-option{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:7px;cursor:pointer}
+.ancestry-option:hover{background:#14243a}
+.ancestry-option input{width:16px;height:16px}
+.ancestry-option span{font-size:.8rem;color:#dce7f7}
 </style>
 
 @code {
@@ -153,6 +204,106 @@
                             && !(_profile?.Gender ?? "").Contains("female",StringComparison.OrdinalIgnoreCase))
                             || string.Equals(_profile?.Gender,"man",StringComparison.OrdinalIgnoreCase));
 
+    // HAIR LIST MODE - GENDER AWARE
+    // Default presentation follows the NPC gender, but manual cross-gender
+    // choices remain fully valid canon through the Women / Men / All buttons.
+    private string _hairListMode = "";
+
+    private string HairListMode
+    {
+        get
+        {
+            if (!string.IsNullOrWhiteSpace(_hairListMode))
+                return _hairListMode;
+
+            if (IsFemale) return "women";
+            if (IsMale) return "men";
+            return "all";
+        }
+    }
+
+    private void SetHairMode(string mode)
+    {
+        _hairListMode = mode;
+    }
+
+    private string HairModeClass(string mode)
+        => string.Equals(HairListMode, mode, StringComparison.OrdinalIgnoreCase)
+            ? "active"
+            : "";
+
+    private void HairStyleChanged(ChangeEventArgs e)
+    {
+        if (_profile is null) return;
+        _profile.HairStyle = e.Value?.ToString() ?? "N/A";
+    }
+
+    private IEnumerable<string> VisibleHairStyles
+    {
+        get
+        {
+            var source = HairStyles ?? Array.Empty<string>();
+
+            IEnumerable<string> filtered = HairListMode switch
+            {
+                "women" => source.Where(x => !IsTraditionallyMensCut(x)),
+                "men"   => source.Where(x => !IsTraditionallyWomensStyle(x)),
+                _       => source
+            };
+
+            // Preserve the currently selected canonical/manual style even when
+            // it belongs to the opposite presentation list.
+            var current = _profile?.HairStyle ?? "";
+            if (!string.IsNullOrWhiteSpace(current)
+                && !filtered.Contains(current, StringComparer.OrdinalIgnoreCase))
+            {
+                filtered = new[] { current }.Concat(filtered);
+            }
+
+            return filtered.Distinct(StringComparer.OrdinalIgnoreCase);
+        }
+    }
+
+    private static bool IsTraditionallyMensCut(string value)
+    {
+        var x = (value ?? "").Trim().ToLowerInvariant();
+
+        return x.Contains("buzz")
+            || x.Contains("crew cut")
+            || x.Contains("high and tight")
+            || x.Contains("high & tight")
+            || x.Contains("flat top")
+            || x.Contains("caesar")
+            || x.Contains("ivy league")
+            || x.Contains("bald fade")
+            || x.Contains("skin fade")
+            || x.Contains("high fade")
+            || x.Contains("mid fade")
+            || x.Contains("low fade")
+            || x.Contains("taper fade")
+            || x.Contains("military cut")
+            || x.Contains("butch cut")
+            || x.Contains("burr cut");
+    }
+
+    private static bool IsTraditionallyWomensStyle(string value)
+    {
+        var x = (value ?? "").Trim().ToLowerInvariant();
+
+        return x.Contains("princess")
+            || x.Contains("french twist")
+            || x.Contains("victory roll")
+            || x.Contains("space buns")
+            || x.Contains("double bun")
+            || x.Contains("crown braid")
+            || x.Contains("milkmaid braid")
+            || x.Contains("waterfall braid")
+            || x.Contains("fishtail braid")
+            || x.Contains("braided updo")
+            || x.Contains("formal updo")
+            || x.Contains("bridal")
+            || x.Contains("beehive");
+    }
     private async Task BuildAiDraftAsync()
     {
         _busy=true; _error=false; _message="AI is reading this NPC and filling missing appearance details...";
@@ -178,16 +329,130 @@
         return Task.CompletedTask;
     }
 
-    private void RaceChanged(ChangeEventArgs e)
+    private IReadOnlyList<string> SelectedAncestries
+        => ParseAncestryComponents(_profile?.RaceEthnicity);
+
+    private string DisplayAncestry
+        => string.IsNullOrWhiteSpace(_profile?.RaceEthnicity)
+            ? "Select one or more ancestry components"
+            : _profile!.RaceEthnicity;
+
+    private bool IsAncestrySelected(string value)
+        => SelectedAncestries.Contains(
+            value,
+            StringComparer.OrdinalIgnoreCase);
+
+    private void ToggleAncestry(string value, bool selected)
     {
-        if (_profile is null) return;
+        if (_profile is null)
+            return;
 
-        _profile.RaceEthnicity = e.Value?.ToString() ?? "";
+        var parts = SelectedAncestries.ToList();
 
-        // Race changes the available complexion range. Keep the current tone
-        // only if it is still a valid option; otherwise force review.
-        if (!SkinToneOptions.Contains(_profile.SkinTone, StringComparer.OrdinalIgnoreCase))
+        if (selected)
+        {
+            if (!parts.Contains(value,StringComparer.OrdinalIgnoreCase))
+                parts.Add(value);
+        }
+        else
+        {
+            parts.RemoveAll(x =>
+                x.Equals(
+                    value,
+                    StringComparison.OrdinalIgnoreCase));
+        }
+
+        _profile.RaceEthnicity = BuildAncestryValue(parts);
+
+        if (!SkinToneOptions.Contains(
+                _profile.SkinTone,
+                StringComparer.OrdinalIgnoreCase))
+        {
             _profile.SkinTone = "";
+        }
+    }
+
+    private static IReadOnlyList<string> ParseAncestryComponents(
+        string? ancestry)
+    {
+        var value = (ancestry ?? "").Trim();
+
+        if (string.IsNullOrWhiteSpace(value))
+            return Array.Empty<string>();
+
+        while (value.StartsWith(
+            "Mixed - ",
+            StringComparison.OrdinalIgnoreCase))
+        {
+            value = value["Mixed - ".Length..].Trim();
+        }
+
+        return value
+            .Split(
+                " + ",
+                StringSplitOptions.RemoveEmptyEntries |
+                StringSplitOptions.TrimEntries)
+            .Select(ExpandDisplayAncestry)
+            .Where(x => !string.IsNullOrWhiteSpace(x))
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .ToArray();
+    }
+
+    private static string ExpandDisplayAncestry(string value)
+    {
+        var clean = (value ?? "").Trim();
+
+        var open = clean.LastIndexOf(" (",StringComparison.Ordinal);
+        if (open > 0 && clean.EndsWith(")",StringComparison.Ordinal))
+        {
+            var broad = clean[..open].Trim();
+            var specific = clean[(open + 2)..^1].Trim();
+
+            if (!string.IsNullOrWhiteSpace(broad) &&
+                !string.IsNullOrWhiteSpace(specific))
+            {
+                return $"{broad} - {specific}";
+            }
+        }
+
+        return clean;
+    }
+
+    private static string BuildAncestryValue(
+        IEnumerable<string> ancestries)
+    {
+        var parts = ancestries
+            .Where(x => !string.IsNullOrWhiteSpace(x))
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .ToList();
+
+        if (parts.Count == 0)
+            return "";
+
+        if (parts.Count == 1)
+            return parts[0];
+
+        var display = parts
+            .Select(CompactDisplayAncestry);
+
+        return "Mixed - " + string.Join(" + ",display);
+    }
+
+    private static string CompactDisplayAncestry(string value)
+    {
+        var clean = (value ?? "").Trim();
+        var separator = clean.IndexOf(" - ",StringComparison.Ordinal);
+
+        if (separator <= 0)
+            return clean;
+
+        var broad = clean[..separator].Trim();
+        var specific = clean[(separator + 3)..].Trim();
+
+        if (string.IsNullOrWhiteSpace(specific))
+            return broad;
+
+        return $"{broad} ({specific})";
     }
     private void EyeBaseChanged(ChangeEventArgs e)
     {
@@ -238,23 +503,25 @@
         }
     }
 
-    private static readonly string[] RaceEthnicityOptions =
+    private IEnumerable<string> RaceEthnicityOptions
     {
-        "",
-        "White, non-Hispanic",
-        "Black or African American, non-Hispanic",
-        "Asian, non-Hispanic",
-        "American Indian or Alaska Native, non-Hispanic",
-        "Native Hawaiian or Other Pacific Islander, non-Hispanic",
-        "Two or More Races, non-Hispanic",
-        "Hispanic or Latino - White",
-        "Hispanic or Latino - Black or African American",
-        "Hispanic or Latino - Two or More Races",
-        "Hispanic or Latino - Other race",
-        "Middle Eastern / North African",
-        "Mixed / Multiracial",
-        "Other / Self-described"
-    };
+        get
+        {
+            var current = (_profile?.RaceEthnicity ?? "").Trim();
+
+            if (!string.IsNullOrWhiteSpace(current) &&
+                !NpcAncestryCatalog.Options.Contains(
+                    current,
+                    StringComparer.OrdinalIgnoreCase))
+            {
+                return new[] { current }
+                    .Concat(NpcAncestryCatalog.Options)
+                    .Distinct(StringComparer.OrdinalIgnoreCase);
+            }
+
+            return NpcAncestryCatalog.Options;
+        }
+    }
     private static readonly string[] AppearanceLevels={"","Below Average","Normal / Everyday","Pleasant","Above Average","Attractive","Very Attractive","Striking","Model-Like","Supermodel-Like"};
     private static readonly string[] BodyBuilds={"","Very Slim","Slim","Petite","Lean","Average","Soft Average","Curvy","Full-Figured","Thick","Stocky","Broad","Athletic","Lean Athletic","Fit","Toned","Muscular","Very Muscular","Heavyset","Tall / Lanky"};
     private static readonly string[] EyeBaseColors={"","Brown","Hazel","Green","Blue","Gray","Amber","Rare / Mixed"};
