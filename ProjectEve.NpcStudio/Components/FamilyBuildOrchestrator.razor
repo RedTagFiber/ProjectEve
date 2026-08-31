@@ -1,4 +1,4 @@
-﻿@page "/family-build/{NpcId:int}"
+@page "/family-build/{NpcId:int}"
 @using ProjectEve.NpcStudio.Services
 @inject FamilyBuildOrchestratorService Orchestrator
 @implements IDisposable
@@ -74,7 +74,7 @@
                         <div>
                             <small>CURRENT NPC</small>
                             <b>@_progress.NpcName</b>
-                            <span>@_progress.FamilyRole · NPC @_progress.NpcId</span>
+                            <span>@AgeText(_progress.Age) | @_progress.FamilyRole | NPC @_progress.NpcId</span>
                         </div>
                         <div>
                             <small>COMPLETE</small>
@@ -135,7 +135,7 @@
                         <div>
                             <small>@member.Role</small>
                             <h2>@member.Name</h2>
-                            <span>NPC @member.NpcId</span>
+                            <div class="fbo-person-meta">                                 <b>@AgeText(member.Age)</b>                                 <span>@member.Role</span>                                 <span>NPC @member.NpcId</span>                             </div>
                         </div>
                     </header>
 
@@ -164,7 +164,7 @@
             </div>
         }
 
-        @if (_run.Repairs.Count > 0)
+        @if (_run.Repairs.Any(x => x.Status == "Open"))
         {
             <div class="fbo-repairs">
                 <h2>Needs Repair</h2>
@@ -213,6 +213,9 @@
 .fbo-members{display:grid;gap:11px}
 .fbo article{padding:13px;border:1px solid #2e425c;border-radius:12px;background:#0a1524}
 .fbo article header small{color:#9b87ff;text-transform:uppercase;font-weight:900}.fbo article h2{margin:2px 0}.fbo article header span{color:#8297b5;font-size:.75rem}
+.fbo-person-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:4px}
+.fbo-person-meta b{color:#e9effa;font-size:.78rem}
+.fbo-person-meta span{padding-left:8px;border-left:1px solid #344861}
 .fbo-phases{display:grid;grid-template-columns:repeat(5,minmax(120px,1fr));gap:7px;margin-top:11px}
 .fbo-phase{display:flex;gap:8px;align-items:center;padding:9px;border:1px solid #354960;border-radius:9px;background:#111d2d}
 .fbo-phase>span{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:#24344c;font-weight:900}
@@ -248,6 +251,11 @@
 
     private string ElapsedText =>
         $"{(int)_elapsed.TotalHours:00}:{_elapsed.Minutes:00}:{_elapsed.Seconds:00}";
+
+    private static string AgeText(int age)
+        => age > 0
+            ? $"Age {age}"
+            : "Age N/A";
 
     private double ProgressPercent =>
         _progress is null || _progress.Total <= 0

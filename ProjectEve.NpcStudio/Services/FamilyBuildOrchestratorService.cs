@@ -1,4 +1,4 @@
-﻿using Microsoft.Data.Sqlite;
+using Microsoft.Data.Sqlite;
 using ProjectEve.NpcStudio.Models;
 
 namespace ProjectEve.NpcStudio.Services;
@@ -54,6 +54,8 @@ public sealed class FamilyBuildOrchestratorService
         EnsureRunMembersAndPhases(conn, runId, ordered);
         EnsureSharedHistoryPhase(conn, runId, rootNpcId);
 
+        RefreshRunStageStatus(conn, runId);
+
         return LoadSnapshot(conn, runId);
     }
 
@@ -94,12 +96,16 @@ public sealed class FamilyBuildOrchestratorService
                 x.PhaseNumber == 1 &&
                 x.Status.Equals("Failed",StringComparison.OrdinalIgnoreCase));
 
+            var latestMember = latest.Members.FirstOrDefault(x =>
+                x.NpcId == member.NpcId);
+
             await progress(new FamilyBuildProgressSnapshot
             {
                 RunId = run.RunId,
                 NpcId = member.NpcId,
-                NpcName = member.Name,
-                FamilyRole = member.Role,
+                NpcName = latestMember?.Name ?? member.Name,
+                Age = latestMember?.Age ?? 0,
+                FamilyRole = latestMember?.Role ?? member.Role,
                 Step = step,
                 Detail = detail,
                 Total = totalPhase1,
@@ -229,7 +235,36 @@ public sealed class FamilyBuildOrchestratorService
             run = Snapshot(run.RunId);
         }
 
-        return Snapshot(run.RunId);
+        var final = Snapshot(run.RunId);
+
+        var phase1Complete = final.Phases.Count(x =>
+            x.PhaseNumber == 1 &&
+            (x.Status.Equals(
+                 "Complete",
+                 StringComparison.OrdinalIgnoreCase) ||
+             x.Status.Equals(
+                 "SkippedExisting",
+                 StringComparison.OrdinalIgnoreCase)));
+
+        var phase1Failed = final.Phases.Count(x =>
+            x.PhaseNumber == 1 &&
+            x.Status.Equals(
+                "Failed",
+                StringComparison.OrdinalIgnoreCase));
+
+        if (phase1Complete == totalPhase1 &&
+            phase1Failed == 0)
+        {
+            using var conn = Open();
+            TouchRun(
+                conn,
+                run.RunId,
+                "ReadyForPhase2");
+
+            final = Snapshot(run.RunId);
+        }
+
+        return final;
     }
 
     public void MarkPhaseStarted(
@@ -822,10 +857,46 @@ public sealed class FamilyBuildOrchestratorService
         using (var cmd = conn.CreateCommand())
         {
             cmd.CommandText = """
-                SELECT NpcId, DisplayName, FamilyRole, SortOrder, Status
-                FROM NpcBuildRunMembers
-                WHERE RunId=$run
-                ORDER BY SortOrder, DisplayName;
+                SELECT
+                    m.NpcId,
+                    CASE
+                        WHEN trim(COALESCE(np.FirstName,'')) <> ''
+                        THEN trim(
+                            COALESCE(np.FirstName,'') ||
+                            CASE
+                                WHEN trim(COALESCE(np.MiddleName,'')) <> ''
+                                THEN ' ' || trim(np.MiddleName)
+                                ELSE ''
+                            END ||
+                            CASE
+                                WHEN trim(COALESCE(np.CurrentLastName,'')) <> ''
+                                THEN ' ' || trim(np.CurrentLastName)
+                                WHEN trim(COALESCE(c.LastName,'')) <> ''
+                                THEN ' ' || trim(c.LastName)
+                                ELSE ''
+                            END
+                        )
+                        WHEN trim(COALESCE(c.Name,'')) <> ''
+                             AND c.Name NOT LIKE '[Family Draft %]%'
+                        THEN trim(c.Name)
+                        WHEN trim(COALESCE(c.DisplayName,'')) <> ''
+                             AND c.DisplayName NOT LIKE '[Family Draft %]%'
+                        THEN trim(c.DisplayName)
+                        WHEN trim(COALESCE(m.DisplayName,'')) <> ''
+                        THEN trim(m.DisplayName)
+                        ELSE 'NPC ' || CAST(m.NpcId AS TEXT)
+                    END AS CanonicalDisplayName,
+                    m.FamilyRole,
+                    m.SortOrder,
+                    m.Status,
+                    COALESCE(c.Age,0)
+                FROM NpcBuildRunMembers m
+                LEFT JOIN Characters c
+                    ON c.Id=m.NpcId
+                LEFT JOIN NpcNameProfiles np
+                    ON np.NpcId=m.NpcId
+                WHERE m.RunId=$run
+                ORDER BY m.SortOrder, CanonicalDisplayName;
                 """;
             cmd.Parameters.AddWithValue("$run", runId);
 
@@ -838,7 +909,8 @@ public sealed class FamilyBuildOrchestratorService
                     Name = r.GetString(1),
                     Role = r.GetString(2),
                     SortOrder = r.GetInt32(3),
-                    Status = r.GetString(4)
+                    Status = r.GetString(4),
+                    Age = r.GetInt32(5)
                 });
             }
         }
@@ -905,6 +977,66 @@ public sealed class FamilyBuildOrchestratorService
         return snapshot;
     }
 
+    private static void RefreshRunStageStatus(
+        SqliteConnection conn,
+        string runId)
+    {
+        using var cmd = conn.CreateCommand();
+        cmd.CommandText = """
+            UPDATE NpcBuildRuns
+            SET Status =
+                CASE
+                    WHEN EXISTS
+                    (
+                        SELECT 1
+                        FROM NpcBuildPhaseRuns
+                        WHERE RunId=$run
+                          AND PhaseNumber=1
+                          AND Status='Failed'
+                    )
+                    THEN 'NeedsRepair'
+
+                    WHEN
+                    (
+                        SELECT COUNT(*)
+                        FROM NpcBuildPhaseRuns
+                        WHERE RunId=$run
+                          AND PhaseNumber=1
+                    ) > 0
+
+                    AND
+                    (
+                        SELECT COUNT(*)
+                        FROM NpcBuildPhaseRuns
+                        WHERE RunId=$run
+                          AND PhaseNumber=1
+                          AND Status IN ('Complete','SkippedExisting')
+                    ) =
+                    (
+                        SELECT COUNT(*)
+                        FROM NpcBuildPhaseRuns
+                        WHERE RunId=$run
+                          AND PhaseNumber=1
+                    )
+
+                    AND NOT EXISTS
+                    (
+                        SELECT 1
+                        FROM NpcBuildPhaseRuns
+                        WHERE RunId=$run
+                          AND PhaseNumber>=2
+                          AND Status <> 'Pending'
+                    )
+                    THEN 'ReadyForPhase2'
+
+                    ELSE Status
+                END,
+                UpdatedRealAt=CURRENT_TIMESTAMP
+            WHERE RunId=$run;
+            """;
+        cmd.Parameters.AddWithValue("$run", runId);
+        cmd.ExecuteNonQuery();
+    }
     private string? FindOpenRunId(
         SqliteConnection conn,
         int rootNpcId)
@@ -1053,6 +1185,7 @@ public sealed class FamilyBuildProgressSnapshot
     public string RunId { get; set; } = "";
     public int NpcId { get; set; }
     public string NpcName { get; set; } = "";
+    public int Age { get; set; }
     public string FamilyRole { get; set; } = "";
     public string Step { get; set; } = "";
     public string Detail { get; set; } = "";
@@ -1087,6 +1220,7 @@ public sealed class FamilyBuildMemberSnapshot
 {
     public int NpcId { get; set; }
     public string Name { get; set; } = "";
+    public int Age { get; set; }
     public string Role { get; set; } = "";
     public int SortOrder { get; set; }
     public string Status { get; set; } = "";
